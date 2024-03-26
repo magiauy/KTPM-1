@@ -10,10 +10,10 @@
           <children>
               <Pane prefHeight="67.0" prefWidth="639.0" style="-fx-border-color: rgb(255,255,255); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
-                      <TextField fx:id="TxtField__P1__search" layoutX="67.0" layoutY="23.0" prefHeight="25.0" prefWidth="205.0" promptText="Search" />
-                      <ComboBox fx:id="comboBox__P1__1" layoutX="291.0" layoutY="22.0" prefHeight="25.0" prefWidth="100.0" />
-                      <Button fx:id="bnt__P1__search" layoutX="534.0" layoutY="23.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Tìm kiếm" textFill="WHITE" />
-                      <ComboBox fx:id="comboBox__P1__2" layoutX="412.0" layoutY="23.0" prefHeight="25.0" prefWidth="100.0" />
+                      <TextField fx:id="TxtField__P7__search" layoutX="67.0" layoutY="23.0" prefHeight="25.0" prefWidth="205.0" promptText="Search" />
+                      <ComboBox fx:id="comboBox__P7__1" layoutX="291.0" layoutY="22.0" prefHeight="25.0" prefWidth="100.0" />
+                      <Button fx:id="bnt__P7__search" layoutX="534.0" layoutY="23.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Tìm kiếm" textFill="WHITE" />
+                      <ComboBox fx:id="comboBox__P7__2" layoutX="412.0" layoutY="23.0" prefHeight="25.0" prefWidth="100.0" />
                       <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../../../Picture/search.png" />
@@ -25,7 +25,7 @@
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <Label fx:id="txtField__P1__1" alignment="CENTER" contentDisplay="CENTER" layoutX="157.0" layoutY="84.0" prefHeight="25.0" prefWidth="165.0" text="TN000" textFill="WHITE">
+              <Label fx:id="txtField__P7__1" alignment="CENTER" contentDisplay="CENTER" layoutX="157.0" layoutY="84.0" prefHeight="25.0" prefWidth="165.0" text="TN000" textFill="WHITE">
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
@@ -33,14 +33,14 @@
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <TextField fx:id="TxtField__P1__1" layoutX="152.0" layoutY="135.0" prefHeight="32.0" prefWidth="165.0" />
-              <TableView fx:id="table__P1__1" layoutX="352.0" layoutY="109.0" prefHeight="377.0" prefWidth="270.0">
+              <TextField fx:id="TxtField__P7__1" layoutX="152.0" layoutY="135.0" prefHeight="32.0" prefWidth="165.0" />
+              <TableView fx:id="table__P7__1" layoutX="352.0" layoutY="109.0" prefHeight="377.0" prefWidth="270.0">
                   <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
                       <TableColumn prefWidth="75.0" text="C2" />
                   </columns>
               </TableView>
-              <TextField fx:id="TxtField__P1__2" layoutX="152.0" layoutY="183.0" prefHeight="32.0" prefWidth="165.0" />
+              <TextField fx:id="TxtField__P7__2" layoutX="152.0" layoutY="183.0" prefHeight="32.0" prefWidth="165.0" />
               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="183.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng" textFill="WHITE">
                   <font>
                       <Font name="System Bold" size="13.0" />
@@ -49,8 +49,8 @@
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <TextField fx:id="TxtField__P1__4" layoutX="153.0" layoutY="282.0" prefHeight="32.0" prefWidth="165.0" />
-              <TextField fx:id="TxtField__P1__3" layoutX="153.0" layoutY="232.0" prefHeight="32.0" prefWidth="165.0" />
+              <TextField fx:id="TxtField__P7__4" layoutX="153.0" layoutY="282.0" prefHeight="32.0" prefWidth="165.0" />
+              <TextField fx:id="TxtField__P7__3" layoutX="153.0" layoutY="232.0" prefHeight="32.0" prefWidth="165.0" />
               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="232.0" prefHeight="32.0" prefWidth="120.0" text="Diện tích" textFill="WHITE">
                   <font>
                       <Font name="System Bold" size="13.0" />
@@ -59,12 +59,12 @@
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <TextField fx:id="TxtField__P1__5" layoutX="153.0" layoutY="329.0" prefHeight="32.0" prefWidth="165.0" />
+              <TextField fx:id="TxtField__P7__5" layoutX="153.0" layoutY="329.0" prefHeight="32.0" prefWidth="165.0" />
               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="376.0" prefHeight="32.0" prefWidth="120.0" text="Nội thất" textFill="WHITE">
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="21.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
+              <Button fx:id="bnt__P7__add" contentDisplay="GRAPHIC_ONLY" layoutX="21.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
                   <graphic>
                       <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -72,7 +72,7 @@
                           </image>
                       </ImageView>
                   </graphic></Button>
-              <Button fx:id="bnt__P1__update" contentDisplay="GRAPHIC_ONLY" layoutX="122.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE">
+              <Button fx:id="bnt__P7__update" contentDisplay="GRAPHIC_ONLY" layoutX="122.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE">
                   <graphic>
                       <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -80,7 +80,7 @@
                           </image>
                       </ImageView>
                   </graphic></Button>
-              <Button fx:id="bnt__P1__delete" contentDisplay="GRAPHIC_ONLY" layoutX="227.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
+              <Button fx:id="bnt__P7__delete" contentDisplay="GRAPHIC_ONLY" layoutX="227.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
                   <graphic>
                       <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                           <image>
@@ -92,8 +92,8 @@
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <ComboBox fx:id="comboBox__P1__3" layoutX="152.0" layoutY="376.0" prefHeight="32.0" prefWidth="90.0" />
-              <Button fx:id="bnt__P1__1" layoutX="251.0" layoutY="376.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="66.0" text="Chi tiết" textFill="WHITE" />
+              <ComboBox fx:id="comboBox__P7__3" layoutX="152.0" layoutY="376.0" prefHeight="32.0" prefWidth="90.0" />
+              <Button fx:id="bnt__P7__1" layoutX="251.0" layoutY="376.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="66.0" text="Chi tiết" textFill="WHITE" />
           </children>
 
 </Pane>

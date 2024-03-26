@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(26,26,26);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
+          <children>
+              <Pane prefHeight="67.0" prefWidth="639.0" style="-fx-border-color: rgb(255,255,255); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
+                  <children>
+                      <TextField fx:id="TxtField__P4__search" layoutX="67.0" layoutY="23.0" prefHeight="25.0" prefWidth="205.0" promptText="Search" />
+                      <ComboBox fx:id="comboBox__P4__1" layoutX="291.0" layoutY="22.0" prefHeight="25.0" prefWidth="100.0" />
+                      <Button fx:id="bnt__P4__search" layoutX="534.0" layoutY="23.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Tìm kiếm" textFill="WHITE" />
+                      <ComboBox fx:id="comboBox__P4__2" layoutX="412.0" layoutY="23.0" prefHeight="25.0" prefWidth="100.0" />
+                      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../Picture/search.png" />
+                          </image>
+                      </ImageView>
+                  </children>
+              </Pane>
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="97.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu dịch vụ" textFill="WHITE">
+                  <font>
+                      <Font name="System Bold" size="13.0" />
+                  </font></Label>
+              <TextField fx:id="TxtField__P4__1" layoutX="152.0" layoutY="97.0" prefHeight="32.0" prefWidth="165.0" />
+              <TableView fx:id="table__P4__1" layoutX="352.0" layoutY="109.0" prefHeight="377.0" prefWidth="270.0">
+                  <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                  </columns>
+              </TableView>
+              <TextField fx:id="TxtField__P4__2" layoutX="152.0" layoutY="145.0" prefHeight="32.0" prefWidth="165.0" />
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="145.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu thu" textFill="WHITE">
+                  <font>
+                      <Font name="System Bold" size="13.0" />
+                  </font></Label>
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="244.0" prefHeight="32.0" prefWidth="120.0" text="Số lượng" textFill="WHITE">
+                  <font>
+                      <Font name="System Bold" size="13.0" />
+                  </font></Label>
+              <TextField fx:id="TxtField__P4__4" layoutX="152.0" layoutY="338.0" prefHeight="32.0" prefWidth="165.0" />
+              <TextField fx:id="TxtField__P4__3" layoutX="153.0" layoutY="244.0" prefHeight="32.0" prefWidth="165.0" />
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="194.0" prefHeight="32.0" prefWidth="120.0" text="Loại dịch vụ" textFill="WHITE">
+                  <font>
+                      <Font name="System Bold" size="13.0" />
+                  </font></Label>
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="291.0" prefHeight="32.0" prefWidth="120.0" text="Đơn vị" textFill="WHITE">
+                  <font>
+                      <Font name="System Bold" size="13.0" />
+                  </font></Label>
+              <TextField fx:id="TxtField__P4__5" layoutX="152.0" layoutY="382.0" prefHeight="32.0" prefWidth="165.0" />
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="382.0" prefHeight="32.0" prefWidth="120.0" text="Thành tiền" textFill="WHITE">
+                  <font>
+                      <Font name="System Bold" size="13.0" />
+                  </font></Label>
+              <Button fx:id="bnt__P4__add" contentDisplay="GRAPHIC_ONLY" layoutX="21.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
+                  <graphic>
+                      <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../Picture/add2.png" />
+                          </image>
+                      </ImageView>
+                  </graphic></Button>
+              <Button fx:id="bnt__P4__update" contentDisplay="GRAPHIC_ONLY" layoutX="122.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE">
+                  <graphic>
+                      <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../Picture/update.png" />
+                          </image>
+                      </ImageView>
+                  </graphic></Button>
+              <Button fx:id="bnt__P4__delete" contentDisplay="GRAPHIC_ONLY" layoutX="227.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
+                  <graphic>
+                      <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@../../../Picture/delete.png" />
+                          </image>
+                      </ImageView>
+                  </graphic></Button>
+              <Label alignment="CENTER" layoutX="395.0" layoutY="78.0" prefHeight="25.0" prefWidth="199.0" styleClass="tableNameLabel" text="Danh sách phiếu dịch vụ" textFill="WHITE">
+                  <font>
+                      <Font name="System Bold" size="13.0" />
+                  </font></Label>
+              <ComboBox fx:id="comboBox__P4__3" layoutX="152.0" layoutY="194.0" prefHeight="32.0" prefWidth="165.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="338.0" prefHeight="32.0" prefWidth="120.0" text="Đơn giá" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboBox__P4__4" layoutX="153.0" layoutY="291.0" prefHeight="32.0" prefWidth="165.0" />
+          </children>
+
+</Pane>

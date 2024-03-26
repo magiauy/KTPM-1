@@ -5,11 +5,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -18,6 +22,8 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class BuildingManagerController implements Initializable {
+    public TextField TxtField__P1__search;
+    public ComboBox comboBox__P1__1;
     private volatile boolean stop = false;
     private volatile Thread thread;
     int dem =0;
@@ -25,6 +31,11 @@ public class BuildingManagerController implements Initializable {
     private BorderPane bp;
     @FXML
     private Pane mp;
+    @FXML
+    private TextField TxtField__P1__1;
+    @FXML
+    private Button bnt__P1__add;
+
     @FXML
     private void page0 (MouseEvent event){
         stop = false;
@@ -37,27 +48,27 @@ public class BuildingManagerController implements Initializable {
     }
     @FXML
     private void page2 (MouseEvent event) throws IOException {
-        loadPage("BuildingManager-view-Page1");
+        loadPage("BuildingManager-view-Page2");
     }
     @FXML
     private void page3 (MouseEvent event) throws IOException {
-        loadPage("BuildingManager-view-Page1");
+        loadPage("BuildingManager-view-Page3");
     }
     @FXML
     private void page4 (MouseEvent event) throws IOException {
-        loadPage("BuildingManager-view-Page1");
+        loadPage("BuildingManager-view-Page4");
     }
     @FXML
     private void page5 (MouseEvent event) throws IOException {
-        loadPage("BuildingManager-view-Page1");
+        loadPage("BuildingManager-view-Page5");
     }
     @FXML
     private void page6 (MouseEvent event) throws IOException {
-        loadPage("BuildingManager-view-Page1");
+        loadPage("BuildingManager-view-Page6");
     }
     @FXML
     private void page7 (MouseEvent event) throws IOException {
-        loadPage("BuildingManager-view-Page1");
+        loadPage("BuildingManager-view-Page7");
     }
     @FXML
     private Label time;
