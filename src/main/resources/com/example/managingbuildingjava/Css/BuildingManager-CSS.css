@@ -1,0 +1,45 @@
+.MainPane{
+    -fx-background-color: rgb(0, 0, 0);
+}
+.CenterPane{
+    -fx-background-color: rgb(26, 26, 26);
+}
+
+.TopPane{
+    -fx-background-color: rgba(30, 31, 37, 1);
+}
+
+.leftPane{
+    -fx-background-color: rgba(30, 31, 37, 1);
+}
+
+.button {
+    -fx-background-color: rgba(98, 95, 87, 0.42);
+}
+
+.logOutBtn{
+    -fx-background-color: rgb(199, 48, 48);
+}
+
+.selectedBtn{
+    -fx-background-color: rgba(208, 153, 33, 0.71);
+}
+
+.text-field{
+    -fx-background-color: rgb(0, 0, 0);
+    -fx-text-fill: white;
+}
+
+.label{
+    -fx-background-color: rgba(98, 95, 87, 0.5);
+    -fx-background-radius: 10px;
+}
+
+.tableNameLabel{
+    -fx-background-color: rgb(64, 65, 194);
+}
+
+.labelWithBackGround{
+    -fx-background-color: rgba(98, 95, 87, 0.8);
+    -fx-background-radius: 10px;
+}

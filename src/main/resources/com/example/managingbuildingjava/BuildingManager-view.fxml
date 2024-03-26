@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<Pane prefHeight="500.0" prefWidth="750.0" styleClass="MainPane" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="500.0" prefWidth="120.0" styleClass="leftPane">
+            <children>
+                <ImageView fitHeight="80.0" fitWidth="120.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Picture/shutterstock_1692834160-copy-scaled.jpg" />
+               </image>
+            </ImageView>
+                <Button layoutX="10.0" layoutY="461.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="100.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
+                <Button alignment="BASELINE_LEFT" layoutX="4.0" layoutY="347.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" text="Hợp đồng" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Picture/contract.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+                <Button alignment="BASELINE_LEFT" layoutX="5.0" layoutY="299.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" text="Nội thất" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Picture/furniture.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+                <Button alignment="BASELINE_LEFT" layoutX="5.0" layoutY="198.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" text="Phiếu thu" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Picture/bill.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+                <Button alignment="BASELINE_LEFT" layoutX="5.0" layoutY="250.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" text="Dịch vụ" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Picture/service.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+                <Button alignment="BASELINE_LEFT" layoutX="5.0" layoutY="100.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" text="Căn hộ" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Picture/apartment.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+                <Button alignment="BASELINE_LEFT" layoutX="4.0" layoutY="148.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" text="Khách thuê" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@../../../Picture/customer.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+                <Button alignment="BASELINE_LEFT" layoutX="4.0" layoutY="396.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="110.0" text="Thống kê" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="40" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../Picture/statistical.png" />
+                            </image>
+                  </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </Pane>
+        <Pane layoutX="120.0" prefHeight="70.0" prefWidth="630.0" styleClass="TopPane">
+            <children>
+                <TextField layoutX="51.0" layoutY="22.0" prefHeight="25.0" prefWidth="199.0" promptText="Search" />
+                <ComboBox layoutX="265.0" layoutY="22.0" prefHeight="25.0" prefWidth="100.0" />
+                <Button layoutX="490.0" layoutY="23.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Tìm kiếm" textFill="WHITE" />
+                <ComboBox layoutX="381.0" layoutY="23.0" prefHeight="25.0" prefWidth="100.0" />
+            <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="8.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Picture/search.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="53.0" fitWidth="66.0" layoutX="570.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Picture/user.png" />
+               </image>
+            </ImageView>
+            </children>
+        </Pane>
+        <Pane layoutX="121.0" layoutY="70.0" prefHeight="430.0" prefWidth="630.0" styleClass="CenterPane">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="14.0" prefHeight="25.0" prefWidth="66.0" text="Toà nhà" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="154.0" layoutY="14.0" prefHeight="25.0" prefWidth="165.0" text="TN000" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="65.0" prefHeight="32.0" prefWidth="120.0" text="Mã căn hộ" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <TextField layoutX="149.0" layoutY="65.0" prefHeight="32.0" prefWidth="165.0" />
+                <TableView layoutX="349.0" layoutY="39.0" prefHeight="377.0" prefWidth="270.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="C1" />
+                        <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                </TableView>
+                <TextField layoutX="149.0" layoutY="113.0" prefHeight="32.0" prefWidth="165.0" />
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="113.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="212.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng ngủ" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <TextField layoutX="150.0" layoutY="212.0" prefHeight="32.0" prefWidth="165.0" />
+                <TextField layoutX="150.0" layoutY="162.0" prefHeight="32.0" prefWidth="165.0" />
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="162.0" prefHeight="32.0" prefWidth="120.0" text="Diện tích" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="259.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng tắm" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <TextField layoutX="150.0" layoutY="259.0" prefHeight="32.0" prefWidth="165.0" />
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="309.0" prefHeight="32.0" prefWidth="120.0" text="Nội thất" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <Button contentDisplay="GRAPHIC_ONLY" layoutX="18.0" layoutY="376.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Picture/add2.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button contentDisplay="GRAPHIC_ONLY" layoutX="119.0" layoutY="376.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Picture/update.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Button contentDisplay="GRAPHIC_ONLY" layoutX="224.0" layoutY="376.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Picture/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+                <Label alignment="CENTER" layoutX="392.0" layoutY="8.0" prefHeight="25.0" prefWidth="199.0" styleClass="tableNameLabel" text="Tên tòa nhà" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <ComboBox layoutX="149.0" layoutY="306.0" prefHeight="32.0" prefWidth="90.0" />
+                <Button layoutX="248.0" layoutY="306.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="66.0" text="Chi tiết" textFill="WHITE" />
+            </children>
+        </Pane>
+    </children>
+</Pane>
