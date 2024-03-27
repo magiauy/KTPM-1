@@ -13,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -21,14 +20,8 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class BuildingManagerController implements Initializable {
-    public TextField TxtField__P1__search;
-    public ComboBox comboBox__P1__1;
-    public Label txtField__P1__1;
-    public TextField TxtField__P2__search;
-    public TextField TxtField__P4__search;
-    public Button bnt__P1__search;
-    public TextField TxtField__P3__search;
+public class BossController implements Initializable {
+
     private volatile boolean stop = false;
     private volatile Thread thread;
     int dem =0;
@@ -36,10 +29,6 @@ public class BuildingManagerController implements Initializable {
     private BorderPane bp;
     @FXML
     private Pane mp;
-    @FXML
-    private TextField TxtField__P1__1;
-    @FXML
-    private Button bnt__P1__add;
 
     @FXML
     private void page0 (MouseEvent event){
