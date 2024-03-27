@@ -21,46 +21,38 @@
                       </ImageView>
                   </children>
               </Pane>
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="84.0" prefHeight="25.0" prefWidth="77.0" text="Toà nhà" textFill="WHITE">
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="103.0" prefHeight="32.0" prefWidth="120.0" text="Mã hợp đồng" textFill="WHITE">
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <Label fx:id="txtField__P6__1" alignment="CENTER" contentDisplay="CENTER" layoutX="157.0" layoutY="84.0" prefHeight="25.0" prefWidth="165.0" text="TN000" textFill="WHITE">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font></Label>
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="135.0" prefHeight="32.0" prefWidth="120.0" text="Mã căn hộ" textFill="WHITE">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font></Label>
-              <TextField fx:id="TxtField__P6__1" layoutX="152.0" layoutY="135.0" prefHeight="32.0" prefWidth="165.0" />
-              <TableView fx:id="table__P6__1" layoutX="352.0" layoutY="109.0" prefHeight="377.0" prefWidth="270.0">
+              <TextField fx:id="TxtField__P6__1" layoutX="156.0" layoutY="103.0" prefHeight="32.0" prefWidth="165.0" />
+              <TableView fx:id="table__P6__1" layoutX="352.0" layoutY="197.0" prefHeight="289.0" prefWidth="270.0">
                   <columns>
                       <TableColumn prefWidth="75.0" text="C1" />
                       <TableColumn prefWidth="75.0" text="C2" />
                   </columns>
               </TableView>
-              <TextField fx:id="TxtField__P6__2" layoutX="152.0" layoutY="183.0" prefHeight="32.0" prefWidth="165.0" />
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="183.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng" textFill="WHITE">
+              <TextField fx:id="TxtField__P6__2" layoutX="156.0" layoutY="151.0" prefHeight="32.0" prefWidth="165.0" />
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="151.0" prefHeight="32.0" prefWidth="120.0" text="Mã căn hộ" textFill="WHITE">
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="282.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng ngủ" textFill="WHITE">
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="250.0" prefHeight="32.0" prefWidth="120.0" text="Ngày ký hợp đồng" textFill="WHITE">
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <TextField fx:id="TxtField__P6__4" layoutX="153.0" layoutY="282.0" prefHeight="32.0" prefWidth="165.0" />
-              <TextField fx:id="TxtField__P6__3" layoutX="153.0" layoutY="232.0" prefHeight="32.0" prefWidth="165.0" />
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="232.0" prefHeight="32.0" prefWidth="120.0" text="Diện tích" textFill="WHITE">
+              <TextField fx:id="TxtField__P6__4" layoutX="157.0" layoutY="250.0" prefHeight="32.0" prefWidth="165.0" />
+              <TextField fx:id="TxtField__P6__3" layoutX="157.0" layoutY="200.0" prefHeight="32.0" prefWidth="165.0" />
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="200.0" prefHeight="32.0" prefWidth="120.0" text="Mã khách hàng" textFill="WHITE">
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="329.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng tắm" textFill="WHITE">
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="297.0" prefHeight="32.0" prefWidth="120.0" text="Ngày bắt đầu thuê" textFill="WHITE">
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
-              <TextField fx:id="TxtField__P6__5" layoutX="153.0" layoutY="329.0" prefHeight="32.0" prefWidth="165.0" />
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="376.0" prefHeight="32.0" prefWidth="120.0" text="Nội thất" textFill="WHITE">
+              <TextField fx:id="TxtField__P6__5" layoutX="157.0" layoutY="297.0" prefHeight="32.0" prefWidth="165.0" />
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="344.0" prefHeight="32.0" prefWidth="120.0" text="Thời hạn thuê" textFill="WHITE">
                   <font>
                       <Font name="System Bold" size="13.0" />
                   </font></Label>
@@ -88,12 +80,43 @@
                           </image>
                       </ImageView>
                   </graphic></Button>
-              <Label alignment="CENTER" layoutX="395.0" layoutY="78.0" prefHeight="25.0" prefWidth="199.0" styleClass="tableNameLabel" text="Danh sách căn hộ" textFill="WHITE">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font></Label>
-              <ComboBox fx:id="comboBox__P6__3" layoutX="152.0" layoutY="376.0" prefHeight="32.0" prefWidth="90.0" />
-              <Button fx:id="bnt__P6__1" layoutX="251.0" layoutY="376.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="66.0" text="Chi tiết" textFill="WHITE" />
+              <Button fx:id="bnt__P6__1" layoutX="134.0" layoutY="401.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="66.0" text="Chi tiết" textFill="WHITE" />
+      <TextField fx:id="TxtField__P6__6" layoutX="157.0" layoutY="344.0" prefHeight="32.0" prefWidth="90.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="255.0" layoutY="344.0" prefHeight="32.0" prefWidth="66.0" text="tháng" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TxtField__P6__7" layoutX="472.0" layoutY="103.0" prefHeight="32.0" prefWidth="158.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="337.0" layoutY="103.0" prefHeight="32.0" prefWidth="120.0" text="Số tiền cọc" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TxtField__P6__8" layoutX="472.0" layoutY="150.0" prefHeight="32.0" prefWidth="158.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="337.0" layoutY="150.0" prefHeight="32.0" prefWidth="120.0" text="Giá thuê/tháng" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="bnt__P6__ExportFile" contentDisplay="GRAPHIC_ONLY" layoutX="227.0" layoutY="398.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Picture/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="bnt__P6__exportAll" contentDisplay="GRAPHIC_ONLY" layoutX="21.0" layoutY="398.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Picture/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
           </children>
 
 </Pane>
