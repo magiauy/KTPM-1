@@ -117,6 +117,20 @@ CREATE TABLE monthlyrentbill (
                                  status VARCHAR(50)
 );
 
+CREATE TABLE account (
+   tendangnhap varchar(50) NOT NULL DEFAULT '',
+   matkhau varchar(255) NOT NULL,
+   manhomquyen int(3) NOT NULL
+);
+
+INSERT INTO account (tendangnhap, matkhau, manhomquyen)
+VALUES
+('minh', '$2a$12$6GSkiQ05XjTRvCW9MB6MNuf7hOJEbbeQx11Eb8oELil1OrCq6uBXm', 2),
+('nghia', '$2a$12$SAlAhcsudMzNEouyBaoHnOKR23ixdH0ZkcoyXUJ5gS/NFt.b4oqw6', 0),
+('muoi', '$2a$12$SAlAhcsudMzNEouyBaoHnOKR23ixdH0ZkcoyXUJ5gS/NFt.b4oqw6', 0),
+('nam', '$2a$12$SAlAhcsudMzNEouyBaoHnOKR23ixdH0ZkcoyXUJ5gS/NFt.b4oqw6', 1);
+
+
 -- Chèn dữ liệu vào bảng Apartment
 INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture)
 VALUES
