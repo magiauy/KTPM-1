@@ -20,7 +20,7 @@ public class BuildingManager extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BuildingManager.class.getResource("BuildingManager-view-Page0.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 750, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 1024, 720);
         stage.setTitle("Quản lý tòa nhà!");
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> {

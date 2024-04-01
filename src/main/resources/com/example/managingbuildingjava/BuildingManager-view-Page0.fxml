@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="760.0" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
    <left>
-      <Pane prefHeight="400.0" prefWidth="122.0" style="-fx-background-color: rgb(26,26,26); -fx-border-color: rgb(255,255,255); -fx-border-width: 0px 2px 0px 0px;" BorderPane.alignment="CENTER">
+      <Pane prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: rgb(240,240,240); -fx-border-color: rgb(255,255,255); -fx-border-width: 0px 2px 0px 0px;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="80.0" fitWidth="120.0" onMouseClicked="#page0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="107.0" fitWidth="160.0" onMouseClicked="#page0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Picture/shutterstock_1692834160-copy-scaled.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="10.0" layoutY="461.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="100.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
-            <Button alignment="BASELINE_LEFT" layoutX="4.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#page6" prefHeight="42.0" prefWidth="110.0" text="Hợp đồng" textFill="WHITE">
+            <Button layoutX="20.0" layoutY="670.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#page6" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Hợp đồng" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -24,7 +25,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="5.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#page5" prefHeight="42.0" prefWidth="110.0" text="Nội thất" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="421.0" mnemonicParsing="false" onMouseClicked="#page5" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Nội thất" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -33,7 +34,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="5.0" layoutY="198.0" mnemonicParsing="false" onMouseClicked="#page3" prefHeight="42.0" prefWidth="110.0" text="Phiếu thu" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#page3" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Phiếu thu" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -42,7 +43,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="5.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#page4" prefHeight="42.0" prefWidth="110.0" text="Dịch vụ" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#page4" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Dịch vụ" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,7 +52,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="5.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#page1" prefHeight="42.0" prefWidth="110.0" text="Căn hộ" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="173.0" mnemonicParsing="false" onMouseClicked="#page1" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Căn hộ" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -60,7 +61,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="4.0" layoutY="148.0" mnemonicParsing="false" onMouseClicked="#page2" prefHeight="42.0" prefWidth="110.0" text="Khách thuê" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-4.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#page2" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Khách thuê" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
@@ -69,7 +70,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" layoutX="4.0" layoutY="396.0" mnemonicParsing="false" onMouseClicked="#page1" prefHeight="42.0" prefWidth="110.0" text="Thống kê" textFill="WHITE">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#page1" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Thống kê" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -82,114 +83,99 @@
       </Pane>
    </left>
    <center>
-      <Pane fx:id="mp" prefHeight="500.0" prefWidth="373.0" style="-fx-background-color: rgb(26,26,26);" BorderPane.alignment="CENTER">
+      <Pane fx:id="mp" prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240);" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="500.0" fitWidth="760.0" pickOnBounds="true" styleClass="image-view-background">
-               <image>
-<!--                  <Image url="@../../../Picture/backgroundMain.jpg" />-->
-               </image>
-            </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="27.0" prefHeight="30.0" prefWidth="572.0" text="Start Sky" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="28.0" prefHeight="30.0" prefWidth="722.0" text="Start Sky" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Pane layoutX="33.0" layoutY="81.0" opacity="0.8" prefHeight="190.0" prefWidth="190.0" style="-fx-background-color: rgb(30,31,37);">
+            <Pane layoutX="45.0" layoutY="455.0" opacity="0.8" prefHeight="240.0" prefWidth="220.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <children>
-                  <ImageView fitHeight="190.0" fitWidth="190.0" opacity="0.3" pickOnBounds="true">
-                     <image>
-<!--                        <Image url="@../../../Picture/flow3_1.gif" />-->
-                     </image></ImageView>
-                  <Label alignment="CENTER" layoutX="20.0" layoutY="23.0" prefHeight="30.0" prefWidth="150.0" styleClass="labelWithBackGround" text="Doanh thu tháng (triệu)" textAlignment="CENTER" textFill="WHITE" />
-                  <Label alignment="CENTER" layoutX="40.0" layoutY="69.0" prefHeight="100.0" prefWidth="110.0" styleClass="labelWithBackGround" text="1234" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="25.0" layoutY="24.0" prefHeight="30.0" prefWidth="170.0" styleClass="labelWithBackGround" text="Doanh thu tháng (triệu)" textAlignment="CENTER" textFill="WHITE" />
+                  <Label alignment="CENTER" layoutX="40.0" layoutY="87.0" prefHeight="130.0" prefWidth="140.0" styleClass="labelWithBackGround" text="1234" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font></Label>
-                  <ImageView fitHeight="190.0" fitWidth="190.0" layoutX="10.0" layoutY="10.0" opacity="0.3" pickOnBounds="true">
-                     <image>
-<!--                        <Image url="@../../../Picture/flow3_1.gif" />-->
-                     </image>
-                  </ImageView>
                </children></Pane>
-            <Pane layoutX="243.0" layoutY="81.0" opacity="0.8" prefHeight="190.0" prefWidth="377.0" style="-fx-background-color: rgb(30,31,37); -fx-background-radius: 20px;">
+            <Pane layoutX="370.0" layoutY="97.0" opacity="0.8" prefHeight="320.0" prefWidth="460.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <children>
-                  <ImageView fitHeight="190.0" fitWidth="396.0" opacity="0.3" pickOnBounds="true">
-                     <image>
-<!--                        <Image url="@../../../Picture/flow2.gif" />-->
-                     </image>
-                  </ImageView>
-                  <Label fx:id="time" alignment="CENTER" layoutX="15.0" layoutY="56.0" prefHeight="78.0" prefWidth="170.0" text="Giờ" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="time" alignment="CENTER" layoutX="30.0" layoutY="71.0" prefHeight="160.0" prefWidth="185.0" text="Giờ" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font></Label>
-                  <Label alignment="CENTER" layoutX="15.0" layoutY="14.0" prefHeight="30.0" prefWidth="170.0" text="24/ 03/ 2024" textAlignment="CENTER" textFill="WHITE" />
-                  <Label alignment="CENTER" layoutX="219.0" layoutY="56.0" prefHeight="78.0" prefWidth="125.0" text="320" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="30.0" layoutY="21.0" prefHeight="30.0" prefWidth="185.0" text="24/ 03/ 2024" textAlignment="CENTER" textFill="WHITE" />
+                  <Label alignment="CENTER" layoutX="245.0" layoutY="71.0" prefHeight="160.0" prefWidth="185.0" text="320" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label alignment="CENTER" layoutX="202.0" layoutY="14.0" prefHeight="30.0" prefWidth="160.0" text="Phí vận hành tháng (triệu)" textAlignment="CENTER" textFill="WHITE" />
-                  <Label alignment="CENTER" layoutX="14.0" layoutY="146.0" prefHeight="30.0" prefWidth="86.0" text="TP.HCM" textAlignment="CENTER" textFill="WHITE" />
-                  <Label alignment="CENTER" layoutX="107.0" layoutY="146.0" prefHeight="30.0" prefWidth="85.0" text="Phú Nhuận" textAlignment="CENTER" textFill="WHITE" />
-                  <Label alignment="CENTER" layoutX="204.0" layoutY="146.0" prefHeight="30.0" prefWidth="155.0" text="287/42 Âu Dương Lân" textAlignment="CENTER" textFill="WHITE" />
+                  <Label alignment="CENTER" layoutX="245.0" layoutY="21.0" prefHeight="30.0" prefWidth="185.0" text="Phí vận hành tháng (triệu)" textAlignment="CENTER" textFill="WHITE" />
+                  <Label alignment="CENTER" layoutX="30.0" layoutY="255.0" prefHeight="30.0" prefWidth="400.0" text="TP.HCM" textAlignment="CENTER" textFill="WHITE" />
                </children></Pane>
-            <Pane layoutX="34.0" layoutY="291.0" opacity="0.8" prefHeight="190.0" prefWidth="188.0" style="-fx-background-color: rgb(30,31,37);">
+            <Pane layoutX="284.0" layoutY="455.0" opacity="0.8" prefHeight="240.0" prefWidth="220.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <children>
-                  <Label alignment="CENTER" layoutX="39.0" layoutY="27.0" prefHeight="100.0" prefWidth="110.0" styleClass="labelWithBackGround" text="89" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="40.0" layoutY="82.0" prefHeight="130.0" prefWidth="140.0" styleClass="labelWithBackGround" text="89" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="19.0" layoutY="146.0" prefHeight="30.0" prefWidth="150.0" styleClass="labelWithBackGround" text="Số phiếu cần thu" textAlignment="CENTER" textFill="WHITE" />
-                  <ImageView fitHeight="190.0" fitWidth="190.0" layoutX="-1.0" opacity="0.3 " pickOnBounds="true">
-                     <image>
-<!--                        <Image url="@../../../Picture/flow3_2.gif" />-->
-                     </image></ImageView>
+                  <Label alignment="CENTER" layoutX="25.0" layoutY="23.0" prefHeight="30.0" prefWidth="170.0" styleClass="labelWithBackGround" text="Số phiếu cần thu" textAlignment="CENTER" textFill="WHITE" />
                </children></Pane>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="294.0" prefHeight="25.0" prefWidth="360.0" text="Thông tin quản lý" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="579.0" layoutY="481.0" prefHeight="25.0" prefWidth="222.0" text="Thông tin quản lý" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="274.0" layoutY="338.0" prefHeight="25.0" prefWidth="140.0" text="Họ: Phạm Văn" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="525.0" layoutY="535.0" prefHeight="25.0" prefWidth="150.0" text="Họ: Phạm Văn" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="433.0" layoutY="338.0" prefHeight="25.0" prefWidth="140.0" text="Tên: Nam" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="690.0" layoutY="535.0" prefHeight="25.0" prefWidth="150.0" text="Tên: Nam" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="378.0" prefHeight="25.0" prefWidth="170.0" text="SĐT: 0777777878" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="525.0" layoutY="575.0" prefHeight="25.0" prefWidth="150.0" text="SĐT: 0777777878" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="433.0" layoutY="378.0" prefHeight="25.0" prefWidth="170.0" text="Dob: 29/2/2004" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="690.0" layoutY="575.0" prefHeight="25.0" prefWidth="150.0" text="Dob: 29/2/2004" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="274.0" layoutY="416.0" prefHeight="25.0" prefWidth="140.0" text="Giới tính: Nam" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="525.0" layoutY="619.0" prefHeight="25.0" prefWidth="150.0" text="Giới tính: Nam" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="433.0" layoutY="416.0" prefHeight="25.0" prefWidth="140.0" text="ID: QL000" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="690.0" layoutY="619.0" prefHeight="25.0" prefWidth="150.0" text="ID: QL000" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="455.0" prefHeight="25.0" prefWidth="170.0" text="Lương: 128.67 (triệu)" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="525.0" layoutY="658.0" prefHeight="25.0" prefWidth="150.0" text="Lương: 128.67 (triệu)" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="433.0" layoutY="455.0" prefHeight="25.0" prefWidth="170.0" text="CCCD: 0878987908" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="690.0" layoutY="658.0" prefHeight="25.0" prefWidth="150.0" text="CCCD: 0878987908" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <ImageView fitHeight="198.0" fitWidth="380.0" layoutX="244.0" layoutY="288.0" pickOnBounds="true" preserveRatio="true" />
+            <Pane layoutX="45.0" layoutY="97.0" opacity="0.8" prefHeight="320.0" prefWidth="300.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+               <children>
+                  <Label fx:id="time1" alignment="CENTER" layoutX="25.0" layoutY="87.0" prefHeight="140.0" prefWidth="250.0" text="Giờ" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="65.0" layoutY="25.0" prefHeight="30.0" prefWidth="170.0" text="24/ 03/ 2024" textAlignment="CENTER" textFill="WHITE" />
+                  <Label alignment="CENTER" layoutX="47.0" layoutY="252.0" prefHeight="35.0" prefWidth="206.0" text="TP.HCM" textAlignment="CENTER" textFill="WHITE" />
+               </children>
+            </Pane>
          </children>
       </Pane>
 
