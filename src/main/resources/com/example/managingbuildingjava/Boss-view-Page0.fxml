@@ -86,7 +86,7 @@
          <children>
             <ImageView fitHeight="500.0" fitWidth="760.0" pickOnBounds="true" styleClass="image-view-background">
                <image>
-<!--                  <Image url="@../../../Picture/backgroundMain.jpg" />-->
+                  <Image url="@../../../Picture/backgroundMain.jpg" />
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="33.0" layoutY="27.0" prefHeight="30.0" prefWidth="572.0" text="Start Sky" textFill="WHITE">
@@ -97,24 +97,19 @@
                <children>
                   <ImageView fitHeight="190.0" fitWidth="190.0" opacity="0.3" pickOnBounds="true">
                      <image>
-<!--                        <Image url="@../../../Picture/flow3_1.gif" />-->
+                        <Image url="@../../../Picture/flow3_1.gif" />
                      </image></ImageView>
                   <Label alignment="CENTER" layoutX="20.0" layoutY="23.0" prefHeight="30.0" prefWidth="150.0" styleClass="labelWithBackGround" text="Doanh thu tháng (triệu)" textAlignment="CENTER" textFill="WHITE" />
                   <Label alignment="CENTER" layoutX="40.0" layoutY="69.0" prefHeight="100.0" prefWidth="110.0" styleClass="labelWithBackGround" text="1234" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font></Label>
-                  <ImageView fitHeight="190.0" fitWidth="190.0" layoutX="10.0" layoutY="10.0" opacity="0.3" pickOnBounds="true">
-                     <image>
-<!--                        <Image url="@../../../Picture/flow3_1.gif" />-->
-                     </image>
-                  </ImageView>
                </children></Pane>
             <Pane layoutX="243.0" layoutY="81.0" opacity="0.8" prefHeight="190.0" prefWidth="377.0" style="-fx-background-color: rgb(30,31,37); -fx-background-radius: 20px;">
                <children>
                   <ImageView fitHeight="190.0" fitWidth="396.0" opacity="0.3" pickOnBounds="true">
                      <image>
-<!--                        <Image url="@../../../Picture/flow2.gif" />-->
+                        <Image url="@../../../Picture/flow2.gif" />
                      </image>
                   </ImageView>
                   <Label fx:id="time" alignment="CENTER" layoutX="15.0" layoutY="56.0" prefHeight="78.0" prefWidth="170.0" text="Giờ" textAlignment="CENTER" textFill="WHITE">
@@ -141,7 +136,7 @@
                   <Label alignment="CENTER" layoutX="19.0" layoutY="146.0" prefHeight="30.0" prefWidth="150.0" styleClass="labelWithBackGround" text="Số phiếu cần thu" textAlignment="CENTER" textFill="WHITE" />
                   <ImageView fitHeight="190.0" fitWidth="190.0" layoutX="-1.0" opacity="0.3 " pickOnBounds="true">
                      <image>
-<!--                        <Image url="@../../../Picture/flow3_2.gif" />-->
+                        <Image url="@../../../Picture/flow3_2.gif" />
                      </image></ImageView>
                </children></Pane>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="294.0" prefHeight="25.0" prefWidth="360.0" text="Thông tin quản lý" textFill="WHITE">

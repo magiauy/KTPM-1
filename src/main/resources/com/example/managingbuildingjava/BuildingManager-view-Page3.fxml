@@ -1,98 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(26,26,26);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
           <children>
-              <Pane prefHeight="67.0" prefWidth="639.0" style="-fx-border-color: rgb(255,255,255); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
+              <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
-                      <TextField fx:id="TxtField__P3__search" layoutX="67.0" layoutY="23.0" prefHeight="25.0" prefWidth="205.0" promptText="Search" />
-                      <ComboBox fx:id="comboBox__P3__1" layoutX="291.0" layoutY="22.0" prefHeight="25.0" prefWidth="100.0" />
-                      <Button fx:id="bnt__P3__search" layoutX="534.0" layoutY="23.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="72.0" text="Tìm kiếm" textFill="WHITE" />
-                      <ComboBox fx:id="comboBox__P3__2" layoutX="412.0" layoutY="23.0" prefHeight="25.0" prefWidth="100.0" />
-                      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                      <TextField fx:id="TxtField__P3__search" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px;" />
+                      <ComboBox fx:id="comboBox__P3__1" layoutX="623.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
+                      <ComboBox fx:id="comboBox__P3__2" layoutX="740.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
+                      <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="234.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../../../Picture/search.png" />
                           </image>
                       </ImageView>
+            <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+               <children>
+                          <TextField fx:id="TxtField__P3__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                          <TextField fx:id="TxtField__P3__2" layoutX="216.0" layoutY="79.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                          <TextField fx:id="TxtField__P3__4" layoutX="216.0" layoutY="189.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                          <TextField fx:id="TxtField__P3__3" layoutX="216.0" layoutY="134.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                          <TextField fx:id="TxtField__P3__5" layoutX="216.0" layoutY="245.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="300.0" prefHeight="32.0" prefWidth="120.0" text="Thời hạn " textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="13.0" />
+                              </font>
+                  </Label>
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="245.0" prefHeight="32.0" prefWidth="120.0" text="Ngày xuất phiếu" textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="13.0" />
+                              </font>
+                  </Label>
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="189.0" prefHeight="32.0" prefWidth="120.0" text="Mã hợp đồng" textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="13.0" />
+                              </font>
+                  </Label>
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="134.0" prefHeight="32.0" prefWidth="120.0" text="Mã khách hàng" textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="13.0" />
+                              </font>
+                  </Label>
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="79.0" prefHeight="32.0" prefWidth="120.0" text="Mã căn hộ" textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="13.0" />
+                              </font>
+                  </Label>
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="27.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu thu" textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="13.0" />
+                              </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="355.0" prefHeight="32.0" prefWidth="120.0" text="Tổng tiền" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="410.0" prefHeight="32.0" prefWidth="120.0" text="Trạng thái" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="TxtField__P3__51" layoutX="216.0" layoutY="355.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                  <TextField fx:id="TxtField__P3__41" layoutX="216.0" layoutY="300.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                  <TextField fx:id="TxtField__P3__52" layoutX="216.0" layoutY="410.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+               </children>
+            </Pane>
+                    <Button fx:id="bnt__P3__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="638.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../Picture/add2.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+            </Button>
+                    <Button fx:id="bnt__P3__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="638.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../Picture/update.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+            </Button>
+                    <Button fx:id="bnt__P3__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="638.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../Picture/delete.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+            </Button>
+                    <TableView fx:id="table__P3__1" layoutX="497.0" layoutY="117.0" prefHeight="580.0" prefWidth="340.0">
+                        <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                        </columns>
+                    </TableView>
+                      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="75.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin phiếu thu tháng">
+                          <font>
+                              <Font size="16.0" />
+                          </font>
+                      </Label>
                   </children>
               </Pane>
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="92.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu thu" textFill="WHITE">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font></Label>
-              <TextField fx:id="TxtField__P3__1" layoutX="159.0" layoutY="92.0" prefHeight="32.0" prefWidth="150.0" />
-              <TableView fx:id="table__P3__1" layoutX="346.0" layoutY="145.0" prefHeight="340.0" prefWidth="276.0">
-                  <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                  </columns>
-              </TableView>
-              <TextField fx:id="TxtField__P3__2" layoutX="159.0" layoutY="140.0" prefHeight="32.0" prefWidth="150.0" />
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="140.0" prefHeight="32.0" prefWidth="120.0" text="Mã căn hộ" textFill="WHITE">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font></Label>
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="239.0" prefHeight="32.0" prefWidth="120.0" text="Mã hợp đồng" textFill="WHITE">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font></Label>
-              <TextField fx:id="TxtField__P3__4" layoutX="160.0" layoutY="239.0" prefHeight="32.0" prefWidth="150.0" />
-              <TextField fx:id="TxtField__P3__3" layoutX="160.0" layoutY="189.0" prefHeight="32.0" prefWidth="150.0" />
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="189.0" prefHeight="32.0" prefWidth="120.0" text="Mã khách hàng" textFill="WHITE">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font></Label>
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="286.0" prefHeight="32.0" prefWidth="120.0" text="Ngày xuất phiếu" textFill="WHITE">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font></Label>
-              <TextField fx:id="TxtField__P3__5" layoutX="160.0" layoutY="286.0" prefHeight="32.0" prefWidth="150.0" />
-              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="346.0" layoutY="92.0" prefHeight="32.0" prefWidth="120.0" text="Trạng thái" textFill="WHITE">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font></Label>
-              <Button fx:id="bnt__P3__add" contentDisplay="GRAPHIC_ONLY" layoutX="21.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
-                  <graphic>
-                      <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../../../Picture/add2.png" />
-                          </image>
-                      </ImageView>
-                  </graphic></Button>
-              <Button fx:id="bnt__P3__update" contentDisplay="GRAPHIC_ONLY" layoutX="122.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE">
-                  <graphic>
-                      <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../../../Picture/update.png" />
-                          </image>
-                      </ImageView>
-                  </graphic></Button>
-              <Button fx:id="bnt__P3__delete" contentDisplay="GRAPHIC_ONLY" layoutX="227.0" layoutY="446.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
-                  <graphic>
-                      <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../../../Picture/delete.png" />
-                          </image>
-                      </ImageView>
-                  </graphic></Button>
-              <ComboBox fx:id="comboBox__P3__3" layoutX="484.0" layoutY="92.0" prefHeight="32.0" prefWidth="120.0" />
-      <TextField fx:id="TxtField__P3__6" layoutX="161.0" layoutY="335.0" prefHeight="32.0" prefWidth="150.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="335.0" prefHeight="32.0" prefWidth="120.0" text="Số ngày hết hạn" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="380.0" prefHeight="32.0" prefWidth="120.0" text="Tổng tiền" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <TextField fx:id="TxtField__P3__7" layoutX="161.0" layoutY="380.0" prefHeight="32.0" prefWidth="150.0" />
           </children>
 
 </Pane>
