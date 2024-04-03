@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
           <children>
               <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
@@ -23,7 +24,6 @@
                           <TextField fx:id="TxtField__P3__2" layoutX="216.0" layoutY="79.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
                           <TextField fx:id="TxtField__P3__4" layoutX="216.0" layoutY="189.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
                           <TextField fx:id="TxtField__P3__3" layoutX="216.0" layoutY="134.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P3__5" layoutX="216.0" layoutY="245.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
                           <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="300.0" prefHeight="32.0" prefWidth="120.0" text="Thời hạn " textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
@@ -64,9 +64,10 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="TxtField__P3__51" layoutX="216.0" layoutY="355.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                  <TextField fx:id="TxtField__P3__41" layoutX="216.0" layoutY="300.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                  <TextField fx:id="TxtField__P3__52" layoutX="216.0" layoutY="410.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                  <TextField fx:id="TxtField__P3__6" layoutX="216.0" layoutY="355.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                  <TextField fx:id="TxtField__P3__5" layoutX="216.0" layoutY="300.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                  <DatePicker layoutX="216.0" layoutY="252.0" prefHeight="2.0" prefWidth="165.0" />
+                  <ComboBox fx:id="comboBox__P3__3" layoutX="224.0" layoutY="417.0" prefWidth="150.0" />
                </children>
             </Pane>
                     <Button fx:id="bnt__P3__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="638.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
