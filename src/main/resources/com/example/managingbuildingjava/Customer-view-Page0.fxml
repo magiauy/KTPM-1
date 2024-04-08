@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.*?>
 <?import java.lang.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -18,25 +17,7 @@
                </image>
             </ImageView>
             <Button layoutX="20.0" layoutY="670.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#page6" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Hợp đồng" textAlignment="CENTER" textFill="#4a4a4a">
-               <graphic>
-                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../Picture/contract.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="421.0" mnemonicParsing="false" onMouseClicked="#page5" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Nội thất" textAlignment="CENTER" textFill="#4a4a4a">
-               <graphic>
-                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../Picture/furniture.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#page3" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Phiếu thu" textAlignment="CENTER" textFill="#4a4a4a">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#page3" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Phiếu thu" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -45,7 +26,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#page4" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Dịch vụ" textAlignment="CENTER" textFill="#4a4a4a">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#page4" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Dịch vụ" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -54,24 +35,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="173.0" mnemonicParsing="false" onMouseClicked="#page1" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Căn hộ" textAlignment="CENTER" textFill="#4a4a4a">
-               <graphic>
-                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../Picture/apartment.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-4.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#page2" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Khách thuê" textAlignment="CENTER" textFill="#4a4a4a">
-               <graphic>
-                  <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true" smooth="false">
-                     <image>
-                        <Image url="@../../../Picture/customer.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-4.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#page2" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" textAlignment="CENTER" textFill="#4a4a4a" />
             <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#page1" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Thống kê" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
