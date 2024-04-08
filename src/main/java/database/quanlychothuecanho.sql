@@ -115,6 +115,7 @@ CREATE TABLE ServiceUsage (
     unit nVARCHAR(255),
     totalAmount nvarchar(255),
     Date DATE,
+    note TEXT,
     FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID)
 );
 CREATE TABLE Violation (
@@ -197,12 +198,12 @@ VALUES
 (4, 'A4', 4, 4, '2023-04-01', 30, '1800', 'current');
 
 
-INSERT INTO ServiceUsage (serviceID, monthlyRentBillID, name, quantity, pricePerUnit, unit, totalAmount, Date) 
+INSERT INTO ServiceUsage (serviceID, monthlyRentBillID, name, quantity, pricePerUnit, unit, totalAmount, Date, note)
 VALUES 
-(1, 1, 'Electricity', '100', '0.15', 'kWh', '15.00', '2023-01-15'),
-(2, 2, 'Water', '50', '0.10', 'm3', '5.00', '2023-02-15'),
-(3, 3, 'Internet', '1', '50', 'Mbps', '50.00', '2023-03-15'),
-(4, 4, 'Cleaning', '2', '30', 'hours', '60.00', '2023-04-15');
+(1, 1, 'Electricity', '100', '0.15', 'kWh', '15.00', '2023-01-15', ''),
+(2, 2, 'Water', '50', '0.10', 'm3', '5.00', '2023-02-15', ''),
+(3, 3, 'Internet', '1', '50', 'Mbps', '50.00', '2023-03-15', ''),
+(4, 4, 'Cleaning', '2', '30', 'hours', '60.00', '2023-04-15', '');
 
 
 INSERT INTO Violation (violationID, monthlyRentBillID, name, totalAmount, note) 
