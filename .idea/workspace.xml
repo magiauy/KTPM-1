@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update GUI (4/3)-1">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page2.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page1.fxml" afterDir="false" />
+    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update GUI (8/4)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Boss.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Css/BuildingManager-CSS.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Css/BuildingManager-CSS.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,10 +16,24 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Kai-GUI2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;NghiaNguyen04&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="6387b31e-0c04-462a-8819-0a6a7eee3584" />
+        <option name="url" value="https://github.com/NghiaNguyen04/ManagingBuildingJava.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -55,7 +62,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Kai-GUI2&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/OneDrive/Desktop/Data/code/Java/ManagingBuildingJava/src/main/resources/com/example/managingbuildingjava&quot;,
@@ -148,6 +155,7 @@
       <workItem from="1712313963995" duration="308000" />
       <workItem from="1712331166961" duration="266000" />
       <workItem from="1712331443214" duration="2441000" />
+      <workItem from="1712582150161" duration="64000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
