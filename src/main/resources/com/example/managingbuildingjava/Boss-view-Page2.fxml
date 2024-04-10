@@ -24,7 +24,7 @@
                                          <Image url="@../../../Picture/search.png" />
                                      </image>
                                  </ImageView>
-                                 <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20;">
+                                 <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-background-radius: 20;">
                                      <children>
                                          <TextField fx:id="TxtField__P2__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
                                          <TextField fx:id="TxtField__P2__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
@@ -104,7 +104,7 @@
                                          <TableColumn prefWidth="75.0" text="C2" />
                                      </columns>
                                  </TableView>
-                                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="74.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin khách hàng">
+                                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="74.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);" text="Thông tin khách hàng">
                                      <font>
                                          <Font size="16.0" />
                                      </font>
