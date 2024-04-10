@@ -17,7 +17,7 @@
                   <Image url="@../../../Picture/shutterstock_1692834160-copy-scaled.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="20.0" layoutY="670.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
+            <Button layoutX="20.0" layoutY="670.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#page6" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Hợp đồng" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
@@ -87,11 +87,11 @@
    <center>
       <Pane fx:id="mp" prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240);" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="28.0" prefHeight="30.0" prefWidth="722.0" style="-fx-background-color: rgb(145,205,175);" text="Start Sky" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="28.0" prefHeight="30.0" prefWidth="722.0" style="-fx-background-color: rgb(145,205,175); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);" text="Start Sky" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Pane layoutX="45.0" layoutY="455.0" opacity="0.8" prefHeight="240.0" prefWidth="220.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <Pane layoutX="45.0" layoutY="455.0" opacity="0.8" prefHeight="240.0" prefWidth="220.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);">
                <children>
                   <Label alignment="CENTER" layoutX="25.0" layoutY="24.0" prefHeight="30.0" prefWidth="170.0" text="Doanh thu tháng (triệu)" textAlignment="CENTER" textFill="WHITE" />
                   <Label alignment="CENTER" layoutX="40.0" layoutY="87.0" prefHeight="130.0" prefWidth="140.0" text="1234" textAlignment="CENTER" textFill="WHITE">
@@ -99,7 +99,7 @@
                         <Font size="30.0" />
                      </font></Label>
                </children></Pane>
-            <Pane layoutX="370.0" layoutY="97.0" opacity="0.8" prefHeight="320.0" prefWidth="460.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <Pane layoutX="370.0" layoutY="97.0" opacity="0.8" prefHeight="320.0" prefWidth="460.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);">
                <children>
                   <Label alignment="CENTER" layoutX="88.0" layoutY="22.0" prefHeight="35.0" prefWidth="284.0" text="Phí vận hành tháng (triệu)" textAlignment="CENTER" textFill="WHITE" />
                   <LineChart layoutX="21.0" layoutY="95.0" prefHeight="211.0" prefWidth="418.0">
@@ -111,12 +111,12 @@
                     </yAxis>
                   </LineChart>
                </children></Pane>
-            <Pane layoutX="284.0" layoutY="455.0" opacity="0.8" prefHeight="240.0" prefWidth="220.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <Pane layoutX="284.0" layoutY="455.0" opacity="0.8" prefHeight="240.0" prefWidth="220.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);">
                <children>
                   <Label alignment="CENTER" layoutX="25.0" layoutY="23.0" prefHeight="30.0" prefWidth="170.0" styleClass="\\]" text="Số phiếu cần thu" textAlignment="CENTER" textFill="WHITE" />
                   <PieChart layoutX="10.0" layoutY="76.0" prefHeight="150.0" prefWidth="160.0" />
                </children></Pane>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="579.0" layoutY="481.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Thông tin quản lý" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="579.0" layoutY="481.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);" text="Thông tin quản lý" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -161,7 +161,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Pane layoutX="45.0" layoutY="97.0" opacity="0.8" prefHeight="320.0" prefWidth="300.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <Pane layoutX="45.0" layoutY="97.0" opacity="0.8" prefHeight="320.0" prefWidth="300.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);">
                <children>
                   <Label fx:id="time" alignment="CENTER" layoutX="25.0" layoutY="87.0" prefHeight="140.0" prefWidth="250.0" text="Giờ" textAlignment="CENTER" textFill="WHITE">
                      <font>
