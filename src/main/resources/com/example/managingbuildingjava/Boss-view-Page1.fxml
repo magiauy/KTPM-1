@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
           <children>
               <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
@@ -18,7 +17,7 @@
                               <Image url="@../../../Picture/search.png" />
                           </image>
                       </ImageView>
-            <Pane layoutX="33.0" layoutY="121.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-background-radius: 20px;">
+            <Pane layoutX="33.0" layoutY="121.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
                           <TextField fx:id="TxtField__P1__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
                           <TextField fx:id="TxtField__P1__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
@@ -68,7 +67,15 @@
                             </ImageView>
                         </graphic>
             </Button>
-                    <Button fx:id="bnt__P1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Sửa" textFill="WHITE" />
+                    <Button fx:id="bnt__P1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Sửa" textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../Picture/update.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+            </Button>
                     <Button fx:id="bnt__P1__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Xóa" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
@@ -84,16 +91,11 @@
                             <TableColumn prefWidth="75.0" text="C2" />
                         </columns>
                     </TableView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="77.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);" text="Thông tin căn hộ">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="77.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin căn hộ">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-                      <ImageView fitHeight="30" fitWidth="40" layoutX="238.0" layoutY="652.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../../../Picture/update.png" />
-                          </image>
-                      </ImageView>
                   </children>
               </Pane>
           </children>
