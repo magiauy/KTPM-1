@@ -4,13 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update GUI (8/4)-2">
+    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update GUI (11/4)">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page3.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page4.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page2.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page3.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Boss.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page1.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page2.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Css/BuildingManager-CSS.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Css/BuildingManager-CSS.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page4.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page4.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page1.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +68,7 @@
   "keyToString": {
     "Application.Boss.executor": "Run",
     "Application.BuildingManager.executor": "Run",
+    "Application.Customer.executor": "Run",
     "Application.Login.executor": "Run",
     "Application.TrangChu.executor": "Run",
     "Application.main.executor": "Run",
@@ -84,10 +94,12 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
+      <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\java\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -162,6 +174,8 @@
       <workItem from="1712582150161" duration="312000" />
       <workItem from="1712647492456" duration="1299000" />
       <workItem from="1712729064018" duration="1969000" />
+      <workItem from="1712815906118" duration="5769000" />
+      <workItem from="1712836547109" duration="3260000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -261,7 +275,8 @@
     <MESSAGE value="update GUI (4/2)-1" />
     <MESSAGE value="update GUI (4/3)-1" />
     <MESSAGE value="update GUI (8/4)-2" />
-    <option name="LAST_COMMIT_MESSAGE" value="update GUI (8/4)-2" />
+    <MESSAGE value="update GUI (11/4)" />
+    <option name="LAST_COMMIT_MESSAGE" value="update GUI (11/4)" />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />
