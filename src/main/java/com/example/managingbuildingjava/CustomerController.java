@@ -20,8 +20,14 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class BossController implements Initializable {
-
+public class CustomerController implements Initializable {
+    public TextField TxtField__P1__search;
+    public ComboBox comboBox__P1__1;
+    public Label txtField__P1__1;
+    public TextField TxtField__P2__search;
+    public TextField TxtField__P4__search;
+    public Button bnt__P1__search;
+    public TextField TxtField__P3__search;
     private volatile boolean stop = false;
     private volatile Thread thread;
     int dem =0;
@@ -29,6 +35,10 @@ public class BossController implements Initializable {
     private BorderPane bp;
     @FXML
     private Pane mp;
+    @FXML
+    private TextField TxtField__P1__1;
+    @FXML
+    private Button bnt__P1__add;
 
     @FXML
     private void page0 (MouseEvent event){
@@ -38,32 +48,17 @@ public class BossController implements Initializable {
     }
     @FXML
     private void page1 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page1");
+        loadPage("Customer-view-Page1");
     }
     @FXML
     private void page2 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page2");
+        loadPage("Customer-view-Page2");
     }
     @FXML
     private void page3 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page3");
+        loadPage("Customer-view-Page3");
     }
-    @FXML
-    private void page4 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page4");
-    }
-    @FXML
-    private void page5 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page5");
-    }
-    @FXML
-    private void page6 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page6");
-    }
-    @FXML
-    private void page7 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page7");
-    }
+
     @FXML
     private Label time;
 
