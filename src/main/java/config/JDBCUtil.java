@@ -12,10 +12,21 @@ import java.sql.*;
 public class JDBCUtil {
     public static Connection getConnection() {
         try {
+            // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            // String url = "jdbc:sqlserver://DESKTOP-2O5BBS1:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
+            // String userName = "sa";
+            // String password = "123456789";
+            
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://DESKTOP-2O5BBS1:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
+            String url = "jdbc:sqlserver://TEN:1433;databaseName=ql_thue_canho;trustServerCertificate=true";
             String userName = "sa";
-            String password = "123456789";
+            String password = "12345678";
+
+            // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            // String url =
+            // "jdbc:sqlserver://DESKTOP-2O5BBS1:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
+            // String userName = "sa";
+            // String password = "123456789";
 
             try (Connection connection = DriverManager.getConnection(url, userName, password)) {
                 String sql = "SELECT * FROM Building";

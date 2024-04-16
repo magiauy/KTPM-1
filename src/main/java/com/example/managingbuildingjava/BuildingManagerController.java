@@ -67,7 +67,9 @@ public class BuildingManagerController implements Initializable {
     private ComboBox<?> comboBox__P1__3;
 
     @FXML
+   
     private TableColumn<Apartment, String> maCanHoTable;
+
 
     @FXML
     private TableColumn<Apartment, String> soPhongTable;
@@ -158,14 +160,7 @@ public class BuildingManagerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        apartmentsList = FXCollections.observableArrayList(
-                new Apartment("abc", "a1", "aa1", 1.1, 2, 2, "as")
-        );
-
-        maCanHoTable.setCellValueFactory(new PropertyValueFactory<Apartment, String>("apartmentID"));
-        soPhongTable.setCellValueFactory(new PropertyValueFactory<Apartment, String>("roomNumber"));
-
-        canHoTable.setItems(apartmentsList);
+       
     }
 
 

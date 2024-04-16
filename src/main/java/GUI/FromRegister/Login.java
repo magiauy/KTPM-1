@@ -2,29 +2,34 @@ package GUI.FromRegister;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+
+import DAO.AcountDAO;
+import DTO.Acount;
+
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Login extends JFrame {
-    JLabel userLabel = new JLabel("Email:");
+    JLabel userLabel = new JLabel("username:");
     JLabel passwordLabel = new JLabel("PASSWORD:");
     JTextField userTextField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
     JButton loginButton = new JButton("LOGIN");
     JButton resetButton = new JButton("RESET");
-    JButton dk = new JButton("Đăng Kí");
+
     JCheckBox showPassword = new JCheckBox("Show Password");
     JLabel title = new JLabel("Hello Again!");
     JLabel title2 = new JLabel("Welcome Back");
-    JLabel title3 = new JLabel("Bạn Chưa Có Tài Khoản");
 
     public Login() {
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(1, 2));
         JPanel imagePanel = new JPanel(new BorderLayout());
-        ImageIcon imageIcon = new ImageIcon("src/GUI/FromRegister/imgs/anh1.png");
+        ImageIcon imageIcon = new ImageIcon("src\\main\\java\\GUI\\FromRegister\\imgs\\anh1.png");
         Image image = imageIcon.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
         JLabel imageLabel = new JLabel(new ImageIcon(image));
         imagePanel.add(imageLabel, BorderLayout.CENTER);
@@ -36,7 +41,7 @@ public class Login extends JFrame {
         title.setFont(boldFont);
         title.setBounds(50, 30, 150, 30);
         title2.setBounds(50, 46, 100, 30);
-        title3.setBounds(50, 260, 300, 30);
+
         userLabel.setBounds(50, 100, 100, 30);
         passwordLabel.setBounds(50, 150, 100, 30);
         userTextField.setBounds(150, 100, 200, 30);
@@ -44,11 +49,10 @@ public class Login extends JFrame {
         showPassword.setBounds(145, 180, 150, 30);
         loginButton.setBounds(50, 210, 100, 30);
         resetButton.setBounds(200, 210, 100, 30);
-        dk.setBounds(200, 267, 100, 20);
+
         registerPanel.add(title);
         registerPanel.add(title2);
-        registerPanel.add(title3);
-        registerPanel.add(dk);
+
         registerPanel.add(userLabel);
         registerPanel.add(passwordLabel);
         registerPanel.add(userTextField);
@@ -62,19 +66,54 @@ public class Login extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
-        dk.addActionListener(new ActionListener() {
+        loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                Register register = new Register();
-                register.setVisible(true);
+                String username = userTextField.getText();
+                String password = new String(passwordField.getPassword());
+
+                if (username.isEmpty() || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(Login.this, "Vui lòng nhập email và password!");
+                } else {
+
+                    if (isValidLogin(username, password)) {
+                        JOptionPane.showMessageDialog(Login.this, "Đăng nhập thành công!");
+                        // Thực hiện các hành động sau khi đăng nhập thành công
+                        // Ví dụ: mở cửa sổ mới, chuyển đổi sang giao diện khác, vv.
+                    } else {
+                        JOptionPane.showMessageDialog(Login.this,
+                                "Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin!");
+                    }
+                }
+            }
+        });
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userTextField.setText("");
+                passwordField.setText("");
             }
         });
     }
+
+    private boolean isValidLogin(String username, String password) {
+        // Gọi lớp DAO để kiểm tra thông tin đăng nhập
+        AcountDAO accountDao = AcountDAO.getInstance();
+        ArrayList<Acount> accounts = accountDao.selectAll();
+        for (Acount account : accounts) {
+            if (account.getUsername().equals(username) && account.getPassword().equals(password)) {
+                System.out.println(account.getUsername());
+                return true; // Đăng nhập thành công
+            }
+        }
+        return false; // Đăng nhập không thành công
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Login login = new Login();
             login.setVisible(true);
         });
     }
+
 }
