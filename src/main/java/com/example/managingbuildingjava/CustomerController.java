@@ -63,7 +63,7 @@ public class CustomerController implements Initializable {
         loadPage("Customer-view-Page3");
     }
     @FXML
-    private Label time, monthlyRevenueLabel, ;
+    private Label time, monthlyRevenueLabel;
     private void loadPage(String page) throws IOException {
         stop = true;
         Parent root = null;
