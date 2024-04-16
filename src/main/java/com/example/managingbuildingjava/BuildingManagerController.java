@@ -1,22 +1,19 @@
 package com.example.managingbuildingjava;
 
-import DTO.Apartment;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -25,66 +22,24 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class BuildingManagerController implements Initializable {
-
-    private ObservableList<Apartment> apartmentsList;
-    @FXML
-    private TextField TxtField__P1__1;
-
-    @FXML
-    private TextField TxtField__P1__2;
-
-    @FXML
-    private TextField TxtField__P1__3;
-
-    @FXML
-    private TextField TxtField__P1__5;
-
-    @FXML
-    private TextField TxtField__P1__search;
-
-    @FXML
-    private TextField TxtField__P2__search;
-
-    @FXML
-    private Button bnt__P1__1;
-
-    @FXML
-    private Button bnt__P1__add;
-
-    @FXML
-    private Button bnt__P1__delete;
-
-    @FXML
-    private Button bnt__P1__update;
-
-    @FXML
-    private ComboBox<?> comboBox__P1__1;
-
-    @FXML
-    private ComboBox<?> comboBox__P1__2;
-
-    @FXML
-    private ComboBox<?> comboBox__P1__3;
-
-    @FXML
-    private TableColumn<Apartment, String> maCanHoTable;
-
-    @FXML
-    private TableColumn<Apartment, String> soPhongTable;
-
-    @FXML
-    private TableView<Apartment> canHoTable;
-
+    public TextField TxtField__P1__search;
+    public ComboBox comboBox__P1__1;
+    public Label txtField__P1__1;
+    public TextField TxtField__P2__search;
+    public TextField TxtField__P4__search;
+    public Button bnt__P1__search;
+    public TextField TxtField__P3__search;
     private volatile boolean stop = false;
-
     private volatile Thread thread;
-
     int dem =0;
-
     @FXML
     private BorderPane bp;
     @FXML
     private Pane mp;
+    @FXML
+    private TextField TxtField__P1__1;
+    @FXML
+    private Button bnt__P1__add;
 
     @FXML
     private void page0 (MouseEvent event){
@@ -154,33 +109,7 @@ public class BuildingManagerController implements Initializable {
     void Close_Clicked(MouseEvent event){
         stop = true;
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        apartmentsList = FXCollections.observableArrayList(
-                new Apartment("abc", "a1", "aa1", 1.1, 2, 2, "as")
-        );
-
-        maCanHoTable.setCellValueFactory(new PropertyValueFactory<Apartment, String>("apartmentID"));
-        soPhongTable.setCellValueFactory(new PropertyValueFactory<Apartment, String>("roomNumber"));
-
-        canHoTable.setItems(apartmentsList);
     }
-
-
-
-    @FXML
-    void themCanHo(ActionEvent event) {
-        Apartment apartment = new Apartment();
-        apartment.setApartmentID(TxtField__P1__1.getText());
-        apartment.setRoomNumber(TxtField__P1__2.getText());
-        apartmentsList.add(apartment);
-    }
-
-    @FXML
-    void suaCanHo(ActionEvent event) {
-        System.out.println("sdfsd");
-    }
-
 }
