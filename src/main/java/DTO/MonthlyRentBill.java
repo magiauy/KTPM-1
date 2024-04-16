@@ -4,24 +4,26 @@
  */
 package DTO;
 
+import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
  * @author NGOC
  */
 public class MonthlyRentBill {
-    private String monthlyRentBillID;;
+    private int monthlyRentBillID;;
     private String apartmentID;
-    private String tenantID;
-    private String leaseAgreementID;
+    private int tenantID;
+    private int leaseAgreementID;
     private LocalDate date;
     private int repaymentPeriod;
     private Double totalPayment;
     private String status;
 
-    public MonthlyRentBill(String monthlyRentBillID, String apartmentID, String tenantID,
-                           String leaseAgreementID, LocalDate date, int repaymentPeriod,
+    public MonthlyRentBill(int monthlyRentBillID, String apartmentID, int tenantID,
+                           int leaseAgreementID, LocalDate date, int repaymentPeriod,
                            Double totalPayment, String status) {
         this.monthlyRentBillID = monthlyRentBillID;
         this.apartmentID = apartmentID;
@@ -47,11 +49,11 @@ public class MonthlyRentBill {
         this.status = monthlyRentBill.status;
     }
 
-    public String getMonthlyRentBillID() {
+    public int getMonthlyRentBillID() {
         return monthlyRentBillID;
     }
 
-    public void setMonthlyRentBillID(String monthlyRentBillID) {
+    public void setMonthlyRentBillID(int monthlyRentBillID) {
         this.monthlyRentBillID = monthlyRentBillID;
     }
 
@@ -63,19 +65,19 @@ public class MonthlyRentBill {
         this.apartmentID = apartmentID;
     }
 
-    public String getTenantID() {
+    public int getTenantID() {
         return tenantID;
     }
 
-    public void setTenantID(String tenantID) {
+    public void setTenantID(int tenantID) {
         this.tenantID = tenantID;
     }
 
-    public String getLeaseAgreementID() {
+    public int getLeaseAgreementID() {
         return leaseAgreementID;
     }
 
-    public void setLeaseAgreementID(String leaseAgreementID) {
+    public void setLeaseAgreementID(int leaseAgreementID) {
         this.leaseAgreementID = leaseAgreementID;
     }
 
@@ -124,4 +126,41 @@ public class MonthlyRentBill {
                 ", status='" + status + '\'' +
                 '}';
     }
+    public static ArrayList<MonthlyRentBill> getAllMonthlyRentBillsFromDatabase() {
+        ArrayList<MonthlyRentBill> monthlyRentBills = new ArrayList<>();
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+            String url = "jdbc:sqlserver://PHAMNAM:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
+            String userName = "sa";
+            String password = "123456789";
+
+            try (Connection connection = DriverManager.getConnection(url, userName, password)) {
+                String sql = "SELECT * FROM MonthlyRentBill";
+                PreparedStatement statement = connection.prepareStatement(sql);
+
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    int monthlyRentBillID = resultSet.getInt("monthlyRentBillID");
+                    String apartmentID = resultSet.getString("apartmentID");
+                    int tenantID = resultSet.getInt("tenantID");
+                    int leaseAgreementID = resultSet.getInt("leaseAgreementID");
+                    LocalDate date = resultSet.getDate("date").toLocalDate();
+                    int repaymentPeriod = resultSet.getInt("repaymentPeriod");
+                    double totalPayment = resultSet.getDouble("totalPayment");
+                    String status = resultSet.getString("status");
+
+                    MonthlyRentBill monthlyRentBill = new MonthlyRentBill(monthlyRentBillID, apartmentID, tenantID, leaseAgreementID, date, repaymentPeriod, totalPayment, status);
+                    monthlyRentBills.add(monthlyRentBill);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return monthlyRentBills;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

@@ -13,26 +13,12 @@ public class JDBCUtil {
     public static Connection getConnection() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://DESKTOP-2O5BBS1:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
+            String url = "jdbc:sqlserver://PHAMNAM:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
             String userName = "sa";
             String password = "123456789";
 
             try (Connection connection = DriverManager.getConnection(url, userName, password)) {
-                String sql = "SELECT * FROM Building";
-                try (Statement statement = connection.createStatement();
-                     ResultSet resultSet = statement.executeQuery(sql)) {
-                    System.out.println("Danh sách thông tin khách hàng:");
-                    System.out.println("---------------------------------");
-                    while (resultSet.next()) {
-                        String maKH = resultSet.getString("buildingID");
-                        String hoTen = resultSet.getString("name");
-                        String diaChi = resultSet.getString("city");
-                        System.out.println("Mã KH: " + maKH);
-                        System.out.println("Họ Tên: " + hoTen);
-                        System.out.println("City Building: " + diaChi);
-                        System.out.println();
-                    }
-                }
+                System.out.println("Kết nối thành công.");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
