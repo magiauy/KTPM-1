@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.CustomerController">
+          <children>
+              <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
+                  <children>
+                      <ComboBox fx:id="comboBox__P1__2" layoutX="737.0" layoutY="38.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+            <Pane layoutX="33.0" layoutY="121.0" prefHeight="208.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
+               <children>
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="86.0" prefHeight="32.0" prefWidth="120.0" text="Phòng gym" textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="13.0" />
+                              </font>
+                  </Label>
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="27.0" prefHeight="32.0" prefWidth="120.0" text="Giữ xe" textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="13.0" />
+                              </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="159.0" prefHeight="32.0" prefWidth="120.0" text="Hồ bơi" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <CheckBox layoutX="210.0" layoutY="34.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutX="210.0" layoutY="94.0" mnemonicParsing="false" text="CheckBox" />
+                  <CheckBox layoutX="197.0" layoutY="157.0" mnemonicParsing="false" text="CheckBox" />
+               </children>
+            </Pane>
+                    <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="193.0" layoutY="636.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
+                        <graphic>
+                            <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../Picture/add2.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+            </Button>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="55.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin căn hộ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TableView layoutX="495.0" layoutY="101.0" prefHeight="520.0" prefWidth="343.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <Pane layoutX="33.0" layoutY="342.0" prefHeight="265.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="211.0" prefHeight="32.0" prefWidth="120.0" text="Quầy đồ nướng" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="42.0" prefHeight="32.0" prefWidth="120.0" text="Giặt xấy" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="52.0" layoutY="99.0" prefHeight="32.0" prefWidth="120.0" text="Dọn phòng" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <DatePicker layoutX="199.0" layoutY="33.0" prefHeight="51.0" prefWidth="191.0" />
+                  <DatePicker layoutX="199.0" layoutY="106.0" prefHeight="51.0" prefWidth="191.0" />
+                  <DatePicker layoutX="199.0" layoutY="186.0" prefHeight="51.0" prefWidth="191.0" />
+               </children>
+            </Pane>
+                  </children>
+              </Pane>
+          </children>
+
+</Pane>
