@@ -30,12 +30,13 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
 
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture) VALUES (?, ?, ?, ?, ?, ?, ?)");
-
+            int roomNumberValue = (apartment.getRoomNumber());
+            preparedStatement.setInt(3, roomNumberValue);
             // Thiết lập các giá trị tham số trong câu lệnh SQL
             preparedStatement.setString(1, (apartment.getApartmentID() != null) ? apartment.getApartmentID() : null);
             preparedStatement.setString(2, (apartment.getBuildingID() != null) ? apartment.getBuildingID() : null);
-            preparedStatement.setString(3, (apartment.getRoomNumber() != null) ? apartment.getRoomNumber() : null);
-            preparedStatement.setDouble(4, apartment.getArea());
+            preparedStatement.setInt(3, roomNumberValue);
+            preparedStatement.setString(4, apartment.getArea());
             preparedStatement.setInt(5, apartment.getBedrooms());
             preparedStatement.setInt(6, apartment.getBathrooms());
             //Luu Y
@@ -66,8 +67,8 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
             PreparedStatement pst = con.prepareStatement(sql);
 
             pst.setString(1, apartment.getBuildingID());
-            pst.setString(2, apartment.getRoomNumber());
-            pst.setDouble(3, apartment.getArea());
+            pst.setInt(2, apartment.getRoomNumber());
+            pst.setString(3, apartment.getArea());
             pst.setInt(4, apartment.getBedrooms());
             pst.setInt(5, apartment.getBathrooms());
             pst.setString(6, apartment.getFurniture());
@@ -143,11 +144,12 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         }
         return apartment;
     }
+
     private Apartment createApartmentFromResultSet(ResultSet resultSet) throws SQLException {
         String apartmentID = resultSet.getString("apartmentID");
         String buildingID = resultSet.getString("buildingID");
-        String roomNumber = resultSet.getString("roomNumber");
-        double area = resultSet.getDouble("area");
+        int roomNumber = resultSet.getInt("roomNumber");
+        String area = resultSet.getString("area");
         int bedrooms = resultSet.getInt("bedrooms");
         int bathrooms = resultSet.getInt("bathrooms");
         String furniture = resultSet.getString("furniture");

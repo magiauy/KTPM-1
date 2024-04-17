@@ -3,6 +3,7 @@ package GUI.FromRegister;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import BUS.AccountBUS;
 import DAO.AcountDAO;
 import DTO.Acount;
 
@@ -71,22 +72,22 @@ public class Login extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = userTextField.getText();
                 String password = new String(passwordField.getPassword());
-
                 if (username.isEmpty() || password.isEmpty()) {
                     JOptionPane.showMessageDialog(Login.this, "Vui lòng nhập email và password!");
                 } else {
-
-                    if (isValidLogin(username, password)) {
+                    AccountBUS accountBUS = new AccountBUS();
+                    boolean loginResult = accountBUS.checkLogin(username, password);
+                    if (loginResult) {
                         JOptionPane.showMessageDialog(Login.this, "Đăng nhập thành công!");
-                        // Thực hiện các hành động sau khi đăng nhập thành công
-                        // Ví dụ: mở cửa sổ mới, chuyển đổi sang giao diện khác, vv.
+                   
                     } else {
                         JOptionPane.showMessageDialog(Login.this,
-                                "Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin!");
+                                "Đăng nhập thất bại! Vui lòng kiểm tra lại thông tin.");
                     }
                 }
             }
         });
+
         resetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,18 +97,7 @@ public class Login extends JFrame {
         });
     }
 
-    private boolean isValidLogin(String username, String password) {
-        // Gọi lớp DAO để kiểm tra thông tin đăng nhập
-        AcountDAO accountDao = AcountDAO.getInstance();
-        ArrayList<Acount> accounts = accountDao.selectAll();
-        for (Acount account : accounts) {
-            if (account.getUsername().equals(username) && account.getPassword().equals(password)) {
-                System.out.println(account.getUsername());
-                return true; // Đăng nhập thành công
-            }
-        }
-        return false; // Đăng nhập không thành công
-    }
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

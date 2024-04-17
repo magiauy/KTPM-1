@@ -43,27 +43,31 @@ public class AcountDAO implements DAOInterface<Acount> {
 
     @Override
     public ArrayList<Acount> selectAll() {
-        ArrayList<Acount> result = new ArrayList<>();
+        ArrayList<Acount> accounts = new ArrayList<>();
         try {
-            Connection con = (Connection) JDBCUtil.getConnection();
-            String sql = "SELECT * FROM TaiKhoan";
-            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            ResultSet rs = (ResultSet) pst.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String username = rs.getNString("username");
-                String password = rs.getNString("password");
-                String loai = rs.getNString("loai");
-                Acount ac = new Acount(id, username, password, loai);
-                result.add(ac);
+            Connection connection = JDBCUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM TaiKhoan");
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String loai = resultSet.getString("loai");
+
+                Acount account = new Acount(id, username, password, loai);
+                accounts.add(account);
             }
-            JDBCUtil.closeConnection(con);
+
+            resultSet.close();
+            statement.close();
+            connection.close();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
-        return result;
+        return accounts;
     }
-
+    
     @Override
     public Acount selectById(String id) {
         return null;
