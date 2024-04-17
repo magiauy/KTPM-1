@@ -27,16 +27,15 @@ public class MonthlyRentBillDAO implements DAOInterface<MonthlyRentBill> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, leaseAgreementID, date, repaymentPeriod, totalPayment, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setString(1, monthlyRentBill.getMonthlyRentBillID());
             preparedStatement.setString(2, monthlyRentBill.getApartmentID());
-            preparedStatement.setInt(3, monthlyRentBill.getTenantID());
-            preparedStatement.setInt(4, monthlyRentBill.getLeaseAgreementID());
-            preparedStatement.setDate(5, Date.valueOf(monthlyRentBill.getDate()));
-            preparedStatement.setInt(6, monthlyRentBill.getRepaymentPeriod());
-            preparedStatement.setDouble(7, monthlyRentBill.getTotalPayment());
-            preparedStatement.setString(8, monthlyRentBill.getStatus());
+            preparedStatement.setString(3, monthlyRentBill.getTenantID());
+            preparedStatement.setDate(4, Date.valueOf(monthlyRentBill.getDate()));
+            preparedStatement.setInt(5, monthlyRentBill.getRepaymentPeriod());
+            preparedStatement.setDouble(6, monthlyRentBill.getTotalPayment());
+            preparedStatement.setString(7, monthlyRentBill.getStatus());
 
             result = preparedStatement.executeUpdate();
 
@@ -57,13 +56,12 @@ public class MonthlyRentBillDAO implements DAOInterface<MonthlyRentBill> {
                     "UPDATE MonthlyRentBill SET apartmentID = ?, tenantID = ?, leaseAgreementID = ?, date = ?, repaymentPeriod = ?, totalPayment = ?, status = ? WHERE monthlyRentBillID = ?");
 
             preparedStatement.setString(1, monthlyRentBill.getApartmentID());
-            preparedStatement.setInt(2, monthlyRentBill.getTenantID());
-            preparedStatement.setInt(3, monthlyRentBill.getLeaseAgreementID());
-            preparedStatement.setDate(4, Date.valueOf(monthlyRentBill.getDate()));
-            preparedStatement.setInt(5, monthlyRentBill.getRepaymentPeriod());
-            preparedStatement.setDouble(6, monthlyRentBill.getTotalPayment());
-            preparedStatement.setString(7, monthlyRentBill.getStatus());
-            preparedStatement.setString(8, monthlyRentBill.getMonthlyRentBillID());
+            preparedStatement.setString(2, monthlyRentBill.getTenantID());
+            preparedStatement.setDate(3, Date.valueOf(monthlyRentBill.getDate()));
+            preparedStatement.setInt(4, monthlyRentBill.getRepaymentPeriod());
+            preparedStatement.setDouble(5, monthlyRentBill.getTotalPayment());
+            preparedStatement.setString(6, monthlyRentBill.getStatus());
+            preparedStatement.setString(7, monthlyRentBill.getMonthlyRentBillID());
 
             result = preparedStatement.executeUpdate();
 
@@ -106,14 +104,13 @@ public class MonthlyRentBillDAO implements DAOInterface<MonthlyRentBill> {
             while (resultSet.next()) {
                 String monthlyRentBillID = resultSet.getString("monthlyRentBillID");
                 String apartmentID = resultSet.getString("apartmentID");
-                int tenantID = resultSet.getInt("tenantID");
-                int leaseAgreementID = resultSet.getInt("leaseAgreementID");
+                String tenantID = resultSet.getString("tenantID");
                 LocalDate date = resultSet.getDate("date").toLocalDate();
                 int repaymentPeriod = resultSet.getInt("repaymentPeriod");
                 double totalPayment = resultSet.getDouble("totalPayment");
                 String status = resultSet.getString("status");
 
-                MonthlyRentBill monthlyRentBill = new MonthlyRentBill(monthlyRentBillID, apartmentID, tenantID, leaseAgreementID, date, repaymentPeriod, totalPayment, status);
+                MonthlyRentBill monthlyRentBill = new MonthlyRentBill(monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status);
                 monthlyRentBills.add(monthlyRentBill);
             }
             resultSet.close();
@@ -138,14 +135,13 @@ public class MonthlyRentBillDAO implements DAOInterface<MonthlyRentBill> {
             if (resultSet.next()) {
                 String monthlyRentBillID = resultSet.getString("monthlyRentBillID");
                 String apartmentID = resultSet.getString("apartmentID");
-                int tenantID = resultSet.getInt("tenantID");
-                int leaseAgreementID = resultSet.getInt("leaseAgreementID");
+                String tenantID = resultSet.getString("tenantID");
                 LocalDate date = resultSet.getDate("date").toLocalDate();
                 int repaymentPeriod = resultSet.getInt("repaymentPeriod");
                 double totalPayment = resultSet.getDouble("totalPayment");
                 String status = resultSet.getString("status");
 
-                monthlyRentBill = new MonthlyRentBill(monthlyRentBillID, apartmentID, tenantID, leaseAgreementID, date, repaymentPeriod, totalPayment, status);
+                monthlyRentBill = new MonthlyRentBill(monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status);
             }
 
             resultSet.close();
