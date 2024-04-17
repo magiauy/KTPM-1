@@ -8,8 +8,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Customer extends Application {
-
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Customer.class.getResource("Customer-view-Page0.fxml"));
@@ -24,8 +22,6 @@ public class Customer extends Application {
         });
         stage.show();
     }
-
-
 
     public static void main(String[] args) {
         launch();

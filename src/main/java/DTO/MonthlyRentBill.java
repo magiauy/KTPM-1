@@ -4,7 +4,9 @@
  */
 package DTO;
 
+import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,15 +15,15 @@ import java.time.LocalDate;
 public class MonthlyRentBill {
     private String monthlyRentBillID;;
     private String apartmentID;
-    private String tenantID;
-    private String leaseAgreementID;
+    private int tenantID;
+    private int leaseAgreementID;
     private LocalDate date;
     private int repaymentPeriod;
     private Double totalPayment;
     private String status;
 
-    public MonthlyRentBill(String monthlyRentBillID, String apartmentID, String tenantID,
-                           String leaseAgreementID, LocalDate date, int repaymentPeriod,
+    public MonthlyRentBill(String monthlyRentBillID, String apartmentID, int tenantID,
+                           int leaseAgreementID, LocalDate date, int repaymentPeriod,
                            Double totalPayment, String status) {
         this.monthlyRentBillID = monthlyRentBillID;
         this.apartmentID = apartmentID;
@@ -63,19 +65,19 @@ public class MonthlyRentBill {
         this.apartmentID = apartmentID;
     }
 
-    public String getTenantID() {
+    public int getTenantID() {
         return tenantID;
     }
 
-    public void setTenantID(String tenantID) {
+    public void setTenantID(int tenantID) {
         this.tenantID = tenantID;
     }
 
-    public String getLeaseAgreementID() {
+    public int getLeaseAgreementID() {
         return leaseAgreementID;
     }
 
-    public void setLeaseAgreementID(String leaseAgreementID) {
+    public void setLeaseAgreementID(int leaseAgreementID) {
         this.leaseAgreementID = leaseAgreementID;
     }
 
@@ -124,4 +126,5 @@ public class MonthlyRentBill {
                 ", status='" + status + '\'' +
                 '}';
     }
+
 }
