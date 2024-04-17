@@ -1,13 +1,11 @@
 module com.example.managingbuildingjava {
-    requires javafx.controls;
-    requires javafx.fxml;
-    requires java.logging;
+        requires javafx.fxml;
+        requires java.logging;
+        requires javafx.controls;
+        requires com.dlsc.formsfx;
+        requires java.sql;
+        requires java.desktop;
 
-
-    requires com.dlsc.formsfx;
-    requires java.sql;
-    requires java.desktop;
-
-    opens com.example.managingbuildingjava to javafx.fxml;
-    exports com.example.managingbuildingjava;
+        opens com.example.managingbuildingjava to javafx.fxml;
+        exports com.example.managingbuildingjava;
 }

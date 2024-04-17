@@ -11,9 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -32,8 +30,14 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class BossController implements Initializable {
-
+public class CustomerController implements Initializable {
+    public TextField TxtField__P1__search;
+    public ComboBox comboBox__P1__1;
+    public Label txtField__P1__1;
+    public TextField TxtField__P2__search;
+    public TextField TxtField__P4__search;
+    public Button bnt__P1__search;
+    public TextField TxtField__P3__search;
     private volatile boolean stop = false;
     private volatile Thread thread;
     int dem =0;
@@ -41,6 +45,10 @@ public class BossController implements Initializable {
     private BorderPane bp;
     @FXML
     private Pane mp;
+    @FXML
+    private TextField TxtField__P1__1;
+    @FXML
+    private Button bnt__P1__add;
 
     @FXML
     private void page0 (MouseEvent event){
@@ -50,41 +58,18 @@ public class BossController implements Initializable {
     }
     @FXML
     private void page1 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page1");
+        loadPage("Customer-view-Page1");
     }
     @FXML
     private void page2 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page2");
+        loadPage("Customer-view-Page2");
     }
     @FXML
     private void page3 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page3");
-    }
-    @FXML
-    private void page4 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page4");
-    }
-    @FXML
-    private void page5 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page5");
-    }
-    @FXML
-    private void page6 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page6");
-    }
-    @FXML
-    private void page7 (MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page7");
+        loadPage("Customer-view-Page3");
     }
     @FXML
     private Label time;
-
-    private void loadPage(String page) throws IOException {
-        stop = true;
-        Parent root = null;
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
-        bp.setCenter(root);
-    }
     @FXML
     private Label monthlyRevenueLabel;
     @FXML
@@ -93,18 +78,66 @@ public class BossController implements Initializable {
     private BarChart barChartOfMonthlyOpex;
     private ObservableList<FinancialReport> financialReportsList;
     private ObservableList<FinancialReport> monthlyRentBillsList;
-
+    private void loadPage(String page) throws IOException {
+        stop = true;
+        Parent root = null;
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
+        bp.setCenter(root);
+    }
+    private void TimeNow(){
+        thread = new Thread(()->{
+            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+            while (!stop){
+                try {
+                    Thread.sleep(1000);
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+                final String timenow = sdf.format((new Date()));
+                Platform.runLater(()->{
+                    if (time!=null) time.setText(timenow);
+                });
+                dem++;
+//                System.out.println(dem);
+            }
+        });
+        thread.start();
+    }
+    @FXML
+    void Close_Clicked(MouseEvent event){
+        stop = true;
+    }
     public void updateMonthlyRevenueLabel() {
         if (monthlyRevenueLabel == null) {
             return;
         }
         try {
             financialReportsList = FXCollections.observableArrayList();
-
             FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-            financialReportBUS.setMonthlyRevenueLabel(monthlyRevenueLabel);
+            ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
 
+            // Lấy ngày hiện tại
+            LocalDate currentDate = LocalDate.now();
 
+            // Lọc danh sách financialReports để chỉ chọn ra các báo cáo tài chính có ngày tương ứng với tháng hiện tại
+            ArrayList<FinancialReport> currentMonthReports = new ArrayList<>();
+            for (FinancialReport report : financialReports) {
+                LocalDate reportDate = LocalDate.parse(report.getDate().toString());
+                YearMonth reportYearMonth = YearMonth.from(reportDate);
+                YearMonth currentYearMonth = YearMonth.from(currentDate);
+                if (reportYearMonth.equals(currentYearMonth)) {
+                    currentMonthReports.add(report);
+                }
+            }
+
+            // Kiểm tra xem có báo cáo nào cho tháng hiện tại không
+            if (!currentMonthReports.isEmpty()) {
+                // Lấy giá trị monthlyRevenue của báo cáo đầu tiên trong danh sách và gán vào monthlyRevenueLabel
+                double monthlyRevenue = currentMonthReports.get(0).getMonthlyRevenue();
+                monthlyRevenueLabel.setText(String.valueOf(monthlyRevenue));
+            } else {
+                monthlyRevenueLabel.setText("N/A");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,6 +148,7 @@ public class BossController implements Initializable {
         }
         try {
             monthlyRentBillsList = FXCollections.observableArrayList();
+
             MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
             monthlyRentBillBUS.setMonthlyRentBillsLabel(numberOfStatusLabel);
 
@@ -130,37 +164,13 @@ public class BossController implements Initializable {
         try {
             financialReportsList = FXCollections.observableArrayList();
             FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-            financialReportBUS.setMonthlyOpexLabel(barChartOfMonthlyOpex);
+            ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-
-    private void TimeNow(){
-        thread = new Thread(()->{
-            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
-            while (!stop){
-                try {
-                    Thread.sleep(1000);
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-                final String timenow = sdf.format((new Date()));
-                Platform.runLater(()->{
-                    if (time!=null) time.setText(timenow);
-                });
-            }
-        });
-        thread.start();
-    }
-
-    @FXML
-    void Close_Clicked(MouseEvent event){
-        stop = true;
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateMonthlyRevenueLabel();
