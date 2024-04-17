@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author NGOC
  */
 public class MonthlyRentBill {
-    private int monthlyRentBillID;;
+    private String monthlyRentBillID;;
     private String apartmentID;
     private int tenantID;
     private int leaseAgreementID;
@@ -22,7 +22,7 @@ public class MonthlyRentBill {
     private Double totalPayment;
     private String status;
 
-    public MonthlyRentBill(int monthlyRentBillID, String apartmentID, int tenantID,
+    public MonthlyRentBill(String monthlyRentBillID, String apartmentID, int tenantID,
                            int leaseAgreementID, LocalDate date, int repaymentPeriod,
                            Double totalPayment, String status) {
         this.monthlyRentBillID = monthlyRentBillID;
@@ -49,11 +49,11 @@ public class MonthlyRentBill {
         this.status = monthlyRentBill.status;
     }
 
-    public int getMonthlyRentBillID() {
+    public String getMonthlyRentBillID() {
         return monthlyRentBillID;
     }
 
-    public void setMonthlyRentBillID(int monthlyRentBillID) {
+    public void setMonthlyRentBillID(String monthlyRentBillID) {
         this.monthlyRentBillID = monthlyRentBillID;
     }
 
@@ -125,42 +125,6 @@ public class MonthlyRentBill {
                 ", totalPayment=" + totalPayment +
                 ", status='" + status + '\'' +
                 '}';
-    }
-    public static ArrayList<MonthlyRentBill> getAllMonthlyRentBillsFromDatabase() {
-        ArrayList<MonthlyRentBill> monthlyRentBills = new ArrayList<>();
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-            String url = "jdbc:sqlserver://PHAMNAM:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
-            String userName = "sa";
-            String password = "123456789";
-
-            try (Connection connection = DriverManager.getConnection(url, userName, password)) {
-                String sql = "SELECT * FROM MonthlyRentBill";
-                PreparedStatement statement = connection.prepareStatement(sql);
-
-                ResultSet resultSet = statement.executeQuery();
-
-                while (resultSet.next()) {
-                    int monthlyRentBillID = resultSet.getInt("monthlyRentBillID");
-                    String apartmentID = resultSet.getString("apartmentID");
-                    int tenantID = resultSet.getInt("tenantID");
-                    int leaseAgreementID = resultSet.getInt("leaseAgreementID");
-                    LocalDate date = resultSet.getDate("date").toLocalDate();
-                    int repaymentPeriod = resultSet.getInt("repaymentPeriod");
-                    double totalPayment = resultSet.getDouble("totalPayment");
-                    String status = resultSet.getString("status");
-
-                    MonthlyRentBill monthlyRentBill = new MonthlyRentBill(monthlyRentBillID, apartmentID, tenantID, leaseAgreementID, date, repaymentPeriod, totalPayment, status);
-                    monthlyRentBills.add(monthlyRentBill);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return monthlyRentBills;
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

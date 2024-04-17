@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class FinancialReport {
-    private int financialReportID;
+    private String financialReportID;
     private String buildingID;
     private int buildingManagerID;
     private Date date;
@@ -25,7 +25,7 @@ public class FinancialReport {
     }
     public FinancialReport(){
     }
-    public FinancialReport(int financialReportID, String buildingID, int buildingManagerID,
+    public FinancialReport(String financialReportID, String buildingID, int buildingManagerID,
                            Date date, double monthlyRevenue, double monthlyOpex, double monthlyProfit) {
         this.financialReportID = financialReportID;
         this.buildingID = buildingID;
@@ -35,10 +35,10 @@ public class FinancialReport {
         this.monthlyOpex = monthlyOpex;
         this.monthlyProfit = monthlyProfit;
     }
-    public int getFinancialReportID() {
+    public String getFinancialReportID() {
         return financialReportID;
     }
-    public void setFinancialReportID(int financialReportID) {
+    public void setFinancialReportID(String financialReportID) {
         this.financialReportID = financialReportID;
     }
     public String getBuildingID() {
@@ -88,41 +88,5 @@ public class FinancialReport {
                 ", monthlyOpex=" + monthlyOpex +
                 ", monthlyProfit=" + monthlyProfit +
                 '}';
-    }
-    public static ArrayList<FinancialReport> getAllFinancialReportsFromDatabase() {
-        ArrayList<FinancialReport> financialReports = new ArrayList<>();
-        try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-            String url = "jdbc:sqlserver://PHAMNAM:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
-            String userName = "sa";
-            String password = "123456789";
-
-            try (Connection connection = DriverManager.getConnection(url, userName, password)) {
-                String sql = "SELECT * FROM FinancialReport";
-                PreparedStatement statement = connection.prepareStatement(sql);
-
-                ResultSet resultSet = statement.executeQuery();
-
-                while (resultSet.next()) {
-                    int financialReportID = resultSet.getInt("financialReportID");
-                    String buildingID = resultSet.getString("buildingID");
-                    int buildingManagerID = resultSet.getInt("buildingManagerID");
-                    Date date = resultSet.getDate("date");
-                    double monthlyRevenue = resultSet.getDouble("monthlyRevenue");
-                    double monthlyOpex = resultSet.getDouble("monthlyOpex");
-                    double monthlyProfit = resultSet.getDouble("monthlyProfit");
-
-                    FinancialReport financialReport = new FinancialReport(financialReportID, buildingID, buildingManagerID, date, monthlyRevenue, monthlyOpex, monthlyProfit);
-                    financialReports.add(financialReport);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return financialReports;
-        }
-        catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

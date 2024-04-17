@@ -12,7 +12,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class FinancialReportDAO implements DAOInterface<FinancialReport> {
+    public FinancialReportDAO() {
+    }
 
+    public static FinancialReportDAO getInstance(){
+        return new FinancialReportDAO();
+    }
     @Override
     public int insert(FinancialReport financialReport) {
         int ketQua = 0;
@@ -21,7 +26,7 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO FinancialReport (financialReportID, buildingID, buildingManagerID, date, monthlyRevenue, monthlyOpex, monthlyProfit) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-            preparedStatement.setInt(1, financialReport.getFinancialReportID());
+            preparedStatement.setString(1, financialReport.getFinancialReportID());
             preparedStatement.setString(2, financialReport.getBuildingID());
             preparedStatement.setInt(3, financialReport.getBuildingManagerID());
             preparedStatement.setDate(4, new Date(financialReport.getDate().getTime()));
@@ -53,7 +58,7 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
             preparedStatement.setDouble(4, financialReport.getMonthlyRevenue());
             preparedStatement.setDouble(5, financialReport.getMonthlyOpex());
             preparedStatement.setDouble(6, financialReport.getMonthlyProfit());
-            preparedStatement.setInt(7, financialReport.getFinancialReportID());
+            preparedStatement.setString(7, financialReport.getFinancialReportID());
 
             ketQua = preparedStatement.executeUpdate();
 
@@ -94,10 +99,10 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                int financialReportID = resultSet.getInt("financialReportID");
+                String financialReportID = resultSet.getString("financialReportID");
                 String buildingID = resultSet.getString("buildingID");
                 int buildingManagerID = resultSet.getInt("buildingManagerID");
-                Date date = resultSet.getDate("date");
+                Date date = resultSet.getDate("Date");
                 double monthlyRevenue = resultSet.getDouble("monthlyRevenue");
                 double monthlyOpex = resultSet.getDouble("monthlyOpex");
                 double monthlyProfit = resultSet.getDouble("monthlyProfit");
@@ -105,7 +110,6 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
                 FinancialReport financialReport = new FinancialReport(financialReportID, buildingID, buildingManagerID, date, monthlyRevenue, monthlyOpex, monthlyProfit);
                 financialReports.add(financialReport);
             }
-
             resultSet.close();
             statement.close();
             JDBCUtil.closeConnection(connection);
@@ -114,6 +118,7 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
         }
         return financialReports;
     }
+
 
     @Override
     public FinancialReport selectById(String ID) {
@@ -126,10 +131,10 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                int financialReportID = resultSet.getInt("financialReportID");
+                String financialReportID = resultSet.getString("financialReportID");
                 String buildingID = resultSet.getString("buildingID");
                 int buildingManagerID = resultSet.getInt("buildingManagerID");
-                Date date = resultSet.getDate("date");
+                Date date = resultSet.getDate("Date");
                 double monthlyRevenue = resultSet.getDouble("monthlyRevenue");
                 double monthlyOpex = resultSet.getDouble("monthlyOpex");
                 double monthlyProfit = resultSet.getDouble("monthlyProfit");

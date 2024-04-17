@@ -1,11 +1,17 @@
 package com.example.managingbuildingjava;
 
+import BUS.FinancialReportBUS;
+import BUS.MonthlyRentBillBUS;
 import DTO.FinancialReport;
+import DTO.MonthlyRentBill;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -63,35 +69,20 @@ public class CustomerController implements Initializable {
         loadPage("Customer-view-Page3");
     }
     @FXML
-    private Label time, monthlyRevenueLabel;
+    private Label time;
+    @FXML
+    private Label monthlyRevenueLabel;
+    @FXML
+    private PieChart numberOfStatusLabel;
+    @FXML
+    private BarChart barChartOfMonthlyOpex;
+    private ObservableList<FinancialReport> financialReportsList;
+    private ObservableList<FinancialReport> monthlyRentBillsList;
     private void loadPage(String page) throws IOException {
         stop = true;
         Parent root = null;
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
         bp.setCenter(root);
-    }
-    private void upddateMonthlyRevenueLabel(ArrayList<FinancialReport> financialReports){
-        // Lấy ngày hiện tại
-        LocalDate currentDate = LocalDate.now();
-
-        // Lọc danh sách financialReports để chỉ chọn ra các báo cáo tài chính có ngày tương ứng với tháng hiện tại
-        ArrayList<FinancialReport> currentMonthReports = new ArrayList<>();
-        for (FinancialReport report : financialReports) {
-            LocalDate reportDate = LocalDate.parse(report.getDate().toString());
-            YearMonth reportYearMonth = YearMonth.from(reportDate);
-            YearMonth currentYearMonth = YearMonth.from(currentDate);
-            if (reportYearMonth.equals(currentYearMonth)) {
-                currentMonthReports.add(report);
-            }
-        }
-        // Kiểm tra xem có báo cáo nào cho tháng hiện tại không
-        if (!currentMonthReports.isEmpty()) {
-            // Lấy giá trị monthlyRevenue của báo cáo đầu tiên trong danh sách và gán vào monthlyRevenueLabel
-            double monthlyRevenue = currentMonthReports.get(0).getMonthlyRevenue();
-            monthlyRevenueLabel.setText(String.valueOf(monthlyRevenue));
-        } else {
-            monthlyRevenueLabel.setText("N/A");
-        }
     }
     private void TimeNow(){
         thread = new Thread(()->{
@@ -107,7 +98,7 @@ public class CustomerController implements Initializable {
                     if (time!=null) time.setText(timenow);
                 });
                 dem++;
-                System.out.println(dem);
+//                System.out.println(dem);
             }
         });
         thread.start();
@@ -116,10 +107,74 @@ public class CustomerController implements Initializable {
     void Close_Clicked(MouseEvent event){
         stop = true;
     }
+    public void updateMonthlyRevenueLabel() {
+        if (monthlyRevenueLabel == null) {
+            return;
+        }
+        try {
+            financialReportsList = FXCollections.observableArrayList();
+            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+            ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
+
+            // Lấy ngày hiện tại
+            LocalDate currentDate = LocalDate.now();
+
+            // Lọc danh sách financialReports để chỉ chọn ra các báo cáo tài chính có ngày tương ứng với tháng hiện tại
+            ArrayList<FinancialReport> currentMonthReports = new ArrayList<>();
+            for (FinancialReport report : financialReports) {
+                LocalDate reportDate = LocalDate.parse(report.getDate().toString());
+                YearMonth reportYearMonth = YearMonth.from(reportDate);
+                YearMonth currentYearMonth = YearMonth.from(currentDate);
+                if (reportYearMonth.equals(currentYearMonth)) {
+                    currentMonthReports.add(report);
+                }
+            }
+
+            // Kiểm tra xem có báo cáo nào cho tháng hiện tại không
+            if (!currentMonthReports.isEmpty()) {
+                // Lấy giá trị monthlyRevenue của báo cáo đầu tiên trong danh sách và gán vào monthlyRevenueLabel
+                double monthlyRevenue = currentMonthReports.get(0).getMonthlyRevenue();
+                monthlyRevenueLabel.setText(String.valueOf(monthlyRevenue));
+            } else {
+                monthlyRevenueLabel.setText("N/A");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void updateNumberOfStatus() {
+        if (numberOfStatusLabel == null) {
+            return;
+        }
+        try {
+            monthlyRentBillsList = FXCollections.observableArrayList();
+
+            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+            monthlyRentBillBUS.setMonthlyRentBillsLabel(numberOfStatusLabel);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void drawLineChartOfMonthlyOpex() {
+        if (barChartOfMonthlyOpex == null) {
+            return;
+        }
+
+        try {
+            financialReportsList = FXCollections.observableArrayList();
+            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+            ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<FinancialReport> financialReports = FinancialReport.getAllFinancialReportsFromDatabase();
-        upddateMonthlyRevenueLabel(financialReports);
-
+        updateMonthlyRevenueLabel();
+        updateNumberOfStatus();
+        drawLineChartOfMonthlyOpex();
     }
 }

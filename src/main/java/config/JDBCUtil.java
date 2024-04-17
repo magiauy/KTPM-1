@@ -11,22 +11,23 @@ import java.sql.*;
 
 public class JDBCUtil {
     public static Connection getConnection() {
+        Connection connection = null;
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String url = "jdbc:sqlserver://PHAMNAM:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
             String userName = "sa";
             String password = "123456789";
 
-            try (Connection connection = DriverManager.getConnection(url, userName, password)) {
-                System.out.println("Kết nối thành công.");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            connection = DriverManager.getConnection(url, userName, password);
+            System.out.println("Kết nối thành công.");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException("Không thể kết nối đến cơ sở dữ liệu.", e);
         }
-        return null;
+        return connection;
     }
+
     public static void closeConnection(Connection connection) {
         try {
             if (connection != null) {

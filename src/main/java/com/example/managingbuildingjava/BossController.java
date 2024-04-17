@@ -1,10 +1,19 @@
 package com.example.managingbuildingjava;
 
+import BUS.FinancialReportBUS;
+import BUS.MonthlyRentBillBUS;
+import DTO.FinancialReport;
+import DTO.MonthlyRentBill;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -16,6 +25,9 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -73,6 +85,59 @@ public class BossController implements Initializable {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
         bp.setCenter(root);
     }
+    @FXML
+    private Label monthlyRevenueLabel;
+    @FXML
+    private PieChart numberOfStatusLabel;
+    @FXML
+    private BarChart barChartOfMonthlyOpex;
+    private ObservableList<FinancialReport> financialReportsList;
+    private ObservableList<FinancialReport> monthlyRentBillsList;
+
+    public void updateMonthlyRevenueLabel() {
+        if (monthlyRevenueLabel == null) {
+            return;
+        }
+        try {
+            financialReportsList = FXCollections.observableArrayList();
+
+            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+            financialReportBUS.setMonthlyRevenueLabel(monthlyRevenueLabel);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void updateNumberOfStatus() {
+        if (numberOfStatusLabel == null) {
+            return;
+        }
+        try {
+            monthlyRentBillsList = FXCollections.observableArrayList();
+            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+            monthlyRentBillBUS.setMonthlyRentBillsLabel(numberOfStatusLabel);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void drawLineChartOfMonthlyOpex() {
+        if (barChartOfMonthlyOpex == null) {
+            return;
+        }
+
+        try {
+            financialReportsList = FXCollections.observableArrayList();
+            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+            financialReportBUS.setMonthlyOpexLabel(barChartOfMonthlyOpex);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private void TimeNow(){
         thread = new Thread(()->{
@@ -87,8 +152,6 @@ public class BossController implements Initializable {
                 Platform.runLater(()->{
                     if (time!=null) time.setText(timenow);
                 });
-                dem++;
-                System.out.println(dem);
             }
         });
         thread.start();
@@ -100,5 +163,8 @@ public class BossController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        updateMonthlyRevenueLabel();
+        updateNumberOfStatus();
+        drawLineChartOfMonthlyOpex();
     }
 }
