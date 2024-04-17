@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 public class ApartmentBUS {
     private ArrayList<Apartment> listApartment = new ArrayList<>();
+
     public ApartmentBUS() {
         this.listApartment = ApartmentDAO.getInstance().selectAll();
     }
@@ -31,7 +32,7 @@ public class ApartmentBUS {
         return check;
     }
 
-    public boolean delete(Apartment apartment, int index){
+    public boolean delete(Apartment apartment){
         boolean check = ApartmentDAO.getInstance().delete(apartment.getApartmentID())!=0;
         if (check){
             this.listApartment.remove(apartment);

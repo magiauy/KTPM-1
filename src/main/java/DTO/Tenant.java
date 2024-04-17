@@ -75,12 +75,12 @@ public class Tenant {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDate getDob() {
+    public LocalDate getDateOfBirthDay() {
         return dateOfBirthDay;
     }
 
-    public void setDob(LocalDate dob) {
-        this.dateOfBirthDay = dob;
+    public void setDateOfBirthDay(LocalDate dateOfBirthDay) {
+        this.dateOfBirthDay = dateOfBirthDay;
     }
 
     public String getGender() {

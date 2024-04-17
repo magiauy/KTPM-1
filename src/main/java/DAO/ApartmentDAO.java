@@ -29,7 +29,7 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
             Connection connection = JDBCUtil.getConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Apartment (apartmentID, buildingID, roomNumber, Area, bedrooms, bathrooms, furniture) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL
             preparedStatement.setString(1, (apartment.getApartmentID() != null) ? apartment.getApartmentID() : null);
@@ -62,7 +62,7 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE Apartment SET buildingID=?, roomNumber=?, area=?, bedrooms=?, bathrooms=?, furniture=? WHERE apartmentID=?";
+            String sql = "UPDATE Apartment SET buildingID=?, roomNumber=?, Area=?, bedrooms=?, bathrooms=?, furniture=? WHERE apartmentID=?";
             PreparedStatement pst = con.prepareStatement(sql);
 
             pst.setString(1, apartment.getBuildingID());
@@ -147,7 +147,7 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         String apartmentID = resultSet.getString("apartmentID");
         String buildingID = resultSet.getString("buildingID");
         String roomNumber = resultSet.getString("roomNumber");
-        double area = resultSet.getDouble("area");
+        double area = resultSet.getDouble("Area");
         int bedrooms = resultSet.getInt("bedrooms");
         int bathrooms = resultSet.getInt("bathrooms");
         String furniture = resultSet.getString("furniture");
