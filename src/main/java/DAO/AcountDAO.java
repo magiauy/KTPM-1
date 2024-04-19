@@ -50,12 +50,12 @@ public class AcountDAO implements DAOInterface<Acount> {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                String id = resultSet.getString("id");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
-                String loai = resultSet.getString("loai");
+                String role = resultSet.getString("role");
 
-                Acount account = new Acount(id, username, password, loai);
+                Acount account = new Acount(id, username, password, role);
                 accounts.add(account);
             }
 

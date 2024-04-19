@@ -76,8 +76,8 @@ public class Login extends JFrame {
                     JOptionPane.showMessageDialog(Login.this, "Vui lòng nhập email và password!");
                 } else {
                     AccountBUS accountBUS = new AccountBUS();
-                    boolean loginResult = accountBUS.checkLogin(username, password);
-                    if (loginResult) {
+                    String loginResult = accountBUS.checkLogin(username, password);
+                    if (!loginResult.equals("0")) {
                         JOptionPane.showMessageDialog(Login.this, "Đăng nhập thành công!");
                    
                     } else {

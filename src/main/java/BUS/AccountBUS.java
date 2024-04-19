@@ -18,20 +18,20 @@ public class AccountBUS {
         return accountDAO.selectAll();
     }
 
-    public boolean checkLogin(String username, String password ) {
+    public String checkLogin(String username, String password ) {
         for (Acount account : listAccount) {
             if (account.getUsername().equals(username) && account.getPassword().equals(password)) {
-                return true; // Đăng nhập thành công
+                return account.getId(); // Đăng nhập thành công
             }
         }
-        return false; // Đăng nhập không thành công
+        return "0"; // Đăng nhập không thành công
     }
 
     public String getUserType(String username, String password) {
         // Kiểm tra thông tin đăng nhập trong danh sách tài khoản
         for (Acount account : listAccount) {
             if (account.getUsername().equals(username) && account.getPassword().equals(password)) {
-                return account.getLoai();
+                return account.getRole();
             }
         }
         return ""; // Trả về chuỗi rỗng nếu không tìm thấy

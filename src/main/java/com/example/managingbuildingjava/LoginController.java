@@ -47,9 +47,9 @@ public class LoginController {
         }
 
         // Call checkLogin method (implementation in AccountBUS)
-        boolean validLogin = accountBUS.checkLogin(username, password);
+        String validLogin = accountBUS.checkLogin(username, password);
 
-        if (validLogin) {
+        if (!validLogin.equals("0")) {
             System.out.println("Login successful!");
             try {
                 String userType = accountBUS.getUserType(username, password);

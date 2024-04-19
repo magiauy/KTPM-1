@@ -16,7 +16,7 @@ import BUS.AccountBUS;
 
 public class main extends Application {
 
-    private Stage primaryStage;
+    private Stage primaryStage = new Stage();
     private Scene loginScene;
     private Scene bossScene;
     private Scene buiScene;
@@ -24,7 +24,7 @@ public class main extends Application {
 
     private TextField usernameField;
     private PasswordField passwordField;
-    private Label statusLabel;
+    private Label statusLabel = new Label();
 
     private AccountBUS accountBUS;
 
@@ -79,19 +79,22 @@ public class main extends Application {
         }
 
         // Call checkLogin method (implementation in AccountBUS)
-        boolean validLogin = accountBUS.checkLogin(username, password);
+        String validLogin = accountBUS.checkLogin(username, password);
         String userType = accountBUS.getUserType(username, password);
-        if (validLogin) {
+        if (!validLogin.equals("0")) {
             System.out.println("Login successful!");
-            String ID = 
-            if (userType.equals("admin"))
-                BossController.getInstance().setID(ID);
+            if (userType.equals("admin") || userType.equals("boss")){
+                BossController.getInstance().setID(validLogin);
                 primaryStage.setScene(bossScene);
-            if (userType.equals("khachhang"))
+            }
+            if (userType.equals("customer") || userType.equals("khachHang")){
+                CustomerController.getInstance().setID(validLogin);
                 primaryStage.setScene(cusScene);
-            if (userType.equals("quanli"))
+            }
+            if (userType.equals("manager")||userType.equals("quanLy")){
+                BuildingManagerController.getInstance().setID(validLogin);
                 primaryStage.setScene(buiScene);
-         
+            }
             primaryStage.setTitle("Admin");
         } else {
             showStatusMessage("Invalid username or password.");

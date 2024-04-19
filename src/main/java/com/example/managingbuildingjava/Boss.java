@@ -14,11 +14,8 @@ public class Boss extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         bossStage = primaryStage;
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
-        loginScene = new Scene(loginLoader.load(), 400, 300);
-        bossStage.setScene(loginScene);
-        bossStage.setTitle("Login");
-        bossStage.show();
+        BossController.getInstance().setID("Admin");
+        openBossView();
     }
     public static void openBossView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Boss.class.getResource("Boss-view-Page0.fxml"));

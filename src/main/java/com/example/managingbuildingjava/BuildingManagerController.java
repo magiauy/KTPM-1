@@ -25,6 +25,19 @@ import java.util.ResourceBundle;
 import java.sql.*;
 
 public class BuildingManagerController implements Initializable {
+
+    public static BuildingManagerController getInstance() {
+        return new BuildingManagerController();
+    }
+    private String ID;
+    public void setID (String ID){
+        this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
     public TextField TxtField__P1__search;
     public ComboBox comboBox__P1__1;
     public Label txtField__P1__1;
@@ -34,7 +47,6 @@ public class BuildingManagerController implements Initializable {
     public TextField TxtField__P3__search;
     private volatile boolean stop = false;
     private volatile Thread thread;
-    int dem =0;
     @FXML
     private BorderPane bp;
     @FXML
@@ -110,8 +122,6 @@ public class BuildingManagerController implements Initializable {
                     if (time != null)
                         time.setText(timenow);
                 });
-                dem++;
-                System.out.println(dem);
             }
         });
         thread.start();

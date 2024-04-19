@@ -31,6 +31,21 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
+
+    public static CustomerController getInstance() {
+        return new CustomerController();
+    }
+
+    private String ID;
+
+    public void setID (String ID){
+        this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
     public TextField TxtField__P1__search;
     public ComboBox comboBox__P1__1;
     public Label txtField__P1__1;

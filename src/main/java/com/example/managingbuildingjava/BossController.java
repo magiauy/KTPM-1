@@ -43,18 +43,21 @@ public class BossController implements Initializable {
     public static BossController getInstance() {
         return new BossController();
     }
-    
-    private String ID = new String();
 
+    private String ID;
+
+    public void setID (String ID){
+        this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
+    }
     private volatile boolean stop = false;
     private volatile Thread thread;
     private String buildingId;
     private ObservableList<Building> buildingsList;
     private Building selectedBuildingToDelete;
-
-    public void setID (String ID){
-        this.ID = ID;
-    }
 
     public String getBuildingId() {
         return buildingId;
@@ -97,20 +100,6 @@ public class BossController implements Initializable {
         loadPage("Boss-view-Page4");
     }
 
-    @FXML
-    private void page5(MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page5");
-    }
-
-    @FXML
-    private void page6(MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page6");
-    }
-
-    @FXML
-    private void page7(MouseEvent event) throws IOException {
-        loadPage("Boss-view-Page7");
-    }
 
     @FXML
     private Label time;
@@ -416,5 +405,6 @@ public class BossController implements Initializable {
             showAlert("Thất Bại", "Không thể cập nhật", AlertType.ERROR);
         }
     }
+
 
 }

@@ -1,22 +1,22 @@
 package DTO;
 
 public class Acount {
-    private int id;
+    private String id;
     private String username;
     private String password;
-    private String loai;
+    private String role;
 
     public Acount() {
     }
 
-    public Acount(int id, String username, String password, String loai) {
+    public Acount(String id, String username, String password, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.loai = loai;
+        this.role = role;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -28,11 +28,11 @@ public class Acount {
         return password;
     }
 
-    public String getLoai() {
-        return loai;
+    public String getRole() {
+        return role;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -44,12 +44,12 @@ public class Acount {
         this.password = password;
     }
 
-    public void setLoai(String loai) {
-        this.loai = loai;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
-        return "Acount [id=" + id + ", username=" + username + ", password=" + password + ", loai=" + loai + "]";
+        return "Acount [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + "]";
     }
 }
