@@ -11,13 +11,14 @@ package DTO;
 public class Apartment {
     private String apartmentID;
     private String buildingID;
-    private String roomNumber;
-    private Double area;
+    private int roomNumber;
+    private String area;
     private int bedrooms;
     private int bathrooms;
     private String furniture;
-    public Apartment(String apartmentID, String buildingID, String roomNumber,
-                     Double area, int bedrooms, int bathrooms, String furniture) {
+
+    public Apartment(String apartmentID, String buildingID, int roomNumber,
+            String area, int bedrooms, int bathrooms, String furniture) {
         this.apartmentID = apartmentID;
         this.buildingID = buildingID;
         this.roomNumber = roomNumber;
@@ -26,8 +27,10 @@ public class Apartment {
         this.bathrooms = bathrooms;
         this.furniture = furniture;
     }
+
     public Apartment() {
     }
+
     public Apartment(Apartment apartment) {
         this.apartmentID = apartment.apartmentID;
         this.buildingID = apartment.buildingID;
@@ -37,48 +40,63 @@ public class Apartment {
         this.bathrooms = apartment.bathrooms;
         this.furniture = apartment.furniture;
     }
+
     public String getApartmentID() {
         return apartmentID;
     }
+
     public void setApartmentID(String apartmentID) {
         this.apartmentID = apartmentID;
     }
+
     public String getBuildingID() {
         return buildingID;
     }
+
     public void setBuildingID(String buildingID) {
         this.buildingID = buildingID;
     }
-    public String getRoomNumber() {
+
+    public int getRoomNumber() {
         return roomNumber;
     }
-    public void setRoomNumber(String roomNumber) {
+
+    public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
-    public Double getArea() {
+
+    public String getArea() {
         return area;
     }
-    public void setArea(Double area) {
+
+    public void setArea(String area) {
         this.area = area;
     }
+
     public int getBedrooms() {
         return bedrooms;
     }
+
     public void setBedrooms(int bedrooms) {
         this.bedrooms = bedrooms;
     }
+
     public int getBathrooms() {
         return bathrooms;
     }
+
     public void setBathrooms(int bathrooms) {
         this.bathrooms = bathrooms;
     }
+
     public String getFurniture() {
         return furniture;
     }
+
     public void setFurniture(String furniture) {
         this.furniture = furniture;
     }
+
     @Override
     public String toString() {
         return "Apartment{" +

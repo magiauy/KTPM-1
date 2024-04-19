@@ -39,9 +39,7 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager>{
             preparedStatement.setString(7, t.getGender_BuildingManager());
             preparedStatement.setString(8, t.getCitizenIdentityCard_BuildingManager());
             preparedStatement.setDouble(9, t.getSalary_BuildingManager());
-
             ketQua = preparedStatement.executeUpdate();
-
             preparedStatement.close();
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {

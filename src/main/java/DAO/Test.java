@@ -14,9 +14,8 @@ import DTO.Apartment;
  */
 public class Test {
     public static void main(String[] args) {
-       Apartment apartment = new Apartment("11111", "3123123123", "12214342342",  2.0 , 0, 0, "urniture");
-       ApartmentDAO.getInstance().insert(apartment);
-       ApartmentDAO.getInstance().delete("11111");
+      
+       
 
     }
 }

@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author NGOC
  * @param <T>
  */
+
 public interface DAOInterface<T> {
     public int insert(T t);
     
@@ -21,4 +22,7 @@ public interface DAOInterface<T> {
     public ArrayList<T> selectAll();
     
     public T selectById(String t);
+
 }
+
+

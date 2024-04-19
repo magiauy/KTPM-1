@@ -5,12 +5,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.LoginController">
+<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.LoginController">
    <children>
       <Label layoutX="39.0" layoutY="118.0" prefHeight="71.0" prefWidth="161.0" text="Username" />
-      <PasswordField layoutX="276.0" layoutY="228.0" />
-      <TextField layoutX="269.0" layoutY="138.0" />
+      <PasswordField fx:id="passwordField" layoutX="276.0" layoutY="228.0" />
+      <TextField fx:id="usernameField" layoutX="269.0" layoutY="138.0" />
       <Label layoutX="27.0" layoutY="208.0" prefHeight="71.0" prefWidth="161.0" text="Password" />
-      <Button layoutX="202.0" layoutY="361.0" mnemonicParsing="false" text="Đăng nhập" />
+      <Button fx:id="loginButton" layoutX="202.0" layoutY="361.0" mnemonicParsing="false" text="Đăng nhập" onAction="#onHelloButtonClick" />
    </children>
 </Pane>
