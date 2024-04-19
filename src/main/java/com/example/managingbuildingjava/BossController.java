@@ -39,12 +39,22 @@ import BUS.BuildingBUS;
 import DTO.Building;
 
 public class BossController implements Initializable {
+   
+    public static BossController getInstance() {
+        return new BossController();
+    }
+    
+    private String ID = new String();
 
     private volatile boolean stop = false;
     private volatile Thread thread;
     private String buildingId;
     private ObservableList<Building> buildingsList;
     private Building selectedBuildingToDelete;
+
+    public void setID (String ID){
+        this.ID = ID;
+    }
 
     public String getBuildingId() {
         return buildingId;
