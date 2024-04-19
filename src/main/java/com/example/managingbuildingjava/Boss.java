@@ -24,10 +24,8 @@ public class Boss extends Application {
         bossStage.setScene(scene);
         bossStage.show();
     }
-
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }

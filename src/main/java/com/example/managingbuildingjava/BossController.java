@@ -27,16 +27,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 import BUS.BuildingBUS;
+import BUS.BuildingManagerBUS;
 import DTO.Building;
+
 
 public class BossController implements Initializable {
    
@@ -59,6 +63,8 @@ public class BossController implements Initializable {
     private ObservableList<Building> buildingsList;
     private Building selectedBuildingToDelete;
 
+    private ObservableList<DTO.BuildingManager> buildingManagersList;
+    private BuildingManager selectedBuildingManagerToDelete;
     public String getBuildingId() {
         return buildingId;
     }
@@ -135,6 +141,34 @@ public class BossController implements Initializable {
     private TextField TxtField__P1__5;
     @FXML
     private TextField TxtField__P1__6;
+    private TableView<DTO.BuildingManager> table__view2;
+
+    @FXML
+    private TableColumn<BuildingManager, String> buildingManagerIdColumn;
+
+    @FXML
+    private TableColumn<BuildingManager, String> buildingIdColumn;
+
+    @FXML
+    private TableColumn<BuildingManager, String> lastNameColumn;
+
+    @FXML
+    private TableColumn<BuildingManager, String> firstNameColumn;
+
+    @FXML
+    private TableColumn<BuildingManager, String> phoneNumberColumn;
+
+    @FXML
+    private TableColumn<BuildingManager, LocalDate> dobColumn;
+
+    @FXML
+    private TableColumn<BuildingManager, String> genderColumn;
+
+    @FXML
+    private TableColumn<BuildingManager, String> citizenIdentityCardColumn;
+
+    @FXML
+    private TableColumn<BuildingManager, Float> salaryColumn;
 
     private void loadPage(String page) throws IOException {
         stop = true;
@@ -223,6 +257,8 @@ public class BossController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buildingsList = FXCollections.observableArrayList();
+        buildingManagersList = FXCollections.observableArrayList();
+
         try {
             BuildingBUS buildingBUS = new BuildingBUS();
             ArrayList<Building> buildings = buildingBUS.getAll();
@@ -236,12 +272,38 @@ public class BossController implements Initializable {
             diaChiColumn.setCellValueFactory(new PropertyValueFactory<>("address_Building"));
             soLuongCanHoColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfApartment_Building"));
             table__view.setItems(observableBuildingList);
-            handle();
+           
+            loadBuildingManagers();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+   private void loadBuildingManagers() {
+        try {
+            BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+            ArrayList<DTO.BuildingManager> buildingManagers = buildingManagerBUS.getAll();
+            buildingManagersList.addAll(buildingManagers);
+            for (DTO.BuildingManager manager : buildingManagersList) {
+                System.out.println("Building Manager ID: " + manager.getBuildingId());
+                System.out.println("Last Name: " + manager.getLastName_BuildingManager());
+                System.out.println("First Name: " + manager.getFirstName_BuildingManager());
+                // In các trường dữ liệu khác nếu cần
+                System.out.println("--------------------------------------");
+            }
+
+            ObservableList<DTO.BuildingManager> building = FXCollections.observableArrayList(buildingManagersList);
+
+            buildingManagerIdColumn.setCellValueFactory(new PropertyValueFactory<>("buildingManagerId"));
+            lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName_BuildingManager"));
+            firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName_BuildingManager"));
+            // Đặt các cell value factory cho các cột khác tương ứng với trường dữ liệu của BuildingManager
+
+            table__view2.setItems(building);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void handle() {
         table__view.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
@@ -362,15 +424,15 @@ public class BossController implements Initializable {
         TxtField__P1__5.setText("");
         TxtField__P1__6.setText("");
     }
-       
+   
     public void handleEdit() {
-        // Lấy thông tin từ các TextField
-        String buildingId = TxtField__P1__1.getText();
+        String buildingId = TxtField__P1__1.getText().trim();
         String nameBuilding = TxtField__P1__2.getText();
         String city_Building = TxtField__P1__3.getText();
         String district_Building = TxtField__P1__4.getText();
         String address_Building = TxtField__P1__5.getText();
         int numberOfApartment_Building = 0;
+
         try {
             numberOfApartment_Building = Integer.parseInt(TxtField__P1__6.getText());
         } catch (NumberFormatException e) {
@@ -378,12 +440,6 @@ public class BossController implements Initializable {
             return;
         }
 
-        // Kiểm tra thông tin đã nhập đầy đủ chưa
-        if (buildingId.isEmpty() || nameBuilding.isEmpty() || city_Building.isEmpty() ||
-                district_Building.isEmpty() || address_Building.isEmpty()) {
-            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin để cập nhật.", AlertType.ERROR);
-            return;
-        }
 
         // Tạo đối tượng Building mới
         Building editedBuilding = new Building();
@@ -394,17 +450,18 @@ public class BossController implements Initializable {
         editedBuilding.setAddress_Building(address_Building);
         editedBuilding.setNumberOfApartment_Building(numberOfApartment_Building);
 
-        BuildingBUS buildingBUS = new BuildingBUS();
+        // Gọi phương thức cập nhật từ BuildingBUS hoặc BuildingDAO
+        BuildingBUS buildingBUS = new BuildingBUS(); // Đây là một ví dụ, bạn cần sửa lại theo cấu trúc thực tế của ứng
+                                                     // dụng
         boolean updateResult = buildingBUS.update(editedBuilding);
 
         if (updateResult) {
             showAlert("Thành Công", "Cập nhật thành công", AlertType.CONFIRMATION);
-            resetTextfield(); 
-            updateBuildingList(); 
+            resetTextfield();
+            updateBuildingList();
         } else {
             showAlert("Thất Bại", "Không thể cập nhật", AlertType.ERROR);
         }
     }
-
 
 }

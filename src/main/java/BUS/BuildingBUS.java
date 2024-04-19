@@ -39,21 +39,20 @@ public class BuildingBUS {
     }
    
     public boolean update(Building building) {
-        int index = getIndexByBuildingId(building.getBuildingId());
-        if (index >= 0 && index < listBuildings.size()) {
-            listBuildings.set(index, building);
-            return true;
-        } else {
-   
-            System.err.println("Lỗi: Chỉ số không hợp lệ khi cập nhật.");
-            return false;
+        boolean updated = BuildingDAO.getInstance().update(building) != 0;
+        if (updated) {
+            int index = getIndexByBuildingID(building.getBuildingId());
+            if (index != -1) {
+                this.listBuildings.set(index, building);
+            }
         }
+        return updated;
     }
 
-    private int getIndexByBuildingId(String buildingId) {
-        for (int i = 0; i < listBuildings.size(); i++) {
+    public int getIndexByBuildingID(String buildingId) {
+        for (int i = 0; i < this.listBuildings.size(); i++) {
             if (listBuildings.get(i).getBuildingId().equals(buildingId)) {
-                return i;
+                return i; // Trả về chỉ mục khi tìm thấy
             }
         }
         return -1; 

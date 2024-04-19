@@ -20,11 +20,11 @@ public class BuildingManager {
     private LocalDate dateOfBirthDay;
     private String gender_BuildingManager;
     private String citizenIdentityCard_BuildingManager;
-    private Double salary_BuildingManager;
+    private Float salary_BuildingManager;
 
     public BuildingManager(String buildingManagerId, String buildingId, String lastName_BuildingManager,
                     String firstName_BuildingManager, String phoneNumber_BuildingManager, LocalDate dobDate,
-                    String gender_BuildingManager, String citizenIdentityCard_BuildingManager, Double salary_BuildingManager) {
+                    String gender_BuildingManager, String citizenIdentityCard_BuildingManager, Float salary_BuildingManager) {
             this.buildingManagerId = buildingManagerId;
             this.buildingId = buildingId;
             this.lastName_BuildingManager = lastName_BuildingManager;
@@ -45,7 +45,7 @@ public class BuildingManager {
             this.dateOfBirthDay = LocalDate.now();
             this.gender_BuildingManager = "";
             this.citizenIdentityCard_BuildingManager = "";
-            this.salary_BuildingManager = (double) 0;
+            this.salary_BuildingManager = (float) 0;
     }
     public LocalDate getDateOfBirthDay() {
         return dateOfBirthDay;
@@ -104,10 +104,10 @@ public class BuildingManager {
     public void setCitizenIdentityCard_BuildingManager(String citizenIdentityCard_BuildingManager) {
             this.citizenIdentityCard_BuildingManager = citizenIdentityCard_BuildingManager;
     }
-    public Double getSalary_BuildingManager() {
+    public Float getSalary_BuildingManager() {
             return salary_BuildingManager;
     }
-    public void setSalary_BuildingManager(Double salary_BuildingManager) {
+    public void setSalary_BuildingManager(Float salary_BuildingManager) {
             this.salary_BuildingManager = salary_BuildingManager;
     }
     @Override

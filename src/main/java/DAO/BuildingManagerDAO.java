@@ -26,7 +26,7 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager>{
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO BuildingManager (buildingManagerId, buildingId, lastName_BuildingManager, firstName_BuildingManager, phoneNumber_BuildingManager, dateOfBirthDay, gender_BuildingManager, citizenIdentityCard_BuildingManager, salary_BuildingManager) "
+                    "INSERT INTO BuildingManager (buildingManagerID, buildingID, lastName, firstName, phoneNumber, dob, gender, citizenIdentityCard, salary) "
                             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL
@@ -38,7 +38,7 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager>{
             preparedStatement.setDate(6, Date.valueOf(t.getDateOfBirthDay()));
             preparedStatement.setString(7, t.getGender_BuildingManager());
             preparedStatement.setString(8, t.getCitizenIdentityCard_BuildingManager());
-            preparedStatement.setDouble(9, t.getSalary_BuildingManager());
+            preparedStatement.setFloat(9, t.getSalary_BuildingManager());
             ketQua = preparedStatement.executeUpdate();
             preparedStatement.close();
             JDBCUtil.closeConnection(connection);
@@ -154,7 +154,7 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager>{
         LocalDate dateOfBirthDay = resultSet.getDate("dateOfBirthDay").toLocalDate();
         String gender_BuildingManager = resultSet.getString("gender_BuildingManager");
         String citizenIdentityCard_BuildingManager = resultSet.getString("citizenIdentityCard_BuildingManager");
-        double salary_BuildingManager = resultSet.getDouble("salary_BuildingManager");
+        Float salary_BuildingManager = resultSet.getFloat("salary_BuildingManager");
 
         return new BuildingManager(buildingManagerId, buildingId, lastName_BuildingManager, firstName_BuildingManager, phoneNumber_BuildingManager, dateOfBirthDay, gender_BuildingManager, citizenIdentityCard_BuildingManager, salary_BuildingManager);
     }
