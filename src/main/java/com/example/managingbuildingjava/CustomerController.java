@@ -91,8 +91,6 @@ public class CustomerController implements Initializable {
     private PieChart numberOfStatusLabel;
     @FXML
     private BarChart barChartOfMonthlyOpex;
-    private ObservableList<FinancialReport> financialReportsList;
-    private ObservableList<FinancialReport> monthlyRentBillsList;
     private void loadPage(String page) throws IOException {
         stop = true;
         Parent root = null;
@@ -127,7 +125,6 @@ public class CustomerController implements Initializable {
             return;
         }
         try {
-            financialReportsList = FXCollections.observableArrayList();
             FinancialReportBUS financialReportBUS = new FinancialReportBUS();
             ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
 
@@ -162,8 +159,6 @@ public class CustomerController implements Initializable {
             return;
         }
         try {
-            monthlyRentBillsList = FXCollections.observableArrayList();
-
             MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
             monthlyRentBillBUS.setMonthlyRentBillsLabel(numberOfStatusLabel);
 
@@ -177,7 +172,6 @@ public class CustomerController implements Initializable {
         }
 
         try {
-            financialReportsList = FXCollections.observableArrayList();
             FinancialReportBUS financialReportBUS = new FinancialReportBUS();
             ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
 

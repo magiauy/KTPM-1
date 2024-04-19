@@ -148,15 +148,11 @@ public class BossController implements Initializable {
     private PieChart numberOfStatusLabel;
     @FXML
     private BarChart barChartOfMonthlyOpex;
-    private ObservableList<FinancialReport> financialReportsList;
-    private ObservableList<FinancialReport> monthlyRentBillsList;
-
     public void updateMonthlyRevenueLabel() {
         if (monthlyRevenueLabel == null) {
             return;
         }
         try {
-            financialReportsList = FXCollections.observableArrayList();
 
             FinancialReportBUS financialReportBUS = new FinancialReportBUS();
             financialReportBUS.setMonthlyRevenueLabel(monthlyRevenueLabel);
@@ -171,7 +167,6 @@ public class BossController implements Initializable {
             return;
         }
         try {
-            monthlyRentBillsList = FXCollections.observableArrayList();
             MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
             monthlyRentBillBUS.setMonthlyRentBillsLabel(numberOfStatusLabel);
 
@@ -185,7 +180,6 @@ public class BossController implements Initializable {
         }
 
         try {
-            financialReportsList = FXCollections.observableArrayList();
             FinancialReportBUS financialReportBUS = new FinancialReportBUS();
             financialReportBUS.setMonthlyOpexLabel(barChartOfMonthlyOpex);
 
@@ -193,8 +187,6 @@ public class BossController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 
     private void TimeNow() {
         thread = new Thread(() -> {
@@ -224,12 +216,17 @@ public class BossController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buildingsList = FXCollections.observableArrayList();
         try {
+            //Chạy page 0
+            updateMonthlyRevenueLabel();
+            updateNumberOfStatus();
+            drawLineChartOfMonthlyOpex();
+
             BuildingBUS buildingBUS = new BuildingBUS();
             ArrayList<Building> buildings = buildingBUS.getAll();
             buildingsList.addAll(buildings);
 
             ObservableList<Building> observableBuildingList = FXCollections.observableArrayList(buildingsList);
-            maToaNhaColumn.setCellValueFactory(new PropertyValueFactory<>("buildingId"));
+            maToaNhaColumn.setCellValueFactory(new PropertyValueFactory<>("buildingID"));
             tenColumn.setCellValueFactory(new PropertyValueFactory<>("nameBuilding"));
             thanhPhoColumn.setCellValueFactory(new PropertyValueFactory<>("city_Building"));
             quanColumn.setCellValueFactory(new PropertyValueFactory<>("district_Building"));
@@ -249,17 +246,17 @@ public class BossController implements Initializable {
                 if (selectedRow != null) {
                     System.out.println("Dữ liệu của dòng được chọn:");
                     System.out.println("Mã Tòa Nhà: " + selectedRow.getBuildingId());
-                    System.out.println("Tên: " + selectedRow.getNameBuilding());
-                    System.out.println("Thành Phố: " + selectedRow.getCity_Building());
-                    System.out.println("Quận: " + selectedRow.getDistrict_Building());
-                    System.out.println("Địa Chỉ: " + selectedRow.getAddress_Building());
-                    System.out.println("Số Lượng Căn Hộ: " + selectedRow.getNumberOfApartment_Building());
+                    System.out.println("Tên: " + selectedRow.getName());
+                    System.out.println("Thành Phố: " + selectedRow.getCity());
+                    System.out.println("Quận: " + selectedRow.getDistrict());
+                    System.out.println("Địa Chỉ: " + selectedRow.getAddress());
+                    System.out.println("Số Lượng Căn Hộ: " + selectedRow.getNumberOfApartment());
                     TxtField__P1__1.setText(selectedRow.getBuildingId());
-                    TxtField__P1__2.setText(selectedRow.getNameBuilding());
-                    TxtField__P1__3.setText(selectedRow.getCity_Building());
-                    TxtField__P1__4.setText(selectedRow.getDistrict_Building());
-                    TxtField__P1__5.setText(selectedRow.getAddress_Building());
-                    int numberOfApartments = selectedRow.getNumberOfApartment_Building();
+                    TxtField__P1__2.setText(selectedRow.getName());
+                    TxtField__P1__3.setText(selectedRow.getCity());
+                    TxtField__P1__4.setText(selectedRow.getDistrict());
+                    TxtField__P1__5.setText(selectedRow.getAddress());
+                    int numberOfApartments = selectedRow.getNumberOfApartment();
                     TxtField__P1__6.setText(String.valueOf(numberOfApartments));
                     selectedBuildingToDelete = selectedRow;
                 }
@@ -312,11 +309,11 @@ public class BossController implements Initializable {
             }
             Building newBuilding = new Building();
             newBuilding.setBuildingId(buildingId);
-            newBuilding.setNameBuilding(nameBuilding);
-            newBuilding.setCity_Building(city_Building);
-            newBuilding.setDistrict_Building(district_Building);
-            newBuilding.setAddress_Building(address_Building);
-            newBuilding.setNumberOfApartment_Building(numberOfApartment_Building);
+            newBuilding.setName(nameBuilding);
+            newBuilding.setCity(city_Building);
+            newBuilding.setDistrict(district_Building);
+            newBuilding.setAddress(address_Building);
+            newBuilding.setNumberOfApartment(numberOfApartment_Building);
 
             BuildingBUS buildingBUS = new BuildingBUS();
             boolean insertResult = buildingBUS.insert(newBuilding);
@@ -388,11 +385,11 @@ public class BossController implements Initializable {
         // Tạo đối tượng Building mới
         Building editedBuilding = new Building();
         editedBuilding.setBuildingId(buildingId);
-        editedBuilding.setNameBuilding(nameBuilding);
-        editedBuilding.setCity_Building(city_Building);
-        editedBuilding.setDistrict_Building(district_Building);
-        editedBuilding.setAddress_Building(address_Building);
-        editedBuilding.setNumberOfApartment_Building(numberOfApartment_Building);
+        editedBuilding.setName(nameBuilding);
+        editedBuilding.setCity(city_Building);
+        editedBuilding.setDistrict(district_Building);
+        editedBuilding.setAddress(address_Building);
+        editedBuilding.setNumberOfApartment(numberOfApartment_Building);
 
         BuildingBUS buildingBUS = new BuildingBUS();
         boolean updateResult = buildingBUS.update(editedBuilding);
