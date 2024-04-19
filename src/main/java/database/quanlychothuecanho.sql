@@ -8,7 +8,7 @@ CREATE TABLE Building (
                           city NVARCHAR(255),
                           district NVARCHAR(255),
                           address NVARCHAR(255),
-                          numberOfApartment VARCHAR(20)
+                          numberOfApartment INT
 );
 
 CREATE TABLE BuildingManager (
@@ -211,11 +211,11 @@ VALUES ('CH1', 'T1', N'Nguyễn', N'Thị A', '0123456789', '1990-01-10', N'Nữ
        ('CH4', 'T3', N'Phạm', N'Văn D', '0932154789', '1992-07-25', N'Nam', '852963147'),
        ('CH5', 'T4', N'Hồ', N'Thị E', '0789456123', '1997-03-05', N'Nữ', '369852147');
 INSERT INTO LeaseAgreement (leaseAgreementID, tenantID, apartmentID, buildingManagerID, signingDate, LeaseStartDate, LeaseEndDate, LeaseTerm, deposit, monthlyRent)
-VALUES ('LA1', 'T1', 'APT1', 'BM1', '2024-04-01', '2024-04-15', '2025-04-15', N'1 năm', '10000000', '2000000'),
-       ('LA2', 'T2', 'APT2', 'BM2', '2024-04-01', '2024-04-15', '2025-04-15', N'1 năm', '11000000', '2100000'),
-       ('LA3', 'T3', 'APT3', 'BM3', '2024-04-01', '2024-04-15', '2025-04-15', N'1 năm', '12000000', '2200000'),
-       ('LA4', 'T4', 'APT4', 'BM4', '2024-04-01', '2024-04-15', '2025-04-15', N'1 năm', '13000000', '2300000'),
-       ('LA5', 'T5', 'APT5', 'BM5', '2024-04-01', '2024-04-15', '2025-04-15', N'1 năm', '14000000', '2400000');
+VALUES ('LA1', 'T1', 'APT1', 'BM1', '2024-04-01', '2024-04-15', '2025-04-15', 12, '10000000', '2000000'),
+       ('LA2', 'T2', 'APT2', 'BM2', '2024-04-01', '2024-04-15', '2025-04-15', 12, '11000000', '2100000'),
+       ('LA3', 'T3', 'APT3', 'BM3', '2024-04-01', '2024-04-15', '2025-04-15', 24, '12000000', '2200000'),
+       ('LA4', 'T4', 'APT4', 'BM4', '2024-04-01', '2024-04-15', '2025-04-15',36, '13000000', '2300000'),
+       ('LA5', 'T5', 'APT5', 'BM5', '2024-04-01', '2024-04-15', '2025-04-15', 24, '14000000', '2400000');
 -- Dữ liệu cho bảng Furniture
 INSERT INTO Furniture (furnitureID, apartmentID, name, condition, price)
 VALUES
@@ -227,11 +227,11 @@ VALUES
 -- Dữ liệu cho bảng MonthlyRentBill
 INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status)
 VALUES
-    ('MRB1', 'APT1', 'T1', '2024-03-01', 12, '1200', N'Unpaid'),
-    ('MRB2', 'APT2', 'T2', '2024-04-13', 12, '1500', N'Unpaid'),
-    ('MRB3', 'APT3', 'T3', '2024-01-16', 12, '1800', N'Paid'),
-    ('MRB4', 'APT4', 'T4', '2024-11-24', 12, '2000', N'Pending'),
-    ('MRB5', 'APT5', 'T5', '2024-12-21', 12, '1400', N'Pending');
+    ('MRB1', 'APT1', 'T1', '2024-03-01', 5, '1200', N'Unpaid'),
+    ('MRB2', 'APT2', 'T2', '2024-04-13', 5, '1500', N'Unpaid'),
+    ('MRB3', 'APT3', 'T3', '2024-01-16', 5, '1800', N'Paid'),
+    ('MRB4', 'APT4', 'T4', '2024-11-24', 5, '2000', N'Pending'),
+    ('MRB5', 'APT5', 'T5', '2024-12-21', 5, '1400', N'Pending');
 -- Dữ liệu cho bảng ServiceUsage
 INSERT INTO ServiceUsage (serviceID, monthlyRentBillID, name, quantity, pricePerUnit, unit, totalAmount, Date, note)
 VALUES

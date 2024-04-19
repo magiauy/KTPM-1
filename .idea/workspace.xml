@@ -4,27 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update GUI (11/4)">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update from Kai 19/4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/AccountBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/AccountBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/AcountDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/AcountDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/Acount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/Acount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/FromRegister/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GUI/FromRegister/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Boss.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page7.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page7.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -315,7 +297,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713266794443</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="update from Kai 19/4">
+      <option name="closed" value="true" />
+      <created>1713509335632</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713509335632</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,7 +333,8 @@
     <MESSAGE value="update GUI (8/4)-2" />
     <MESSAGE value="update GUI (11/4)" />
     <MESSAGE value="Customer, them FinancialReport" />
-    <option name="LAST_COMMIT_MESSAGE" value="Customer, them FinancialReport" />
+    <MESSAGE value="update from Kai 19/4" />
+    <option name="LAST_COMMIT_MESSAGE" value="update from Kai 19/4" />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />
