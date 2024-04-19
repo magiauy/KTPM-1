@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class FinancialReportBUS {
     public FinancialReportBUS(ArrayList<FinancialReport> financialReports) {
@@ -99,8 +100,8 @@ public class FinancialReportBUS {
             series.getData().add(new XYChart.Data<>(month, report.getMonthlyOpex()));
         }
 
-        // Đảo ngược danh sách để tháng 12 xuất hiện ở cột cuối cùng
-        FXCollections.reverse(series.getData());
+        // Sắp xếp lại dữ liệu theo tháng
+        series.getData().sort(Comparator.comparing(data -> Integer.parseInt(data.getXValue())));
 
         // Xóa dữ liệu cũ trước khi cập nhật
         barChartOfMonthlyOpex.getData().clear();
@@ -110,4 +111,5 @@ public class FinancialReportBUS {
         // Xóa chú thích của Bar Chart
         barChartOfMonthlyOpex.setLegendVisible(false);
     }
+
 }

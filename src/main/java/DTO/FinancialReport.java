@@ -7,7 +7,7 @@ import java.util.Date;
 public class FinancialReport {
     private String financialReportID;
     private String buildingID;
-    private int buildingManagerID;
+    private String buildingManagerID;
     private Date date;
     private double monthlyRevenue;
     private double monthlyOpex;
@@ -25,7 +25,7 @@ public class FinancialReport {
     }
     public FinancialReport(){
     }
-    public FinancialReport(String financialReportID, String buildingID, int buildingManagerID,
+    public FinancialReport(String financialReportID, String buildingID, String buildingManagerID,
                            Date date, double monthlyRevenue, double monthlyOpex, double monthlyProfit) {
         this.financialReportID = financialReportID;
         this.buildingID = buildingID;
@@ -47,10 +47,10 @@ public class FinancialReport {
     public void setBuildingID(String buildingID) {
         this.buildingID = buildingID;
     }
-    public int getBuildingManagerID() {
+    public String getBuildingManagerID() {
         return buildingManagerID;
     }
-    public void setBuildingManagerID(int buildingManagerID) {
+    public void setBuildingManagerID(String buildingManagerID) {
         this.buildingManagerID = buildingManagerID;
     }
     public Date getDate() {

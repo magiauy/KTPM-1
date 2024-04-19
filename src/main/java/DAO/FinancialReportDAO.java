@@ -28,7 +28,7 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
 
             preparedStatement.setString(1, financialReport.getFinancialReportID());
             preparedStatement.setString(2, financialReport.getBuildingID());
-            preparedStatement.setInt(3, financialReport.getBuildingManagerID());
+            preparedStatement.setString(3, financialReport.getBuildingManagerID());
             preparedStatement.setDate(4, new Date(financialReport.getDate().getTime()));
             preparedStatement.setDouble(5, financialReport.getMonthlyRevenue());
             preparedStatement.setDouble(6, financialReport.getMonthlyOpex());
@@ -53,7 +53,7 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
                     "UPDATE FinancialReport SET buildingID = ?, buildingManagerID = ?, date = ?, monthlyRevenue = ?, monthlyOpex = ?, monthlyProfit = ? WHERE financialReportID = ?");
 
             preparedStatement.setString(1, financialReport.getBuildingID());
-            preparedStatement.setInt(2, financialReport.getBuildingManagerID());
+            preparedStatement.setString(2, financialReport.getBuildingManagerID());
             preparedStatement.setDate(3, new Date(financialReport.getDate().getTime()));
             preparedStatement.setDouble(4, financialReport.getMonthlyRevenue());
             preparedStatement.setDouble(5, financialReport.getMonthlyOpex());
@@ -101,7 +101,7 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
             while (resultSet.next()) {
                 String financialReportID = resultSet.getString("financialReportID");
                 String buildingID = resultSet.getString("buildingID");
-                int buildingManagerID = resultSet.getInt("buildingManagerID");
+                String buildingManagerID = resultSet.getString("buildingManagerID");
                 Date date = resultSet.getDate("Date");
                 double monthlyRevenue = resultSet.getDouble("monthlyRevenue");
                 double monthlyOpex = resultSet.getDouble("monthlyOpex");
@@ -133,7 +133,7 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
             if (resultSet.next()) {
                 String financialReportID = resultSet.getString("financialReportID");
                 String buildingID = resultSet.getString("buildingID");
-                int buildingManagerID = resultSet.getInt("buildingManagerID");
+                String buildingManagerID = resultSet.getString("buildingManagerID");
                 Date date = resultSet.getDate("Date");
                 double monthlyRevenue = resultSet.getDouble("monthlyRevenue");
                 double monthlyOpex = resultSet.getDouble("monthlyOpex");
