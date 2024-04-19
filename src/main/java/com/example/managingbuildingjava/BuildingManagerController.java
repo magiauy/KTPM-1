@@ -1,10 +1,21 @@
 package com.example.managingbuildingjava;
 
+import BUS.BuildingBUS;
+import BUS.BuildingManagerBUS;
+import BUS.FinancialReportBUS;
+import BUS.MonthlyRentBillBUS;
+import DTO.Building;
+import DTO.BuildingManager;
+import DTO.FinancialReport;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -99,7 +110,12 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
-    private Label time;
+    private Label time, numberOfBuildings;
+    @FXML
+    private PieChart pieChart;
+    @FXML
+    private BarChart<String, Number> barChart;
+    private ObservableList<BuildingManager> buildingManagerList;
 
     private void loadPage(String page) throws IOException {
         stop = true;
@@ -107,7 +123,6 @@ public class BuildingManagerController implements Initializable {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
         bp.setCenter(root);
     }
-
     private void TimeNow() {
         thread = new Thread(() -> {
             SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
@@ -126,12 +141,58 @@ public class BuildingManagerController implements Initializable {
         });
         thread.start();
     }
-
     @FXML
     void Close_Clicked(MouseEvent event) {
         stop = true;
     }
+    public void totalOfBuldings() {
+        if (numberOfBuildings == null) {
+            return;
+        }
+        try {
+            BuildingBUS buildingBUS = new BuildingBUS();
+            buildingBUS.setTotalNumberOfBuildings(numberOfBuildings);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void updatePieChart() {
+        if (pieChart == null) {
+            return;
+        }
+        try {
+            BuildingBUS buildingBUS = new BuildingBUS();
+            buildingBUS.setLocationOfBuildings(pieChart);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void drawBarChart() {
+        if (barChart == null) {
+            return;
+        }
+
+        try {
+            buildingManagerList = FXCollections.observableArrayList();
+            BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+            buildingManagerBUS.getGenderOfBDManager(barChart);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try{
+            //Chạy page 0
+            totalOfBuldings();
+            updatePieChart();
+            drawBarChart();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
