@@ -4,14 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="Customer, them FinancialReport">
+    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update from Kai 19/4">
+      <change afterPath="$PROJECT_DIR$/src/main/java/BUS/BuildingManagerBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_16_2024_2_36_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_16_2024_2_36_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_16_2024_9_21_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4_16_2024_9_21_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/FinancialReportDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/FinancialReportDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/MonthlyRentBillDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/MonthlyRentBillDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/FinancialReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/FinancialReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/MonthlyRentBill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/MonthlyRentBill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/BuildingBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/BuildingBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/BuildingDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/BuildingDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/BuildingManagerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/BuildingManagerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/BuildingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/BuildingManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +29,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="module-info" />
         <option value="Class" />
       </list>
     </option>
@@ -41,7 +50,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="nam" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -52,13 +61,17 @@
     &quot;assignee&quot;: &quot;NghiaNguyen04&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="6387b31e-0c04-462a-8819-0a6a7eee3584" />
-        <option name="url" value="https://github.com/NghiaNguyen04/ManagingBuildingJava.git" />
-      </UrlAndAccount>
-    </option>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/NghiaNguyen04/BuildingOperationsApplication.git&quot;,
+    &quot;accountId&quot;: &quot;6387b31e-0c04-462a-8819-0a6a7eee3584&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/module-info.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -79,6 +92,7 @@
     "Application.Login.executor": "Run",
     "Application.Test.executor": "Run",
     "Application.TrangChu.executor": "Run",
+    "Application.com.example.managingbuildingjava.main.executor": "Run",
     "Application.config.main.executor": "Run",
     "Application.main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
@@ -89,18 +103,18 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "NAM",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Downloads/JavaProject/BuildingOperationsApplication2/lib/sqljdbc_12.6/enu/jars/mssql-jdbc-12.6.1.jre11.jar",
+    "last_opened_file_path": "E:/Downloads/JavaProject/BuildingOperationsApplication/lib/sqljdbc_12.6/enu/jars/mssql-jdbc-12.6.1.jre11.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15722656",
-    "project.structure.side.proportion": "0.24421297",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.16089965",
+    "project.structure.side.proportion": "0.36673555",
     "settings.editor.selected.configurable": "preferences.JavaFX",
     "vue.rearranger.settings.migration": "true"
   }
@@ -124,10 +138,8 @@
   <component name="RunManager">
     <configuration name="main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="20" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.BuildingManager" />
       <module name="ManagingBuildingJava" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;D:\Downloads_D\Compressed\openjfx-22_windows-x64_bin-sdk\javafx-sdk-22\lib&quot; --add-modules javafx.controls,javafx.fxml " />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -198,7 +210,10 @@
       <workItem from="1713322479083" duration="1261000" />
       <workItem from="1713323768538" duration="1412000" />
       <workItem from="1713333120161" duration="11813000" />
+      <workItem from="1713373962064" duration="224000" />
+      <workItem from="1713374737008" duration="1858000" />
       <workItem from="1713373972347" duration="1931000" />
+      <workItem from="1713515380664" duration="15241000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -296,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713266794443</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="update from Kai 19/4">
+      <option name="closed" value="true" />
+      <created>1713509335632</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1713509335632</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,7 +347,8 @@
     <MESSAGE value="update GUI (8/4)-2" />
     <MESSAGE value="update GUI (11/4)" />
     <MESSAGE value="Customer, them FinancialReport" />
-    <option name="LAST_COMMIT_MESSAGE" value="Customer, them FinancialReport" />
+    <MESSAGE value="update from Kai 19/4" />
+    <option name="LAST_COMMIT_MESSAGE" value="update from Kai 19/4" />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />

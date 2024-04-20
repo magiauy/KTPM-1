@@ -11,21 +11,27 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class BuildingDAO implements DAOInterface<Building> {
+  
 
+    public static BuildingDAO getInstance() {
+        return new BuildingDAO();
+    }
+
+   
     @Override
     public int insert(Building building) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO Building (buildingId, nameBuilding, city_Building, district_Building, address_Building, numberOfApartment_Building) VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Building (buildingId, name, city, district, address, numberOfApartment) VALUES (?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setString(1, building.getBuildingId());
-            preparedStatement.setString(2, building.getNameBuilding());
-            preparedStatement.setString(3, building.getCity_Building());
-            preparedStatement.setString(4, building.getDistrict_Building());
-            preparedStatement.setString(5, building.getAddress_Building());
-            preparedStatement.setInt(6, building.getNumberOfApartment_Building());
+            preparedStatement.setString(2, building.getName());
+            preparedStatement.setString(3, building.getCity());
+            preparedStatement.setString(4, building.getDistrict());
+            preparedStatement.setString(5, building.getAddress());
+            preparedStatement.setInt(6, building.getNumberOfApartment());
 
             ketQua = preparedStatement.executeUpdate();
 
@@ -38,18 +44,20 @@ public class BuildingDAO implements DAOInterface<Building> {
     }
 
     @Override
+   
+
+
     public int update(Building building) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE Building SET nameBuilding = ?, city_Building = ?, district_Building = ?, address_Building = ?, numberOfApartment_Building = ? WHERE buildingId = ?");
-
-            preparedStatement.setString(1, building.getNameBuilding());
-            preparedStatement.setString(2, building.getCity_Building());
-            preparedStatement.setString(3, building.getDistrict_Building());
-            preparedStatement.setString(4, building.getAddress_Building());
-            preparedStatement.setInt(5, building.getNumberOfApartment_Building());
+                    "UPDATE Building SET name = ?, city = ?, district = ?, address = ?, numberOfApartment = ? WHERE buildingID = ?");
+            preparedStatement.setString(1, building.getName());
+            preparedStatement.setString(2, building.getCity());
+            preparedStatement.setString(3, building.getDistrict());
+            preparedStatement.setString(4, building.getAddress());
+            preparedStatement.setInt(5, building.getNumberOfApartment());
             preparedStatement.setString(6, building.getBuildingId());
 
             ketQua = preparedStatement.executeUpdate();
@@ -68,7 +76,7 @@ public class BuildingDAO implements DAOInterface<Building> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE FROM Building WHERE buildingId = ?");
+                    "DELETE FROM Building WHERE buildingID = ?");
             preparedStatement.setString(1, ID);
 
             ketQua = preparedStatement.executeUpdate();
@@ -93,11 +101,11 @@ public class BuildingDAO implements DAOInterface<Building> {
 
             while (resultSet.next()) {
                 String buildingId = resultSet.getString("buildingID");
-                String nameBuilding = resultSet.getString("nameBuilding");
-                String city_Building = resultSet.getString("cityBuilding");
-                String district_Building = resultSet.getString("district_Building");
-                String address_Building = resultSet.getString("address_Building");
-                int numberOfApartment_Building = resultSet.getInt("numberOfApartment_Building");
+                String nameBuilding = resultSet.getString("name");
+                String city_Building = resultSet.getString("city");
+                String district_Building = resultSet.getString("district");
+                String address_Building = resultSet.getString("address");
+                int numberOfApartment_Building = resultSet.getInt("numberOfApartment");
 
                 Building building = new Building(buildingId, nameBuilding, city_Building, district_Building, address_Building, numberOfApartment_Building);
                 buildings.add(building);
@@ -117,7 +125,7 @@ public class BuildingDAO implements DAOInterface<Building> {
         Building building = null;
         try {
             Connection connection = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM Building WHERE buildingId = ?";
+            String sql = "SELECT * FROM Building WHERE buildingID = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, ID);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -132,7 +140,6 @@ public class BuildingDAO implements DAOInterface<Building> {
 
                 building = new Building(buildingId, nameBuilding, city_Building, district_Building, address_Building, numberOfApartment_Building);
             }
-
             resultSet.close();
             preparedStatement.close();
             JDBCUtil.closeConnection(connection);

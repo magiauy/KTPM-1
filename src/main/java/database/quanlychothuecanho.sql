@@ -1,7 +1,9 @@
+Create Database QuanLyChoThueCanHo
 
+Use QuanLyChoThueCanHo
 
 CREATE TABLE Building (
-                          buildingID NVARCHAR(20) PRIMARY KEY,
+                          buildingID VARCHAR(20) PRIMARY KEY,
                           name NVARCHAR(255),
                           city NVARCHAR(255),
                           district NVARCHAR(255),
@@ -10,23 +12,22 @@ CREATE TABLE Building (
 );
 
 CREATE TABLE BuildingManager (
-                                 buildingManagerID NVARCHAR(20) PRIMARY KEY,
-                                 buildingID NVARCHAR(20),
+                                 buildingManagerID VARCHAR(20) PRIMARY KEY,
+                                 buildingID VARCHAR(20),
                                  lastName NVARCHAR(255),
                                  firstName NVARCHAR(255),
-                                 phoneNumber NVARCHAR(255),
+                                 phoneNumber VARCHAR(255),
                                  dob DATE,
                                  gender NVARCHAR(10),
-                                 citizenIdentityCard NVARCHAR(255),
-                                 position NVARCHAR(255),
+                                 citizenIdentityCard VARCHAR(255),
                                  salary DECIMAL(20, 2),
                                  FOREIGN KEY (buildingID) REFERENCES Building(buildingID)
 );
 
 CREATE TABLE FinancialReport (
-                                 financialReportID NVARCHAR(20) PRIMARY KEY,
-                                 buildingID NVARCHAR(20),
-                                 buildingManagerID NVARCHAR(20),
+                                 financialReportID VARCHAR(20) PRIMARY KEY,
+                                 buildingID VARCHAR(20),
+                                 buildingManagerID VARCHAR(20),
                                  Date DATE,
                                  monthlyRevenue DECIMAL(20, 2),
                                  monthlyOpex DECIMAL(20, 2),
@@ -36,19 +37,19 @@ CREATE TABLE FinancialReport (
 );
 
 CREATE TABLE Tenant (
-                        tenantID NVARCHAR(20) PRIMARY KEY,
+                        tenantID VARCHAR(20) PRIMARY KEY,
                         lastName NVARCHAR(255),
                         firstName NVARCHAR(255),
-                        phoneNumber NVARCHAR(255),
+                        phoneNumber VARCHAR(255),
                         dob DATE,
                         gender NVARCHAR(255),
-                        citizenIdentityCard NVARCHAR(255)
+                        citizenIdentityCard VARCHAR(255)
 );
 
 CREATE TABLE Apartment (
-                           apartmentID NVARCHAR(20) PRIMARY KEY,
-                           buildingID NVARCHAR(20),
-                           roomNumber NVARCHAR(255),
+                           apartmentID VARCHAR(20) PRIMARY KEY,
+                           buildingID VARCHAR(20),
+                           roomNumber VARCHAR(255),
                            Area NVARCHAR(255),
                            bedrooms INT,
                            bathrooms INT,
@@ -57,26 +58,26 @@ CREATE TABLE Apartment (
 );
 
 CREATE TABLE Cohabitant (
-                            cohabitantID NVARCHAR(20) PRIMARY KEY,
-                            tenantID NVARCHAR(20),
-                            lastName NVARCHAR(255),
+                            cohabitantID VARCHAR(20) PRIMARY KEY,
+                            tenantID VARCHAR(20),
+                            lastName VARCHAR(255),
                             firstName NVARCHAR(255),
-                            phoneNumber NVARCHAR(255),
+                            phoneNumber VARCHAR(255),
                             dob DATE,
                             gender NVARCHAR(10),
-                            citizenIdentityCard NVARCHAR(255),
+                            citizenIdentityCard VARCHAR(255),
                             FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
 );
 
 CREATE TABLE LeaseAgreement (
-                                leaseAgreementID NVARCHAR(20) PRIMARY KEY,
-                                tenantID NVARCHAR(20),
-                                apartmentID NVARCHAR(20),
-                                buildingManagerID NVARCHAR(20),
+                                leaseAgreementID VARCHAR(20) PRIMARY KEY,
+                                tenantID VARCHAR(20),
+                                apartmentID VARCHAR(20),
+                                buildingManagerID VARCHAR(20),
                                 signingDate DATE,
                                 LeaseStartDate DATE,
                                 LeaseEndDate DATE,
-                                LeaseTerm NVARCHAR(255),
+                                LeaseTerm INT,
                                 deposit DECIMAL(20, 2),
                                 monthlyRent DECIMAL(20, 2),
                                 FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID),
@@ -85,8 +86,8 @@ CREATE TABLE LeaseAgreement (
 );
 
 CREATE TABLE Furniture (
-                           furnitureID NVARCHAR(20) PRIMARY KEY,
-                           apartmentID NVARCHAR(20),
+                           furnitureID VARCHAR(20) PRIMARY KEY,
+                           apartmentID VARCHAR(20),
                            name NVARCHAR(255),
                            condition NVARCHAR(255),
                            price DECIMAL(20, 2),
@@ -94,9 +95,9 @@ CREATE TABLE Furniture (
 );
 
 CREATE TABLE MonthlyRentBill (
-                                 monthlyRentBillID NVARCHAR(20) PRIMARY KEY,
-                                 apartmentID NVARCHAR(20),
-                                 tenantID NVARCHAR(20),
+                                 monthlyRentBillID VARCHAR(20) PRIMARY KEY,
+                                 apartmentID VARCHAR(20),
+                                 tenantID VARCHAR(20),
                                  date DATE,
                                  repaymentPeriod INT,
                                  totalPayment DECIMAL(20, 2),
@@ -106,8 +107,8 @@ CREATE TABLE MonthlyRentBill (
 );
 
 CREATE TABLE ServiceUsage (
-                              serviceID NVARCHAR(20) PRIMARY KEY,
-                              monthlyRentBillID NVARCHAR(20),
+                              serviceID VARCHAR(20) PRIMARY KEY,
+                              monthlyRentBillID VARCHAR(20),
                               name NVARCHAR(255),
                               quantity INT,
                               pricePerUnit DECIMAL(20, 2),
@@ -119,20 +120,20 @@ CREATE TABLE ServiceUsage (
 );
 
 CREATE TABLE ServiceTicket (
-                               serviceID NVARCHAR(20),
-                               monthlyRentBillID NVARCHAR(20),
+                               serviceID VARCHAR(20),
+                               monthlyRentBillID VARCHAR(20),
                                quantity DECIMAL(10, 2),
                                totalAmount DECIMAL(20, 2),
                                Date DATE,
-                               Note VARCHAR(255),
+                               Note TEXT,
                                PRIMARY KEY (serviceID, monthlyRentBillID),
                                FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
                                FOREIGN KEY (serviceID) REFERENCES ServiceUsage(serviceID)
 );
 
 CREATE TABLE Violation (
-                           violationID NVARCHAR(20) PRIMARY KEY,
-                           monthlyRentBillID NVARCHAR(20),
+                           violationID VARCHAR(20) PRIMARY KEY,
+                           monthlyRentBillID VARCHAR(20),
                            name NVARCHAR(255),
                            totalAmount DECIMAL(20, 2),
                            note TEXT,
@@ -140,8 +141,8 @@ CREATE TABLE Violation (
 );
 
 CREATE TABLE ViolationTicket (
-                                 violationID NVARCHAR(20),
-                                 monthlyRentBillID NVARCHAR(20),
+                                 violationID VARCHAR(20),
+                                 monthlyRentBillID VARCHAR(20),
                                  name VARCHAR(255),
                                  totalAmount DECIMAL(20, 2),
                                  Date DATE,
@@ -152,11 +153,26 @@ CREATE TABLE ViolationTicket (
 );
 
 CREATE TABLE TaiKhoan (
-                          id NVARCHAR(20) PRIMARY KEY,
-                          username NVARCHAR(255),
-                          password NVARCHAR(255),
-                          loai VARCHAR(255)
+                          id VARCHAR(20) PRIMARY KEY,
+                          username VARCHAR(255),
+                          password VARCHAR(255),
+                          role VARCHAR(255)
 );
+
+
+
+INSERT INTO TaiKhoan  (Id, username, password, role)
+VALUES ('admin', 'admin', '123', 'admin'),
+       ('BM1', 'BM1', '123', 'manager'),
+       ('BM2', 'BM2', '123', 'manager'),
+       ('BM3', 'BM3', '123', 'manager'),
+       ('BM4', 'BM4', '123', 'manager'),
+       ('BM5', 'BM5', '123', 'manager'),
+       ('T1', 'T1', '123', 'customer'),
+       ('T2', 'T2', '123', 'customer'),
+       ('T3', 'T3', '123', 'customer'),
+       ('T4', 'T4', '123', 'customer'),
+       ('T5', 'T5', '123', 'customer');
 
 INSERT INTO Building (buildingID, name, city, district, address, numberOfApartment)
 VALUES ('B1', N'Tòa nhà A', N'Hà Nội', N'Cầu Giấy', N'Số 123 Đường ABC', 50),
@@ -164,12 +180,12 @@ VALUES ('B1', N'Tòa nhà A', N'Hà Nội', N'Cầu Giấy', N'Số 123 Đườn
        ('B3', N'Tòa nhà C', N'Đà Nẵng', N'Hải Châu', N'Số 789 Đường LMN', 30),
        ('B4', N'Tòa nhà D', N'Hải Phòng', N'Đồ Sơn', N'Số 321 Đường PQR', 20),
        ('B5', N'Tòa nhà E', N'Cần Thơ', N'Ninh Kiều', N'Số 555 Đường STU', 10);
-INSERT INTO BuildingManager (buildingManagerID, buildingID, lastName, firstName, phoneNumber, dob, gender, citizenIdentityCard, position, salary)
-VALUES ('BM1', 'B1', N'Nguyễn', N'Văn A', '0123456789', '1980-01-01', N'Nam', '123456789', N'Quản lý', 15000000.00),
-       ('BM2', 'B2', N'Trần', N'Thị B', '0987654321', '1985-05-10', N'Nữ', '987654321', N'Quản lý', 12000000.00),
-       ('BM3', 'B3', N'Lê', N'Văn C', '0369852147', '1990-12-20', N'Nam', '654789321', N'Quản lý', 13500000.00),
-       ('BM4', 'B4', N'Phạm', N'Thị D', '0932154789', '1982-08-15', N'Nữ', '852963147', N'Quản lý', 14000000.00),
-       ('BM5', 'B5', N'Hồ', N'Văn E', '0789456123', '1988-04-30', N'Nam', '369852147', N'Quản lý', 13000000.00);
+INSERT INTO BuildingManager (buildingManagerID, buildingID, lastName, firstName, phoneNumber, dob, gender, citizenIdentityCard, salary)
+VALUES ('BM1', 'B1', N'Nguyễn', N'Văn A', '0123456789', '1980-01-01', N'Nam', '123456789', 15000000.00),
+       ('BM2', 'B2', N'Trần', N'Thị B', '0987654321', '1985-05-10', N'Nữ', '987654321', 12000000.00),
+       ('BM3', 'B3', N'Lê', N'Văn C', '0369852147', '1990-12-20', N'Nam', '654789321', 13500000.00),
+       ('BM4', 'B4', N'Phạm', N'Thị D', '0932154789', '1982-08-15', N'Nữ', '852963147', 14000000.00),
+       ('BM5', 'B5', N'Hồ', N'Văn E', '0789456123', '1988-04-30', N'Nam', '369852147', 13000000.00);
 INSERT INTO FinancialReport (financialReportID, buildingID, buildingManagerID, Date, monthlyRevenue, monthlyOpex, monthlyProfit)
 VALUES ('FR1', 'B1', 'BM1', '2024-04-24', 50000000.00, 30000000.00, 20000000.00),
        ('FR2', 'B2', 'BM2', '2024-02-12', 60000000.00, 35000000.00, 25000000.00),
@@ -195,11 +211,11 @@ VALUES ('CH1', 'T1', N'Nguyễn', N'Thị A', '0123456789', '1990-01-10', N'Nữ
        ('CH4', 'T3', N'Phạm', N'Văn D', '0932154789', '1992-07-25', N'Nam', '852963147'),
        ('CH5', 'T4', N'Hồ', N'Thị E', '0789456123', '1997-03-05', N'Nữ', '369852147');
 INSERT INTO LeaseAgreement (leaseAgreementID, tenantID, apartmentID, buildingManagerID, signingDate, LeaseStartDate, LeaseEndDate, LeaseTerm, deposit, monthlyRent)
-VALUES ('LA1', 'T1', 'APT1', 'BM1', '2024-04-01', '2024-04-15', '2025-04-15', N'1 năm', '10000000', '2000000'),
-       ('LA2', 'T2', 'APT2', 'BM2', '2024-04-01', '2024-04-15', '2025-04-15', N'1 năm', '11000000', '2100000'),
-       ('LA3', 'T3', 'APT3', 'BM3', '2024-04-01', '2024-04-15', '2025-04-15', N'1 năm', '12000000', '2200000'),
-       ('LA4', 'T4', 'APT4', 'BM4', '2024-04-01', '2024-04-15', '2025-04-15', N'1 năm', '13000000', '2300000'),
-       ('LA5', 'T5', 'APT5', 'BM5', '2024-04-01', '2024-04-15', '2025-04-15', N'1 năm', '14000000', '2400000');
+VALUES ('LA1', 'T1', 'APT1', 'BM1', '2024-04-01', '2024-04-15', '2025-04-15', 12, '10000000', '2000000'),
+       ('LA2', 'T2', 'APT2', 'BM2', '2024-04-01', '2024-04-15', '2025-04-15', 12, '11000000', '2100000'),
+       ('LA3', 'T3', 'APT3', 'BM3', '2024-04-01', '2024-04-15', '2025-04-15', 24, '12000000', '2200000'),
+       ('LA4', 'T4', 'APT4', 'BM4', '2024-04-01', '2024-04-15', '2025-04-15',36, '13000000', '2300000'),
+       ('LA5', 'T5', 'APT5', 'BM5', '2024-04-01', '2024-04-15', '2025-04-15', 24, '14000000', '2400000');
 -- Dữ liệu cho bảng Furniture
 INSERT INTO Furniture (furnitureID, apartmentID, name, condition, price)
 VALUES
@@ -211,11 +227,11 @@ VALUES
 -- Dữ liệu cho bảng MonthlyRentBill
 INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status)
 VALUES
-    ('MRB1', 'APT1', 'T1', '2024-03-01', 12, '1200', N'Unpaid'),
-    ('MRB2', 'APT2', 'T2', '2024-04-13', 12, '1500', N'Unpaid'),
-    ('MRB3', 'APT3', 'T3', '2024-01-16', 12, '1800', N'Paid'),
-    ('MRB4', 'APT4', 'T4', '2024-11-24', 12, '2000', N'Pending'),
-    ('MRB5', 'APT5', 'T5', '2024-12-21', 12, '1400', N'Pending');
+    ('MRB1', 'APT1', 'T1', '2024-03-01', 5, '1200', N'Unpaid'),
+    ('MRB2', 'APT2', 'T2', '2024-04-13', 5, '1500', N'Unpaid'),
+    ('MRB3', 'APT3', 'T3', '2024-01-16', 5, '1800', N'Paid'),
+    ('MRB4', 'APT4', 'T4', '2024-11-24', 5, '2000', N'Pending'),
+    ('MRB5', 'APT5', 'T5', '2024-12-21', 5, '1400', N'Pending');
 -- Dữ liệu cho bảng ServiceUsage
 INSERT INTO ServiceUsage (serviceID, monthlyRentBillID, name, quantity, pricePerUnit, unit, totalAmount, Date, note)
 VALUES
@@ -248,3 +264,4 @@ VALUES
     ('V3', 'MRB3', N'Cháy nổ', 150.00, '2024-04-17', N'Báo ngay lập tức'),
     ('V4', 'MRB4', N'Vi phạm an ninh', 200.00, '2024-04-20', N'Cảnh báo vi phạm an ninh'),
     ('V5', 'MRB5', N'Quá hạn thanh toán', 100.00, '2024-04-25', N'Phạt quá hạn 5%');
+
