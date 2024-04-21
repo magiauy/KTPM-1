@@ -7,7 +7,6 @@ import DTO.MonthlyRentBill;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,8 +14,8 @@ import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,13 +26,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -41,22 +40,22 @@ import BUS.BuildingBUS;
 import BUS.BuildingManagerBUS;
 import DTO.Building;
 
-
 public class BossController implements Initializable {
-   
+
     public static BossController getInstance() {
         return new BossController();
     }
 
     private String ID;
 
-    public void setID (String ID){
+    public void setID(String ID) {
         this.ID = ID;
     }
 
     public String getID() {
         return ID;
     }
+
     private volatile boolean stop = false;
     private volatile Thread thread;
     private String buildingId;
@@ -65,6 +64,7 @@ public class BossController implements Initializable {
 
     private ObservableList<DTO.BuildingManager> buildingManagersList;
     private BuildingManager selectedBuildingManagerToDelete;
+
     public String getBuildingId() {
         return buildingId;
     }
@@ -106,11 +106,14 @@ public class BossController implements Initializable {
         loadPage("Boss-view-Page4");
     }
 
-
     @FXML
     private Label time;
+
     @FXML
     private TableView<Building> table__view;
+
+    @FXML
+    private TableView<DTO.BuildingManager> table__view2;
 
     @FXML
     private TableColumn<Building, String> maToaNhaColumn;
@@ -141,34 +144,59 @@ public class BossController implements Initializable {
     private TextField TxtField__P1__5;
     @FXML
     private TextField TxtField__P1__6;
-    private TableView<DTO.BuildingManager> table__view2;
 
     @FXML
-    private TableColumn<BuildingManager, String> buildingManagerIdColumn;
+    private TableColumn<DTO.BuildingManager, String> buildingManagerIdColumn;
 
     @FXML
-    private TableColumn<BuildingManager, String> buildingIdColumn;
+    private TableColumn<DTO.BuildingManager, String> buildingIdColumn;
 
     @FXML
-    private TableColumn<BuildingManager, String> lastNameColumn;
+    private TableColumn<DTO.BuildingManager, String> lastNameColumn;
 
     @FXML
-    private TableColumn<BuildingManager, String> firstNameColumn;
+    private TableColumn<DTO.BuildingManager, String> firstNameColumn;
 
     @FXML
-    private TableColumn<BuildingManager, String> phoneNumberColumn;
+    private TableColumn<DTO.BuildingManager, String> phoneNumberColumn;
 
     @FXML
-    private TableColumn<BuildingManager, LocalDate> dobColumn;
+    private TableColumn<DTO.BuildingManager, LocalDate> dobColumn;
 
     @FXML
-    private TableColumn<BuildingManager, String> genderColumn;
+    private TableColumn<DTO.BuildingManager, String> genderColumn;
+    @FXML
+    private TableColumn<DTO.BuildingManager, String> positionColumn;
 
     @FXML
-    private TableColumn<BuildingManager, String> citizenIdentityCardColumn;
+    private TableColumn<DTO.BuildingManager, String> citizenIdentityCardColumn;
 
     @FXML
-    private TableColumn<BuildingManager, Float> salaryColumn;
+    private TableColumn<DTO.BuildingManager, Float> salaryColumn;
+
+    @FXML
+    private TextField TxtField__b1;
+
+    @FXML
+
+    private TextField TxtField__b2;
+    @FXML
+
+    private TextField TxtField__b3;
+    @FXML
+
+    private TextField TxtField__b4;
+    @FXML
+
+    private TextField TxtField__b5;
+    @FXML
+
+    private TextField TxtField__b6;
+    @FXML
+
+    private TextField TxtField__b7;
+    @FXML
+    private DatePicker datePickerDOB;
 
     private void loadPage(String page) throws IOException {
         stop = true;
@@ -176,6 +204,7 @@ public class BossController implements Initializable {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
         bp.setCenter(root);
     }
+
     @FXML
     private Label monthlyRevenueLabel;
     @FXML
@@ -195,11 +224,11 @@ public class BossController implements Initializable {
             FinancialReportBUS financialReportBUS = new FinancialReportBUS();
             financialReportBUS.setMonthlyRevenueLabel(monthlyRevenueLabel);
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     private void updateNumberOfStatus() {
         if (numberOfStatusLabel == null) {
             return;
@@ -213,6 +242,7 @@ public class BossController implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void drawLineChartOfMonthlyOpex() {
         if (barChartOfMonthlyOpex == null) {
             return;
@@ -227,8 +257,6 @@ public class BossController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 
     private void TimeNow() {
         thread = new Thread(() -> {
@@ -254,16 +282,34 @@ public class BossController implements Initializable {
         stop = true;
     }
 
+    @FXML
+    private ComboBox<String> fruitCombo;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buildingsList = FXCollections.observableArrayList();
         buildingManagersList = FXCollections.observableArrayList();
 
+        loadBuildingManagers();
+        loadBuilding();
+        Platform.runLater(() -> {
+            if (fruitCombo != null) {
+                ObservableList<String> fruits = FXCollections.observableArrayList(
+                        "Nam",
+                        "Nữ");
+                fruitCombo.setItems(fruits);
+            } else {
+                System.err.println("fruitCombo is null. Check FXML and controller connection.");
+            }
+        });
+
+    }
+
+    public void loadBuilding() {
         try {
             BuildingBUS buildingBUS = new BuildingBUS();
             ArrayList<Building> buildings = buildingBUS.getAll();
             buildingsList.addAll(buildings);
-
             ObservableList<Building> observableBuildingList = FXCollections.observableArrayList(buildingsList);
             maToaNhaColumn.setCellValueFactory(new PropertyValueFactory<>("buildingId"));
             tenColumn.setCellValueFactory(new PropertyValueFactory<>("nameBuilding"));
@@ -272,39 +318,36 @@ public class BossController implements Initializable {
             diaChiColumn.setCellValueFactory(new PropertyValueFactory<>("address_Building"));
             soLuongCanHoColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfApartment_Building"));
             table__view.setItems(observableBuildingList);
-           
-            loadBuildingManagers();
+            handleBuilding();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-   private void loadBuildingManagers() {
+    public void loadBuildingManagers() {
         try {
             BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
             ArrayList<DTO.BuildingManager> buildingManagers = buildingManagerBUS.getAll();
             buildingManagersList.addAll(buildingManagers);
-            for (DTO.BuildingManager manager : buildingManagersList) {
-                System.out.println("Building Manager ID: " + manager.getBuildingId());
-                System.out.println("Last Name: " + manager.getLastName_BuildingManager());
-                System.out.println("First Name: " + manager.getFirstName_BuildingManager());
-                // In các trường dữ liệu khác nếu cần
-                System.out.println("--------------------------------------");
-            }
-
             ObservableList<DTO.BuildingManager> building = FXCollections.observableArrayList(buildingManagersList);
-
             buildingManagerIdColumn.setCellValueFactory(new PropertyValueFactory<>("buildingManagerId"));
-            lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName_BuildingManager"));
-            firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName_BuildingManager"));
-            // Đặt các cell value factory cho các cột khác tương ứng với trường dữ liệu của BuildingManager
-
+            buildingIdColumn.setCellValueFactory(new PropertyValueFactory<>("buildingId"));
+            lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            phoneNumberColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+            dobColumn.setCellValueFactory(new PropertyValueFactory<>("dob"));
+            genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
+            citizenIdentityCardColumn.setCellValueFactory(new PropertyValueFactory<>("citizenIdentityCard"));
+            salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
+            positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
             table__view2.setItems(building);
+            handbuildingmanager();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void handle() {
+
+    public void handleBuilding() {
         table__view.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 Building selectedRow = table__view.getSelectionModel().getSelectedItem();
@@ -329,6 +372,35 @@ public class BossController implements Initializable {
             }
         });
 
+    }
+
+    public void handbuildingmanager() {
+        table__view2.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                DTO.BuildingManager selectedRow = table__view2.getSelectionModel().getSelectedItem();
+                if (selectedRow != null) {
+
+                    TxtField__b1.setText(selectedRow.getBuildingManagerId());
+                    TxtField__b2.setText(selectedRow.getBuildingId());
+                    TxtField__b3.setText(selectedRow.getFirstName());
+                    TxtField__b4.setText(selectedRow.getLastName());
+                    TxtField__b5.setText(selectedRow.getPhoneNumber());
+                    TxtField__b6.setText(selectedRow.getCitizenIdentityCard());
+                    TxtField__b7.setText(String.valueOf(selectedRow.getSalary()));
+                    // Chuyển đổi sang String nếu cần
+                    datePickerDOB.setValue(selectedRow.getDob());
+
+                    // Xác định giá trị cho ComboBox dựa trên giới tính
+                    String genderValue = selectedRow.getGender();
+                    if (genderValue != null && !genderValue.isEmpty()) {
+                        fruitCombo.setValue(genderValue);
+                    } else {
+                        fruitCombo.getSelectionModel().clearSelection();
+                    }
+
+                }
+            }
+        });
     }
 
     private void showAlert(String title, String message, AlertType alertType) {
@@ -408,7 +480,7 @@ public class BossController implements Initializable {
 
         if (deleteResult) {
             showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
-        resetTextfield();
+            resetTextfield();
             updateBuildingList();
         } else {
             showAlert("Thật Bại", "Không Thế Xóa", AlertType.CONFIRMATION);
@@ -424,7 +496,7 @@ public class BossController implements Initializable {
         TxtField__P1__5.setText("");
         TxtField__P1__6.setText("");
     }
-   
+
     public void handleEdit() {
         String buildingId = TxtField__P1__1.getText().trim();
         String nameBuilding = TxtField__P1__2.getText();
@@ -439,9 +511,6 @@ public class BossController implements Initializable {
             showAlert("Lỗi", "Số lượng căn hộ không hợp lệ.", AlertType.ERROR);
             return;
         }
-
-
-        // Tạo đối tượng Building mới
         Building editedBuilding = new Building();
         editedBuilding.setBuildingId(buildingId);
         editedBuilding.setNameBuilding(nameBuilding);
@@ -462,6 +531,66 @@ public class BossController implements Initializable {
         } else {
             showAlert("Thất Bại", "Không thể cập nhật", AlertType.ERROR);
         }
+    }
+
+    public void handleAddpage2() {
+        String buildingManagerId = TxtField__b1.getText();
+        String buildingId = TxtField__b2.getText();
+        String lastName = TxtField__b3.getText();
+        String firstName = TxtField__b4.getText();
+        String phoneNumber = TxtField__b5.getText();
+        LocalDate dob = datePickerDOB.getValue();
+        String gender = fruitCombo.getValue();
+        String citizenIdentityCard = TxtField__b6.getText();
+        Double salary = Double.parseDouble(TxtField__b7.getText());
+
+        if (buildingManagerId.isEmpty() || buildingId.isEmpty() || lastName.isEmpty() || firstName.isEmpty() ||
+                phoneNumber.isEmpty() || dob == null || gender.isEmpty() || citizenIdentityCard.isEmpty()
+                || salary.isNaN()) {
+
+            System.out.println("Vui lòng nhập đầy đủ thông tin.");
+            return;
+        }
+        DTO.BuildingManager newBuildingManager = new DTO.BuildingManager();
+        newBuildingManager.setBuildingManagerId(buildingManagerId);
+        newBuildingManager.setBuildingId(buildingId);
+        newBuildingManager.setLastName(lastName);
+        newBuildingManager.setFirstName(firstName);
+        newBuildingManager.setPhoneNumber(phoneNumber);
+        newBuildingManager.setDob(dob);
+        newBuildingManager.setGender(gender);
+        newBuildingManager.setCitizenIdentityCard(citizenIdentityCard);
+        newBuildingManager.setSalary(salary);
+        BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+        boolean insertResult = buildingManagerBUS.insert(newBuildingManager);
+
+        if (insertResult) {
+            showAlert("Thành Công", "Đã Thêm Thành Công", AlertType.CONFIRMATION);
+            buildingManagersList.clear();
+            ArrayList<DTO.BuildingManager> buildings = buildingManagerBUS.getAll();
+            buildingManagersList.addAll(buildings);
+            ObservableList<DTO.BuildingManager> observableBuildingList = FXCollections.observableArrayList(
+                    buildingManagersList);
+            table__view2.setItems(observableBuildingList);
+            clearInputFields();
+
+        } else {
+            showAlert("Lỗi", "Mã đã tồn tại trong cơ sở dữ liệu.", AlertType.ERROR);
+        }
+
+        // Xóa nội dung của các trường nhập liệu sau khi thêm
+    }
+
+    private void clearInputFields() {
+        TxtField__b1.clear();
+        TxtField__b2.clear();
+        TxtField__b3.clear();
+        TxtField__b4.clear();
+        TxtField__b5.clear();
+        TxtField__b6.clear();
+        TxtField__b7.clear();
+        datePickerDOB.setValue(null); // Đặt DatePicker về giá trị mặc định
+        fruitCombo.getSelectionModel().clearSelection(); // Xóa lựa chọn trong ComboBox
     }
 
 }

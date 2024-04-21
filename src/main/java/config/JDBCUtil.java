@@ -14,7 +14,7 @@ public class JDBCUtil {
         Connection connection = null;
         try {
             // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            // String url = "jdbc:sqlserver://DESKTOP-2O5BBS1:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
+            // String url = "jdbc:sqlserver://PHAMNAM:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
             // String userName = "sa";
             // String password = "123456789";
 
@@ -33,21 +33,23 @@ public class JDBCUtil {
             // String url = "jdbc:sqlserver://KAI:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
             // String userName = "sa";
             // String password = "123456";
-            connection = DriverManager.getConnection(url, userName, password);
+            
 
+            connection = DriverManager.getConnection(url, userName, password);
             printInfo(connection);
             String sql = "SELECT * FROM Apartment";
             try (Statement statement = connection.createStatement();
                     ResultSet resultSet = statement.executeQuery(sql)) {
-                System.out.println("Danh sách thông tin căn hộ:");
-                System.out.println("---------------------------------");
-                while (resultSet.next()) {
-                    String maCanHo = resultSet.getString("apartmentID");
-                    String soPhong = resultSet.getString("roomNumber");
-                    System.out.println("Mã căn hộ: " + maCanHo);
-                    System.out.println("Số phòng: " + soPhong);
-                    System.out.println();
-                }
+//                System.out.println("Danh sách thông tin căn hộ:");
+//                System.out.println("---------------------------------");
+//                while (resultSet.next()) {
+//                    String maCanHo = resultSet.getString("apartmentID");
+//                    String soPhong = resultSet.getString("roomNumber");
+//                    System.out.println("Mã căn hộ: " + maCanHo);
+//                    System.out.println("Số phòng: " + soPhong);
+//                    System.out.println();
+//                }
+                System.out.println("Kết nối thành công.");
             } catch (SQLException e) {
                 e.printStackTrace();
            

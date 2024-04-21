@@ -14,44 +14,48 @@ import java.util.Objects;
 public class BuildingManager {
     private String buildingManagerId;
     private String buildingId;
-    private String lastName_BuildingManager;
-    private String firstName_BuildingManager;
-    private String phoneNumber_BuildingManager;
-    private LocalDate dateOfBirthDay;
-    private String gender_BuildingManager;
-    private String citizenIdentityCard_BuildingManager;
-    private Float salary_BuildingManager;
+    private String lastName;
+    private String firstName;
+    private String phoneNumber;
+    private LocalDate dob;
+    private String gender;
+    private String position;
+    private String citizenIdentityCard;
+    private Double salary;
 
-    public BuildingManager(String buildingManagerId, String buildingId, String lastName_BuildingManager,
-                    String firstName_BuildingManager, String phoneNumber_BuildingManager, LocalDate dobDate,
-                    String gender_BuildingManager, String citizenIdentityCard_BuildingManager, Float salary_BuildingManager) {
+
+    public BuildingManager(String buildingManagerId, String buildingId, String lastName,
+                    String firstName, String phoneNumber, LocalDate dobDate,
+                    String gender, String citizenIdentityCard, Double salary, String position) {
             this.buildingManagerId = buildingManagerId;
             this.buildingId = buildingId;
-            this.lastName_BuildingManager = lastName_BuildingManager;
-            this.firstName_BuildingManager = firstName_BuildingManager;
-            this.phoneNumber_BuildingManager = phoneNumber_BuildingManager;
-            this.dateOfBirthDay = dobDate;
-            this.gender_BuildingManager = gender_BuildingManager;
-            this.citizenIdentityCard_BuildingManager = citizenIdentityCard_BuildingManager;
-            this.salary_BuildingManager = salary_BuildingManager;
+            this.lastName = lastName;
+            this.firstName = firstName;
+            this.phoneNumber = phoneNumber;
+            this.dob = dobDate;
+            this.gender = gender;
+            this.citizenIdentityCard = citizenIdentityCard;
+            this.salary = salary;
+            this.position = position;
     }
 
     public BuildingManager() {
             this.buildingManagerId = "";
             this.buildingId = "";
-            this.lastName_BuildingManager = "";
-            this.firstName_BuildingManager = "";
-            this.phoneNumber_BuildingManager = "";
-            this.dateOfBirthDay = LocalDate.now();
-            this.gender_BuildingManager = "";
-            this.citizenIdentityCard_BuildingManager = "";
-            this.salary_BuildingManager = (float) 0;
+            this.lastName = "";
+            this.firstName = "";
+            this.phoneNumber = "";
+            this.dob = LocalDate.now();
+            this.gender = "";
+            this.citizenIdentityCard = "";
+            this.salary = (double) 0;
+            this.position="";
     }
-    public LocalDate getDateOfBirthDay() {
-        return dateOfBirthDay;
+    public LocalDate getDob() {
+        return dob;
     }
-    public void setDateOfBirthDay(LocalDate dateOfBirthDay) {
-        this.dateOfBirthDay = dateOfBirthDay;
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
     public String getBuildingManagerId() {
@@ -66,55 +70,63 @@ public class BuildingManager {
     public void setBuildingId(String buildingId) {
             this.buildingId = buildingId;
     }
-    public String getLastName_BuildingManager() {
-            return lastName_BuildingManager;
+    public String getLastName() {
+            return lastName;
     }
-    public void setLastName_BuildingManager(String lastName_BuildingManager) {
-            this.lastName_BuildingManager = lastName_BuildingManager;
+    public void setLastName(String lastName) {
+            this.lastName = lastName;
     }
-    public String getFirstName_BuildingManager() {
-            return firstName_BuildingManager;
+    public String getFirstName() {
+            return firstName;
     }
-    public void setFirstName_BuildingManager(String firstName_BuildingManager) {
-            this.firstName_BuildingManager = firstName_BuildingManager;
+    public void setFirstName(String firstName) {
+            this.firstName = firstName;
     }
-    public String getPhoneNumber_BuildingManager() {
-            return phoneNumber_BuildingManager;
+    public String getPhoneNumber() {
+            return phoneNumber;
     }
-    public void setPhoneNumber_BuildingManager(String phoneNumber_BuildingManager) {
-            this.phoneNumber_BuildingManager = phoneNumber_BuildingManager;
+    public void setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
     }
     public LocalDate getDobDate() {
-            return dateOfBirthDay;
+            return dob;
     }
 
     public void setDobDate(LocalDate dobDate) {
-            this.dateOfBirthDay = dobDate;
+            this.dob = dobDate;
     }
 
-    public String getGender_BuildingManager() {
-            return gender_BuildingManager;
+    public String getGender() {
+            return gender;
     }
-    public void setGender_BuildingManager(String gender_BuildingManager) {
-            this.gender_BuildingManager = gender_BuildingManager;
+    public void setGender(String gender) {
+            this.gender = gender;
     }
-    public String getCitizenIdentityCard_BuildingManager() {
-            return citizenIdentityCard_BuildingManager;
+    public String getCitizenIdentityCard() {
+            return citizenIdentityCard;
     }
-    public void setCitizenIdentityCard_BuildingManager(String citizenIdentityCard_BuildingManager) {
-            this.citizenIdentityCard_BuildingManager = citizenIdentityCard_BuildingManager;
+    public void setCitizenIdentityCard(String citizenIdentityCard) {
+            this.citizenIdentityCard = citizenIdentityCard;
     }
-    public Float getSalary_BuildingManager() {
-            return salary_BuildingManager;
+    public Double getSalary() {
+            return salary;
     }
-    public void setSalary_BuildingManager(Float salary_BuildingManager) {
-            this.salary_BuildingManager = salary_BuildingManager;
+    public void setSalary(Double salary) {
+            this.salary = salary;
+    }
+    
+    public String getPosition() {
+            return position;
+    }
+
+    public void setPosition(String position) {
+            this.position = position;
     }
     @Override
     public int hashCode() {
-            return Objects.hash(buildingId, buildingManagerId, citizenIdentityCard_BuildingManager, dateOfBirthDay,
-                            firstName_BuildingManager, gender_BuildingManager, lastName_BuildingManager,
-                            phoneNumber_BuildingManager, salary_BuildingManager);
+            return Objects.hash(buildingId, buildingManagerId, citizenIdentityCard, dob,
+                            firstName, gender, lastName,
+                            phoneNumber, salary,position);
     }
     @Override
     public boolean equals(Object obj) {
@@ -127,22 +139,15 @@ public class BuildingManager {
             BuildingManager other = (BuildingManager) obj;
             return Objects.equals(buildingId, other.buildingId)
                             && Objects.equals(buildingManagerId, other.buildingManagerId)
-                            && Objects.equals(citizenIdentityCard_BuildingManager, other.citizenIdentityCard_BuildingManager)
-                            && Objects.equals(dateOfBirthDay, other.dateOfBirthDay)
-                            && Objects.equals(firstName_BuildingManager, other.firstName_BuildingManager)
-                            && Objects.equals(gender_BuildingManager, other.gender_BuildingManager)
-                            && Objects.equals(lastName_BuildingManager, other.lastName_BuildingManager)
-                            && Objects.equals(phoneNumber_BuildingManager, other.phoneNumber_BuildingManager)
-                            && Double.doubleToLongBits(salary_BuildingManager) == Double
-                                            .doubleToLongBits(other.salary_BuildingManager);
+                            && Objects.equals(citizenIdentityCard, other.citizenIdentityCard)
+                            && Objects.equals(dob, other.dob)
+                            && Objects.equals(position,other.position)
+                            && Objects.equals(firstName, other.firstName)
+                            && Objects.equals(gender, other.gender)
+                            && Objects.equals(lastName, other.lastName)
+                            && Objects.equals(phoneNumber, other.phoneNumber)
+                            && Double.doubleToLongBits(salary) == Double
+                                            .doubleToLongBits(other.salary);
     }
-    @Override
-    public String toString() {
-            return "BuildingManager [buildingManagerId=" + buildingManagerId + ", buildingId=" + buildingId
-                            + ", lastName_BuildingManager=" + lastName_BuildingManager + ", firstName_BuildingManager="
-                            + firstName_BuildingManager + ", phoneNumber_BuildingManager=" + phoneNumber_BuildingManager
-                            + ", dobDate=" + dateOfBirthDay + ", gender_BuildingManager=" + gender_BuildingManager
-                            + ", citizenIdentityCard_BuildingManager=" + citizenIdentityCard_BuildingManager
-                            + ", salary_BuildingManager=" + salary_BuildingManager + "]";
-    }
+   
 }

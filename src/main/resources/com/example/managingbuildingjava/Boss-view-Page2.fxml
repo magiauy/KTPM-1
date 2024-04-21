@@ -19,11 +19,11 @@
                       </ImageView>
             <Pane layoutX="33.0" layoutY="121.0" prefHeight="510.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                          <TextField fx:id="TxtField__P1__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P1__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P1__4" layoutX="198.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P1__3" layoutX="88.0" layoutY="150.0" prefHeight="32.0" prefWidth="88.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P1__5" layoutX="216.0" layoutY="271.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                          <TextField fx:id="TxtField__b1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
+                          <TextField fx:id="TxtField__b2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                          <TextField fx:id="TxtField__b3" layoutX="198.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
+                          <TextField fx:id="TxtField__b4" layoutX="88.0" layoutY="150.0" prefHeight="32.0" prefWidth="88.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                          <TextField fx:id="TxtField__b5" layoutX="216.0" layoutY="271.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
                           <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="419.0" prefHeight="32.0" prefWidth="120.0" text="CCCD" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
@@ -54,15 +54,20 @@
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                  <TextField fx:id="TxtField__P1__6" layoutX="211.0" layoutY="405.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                  <TextField fx:id="TxtField__b6" layoutX="211.0" layoutY="405.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="336.0" prefHeight="32.0" prefWidth="120.0" text="Ngày sinh" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <DatePicker layoutX="198.0" layoutY="343.0" prefHeight="30.0" prefWidth="183.0" />
-                  <ComboBox layoutX="206.0" layoutY="204.0" prefWidth="150.0" />
-                  <TextField fx:id="TxtField__P1__7" layoutX="219.0" layoutY="451.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                  <DatePicker layoutX="198.0" layoutY="343.0" prefHeight="30.0" prefWidth="183.0" fx:id="datePickerDOB" />
+        <ComboBox fx:id="fruitCombo" layoutX="206.0" layoutY="204.0" prefWidth="150.0"  promptText="Chọn giới tính">
+  
+</ComboBox>
+
+
+
+                  <TextField fx:id="TxtField__b7" layoutX="219.0" layoutY="451.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="465.0" prefHeight="32.0" prefWidth="120.0" text="Lương" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
@@ -70,7 +75,7 @@
                   </Label>
                </children>
             </Pane>
-                    <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
+                    <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE"  onAction="#handleAddpage2">
                         <graphic>
                             <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -80,7 +85,7 @@
                         </graphic>
             </Button>
                     <Button fx:id="bnt__P1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Sửa" textFill="WHITE" />
-                    <Button fx:id="bnt__P1__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Xóa" textFill="WHITE">
+                    <Button fx:id="bnt__P1__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Xóa" textFill="WHITE" >
                         <graphic>
                             <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -100,6 +105,8 @@
                         <TableColumn fx:id="genderColumn" prefWidth="75.0" text="Gender" />
                         <TableColumn fx:id="citizenIdentityCardColumn" prefWidth="75.0" text="Citizen ID Card" />
                         <TableColumn fx:id="salaryColumn" prefWidth="75.0" text="Salary" />
+                        <TableColumn fx:id="positionColumn" prefWidth="75.0" text="posi" />
+
                     </columns>
                 </TableView>
 
