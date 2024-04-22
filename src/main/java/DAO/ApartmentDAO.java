@@ -30,7 +30,8 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
 
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture) VALUES (?, ?, ?, ?, ?, ?, ?)");
-
+            int roomNumberValue = (apartment.getRoomNumber());
+            preparedStatement.setInt(3, roomNumberValue);
             // Thiết lập các giá trị tham số trong câu lệnh SQL
             preparedStatement.setString(1, (apartment.getApartmentID() != null) ? apartment.getApartmentID() : null);
             preparedStatement.setString(2, (apartment.getBuildingID() != null) ? apartment.getBuildingID() : null);
@@ -147,8 +148,8 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
     private Apartment createApartmentFromResultSet(ResultSet resultSet) throws SQLException {
         String apartmentID = resultSet.getString("apartmentID");
         String buildingID = resultSet.getString("buildingID");
-        String roomNumber = resultSet.getString("roomNumber");
-        double area = resultSet.getDouble("area");
+        int roomNumber = resultSet.getInt("roomNumber");
+        String area = resultSet.getString("area");
         int bedrooms = resultSet.getInt("bedrooms");
         int bathrooms = resultSet.getInt("bathrooms");
         String furniture = resultSet.getString("furniture");
