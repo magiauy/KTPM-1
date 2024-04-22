@@ -109,6 +109,13 @@ public class Building {
 
     @Override
     public String toString() {
-        return STR."Building [buildingId=\{buildingId}, name=\{name}, city=\{city}, district=\{district}, address=\{address}, numberOfApartment=\{numberOfApartment}]";
+        return "Building{" +
+                "buildingId='" + buildingId + '\'' +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                ", address='" + address + '\'' +
+                ", numberOfApartment=" + numberOfApartment +
+                '}';
     }
 }
