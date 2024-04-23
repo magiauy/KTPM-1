@@ -16,10 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -36,18 +33,27 @@ import java.util.ResourceBundle;
 import java.sql.*;
 
 public class BuildingManagerController implements Initializable {
-
+    private static BuildingManagerController instance;
     public static BuildingManagerController getInstance() {
-        return new BuildingManagerController();
+        if (instance == null) {
+            instance = new BuildingManagerController();
+        }
+        return instance;
     }
-    private String ID;
+
+    private static String ID;
     public void setID (String ID){
-        this.ID = ID;
+        BuildingManagerController.ID = ID;
     }
 
     public String getID() {
         return ID;
     }
+
+    public TableView table__P3__2;
+    public TableView table__P3__1;
+
+
 
     public TextField TxtField__P1__search;
     public ComboBox comboBox__P1__1;

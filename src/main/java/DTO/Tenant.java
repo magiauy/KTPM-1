@@ -19,28 +19,17 @@ public class Tenant {
     private String gender;
     private String citizenIdentityCard;
 
-    public Tenant(String tenantID, String lastName, String firstName,
-                  String phoneNumber, LocalDate dob, String gender, String citizenIdentityCard) {
+    public Tenant(String tenantID, String lastName, String firstName, String phoneNumber, LocalDate dateOfBirthDay, String gender, String citizenIdentityCard) {
         this.tenantID = tenantID;
         this.lastName = lastName;
         this.firstName = firstName;
         this.phoneNumber = phoneNumber;
-        this.dateOfBirthDay = dob;
+        this.dateOfBirthDay = dateOfBirthDay;
         this.gender = gender;
         this.citizenIdentityCard = citizenIdentityCard;
     }
 
     public Tenant() {
-    }
-
-    public Tenant(Tenant tenant) {
-        this.tenantID = tenant.tenantID;
-        this.lastName = tenant.lastName;
-        this.firstName = tenant.firstName;
-        this.phoneNumber = tenant.phoneNumber;
-        this.dateOfBirthDay = tenant.dateOfBirthDay;
-        this.gender = tenant.gender;
-        this.citizenIdentityCard = tenant.citizenIdentityCard;
     }
 
     public String getTenantID() {
@@ -75,12 +64,12 @@ public class Tenant {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDate getDob() {
+    public LocalDate getDateOfBirthDay() {
         return dateOfBirthDay;
     }
 
-    public void setDob(LocalDate dob) {
-        this.dateOfBirthDay = dob;
+    public void setDateOfBirthDay(LocalDate dateOfBirthDay) {
+        this.dateOfBirthDay = dateOfBirthDay;
     }
 
     public String getGender() {
@@ -99,16 +88,4 @@ public class Tenant {
         this.citizenIdentityCard = citizenIdentityCard;
     }
 
-    @Override
-    public String toString() {
-        return "Tenant{" +
-                "tenantID='" + tenantID + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", dob=" + dateOfBirthDay +
-                ", gender='" + gender + '\'' +
-                ", citizenIdentityCard='" + citizenIdentityCard + '\'' +
-                '}';
-    }
 }

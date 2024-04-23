@@ -12,13 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.chart.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,15 +30,18 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CustomerController implements Initializable {
-
+    private static CustomerController instance;
     public static CustomerController getInstance() {
-        return new CustomerController();
+        if (instance == null) {
+            instance = new CustomerController();
+        }
+        return instance;
     }
 
-    private String ID;
+    private static String ID;
 
     public void setID (String ID){
-        this.ID = ID;
+        CustomerController.ID = ID;
     }
 
     public String getID() {
@@ -53,6 +55,18 @@ public class CustomerController implements Initializable {
     public TextField TxtField__P4__search;
     public Button bnt__P1__search;
     public TextField TxtField__P3__search;
+    @FXML
+    public TableView<MonthlyRentBill> table__P3__1 = new TableView<>();
+    @FXML
+    TableColumn<MonthlyRentBill, String> monthlyRentBillIdColumn = new TableColumn<MonthlyRentBill, String >("Mã phiếu");
+    @FXML
+    TableColumn<MonthlyRentBill, LocalDate> dateColumn = new TableColumn<MonthlyRentBill, LocalDate>();
+    @FXML
+    TableColumn<MonthlyRentBill, Integer> repaymentPeriodColumn  = new TableColumn<MonthlyRentBill, Integer>();
+    @FXML
+    TableColumn<MonthlyRentBill, Double> totalPaymentColumn = new TableColumn<MonthlyRentBill, Double>();
+    @FXML
+    TableColumn<MonthlyRentBill, String> statusColumn = new TableColumn<>();
     private volatile boolean stop = false;
     private volatile Thread thread;
     int dem =0;
@@ -179,11 +193,29 @@ public class CustomerController implements Initializable {
             e.printStackTrace();
         }
     }
+//    private String monthlyRentBillID;;
+//    private String apartmentID; ---
+//    private String tenantID; ---
+//    private LocalDate date;
+//    private int repaymentPeriod;
+//    private Double totalPayment;
+//    private String status;
+
+    void setTableMonthlyRentBill(){
+        monthlyRentBillIdColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("monthlyRentBillID"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, LocalDate>("date"));
+        repaymentPeriodColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, Integer>("repaymentPeriod"));
+        totalPaymentColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, Double>("totalPayment"));
+        statusColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("status"));
+        ObservableList<MonthlyRentBill> data = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(this.ID));
+        table__P3__1.setItems(data);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateMonthlyRevenueLabel();
         updateNumberOfStatus();
         drawLineChartOfMonthlyOpex();
+        setTableMonthlyRentBill();
     }
 }
