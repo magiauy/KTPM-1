@@ -39,15 +39,19 @@ import BUS.BuildingBUS;
 import DTO.Building;
 
 public class BossController implements Initializable {
-   
+
+    private static BossController instance;
     public static BossController getInstance() {
-        return new BossController();
+        if (instance == null) {
+            instance = new BossController();
+        }
+        return instance;
     }
 
-    private String ID;
+    private static String ID;
 
     public void setID (String ID){
-        this.ID = ID;
+        BossController.ID = ID;
     }
 
     public String getID() {
