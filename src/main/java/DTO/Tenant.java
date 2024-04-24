@@ -19,7 +19,7 @@ public class Tenant {
     private String gender;
     private String citizenIdentityCard;
 
-    public Tenant(String tenantID, String lastName, String firstName, String phoneNumber, LocalDate dateOfBirthDay, String gender, String citizenIdentityCard) {
+    public Tenant(String tenantID, String firstName, String lastName, String phoneNumber, LocalDate dateOfBirthDay, String gender, String citizenIdentityCard) {
         this.tenantID = tenantID;
         this.lastName = lastName;
         this.firstName = firstName;

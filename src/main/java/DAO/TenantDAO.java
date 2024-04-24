@@ -22,11 +22,11 @@ public class TenantDAO implements DAOInterface<Tenant> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO Tenant (tenantID, lastName, firstName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Tenant (tenantID, firstName, lastName, phoneNumber, dob, gender, citizenIdentityCard) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setString(1, tenant.getTenantID());
-            preparedStatement.setString(2, tenant.getLastName());
-            preparedStatement.setString(3, tenant.getFirstName());
+            preparedStatement.setString(2, tenant.getFirstName());
+            preparedStatement.setString(3, tenant.getLastName());
             preparedStatement.setString(4, tenant.getPhoneNumber());
             preparedStatement.setDate(5, java.sql.Date.valueOf(tenant.getDateOfBirthDay()));
             preparedStatement.setString(6, tenant.getGender());
@@ -48,9 +48,9 @@ public class TenantDAO implements DAOInterface<Tenant> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE Tenant SET lastName = ?, firstName = ?, phoneNumber = ?, dateOfBirthDay = ?, gender = ?, citizenIdentityCard = ? WHERE tenantID = ?");
-            preparedStatement.setString(1, tenant.getLastName());
-            preparedStatement.setString(2, tenant.getFirstName());
+                    "UPDATE Tenant SET firstName = ?, lastName = ?, phoneNumber = ?, dob = ?, gender = ?, citizenIdentityCard = ? WHERE tenantID = ?");
+            preparedStatement.setString(1, tenant.getFirstName());
+            preparedStatement.setString(2, tenant.getLastName());
             preparedStatement.setString(3, tenant.getPhoneNumber());
             preparedStatement.setDate(4, java.sql.Date.valueOf(tenant.getDateOfBirthDay()));
             preparedStatement.setString(5, tenant.getGender());
@@ -97,14 +97,14 @@ public class TenantDAO implements DAOInterface<Tenant> {
 
             while (resultSet.next()) {
                 String tenantID = resultSet.getString("tenantID");
-                String lastName = resultSet.getString("lastName");
                 String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
                 String phoneNumber = resultSet.getString("phoneNumber");
-                LocalDate dateOfBirthDay = resultSet.getDate("dateOfBirthDay").toLocalDate();
+                LocalDate dateOfBirthDay = resultSet.getDate("dob").toLocalDate();
                 String gender = resultSet.getString("gender");
                 String citizenIdentityCard = resultSet.getString("citizenIdentityCard");
 
-                Tenant tenant = new Tenant(tenantID, lastName, firstName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard);
+                Tenant tenant = new Tenant(tenantID, firstName, lastName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard);
                 tenants.add(tenant);
             }
 
@@ -129,14 +129,14 @@ public class TenantDAO implements DAOInterface<Tenant> {
 
             if (resultSet.next()) {
                 String tenantID = resultSet.getString("tenantID");
-                String lastName = resultSet.getString("lastName");
                 String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
                 String phoneNumber = resultSet.getString("phoneNumber");
                 LocalDate dateOfBirthDay = resultSet.getDate("dateOfBirthDay").toLocalDate();
                 String gender = resultSet.getString("gender");
                 String citizenIdentityCard = resultSet.getString("citizenIdentityCard");
 
-                tenant = new Tenant(tenantID, lastName, firstName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard);
+                tenant = new Tenant(tenantID, firstName, lastName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard);
             }
             resultSet.close();
             preparedStatement.close();

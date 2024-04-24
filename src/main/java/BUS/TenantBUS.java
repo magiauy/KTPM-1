@@ -1,41 +1,55 @@
 package BUS;
 
+import DAO.ApartmentDAO;
 import DAO.TenantDAO;
+import DTO.Apartment;
 import DTO.Tenant;
 import java.util.ArrayList;
 
 public class TenantBUS {
-    private TenantDAO tenantDAO;
-
+    private ArrayList<Tenant> listTenant = new ArrayList<>();
     public TenantBUS() {
-        tenantDAO = TenantDAO.getInstance();
+        this.listTenant = TenantDAO.getInstance().selectAll();
     }
 
-    // Phương thức thêm mới một Tenant
-    public boolean addTenant(Tenant tenant) {
-        int result = tenantDAO.insert(tenant);
-        return result > 0;
+    public ArrayList<Tenant> getAll(){
+        return this.listTenant;
     }
 
-    // Phương thức cập nhật thông tin một Tenant
-    public boolean updateTenant(Tenant tenant) {
-        int result = tenantDAO.update(tenant);
-        return result > 0;
+    public boolean add(Tenant tenant){
+        boolean check = TenantDAO.getInstance().insert(tenant)!=0;
+        if (check){
+            this.listTenant.add(tenant);
+        }
+        return check;
     }
 
-    // Phương thức xóa một Tenant dựa trên ID
-    public boolean deleteTenant(String tenantID) {
-        int result = tenantDAO.delete(tenantID);
-        return result > 0;
+    public boolean delete(Tenant tenant){
+        boolean check = TenantDAO.getInstance().delete(tenant.getTenantID())!=0;
+        if (check){
+            this.listTenant.remove(tenant);
+        }
+        return check;
     }
 
-    // Phương thức lấy danh sách tất cả các Tenant
-    public ArrayList<Tenant> getAllTenants() {
-        return tenantDAO.selectAll();
+    public boolean update(Tenant tenant){
+        boolean check = TenantDAO.getInstance().update(tenant)!=0;
+        if (check){
+            this.listTenant.set(getIndexByApartmentID(tenant.getTenantID()), tenant);
+        }
+        return check;
     }
 
-    // Phương thức lấy thông tin một Tenant dựa trên ID
-    public Tenant getTenantById(String tenantID) {
-        return tenantDAO.selectById(tenantID);
+    public int getIndexByApartmentID(String tenentID){
+        int i=0;
+        int vitri=-1;
+        while (i < this.listTenant.size() && vitri == -1){
+            if (listTenant.get(i).getTenantID().equals(tenentID)){
+                vitri = i;
+            } else {
+                i++;
+            }
+        }
+        return vitri;
     }
 }
