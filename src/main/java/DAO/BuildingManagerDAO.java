@@ -9,6 +9,7 @@ import config.JDBCUtil;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -39,7 +40,7 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager> {
             preparedStatement.setString(7, t.getGender());
             preparedStatement.setString(8, t.getCitizenIdentityCard());
             preparedStatement.setDouble(9, t.getSalary());
-        
+
             ketQua = preparedStatement.executeUpdate();
             preparedStatement.close();
             JDBCUtil.closeConnection(connection);
@@ -55,21 +56,19 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE BuildingManager SET buildingId = ?, lastName = ?, firstName = ?, phoneNumber = ?, dob = ?, gender = ?, citizenIdentityCard = ?, salary = ? , position = ? WHERE buildingManagerId = ?");
-
-            // Thiết lập các giá trị tham số trong câu lệnh SQL
-            preparedStatement.setString(1, t.getBuildingManagerId());
-            preparedStatement.setString(2, t.getBuildingId());
-            preparedStatement.setString(3, t.getLastName());
-            preparedStatement.setString(4, t.getFirstName());
-            preparedStatement.setString(5, t.getPhoneNumber());
-            preparedStatement.setDate(6, Date.valueOf(t.getDob()));
-            preparedStatement.setString(7, t.getGender());
-            preparedStatement.setString(8, t.getCitizenIdentityCard());
-            preparedStatement.setDouble(9, t.getSalary());
-
+                    "UPDATE BuildingManager SET buildingId = ?, lastName = ?, firstName = ?, phoneNumber = ?, dob = ?, gender = ?, citizenIdentityCard = ?, salary = ?  WHERE buildingManagerId = ?");
+            preparedStatement.setString(1, t.getBuildingId());
+            preparedStatement.setString(2, t.getLastName());
+            preparedStatement.setString(3, t.getFirstName());
+            preparedStatement.setString(4, t.getPhoneNumber());
+            LocalDate dob = t.getDob(); 
+            java.sql.Date sqlDob = java.sql.Date.valueOf(dob);
+            preparedStatement.setDate(5, sqlDob);
+            preparedStatement.setString(6, t.getGender());
+            preparedStatement.setString(7, t.getCitizenIdentityCard());
+            preparedStatement.setDouble(8, t.getSalary());
+            preparedStatement.setString(9, t.getBuildingManagerId());
             ketQua = preparedStatement.executeUpdate();
-
             preparedStatement.close();
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
@@ -154,12 +153,13 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager> {
         LocalDate dateOfBirthDay = resultSet.getDate("dob").toLocalDate();
         String gender_BuildingManager = resultSet.getString("gender");
         String citizenIdentityCard_BuildingManager = resultSet.getString("citizenIdentityCard");
-        double salary_BuildingManager = resultSet.getDouble("salary");
-        String position = resultSet.getString("position"); // Truy cập vào trường position từ ResultSet
+        Float salary_BuildingManager = resultSet.getFloat("salary");
+        String position = resultSet.getString("position"); 
         return new BuildingManager(buildingManagerId, buildingId, lastName_BuildingManager, firstName_BuildingManager,
                 phoneNumber_BuildingManager, dateOfBirthDay, gender_BuildingManager,
-                citizenIdentityCard_BuildingManager, salary_BuildingManager, position); // Chuyển giá trị position vào
-                                                                                        // constructor
+                citizenIdentityCard_BuildingManager, salary_BuildingManager, position); 
+                                                                                       
     }
+
 
 }

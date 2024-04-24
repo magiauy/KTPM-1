@@ -21,12 +21,12 @@ public class BuildingManager {
     private String gender;
     private String position;
     private String citizenIdentityCard;
-    private Double salary;
+    private Float salary;
 
 
     public BuildingManager(String buildingManagerId, String buildingId, String lastName,
                     String firstName, String phoneNumber, LocalDate dobDate,
-                    String gender, String citizenIdentityCard, Double salary, String position) {
+                    String gender, String citizenIdentityCard, Float salary, String position) {
             this.buildingManagerId = buildingManagerId;
             this.buildingId = buildingId;
             this.lastName = lastName;
@@ -48,7 +48,7 @@ public class BuildingManager {
             this.dob = LocalDate.now();
             this.gender = "";
             this.citizenIdentityCard = "";
-            this.salary = (double) 0;
+            this.salary = 0.0f;
             this.position="";
     }
     public LocalDate getDob() {
@@ -108,10 +108,10 @@ public class BuildingManager {
     public void setCitizenIdentityCard(String citizenIdentityCard) {
             this.citizenIdentityCard = citizenIdentityCard;
     }
-    public Double getSalary() {
+    public Float getSalary() {
             return salary;
     }
-    public void setSalary(Double salary) {
+    public void setSalary(Float salary) {
             this.salary = salary;
     }
     

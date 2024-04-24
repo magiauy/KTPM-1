@@ -108,7 +108,6 @@ CREATE TABLE MonthlyRentBill (
 
 CREATE TABLE ServiceUsage (
                               serviceID VARCHAR(20) PRIMARY KEY,
-                              monthlyRentBillID VARCHAR(20),
                               name NVARCHAR(255),
                               quantity INT,
                               pricePerUnit DECIMAL(20, 2),
@@ -116,8 +115,7 @@ CREATE TABLE ServiceUsage (
                               totalAmount DECIMAL(20, 2),
                               Date DATE,
                               note TEXT,
-                              FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID)
-);
+                             
 
 CREATE TABLE ServiceTicket (
                                serviceID VARCHAR(20),
@@ -133,11 +131,10 @@ CREATE TABLE ServiceTicket (
 
 CREATE TABLE Violation (
                            violationID VARCHAR(20) PRIMARY KEY,
-                           monthlyRentBillID VARCHAR(20),
                            name NVARCHAR(255),
                            totalAmount DECIMAL(20, 2),
                            note TEXT,
-                           FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID)
+                           
 );
 
 CREATE TABLE ViolationTicket (
@@ -233,13 +230,13 @@ VALUES
     ('MRB4', 'APT4', 'T4', '2024-11-24', 5, '2000', N'Pending'),
     ('MRB5', 'APT5', 'T5', '2024-12-21', 5, '1400', N'Pending');
 -- Dữ liệu cho bảng ServiceUsage
-INSERT INTO ServiceUsage (serviceID, monthlyRentBillID, name, quantity, pricePerUnit, unit, totalAmount, Date, note)
+INSERT INTO ServiceUsage (serviceID, name, quantity, pricePerUnit, unit, totalAmount, Date, note)
 VALUES
-    ('SERV1', 'MRB1', N'Dịch vụ vệ sinh', '2', '50', N'Lần', '100', '2024-04-10', NULL),
-    ('SERV2', 'MRB2', N'Dịch vụ giặt ủi', '1', '70', N'Lần', '70', '2024-04-12', N'Khách hàng yêu cầu ủi đồ'),
-    ('SERV3', 'MRB3', N'Giữ xe', '1', '30', N'Lần', '30', '2024-04-12', NULL),
-    ('SERV4', 'MRB4', N'Internet', '1', '50', N'Tháng', '50', '2024-04-15', N'Yêu cầu kết nối mạng'),
-    ('SERV5', 'MRB5', N'Tiền nước', '1', '25', N'Tháng', '25', '2024-04-20', NULL);
+    ('SERV1', N'Dịch vụ vệ sinh', '2', '50', N'Lần', '100', '2024-04-10', NULL),
+    ('SERV2', N'Dịch vụ giặt ủi', '1', '70', N'Lần', '70', '2024-04-12', N'Khách hàng yêu cầu ủi đồ'),
+    ('SERV3', N'Giữ xe', '1', '30', N'Lần', '30', '2024-04-12', NULL),
+    ('SERV4', N'Internet', '1', '50', N'Tháng', '50', '2024-04-15', N'Yêu cầu kết nối mạng'),
+    ('SERV5', N'Tiền nước', '1', '25', N'Tháng', '25', '2024-04-20', NULL);
 -- Dữ liệu cho bảng ServiceTicket
 INSERT INTO ServiceTicket (serviceID, monthlyRentBillID, quantity, totalAmount, Date, Note)
 VALUES
@@ -249,13 +246,13 @@ VALUES
     ('SERV4', 'MRB4', 1, 50.00, '2024-04-15', N'Yêu cầu kết nối mạng'),
     ('SERV5', 'MRB5', 1, 25.00, '2024-04-20', NULL);
 -- Dữ liệu cho bảng Violation
-INSERT INTO Violation (violationID, monthlyRentBillID, name, totalAmount, note)
+INSERT INTO Violation (violationID, name, totalAmount, note)
 VALUES
-    ('V1', 'MRB1', N'Quá hạn thanh toán', '100', N'Phạt quá hạn 10%'),
-    ('V2', 'MRB2', N'Gây ồn', '50', N'Đề nghị khắc phục ngay'),
-    ('V3', 'MRB3', N'Cháy nổ', '150', N'Báo ngay lập tức'),
-    ('V4', 'MRB4', N'Vi phạm an ninh', '200', N'Cảnh báo vi phạm an ninh'),
-    ('V5', 'MRB5', N'Quá hạn thanh toán', '100', N'Phạt quá hạn 5%');
+    ('V1', N'Quá hạn thanh toán', '100', N'Phạt quá hạn 10%'),
+    ('V2', N'Gây ồn', '50', N'Đề nghị khắc phục ngay'),
+    ('V3', N'Cháy nổ', '150', N'Báo ngay lập tức'),
+    ('V4', N'Vi phạm an ninh', '200', N'Cảnh báo vi phạm an ninh'),
+    ('V5', N'Quá hạn thanh toán', '100', N'Phạt quá hạn 5%');
 -- Dữ liệu cho bảng ViolationTicket
 INSERT INTO ViolationTicket (violationID, monthlyRentBillID, name, totalAmount, Date, note)
 VALUES

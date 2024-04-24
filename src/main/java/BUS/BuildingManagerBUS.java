@@ -39,19 +39,21 @@ public class BuildingManagerBUS {
         }
         return check;
     }
+    
     public boolean update(BuildingManager buildingManager) {
-        int index = getIndexByBuildingManagerId(buildingManager.getBuildingManagerId());
-        if (index >= 0 && index < listBuildingManagers.size()) {
-            listBuildingManagers.set(index, buildingManager);
-            return true;
-        } else {
-            System.err.println("Lỗi: Chỉ số không hợp lệ khi cập nhật.");
-            return false;
+        boolean updated = BuildingManagerDAO.getInstance().update(buildingManager) != 0;
+        if (updated) {
+            int index = getIndexByBuildingId(buildingManager.getBuildingId());
+            if (index != -1) {
+                this.listBuildingManagers.set(index, buildingManager);
+            }
         }
+        return updated;
     }
-    private int getIndexByBuildingManagerId(String buildingManagerId) {
+
+    private int getIndexByBuildingId(String buildingManegerId) {
         for (int i = 0; i < listBuildingManagers.size(); i++) {
-            if (listBuildingManagers.get(i).getBuildingManagerId().equals(buildingManagerId)) {
+            if (listBuildingManagers.get(i).getBuildingId().equals(buildingManegerId)) {
                 return i;
             }
         }
