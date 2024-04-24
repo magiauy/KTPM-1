@@ -27,11 +27,11 @@ public class BuildingDAO implements DAOInterface<Building> {
                     "INSERT INTO Building (buildingId, name, city, district, address, numberOfApartment) VALUES (?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setString(1, building.getBuildingId());
-            preparedStatement.setString(2, building.getName());
-            preparedStatement.setString(3, building.getCity());
-            preparedStatement.setString(4, building.getDistrict());
-            preparedStatement.setString(5, building.getAddress());
-            preparedStatement.setInt(6, building.getNumberOfApartment());
+            preparedStatement.setString(2, building.getNameBuilding());
+            preparedStatement.setString(3, building.getCity_Building());
+            preparedStatement.setString(4, building.getDistrict_Building());
+            preparedStatement.setString(5, building.getAddress_Building());
+            preparedStatement.setInt(6, building.getNumberOfApartment_Building());
 
             ketQua = preparedStatement.executeUpdate();
 
@@ -53,11 +53,11 @@ public class BuildingDAO implements DAOInterface<Building> {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "UPDATE Building SET name = ?, city = ?, district = ?, address = ?, numberOfApartment = ? WHERE buildingID = ?");
-            preparedStatement.setString(1, building.getName());
-            preparedStatement.setString(2, building.getCity());
-            preparedStatement.setString(3, building.getDistrict());
-            preparedStatement.setString(4, building.getAddress());
-            preparedStatement.setInt(5, building.getNumberOfApartment());
+            preparedStatement.setString(1, building.getNameBuilding());
+            preparedStatement.setString(2, building.getCity_Building());
+            preparedStatement.setString(3, building.getDistrict_Building());
+            preparedStatement.setString(4, building.getAddress_Building());
+            preparedStatement.setInt(5, building.getNumberOfApartment_Building());
             preparedStatement.setString(6, building.getBuildingId());
 
             ketQua = preparedStatement.executeUpdate();

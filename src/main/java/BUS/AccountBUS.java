@@ -12,12 +12,10 @@ public class AccountBUS {
         // Initialize the list in the constructor if needed
         this.listAccount = getAll();
     }
-
     public ArrayList<Acount> getAll() {
         AcountDAO accountDAO = AcountDAO.getInstance();
         return accountDAO.selectAll();
     }
-
     public String checkLogin(String username, String password ) {
         for (Acount account : listAccount) {
             if (account.getUsername().equals(username) && account.getPassword().equals(password)) {

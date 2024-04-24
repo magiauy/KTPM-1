@@ -37,20 +37,19 @@ public class BuildingBUS {
         return check;
     }
     public boolean update(Building building) {
-        int index = getIndexByBuildingId(building.getBuildingId());
-        if (index >= 0 && index < listBuildings.size()) {
-            listBuildings.set(index, building);
-            return true;
-        } else {
-   
-            System.err.println("Lỗi: Chỉ số không hợp lệ khi cập nhật.");
-            return false;
+        boolean updated = BuildingDAO.getInstance().update(building) != 0;
+        if (updated) {
+            int index = getIndexByBuildingId(building.getBuildingId());
+            if (index != -1) {
+                this.listBuildings.set(index, building);
+            }
         }
+        return updated;
     }
     private int getIndexByBuildingId(String buildingId) {
         for (int i = 0; i < listBuildings.size(); i++) {
             if (listBuildings.get(i).getBuildingId().equals(buildingId)) {
-                return i;
+                return i; // Trả về chỉ mục khi tìm thấy
             }
         }
         return -1; 
@@ -62,7 +61,7 @@ public class BuildingBUS {
         int total = 0;
 
         for(Building building : buildings){
-            total += building.getNumberOfApartment();
+            total += building.getNumberOfApartment_Building();
         }
         numberOfBuildings.setText(String.valueOf(total));
     }
@@ -75,7 +74,7 @@ public class BuildingBUS {
 
         // Đếm số lượng tòa nhà trong mỗi thành phố
         for (Building building : buildings) {
-            String city = building.getCity();
+            String city = building.getCity_Building();
             cityCounts.put(city, cityCounts.getOrDefault(city, 0) + 1);
         }
 
