@@ -6,22 +6,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package config;
-
 import java.sql.*;
 
 public class JDBCUtil {
     public static Connection getConnection() {
         Connection connection = null;
         try {
-//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//            String url = "jdbc:sqlserver://PHAMNAM:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
-//            String userName = "sa";
-//            String password = "123456789";
+            // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            // String url = "jdbc:sqlserver://PHAMNAM:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
+            // String userName = "sa";
+            // String password = "123456789";
 
-           Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-           String url = "jdbc:sqlserver://TEN:1433;databaseName=ql_thue_can_ho;trustServerCertificate=true";
-           String userName = "sa";
-           String password = "12345678";
+          Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+          String url = "jdbc:sqlserver://TEN:1433;databaseName=ql_thue_can_ho;trustServerCertificate=true";
+          String userName = "sa";
+          String password = "12345678";
             
             // Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // String url =

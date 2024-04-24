@@ -11,13 +11,13 @@ package DTO;
 public class Apartment {
     private String apartmentID;
     private String buildingID;
-    private int roomNumber;
+    private String roomNumber;
     private String area;
     private int bedrooms;
     private int bathrooms;
     private String furniture;
 
-    public Apartment(String apartmentID, String buildingID, int roomNumber,
+    public Apartment(String apartmentID, String buildingID, String roomNumber,
             String area, int bedrooms, int bathrooms, String furniture) {
         this.apartmentID = apartmentID;
         this.buildingID = buildingID;
@@ -57,11 +57,11 @@ public class Apartment {
         this.buildingID = buildingID;
     }
 
-    public int getRoomNumber() {
+    public String getRoomNumber() {
         return roomNumber;
     }
 
-    public void setRoomNumber(int roomNumber) {
+    public void setRoomNumber(String roomNumber) {
         this.roomNumber = roomNumber;
     }
 

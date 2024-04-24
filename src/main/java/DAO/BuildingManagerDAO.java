@@ -154,10 +154,10 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager> {
         String gender_BuildingManager = resultSet.getString("gender");
         String citizenIdentityCard_BuildingManager = resultSet.getString("citizenIdentityCard");
         Float salary_BuildingManager = resultSet.getFloat("salary");
-        String position = resultSet.getString("position"); 
+
         return new BuildingManager(buildingManagerId, buildingId, lastName_BuildingManager, firstName_BuildingManager,
                 phoneNumber_BuildingManager, dateOfBirthDay, gender_BuildingManager,
-                citizenIdentityCard_BuildingManager, salary_BuildingManager, position); 
+                citizenIdentityCard_BuildingManager, salary_BuildingManager); 
                                                                                        
     }
 

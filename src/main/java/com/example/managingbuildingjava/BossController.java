@@ -206,7 +206,6 @@ public class BossController implements Initializable {
     @FXML
     private DatePicker datePickerDOB;
 
-
     @FXML
     private ComboBox<String> fruitCombo;
     @FXML
@@ -214,10 +213,14 @@ public class BossController implements Initializable {
     @FXML
     private ComboBox<String> comboBox__P1__2;
     @FXML
-    private Label time, numberOfBuildings;
+    private Label time, numberOfBuildings, monthlyRevenueLabel;
     @FXML
     private PieChart pieChart;
+  
     @FXML
+    private PieChart numberOfStatusLabel;
+    @FXML
+    private BarChart barChartOfMonthlyOpex;
     private BarChart<String, Number> barChart;
     private void loadPage(String page) throws IOException {
         stop = true;
@@ -225,7 +228,6 @@ public class BossController implements Initializable {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
         bp.setCenter(root);
     }
-
     @FXML
     void Close_Clicked(MouseEvent event) {
         stop = true;
@@ -244,33 +246,7 @@ public class BossController implements Initializable {
         }
     }
 
-    private void updatePieChart() {
-        if (pieChart == null) {
-            return;
-        }
-        try {
-            BuildingBUS buildingBUS = new BuildingBUS();
-            buildingBUS.setLocationOfBuildings(pieChart);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void drawBarChart() {
-        if (barChart == null) {
-            return;
-        }
-
-        try {
-            buildingManagersList = FXCollections.observableArrayList();
-            BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-            buildingManagerBUS.getGenderOfBDManager(barChart);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+  
 
     private void TimeNow() {
         thread = new Thread(() -> {
@@ -290,16 +266,60 @@ public class BossController implements Initializable {
         });
         thread.start();
     }
+    public void updateMonthlyRevenueLabel() {
+        if (monthlyRevenueLabel == null) {
+            return;
+        }
+        try {
+
+            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+            financialReportBUS.setMonthlyRevenueLabel(monthlyRevenueLabel);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void updateNumberOfStatus() {
+        if (numberOfStatusLabel == null) {
+            return;
+        }
+        try {
+            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+            monthlyRentBillBUS.setMonthlyRentBillsLabel(numberOfStatusLabel);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void drawLineChartOfMonthlyOpex() {
+        if (barChartOfMonthlyOpex == null) {
+            return;
+        }
+
+        try {
+            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+            financialReportBUS.setMonthlyOpexLabel(barChartOfMonthlyOpex);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buildingsList = FXCollections.observableArrayList();
         buildingManagersList = FXCollections.observableArrayList();
-        totalOfBuldings();
-        updatePieChart();
-        drawBarChart();
+        //Loading Page 0 From Nam
+        updateMonthlyRevenueLabel();
+        updateNumberOfStatus();
+        drawLineChartOfMonthlyOpex();
+      
+    
         loadBuildingManagers();
         loadBuilding();
+        loadDinancialReport();
+
         showcomboboxBuildingManager();
         showcombobox();
         keyenter();
@@ -379,15 +399,30 @@ public class BossController implements Initializable {
             dobColumn.setCellValueFactory(new PropertyValueFactory<>("dob"));
             genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
             citizenIdentityCardColumn.setCellValueFactory(new PropertyValueFactory<>("citizenIdentityCard"));
-            positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+          
             salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
             table__view2.setItems(building);
+            for (DTO.BuildingManager manager : buildingManagers) {
+                System.out.println("Building Manager ID: " + manager.getBuildingManagerId());
+                System.out.println("Building ID: " + manager.getBuildingId());
+                System.out.println("Last Name: " + manager.getLastName());
+                System.out.println("First Name: " + manager.getFirstName());
+                System.out.println("Phone Number: " + manager.getPhoneNumber());
+                System.out.println("DOB: " + manager.getDob());
+                System.out.println("Gender: " + manager.getGender());
+                System.out.println("Citizen Identity Card: " + manager.getCitizenIdentityCard());
+                System.out.println("Salary: " + manager.getSalary());
+                System.out.println("-------------------------");
+            }
             handbuildingmanager();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void loadDinancialReport(){
+
+    }
     public void handleBuilding() {
         table__view.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
@@ -725,11 +760,17 @@ public class BossController implements Initializable {
         buildingManagersList.clear();
         BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
         ArrayList<BuildingManager> buildingManagers = buildingManagerBUS.getAll();
+        boolean found = false; 
         for (BuildingManager manager : buildingManagers) {
             if (manager.getFirstName().equals(name)) {
                 buildingManagersList.add(manager);
+                found = true; 
             }
         }
+        if (!found) {
+            System.out.println("Không tìm thấy quản lý có tên: " + name);
+        }
+
         ObservableList<BuildingManager> observableBuildingList = FXCollections
                 .observableArrayList(buildingManagersList);
         table__view2.setItems(observableBuildingList);
