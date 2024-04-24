@@ -2,6 +2,7 @@ package BUS;
 
 import DAO.FinancialReportDAO;
 import DTO.FinancialReport;
+import com.example.managingbuildingjava.CustomerController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.BarChart;
@@ -18,6 +19,13 @@ public class FinancialReportBUS {
         this.financialReports = financialReports;
     }
     private ArrayList<FinancialReport> financialReports = new ArrayList<>();
+    private static FinancialReportBUS instance;
+    public static FinancialReportBUS getInstance() {
+        if (instance == null) {
+            instance = new FinancialReportBUS();
+        }
+        return instance;
+    }
     public FinancialReportBUS() {
         this.financialReports = FinancialReportDAO.getInstance().selectAll();
     }

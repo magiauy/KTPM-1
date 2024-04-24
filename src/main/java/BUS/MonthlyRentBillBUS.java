@@ -17,6 +17,7 @@ public class MonthlyRentBillBUS {
         return new MonthlyRentBillBUS();
     }
 
+
     public MonthlyRentBillBUS() {
         this.monthlyRentBills = MonthlyRentBillDAO.getInstance().selectAll();
     }
@@ -58,15 +59,6 @@ public class MonthlyRentBillBUS {
         }
         return  monthlyRentBillsWithTenantID;
     }
-
-    public int getIndexByMonthlyRentBillID(String monthlyRentBillID) {
-        for (int i = 0; i < this.monthlyRentBills.size(); i++) {
-            if (this.monthlyRentBills.get(i).getMonthlyRentBillID() == monthlyRentBillID) {
-                return i;
-            }
-        }
-        return -1; // Not found
-    }
     public void setMonthlyRentBillsLabel(PieChart numberOfStatusLabel){
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
         ArrayList<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getAll();
@@ -94,5 +86,13 @@ public class MonthlyRentBillBUS {
 
         // Cập nhật dữ liệu cho numberOfStatusLabel
         numberOfStatusLabel.setData(pieChartData);
+    }
+    public int getIndexByMonthlyRentBillID(String monthlyRentBillID) {
+        for (int i = 0; i < this.monthlyRentBills.size(); i++) {
+            if (this.monthlyRentBills.get(i).getMonthlyRentBillID() == monthlyRentBillID) {
+                return i;
+            }
+        }
+        return -1; // Not found
     }
 }

@@ -250,9 +250,7 @@ public class BossController implements Initializable {
             return;
         }
         try {
-
-            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-            financialReportBUS.setMonthlyRevenueLabel(monthlyRevenueLabel);
+            FinancialReportBUS.getInstance().setMonthlyRevenueLabel(monthlyRevenueLabel);
 
 
         } catch (Exception e) {
