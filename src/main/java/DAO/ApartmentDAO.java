@@ -29,13 +29,12 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
             Connection connection = JDBCUtil.getConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            int roomNumberValue = (apartment.getRoomNumber());
-            preparedStatement.setInt(3, roomNumberValue);
+                    "INSERT INTO Apartment (apartmentID, buildingID, roomNumber, Area, bedrooms, bathrooms, furniture) VALUES (?, ?, ?, ?, ?, ?, ?)");
+
             // Thiết lập các giá trị tham số trong câu lệnh SQL
             preparedStatement.setString(1, (apartment.getApartmentID() != null) ? apartment.getApartmentID() : null);
             preparedStatement.setString(2, (apartment.getBuildingID() != null) ? apartment.getBuildingID() : null);
-            preparedStatement.setInt(3, roomNumberValue);
+            preparedStatement.setString(3, apartment.getRoomNumber());
             preparedStatement.setString(4, apartment.getArea());
             preparedStatement.setInt(5, apartment.getBedrooms());
             preparedStatement.setInt(6, apartment.getBathrooms());
@@ -63,11 +62,11 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE Apartment SET buildingID=?, roomNumber=?, area=?, bedrooms=?, bathrooms=?, furniture=? WHERE apartmentID=?";
+            String sql = "UPDATE Apartment SET buildingID=?, roomNumber=?, Area=?, bedrooms=?, bathrooms=?, furniture=? WHERE apartmentID=?";
             PreparedStatement pst = con.prepareStatement(sql);
 
             pst.setString(1, apartment.getBuildingID());
-            pst.setInt(2, apartment.getRoomNumber());
+            pst.setString(2, apartment.getRoomNumber());
             pst.setString(3, apartment.getArea());
             pst.setInt(4, apartment.getBedrooms());
             pst.setInt(5, apartment.getBathrooms());
@@ -148,8 +147,8 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
     private Apartment createApartmentFromResultSet(ResultSet resultSet) throws SQLException {
         String apartmentID = resultSet.getString("apartmentID");
         String buildingID = resultSet.getString("buildingID");
-        int roomNumber = resultSet.getInt("roomNumber");
-        String area = resultSet.getString("area");
+        String roomNumber = resultSet.getString("roomNumber");
+        String area = resultSet.getString("Area");
         int bedrooms = resultSet.getInt("bedrooms");
         int bathrooms = resultSet.getInt("bathrooms");
         String furniture = resultSet.getString("furniture");
