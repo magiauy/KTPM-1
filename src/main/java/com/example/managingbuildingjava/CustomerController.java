@@ -99,12 +99,6 @@ public class CustomerController implements Initializable {
     }
     @FXML
     private Label time;
-    @FXML
-    private Label monthlyRevenueLabel;
-    @FXML
-    private PieChart numberOfStatusLabel;
-    @FXML
-    private BarChart barChartOfMonthlyOpex;
     private void loadPage(String page) throws IOException {
         stop = true;
         Parent root = null;
@@ -134,65 +128,8 @@ public class CustomerController implements Initializable {
     void Close_Clicked(MouseEvent event){
         stop = true;
     }
-    public void updateMonthlyRevenueLabel() {
-        if (monthlyRevenueLabel == null) {
-            return;
-        }
-        try {
-            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-            ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
-
-            // Lấy ngày hiện tại
-            LocalDate currentDate = LocalDate.now();
-
-            // Lọc danh sách financialReports để chỉ chọn ra các báo cáo tài chính có ngày tương ứng với tháng hiện tại
-            ArrayList<FinancialReport> currentMonthReports = new ArrayList<>();
-            for (FinancialReport report : financialReports) {
-                LocalDate reportDate = LocalDate.parse(report.getDate().toString());
-                YearMonth reportYearMonth = YearMonth.from(reportDate);
-                YearMonth currentYearMonth = YearMonth.from(currentDate);
-                if (reportYearMonth.equals(currentYearMonth)) {
-                    currentMonthReports.add(report);
-                }
-            }
-
-            // Kiểm tra xem có báo cáo nào cho tháng hiện tại không
-            if (!currentMonthReports.isEmpty()) {
-                // Lấy giá trị monthlyRevenue của báo cáo đầu tiên trong danh sách và gán vào monthlyRevenueLabel
-                double monthlyRevenue = currentMonthReports.get(0).getMonthlyRevenue();
-                monthlyRevenueLabel.setText(String.valueOf(monthlyRevenue));
-            } else {
-                monthlyRevenueLabel.setText("N/A");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private void updateNumberOfStatus() {
-        if (numberOfStatusLabel == null) {
-            return;
-        }
-        try {
-            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-            monthlyRentBillBUS.setMonthlyRentBillsLabel(numberOfStatusLabel);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private void drawLineChartOfMonthlyOpex() {
-        if (barChartOfMonthlyOpex == null) {
-            return;
-        }
-
-        try {
-            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-            ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    @FXML
+    private Label monthlyBillLabel;
 //    private String monthlyRentBillID;;
 //    private String apartmentID; ---
 //    private String tenantID; ---
@@ -201,6 +138,9 @@ public class CustomerController implements Initializable {
 //    private Double totalPayment;
 //    private String status;
 
+    void setMonthlyBillLabel(){
+
+    }
     void setTableMonthlyRentBill(){
         monthlyRentBillIdColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("monthlyRentBillID"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, LocalDate>("date"));
@@ -213,9 +153,8 @@ public class CustomerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        updateMonthlyRevenueLabel();
-        updateNumberOfStatus();
-        drawLineChartOfMonthlyOpex();
+
+        //Page 2
         setTableMonthlyRentBill();
     }
 }
