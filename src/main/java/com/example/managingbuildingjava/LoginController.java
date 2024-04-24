@@ -59,17 +59,14 @@ public class LoginController {
                     BuildingManager.openBuildingManagerView();
                 if (userType.equals("quanli"))
                    Customer.openCustomerView();
-
             } catch (Exception e) {
                 System.out.println("Error opening Boss view: " + e.getMessage());
                 e.printStackTrace();
             }
-
         } else {
             showError("Invalid username or password.");
         }
     }
-
     private void showError(String message) {
         System.err.println("Error: " + message); // Placeholder for user feedback
     }

@@ -19,12 +19,14 @@ public class BuildingManager {
     private String phoneNumber;
     private LocalDate dob;
     private String gender;
+    private String position;
     private String citizenIdentityCard;
-    private Double salary;
+    private Float salary;
+
 
     public BuildingManager(String buildingManagerId, String buildingId, String lastName,
                     String firstName, String phoneNumber, LocalDate dobDate,
-                    String gender, String citizenIdentityCard, Double salary) {
+                    String gender, String citizenIdentityCard, Float salary, String position) {
             this.buildingManagerId = buildingManagerId;
             this.buildingId = buildingId;
             this.lastName = lastName;
@@ -34,6 +36,7 @@ public class BuildingManager {
             this.gender = gender;
             this.citizenIdentityCard = citizenIdentityCard;
             this.salary = salary;
+            this.position = position;
     }
 
     public BuildingManager() {
@@ -45,7 +48,8 @@ public class BuildingManager {
             this.dob = LocalDate.now();
             this.gender = "";
             this.citizenIdentityCard = "";
-            this.salary = (double) 0;
+            this.salary = 0.0f;
+            this.position="";
     }
     public LocalDate getDob() {
         return dob;
@@ -104,17 +108,25 @@ public class BuildingManager {
     public void setCitizenIdentityCard(String citizenIdentityCard) {
             this.citizenIdentityCard = citizenIdentityCard;
     }
-    public Double getSalary() {
+    public Float getSalary() {
             return salary;
     }
-    public void setSalary(Double salary) {
+    public void setSalary(Float salary) {
             this.salary = salary;
+    }
+    
+    public String getPosition() {
+            return position;
+    }
+
+    public void setPosition(String position) {
+            this.position = position;
     }
     @Override
     public int hashCode() {
             return Objects.hash(buildingId, buildingManagerId, citizenIdentityCard, dob,
                             firstName, gender, lastName,
-                            phoneNumber, salary);
+                            phoneNumber, salary,position);
     }
     @Override
     public boolean equals(Object obj) {
@@ -129,6 +141,7 @@ public class BuildingManager {
                             && Objects.equals(buildingManagerId, other.buildingManagerId)
                             && Objects.equals(citizenIdentityCard, other.citizenIdentityCard)
                             && Objects.equals(dob, other.dob)
+                            && Objects.equals(position,other.position)
                             && Objects.equals(firstName, other.firstName)
                             && Objects.equals(gender, other.gender)
                             && Objects.equals(lastName, other.lastName)
