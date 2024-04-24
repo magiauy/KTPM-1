@@ -8,8 +8,7 @@ import java.io.IOException;
 
 public class Boss extends Application {
 
-    private static Stage bossStage;
-    private static Scene loginScene; 
+    private static Stage bossStage; 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
