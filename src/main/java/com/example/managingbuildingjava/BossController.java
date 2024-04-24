@@ -206,26 +206,27 @@ public class BossController implements Initializable {
     private DatePicker datePickerDOB;
 
     @FXML
-    private Label time;
+    private Label time, monthlyRevenueLabel;
     @FXML
     private ComboBox<String> fruitCombo;
     @FXML
     private ComboBox<String> comboBox__P1__1;
     @FXML
     private ComboBox<String> comboBox__P1__2;
-
+    @FXML
+    private PieChart numberOfStatusLabel;
+    @FXML
+    private BarChart barChartOfMonthlyOpex;
     private void loadPage(String page) throws IOException {
         stop = true;
         Parent root = null;
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
         bp.setCenter(root);
     }
-
     @FXML
     void Close_Clicked(MouseEvent event) {
         stop = true;
     }
-
     private void TimeNow() {
         thread = new Thread(() -> {
             SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
@@ -244,9 +245,52 @@ public class BossController implements Initializable {
         });
         thread.start();
     }
+    public void updateMonthlyRevenueLabel() {
+        if (monthlyRevenueLabel == null) {
+            return;
+        }
+        try {
+
+            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+            financialReportBUS.setMonthlyRevenueLabel(monthlyRevenueLabel);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void updateNumberOfStatus() {
+        if (numberOfStatusLabel == null) {
+            return;
+        }
+        try {
+            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+            monthlyRentBillBUS.setMonthlyRentBillsLabel(numberOfStatusLabel);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void drawLineChartOfMonthlyOpex() {
+        if (barChartOfMonthlyOpex == null) {
+            return;
+        }
+
+        try {
+            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+            financialReportBUS.setMonthlyOpexLabel(barChartOfMonthlyOpex);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Loading Page 0 From Nam
+        updateMonthlyRevenueLabel();
+        updateNumberOfStatus();
+        drawLineChartOfMonthlyOpex();
         buildingsList = FXCollections.observableArrayList();
         buildingManagersList = FXCollections.observableArrayList();
         loadBuildingManagers();
