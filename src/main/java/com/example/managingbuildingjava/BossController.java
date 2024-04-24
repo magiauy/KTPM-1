@@ -71,6 +71,7 @@ public class BossController implements Initializable {
     private Building selectedBuildingToDelete;
     private DTO.BuildingManager selectedBuildingToDelete1;
     private ObservableList<DTO.BuildingManager> buildingManagersList;
+    private ObservableList<BuildingManager> buildingManagerList;
 
     public String getBuildingId() {
         return buildingId;
@@ -205,15 +206,19 @@ public class BossController implements Initializable {
     @FXML
     private DatePicker datePickerDOB;
 
-    @FXML
-    private Label time;
+
     @FXML
     private ComboBox<String> fruitCombo;
     @FXML
     private ComboBox<String> comboBox__P1__1;
     @FXML
     private ComboBox<String> comboBox__P1__2;
-
+    @FXML
+    private Label time, numberOfBuildings;
+    @FXML
+    private PieChart pieChart;
+    @FXML
+    private BarChart<String, Number> barChart;
     private void loadPage(String page) throws IOException {
         stop = true;
         Parent root = null;
@@ -224,6 +229,47 @@ public class BossController implements Initializable {
     @FXML
     void Close_Clicked(MouseEvent event) {
         stop = true;
+    }
+
+    public void totalOfBuldings() {
+        if (numberOfBuildings == null) {
+            return;
+        }
+        try {
+            BuildingBUS buildingBUS = new BuildingBUS();
+            buildingBUS.setTotalNumberOfBuildings(numberOfBuildings);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updatePieChart() {
+        if (pieChart == null) {
+            return;
+        }
+        try {
+            BuildingBUS buildingBUS = new BuildingBUS();
+            buildingBUS.setLocationOfBuildings(pieChart);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void drawBarChart() {
+        if (barChart == null) {
+            return;
+        }
+
+        try {
+            buildingManagersList = FXCollections.observableArrayList();
+            BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+            buildingManagerBUS.getGenderOfBDManager(barChart);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void TimeNow() {
@@ -249,11 +295,15 @@ public class BossController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buildingsList = FXCollections.observableArrayList();
         buildingManagersList = FXCollections.observableArrayList();
+        totalOfBuldings();
+        updatePieChart();
+        drawBarChart();
         loadBuildingManagers();
         loadBuilding();
         showcomboboxBuildingManager();
         showcombobox();
         keyenter();
+       
 
     }
 
@@ -320,7 +370,6 @@ public class BossController implements Initializable {
             ArrayList<DTO.BuildingManager> buildingManagers = buildingManagerBUS.getAll();
             buildingManagersList.addAll(buildingManagers);
             ObservableList<DTO.BuildingManager> building = FXCollections.observableArrayList(buildingManagersList);
-
             // Thiết lập các cột cho TableView
             buildingManagerIdColumn.setCellValueFactory(new PropertyValueFactory<>("buildingManagerId"));
             buildingIdColumn.setCellValueFactory(new PropertyValueFactory<>("buildingId"));
@@ -331,9 +380,7 @@ public class BossController implements Initializable {
             genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
             citizenIdentityCardColumn.setCellValueFactory(new PropertyValueFactory<>("citizenIdentityCard"));
             positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
-
             salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
-
             table__view2.setItems(building);
             handbuildingmanager();
         } catch (Exception e) {
