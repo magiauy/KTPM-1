@@ -31,7 +31,7 @@ public class ApartmentBUS {
         return check;
     }
 
-    public boolean delete(Apartment apartment, int index){
+    public boolean delete(Apartment apartment){
         boolean check = ApartmentDAO.getInstance().delete(apartment.getApartmentID())!=0;
         if (check){
             this.listApartment.remove(apartment);

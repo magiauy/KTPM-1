@@ -8,6 +8,7 @@ import DTO.FinancialReport;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -258,6 +260,18 @@ public class BuildingManagerController implements Initializable {
         comboBox__P1__3.getSelectionModel().clearSelection();
     }
 
+    private void initApartment(){
+        maCanHoTable.setCellValueFactory(new PropertyValueFactory<>("apartmentID"));
+        maToaNhaTable.setCellValueFactory(new PropertyValueFactory<>("buildingID"));
+        soPhongTable.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+        dienTichTable.setCellValueFactory(new PropertyValueFactory<>("area"));
+        soPhongNguTable.setCellValueFactory(new PropertyValueFactory<>("bedrooms"));
+        soPhongTamTable.setCellValueFactory(new PropertyValueFactory<>("bathrooms"));
+        noiThatTable.setCellValueFactory(new PropertyValueFactory<>("furniture"));
+        apartmentObservableList = getApartmentList();
+        table__P1__1.setItems(apartmentObservableList);
+    }
+
     @FXML
     void showApartment(MouseEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
@@ -269,10 +283,81 @@ public class BuildingManagerController implements Initializable {
         comboBox__P1__3.setValue(selectedApartment.getFurniture());
     }
 
+    @FXML
+    void suaCanHo(ActionEvent event) {
+        Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
+        selectedApartment.setApartmentID(TxtField__P1__1.getText());
+        selectedApartment.setBuildingID("B1");
+        selectedApartment.setRoomNumber(TxtField__P1__2.getText());
+        selectedApartment.setArea(TxtField__P1__3.getText());
+        selectedApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
+        selectedApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
+        selectedApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
+        ApartmentBUS apartmentBUS = new ApartmentBUS();
+        boolean updateSuccess = apartmentBUS.update(selectedApartment);
+        System.out.println(updateSuccess);
+        if (updateSuccess) {
+            int selectedIndex = table__P1__1.getSelectionModel().getSelectedIndex();
+            apartmentObservableList.set(selectedIndex, selectedApartment);
+            table__P1__1.refresh();
+            refreshFormApartment();
+        } else {
+            System.err.println("Không thể cập nhật căn hộ trong cơ sở dữ liệu.");
+        }
+    }
+
+    @FXML
+    void themCanHo(ActionEvent event) {
+        try {
+            Apartment newApartment = new Apartment();
+//            BuildingManagerBUS bus = new BuildingManagerBUS();
+//            List<BuildingManager> buildingManagers = bus.getAll();
+//
+//            for (BuildingManager buildingManager : buildingManagers) {
+//                if (ID.equals(buildingManager.getBuildingManagerId())) {
+//                    newApartment.setBuildingID(buildingManager.getBuildingId());
+//                }
+//            }
+
+            newApartment.setApartmentID(TxtField__P1__1.getText());
+            newApartment.setRoomNumber(TxtField__P1__2.getText());
+            newApartment.setArea(TxtField__P1__3.getText());
+            newApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
+            newApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
+            newApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
+
+            ApartmentBUS apartmentBUS = new ApartmentBUS();
+            apartmentBUS.add(newApartment);
+
+            apartmentObservableList.add(newApartment);
+            refreshFormApartment();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void xoaCanHo(ActionEvent event) {
+        Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
+        if (selectedApartment!=null){
+            ApartmentBUS apartmentBUS = new ApartmentBUS();
+            boolean deleteSuccess = apartmentBUS.delete(selectedApartment);
+            if (deleteSuccess) {
+                apartmentObservableList.remove(selectedApartment);
+                table__P1__1.refresh();
+                refreshFormApartment();
+            } else{
+                System.err.println("Không thể xóa căn hộ từ cơ sở dữ liệu.");
+            }
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
-
+            comboBox__P1__3.getItems().addAll("Cơ bản", "Tiện nghi", "Cao cấp");
+            comboBox__P1__3.setPromptText("");
+            initApartment();
             //Chạy page 0
             totalOfBuldings();
             updatePieChart();
