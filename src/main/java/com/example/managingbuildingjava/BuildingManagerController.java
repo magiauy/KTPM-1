@@ -1,9 +1,7 @@
 package com.example.managingbuildingjava;
 
-import BUS.BuildingBUS;
-import BUS.BuildingManagerBUS;
-import BUS.FinancialReportBUS;
-import BUS.MonthlyRentBillBUS;
+import BUS.*;
+import DTO.Apartment;
 import DTO.Building;
 import DTO.BuildingManager;
 import DTO.FinancialReport;
@@ -26,11 +24,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.sql.*;
+import java.util.Date;
 
 public class BuildingManagerController implements Initializable {
     private static BuildingManagerController instance;
@@ -49,29 +45,25 @@ public class BuildingManagerController implements Initializable {
     public String getID() {
         return ID;
     }
-
-    public TableView table__P3__2;
-    public TableView table__P3__1;
-
-
+    //
 
     public TextField TxtField__P1__search;
-    public ComboBox comboBox__P1__1;
     public Label txtField__P1__1;
     public TextField TxtField__P2__search;
     public TextField TxtField__P4__search;
     public Button bnt__P1__search;
     public TextField TxtField__P3__search;
+    @FXML
+    private Button bnt__P1__add;
+
     private volatile boolean stop = false;
     private volatile Thread thread;
     @FXML
     private BorderPane bp;
     @FXML
     private Pane mp;
-    @FXML
-    private TextField TxtField__P1__1;
-    @FXML
-    private Button bnt__P1__add;
+
+
 
     @FXML
     private void page0(MouseEvent event) {
@@ -189,9 +181,98 @@ public class BuildingManagerController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private TextField TxtField__P1__1 = new TextField();
+
+    @FXML
+    private TextField TxtField__P1__2 = new TextField();
+
+    @FXML
+    private TextField TxtField__P1__3 = new TextField();
+
+    @FXML
+    private TextField TxtField__P1__4 = new TextField();
+
+    @FXML
+    private TextField TxtField__P1__5 = new TextField();
+
+    @FXML
+    private Button bnt__P1__1;
+
+    @FXML
+    private Button bnt__P1__delete;
+
+    @FXML
+    private Button bnt__P1__update;
+
+    @FXML
+    private ComboBox<String> comboBox__P1__1 = new ComboBox<>();
+
+    @FXML
+    private ComboBox<String> comboBox__P1__2 = new ComboBox<>() ;
+
+    @FXML
+    private ComboBox<String> comboBox__P1__3 = new ComboBox<>();
+
+    @FXML
+    private TableColumn<Apartment, String> dienTichTable = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Apartment, String> maCanHoTable = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Apartment, String> maToaNhaTable = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Apartment, String> noiThatTable = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Apartment, Integer> soPhongNguTable = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Apartment, String> soPhongTable = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Apartment, Integer> soPhongTamTable = new TableColumn<>();
+
+    @FXML
+    private TableView<Apartment> table__P1__1 = new TableView<>();
+
+    private ObservableList<Apartment> apartmentObservableList;
+
+    public ObservableList<Apartment> getApartmentList(){
+        ObservableList<Apartment> apartmentObservableList = FXCollections.observableArrayList();
+        ApartmentBUS apartmentBUS = new ApartmentBUS();
+        List<Apartment> apartments = apartmentBUS.getAll();
+        apartmentObservableList.addAll(apartments);
+        return apartmentObservableList;
+    }
+
+    private void refreshFormApartment(){
+        TxtField__P1__1.setText("");
+        TxtField__P1__2.setText("");
+        TxtField__P1__3.setText("");
+        TxtField__P1__4.setText("");
+        TxtField__P1__5.setText("");
+        comboBox__P1__3.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    void showApartment(MouseEvent event) {
+        Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
+        TxtField__P1__1.setText(selectedApartment.getApartmentID());
+        TxtField__P1__2.setText(selectedApartment.getRoomNumber());
+        TxtField__P1__3.setText(selectedApartment.getArea());
+        TxtField__P1__4.setText(String.valueOf(selectedApartment.getBedrooms()));
+        TxtField__P1__5.setText(String.valueOf(selectedApartment.getBathrooms()));
+        comboBox__P1__3.setValue(selectedApartment.getFurniture());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
+
             //Chạy page 0
             totalOfBuldings();
             updatePieChart();
