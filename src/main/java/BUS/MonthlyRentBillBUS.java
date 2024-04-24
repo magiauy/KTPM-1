@@ -12,6 +12,11 @@ import java.util.Objects;
 
 public class MonthlyRentBillBUS {
     private ArrayList<MonthlyRentBill> monthlyRentBills = new ArrayList<>();
+
+    public static MonthlyRentBillBUS getInstance() {
+        return new MonthlyRentBillBUS();
+    }
+
     public MonthlyRentBillBUS() {
         this.monthlyRentBills = MonthlyRentBillDAO.getInstance().selectAll();
     }
@@ -43,6 +48,17 @@ public class MonthlyRentBillBUS {
         }
         return check;
     }
+
+    public ArrayList<MonthlyRentBill> getMonthlyRentBillsWithTenantId(String tenantId) {
+        ArrayList<MonthlyRentBill> monthlyRentBillsWithTenantID = new ArrayList<>();
+        for (MonthlyRentBill monthlyRentBill : monthlyRentBills) {
+            if (Objects.equals(monthlyRentBill.getTenantID(), tenantId)) {
+                monthlyRentBillsWithTenantID.add(monthlyRentBill);
+            }
+        }
+        return  monthlyRentBillsWithTenantID;
+    }
+
     public int getIndexByMonthlyRentBillID(String monthlyRentBillID) {
         for (int i = 0; i < this.monthlyRentBills.size(); i++) {
             if (this.monthlyRentBills.get(i).getMonthlyRentBillID() == monthlyRentBillID) {

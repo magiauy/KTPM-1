@@ -13,8 +13,8 @@ public class BuildingManager extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        BuildingManager.primaryStage = primaryStage;
         BuildingManagerController.getInstance().setID("BM1");
+        BuildingManager.primaryStage = primaryStage;
         openBuildingManagerView();
     }
 

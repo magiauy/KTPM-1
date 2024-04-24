@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.CustomerController">
           <children>
               <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
@@ -16,7 +16,7 @@
                               <Image url="@../../../Picture/search.png" />
                           </image>
                       </ImageView>
-            <Pane layoutX="414.0" layoutY="30.0" prefHeight="337.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <Pane layoutX="466.0" layoutY="30.0" prefHeight="337.0" prefWidth="368.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <children>
                           <Label layoutX="38.0" layoutY="153.0" prefHeight="32.0" prefWidth="120.0" text="Thời hạn " textFill="WHITE">
                               <font>
@@ -50,16 +50,19 @@
                   <Label layoutX="167.0" layoutY="270.0" prefHeight="35.0" prefWidth="222.0" text="Label" />
                </children>
             </Pane>
-                    <TableView fx:id="table__P3__2" layoutX="411.0" layoutY="405.0" prefHeight="292.0" prefWidth="399.0">
+                    <TableView fx:id="table__P3__2" layoutX="466.0" layoutY="403.0" prefHeight="292.0" prefWidth="368.0">
                         <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
                         </columns>
                     </TableView>
-            <TableView fx:id="table__P3__1" layoutX="28.0" layoutY="156.0" prefHeight="532.0" prefWidth="340.0">
+            <TableView fx:id="table__P3__1" layoutX="28.0" layoutY="156.0" prefHeight="532.0" prefWidth="399.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn fx:id="monthlyRentBillIdColumn" prefWidth="75.0" text="Mã Phiếu" />
+                  <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Ngày xuất" />
+                  <TableColumn fx:id="repaymentPeriodColumn" prefWidth="83.0" text="Thời gian trả " />
+                  <TableColumn fx:id="totalPaymentColumn" prefWidth="87.0" text="Số tiền (k)" />
+                  <TableColumn fx:id="statusColumn" prefWidth="78.0" text="Trạng thái" />
                </columns>
             </TableView>
             <Label alignment="CENTER" layoutX="91.0" layoutY="34.0" prefHeight="35.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175, 0.5);" text="Phiếu thu tiền tháng">

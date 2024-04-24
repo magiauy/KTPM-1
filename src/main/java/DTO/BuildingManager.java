@@ -149,5 +149,19 @@ public class BuildingManager {
                             && Double.doubleToLongBits(salary) == Double
                                             .doubleToLongBits(other.salary);
     }
-   
+
+    @Override
+    public String toString() {
+        return "BuildingManager{" +
+                "buildingManagerId='" + buildingManagerId + '\'' +
+                ", buildingId='" + buildingId + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dob=" + dob +
+                ", gender='" + gender + '\'' +
+                ", citizenIdentityCard='" + citizenIdentityCard + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }
