@@ -83,7 +83,7 @@
                             </ImageView>
                         </graphic>
             </Button>
-                    <TableView fx:id="table__P1__1" layoutX="497.0" layoutY="117.0" prefHeight="580.0" prefWidth="340.0" style="-fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+                    <TableView fx:id="table__view3" layoutX="497.0" layoutY="117.0" prefHeight="580.0" prefWidth="340.0" style="-fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                         <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
