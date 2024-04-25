@@ -675,6 +675,7 @@ public class BuildingManagerController implements Initializable {
     void xoaCuDan(ActionEvent event) {
         Cohabitant selectedCohatitant = table__P2_1__1.getSelectionModel().getSelectedItem();
         if (selectedCohatitant!=null){
+            System.out.println(selectedCohatitant);
             CohabitantBUS cohabitantBUS = new CohabitantBUS();
             boolean deleteSuccess = cohabitantBUS.delete(selectedCohatitant);
             if (deleteSuccess) {

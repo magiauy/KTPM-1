@@ -26,7 +26,7 @@ public class CohabitantBUS {
     }
 
     public boolean delete(Cohabitant cohabitant){
-        boolean check = CohabitantDAO.getInstance().delete(cohabitant.getTenantID())!=0;
+        boolean check = CohabitantDAO.getInstance().delete(cohabitant.getCohabitantID())!=0;
         if (check){
             this.listCohabitant.remove(cohabitant);
         }

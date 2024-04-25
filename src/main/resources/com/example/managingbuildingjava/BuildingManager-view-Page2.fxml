@@ -24,7 +24,7 @@
                             <children>
                                 <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                                     <children>
-                                        <TextField fx:id="TxtField__P2__search" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px;" />
+                                        <TextField fx:id="TxtField__P2__search" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px;" styleClass="black-text"/>
                                         <ComboBox fx:id="comboBox__P2__1" layoutX="623.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
                                         <ComboBox fx:id="comboBox__P2__2" layoutX="740.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
                                         <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="234.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
@@ -75,8 +75,8 @@
                                                         <Font name="System Bold" size="13.0" />
                                                     </font>
                                                 </Label>
-                                    <TextField fx:id="TxtField__P2__51" layoutX="141.0" layoutY="399.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                    <DatePicker fx:id="TxtField__P2__5" layoutX="145.0" layoutY="275.0" prefHeight="28.0" prefWidth="160.0" />
+                                    <TextField fx:id="TxtField__P2__51" layoutX="141.0" layoutY="399.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
+                                    <DatePicker fx:id="TxtField__P2__5" layoutX="145.0" layoutY="275.0" prefHeight="28.0" prefWidth="160.0"  style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
                                             </children>
                                         </Pane>
                                         <Button fx:id="bnt__P2__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="634.0" mnemonicParsing="false" onAction="#themKhachHang" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
@@ -134,7 +134,7 @@
                             <children>
                                 <Pane layoutY="-7.0" prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                                     <children>
-                                        <TextField fx:id="TxtField__P2_1__search" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px;" />
+                                        <TextField fx:id="TxtField__P2_1__search" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px;" styleClass="black-text"/>
                                         <ComboBox fx:id="comboBox__P2_1__1" layoutX="623.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
                                         <ComboBox fx:id="comboBox__P2_1__2" layoutX="740.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
                                         <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="234.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
@@ -191,7 +191,7 @@
                                                         <Font name="System Bold" size="13.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="TxtField__P2_1__51" layoutX="150.0" layoutY="441.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                                                <TextField fx:id="TxtField__P2_1__51" layoutX="150.0" layoutY="441.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
                                     <DatePicker fx:id="TxtField__P2_1__41" layoutX="151.0" layoutY="390.0" prefHeight="28.0" prefWidth="164.0" />
                                             </children>
                                         </Pane>
