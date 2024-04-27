@@ -23,7 +23,9 @@ import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 import java.sql.*;
 import java.util.Date;
@@ -287,13 +289,12 @@ public class BuildingManagerController implements Initializable {
         selectedApartment.setApartmentID(TxtField__P1__1.getText());
         selectedApartment.setBuildingID("B1");
         selectedApartment.setRoomNumber(TxtField__P1__2.getText());
-        selectedApartment.setArea(TxtField__P1__3.getText());
+        selectedApartment.setArea(TxtField__P1__3.getText() + "m\u00B2");
         selectedApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
         selectedApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
         selectedApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
         ApartmentBUS apartmentBUS = new ApartmentBUS();
         boolean updateSuccess = apartmentBUS.update(selectedApartment);
-        System.out.println(updateSuccess);
         if (updateSuccess) {
             int selectedIndex = table__P1__1.getSelectionModel().getSelectedIndex();
             apartmentObservableList.set(selectedIndex, selectedApartment);
@@ -316,10 +317,9 @@ public class BuildingManagerController implements Initializable {
                     newApartment.setBuildingID(buildingManager.getBuildingId());
                 }
             }
-
             newApartment.setApartmentID(TxtField__P1__1.getText());
             newApartment.setRoomNumber(TxtField__P1__2.getText());
-            newApartment.setArea(TxtField__P1__3.getText());
+            newApartment.setArea(TxtField__P1__3.getText() + "m\u00B2");
             newApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
             newApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
             newApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
@@ -613,7 +613,6 @@ public class BuildingManagerController implements Initializable {
         selectedTenant.setCitizenIdentityCard(TxtField__P2__51.getText());
         TenantBUS tenantBUS = new TenantBUS();
         boolean updateSuccess = tenantBUS.update(selectedTenant);
-        System.out.println(updateSuccess);
         if (updateSuccess) {
             int selectedIndex = table__P2__1.getSelectionModel().getSelectedIndex();
             tenantObservableList.set(selectedIndex, selectedTenant);
@@ -704,6 +703,185 @@ public class BuildingManagerController implements Initializable {
         }
     }
 
+    //
+
+    @FXML
+    private TableColumn<MonthlyRentBill, String> ColumnP3__1 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<MonthlyRentBill, String> ColumnP3__2 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<MonthlyRentBill, String> ColumnP3__3 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<MonthlyRentBill, String> ColumnP3__4 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<MonthlyRentBill, LocalDate> ColumnP3__5 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<MonthlyRentBill, Integer> ColumnP3__6 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<MonthlyRentBill, DecimalFormat> ColumnP3__7 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<MonthlyRentBill, String> ColumnP3__8 = new TableColumn<>();
+
+    @FXML
+    private TextField TxtField__P3__1 = new TextField();
+
+    @FXML
+    private TextField TxtField__P3__2 = new TextField();
+
+    @FXML
+    private TextField TxtField__P3__3 = new TextField();
+
+    @FXML
+    private TextField TxtField__P3__4 = new TextField();
+
+    @FXML
+    private TextField TxtField__P3__5 = new TextField();
+
+    @FXML
+    private TextField TxtField__P3__6 = new TextField();
+
+
+    @FXML
+    private Button bnt__P3__add;
+
+    @FXML
+    private Button bnt__P3__delete;
+
+    @FXML
+    private Button bnt__P3__update;
+
+    @FXML
+    private ComboBox<String> comboBox__P3__1 = new ComboBox<>();
+
+    @FXML
+    private ComboBox<String> comboBox__P3__2 = new ComboBox<>();
+
+    @FXML
+    private ComboBox<String> comboBox__P3__3 = new ComboBox<>();
+
+    @FXML
+    private DatePicker datePicker__P3 = new DatePicker();
+
+    @FXML
+    private TableView<MonthlyRentBill> table__P3__1 = new TableView<>();
+
+    private ObservableList<MonthlyRentBill> monthlyRentBillObservableList;
+
+    public ObservableList<MonthlyRentBill> getMonthlyRentBillObservableList(){
+        ObservableList<MonthlyRentBill> monthlyRentBillsObservableLists = FXCollections.observableArrayList();
+        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+        List<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getAll();
+        monthlyRentBillsObservableLists.addAll(monthlyRentBills);
+        return monthlyRentBillsObservableLists;
+    }
+
+    public void initMonthlyRentBill(){
+        ColumnP3__1.setCellValueFactory(new PropertyValueFactory<>("monthlyRentBillID"));
+        ColumnP3__2.setCellValueFactory(new PropertyValueFactory<>("apartmentID"));
+        ColumnP3__3.setCellValueFactory(new PropertyValueFactory<>("tenantID"));
+        ColumnP3__4.setCellValueFactory(new PropertyValueFactory<>("leaseAgreementID"));
+        ColumnP3__5.setCellValueFactory(new PropertyValueFactory<>("date"));
+        ColumnP3__6.setCellValueFactory(new PropertyValueFactory<>("repaymentPeriod"));
+        ColumnP3__7.setCellValueFactory(new PropertyValueFactory<>("totalPayment"));
+        ColumnP3__8.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        monthlyRentBillObservableList = getMonthlyRentBillObservableList();
+        table__P3__1.setItems(monthlyRentBillObservableList);
+    }
+
+    @FXML
+    void showMonthlyRentBill(MouseEvent event) {
+        MonthlyRentBill monthlyRentBill = table__P3__1.getSelectionModel().getSelectedItem();
+        TxtField__P3__1.setText(monthlyRentBill.getMonthlyRentBillID());
+        TxtField__P3__2.setText(monthlyRentBill.getApartmentID());
+        TxtField__P3__3.setText(monthlyRentBill.getTenantID());
+        TxtField__P3__4.setText(monthlyRentBill.getLeaseAgreementID());
+        datePicker__P3.setValue(monthlyRentBill.getDate());
+        TxtField__P3__5.setText(String.valueOf(monthlyRentBill.getRepaymentPeriod()));
+        TxtField__P3__6.setText(String.valueOf(monthlyRentBill.getTotalPayment()));
+        comboBox__P3__3.setValue(monthlyRentBill.getStatus());
+    }
+
+    public void refreshFormMonthlyRentBill(){
+        TxtField__P3__1.setText("");
+        TxtField__P3__2.setText("");
+        TxtField__P3__3.setText("");
+        TxtField__P3__4.setText("");
+        datePicker__P3.setValue(null);
+        TxtField__P3__5.setText("");
+        TxtField__P3__6.setText("");
+        comboBox__P3__3.getSelectionModel().clearSelection();
+    }
+    @FXML
+    void suaPhieuThu(ActionEvent event) {
+        MonthlyRentBill monthlyRentBill = table__P3__1.getSelectionModel().getSelectedItem();
+        monthlyRentBill.setMonthlyRentBillID(TxtField__P3__1.getText());
+        monthlyRentBill.setApartmentID(TxtField__P3__2.getText());
+        monthlyRentBill.setTenantID(TxtField__P3__3.getText());
+        monthlyRentBill.setLeaseAgreementID(TxtField__P3__4.getText());
+        monthlyRentBill.setDate(datePicker__P3.getValue());
+        monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
+        monthlyRentBill.setTotalPayment(Double.parseDouble(TxtField__P3__6.getText()));
+        monthlyRentBill.setStatus(comboBox__P3__3.getSelectionModel().getSelectedItem());
+        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+        boolean updateSuccess = monthlyRentBillBUS.update(monthlyRentBill);
+        if (updateSuccess) {
+            int selectedIndex = table__P3__1.getSelectionModel().getSelectedIndex();
+            monthlyRentBillObservableList.set(selectedIndex, monthlyRentBill);
+            table__P3__1.refresh();
+            refreshFormMonthlyRentBill();
+        } else {
+            System.err.println("Không thể cập nhật phiếu thu trong cơ sở dữ liệu.");
+        }
+    }
+
+    @FXML
+    void themPhieuThu(ActionEvent event) {
+        try{
+            MonthlyRentBill monthlyRentBill = new MonthlyRentBill();
+            monthlyRentBill.setMonthlyRentBillID(TxtField__P3__1.getText());
+            monthlyRentBill.setApartmentID(TxtField__P3__2.getText());
+            monthlyRentBill.setTenantID(TxtField__P3__3.getText());
+            monthlyRentBill.setLeaseAgreementID(TxtField__P3__4.getText());
+            monthlyRentBill.setDate(datePicker__P3.getValue());
+            monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
+            monthlyRentBill.setTotalPayment(Double.parseDouble(TxtField__P3__6.getText()));
+            monthlyRentBill.setStatus(comboBox__P3__3.getSelectionModel().getSelectedItem());
+
+            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+            monthlyRentBillBUS.add(monthlyRentBill);
+
+            monthlyRentBillObservableList.add(monthlyRentBill);
+            table__P3__1.setItems(monthlyRentBillObservableList);
+            refreshFormMonthlyRentBill();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void xoaPhieuThu(ActionEvent event) {
+        MonthlyRentBill monthlyRentBill = table__P3__1.getSelectionModel().getSelectedItem();
+        if (monthlyRentBill!=null){
+            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+            boolean deleteSuccess = monthlyRentBillBUS.delete(monthlyRentBill);
+            if (deleteSuccess) {
+                monthlyRentBillObservableList.remove(monthlyRentBill);
+                table__P3__1.refresh();
+                refreshFormMonthlyRentBill();
+            } else{
+                System.err.println("Không thể xóa phiếu thu từ cơ sở dữ liệu.");
+            }
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{
@@ -716,6 +894,10 @@ public class BuildingManagerController implements Initializable {
             initCohabitant();
             comboBox__P2_1__3.getItems().addAll("Nam", "Nữ");
             comboBox__P2_1__3.setPromptText("");
+
+            comboBox__P3__3.getItems().addAll("Đã trả", "Chưa trả", "Quá hạn");
+            comboBox__P3__3.setPromptText("");
+            initMonthlyRentBill();
             //Chạy page 0
             totalOfBuldings();
             updatePieChart();
