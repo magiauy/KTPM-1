@@ -19,7 +19,6 @@ public class BuildingManager {
     private String phoneNumber;
     private LocalDate dob;
     private String gender;
-
     private String citizenIdentityCard;
     private Float salary;
 

@@ -29,6 +29,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.lang.module.ModuleDescriptor.Exports;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -47,6 +48,7 @@ import DTO.BuildingManager;
 public class BossController implements Initializable {
 
     private static BossController instance;
+
     public static BossController getInstance() {
         if (instance == null) {
             instance = new BossController();
@@ -56,7 +58,7 @@ public class BossController implements Initializable {
 
     private static String ID;
 
-    public void setID (String ID){
+    public void setID(String ID) {
         BossController.ID = ID;
     }
 
@@ -70,8 +72,10 @@ public class BossController implements Initializable {
     private ObservableList<Building> buildingsList;
     private Building selectedBuildingToDelete;
     private DTO.BuildingManager selectedBuildingToDelete1;
+    private FinancialReport selecFinancialReport;
     private ObservableList<DTO.BuildingManager> buildingManagersList;
     private ObservableList<BuildingManager> buildingManagerList;
+    private ObservableList<FinancialReport> financialReportsList;
 
     public String getBuildingId() {
         return buildingId;
@@ -216,18 +220,58 @@ public class BossController implements Initializable {
     private Label time, numberOfBuildings, monthlyRevenueLabel;
     @FXML
     private PieChart pieChart;
-  
+
     @FXML
     private PieChart numberOfStatusLabel;
     @FXML
     private BarChart barChartOfMonthlyOpex;
     private BarChart<String, Number> barChart;
+
+    // Page 3
+
+    @FXML
+    private TableView<FinancialReport> table__view3;
+    @FXML
+    private TableColumn<FinancialReport, String> maBaoCaoColumn;
+    @FXML
+    private TableColumn<FinancialReport, String> maQuanLiColumn;
+    @FXML
+    private TableColumn<FinancialReport, String> maToaNha1Column;
+    @FXML
+    private TableColumn<FinancialReport, Date> ngayColumn;
+    @FXML
+    private TableColumn<FinancialReport, Float> doanhThuColumn;
+    @FXML
+    private TableColumn<FinancialReport, Float> monthlyOpexColumn;
+    @FXML
+    private TableColumn<FinancialReport, Float> loiNhuanColumn;
+
+    @FXML
+    private TextField TxtField__r1;
+    @FXML
+    private TextField TxtField__r2;
+    @FXML
+    private TextField TxtField__r3;
+    @FXML
+    private TextField TxtField__r4;
+    @FXML
+    private TextField TxtField__r5;
+    @FXML
+    private TextField TxtField__r6;
+    @FXML
+    private DatePicker Date_page3;
+    @FXML
+    private DatePicker date1;
+    @FXML
+    private DatePicker date2;
+
     private void loadPage(String page) throws IOException {
         stop = true;
         Parent root = null;
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
         bp.setCenter(root);
     }
+
     @FXML
     void Close_Clicked(MouseEvent event) {
         stop = true;
@@ -245,8 +289,6 @@ public class BossController implements Initializable {
             e.printStackTrace();
         }
     }
-
-  
 
     private void TimeNow() {
         thread = new Thread(() -> {
@@ -266,6 +308,7 @@ public class BossController implements Initializable {
         });
         thread.start();
     }
+
     public void updateMonthlyRevenueLabel() {
         if (monthlyRevenueLabel == null) {
             return;
@@ -273,11 +316,11 @@ public class BossController implements Initializable {
         try {
             FinancialReportBUS.getInstance().setMonthlyRevenueLabel(monthlyRevenueLabel);
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     private void updateNumberOfStatus() {
         if (numberOfStatusLabel == null) {
             return;
@@ -290,6 +333,7 @@ public class BossController implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void drawLineChartOfMonthlyOpex() {
         if (barChartOfMonthlyOpex == null) {
             return;
@@ -308,12 +352,12 @@ public class BossController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buildingsList = FXCollections.observableArrayList();
         buildingManagersList = FXCollections.observableArrayList();
-        //Loading Page 0 From Nam
+        financialReportsList = FXCollections.observableArrayList();
+        // Loading Page 0 From Nam
         updateMonthlyRevenueLabel();
         updateNumberOfStatus();
         drawLineChartOfMonthlyOpex();
-      
-    
+
         loadBuildingManagers();
         loadBuilding();
         loadDinancialReport();
@@ -321,7 +365,6 @@ public class BossController implements Initializable {
         showcomboboxBuildingManager();
         showcombobox();
         keyenter();
-       
 
     }
 
@@ -397,30 +440,37 @@ public class BossController implements Initializable {
             dobColumn.setCellValueFactory(new PropertyValueFactory<>("dob"));
             genderColumn.setCellValueFactory(new PropertyValueFactory<>("gender"));
             citizenIdentityCardColumn.setCellValueFactory(new PropertyValueFactory<>("citizenIdentityCard"));
-          
+
             salaryColumn.setCellValueFactory(new PropertyValueFactory<>("salary"));
             table__view2.setItems(building);
-            for (DTO.BuildingManager manager : buildingManagers) {
-                System.out.println("Building Manager ID: " + manager.getBuildingManagerId());
-                System.out.println("Building ID: " + manager.getBuildingId());
-                System.out.println("Last Name: " + manager.getLastName());
-                System.out.println("First Name: " + manager.getFirstName());
-                System.out.println("Phone Number: " + manager.getPhoneNumber());
-                System.out.println("DOB: " + manager.getDob());
-                System.out.println("Gender: " + manager.getGender());
-                System.out.println("Citizen Identity Card: " + manager.getCitizenIdentityCard());
-                System.out.println("Salary: " + manager.getSalary());
-                System.out.println("-------------------------");
-            }
             handbuildingmanager();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void loadDinancialReport(){
+    public void loadDinancialReport() {
+        try {
+            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+            ArrayList<FinancialReport> FinancialReport = financialReportBUS.getAll();
+            financialReportsList.addAll(FinancialReport);
+            ObservableList<FinancialReport> financia = FXCollections.observableArrayList(financialReportsList);
+            maBaoCaoColumn.setCellValueFactory(new PropertyValueFactory<>("financialReportID"));
+            maQuanLiColumn.setCellValueFactory(new PropertyValueFactory<>("buildingManagerID"));
+            maToaNha1Column.setCellValueFactory(new PropertyValueFactory<>("buildingID"));
+            ngayColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+            doanhThuColumn.setCellValueFactory(new PropertyValueFactory<>("monthlyRevenue"));
+            monthlyOpexColumn.setCellValueFactory(new PropertyValueFactory<>("monthlyOpex"));
+            loiNhuanColumn.setCellValueFactory(new PropertyValueFactory<>("monthlyProfit"));
+            table__view3.setItems(financia);
+            handleFianceRerport();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
 
     }
+
     public void handleBuilding() {
         table__view.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
@@ -471,6 +521,39 @@ public class BossController implements Initializable {
         });
     }
 
+    public void handleFianceRerport() {
+        table__view3.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                FinancialReport selectedRow = table__view3.getSelectionModel().getSelectedItem();
+                if (selectedRow != null) {
+
+                    TxtField__r1.setText(selectedRow.getFinancialReportID());
+                    TxtField__r2.setText(selectedRow.getBuildingID());
+                    TxtField__r4.setText(selectedRow.getBuildingManagerID());
+
+                    double opex = selectedRow.getMonthlyOpex();
+                    DecimalFormat df = new DecimalFormat("#,##0.00");
+                    String formattedSalary = df.format(opex);
+                    TxtField__r3.setText(formattedSalary);
+
+                    double Revenue = selectedRow.getMonthlyRevenue();
+                    DecimalFormat df1 = new DecimalFormat("#,##0.00");
+                    String formattedSalary1 = df1.format(Revenue);
+                    TxtField__r5.setText(formattedSalary1);
+
+                    double Profit = selectedRow.getMonthlyProfit();
+                    DecimalFormat df2 = new DecimalFormat("#,##0.00");
+                    String formattedSalary2 = df2.format(Profit);
+                    TxtField__r6.setText(formattedSalary2);
+
+                    Date_page3.setValue(selectedRow.getDate());
+                    selecFinancialReport = selectedRow;
+
+                }
+            }
+        });
+    }
+
     private void showAlert(String title, String message, AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -493,6 +576,7 @@ public class BossController implements Initializable {
         }
     }
 
+    // =======Building======
     public void handleaddBuilding() {
         try {
             String buildingId = TxtField__P1__1.getText();
@@ -600,6 +684,7 @@ public class BossController implements Initializable {
         }
     }
 
+    /////// BuildingManeger///====================
     public void handleAddpage2() {
         String buildingManagerId = TxtField__b1.getText();
         String buildingId = TxtField__b2.getText();
@@ -700,7 +785,7 @@ public class BossController implements Initializable {
         String phoneNumber = TxtField__b5.getText();
         LocalDate dob = datePickerDOB.getValue();
         String gender = fruitCombo.getValue();
-  
+
         String citizenIdentityCard = TxtField__b6.getText();
         Float salary = Float.parseFloat(TxtField__b7.getText().replaceAll(",", ""));
         BuildingManager buildingManager = new BuildingManager();
@@ -713,7 +798,7 @@ public class BossController implements Initializable {
         buildingManager.setGender(gender);
         buildingManager.setCitizenIdentityCard(citizenIdentityCard);
         buildingManager.setSalary(salary);
-
+System.out.println(salary);
         BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
         boolean check = buildingManagerBUS.update(buildingManager);
         if (check) {
@@ -758,11 +843,11 @@ public class BossController implements Initializable {
         buildingManagersList.clear();
         BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
         ArrayList<BuildingManager> buildingManagers = buildingManagerBUS.getAll();
-        boolean found = false; 
+        boolean found = false;
         for (BuildingManager manager : buildingManagers) {
             if (manager.getFirstName().equals(name)) {
                 buildingManagersList.add(manager);
-                found = true; 
+                found = true;
             }
         }
         if (!found) {
@@ -773,5 +858,127 @@ public class BossController implements Initializable {
                 .observableArrayList(buildingManagersList);
         table__view2.setItems(observableBuildingList);
     }
-    
+
+    /// ReanialReport///////==========
+
+    public void handleAddReport() {
+        String financialReportID = TxtField__r1.getText();
+        String buildingID = TxtField__r2.getText();
+        String buildingManagerID = TxtField__r4.getText();
+        LocalDate date = Date_page3.getValue();
+
+        Float monthlyRevenue;
+        Float monthlyOpex;
+        Float monthlyProfit;
+        monthlyRevenue = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
+        monthlyOpex = Float.parseFloat(TxtField__r5.getText().replaceAll(",", ""));
+        monthlyProfit = Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
+
+        FinancialReport newFinancialReport = new FinancialReport();
+        newFinancialReport.setFinancialReportID(financialReportID);
+        newFinancialReport.setBuildingID(buildingID);
+        newFinancialReport.setBuildingManagerID(buildingManagerID);
+        newFinancialReport.setDate(date);
+        newFinancialReport.setMonthlyRevenue(monthlyRevenue);
+        newFinancialReport.setMonthlyOpex(monthlyOpex);
+        newFinancialReport.setMonthlyProfit(monthlyProfit);
+        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+        boolean check = financialReportBUS.add(newFinancialReport);
+        if (check) {
+            showAlert("Thành Công", "Đã Thêm Thành Công", AlertType.CONFIRMATION);
+            updateFianReport();
+            clearFildReport();
+        } else {
+            showAlert("Thất Bai", "Thêm Thất Bại", AlertType.ERROR);
+        }
+
+    }
+
+    public void updateFianReport() {
+        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+
+        financialReportsList.clear();
+        ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
+        financialReportsList.addAll(financialReports);
+        ObservableList<FinancialReport> financialReports2 = FXCollections.observableArrayList(
+                financialReportsList);
+        table__view3.setItems(financialReports2);
+    }
+
+    public void handleDeleReport() {
+        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+        boolean check = financialReportBUS.delete(selecFinancialReport);
+        if (check) {
+            showAlert("Thành Công", "Xoa Thành Công", AlertType.CONFIRMATION);
+            updateFianReport();
+            clearFildReport();
+        } else {
+            showAlert("Thất Bai", "Xoa Thất Bại", AlertType.ERROR);
+        }
+    }
+
+    public void handEditReport() {
+        String financialReportID = TxtField__r1.getText();
+        String buildingID = TxtField__r2.getText();
+        String buildingManagerID = TxtField__r4.getText();
+        LocalDate date = Date_page3.getValue();
+        Float monthlyRevenue= Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
+        Float monthlyOpex= Float.parseFloat(TxtField__r5.getText().replaceAll(",", ""));
+        Float monthlyProfit= Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
+       
+        System.out.println(
+                financialReportID + ", " + buildingID + ", " + buildingManagerID + ", " + date + ", " + monthlyOpex);
+
+   
+        FinancialReport newFinancialReport = new FinancialReport();
+        newFinancialReport.setFinancialReportID(financialReportID);
+        newFinancialReport.setBuildingID(buildingID);
+        newFinancialReport.setBuildingManagerID(buildingManagerID);
+        newFinancialReport.setDate(date);
+        newFinancialReport.setMonthlyRevenue(monthlyRevenue);
+        newFinancialReport.setMonthlyOpex(monthlyOpex);
+        newFinancialReport.setMonthlyProfit(monthlyProfit);
+        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+        boolean check = financialReportBUS.update(newFinancialReport);
+        if (check) {
+            showAlert("Thành Công", "Sửa Thêm Thành Công", AlertType.CONFIRMATION);
+            updateFianReport();
+            clearFildReport();
+        } else {
+            showAlert("Thất Bai", "Sửa Thất Bại", AlertType.ERROR);
+        }
+
+    }
+
+    private void clearFildReport() {
+        TxtField__r1.clear();
+        TxtField__r2.clear();
+        TxtField__r3.clear();
+        TxtField__r4.clear();
+        TxtField__r5.clear();
+        TxtField__r6.clear();
+        TxtField__b7.clear();
+        Date_page3.setValue(null);
+
+    }
+
+    public void searchDaypage3() {
+        LocalDate dateFirst = date1.getValue();
+        LocalDate dateLast = date2.getValue();
+        System.out.println(dateFirst);
+        financialReportsList.clear();
+        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+        ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
+        for (FinancialReport manager : financialReports) {
+            LocalDate managerDate = manager.getDate(); 
+            if (!managerDate.isBefore(dateFirst) && !managerDate.isAfter(dateLast)) {
+
+                financialReportsList.add(manager);
+            }
+        }
+        ObservableList<FinancialReport> observableBuildingList = FXCollections
+                .observableArrayList(financialReportsList);
+        table__view3.setItems(observableBuildingList);
+    }
+
 }

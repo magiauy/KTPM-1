@@ -1,6 +1,7 @@
 package DTO;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,10 +9,10 @@ public class FinancialReport {
     private String financialReportID;
     private String buildingID;
     private String buildingManagerID;
-    private Date date;
-    private double monthlyRevenue;
-    private double monthlyOpex;
-    private double monthlyProfit;
+    private LocalDate date;
+    private Float monthlyRevenue;
+    private Float monthlyOpex;
+    private Float monthlyProfit;
 
     public FinancialReport(FinancialReport financialReport){
         financialReport.date = date;
@@ -26,7 +27,7 @@ public class FinancialReport {
     public FinancialReport(){
     }
     public FinancialReport(String financialReportID, String buildingID, String buildingManagerID,
-                           Date date, double monthlyRevenue, double monthlyOpex, double monthlyProfit) {
+                           LocalDate date, Float monthlyRevenue, Float monthlyOpex, Float monthlyProfit) {
         this.financialReportID = financialReportID;
         this.buildingID = buildingID;
         this.buildingManagerID = buildingManagerID;
@@ -53,28 +54,28 @@ public class FinancialReport {
     public void setBuildingManagerID(String buildingManagerID) {
         this.buildingManagerID = buildingManagerID;
     }
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
-    public double getMonthlyRevenue() {
+    public Float getMonthlyRevenue() {
         return monthlyRevenue;
     }
-    public void setMonthlyRevenue(double monthlyRevenue) {
+    public void setMonthlyRevenue(Float monthlyRevenue) {
         this.monthlyRevenue = monthlyRevenue;
     }
-    public double getMonthlyOpex() {
+    public Float getMonthlyOpex() {
         return monthlyOpex;
     }
-    public void setMonthlyOpex(double monthlyOpex) {
+    public void setMonthlyOpex(Float monthlyOpex) {
         this.monthlyOpex = monthlyOpex;
     }
-    public double getMonthlyProfit() {
+    public Float getMonthlyProfit() {
         return monthlyProfit;
     }
-    public void setMonthlyProfit(double monthlyProfit) {
+    public void setMonthlyProfit(Float monthlyProfit) {
         this.monthlyProfit = monthlyProfit;
     }
     @Override
