@@ -26,13 +26,13 @@ public class CohabitantDAO implements DAOInterface<Cohabitant>{
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO Cohabitant (cohabitantID, tenantID, lastName, firstName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Cohabitant (cohabitantID, tenantID, firstName, lastName, phoneNumber, dob, gender, citizenIdentityCard) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL
             preparedStatement.setString(1, t.getCohabitantID());
             preparedStatement.setString(2, t.getTenantID());
-            preparedStatement.setString(3, t.getLastName());
-            preparedStatement.setString(4, t.getFirstName());
+            preparedStatement.setString(3, t.getFirstName());
+            preparedStatement.setString(4, t.getLastName());
             preparedStatement.setString(5, t.getPhoneNumber());
             preparedStatement.setDate(6, Date.valueOf(t.getDateOfBirthDay()));
             preparedStatement.setString(7, t.getGender());
@@ -55,12 +55,12 @@ public class CohabitantDAO implements DAOInterface<Cohabitant>{
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE Cohabitant SET tenantID = ?, lastName = ?, firstName = ?, phoneNumber = ?, dateOfBirthDay = ?, gender = ?, citizenIdentityCard = ? WHERE cohabitantID = ?");
+                    "UPDATE Cohabitant SET tenantID = ?, firstName = ?, lastName = ?, phoneNumber = ?, dob = ?, gender = ?, citizenIdentityCard = ? WHERE cohabitantID = ?");
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL
             preparedStatement.setString(1, t.getTenantID());
-            preparedStatement.setString(2, t.getLastName());
-            preparedStatement.setString(3, t.getFirstName());
+            preparedStatement.setString(2, t.getFirstName());
+            preparedStatement.setString(3, t.getLastName());
             preparedStatement.setString(4, t.getPhoneNumber());
             preparedStatement.setDate(5, Date.valueOf(t.getDateOfBirthDay()));
             preparedStatement.setString(6, t.getGender());
@@ -147,11 +147,11 @@ public class CohabitantDAO implements DAOInterface<Cohabitant>{
         String lastName = resultSet.getString("lastName");
         String firstName = resultSet.getString("firstName");
         String phoneNumber = resultSet.getString("phoneNumber");
-        LocalDate dateOfBirthDay = resultSet.getDate("dateOfBirthDay").toLocalDate();
+        LocalDate dateOfBirthDay = resultSet.getDate("dob").toLocalDate();
         String gender = resultSet.getString("gender");
         String citizenIdentityCard = resultSet.getString("citizenIdentityCard");
 
-        return new Cohabitant(cohabitantID, tenantID, lastName, firstName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard);
+        return new Cohabitant(cohabitantID, tenantID, firstName, lastName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard);
     }
 
     

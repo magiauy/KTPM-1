@@ -82,7 +82,7 @@ CREATE TABLE LeaseAgreement (
                                 monthlyRent DECIMAL(20, 2),
                                 FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID),
                                 FOREIGN KEY (buildingManagerID) REFERENCES BuildingManager(buildingManagerID),
-                                FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID)
+                                FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID),
 );
 
 CREATE TABLE Furniture (
@@ -98,12 +98,14 @@ CREATE TABLE MonthlyRentBill (
                                  monthlyRentBillID VARCHAR(20) PRIMARY KEY,
                                  apartmentID VARCHAR(20),
                                  tenantID VARCHAR(20),
+                                 leaseAgreementID VARCHAR(20),
                                  date DATE,
                                  repaymentPeriod INT,
                                  totalPayment DECIMAL(20, 2),
                                  status NVARCHAR(255),
                                  FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID),
-                                 FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
+                                 FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID),
+                                 FOREIGN KEY (leaseAgreementID) REFERENCES LeaseAgreement(leaseAgreementID),
 );
 
 CREATE TABLE ServiceUsage (
@@ -115,7 +117,7 @@ CREATE TABLE ServiceUsage (
                               totalAmount DECIMAL(20, 2),
                               Date DATE,
                               note TEXT,
-                             
+);
 
 CREATE TABLE ServiceTicket (
                                serviceID VARCHAR(20),
@@ -134,7 +136,7 @@ CREATE TABLE Violation (
                            name NVARCHAR(255),
                            totalAmount DECIMAL(20, 2),
                            note TEXT,
-                           
+
 );
 
 CREATE TABLE ViolationTicket (
@@ -222,14 +224,13 @@ VALUES
     ('FURN4', 'APT3', N'Kệ sách', N'Cũ', 80.00),
     ('FURN5', 'APT3', N'Bàn làm việc', N'Mới', 200.00);
 -- Dữ liệu cho bảng MonthlyRentBill
-INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status)
+INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, leaseAgreementID, date, repaymentPeriod, totalPayment, status)
 VALUES
-    ('MRB1', 'APT1', 'T1', '2024-03-01', 5, '1200', N'Unpaid'),
-    ('MRB2', 'APT2', 'T2', '2024-04-13', 5, '1500', N'Unpaid'),
-    ('MRB3', 'APT3', 'T3', '2024-01-16', 5, '1800', N'Paid'),
-    ('MRB4', 'APT4', 'T4', '2024-11-24', 5, '2000', N'Overdue'),
-    ('MRB5', 'APT5', 'T5', '2024-12-21', 5, '1400', N'Overdue');
-
+    ('MRB1', 'APT1', 'T1', 'LA1', '2024-03-01', 5, '1200', N'Unpaid'),
+    ('MRB2', 'APT2', 'T2', 'LA2', '2024-04-13', 5, '1500', N'Unpaid'),
+    ('MRB3', 'APT3', 'T3', 'LA3', '2024-01-16', 5, '1800', N'Paid'),
+    ('MRB4', 'APT4', 'T4', 'LA4', '2024-11-24', 5, '2000', N'Overdue'),
+    ('MRB5', 'APT5', 'T5', 'LA5', '2024-12-21', 5, '1400', N'Overdue');
 -- Dữ liệu cho bảng ServiceUsage
 INSERT INTO ServiceUsage (serviceID, name, quantity, pricePerUnit, unit, totalAmount, Date, note)
 VALUES
@@ -263,25 +264,25 @@ VALUES
     ('V4', 'MRB4', N'Vi phạm an ninh', 200.00, '2024-04-20', N'Cảnh báo vi phạm an ninh'),
     ('V5', 'MRB5', N'Quá hạn thanh toán', 100.00, '2024-04-25', N'Phạt quá hạn 5%');
 
-INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status)
+INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, leaseAgreementID, date, repaymentPeriod, totalPayment, status)
 VALUES
-    ('MRB6', 'APT1', 'T1', '2024-05-05', 5, '1600', N'Overdue'),
-    ('MRB7', 'APT1', 'T1', '2024-06-10', 5, '1800', N'Paid'),
-    ('MRB8', 'APT1', 'T1', '2024-07-15', 5, '2000', N'Unpaid'),
-    ('MRB9', 'APT1', 'T1', '2024-08-20', 5, '2200', N'Overdue'),
-    ('MRB10', 'APT1', 'T1', '2024-09-25', 5, '2400', N'Paid'),
-    ('MRB11', 'APT1', 'T1', '2024-10-30', 5, '2600', N'Unpaid'),
-    ('MRB12', 'APT1', 'T1', '2024-11-04', 5, '2800', N'Overdue'),
-    ('MRB13', 'APT1', 'T1', '2024-12-09', 5, '3000', N'Paid'),
-    ('MRB14', 'APT1', 'T1', '2025-01-14', 5, '3200', N'Unpaid'),
-    ('MRB15', 'APT1', 'T1', '2025-02-19', 5, '3400', N'Overdue'),
-    ('MRB16', 'APT1', 'T1', '2025-03-25', 5, '3600', N'Paid'),
-    ('MRB17', 'APT1', 'T1', '2025-04-30', 5, '3800', N'Unpaid'),
-    ('MRB18', 'APT1', 'T1', '2025-05-05', 5, '4000', N'Overdue'),
-    ('MRB19', 'APT1', 'T1', '2025-06-10', 5, '4200', N'Paid'),
-    ('MRB20', 'APT1', 'T1', '2025-07-15', 5, '4400', N'Unpaid'),
-    ('MRB21', 'APT1', 'T1', '2025-08-20', 5, '4600', N'Overdue'),
-    ('MRB22', 'APT1', 'T1', '2025-09-25', 5, '4800', N'Paid'),
-    ('MRB23', 'APT1', 'T1', '2025-10-30', 5, '5000', N'Unpaid'),
-    ('MRB24', 'APT1', 'T1', '2025-11-04', 5, '5200', N'Overdue'),
-    ('MRB25', 'APT1', 'T1', '2025-12-09', 5, '5400', N'Paid');
+    ('MRB6', 'APT1', 'T1', 'LA1', '2024-05-05', 5, '1600', N'Overdue'),
+    ('MRB7', 'APT1', 'T1', 'LA1', '2024-06-10', 5, '1800', N'Paid'),
+    ('MRB8', 'APT1', 'T1', 'LA1', '2024-07-15', 5, '2000', N'Unpaid'),
+    ('MRB9', 'APT1', 'T1', 'LA1', '2024-08-20', 5, '2200', N'Overdue'),
+    ('MRB10', 'APT1', 'T1', 'LA1', '2024-09-25', 5, '2400', N'Paid'),
+    ('MRB11', 'APT1', 'T1', 'LA1', '2024-10-30', 5, '2600', N'Unpaid'),
+    ('MRB12', 'APT1', 'T1', 'LA1', '2024-11-04', 5, '2800', N'Overdue'),
+    ('MRB13', 'APT1', 'T1', 'LA1', '2024-12-09', 5, '3000', N'Paid'),
+    ('MRB14', 'APT1', 'T1', 'LA1', '2025-01-14', 5, '3200', N'Unpaid'),
+    ('MRB15', 'APT1', 'T1', 'LA1', '2025-02-19', 5, '3400', N'Overdue'),
+    ('MRB16', 'APT1', 'T1', 'LA1', '2025-03-25', 5, '3600', N'Paid'),
+    ('MRB17', 'APT1', 'T1', 'LA1', '2025-04-30', 5, '3800', N'Unpaid'),
+    ('MRB18', 'APT1', 'T1', 'LA1', '2025-05-05', 5, '4000', N'Overdue'),
+    ('MRB19', 'APT1', 'T1', 'LA1', '2025-06-10', 5, '4200', N'Paid'),
+    ('MRB20', 'APT1', 'T1', 'LA1', '2025-07-15', 5, '4400', N'Unpaid'),
+    ('MRB21', 'APT1', 'T1', 'LA1', '2025-08-20', 5, '4600', N'Overdue'),
+    ('MRB22', 'APT1', 'T1', 'LA1', '2025-09-25', 5, '4800', N'Paid'),
+    ('MRB23', 'APT1', 'T1', 'LA1', '2025-10-30', 5, '5000', N'Unpaid'),
+    ('MRB24', 'APT1', 'T1', 'LA1', '2025-11-04', 5, '5200', N'Overdue'),
+    ('MRB25', 'APT1', 'T1', 'LA1', '2025-12-09', 5, '5400', N'Paid');
