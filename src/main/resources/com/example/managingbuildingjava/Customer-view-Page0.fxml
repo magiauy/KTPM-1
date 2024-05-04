@@ -61,15 +61,26 @@
                </font></Label>
             <Pane layoutX="45.0" layoutY="431.0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <children>
-                  <Label alignment="CENTER" layoutX="33.0" layoutY="8.0" prefHeight="30.0" prefWidth="170.0" text="Hóa đơn tháng hiện tại" textAlignment="CENTER" textFill="WHITE" />
-                  <Label fx:id="monthlyBillLabel" alignment="CENTER" layoutX="7.0" layoutY="23.0" prefHeight="241.0" prefWidth="221.0" text=" " textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="33.0" layoutY="8.0" prefHeight="30.0" prefWidth="170.0" text="Hóa đơn tháng hiện tại" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label fx:id="monthlyBillLabel" alignment="CENTER" layoutX="14.0" layoutY="38.0" prefHeight="104.0" prefWidth="208.0" text=" " textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="30.0" />
                      </font></Label>
+                  <Label fx:id="statusOfMonthlyBills" alignment="CENTER" layoutX="14.0" layoutY="151.0" prefHeight="104.0" prefWidth="208.0" text=" " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
                </children></Pane>
             <Pane layoutX="370.0" layoutY="97.0" opacity="0.8" prefHeight="320.0" prefWidth="460.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <children>
-                  <Label alignment="CENTER" layoutX="88.0" layoutY="2.0" prefHeight="35.0" prefWidth="284.0" text="Phí vận hành tháng (triệu)" textAlignment="CENTER" textFill="WHITE" />
+                  <Label alignment="CENTER" layoutX="88.0" layoutY="2.0" prefHeight="35.0" prefWidth="284.0" text="Phí vận hành tháng (triệu)" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <BarChart fx:id="barChartOfMonthlyOpex" layoutX="20.0" layoutY="37.0" prefHeight="250.0" prefWidth="421.0">
                     <xAxis>
                       <CategoryAxis label="Tháng" prefHeight="37.0" prefWidth="344.0" side="BOTTOM" />
@@ -81,50 +92,38 @@
                </children></Pane>
             <Pane layoutX="303.0" layoutY="433.0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <children>
-                  <Label alignment="CENTER" layoutX="33.0" layoutY="7.0" prefHeight="30.0" prefWidth="170.0" styleClass="\\]" text="Tổng quát những hóa đơn" textAlignment="CENTER" textFill="WHITE" />
+                  <Label alignment="CENTER" layoutX="33.0" layoutY="7.0" prefHeight="30.0" prefWidth="170.0" styleClass="\\]" text="Tổng quát những hóa đơn" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <PieChart fx:id="numberOfStatusLabel" layoutX="-4.0" layoutY="22.0" prefHeight="248.0" prefWidth="244.0" />
                </children></Pane>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="460.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Sơ lược thông tin" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="592.0" layoutY="440.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Sơ lược thông tin" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="lastname" alignment="CENTER" contentDisplay="CENTER" layoutX="539.0" layoutY="514.0" prefHeight="25.0" prefWidth="150.0" text="Họ: Phạm Văn" textFill="WHITE">
+            <Label fx:id="fullname" contentDisplay="CENTER" layoutX="565.0" layoutY="479.0" prefHeight="25.0" prefWidth="285.0" text="Họ &amp; Tên: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="firstname" alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="514.0" prefHeight="25.0" prefWidth="150.0" text="Tên: Nam" textFill="WHITE">
+            <Label fx:id="phone" contentDisplay="CENTER" layoutX="565.0" layoutY="513.0" prefHeight="25.0" prefWidth="221.0" text="SĐT: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="phone" alignment="CENTER" contentDisplay="CENTER" layoutX="539.0" layoutY="554.0" prefHeight="25.0" prefWidth="150.0" text="SĐT: 0777777878" textFill="WHITE">
+            <Label fx:id="dob" contentDisplay="CENTER" layoutX="565.0" layoutY="551.0" prefHeight="25.0" prefWidth="150.0" text="Dob: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="dob" alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="554.0" prefHeight="25.0" prefWidth="150.0" text="Dob: 29/2/2004" textFill="WHITE">
+            <Label fx:id="gender" contentDisplay="CENTER" layoutX="565.0" layoutY="591.0" prefHeight="25.0" prefWidth="150.0" text="Giới tính: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="gender" alignment="CENTER" contentDisplay="CENTER" layoutX="539.0" layoutY="598.0" prefHeight="25.0" prefWidth="150.0" text="Giới tính: Nam" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="tenantID" alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="598.0" prefHeight="25.0" prefWidth="150.0" text="ID: QL000" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" layoutX="539.0" layoutY="637.0" prefHeight="25.0" prefWidth="150.0" text="Lương: 128.67 (triệu)" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="CCCD" alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="637.0" prefHeight="25.0" prefWidth="150.0" text="CCCD: 0878987908" textFill="WHITE">
+            <Label fx:id="CCCD" contentDisplay="CENTER" layoutX="565.0" layoutY="634.0" prefHeight="25.0" prefWidth="255.0" text="CCCD: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -136,8 +135,14 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="65.0" layoutY="25.0" prefHeight="30.0" prefWidth="170.0" text="24/ 03/ 2024" textAlignment="CENTER" textFill="WHITE" />
-                  <Label alignment="CENTER" layoutX="47.0" layoutY="252.0" prefHeight="35.0" prefWidth="206.0" text="TP.HCM" textAlignment="CENTER" textFill="WHITE" />
+                  <Label alignment="CENTER" layoutX="65.0" layoutY="25.0" prefHeight="30.0" prefWidth="170.0" text="24/ 03/ 2024" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label alignment="CENTER" layoutX="47.0" layoutY="252.0" prefHeight="35.0" prefWidth="206.0" text="TP.HCM" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                </children>
             </Pane>
          </children>

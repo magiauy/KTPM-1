@@ -13,7 +13,7 @@ public class Customer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        CustomerController.getInstance().setID("T1");
+        CustomerController.getInstance().setID(CustomerController.getInstance().getID());
         Customer.primaryStage = primaryStage;
         openCustomerView();
     }

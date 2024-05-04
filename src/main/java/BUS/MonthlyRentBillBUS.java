@@ -1,4 +1,6 @@
 package BUS;
+import com.example.managingbuildingjava.Customer;
+import javafx.scene.paint.Color;
 
 import DAO.MonthlyRentBillDAO;
 import DTO.FinancialReport;
@@ -6,15 +8,24 @@ import DTO.MonthlyRentBill;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
+import java.awt.*;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class MonthlyRentBillBUS {
     private ArrayList<MonthlyRentBill> monthlyRentBills = new ArrayList<>();
 
+    private static MonthlyRentBillBUS instance;
     public static MonthlyRentBillBUS getInstance() {
-        return new MonthlyRentBillBUS();
+        if (instance == null) {
+            instance = new MonthlyRentBillBUS();
+        }
+        return instance;
     }
 
 
@@ -59,6 +70,7 @@ public class MonthlyRentBillBUS {
         }
         return  monthlyRentBillsWithTenantID;
     }
+
     public void setMonthlyRentBillsLabel(PieChart numberOfStatusLabel){
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
         ArrayList<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getAll();
@@ -87,6 +99,7 @@ public class MonthlyRentBillBUS {
         // Cập nhật dữ liệu cho numberOfStatusLabel
         numberOfStatusLabel.setData(pieChartData);
     }
+
     public int getIndexByMonthlyRentBillID(String monthlyRentBillID) {
         for (int i = 0; i < this.monthlyRentBills.size(); i++) {
             if (this.monthlyRentBills.get(i).getMonthlyRentBillID() == monthlyRentBillID) {
@@ -95,4 +108,30 @@ public class MonthlyRentBillBUS {
         }
         return -1; // Not found
     }
+
+    public void updateMonthlyBill(javafx.scene.control.Label monthlyBillLabel,javafx.scene.control.Label statusOfMonthlyBills, String tenantId){
+        ObservableList<MonthlyRentBill> monthlyRentBills = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(tenantId));
+
+        double totalPayment = 0;
+        String status = "";
+        Month currentDate = LocalDate.now().getMonth();
+        for (MonthlyRentBill monthlyRentBill : monthlyRentBills){
+            if (Objects.equals(monthlyRentBill.getTenantID(), tenantId)) {
+                if (monthlyRentBill.getDate().getMonth() == currentDate) {
+                    totalPayment += monthlyRentBill.getTotalPayment();
+                    status = monthlyRentBill.getStatus();
+                }
+            }
+        }
+        if ("Paid".equals(status)) {
+            statusOfMonthlyBills.setTextFill(Color.BLUE);
+            statusOfMonthlyBills.setText(status);
+        } else {
+            statusOfMonthlyBills.setTextFill(Color.RED);
+            statusOfMonthlyBills.setText(status);
+        }
+
+        monthlyBillLabel.setText(totalPayment+"");
+    }
+
 }

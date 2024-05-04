@@ -1,9 +1,12 @@
 package com.example.managingbuildingjava;
 
+import BUS.CohabitantBUS;
 import BUS.FinancialReportBUS;
 import BUS.MonthlyRentBillBUS;
+import BUS.TenantBUS;
 import DTO.FinancialReport;
 import DTO.MonthlyRentBill;
+import DTO.Service;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -71,19 +75,20 @@ public class CustomerController implements Initializable {
     private volatile Thread thread;
     int dem =0;
     @FXML
-    private BorderPane bp;
+    private BorderPane bp = new BorderPane();
     @FXML
-    private Pane mp;
+    private Pane mp = new Pane();
     @FXML
     private TextField TxtField__P1__1;
     @FXML
     private Button bnt__P1__add;
 
     @FXML
-    private void page0 (MouseEvent event){
+    private void page0 (MouseEvent event) throws IOException{
         stop = false;
         TimeNow();
         bp.setCenter(mp);
+        loadPage0();
     }
     @FXML
     private void page1 (MouseEvent event) throws IOException {
@@ -129,17 +134,106 @@ public class CustomerController implements Initializable {
         stop = true;
     }
     @FXML
-    private Label monthlyBillLabel;
-//    private String monthlyRentBillID;;
-//    private String apartmentID; ---
-//    private String tenantID; ---
-//    private LocalDate date;
-//    private int repaymentPeriod;
-//    private Double totalPayment;
-//    private String status;
-
+    private Label monthlyBillLabel = new Label();
+    @FXML
+    private Label statusOfMonthlyBills = new Label();
+    @FXML
+    private PieChart pieChart;
+    @FXML
+    private BarChart barChart;
+    @FXML
+    private Label fullname = new Label();
+    @FXML
+    private Label dob = new Label();
+    @FXML
+    private Label phone = new Label();
+    @FXML
+    private Label gender = new Label();
+    @FXML
+    private Label CCCD = new Label();
+    @FXML
+    private TableView<Service> tableContent;
+    void loadPage0(){
+        setMonthlyBillLabel();
+        updateInfor();
+    }
+//    public void updateTotal() {
+//        if (totalLabel == null) {
+//            return;
+//        }
+//        try {
+//            CohabitantBUS cohabitantBUS = new CohabitantBUS();
+//            cohabitantBUS.setTotalTenant(totalLabel);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    private void updatePieChart() {
+//        if (pieChart == null) {
+//            return;
+//        }
+//        try {
+//            CohabitantBUS cohabitantBUS = new CohabitantBUS();
+//            cohabitantBUS.updatePieChart(pieChart);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    private void drawBarChart() {
+//        if (barChart == null) {
+//            return;
+//        }
+//
+//        try {
+//            TenantBUS tenantBUS = new TenantBUS();
+//            tenantBUS.updateBarChart(barChart);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    private void updateTable(){
+//        if(tableContent == null) {
+//            return;
+//        }
+//        try{
+//            ServiceBUS serviceBUS = new ServiceBUS();
+//            serviceBUS.updateTable(tableContent,serviceList, colKhachhang, colDichvu, colSoluong, colDate, colNote, false);
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
+//    public void Filter(){
+////        if(internetCheckbox == null || giuxeCheckbox == null || gymCheckbox == null || giatuiCheckbox == null || vesinhCheckbox == null){
+////            return;
+////        }
+////        try{
+////            ServiceBUS serviceBUS = new ServiceBUS();
+////            serviceBUS.filterEvent(internetCheckbox, giuxeCheckbox, gymCheckbox, giatuiCheckbox, vesinhCheckbox);
+////        }
+////        catch (Exception e){
+////            e.printStackTrace();
+////        }
+//        System.out.println("TEST");
+//    }
+    void updateInfor(){
+        try{
+            TenantBUS.getInstance().setInfor(fullname, phone,dob,gender,CCCD,this.ID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     void setMonthlyBillLabel(){
-
+        try{
+            MonthlyRentBillBUS.getInstance().updateMonthlyBill(monthlyBillLabel, statusOfMonthlyBills, this.ID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
     void setTableMonthlyRentBill(){
         monthlyRentBillIdColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("monthlyRentBillID"));
@@ -150,9 +244,11 @@ public class CustomerController implements Initializable {
         ObservableList<MonthlyRentBill> data = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(this.ID));
         table__P3__1.setItems(data);
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Page 0
+        loadPage0();
+
 
         //Page 2
         setTableMonthlyRentBill();

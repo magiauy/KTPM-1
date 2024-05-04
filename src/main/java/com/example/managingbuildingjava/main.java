@@ -89,6 +89,7 @@ public class main extends Application {
             }
             if (userType.equals("customer") || userType.equals("khachHang")){
                 CustomerController.getInstance().setID(validLogin);
+                CustomerController.getInstance().loadPage0();
                 primaryStage.setScene(cusScene);
             }
             if (userType.equals("manager")||userType.equals("quanLy")){
