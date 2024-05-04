@@ -14,7 +14,7 @@
                       <DatePicker fx:id="date1" layoutX="523.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
                       <DatePicker fx:id="date2" layoutX="640.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
                       <Button fx:id="searchButton" layoutX="760.0" layoutY="70.0" mnemonicParsing="false"  text="Tìm Kiếm" onAction="#searchDaypage3" />
-                      <Button fx:id="resetButton" layoutX="850.0" layoutY="70.0" mnemonicParsing="false"  text="Đặt Lại" />
+                      <Button fx:id="resetButton" layoutX="850.0" layoutY="70.0" mnemonicParsing="false"  text="Đặt Lại" onAction="#resetDay" />
                       <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="230.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../../../Picture/search.png" />

@@ -28,6 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.module.ModuleDescriptor.Exports;
 import java.net.URL;
@@ -147,6 +148,9 @@ public class BossController implements Initializable {
     @FXML
     private TextField TxtField__P1__search;
     @FXML
+    private TextField seacrch_namepage1;
+
+    @FXML
     private TextField TxtField__P1__2;
     @FXML
     private TextField TxtField__P1__3;
@@ -212,6 +216,9 @@ public class BossController implements Initializable {
 
     @FXML
     private ComboBox<String> fruitCombo;
+    @FXML
+    private ComboBox<String> box_dress;
+
     @FXML
     private ComboBox<String> comboBox__P1__1;
     @FXML
@@ -364,7 +371,9 @@ public class BossController implements Initializable {
 
         showcomboboxBuildingManager();
         showcombobox();
+        box_page1();
         keyenter();
+        keyenter1();
 
     }
 
@@ -373,6 +382,19 @@ public class BossController implements Initializable {
             TxtField__P1__search.setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.ENTER) {
                     handleSearch();
+                    handleseacrhName();
+                }
+            });
+        });
+
+    }
+
+    public void keyenter1() {
+        Platform.runLater(() -> {
+            seacrch_namepage1.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                   
+                    handleseacrhName();
                 }
             });
         });
@@ -392,6 +414,37 @@ public class BossController implements Initializable {
         });
     }
 
+    public void box_page1() {
+        Platform.runLater(() -> {
+            if (box_dress != null) {
+                ObservableList<String> districts = FXCollections.observableArrayList(
+                        "Tất Cả",
+                        "Quận 1",
+                        "Quận 2",
+                        "Quận 3",
+                        "Quận 4",
+                        "Quận 5",
+                        "Quận 6",
+                        "Quận 7",
+                        "Quận 8",
+                        "Quận 9",
+                        "Quận 10",
+                        "Quận 11",
+                        "Quận 12",
+                        "Quận Bình Tân",
+                        "Quận Bình Thạnh",
+                        "Quận Gò Vấp",
+                        "Quận Phú Nhuận",
+                        "Quận Tân Bình",
+                        "Quận Tân Phú",
+                        "Quận Thủ Đức");
+                box_dress.setItems(districts);
+            } else {
+                System.err.println("box_dressmbo is null. Check FXML and controller connection.");
+            }
+        });
+    }
+
     public void showcombobox() {
         Platform.runLater(() -> {
             if (comboBox__P1__1 != null) {
@@ -402,6 +455,20 @@ public class BossController implements Initializable {
                 comboBox__P1__1.setItems(genders);
             } else {
                 System.err.println("comboBox__P1__1 is null. Check FXML and controller connection.");
+            }
+        });
+    }
+
+    public void confirmAndDelete(Object itemToDelete, String confirmMessage, Runnable onDelete) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Xác Nhận Xóa");
+        alert.setHeaderText(confirmMessage);
+        alert.setContentText("Hành động này không thể hoàn tác.");
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                onDelete.run();
+            } else {
+                System.out.println("Hủy bỏ xóa.");
             }
         });
     }
@@ -627,17 +694,19 @@ public class BossController implements Initializable {
             System.out.println("Không có tòa nhà nào được chọn để xóa.");
             return;
         }
-        BuildingBUS buildingBUS = new BuildingBUS();
-        boolean deleteResult = buildingBUS.delete(selectedBuildingToDelete);
 
-        if (deleteResult) {
-            showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
-            resetTextfield();
-            updateBuildingList();
-        } else {
-            showAlert("Thật Bại", "Không Thế Xóa", AlertType.CONFIRMATION);
+        confirmAndDelete(selectedBuildingToDelete, "Bạn có chắc chắn muốn xóa tòa nhà này không?", () -> {
+            BuildingBUS buildingBUS = new BuildingBUS();
+            boolean deleteResult = buildingBUS.delete(selectedBuildingToDelete);
 
-        }
+            if (deleteResult) {
+                showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
+                resetTextfield();
+                updateBuildingList();
+            } else {
+                showAlert("Thất Bại", "Không Thể Xóa", AlertType.ERROR);
+            }
+        });
     }
 
     public void resetTextfield() {
@@ -682,6 +751,53 @@ public class BossController implements Initializable {
         } else {
             showAlert("Thất Bại", "Không thể cập nhật", AlertType.ERROR);
         }
+    }
+
+    public void selectDresss() {
+        String dress = box_dress.getValue();
+        if (dress == null) {
+            return;
+        }
+        buildingsList.clear();
+        BuildingBUS buildingBUS = new BuildingBUS();
+        ArrayList<Building> buildings = buildingBUS.getAll();
+
+        if (dress.equals("Tất Cả")) {
+
+            buildingsList.addAll(buildings);
+        } else {
+
+            for (Building manager : buildings) {
+                if (manager.getDistrict_Building().equals(dress)) {
+                    buildingsList.add(manager);
+                }
+            }
+        }
+
+        ObservableList<Building> observableBuildingList = FXCollections
+                .observableArrayList(buildingsList);
+        table__view.setItems(observableBuildingList);
+    }
+
+    public void handleseacrhName() {
+        String name = seacrch_namepage1.getText();
+        buildingsList.clear();
+        BuildingBUS buildingBUS = new BuildingBUS();
+        ArrayList<Building> buildingBUSs = buildingBUS.getAll();
+        boolean found = false;
+        for (Building manager : buildingBUSs) {
+            if (manager.getNameBuilding().equals(name)) {
+                buildingsList.add(manager);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Không tìm thấy quản lý có tên: " + name);
+        }
+
+        ObservableList<Building> observableBuildingList = FXCollections
+                .observableArrayList(buildingsList);
+        table__view.setItems(observableBuildingList);
     }
 
     /////// BuildingManeger///====================
@@ -749,30 +865,20 @@ public class BossController implements Initializable {
         table__view2.setItems(observableBuildingList);
     }
 
-    public void handDeletepage2() {
+    public void handleDeletepage2() {
         if (selectedBuildingToDelete1 == null) {
             System.out.println("Không có tòa nhà nào được chọn để xóa.");
             return;
         }
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Xác Nhận Xóa");
-        alert.setHeaderText("Bạn có chắc chắn muốn xóa tòa nhà này không?");
-        alert.setContentText("Hành động này không thể hoàn tác.");
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-                boolean deleteResult = buildingManagerBUS.delete(selectedBuildingToDelete1);
-                if (deleteResult) {
-                    showAlert("Thành Công", "Xóa Thành Công", Alert.AlertType.CONFIRMATION);
-                    clearInputFields();
-                    updateBuildingManeger();
-
-                } else {
-                    showAlert("Thất Bại", "Không Thể Xóa", Alert.AlertType.ERROR);
-                }
+        confirmAndDelete(selectedBuildingToDelete1, "Bạn có chắc chắn muốn xóa tòa nhà này không?", () -> {
+            BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+            boolean deleteResult = buildingManagerBUS.delete(selectedBuildingToDelete1);
+            if (deleteResult) {
+                showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
+                clearInputFields();
+                updateBuildingManeger();
             } else {
-
-                System.out.println("Hủy bỏ xóa tòa nhà.");
+                showAlert("Thất Bại", "Không Thể Xóa", AlertType.ERROR);
             }
         });
     }
@@ -798,7 +904,7 @@ public class BossController implements Initializable {
         buildingManager.setGender(gender);
         buildingManager.setCitizenIdentityCard(citizenIdentityCard);
         buildingManager.setSalary(salary);
-System.out.println(salary);
+        System.out.println(salary);
         BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
         boolean check = buildingManagerBUS.update(buildingManager);
         if (check) {
@@ -907,14 +1013,16 @@ System.out.println(salary);
 
     public void handleDeleReport() {
         FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-        boolean check = financialReportBUS.delete(selecFinancialReport);
-        if (check) {
-            showAlert("Thành Công", "Xoa Thành Công", AlertType.CONFIRMATION);
-            updateFianReport();
-            clearFildReport();
-        } else {
-            showAlert("Thất Bai", "Xoa Thất Bại", AlertType.ERROR);
-        }
+        confirmAndDelete(selecFinancialReport, "Bạn có chắc chắn muốn xóa báo cáo này không?", () -> {
+            boolean check = financialReportBUS.delete(selecFinancialReport);
+            if (check) {
+                showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
+                updateFianReport();
+                clearFildReport();
+            } else {
+                showAlert("Thất Bại", "Xóa Thất Bại", AlertType.ERROR);
+            }
+        });
     }
 
     public void handEditReport() {
@@ -922,14 +1030,13 @@ System.out.println(salary);
         String buildingID = TxtField__r2.getText();
         String buildingManagerID = TxtField__r4.getText();
         LocalDate date = Date_page3.getValue();
-        Float monthlyRevenue= Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
-        Float monthlyOpex= Float.parseFloat(TxtField__r5.getText().replaceAll(",", ""));
-        Float monthlyProfit= Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
-       
+        Float monthlyRevenue = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
+        Float monthlyOpex = Float.parseFloat(TxtField__r5.getText().replaceAll(",", ""));
+        Float monthlyProfit = Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
+
         System.out.println(
                 financialReportID + ", " + buildingID + ", " + buildingManagerID + ", " + date + ", " + monthlyOpex);
 
-   
         FinancialReport newFinancialReport = new FinancialReport();
         newFinancialReport.setFinancialReportID(financialReportID);
         newFinancialReport.setBuildingID(buildingID);
@@ -970,7 +1077,7 @@ System.out.println(salary);
         FinancialReportBUS financialReportBUS = new FinancialReportBUS();
         ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
         for (FinancialReport manager : financialReports) {
-            LocalDate managerDate = manager.getDate(); 
+            LocalDate managerDate = manager.getDate();
             if (!managerDate.isBefore(dateFirst) && !managerDate.isAfter(dateLast)) {
 
                 financialReportsList.add(manager);
@@ -979,6 +1086,15 @@ System.out.println(salary);
         ObservableList<FinancialReport> observableBuildingList = FXCollections
                 .observableArrayList(financialReportsList);
         table__view3.setItems(observableBuildingList);
+    }
+
+    public void resetDay() {
+        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+        ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
+        financialReportsList.addAll(financialReports);
+        ObservableList<FinancialReport> observableList = FXCollections
+                .observableArrayList(financialReportsList);
+        table__view3.setItems(observableList);
     }
 
 }
