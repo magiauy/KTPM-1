@@ -34,13 +34,8 @@ public class FinancialReportBUS {
         return financialReportDAO.selectAll();
     }
 
-    public boolean add(FinancialReport financialReport) {
-        boolean check = FinancialReportDAO.getInstance().insert(financialReport) != 0;
-        if (check) {
-            this.financialReports.add(financialReport);
-        }
-        return check;
-    }
+   
+
     public boolean delete(FinancialReport financialReport) {
         boolean check = FinancialReportDAO.getInstance().delete(financialReport.getFinancialReportID()) != 0;
         if (check) {
@@ -48,6 +43,14 @@ public class FinancialReportBUS {
         }
         return check;
     }
+    public boolean add(FinancialReport financialReport) {
+        boolean check = FinancialReportDAO.getInstance().insert(financialReport) != 0;
+        if (check) {
+            this.financialReports.add(financialReport);
+        }
+        return check;
+    }
+   
     public boolean update(FinancialReport financialReport) {
         boolean check = FinancialReportDAO.getInstance().update(financialReport) != 0;
         if (check) {
@@ -58,14 +61,16 @@ public class FinancialReportBUS {
         }
         return check;
     }
+
     public int getIndexByFinancialReportID(String financialReportID) {
         for (int i = 0; i < this.financialReports.size(); i++) {
             if (this.financialReports.get(i).getFinancialReportID().equals(financialReportID)) {
                 return i;
             }
         }
-        return -1; // Not found
+        return -1; 
     }
+    
     public void setMonthlyRevenueLabel(Label monthlyRevenueLabel){
         FinancialReportBUS financialReportBUS = new FinancialReportBUS();
         ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
