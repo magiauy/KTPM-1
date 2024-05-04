@@ -147,17 +147,16 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager> {
     private BuildingManager createBuildingManagerFromResultSet(ResultSet resultSet) throws SQLException {
         String buildingManagerId = resultSet.getString("buildingManagerId");
         String buildingId = resultSet.getString("buildingId");
-        String lastName_BuildingManager = resultSet.getString("lastName");
-        String firstName_BuildingManager = resultSet.getString("firstName");
-        String phoneNumber_BuildingManager = resultSet.getString("phoneNumber");
-        LocalDate dateOfBirthDay = resultSet.getDate("dob").toLocalDate();
-        String gender_BuildingManager = resultSet.getString("gender");
-        String citizenIdentityCard_BuildingManager = resultSet.getString("citizenIdentityCard");
-        Float salary_BuildingManager = resultSet.getFloat("salary");
-        String position = resultSet.getString("position"); 
-        return new BuildingManager(buildingManagerId, buildingId, lastName_BuildingManager, firstName_BuildingManager,
-                phoneNumber_BuildingManager, dateOfBirthDay, gender_BuildingManager,
-                citizenIdentityCard_BuildingManager, salary_BuildingManager, position); 
+        String lastName = resultSet.getString("lastName");
+        String firstName = resultSet.getString("firstName");
+        String phoneNumber = resultSet.getString("phoneNumber");
+        LocalDate dob = resultSet.getDate("dob").toLocalDate();
+        String gender = resultSet.getString("gender");
+        String citizenIdentityCard = resultSet.getString("citizenIdentityCard");
+        Float salary = resultSet.getFloat("salary");
+        return new BuildingManager(buildingManagerId, buildingId, lastName, firstName,
+                phoneNumber, dob, gender,
+                citizenIdentityCard, salary);
                                                                                        
     }
 

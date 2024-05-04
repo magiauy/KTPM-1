@@ -48,7 +48,7 @@ public class TenantDAO implements DAOInterface<Tenant> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE Tenant SET lastName = ?, firstName = ?, phoneNumber = ?, dateOfBirthDay = ?, gender = ?, citizenIdentityCard = ? WHERE tenantID = ?");
+                    "UPDATE Tenant SET lastName = ?, firstName = ?, phoneNumber = ?, dob = ?, gender = ?, citizenIdentityCard = ? WHERE tenantID = ?");
             preparedStatement.setString(1, tenant.getLastName());
             preparedStatement.setString(2, tenant.getFirstName());
             preparedStatement.setString(3, tenant.getPhoneNumber());
@@ -100,7 +100,7 @@ public class TenantDAO implements DAOInterface<Tenant> {
                 String lastName = resultSet.getString("lastName");
                 String firstName = resultSet.getString("firstName");
                 String phoneNumber = resultSet.getString("phoneNumber");
-                LocalDate dateOfBirthDay = resultSet.getDate("dateOfBirthDay").toLocalDate();
+                LocalDate dateOfBirthDay = resultSet.getDate("dob").toLocalDate();
                 String gender = resultSet.getString("gender");
                 String citizenIdentityCard = resultSet.getString("citizenIdentityCard");
 
@@ -132,7 +132,7 @@ public class TenantDAO implements DAOInterface<Tenant> {
                 String lastName = resultSet.getString("lastName");
                 String firstName = resultSet.getString("firstName");
                 String phoneNumber = resultSet.getString("phoneNumber");
-                LocalDate dateOfBirthDay = resultSet.getDate("dateOfBirthDay").toLocalDate();
+                LocalDate dateOfBirthDay = resultSet.getDate("dob").toLocalDate();
                 String gender = resultSet.getString("gender");
                 String citizenIdentityCard = resultSet.getString("citizenIdentityCard");
 
