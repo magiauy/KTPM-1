@@ -1,6 +1,6 @@
 
 CREATE TABLE Building (
-                          buildingID VARCHAR(20) PRIMARY KEY,
+                          buildingID NVARCHAR(255) PRIMARY KEY,
                           name NVARCHAR(255),
                           city NVARCHAR(255),
                           district NVARCHAR(255),
@@ -9,11 +9,11 @@ CREATE TABLE Building (
 );
 
 CREATE TABLE BuildingManager (
-                                 buildingManagerID VARCHAR(20) PRIMARY KEY,
-                                 buildingID VARCHAR(20),
+                                 buildingManagerID NVARCHAR(255) PRIMARY KEY,
+                                 buildingID NVARCHAR(255),
                                  lastName NVARCHAR(255),
                                  firstName NVARCHAR(255),
-                                 phoneNumber VARCHAR(255),
+                                 phoneNumber NVARCHAR(255),
                                  dob DATE,
                                  gender NVARCHAR(10),
                                  citizenIdentityCard VARCHAR(255),
@@ -22,9 +22,9 @@ CREATE TABLE BuildingManager (
 );
 
 CREATE TABLE FinancialReport (
-                                 financialReportID VARCHAR(20) PRIMARY KEY,
-                                 buildingID VARCHAR(20),
-                                 buildingManagerID VARCHAR(20),
+                                 financialReportID NVARCHAR(255) PRIMARY KEY,
+                                 buildingID NVARCHAR(255),
+                                 buildingManagerID NVARCHAR(255),
                                  Date DATE,
                                  monthlyRevenue DECIMAL(20, 2),
                                  monthlyOpex DECIMAL(20, 2),
@@ -34,19 +34,19 @@ CREATE TABLE FinancialReport (
 );
 
 CREATE TABLE Tenant (
-                        tenantID VARCHAR(20) PRIMARY KEY,
+                        tenantID NVARCHAR(255) PRIMARY KEY,
                         lastName NVARCHAR(255),
                         firstName NVARCHAR(255),
-                        phoneNumber VARCHAR(255),
+                        phoneNumber NVARCHAR(255),
                         dob DATE,
                         gender NVARCHAR(255),
                         citizenIdentityCard VARCHAR(255)
 );
 
 CREATE TABLE Apartment (
-                           apartmentID VARCHAR(20) PRIMARY KEY,
-                           buildingID VARCHAR(20),
-                           roomNumber VARCHAR(255),
+                           apartmentID NVARCHAR(255) PRIMARY KEY,
+                           buildingID NVARCHAR(255),
+                           roomNumber NVARCHAR(255),
                            area float,
                            bedrooms INT,
                            bathrooms INT,
@@ -55,22 +55,22 @@ CREATE TABLE Apartment (
 );
 
 CREATE TABLE Cohabitant (
-                            cohabitantID VARCHAR(20) PRIMARY KEY,
-                            tenantID VARCHAR(20),
-                            lastName VARCHAR(255),
+                            cohabitantID NVARCHAR(255) PRIMARY KEY,
+                            tenantID NVARCHAR(255),
+                            lastName NVARCHAR(255),
                             firstName NVARCHAR(255),
-                            phoneNumber VARCHAR(255),
+                            phoneNumber NVARCHAR(255),
                             dob DATE,
                             gender NVARCHAR(10),
-                            citizenIdentityCard VARCHAR(255),
+                            citizenIdentityCard NVARCHAR(255),
                             FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
 );
 
 CREATE TABLE LeaseAgreement (
-                                leaseAgreementID VARCHAR(20) PRIMARY KEY,
-                                tenantID VARCHAR(20),
-                                apartmentID VARCHAR(20),
-                                buildingManagerID VARCHAR(20),
+                                leaseAgreementID NVARCHAR(255) PRIMARY KEY,
+                                tenantID NVARCHAR(255),
+                                apartmentID NVARCHAR(255),
+                                buildingManagerID NVARCHAR(255),
                                 signingDate DATE,
                                 LeaseStartDate DATE,
                                 LeaseEndDate DATE,
@@ -83,8 +83,8 @@ CREATE TABLE LeaseAgreement (
 );
 
 CREATE TABLE Furniture (
-                           furnitureID VARCHAR(20) PRIMARY KEY,
-                           apartmentID VARCHAR(20),
+                           furnitureID NVARCHAR(255) PRIMARY KEY,
+                           apartmentID NVARCHAR(255),
                            name NVARCHAR(255),
                            condition NVARCHAR(255),
                            price DECIMAL(20, 2),
@@ -92,9 +92,9 @@ CREATE TABLE Furniture (
 );
 
 CREATE TABLE MonthlyRentBill (
-                                 monthlyRentBillID VARCHAR(20) PRIMARY KEY,
-                                 apartmentID VARCHAR(20),
-                                 tenantID VARCHAR(20),
+                                 monthlyRentBillID NVARCHAR(255) PRIMARY KEY,
+                                 apartmentID NVARCHAR(255),
+                                 tenantID NVARCHAR(20255,
                                  date DATE,
                                  repaymentPeriod INT,
                                  totalPayment DECIMAL(20, 2),
@@ -104,16 +104,16 @@ CREATE TABLE MonthlyRentBill (
 );
 
 CREATE TABLE Service (
-                              serviceID VARCHAR(20) PRIMARY KEY,
+                              serviceID NVARCHAR(255) PRIMARY KEY,
                               name NVARCHAR(255),
                               pricePerUnit DECIMAL(20, 2),
                               unit NVARCHAR(255),
-							  type VARCHAR(255)
+							  type NVARCHAR(255)
 );
 
 CREATE TABLE ServiceTicket (
-                               serviceID VARCHAR(20),
-                               monthlyRentBillID VARCHAR(20),
+                               serviceID NVARCHAR(255),
+                               monthlyRentBillID NVARCHAR(255),
                                quantity DECIMAL(10, 2),
                                totalAmount DECIMAL(20, 2),
                                Date DATE,
@@ -124,14 +124,14 @@ CREATE TABLE ServiceTicket (
 );
 
 CREATE TABLE Violation (
-                           violationID VARCHAR(20) PRIMARY KEY,
+                           violationID NVARCHAR(255) PRIMARY KEY,
                            name NVARCHAR(255),
                            price DECIMAL(20, 2),
 );
 
 CREATE TABLE ViolationTicket (
-                                 violationID VARCHAR(20),
-                                 monthlyRentBillID VARCHAR(20),
+                                 violationID NVARCHAR(255),
+                                 monthlyRentBillID NVARCHAR(255),
                                  price DECIMAL(20, 2),
                                  Date DATE,
                                  note TEXT,
@@ -141,10 +141,10 @@ CREATE TABLE ViolationTicket (
 );
 
 CREATE TABLE TaiKhoan (
-                          id VARCHAR(20) PRIMARY KEY,
-                          username VARCHAR(255),
-                          password VARCHAR(255),
-                          role VARCHAR(255)
+                          id NVARCHAR(255) PRIMARY KEY,
+                          username NVARCHAR(255),
+                          password NVARCHAR(255),
+                          role NVARCHAR(255)
 );
 
 
