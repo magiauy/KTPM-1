@@ -138,7 +138,7 @@ public class CustomerController implements Initializable {
     @FXML
     private Label statusOfMonthlyBills = new Label();
     @FXML
-    private PieChart pieChart;
+    private PieChart pieChart = new PieChart();
     @FXML
     private BarChart barChart;
     @FXML
@@ -156,31 +156,17 @@ public class CustomerController implements Initializable {
     void loadPage0(){
         setMonthlyBillLabel();
         updateInfor();
+        updatePieChart();
     }
-//    public void updateTotal() {
-//        if (totalLabel == null) {
-//            return;
-//        }
-//        try {
-//            CohabitantBUS cohabitantBUS = new CohabitantBUS();
-//            cohabitantBUS.setTotalTenant(totalLabel);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    private void updatePieChart() {
-//        if (pieChart == null) {
-//            return;
-//        }
-//        try {
-//            CohabitantBUS cohabitantBUS = new CohabitantBUS();
-//            cohabitantBUS.updatePieChart(pieChart);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+    private void updatePieChart() {
+        try {
+            MonthlyRentBillBUS.getInstance().updatePiechart(pieChart,this.ID);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 //    private void drawBarChart() {
 //        if (barChart == null) {
 //            return;

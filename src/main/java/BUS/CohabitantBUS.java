@@ -2,9 +2,14 @@ package BUS;
 
 import DAO.CohabitantDAO;
 import DTO.Cohabitant;
+import DTO.MonthlyRentBill;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CohabitantBUS {
     private ArrayList<Cohabitant> listCohabitant = new ArrayList<>();
@@ -60,4 +65,16 @@ public class CohabitantBUS {
         return index;
     }
 
+    private ArrayList<Cohabitant> cohabitants = new ArrayList<>();
+
+
+    public ArrayList<Cohabitant> getCohabitantsWithTenantId(String tenantID) {
+        ArrayList<Cohabitant> cohabitantsWithTenantID = new ArrayList<>();
+        for (Cohabitant cohabitant : cohabitants) {
+            if (Objects.equals(cohabitant.getTenantID(), tenantID)) {
+                cohabitantsWithTenantID.add(cohabitant);
+            }
+        }
+        return  cohabitantsWithTenantID;
+    }
 }

@@ -134,4 +134,48 @@ public class MonthlyRentBillBUS {
         monthlyBillLabel.setText(totalPayment+"");
     }
 
+    public void updatePiechart(PieChart pieChart, String ID) {
+        ObservableList<MonthlyRentBill> monthlyRentBills = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(ID));
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+        // Variables to hold total payment and count for each status
+        int unpaidTotal = 0;
+        int unpaidCount = 0;
+        int paidTotal = 0;
+        int paidCount = 0;
+        int overdueTotal = 0;
+        int overdueCount = 0;
+
+        // Iterate through the monthly rent bills to calculate the total payment and count for each status
+        for (MonthlyRentBill bill : monthlyRentBills) {
+            switch (bill.getStatus()) {
+                case "Unpaid":
+                    unpaidTotal += bill.getTotalPayment();
+                    unpaidCount++;
+                    break;
+                case "Paid":
+                    paidTotal += bill.getTotalPayment();
+                    paidCount++;
+                    break;
+                case "Overdue":
+                    overdueTotal += bill.getTotalPayment();
+                    overdueCount++;
+                    break;
+            }
+        }
+
+        // Add data to the pie chart
+        if (unpaidCount > 0) {
+            pieChartData.add(new PieChart.Data("Unpaid (" + unpaidCount + ")", unpaidTotal));
+        }
+        if (paidCount > 0) {
+            pieChartData.add(new PieChart.Data("Paid (" + paidCount + ")", paidTotal));
+        }
+        if (overdueCount > 0) {
+            pieChartData.add(new PieChart.Data("Overdue (" + overdueCount + ")", overdueTotal));
+        }
+
+        pieChart.setData(pieChartData);
+    }
 }
