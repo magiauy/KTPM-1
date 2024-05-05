@@ -96,34 +96,34 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <PieChart fx:id="numberOfStatusLabel" layoutX="-4.0" layoutY="22.0" prefHeight="248.0" prefWidth="244.0" />
+                  <PieChart fx:id="pieChart" layoutX="-4.0" layoutY="22.0" prefHeight="248.0" prefWidth="244.0" />
                </children></Pane>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="592.0" layoutY="440.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Sơ lược thông tin" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="fullname" contentDisplay="CENTER" layoutX="565.0" layoutY="479.0" prefHeight="25.0" prefWidth="285.0" text="Họ &amp; Tên: " textFill="WHITE">
+            <Label fx:id="fullname" contentDisplay="CENTER" layoutX="601.0" layoutY="479.0" prefHeight="25.0" prefWidth="249.0" text="Họ &amp; Tên: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="phone" contentDisplay="CENTER" layoutX="565.0" layoutY="513.0" prefHeight="25.0" prefWidth="221.0" text="SĐT: " textFill="WHITE">
+            <Label fx:id="phone" contentDisplay="CENTER" layoutX="601.0" layoutY="513.0" prefHeight="25.0" prefWidth="221.0" text="SĐT: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="dob" contentDisplay="CENTER" layoutX="565.0" layoutY="551.0" prefHeight="25.0" prefWidth="150.0" text="Dob: " textFill="WHITE">
+            <Label fx:id="dob" contentDisplay="CENTER" layoutX="601.0" layoutY="551.0" prefHeight="25.0" prefWidth="150.0" text="Dob: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="gender" contentDisplay="CENTER" layoutX="565.0" layoutY="591.0" prefHeight="25.0" prefWidth="150.0" text="Giới tính: " textFill="WHITE">
+            <Label fx:id="gender" contentDisplay="CENTER" layoutX="601.0" layoutY="591.0" prefHeight="25.0" prefWidth="150.0" text="Giới tính: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label fx:id="CCCD" contentDisplay="CENTER" layoutX="565.0" layoutY="634.0" prefHeight="25.0" prefWidth="255.0" text="CCCD: " textFill="WHITE">
+            <Label fx:id="CCCD" contentDisplay="CENTER" layoutX="601.0" layoutY="634.0" prefHeight="25.0" prefWidth="255.0" text="CCCD: " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
