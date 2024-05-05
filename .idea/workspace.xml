@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="revert commit (22/4)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/MonthlyRentBillDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/MonthlyRentBillDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/MonthlyRentBill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/MonthlyRentBill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page3.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page3.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="05/05 Nam" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,10 +87,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;NAMmmmm&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Downloads/JavaProject/BuildingOperationsApplication/lib/sqljdbc_12.6/enu/jars/mssql-jdbc-12.6.1.jre11.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Downloads/JavaProject/BuildingOperationsApplication/src/main/resources/com/example/managingbuildingjava&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -112,6 +105,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Downloads\JavaProject\BuildingOperationsApplication\src\main\resources\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\java\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
@@ -216,6 +210,9 @@
       <workItem from="1714204818617" duration="3276000" />
       <workItem from="1714218970635" duration="742000" />
       <workItem from="1714226663351" duration="1749000" />
+      <workItem from="1714820415649" duration="206000" />
+      <workItem from="1714825884638" duration="7213000" />
+      <workItem from="1714868469016" duration="2459000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -359,7 +356,8 @@
     <MESSAGE value="Customer, them FinancialReport" />
     <MESSAGE value="update from Kai 19/4" />
     <MESSAGE value="revert commit (22/4)" />
-    <option name="LAST_COMMIT_MESSAGE" value="revert commit (22/4)" />
+    <MESSAGE value="24/05 Nam" />
+    <option name="LAST_COMMIT_MESSAGE" value="24/05 Nam" />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />
