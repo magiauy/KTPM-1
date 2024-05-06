@@ -32,11 +32,11 @@ public class main extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
 
-   
+
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
         loginScene = new Scene(loginLoader.load(), 600, 500);
 
-       
+
         FXMLLoader bossLoader = new FXMLLoader(getClass().getResource("Boss-view-Page0.fxml"));
         Pane bossPane = bossLoader.load();
         bossScene = new Scene(bossPane, 1024, 720);
@@ -48,7 +48,7 @@ public class main extends Application {
         FXMLLoader CustomerLoader = new FXMLLoader(getClass().getResource("Customer-view-Page0.fxml"));
         Pane Customer = CustomerLoader.load();
         cusScene = new Scene(Customer, 1024, 720);
-  
+
         usernameField = (TextField) loginLoader.getNamespace().get("usernameField");
         passwordField = (PasswordField) loginLoader.getNamespace().get("passwordField");
         statusLabel = (Label) loginLoader.getNamespace().get("statusLabel");
@@ -83,6 +83,7 @@ public class main extends Application {
         String userType = accountBUS.getUserType(username, password);
         if (!validLogin.equals("0")) {
             System.out.println("Login successful!");
+            CustomerController.getInstance().loadPage0();
             if (userType.equals("admin") || userType.equals("boss")){
                 BossController.getInstance().setID(validLogin);
                 primaryStage.setScene(bossScene);

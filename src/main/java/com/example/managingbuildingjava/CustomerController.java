@@ -1,12 +1,7 @@
 package com.example.managingbuildingjava;
 
-import BUS.CohabitantBUS;
-import BUS.FinancialReportBUS;
-import BUS.MonthlyRentBillBUS;
-import BUS.TenantBUS;
-import DTO.FinancialReport;
-import DTO.MonthlyRentBill;
-import DTO.Service;
+import BUS.*;
+import DTO.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -105,7 +100,7 @@ public class CustomerController implements Initializable {
     @FXML
     private Label time;
     private void loadPage(String page) throws IOException {
-        stop = true;
+//        stop = true;
         Parent root = null;
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(page + ".fxml")));
         bp.setCenter(root);
@@ -151,15 +146,58 @@ public class CustomerController implements Initializable {
     private Label gender = new Label();
     @FXML
     private Label CCCD = new Label();
+    //Table Page 0
     @FXML
-    private TableView<Service> tableContent;
-    void loadPage0(){
+    Label termLabel = new Label();
+    @FXML
+    private Label deposiLabel = new Label();
+    @FXML
+    private Label rentLabel = new Label();
+    @FXML
+    public TableView<Cohabitant> cohabitantTable = new TableView<>();
+    @FXML
+    TableColumn<Cohabitant, String>  nameCol = new TableColumn<Cohabitant, String>("Họ & Tên");
+    @FXML
+    TableColumn<Cohabitant, String>  phoneCol = new TableColumn<Cohabitant, String>();
+    @FXML
+    TableColumn<Cohabitant, LocalDate>  dobCol = new TableColumn<Cohabitant, LocalDate>();
+    @FXML
+    TableColumn<Cohabitant, String>  genderCol = new TableColumn<Cohabitant, String>();
+
+    public void loadPage0(){
+
         setMonthlyBillLabel();
         updateInfor();
         updatePieChart();
+        setTabelLeaseAgreement();
+        setTableCohabitant();
     }
 
-    private void updatePieChart() {
+    void setTableCohabitant(){
+        // Thiết lập font cho các cột
+        String font = "Times New Roman";
+        nameCol.setStyle("-fx-font-family: '" + font + "';");
+        phoneCol.setStyle("-fx-font-family: '" + font + "';");
+        dobCol.setStyle("-fx-font-family: '" + font + "';");
+        genderCol.setStyle("-fx-font-family: '" + font + "';");
+
+
+        nameCol.setCellValueFactory(new PropertyValueFactory<Cohabitant, String>("fullName"));
+        phoneCol.setCellValueFactory(new PropertyValueFactory<Cohabitant, String>("phoneNumber"));
+        dobCol.setCellValueFactory(new PropertyValueFactory<Cohabitant, LocalDate>("dateOfBirthDay"));
+        genderCol.setCellValueFactory(new PropertyValueFactory<Cohabitant, String>("gender"));
+
+        ObservableList<Cohabitant> data = FXCollections.observableArrayList(CohabitantBUS.getInstance().getCohabitantsWithTenantId(this.ID));
+        cohabitantTable.setItems(data);
+    }
+
+    void setTabelLeaseAgreement(){
+        ObservableList<LeaseAgreement> data = FXCollections.observableArrayList(LeaseAgreementBUS.getInstance().getLeaseAgreementsWithTenantId(this.ID));
+
+        LeaseAgreementBUS.getInstance().updateTabelLeaseAgreement(data, termLabel, deposiLabel, rentLabel);
+    }
+
+    void updatePieChart() {
         try {
             MonthlyRentBillBUS.getInstance().updatePiechart(pieChart,this.ID);
 
@@ -167,44 +205,7 @@ public class CustomerController implements Initializable {
             e.printStackTrace();
         }
     }
-//    private void drawBarChart() {
-//        if (barChart == null) {
-//            return;
-//        }
-//
-//        try {
-//            TenantBUS tenantBUS = new TenantBUS();
-//            tenantBUS.updateBarChart(barChart);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    private void updateTable(){
-//        if(tableContent == null) {
-//            return;
-//        }
-//        try{
-//            ServiceBUS serviceBUS = new ServiceBUS();
-//            serviceBUS.updateTable(tableContent,serviceList, colKhachhang, colDichvu, colSoluong, colDate, colNote, false);
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
-//    public void Filter(){
-////        if(internetCheckbox == null || giuxeCheckbox == null || gymCheckbox == null || giatuiCheckbox == null || vesinhCheckbox == null){
-////            return;
-////        }
-////        try{
-////            ServiceBUS serviceBUS = new ServiceBUS();
-////            serviceBUS.filterEvent(internetCheckbox, giuxeCheckbox, gymCheckbox, giatuiCheckbox, vesinhCheckbox);
-////        }
-////        catch (Exception e){
-////            e.printStackTrace();
-////        }
-//        System.out.println("TEST");
-//    }
+
     void updateInfor(){
         try{
             TenantBUS.getInstance().setInfor(fullname, phone,dob,gender,CCCD,this.ID);
@@ -213,7 +214,8 @@ public class CustomerController implements Initializable {
             e.printStackTrace();
         }
     }
-    void setMonthlyBillLabel(){
+
+    void setMonthlyBillLabel() {
         try{
             MonthlyRentBillBUS.getInstance().updateMonthlyBill(monthlyBillLabel, statusOfMonthlyBills, this.ID);
         }
@@ -221,19 +223,23 @@ public class CustomerController implements Initializable {
             e.printStackTrace();
         }
     }
+
     void setTableMonthlyRentBill(){
         monthlyRentBillIdColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("monthlyRentBillID"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, LocalDate>("date"));
         repaymentPeriodColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, Integer>("repaymentPeriod"));
         totalPaymentColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, Double>("totalPayment"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("status"));
+
         ObservableList<MonthlyRentBill> data = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(this.ID));
+        System.out.println("setTableMonthlyRentBill _____________"+data.isEmpty());
         table__P3__1.setItems(data);
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Page 0
         loadPage0();
+        System.out.println("Check check");
 
 
         //Page 2
