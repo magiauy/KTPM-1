@@ -34,7 +34,7 @@ public class main extends Application {
 
 
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
-        loginScene = new Scene(loginLoader.load(), 600, 500);
+        loginScene = new Scene(loginLoader.load(), 400, 400);
 
 
         FXMLLoader bossLoader = new FXMLLoader(getClass().getResource("Boss-view-Page0.fxml"));
