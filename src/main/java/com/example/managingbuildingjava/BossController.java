@@ -148,7 +148,7 @@ public class BossController implements Initializable {
     @FXML
     private TextField TxtField__P1__search;
     @FXML
-    private TextField seacrch_namepage1;
+    TextField seacrch_namepage1 = new TextField();
 
     @FXML
     private TextField TxtField__P1__2;
