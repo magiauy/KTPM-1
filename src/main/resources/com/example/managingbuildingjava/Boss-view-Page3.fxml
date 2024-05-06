@@ -11,8 +11,10 @@
               <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
                       <TextField fx:id="TxtField__P1__search" alignment="CENTER" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" />
-                      <ComboBox fx:id="comboBox__P1__1" layoutX="623.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
-                      <ComboBox fx:id="comboBox__P1__2" layoutX="740.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+                      <DatePicker fx:id="date1" layoutX="523.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+                      <DatePicker fx:id="date2" layoutX="640.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+                      <Button fx:id="searchButton" layoutX="760.0" layoutY="70.0" mnemonicParsing="false"  text="Tìm Kiếm" onAction="#searchDaypage3" />
+                      <Button fx:id="resetButton" layoutX="850.0" layoutY="70.0" mnemonicParsing="false"  text="Đặt Lại" onAction="#resetDay" />
                       <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="230.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../../../Picture/search.png" />
@@ -20,11 +22,11 @@
                       </ImageView>
             <Pane layoutX="33.0" layoutY="121.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                          <TextField fx:id="TxtField__P1__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P1__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P1__4" layoutX="216.0" layoutY="213.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P1__3" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P1__5" layoutX="216.0" layoutY="271.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                          <TextField fx:id="TxtField__r1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                          <TextField fx:id="TxtField__r2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                          <TextField fx:id="TxtField__r3" layoutX="216.0" layoutY="213.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                          <TextField fx:id="TxtField__r4" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                          <TextField fx:id="TxtField__r5" layoutX="216.0" layoutY="271.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
                           <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="345.0" prefHeight="32.0" prefWidth="120.0" text="lợi nhuận" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
@@ -55,16 +57,16 @@
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                  <TextField fx:id="TxtField__P1__6" layoutX="216.0" layoutY="336.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                  <TextField fx:id="TxtField__r6" layoutX="216.0" layoutY="336.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="417.0" prefHeight="32.0" prefWidth="120.0" text="Ngày" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <DatePicker layoutX="179.0" layoutY="417.0" prefHeight="30.0" prefWidth="190.0" />
+                  <DatePicker fx:id="Date_page3" layoutX="179.0" layoutY="417.0" prefHeight="30.0" prefWidth="190.0" />
                </children>
             </Pane>
-                    <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
+                    <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE" onAction="#handleAddReport">
                         <graphic>
                             <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -73,8 +75,8 @@
                             </ImageView>
                         </graphic>
             </Button>
-                    <Button fx:id="bnt__P1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Sửa" textFill="WHITE" />
-                    <Button fx:id="bnt__P1__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Xóa" textFill="WHITE">
+                    <Button fx:id="bnt__P1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Sửa" textFill="WHITE"  onAction= "#handEditReport" />
+                    <Button fx:id="bnt__P1__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Xóa" textFill="WHITE" onAction="#handleDeleReport">
                         <graphic>
                             <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -83,12 +85,17 @@
                             </ImageView>
                         </graphic>
             </Button>
-                    <TableView fx:id="table__view3" layoutX="497.0" layoutY="117.0" prefHeight="580.0" prefWidth="340.0" style="-fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
-                        <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                        </columns>
-                    </TableView>
+                        <TableView fx:id="table__view3" layoutX="497.0" layoutY="117.0" prefHeight="580.0" prefWidth="540.0" style="-fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+                           <columns>
+                                    <TableColumn fx:id="maBaoCaoColumn" prefWidth="75.0" text="Mã Báo Cáo" />
+                                    <TableColumn fx:id="maQuanLiColumn" prefWidth="75.0" text="Mã Quản Lí" />
+                                    <TableColumn fx:id="maToaNha1Column" prefWidth="75.0" text="Mã Tòa Nhà" />
+                                    <TableColumn fx:id="ngayColumn" prefWidth="75.0" text="Ngày" />
+                                    <TableColumn fx:id="doanhThuColumn" prefWidth="75.0" text="Doanh Thu Hàng Tháng" />
+                                    <TableColumn fx:id="monthlyOpexColumn" prefWidth="75.0" text="Monthly Opex" />
+                                    <TableColumn fx:id="loiNhuanColumn" prefWidth="75.0" text="Lợi Nhuận Hàng Tháng" />
+                                </columns>
+                        </TableView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="77.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);" text="Thông tin tòa nhà">
                <font>
                   <Font size="16.0" />
