@@ -163,6 +163,27 @@ public class CustomerController implements Initializable {
     TableColumn<Cohabitant, LocalDate>  dobCol = new TableColumn<Cohabitant, LocalDate>();
     @FXML
     TableColumn<Cohabitant, String>  genderCol = new TableColumn<Cohabitant, String>();
+    //Page 1
+    @FXML
+    private CheckBox parkingRegis = new CheckBox();
+    @FXML
+    private CheckBox playGroundRegis = new CheckBox();
+    @FXML
+    private CheckBox poolRegis = new CheckBox();
+    @FXML
+    private CheckBox gymRegis = new CheckBox();
+    @FXML
+    private CheckBox internetRegis = new CheckBox();
+    @FXML
+    private TextField noteGyms = new TextField();
+    @FXML
+    private TextField noteInternets = new TextField();
+    @FXML
+    private TextField noteParkings = new TextField();
+    @FXML
+    private TextField notePlayGrounds = new TextField();
+    @FXML
+    private TextField notePools = new TextField();
 
     public void loadPage0(){
 
@@ -171,6 +192,11 @@ public class CustomerController implements Initializable {
         updatePieChart();
         setTabelLeaseAgreement();
         setTableCohabitant();
+    }
+
+    @FXML
+    void regisFixed(MouseEvent event) {
+
     }
 
     void setTableCohabitant(){
