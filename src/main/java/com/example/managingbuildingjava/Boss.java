@@ -18,10 +18,10 @@ public class Boss extends Application {
     }
     public static void openBossView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Boss.class.getResource("Boss-view-Page0.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1224, 720);
+        Scene scene = new Scene(fxmlLoader.load(), 1024, 720);
         bossStage.setTitle("Admin");
         bossStage.setScene(scene);
-        bossStage.show(); 
+        bossStage.show();
     }
     public static void main(String[] args) {
         launch(args);

@@ -37,7 +37,6 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager> {
             preparedStatement.setString(4, t.getFirstName());
             preparedStatement.setString(5, t.getPhoneNumber());
             preparedStatement.setDate(6, Date.valueOf(t.getDob()));
-            
             preparedStatement.setString(7, t.getGender());
             preparedStatement.setString(8, t.getCitizenIdentityCard());
             preparedStatement.setDouble(9, t.getSalary());

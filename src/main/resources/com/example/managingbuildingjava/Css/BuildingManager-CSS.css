@@ -54,6 +54,3 @@
 .black-text {
   -fx-text-fill: #000000; /* Màu chữ đen */
 }
-#exportExcel:hover {
-  -fx-cursor: hand;
-}
