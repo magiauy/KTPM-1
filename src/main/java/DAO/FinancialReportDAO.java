@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FinancialReportDAO implements DAOInterface<FinancialReport> {
@@ -30,10 +29,10 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
             preparedStatement.setString(1, financialReport.getFinancialReportID());
             preparedStatement.setString(2, financialReport.getBuildingID());
             preparedStatement.setString(3, financialReport.getBuildingManagerID());
-            preparedStatement.setDate(4, Date.valueOf(financialReport.getDate()));
-            preparedStatement.setFloat(5, financialReport.getMonthlyRevenue());
-            preparedStatement.setFloat(6, financialReport.getMonthlyOpex());
-            preparedStatement.setFloat(7, financialReport.getMonthlyProfit());
+            preparedStatement.setDate(4, new Date(financialReport.getDate().getTime()));
+            preparedStatement.setDouble(5, financialReport.getMonthlyRevenue());
+            preparedStatement.setDouble(6, financialReport.getMonthlyOpex());
+            preparedStatement.setDouble(7, financialReport.getMonthlyProfit());
 
             ketQua = preparedStatement.executeUpdate();
 
@@ -55,13 +54,10 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
 
             preparedStatement.setString(1, financialReport.getBuildingID());
             preparedStatement.setString(2, financialReport.getBuildingManagerID());
-
-            LocalDate dob = financialReport.getDate();
-            java.sql.Date sqlDob = java.sql.Date.valueOf(dob);
-            preparedStatement.setDate(3, sqlDob);
-            preparedStatement.setFloat(4, financialReport.getMonthlyRevenue());
-            preparedStatement.setFloat(5, financialReport.getMonthlyOpex());
-            preparedStatement.setFloat(6, financialReport.getMonthlyProfit());
+            preparedStatement.setDate(3, new Date(financialReport.getDate().getTime()));
+            preparedStatement.setDouble(4, financialReport.getMonthlyRevenue());
+            preparedStatement.setDouble(5, financialReport.getMonthlyOpex());
+            preparedStatement.setDouble(6, financialReport.getMonthlyProfit());
             preparedStatement.setString(7, financialReport.getFinancialReportID());
 
             ketQua = preparedStatement.executeUpdate();
@@ -106,10 +102,10 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
                 String financialReportID = resultSet.getString("financialReportID");
                 String buildingID = resultSet.getString("buildingID");
                 String buildingManagerID = resultSet.getString("buildingManagerID");
-                LocalDate date = resultSet.getDate("Date").toLocalDate();
-                Float monthlyRevenue = resultSet.getFloat("monthlyRevenue");
-                Float monthlyOpex = resultSet.getFloat("monthlyOpex");
-                Float monthlyProfit = resultSet.getFloat("monthlyProfit");
+                Date date = resultSet.getDate("Date");
+                double monthlyRevenue = resultSet.getDouble("monthlyRevenue");
+                double monthlyOpex = resultSet.getDouble("monthlyOpex");
+                double monthlyProfit = resultSet.getDouble("monthlyProfit");
 
                 FinancialReport financialReport = new FinancialReport(financialReportID, buildingID, buildingManagerID, date, monthlyRevenue, monthlyOpex, monthlyProfit);
                 financialReports.add(financialReport);
@@ -138,10 +134,10 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
                 String financialReportID = resultSet.getString("financialReportID");
                 String buildingID = resultSet.getString("buildingID");
                 String buildingManagerID = resultSet.getString("buildingManagerID");
-                LocalDate date = resultSet.getDate("Date").toLocalDate();
-                Float monthlyRevenue = resultSet.getFloat("monthlyRevenue");
-                Float monthlyOpex = resultSet.getFloat("monthlyOpex");
-                Float monthlyProfit = resultSet.getFloat("monthlyProfit");
+                Date date = resultSet.getDate("Date");
+                double monthlyRevenue = resultSet.getDouble("monthlyRevenue");
+                double monthlyOpex = resultSet.getDouble("monthlyOpex");
+                double monthlyProfit = resultSet.getDouble("monthlyProfit");
 
                 financialReport = new FinancialReport(financialReportID, buildingID, buildingManagerID, date, monthlyRevenue, monthlyOpex, monthlyProfit);
             }
