@@ -802,7 +802,7 @@ public class BuildingManagerController implements Initializable {
         TxtField__P3__1.setText(monthlyRentBill.getMonthlyRentBillID());
         TxtField__P3__2.setText(monthlyRentBill.getApartmentID());
         TxtField__P3__3.setText(monthlyRentBill.getTenantID());
-        TxtField__P3__4.setText(monthlyRentBill.getLeaseAgreementID());
+//        TxtField__P3__4.setText(monthlyRentBill.getLeaseAgreementID());
         datePicker__P3.setValue(monthlyRentBill.getDate());
         TxtField__P3__5.setText(String.valueOf(monthlyRentBill.getRepaymentPeriod()));
         TxtField__P3__6.setText(String.valueOf(monthlyRentBill.getTotalPayment()));
@@ -825,7 +825,7 @@ public class BuildingManagerController implements Initializable {
         monthlyRentBill.setMonthlyRentBillID(TxtField__P3__1.getText());
         monthlyRentBill.setApartmentID(TxtField__P3__2.getText());
         monthlyRentBill.setTenantID(TxtField__P3__3.getText());
-        monthlyRentBill.setLeaseAgreementID(TxtField__P3__4.getText());
+//        monthlyRentBill.setLeaseAgreementID(TxtField__P3__4.getText());
         monthlyRentBill.setDate(datePicker__P3.getValue());
         monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
         monthlyRentBill.setTotalPayment(Double.parseDouble(TxtField__P3__6.getText()));
@@ -849,7 +849,7 @@ public class BuildingManagerController implements Initializable {
             monthlyRentBill.setMonthlyRentBillID(TxtField__P3__1.getText());
             monthlyRentBill.setApartmentID(TxtField__P3__2.getText());
             monthlyRentBill.setTenantID(TxtField__P3__3.getText());
-            monthlyRentBill.setLeaseAgreementID(TxtField__P3__4.getText());
+//            monthlyRentBill.setLeaseAgreementID(TxtField__P3__4.getText());
             monthlyRentBill.setDate(datePicker__P3.getValue());
             monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
             monthlyRentBill.setTotalPayment(Double.parseDouble(TxtField__P3__6.getText()));

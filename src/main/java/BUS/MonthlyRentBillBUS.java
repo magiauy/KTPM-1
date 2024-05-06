@@ -71,6 +71,15 @@ public class MonthlyRentBillBUS {
         return  monthlyRentBillsWithTenantID;
     }
 
+    public int getIndexByMonthlyRentBillID(String monthlyRentBillID) {
+        for (int i = 0; i < this.monthlyRentBills.size(); i++) {
+            if (this.monthlyRentBills.get(i).getMonthlyRentBillID() == monthlyRentBillID) {
+                return i;
+            }
+        }
+        return -1; // Not found
+    }
+
     public void setMonthlyRentBillsLabel(PieChart numberOfStatusLabel){
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
         ArrayList<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getAll();
@@ -100,14 +109,6 @@ public class MonthlyRentBillBUS {
         numberOfStatusLabel.setData(pieChartData);
     }
 
-    public int getIndexByMonthlyRentBillID(String monthlyRentBillID) {
-        for (int i = 0; i < this.monthlyRentBills.size(); i++) {
-            if (this.monthlyRentBills.get(i).getMonthlyRentBillID() == monthlyRentBillID) {
-                return i;
-            }
-        }
-        return -1; // Not found
-    }
 
     public void updateMonthlyBill(javafx.scene.control.Label monthlyBillLabel,javafx.scene.control.Label statusOfMonthlyBills, String tenantId){
         ObservableList<MonthlyRentBill> monthlyRentBills = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(tenantId));

@@ -16,9 +16,13 @@ public class Cohabitant {
     private String lastName;
     private String firstName;
     private String phoneNumber;
-    private LocalDate dateOfBirthDay;
+    private LocalDate dob;
     private String gender;
     private String citizenIdentityCard;
+
+    public String getFullName(){
+        return lastName +" "+ firstName;
+    }
 
     public Cohabitant(String cohabitantID, String tenantID, String lastName,
                       String firstName, String phoneNumber, LocalDate dob,
@@ -28,7 +32,7 @@ public class Cohabitant {
         this.lastName = lastName;
         this.firstName = firstName;
         this.phoneNumber = phoneNumber;
-        this.dateOfBirthDay = dob;
+        this.dob = dob;
         this.gender = gender;
         this.citizenIdentityCard = citizenIdentityCard;
     }
@@ -42,17 +46,17 @@ public class Cohabitant {
         this.lastName = cohabitant.lastName;
         this.firstName = cohabitant.firstName;
         this.phoneNumber = cohabitant.phoneNumber;
-        this.dateOfBirthDay = cohabitant.dateOfBirthDay;
+        this.dob = cohabitant.dob;
         this.gender = cohabitant.gender;
         this.citizenIdentityCard = cohabitant.citizenIdentityCard;
     }
 
     public LocalDate getDateOfBirthDay() {
-        return dateOfBirthDay;
+        return dob;
     }
 
-    public void setDateOfBirthDay(LocalDate dateOfBirthDay) {
-        this.dateOfBirthDay = dateOfBirthDay;
+    public void setDateOfBirthDay(LocalDate dob) {
+        this.dob = dob;
     }
 
     public String getCohabitantID() {
@@ -96,11 +100,11 @@ public class Cohabitant {
     }
 
     public LocalDate getDob() {
-        return dateOfBirthDay;
+        return dob;
     }
 
     public void setDob(LocalDate dob) {
-        this.dateOfBirthDay = dob;
+        this.dob = dob;
     }
 
     public String getGender() {
@@ -127,7 +131,7 @@ public class Cohabitant {
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", dob=" + dateOfBirthDay +
+                ", dob=" + dob +
                 ", gender='" + gender + '\'' +
                 ", citizenIdentityCard='" + citizenIdentityCard + '\'' +
                 '}';
