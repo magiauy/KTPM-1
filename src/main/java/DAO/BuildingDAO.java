@@ -132,11 +132,11 @@ public class BuildingDAO implements DAOInterface<Building> {
 
             if (resultSet.next()) {
                 String buildingId = resultSet.getString("buildingID");
-                String nameBuilding = resultSet.getString("nameBuilding");
-                String city_Building = resultSet.getString("cityBuilding");
-                String district_Building = resultSet.getString("district_Building");
-                String address_Building = resultSet.getString("address_Building");
-                int numberOfApartment_Building = resultSet.getInt("numberOfApartment_Building");
+                String nameBuilding = resultSet.getString("name");
+                String city_Building = resultSet.getString("city");
+                String district_Building = resultSet.getString("district");
+                String address_Building = resultSet.getString("address");
+                int numberOfApartment_Building = resultSet.getInt("numberOfApartment");
 
                 building = new Building(buildingId, nameBuilding, city_Building, district_Building, address_Building, numberOfApartment_Building);
             }

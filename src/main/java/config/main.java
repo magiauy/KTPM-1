@@ -7,5 +7,7 @@ public class main {
         Connection connection = JDBCUtil.getConnection();
         JDBCUtil.printInfo(connection);
         JDBCUtil.closeConnection(connection);
+
+
     }
 }
