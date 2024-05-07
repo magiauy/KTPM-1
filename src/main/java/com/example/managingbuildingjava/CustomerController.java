@@ -1,6 +1,8 @@
 package com.example.managingbuildingjava;
 
 import BUS.*;
+import DAO.ServiceDAO;
+import DAO.ServiceTicketDAO;
 import DTO.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -12,12 +14,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -193,10 +199,38 @@ public class CustomerController implements Initializable {
         setTabelLeaseAgreement();
         setTableCohabitant();
     }
+    public void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     @FXML
     void regisFixed(MouseEvent event) {
+        if (!parkingRegis.isSelected() && !playGroundRegis.isSelected() && !poolRegis.isSelected() && !gymRegis.isSelected() && !internetRegis.isSelected()){
+            showAlert("Lỗi", "Vui lòng tích vào ô đăng ký.", Alert.AlertType.ERROR);
+        }
+        else{
+            if(parkingRegis.isSelected()){
+                ServiceTicketBUS.getInstance().regisFixedServ("SERV3",noteParkings.getText());
 
+            }
+            if(playGroundRegis.isSelected()){
+
+            }
+            if(poolRegis.isSelected()){
+
+            }
+            if(gymRegis.isSelected()){
+
+            }
+            if(internetRegis.isSelected()){
+
+            }
+        }
     }
 
     void setTableCohabitant(){

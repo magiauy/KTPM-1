@@ -109,7 +109,6 @@ public class MonthlyRentBillBUS {
         numberOfStatusLabel.setData(pieChartData);
     }
 
-
     public void updateMonthlyBill(javafx.scene.control.Label monthlyBillLabel,javafx.scene.control.Label statusOfMonthlyBills, String tenantId){
         ObservableList<MonthlyRentBill> monthlyRentBills = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(tenantId));
 
