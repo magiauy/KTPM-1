@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTO;
 
 /**
@@ -10,32 +6,20 @@ package DTO;
  */
 public class Service {
     private String serviceID;
-    private String monthlyRentBillID;
     private String name;
-    private Double quantity;
     private Double pricePerUnit;
     private String unit;
-    private Double totalAmount;
-    public Service(String serviceID, String monthlyRentBillID, String name,
-                   Double quantity, Double pricePerUnit, String unit, Double totalAmount) {
+    private String type; // Thêm trường type vào class
+
+    public Service(String serviceID, String name, Double pricePerUnit, String unit, String type) {
         this.serviceID = serviceID;
-        this.monthlyRentBillID = monthlyRentBillID;
         this.name = name;
-        this.quantity = quantity;
         this.pricePerUnit = pricePerUnit;
         this.unit = unit;
-        this.totalAmount = totalAmount;
+        this.type = type;
     }
+
     public Service() {
-    }
-    public Service(Service service) {
-        this.serviceID = service.serviceID;
-        this.monthlyRentBillID = service.monthlyRentBillID;
-        this.name = service.name;
-        this.quantity = service.quantity;
-        this.pricePerUnit = service.pricePerUnit;
-        this.unit = service.unit;
-        this.totalAmount = service.totalAmount;
     }
 
     public String getServiceID() {
@@ -46,28 +30,12 @@ public class Service {
         this.serviceID = serviceID;
     }
 
-    public String getMonthlyRentBillID() {
-        return monthlyRentBillID;
-    }
-
-    public void setMonthlyRentBillID(String monthlyRentBillID) {
-        this.monthlyRentBillID = monthlyRentBillID;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
     }
 
     public Double getPricePerUnit() {
@@ -86,24 +54,22 @@ public class Service {
         this.unit = unit;
     }
 
-    public Double getTotalAmount() {
-        return totalAmount;
+    public String getType() {
+        return type;
     }
 
-    public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "Service{" +
                 "serviceID='" + serviceID + '\'' +
-                ", monthlyRentBillID='" + monthlyRentBillID + '\'' +
                 ", name='" + name + '\'' +
-                ", quantity=" + quantity +
                 ", pricePerUnit=" + pricePerUnit +
                 ", unit='" + unit + '\'' +
-                ", totalAmount=" + totalAmount +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
