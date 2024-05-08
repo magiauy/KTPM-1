@@ -28,7 +28,6 @@
                <children>
                           <TextField fx:id="TxtField__P3__1" layoutX="120.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
                           <TextField fx:id="TxtField__P3__2" layoutX="120.0" layoutY="79.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
-                          <TextField fx:id="TxtField__P3__4" layoutX="120.0" layoutY="189.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
                           <TextField fx:id="TxtField__P3__3" layoutX="120.0" layoutY="134.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
                           <Label alignment="CENTER" contentDisplay="CENTER" layoutY="300.0" prefHeight="32.0" prefWidth="120.0" text="Thời hạn " textFill="WHITE">
                               <font>
@@ -36,11 +35,6 @@
                               </font>
                   </Label>
                           <Label alignment="CENTER" contentDisplay="CENTER" layoutY="245.0" prefHeight="32.0" prefWidth="120.0" text="Ngày xuất phiếu" textFill="WHITE">
-                              <font>
-                                  <Font name="System Bold" size="13.0" />
-                              </font>
-                  </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutY="189.0" prefHeight="32.0" prefWidth="120.0" text="Mã hợp đồng" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
@@ -103,16 +97,15 @@
                             </ImageView>
                         </graphic>
             </Button>
-                    <TableView fx:id="table__P3__1" layoutX="361.0" layoutY="117.0" onMouseClicked="#showMonthlyRentBill" prefHeight="490.0" prefWidth="476.0">
+                    <TableView fx:id="table__P3__1" layoutX="373.0" layoutY="117.0" onMouseClicked="#showMonthlyRentBill" prefHeight="490.0" prefWidth="476.0">
                         <columns>
                             <TableColumn fx:id="ColumnP3__1" prefWidth="75.0" text="Mã phiếu thu" />
                             <TableColumn fx:id="ColumnP3__2" prefWidth="58.66668701171875" text="Mã căn hộ" />
                   <TableColumn fx:id="ColumnP3__3" prefWidth="58.666656494140625" text="Mã khách hàng" />
-                  <TableColumn fx:id="ColumnP3__4" prefWidth="56.66668701171875" text="Mã hợp đồng" />
-                  <TableColumn fx:id="ColumnP3__5" prefWidth="47.33331298828125" text="Ngày xuất phiếu" />
-                  <TableColumn fx:id="ColumnP3__6" prefWidth="64.6666259765625" text="Thời hạn" />
-                  <TableColumn fx:id="ColumnP3__7" prefWidth="52.66668701171875" text="Tổng tiền" />
-                  <TableColumn fx:id="ColumnP3__8" prefWidth="60.0" text="Trạng thái" />
+                  <TableColumn fx:id="ColumnP3__5" prefWidth="66.00006103515625" text="Ngày xuất phiếu" />
+                  <TableColumn fx:id="ColumnP3__6" prefWidth="45.99993896484375" text="Thời hạn" />
+                  <TableColumn fx:id="ColumnP3__7" prefWidth="86.66668701171875" text="Tổng tiền" />
+                  <TableColumn fx:id="ColumnP3__8" prefWidth="82.66668701171875" text="Trạng thái" />
                         </columns>
                     </TableView>
                       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="82.0" layoutY="68.0" prefHeight="30.0" prefWidth="211.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin phiếu thu tháng">

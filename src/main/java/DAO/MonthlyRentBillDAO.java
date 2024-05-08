@@ -53,7 +53,7 @@ public class MonthlyRentBillDAO implements DAOInterface<MonthlyRentBill> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE MonthlyRentBill SET apartmentID = ?, tenantID = ?, leaseAgreementID = ?, date = ?, repaymentPeriod = ?, totalPayment = ?, status = ? WHERE monthlyRentBillID = ?");
+                    "UPDATE MonthlyRentBill SET apartmentID = ?, tenantID = ?, date = ?, repaymentPeriod = ?, totalPayment = ?, status = ? WHERE monthlyRentBillID = ?");
 
             preparedStatement.setString(1, monthlyRentBill.getApartmentID());
             preparedStatement.setString(2, monthlyRentBill.getTenantID());

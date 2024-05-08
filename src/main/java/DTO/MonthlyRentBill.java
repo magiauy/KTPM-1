@@ -21,9 +21,7 @@ public class MonthlyRentBill {
     private Double totalPayment;
     private String status;
 
-    public MonthlyRentBill(String monthlyRentBillID, String apartmentID, String tenantID,
-                           LocalDate date, int repaymentPeriod,
-                           Double totalPayment, String status) {
+    public MonthlyRentBill(String monthlyRentBillID, String apartmentID, String tenantID, LocalDate date, int repaymentPeriod, Double totalPayment, String status) {
         this.monthlyRentBillID = monthlyRentBillID;
         this.apartmentID = apartmentID;
         this.tenantID = tenantID;
@@ -36,7 +34,7 @@ public class MonthlyRentBill {
     public MonthlyRentBill() {
     }
 
-    public MonthlyRentBill(MonthlyRentBill monthlyRentBill) {
+    public MonthlyRentBill(MonthlyRentBill monthlyRentBill){
         this.monthlyRentBillID = monthlyRentBill.monthlyRentBillID;
         this.apartmentID = monthlyRentBill.apartmentID;
         this.tenantID = monthlyRentBill.tenantID;
@@ -69,6 +67,7 @@ public class MonthlyRentBill {
     public void setTenantID(String tenantID) {
         this.tenantID = tenantID;
     }
+
     public LocalDate getDate() {
         return date;
     }
@@ -113,5 +112,4 @@ public class MonthlyRentBill {
                 ", status='" + status + '\'' +
                 '}';
     }
-
 }
