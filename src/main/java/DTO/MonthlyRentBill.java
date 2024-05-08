@@ -16,17 +16,15 @@ public class MonthlyRentBill {
     private String monthlyRentBillID;;
     private String apartmentID;
     private String tenantID;
-    private String leaseAgreementID;
     private LocalDate date;
     private int repaymentPeriod;
     private Double totalPayment;
     private String status;
 
-    public MonthlyRentBill(String monthlyRentBillID, String apartmentID, String tenantID, String leaseAgreementID, LocalDate date, int repaymentPeriod, Double totalPayment, String status) {
+    public MonthlyRentBill(String monthlyRentBillID, String apartmentID, String tenantID, LocalDate date, int repaymentPeriod, Double totalPayment, String status) {
         this.monthlyRentBillID = monthlyRentBillID;
         this.apartmentID = apartmentID;
         this.tenantID = tenantID;
-        this.leaseAgreementID = leaseAgreementID;
         this.date = date;
         this.repaymentPeriod = repaymentPeriod;
         this.totalPayment = totalPayment;
@@ -40,7 +38,6 @@ public class MonthlyRentBill {
         this.monthlyRentBillID = monthlyRentBill.monthlyRentBillID;
         this.apartmentID = monthlyRentBill.apartmentID;
         this.tenantID = monthlyRentBill.tenantID;
-        this.leaseAgreementID = monthlyRentBill.leaseAgreementID;
         this.date = monthlyRentBill.date;
         this.repaymentPeriod = monthlyRentBill.repaymentPeriod;
         this.totalPayment = monthlyRentBill.totalPayment;
@@ -69,14 +66,6 @@ public class MonthlyRentBill {
 
     public void setTenantID(String tenantID) {
         this.tenantID = tenantID;
-    }
-
-    public String getLeaseAgreementID() {
-        return leaseAgreementID;
-    }
-
-    public void setLeaseAgreementID(String leaseAgreementID) {
-        this.leaseAgreementID = leaseAgreementID;
     }
 
     public LocalDate getDate() {
@@ -117,7 +106,6 @@ public class MonthlyRentBill {
                 "monthlyRentBillID='" + monthlyRentBillID + '\'' +
                 ", apartmentID='" + apartmentID + '\'' +
                 ", tenantID='" + tenantID + '\'' +
-                ", leaseAgreementID='" + leaseAgreementID + '\'' +
                 ", date=" + date +
                 ", repaymentPeriod=" + repaymentPeriod +
                 ", totalPayment=" + totalPayment +

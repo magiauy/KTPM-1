@@ -24,7 +24,7 @@ public class FurnitureDAO implements DAOInterface<Furniture>{
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
-            String sql = "INSERT INTO Furniture (furnitureID, apartmentID, nameFurniture, conditionFurniture, price) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Furniture (furnitureID, apartmentID, name, condition, price) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL
@@ -51,7 +51,7 @@ public class FurnitureDAO implements DAOInterface<Furniture>{
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
-            String sql  = "UPDATE Furniture SET apartmentID = ?, nameFurniture = ?, conditionFurniture = ?, price = ? WHERE furnitureID = ?";
+            String sql  = "UPDATE Furniture SET apartmentID = ?, name = ?, condition = ?, price = ? WHERE furnitureID = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL
@@ -144,8 +144,8 @@ public class FurnitureDAO implements DAOInterface<Furniture>{
     private Furniture createFurnitureFromResultSet(ResultSet resultSet) throws SQLException {
         String furnitureID = resultSet.getString("furnitureID");
         String apartmentID = resultSet.getString("apartmentID");
-        String nameFurniture = resultSet.getString("nameFurniture");
-        String conditionFurniture = resultSet.getString("conditionFurniture");
+        String nameFurniture = resultSet.getString("name");
+        String conditionFurniture = resultSet.getString("condition");
         Double price = resultSet.getDouble("price");
 
         return new Furniture(furnitureID, apartmentID, nameFurniture, conditionFurniture, price);
