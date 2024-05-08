@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="revert commit (22/4)">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_8_2024_8_40_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_8_2024_8_40_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/Apartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/Apartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page5.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page5.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page6.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page6.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,6 +225,9 @@
       <workItem from="1714972135754" duration="35000" />
       <workItem from="1714972219270" duration="4297000" />
       <workItem from="1715137742627" duration="558000" />
+      <workItem from="1715153867580" duration="1567000" />
+      <workItem from="1715155756281" duration="5066000" />
+      <workItem from="1715161209890" duration="2339000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
