@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.CustomerController">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1182.0" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.CustomerController">
    <left>
       <Pane prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: rgb(240,240,240); -fx-border-color: rgb(255,255,255); -fx-border-width: 0px 2px 0px 0px;" BorderPane.alignment="CENTER">
          <children>
@@ -21,8 +23,8 @@
                   <Image url="@../../../Picture/shutterstock_1692834160-copy-scaled.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="20.0" layoutY="670.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#page2" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Phiếu thu" textAlignment="CENTER" textFill="#4a4a4a">
+            <Button layoutX="20.0" layoutY="671.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="3.0" layoutY="420.0" mnemonicParsing="false" onMouseClicked="#page2" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Phiếu thu" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -31,7 +33,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#page1" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Dịch vụ" textAlignment="CENTER" textFill="#4a4a4a">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="3.0" layoutY="323.0" mnemonicParsing="false" onMouseClicked="#page1" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Dịch vụ" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -40,7 +42,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#page3" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Thống kê" textAlignment="CENTER" textFill="#4a4a4a">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="4.0" layoutY="523.0" mnemonicParsing="false" onMouseClicked="#page3" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Thống kê" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -49,97 +51,160 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Label alignment="CENTER" layoutX="-1.0" layoutY="113.0" prefHeight="30.0" prefWidth="170.0" text="24/ 03/ 2024" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="time" alignment="CENTER" layoutX="-42.0" layoutY="121.0" prefHeight="140.0" prefWidth="250.0" text="Giờ" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="-20.0" layoutY="244.0" prefHeight="35.0" prefWidth="206.0" text="TP.HCM" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </left>
    <center>
-      <Pane fx:id="mp" prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240);" BorderPane.alignment="CENTER">
+      <Pane fx:id="mp" onMouseClicked="#loadPage0" prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240);" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="28.0" prefHeight="30.0" prefWidth="722.0" style="-fx-background-color: rgb(145,205,175);" text="Start Sky" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="28.0" prefHeight="30.0" prefWidth="990.0" style="-fx-background-color: rgb(145,205,175);" text="Start Sky" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Pane layoutX="45.0" layoutY="431.0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <Pane layoutX="78.0" layoutY="431.0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <children>
-                  <Label alignment="CENTER" layoutX="33.0" layoutY="8.0" prefHeight="30.0" prefWidth="170.0" text="Hóa đơn tháng hiện tại" textAlignment="CENTER" textFill="WHITE" />
-                  <Label fx:id="monthlyBillLabel" alignment="CENTER" layoutX="7.0" layoutY="23.0" prefHeight="241.0" prefWidth="221.0" text=" " textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="33.0" layoutY="8.0" prefHeight="30.0" prefWidth="170.0" text="Hóa đơn tháng hiện tại" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Label fx:id="monthlyBillLabel" alignment="CENTER" layoutX="14.0" layoutY="38.0" prefHeight="104.0" prefWidth="208.0" text=" " textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="30.0" />
                      </font></Label>
-               </children></Pane>
-            <Pane layoutX="370.0" layoutY="97.0" opacity="0.8" prefHeight="320.0" prefWidth="460.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
-               <children>
-                  <Label alignment="CENTER" layoutX="88.0" layoutY="2.0" prefHeight="35.0" prefWidth="284.0" text="Phí vận hành tháng (triệu)" textAlignment="CENTER" textFill="WHITE" />
-                  <BarChart fx:id="barChartOfMonthlyOpex" layoutX="20.0" layoutY="37.0" prefHeight="250.0" prefWidth="421.0">
-                    <xAxis>
-                      <CategoryAxis label="Tháng" prefHeight="37.0" prefWidth="344.0" side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis label="Triệu" prefHeight="204.0" prefWidth="47.0" side="LEFT" />
-                    </yAxis>
-                  </BarChart>
-               </children></Pane>
-            <Pane layoutX="303.0" layoutY="433.0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
-               <children>
-                  <Label alignment="CENTER" layoutX="33.0" layoutY="7.0" prefHeight="30.0" prefWidth="170.0" styleClass="\\]" text="Tổng quát những hóa đơn" textAlignment="CENTER" textFill="WHITE" />
-                  <PieChart fx:id="numberOfStatusLabel" layoutX="-4.0" layoutY="22.0" prefHeight="248.0" prefWidth="244.0" />
-               </children></Pane>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="593.0" layoutY="460.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Sơ lược thông tin" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="lastname" alignment="CENTER" contentDisplay="CENTER" layoutX="539.0" layoutY="514.0" prefHeight="25.0" prefWidth="150.0" text="Họ: Phạm Văn" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="firstname" alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="514.0" prefHeight="25.0" prefWidth="150.0" text="Tên: Nam" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="phone" alignment="CENTER" contentDisplay="CENTER" layoutX="539.0" layoutY="554.0" prefHeight="25.0" prefWidth="150.0" text="SĐT: 0777777878" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="dob" alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="554.0" prefHeight="25.0" prefWidth="150.0" text="Dob: 29/2/2004" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="gender" alignment="CENTER" contentDisplay="CENTER" layoutX="539.0" layoutY="598.0" prefHeight="25.0" prefWidth="150.0" text="Giới tính: Nam" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="tenantID" alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="598.0" prefHeight="25.0" prefWidth="150.0" text="ID: QL000" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" layoutX="539.0" layoutY="637.0" prefHeight="25.0" prefWidth="150.0" text="Lương: 128.67 (triệu)" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label fx:id="CCCD" alignment="CENTER" contentDisplay="CENTER" layoutX="704.0" layoutY="637.0" prefHeight="25.0" prefWidth="150.0" text="CCCD: 0878987908" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Pane layoutX="45.0" layoutY="97.0" opacity="0.8" prefHeight="320.0" prefWidth="300.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
-               <children>
-                  <Label fx:id="time" alignment="CENTER" layoutX="25.0" layoutY="87.0" prefHeight="140.0" prefWidth="250.0" text="Giờ" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="statusOfMonthlyBills" alignment="CENTER" layoutX="14.0" layoutY="151.0" prefHeight="104.0" prefWidth="208.0" text=" " textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="30.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="65.0" layoutY="25.0" prefHeight="30.0" prefWidth="170.0" text="24/ 03/ 2024" textAlignment="CENTER" textFill="WHITE" />
-                  <Label alignment="CENTER" layoutX="47.0" layoutY="252.0" prefHeight="35.0" prefWidth="206.0" text="TP.HCM" textAlignment="CENTER" textFill="WHITE" />
+               </children></Pane>
+            <Pane layoutX="357.0" layoutY="431.0" onMouseClicked="#loadPage0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+               <children>
+                  <Label alignment="CENTER" layoutX="25.0" layoutY="7.0" prefHeight="30.0" prefWidth="186.0" styleClass="\\]" text="Tổng quát những hóa đơn" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <PieChart fx:id="pieChart" layoutX="-4.0" layoutY="22.0" prefHeight="248.0" prefWidth="244.0" />
+               </children></Pane>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="703.0" layoutY="442.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Sơ lược thông tin" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <TableView fx:id="cohabitantTable" layoutX="363.0" layoutY="107.0" prefHeight="318.0" prefWidth="640.0">
+               <columns>
+                  <TableColumn fx:id="nameCol" prefWidth="170.0" text="Họ &amp; Tên" />
+                  <TableColumn fx:id="phoneCol" prefWidth="159.0" text="Số điện thoại" />
+                  <TableColumn fx:id="dobCol" prefWidth="129.0" text="Năm sinh" />
+                  <TableColumn fx:id="genderCol" prefWidth="179.0" text="Giới tình" />
+               </columns>
+            </TableView>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="592.0" layoutY="76.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Thông tin người ở chung" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="76.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Thông tin hợp đồng" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="45.0" layoutY="111.0" prefHeight="311.0" prefWidth="301.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="171.0" minWidth="10.0" prefWidth="161.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="115.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="30.0" prefWidth="170.0" text="Thời hạn hợp đồng:" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="TOP_LEFT" prefHeight="30.0" prefWidth="170.0" text="Tiền cọc:" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="TOP_LEFT" prefHeight="30.0" prefWidth="170.0" text="Tiền phòng hàng tháng:" textAlignment="CENTER" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="termLabel" alignment="CENTER" prefHeight="30.0" prefWidth="170.0" text=". . ." textAlignment="CENTER" textFill="#8a2e2e" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="rentLabel" alignment="CENTER" prefHeight="30.0" prefWidth="170.0" text=". . ." textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="deposiLabel" alignment="CENTER" prefHeight="30.0" prefWidth="170.0" text=". . ." textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children>
-            </Pane>
+            </GridPane>
+            <GridPane layoutX="676.0" layoutY="475.0" prefHeight="218.0" prefWidth="235.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label fx:id="fullname" contentDisplay="CENTER" prefHeight="25.0" prefWidth="249.0" text="Họ &amp; Tên: " textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="phone" contentDisplay="CENTER" prefHeight="25.0" prefWidth="221.0" text="SĐT: " textFill="WHITE" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="dob" contentDisplay="CENTER" prefHeight="25.0" prefWidth="150.0" text="Dob: " textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="gender" contentDisplay="CENTER" prefHeight="25.0" prefWidth="150.0" text="Giới tính: " textFill="WHITE" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="CCCD" contentDisplay="CENTER" prefHeight="25.0" prefWidth="255.0" text="CCCD: " textFill="WHITE" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
          </children>
       </Pane>
 

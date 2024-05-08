@@ -1,4 +1,6 @@
 package BUS;
+import com.example.managingbuildingjava.Customer;
+import javafx.scene.paint.Color;
 
 import DAO.MonthlyRentBillDAO;
 import DTO.FinancialReport;
@@ -6,15 +8,24 @@ import DTO.MonthlyRentBill;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
+import java.awt.*;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class MonthlyRentBillBUS {
     private ArrayList<MonthlyRentBill> monthlyRentBills = new ArrayList<>();
 
+    private static MonthlyRentBillBUS instance;
     public static MonthlyRentBillBUS getInstance() {
-        return new MonthlyRentBillBUS();
+        if (instance == null) {
+            instance = new MonthlyRentBillBUS();
+        }
+        return instance;
     }
 
 
@@ -59,6 +70,16 @@ public class MonthlyRentBillBUS {
         }
         return  monthlyRentBillsWithTenantID;
     }
+
+    public int getIndexByMonthlyRentBillID(String monthlyRentBillID) {
+        for (int i = 0; i < this.monthlyRentBills.size(); i++) {
+            if (this.monthlyRentBills.get(i).getMonthlyRentBillID() == monthlyRentBillID) {
+                return i;
+            }
+        }
+        return -1; // Not found
+    }
+
     public void setMonthlyRentBillsLabel(PieChart numberOfStatusLabel){
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
         ArrayList<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getAll();
@@ -87,12 +108,74 @@ public class MonthlyRentBillBUS {
         // Cập nhật dữ liệu cho numberOfStatusLabel
         numberOfStatusLabel.setData(pieChartData);
     }
-    public int getIndexByMonthlyRentBillID(String monthlyRentBillID) {
-        for (int i = 0; i < this.monthlyRentBills.size(); i++) {
-            if (this.monthlyRentBills.get(i).getMonthlyRentBillID() == monthlyRentBillID) {
-                return i;
+
+    public void updateMonthlyBill(javafx.scene.control.Label monthlyBillLabel,javafx.scene.control.Label statusOfMonthlyBills, String tenantId){
+        ObservableList<MonthlyRentBill> monthlyRentBills = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(tenantId));
+
+        double totalPayment = 0;
+        String status = "";
+        Month currentDate = LocalDate.now().getMonth();
+        for (MonthlyRentBill monthlyRentBill : monthlyRentBills){
+            if (Objects.equals(monthlyRentBill.getTenantID(), tenantId)) {
+                if (monthlyRentBill.getDate().getMonth() == currentDate) {
+                    totalPayment += monthlyRentBill.getTotalPayment();
+                    status = monthlyRentBill.getStatus();
+                }
             }
         }
-        return -1; // Not found
+        if ("Paid".equals(status)) {
+            statusOfMonthlyBills.setTextFill(Color.BLUE);
+            statusOfMonthlyBills.setText(status);
+        } else {
+            statusOfMonthlyBills.setTextFill(Color.RED);
+            statusOfMonthlyBills.setText(status);
+        }
+
+        monthlyBillLabel.setText(totalPayment+"");
+    }
+
+    public void updatePiechart(PieChart pieChart, String ID) {
+        ObservableList<MonthlyRentBill> monthlyRentBills = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(ID));
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+        // Variables to hold total payment and count for each status
+        int unpaidTotal = 0;
+        int unpaidCount = 0;
+        int paidTotal = 0;
+        int paidCount = 0;
+        int overdueTotal = 0;
+        int overdueCount = 0;
+
+        // Iterate through the monthly rent bills to calculate the total payment and count for each status
+        for (MonthlyRentBill bill : monthlyRentBills) {
+            switch (bill.getStatus()) {
+                case "Unpaid":
+                    unpaidTotal += bill.getTotalPayment();
+                    unpaidCount++;
+                    break;
+                case "Paid":
+                    paidTotal += bill.getTotalPayment();
+                    paidCount++;
+                    break;
+                case "Overdue":
+                    overdueTotal += bill.getTotalPayment();
+                    overdueCount++;
+                    break;
+            }
+        }
+
+        // Add data to the pie chart
+        if (unpaidCount > 0) {
+            pieChartData.add(new PieChart.Data("Unpaid (" + unpaidCount + ")", unpaidTotal));
+        }
+        if (paidCount > 0) {
+            pieChartData.add(new PieChart.Data("Paid (" + paidCount + ")", paidTotal));
+        }
+        if (overdueCount > 0) {
+            pieChartData.add(new PieChart.Data("Overdue (" + overdueCount + ")", overdueTotal));
+        }
+
+        pieChart.setData(pieChartData);
     }
 }

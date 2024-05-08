@@ -9,15 +9,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FinancialReportDAO implements DAOInterface<FinancialReport> {
     public FinancialReportDAO() {
     }
 
-    public static FinancialReportDAO getInstance(){
+    public static FinancialReportDAO getInstance() {
         return new FinancialReportDAO();
     }
+
     @Override
     public int insert(FinancialReport financialReport) {
         int ketQua = 0;
@@ -29,10 +31,10 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
             preparedStatement.setString(1, financialReport.getFinancialReportID());
             preparedStatement.setString(2, financialReport.getBuildingID());
             preparedStatement.setString(3, financialReport.getBuildingManagerID());
-            preparedStatement.setDate(4, new Date(financialReport.getDate().getTime()));
-            preparedStatement.setDouble(5, financialReport.getMonthlyRevenue());
-            preparedStatement.setDouble(6, financialReport.getMonthlyOpex());
-            preparedStatement.setDouble(7, financialReport.getMonthlyProfit());
+            preparedStatement.setDate(4, Date.valueOf(financialReport.getDate()));
+            preparedStatement.setFloat(5, financialReport.getMonthlyRevenue());
+            preparedStatement.setFloat(6, financialReport.getMonthlyOpex());
+            preparedStatement.setFloat(7, financialReport.getMonthlyProfit());
 
             ketQua = preparedStatement.executeUpdate();
 
@@ -54,10 +56,13 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
 
             preparedStatement.setString(1, financialReport.getBuildingID());
             preparedStatement.setString(2, financialReport.getBuildingManagerID());
-            preparedStatement.setDate(3, new Date(financialReport.getDate().getTime()));
-            preparedStatement.setDouble(4, financialReport.getMonthlyRevenue());
-            preparedStatement.setDouble(5, financialReport.getMonthlyOpex());
-            preparedStatement.setDouble(6, financialReport.getMonthlyProfit());
+
+            LocalDate dob = financialReport.getDate();
+            java.sql.Date sqlDob = java.sql.Date.valueOf(dob);
+            preparedStatement.setDate(3, sqlDob);
+            preparedStatement.setFloat(4, financialReport.getMonthlyRevenue());
+            preparedStatement.setFloat(5, financialReport.getMonthlyOpex());
+            preparedStatement.setFloat(6, financialReport.getMonthlyProfit());
             preparedStatement.setString(7, financialReport.getFinancialReportID());
 
             ketQua = preparedStatement.executeUpdate();
@@ -102,12 +107,13 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
                 String financialReportID = resultSet.getString("financialReportID");
                 String buildingID = resultSet.getString("buildingID");
                 String buildingManagerID = resultSet.getString("buildingManagerID");
-                Date date = resultSet.getDate("Date");
-                double monthlyRevenue = resultSet.getDouble("monthlyRevenue");
-                double monthlyOpex = resultSet.getDouble("monthlyOpex");
-                double monthlyProfit = resultSet.getDouble("monthlyProfit");
+                LocalDate date = resultSet.getDate("Date").toLocalDate();
+                Float monthlyRevenue = resultSet.getFloat("monthlyRevenue");
+                Float monthlyOpex = resultSet.getFloat("monthlyOpex");
+                Float monthlyProfit = resultSet.getFloat("monthlyProfit");
 
-                FinancialReport financialReport = new FinancialReport(financialReportID, buildingID, buildingManagerID, date, monthlyRevenue, monthlyOpex, monthlyProfit);
+                FinancialReport financialReport = new FinancialReport(financialReportID, buildingID, buildingManagerID,
+                        date, monthlyRevenue, monthlyOpex, monthlyProfit);
                 financialReports.add(financialReport);
             }
             resultSet.close();
@@ -118,7 +124,6 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
         }
         return financialReports;
     }
-
 
     @Override
     public FinancialReport selectById(String ID) {
@@ -134,12 +139,13 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
                 String financialReportID = resultSet.getString("financialReportID");
                 String buildingID = resultSet.getString("buildingID");
                 String buildingManagerID = resultSet.getString("buildingManagerID");
-                Date date = resultSet.getDate("Date");
-                double monthlyRevenue = resultSet.getDouble("monthlyRevenue");
-                double monthlyOpex = resultSet.getDouble("monthlyOpex");
-                double monthlyProfit = resultSet.getDouble("monthlyProfit");
+                LocalDate date = resultSet.getDate("Date").toLocalDate();
+                Float monthlyRevenue = resultSet.getFloat("monthlyRevenue");
+                Float monthlyOpex = resultSet.getFloat("monthlyOpex");
+                Float monthlyProfit = resultSet.getFloat("monthlyProfit");
 
-                financialReport = new FinancialReport(financialReportID, buildingID, buildingManagerID, date, monthlyRevenue, monthlyOpex, monthlyProfit);
+                financialReport = new FinancialReport(financialReportID, buildingID, buildingManagerID, date,
+                        monthlyRevenue, monthlyOpex, monthlyProfit);
             }
 
             resultSet.close();
