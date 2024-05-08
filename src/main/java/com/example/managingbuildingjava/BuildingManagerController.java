@@ -283,7 +283,7 @@ public class BuildingManagerController implements Initializable {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
         TxtField__P1__1.setText(selectedApartment.getApartmentID());
         TxtField__P1__2.setText(selectedApartment.getRoomNumber());
-        TxtField__P1__3.setText(selectedApartment.getArea());
+        TxtField__P1__3.setText(String.valueOf(selectedApartment.getArea()));
         TxtField__P1__4.setText(String.valueOf(selectedApartment.getBedrooms()));
         TxtField__P1__5.setText(String.valueOf(selectedApartment.getBathrooms()));
         comboBox__P1__3.setValue(selectedApartment.getFurniture());
@@ -293,9 +293,18 @@ public class BuildingManagerController implements Initializable {
     void suaCanHo(ActionEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
         selectedApartment.setApartmentID(TxtField__P1__1.getText());
-        selectedApartment.setBuildingID("B1");
+
+        BuildingManagerBUS bus = new BuildingManagerBUS();
+        List<BuildingManager> buildingManagers = bus.getAll();
+
+        for (BuildingManager buildingManager : buildingManagers) {
+            if (ID.equals(buildingManager.getBuildingManagerId())) {
+                selectedApartment.setBuildingID(buildingManager.getBuildingId());
+                break;
+            }
+        }
         selectedApartment.setRoomNumber(TxtField__P1__2.getText());
-        selectedApartment.setArea(TxtField__P1__3.getText() + "m\u00B2");
+        selectedApartment.setArea(Double.parseDouble(TxtField__P1__3.getText()));
         selectedApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
         selectedApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
         selectedApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
@@ -325,7 +334,7 @@ public class BuildingManagerController implements Initializable {
             }
             newApartment.setApartmentID(TxtField__P1__1.getText());
             newApartment.setRoomNumber(TxtField__P1__2.getText());
-            newApartment.setArea(TxtField__P1__3.getText() + "m\u00B2");
+            newApartment.setArea(Double.parseDouble(TxtField__P1__3.getText()));
             newApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
             newApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
             newApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
@@ -683,12 +692,13 @@ public class BuildingManagerController implements Initializable {
             System.out.println(selectedCohatitant);
             CohabitantBUS cohabitantBUS = new CohabitantBUS();
             boolean deleteSuccess = cohabitantBUS.delete(selectedCohatitant);
+            System.out.println(deleteSuccess);
             if (deleteSuccess) {
                 cohabitantObservableList.remove(selectedCohatitant);
                 table__P2_1__1.refresh();
                 refreshFormCohabitant();
             } else {
-                System.err.println("Không thể xóa căn hộ từ cơ sở dữ liệu.");
+                System.err.println("Không thể xóa cư dân từ cơ sở dữ liệu.");
             }
         }
     }
@@ -890,43 +900,43 @@ public class BuildingManagerController implements Initializable {
     private TableColumn<Service, String> madv = new TableColumn<>();
 
     @FXML
-    private TableColumn<Service, String> tenDV;
+    private TableColumn<Service, String> tenDV = new TableColumn<>();
 
     @FXML
-    private TableColumn<Service, Double> giaDV;
+    private TableColumn<Service, Double> giaDV = new TableColumn<>();
 
     @FXML
-    private TableColumn<Service, String> donVi;
+    private TableColumn<Service, String> donVi = new TableColumn<>();
 
     @FXML
-    private TableColumn<Service, String> loai;
+    private TableColumn<Service, String> loai = new TableColumn<>();
 
     @FXML
     private TableView<Service> table__P4__11 = new TableView<>();
 
     @FXML
-    private ComboBox<String> fill_type;
+    private ComboBox<String> fill_type = new ComboBox<>();
 
     @FXML
-    private TextField TxtField__P4__search1;
+    private TextField TxtField__P4__search1 = new TextField();
 
     @FXML
-    private ComboBox<String> comboBox__P4__11;
+    private ComboBox<String> comboBox__P4__11 = new ComboBox<>();
 
     @FXML
-    private ComboBox<String> comboBox__P4__21;
+    private ComboBox<String> comboBox__P4__21 = new ComboBox<>();
 
     @FXML
-    private TextField TxtField__P4__11;
+    private TextField TxtField__P4__11 = new TextField();
 
     @FXML
-    private TextField TxtField__P4__31;
+    private TextField TxtField__P4__31 = new TextField();
 
     @FXML
-    private TextField TxtField__P4__51;
+    private TextField TxtField__P4__51 = new TextField();
 
     @FXML
-    private TextField TxtField__P4__61;
+    private TextField TxtField__P4__61 = new TextField();
 
     private ObservableList<Service> ServiceList;
     private Service servicedelete;
@@ -1075,49 +1085,49 @@ public class BuildingManagerController implements Initializable {
     // Phiếu Dichj Vụ
 
     @FXML
-    private TableColumn<ServiceTicket, String> maPDV;
+    private TableColumn<ServiceTicket, String> maPDV = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, String> maPhieuThu;
+    private TableColumn<ServiceTicket, String> maPhieuThu = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, String> maDichVu;
+    private TableColumn<ServiceTicket, String> maDichVu = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, Double> soLuong;
+    private TableColumn<ServiceTicket, Double> soLuong = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, Double> thanhTien;
+    private TableColumn<ServiceTicket, Double> thanhTien = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, LocalDate> ngayTaoPhieu;
+    private TableColumn<ServiceTicket, LocalDate> ngayTaoPhieu = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, String> ghiChu;
+    private TableColumn<ServiceTicket, String> ghiChu = new TableColumn<>();
 
     @FXML
-    private TextField maPhieuDVField;
+    private TextField maPhieuDVField = new TextField();
 
     @FXML
-    private TextField maPhieuThuField;
+    private TextField maPhieuThuField = new TextField();
 
     @FXML
-    private TextField maDichVuField;
+    private TextField maDichVuField = new TextField();
 
     @FXML
-    private TextField soLuongField;
+    private TextField soLuongField = new TextField();
 
     @FXML
-    private TextField thanhTienField;
+    private TextField thanhTienField = new TextField();
 
     @FXML
-    private DatePicker ngayGhiPicker;
+    private DatePicker ngayGhiPicker = new DatePicker();
 
     @FXML
-    private TextArea ghiChuArea;
+    private TextArea ghiChuArea = new TextArea();
 
     @FXML
-    private TableView<ServiceTicket> table__sericetiket;
+    private TableView<ServiceTicket> table__sericetiket = new TableView<>();
 
     private ObservableList<ServiceTicket> serviceTicketslist;
     private ServiceTicket serviceTicket;
@@ -1247,22 +1257,22 @@ public class BuildingManagerController implements Initializable {
     // Phạt
 
     @FXML
-    private TableView<Violation> tableViolation;
+    private TableView<Violation> tableViolation = new TableView<>();
 
     @FXML
-    private TableColumn<Violation, String> maphat;
+    private TableColumn<Violation, String> maphat = new TableColumn<>();
 
     @FXML
-    private TableColumn<Violation, String> vipham;
+    private TableColumn<Violation, String> vipham = new TableColumn<>();
 
     @FXML
-    private TableColumn<Violation, Double> tienphat;
+    private TableColumn<Violation, Double> tienphat = new TableColumn<>();
     @FXML
-    private TextField maPhatField;
+    private TextField maPhatField = new TextField();
     @FXML
-    private TextField viphamField;
+    private TextField viphamField = new TextField();
     @FXML
-    private TextField tienPhatField;
+    private TextField tienPhatField = new TextField();
     private ObservableList<Violation> violationslist;
     private Violation violation;
     private Violation violationdelete;
@@ -1377,29 +1387,29 @@ public class BuildingManagerController implements Initializable {
     // Phiếu Phạt
 
     @FXML
-    private TableView<ViolationTicket> tableviolationticket;
+    private TableView<ViolationTicket> tableviolationticket = new TableView<>();
     @FXML
-    private TableColumn<ViolationTicket, String> mxPP;
+    private TableColumn<ViolationTicket, String> mxPP = new TableColumn<>();
     @FXML
-    private TableColumn<ViolationTicket, String> mxPThu;
+    private TableColumn<ViolationTicket, String> mxPThu = new TableColumn<>();
     @FXML
-    private TableColumn<ViolationTicket, Double> mxThanhTien;
+    private TableColumn<ViolationTicket, Double> mxThanhTien = new TableColumn<>();
     @FXML
-    private TableColumn<ViolationTicket, LocalDate> mxNgayghi;
+    private TableColumn<ViolationTicket, LocalDate> mxNgayghi = new TableColumn<>();
     @FXML
-    private TableColumn<ViolationTicket, String> mxghichu;
+    private TableColumn<ViolationTicket, String> mxghichu = new TableColumn<>();
     @FXML
-    private TextField maPPField;
+    private TextField maPPField = new TextField();
     @FXML
-    private TextField maPThuField;
+    private TextField maPThuField = new TextField();
 
     @FXML
-    private TextField thanhTienPPField;
+    private TextField thanhTienPPField = new TextField();
 
     @FXML
-    private DatePicker ngayGhiPPField;
+    private DatePicker ngayGhiPPField = new DatePicker();
     @FXML
-    private TextArea ghiChuPPField;
+    private TextArea ghiChuPPField = new TextArea();
 
     private ObservableList<ViolationTicket> violationsList;
     private ViolationTicket violationTicketdelete;
@@ -1590,8 +1600,33 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
-    void suaNoiThat(ActionEvent event) {
+    void showFurniture(MouseEvent event) {
+        Furniture furniture = table__P5__1.getSelectionModel().getSelectedItem();
+        TxtField__P5__1.setText(furniture.getFurnitureID());
+        TxtField__P5__2.setText(furniture.getApartmentID());
+        TxtField__P5__3.setText(furniture.getName());
+        comboBox__P5__3.setValue(furniture.getCondition());
+        TxtField__P5__4.setText(String.valueOf(furniture.getPrice()));
+    }
 
+    @FXML
+    void suaNoiThat(ActionEvent event) {
+        Furniture furniture = table__P5__1.getSelectionModel().getSelectedItem();
+        furniture.setFurnitureID(TxtField__P5__1.getText());
+        furniture.setApartmentID(TxtField__P5__2.getText());
+        furniture.setName(TxtField__P5__3.getText());
+        furniture.setConditionFurniture(comboBox__P5__3.getSelectionModel().getSelectedItem());
+        furniture.setPrice(Double.parseDouble(TxtField__P5__4.getText()));
+        FurnitureBUS furnitureBUS = new FurnitureBUS();
+        boolean updateSuccess = furnitureBUS.update(furniture);
+        if (updateSuccess) {
+            int selectedIndex = table__P5__1.getSelectionModel().getSelectedIndex();
+            furnitureObservableList.set(selectedIndex, furniture);
+            table__P5__1.refresh();
+            refreshFormFurniture();
+        } else {
+            System.err.println("Không thể cập nhật nội thất trong cơ sở dữ liệu.");
+        }
     }
 
     @FXML
@@ -1617,7 +1652,18 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     void xoaNoiThat(ActionEvent event) {
-
+        Furniture selectedApartment = table__P5__1.getSelectionModel().getSelectedItem();
+        if (selectedApartment != null) {
+            FurnitureBUS apartmentBUS = new FurnitureBUS();
+            boolean deleteSuccess = apartmentBUS.delete(selectedApartment);
+            if (deleteSuccess) {
+                furnitureObservableList.remove(selectedApartment);
+                table__P5__1.refresh();
+                refreshFormFurniture();
+            } else {
+                System.err.println("Không thể xóa căn hộ từ cơ sở dữ liệu.");
+            }
+        }
     }
 
 
