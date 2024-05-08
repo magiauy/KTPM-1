@@ -791,7 +791,6 @@ public class BuildingManagerController implements Initializable {
         ColumnP3__1.setCellValueFactory(new PropertyValueFactory<>("monthlyRentBillID"));
         ColumnP3__2.setCellValueFactory(new PropertyValueFactory<>("apartmentID"));
         ColumnP3__3.setCellValueFactory(new PropertyValueFactory<>("tenantID"));
-        ColumnP3__4.setCellValueFactory(new PropertyValueFactory<>("leaseAgreementID"));
         ColumnP3__5.setCellValueFactory(new PropertyValueFactory<>("date"));
         ColumnP3__6.setCellValueFactory(new PropertyValueFactory<>("repaymentPeriod"));
         ColumnP3__7.setCellValueFactory(new PropertyValueFactory<>("totalPayment"));
@@ -807,7 +806,6 @@ public class BuildingManagerController implements Initializable {
         TxtField__P3__1.setText(monthlyRentBill.getMonthlyRentBillID());
         TxtField__P3__2.setText(monthlyRentBill.getApartmentID());
         TxtField__P3__3.setText(monthlyRentBill.getTenantID());
-        // TxtField__P3__4.setText(monthlyRentBill.getLeaseAgreementID());
         datePicker__P3.setValue(monthlyRentBill.getDate());
         TxtField__P3__5.setText(String.valueOf(monthlyRentBill.getRepaymentPeriod()));
         TxtField__P3__6.setText(String.valueOf(monthlyRentBill.getTotalPayment()));
@@ -818,7 +816,6 @@ public class BuildingManagerController implements Initializable {
         TxtField__P3__1.setText("");
         TxtField__P3__2.setText("");
         TxtField__P3__3.setText("");
-        TxtField__P3__4.setText("");
         datePicker__P3.setValue(null);
         TxtField__P3__5.setText("");
         TxtField__P3__6.setText("");
@@ -831,7 +828,6 @@ public class BuildingManagerController implements Initializable {
         monthlyRentBill.setMonthlyRentBillID(TxtField__P3__1.getText());
         monthlyRentBill.setApartmentID(TxtField__P3__2.getText());
         monthlyRentBill.setTenantID(TxtField__P3__3.getText());
-        // monthlyRentBill.setLeaseAgreementID(TxtField__P3__4.getText());
         monthlyRentBill.setDate(datePicker__P3.getValue());
         monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
         monthlyRentBill.setTotalPayment(Double.parseDouble(TxtField__P3__6.getText()));
@@ -855,7 +851,6 @@ public class BuildingManagerController implements Initializable {
             monthlyRentBill.setMonthlyRentBillID(TxtField__P3__1.getText());
             monthlyRentBill.setApartmentID(TxtField__P3__2.getText());
             monthlyRentBill.setTenantID(TxtField__P3__3.getText());
-            // monthlyRentBill.setLeaseAgreementID(TxtField__P3__4.getText());
             monthlyRentBill.setDate(datePicker__P3.getValue());
             monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
             monthlyRentBill.setTotalPayment(Double.parseDouble(TxtField__P3__6.getText()));
@@ -887,6 +882,7 @@ public class BuildingManagerController implements Initializable {
             }
         }
     }
+
 
     // Dich Vu
 
@@ -1512,6 +1508,119 @@ public class BuildingManagerController implements Initializable {
         }
     }
 
+
+    @FXML
+    private TableColumn<Furniture, String> ColumnP5__1 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Furniture, String> ColumnP5__2 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Furniture, String> ColumnP5__3 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Furniture, String> ColumnP5__4 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Furniture, Double> ColumnP5__5 = new TableColumn<>();
+
+    @FXML
+    private TextField TxtField__P5__1 = new TextField();
+
+    @FXML
+    private TextField TxtField__P5__2 = new TextField();
+
+    @FXML
+    private TextField TxtField__P5__3 = new TextField();
+
+    @FXML
+    private TextField TxtField__P5__4 = new TextField();
+
+    @FXML
+    private TextField TxtField__P5__search = new TextField();
+
+    @FXML
+    private Button bnt__P5__add;
+
+    @FXML
+    private Button bnt__P5__delete;
+
+    @FXML
+    private Button bnt__P5__update;
+
+    @FXML
+    private ComboBox<String> comboBox__P5__1 = new ComboBox<>();
+
+    @FXML
+    private ComboBox<String> comboBox__P5__2 = new ComboBox<>();
+
+    @FXML
+    private ComboBox<String> comboBox__P5__3 = new ComboBox<>();
+
+    @FXML
+    private TableView<Furniture> table__P5__1 = new TableView<>();
+
+    private ObservableList<Furniture> furnitureObservableList;
+
+    public ObservableList<Furniture> getFurnitureObservableList(){
+        ObservableList<Furniture> furnitureObservableList1 = FXCollections.observableArrayList();
+        FurnitureBUS furnitureBUS = new FurnitureBUS();
+        List<Furniture> furnitureList = furnitureBUS.getAll();
+        furnitureObservableList1.addAll(furnitureList);
+        return furnitureObservableList1;
+    }
+
+    public void initFurniture(){
+        ColumnP5__1.setCellValueFactory(new PropertyValueFactory<>("furnitureID"));
+        ColumnP5__2.setCellValueFactory(new PropertyValueFactory<>("apartmentID"));
+        ColumnP5__3.setCellValueFactory(new PropertyValueFactory<>("nameFurniture"));
+        ColumnP5__4.setCellValueFactory(new PropertyValueFactory<>("conditionFurniture"));
+        ColumnP5__5.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        furnitureObservableList = getFurnitureObservableList();
+        table__P5__1.setItems(furnitureObservableList);
+    }
+
+    public void refreshFormFurniture(){
+        TxtField__P5__1.setText("");
+        TxtField__P5__2.setText("");
+        TxtField__P5__3.setText("");
+        comboBox__P5__3.setValue(null);
+        TxtField__P5__4.setText("");
+    }
+
+    @FXML
+    void suaNoiThat(ActionEvent event) {
+
+    }
+
+    @FXML
+    void themNoiThat(ActionEvent event) {
+        try{
+            Furniture furniture = new Furniture();
+            furniture.setFurnitureID(TxtField__P5__1.getText());
+            furniture.setApartmentID(TxtField__P5__2.getText());
+            furniture.setNameFurniture(TxtField__P5__3.getText());
+            furniture.setPrice(Double.parseDouble(TxtField__P5__4.getText()));
+            furniture.setCondition(comboBox__P5__3.getSelectionModel().getSelectedItem());
+
+            FurnitureBUS furnitureBUS = new FurnitureBUS();
+            furnitureBUS.add(furniture);
+
+            furnitureObservableList.add(furniture);
+            refreshFormFurniture();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void xoaNoiThat(ActionEvent event) {
+
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -1528,7 +1637,11 @@ public class BuildingManagerController implements Initializable {
             comboBox__P3__3.getItems().addAll("Đã trả", "Chưa trả", "Quá hạn");
             comboBox__P3__3.setPromptText("");
             initMonthlyRentBill();
-            // Chạy page 0
+
+            comboBox__P5__3.getItems().addAll("Mới", "Cũ");
+            comboBox__P5__3.setPromptText("");
+            initFurniture();
+            //Chạy page 0
             totalOfBuldings();
             updatePieChart();
             drawBarChart();
