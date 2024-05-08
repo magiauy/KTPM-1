@@ -161,21 +161,6 @@ go
 								);
 
 
-INSERT INTO StaffsAccount  (username, id, password)
-VALUES
-       ('TKBM1', 'BM1', '123'),
-       ('TKBM2', 'BM2', '123'),
-       ('TKBM3', 'BM3', '123'),
-       ('TKBM4', 'BM4', '123'),
-       ('TKBM5', 'BM5', '123')
-INSERT INTO CustomersAccount  (username, id, password)
-VALUES
-       ('TKT1', 'T1', '123'),
-       ('TKT2', 'T2', '123'),
-       ('TKT3', 'T3', '123'),
-       ('TKT4', 'T4', '123'),
-       ('TKT5', 'T5', '123');
-
 INSERT INTO Building (buildingID, name, city, district, address, numberOfApartment)
 VALUES ('B1', N'Tòa nhà A', N'Hà Nội', N'Cầu Giấy', N'Số 123 Đường ABC', 50),
        ('B2', N'Tòa nhà B', N'Hồ Chí Minh', N'Quận 1', N'Số 456 Đường XYZ', 40),
@@ -553,4 +538,19 @@ VALUES
 	('VT6','V4', 'MRB1', 1500000, '2024-04-24', N'Mang theo vật nuôi không được phép'),
 	('VT7','V1', 'MRB2', 500000, '2024-02-01', N'Quá hạn thanh toán tiền internet');
 
+	
+INSERT INTO StaffsAccount  (username, id, password)
+VALUES
+       ('TKBM1', 'BM1', '123'),
+       ('TKBM2', 'BM2', '123'),
+       ('TKBM3', 'BM3', '123'),
+       ('TKBM4', 'BM4', '123'),
+       ('TKBM5', 'BM5', '123')
+INSERT INTO CustomersAccount  (username, id, password)
+VALUES
+       ('TKT1', 'T1', '123'),
+       ('TKT2', 'T2', '123'),
+       ('TKT3', 'T3', '123'),
+       ('TKT4', 'T4', '123'),
+       ('TKT5', 'T5', '123');
 
