@@ -12,34 +12,34 @@ public class ServiceTicket {
     private LocalDate date;
     private String note;
 
-    public ServiceTicket(String serviceTicketID, String monthlyRentBillID, String serviceID,
-            Double quantity, Double totalAmount, LocalDate date, String note) {
+    public ServiceTicket() {}
+    public ServiceTicket(ServiceTicket serviceTicket){
+        this.serviceTicketID = serviceTicket.serviceTicketID;
+        this.serviceID = serviceTicket.getServiceID();
+        this.monthlyRentBillID = serviceTicket.getMonthlyRentBillID();
+        this.quantity = serviceTicket.getQuantity();
+        this.totalAmount = serviceTicket.getTotalAmount();
+        this.date = serviceTicket.getDate();
+        this.note = serviceTicket.getNote();
+    }
+
+    public ServiceTicket(String serviceTicketID, String serviceID, String monthlyRentBillID, Double quantity, Double totalAmount, LocalDate date, String note) {
         this.serviceTicketID = serviceTicketID;
-        this.monthlyRentBillID = monthlyRentBillID;
         this.serviceID = serviceID;
+        this.monthlyRentBillID = monthlyRentBillID;
         this.quantity = quantity;
         this.totalAmount = totalAmount;
         this.date = date;
         this.note = note;
     }
 
-    public ServiceTicket() {
-    }
-
     public String getServiceTicketID() {
+
         return serviceTicketID;
     }
 
     public void setServiceTicketID(String serviceTicketID) {
         this.serviceTicketID = serviceTicketID;
-    }
-
-    public String getMonthlyRentBillID() {
-        return monthlyRentBillID;
-    }
-
-    public void setMonthlyRentBillID(String monthlyRentBillID) {
-        this.monthlyRentBillID = monthlyRentBillID;
     }
 
     public String getServiceID() {
@@ -48,6 +48,14 @@ public class ServiceTicket {
 
     public void setServiceID(String serviceID) {
         this.serviceID = serviceID;
+    }
+
+    public String getMonthlyRentBillID() {
+        return monthlyRentBillID;
+    }
+
+    public void setMonthlyRentBillID(String monthlyRentBillID) {
+        this.monthlyRentBillID = monthlyRentBillID;
     }
 
     public Double getQuantity() {
@@ -85,9 +93,8 @@ public class ServiceTicket {
     @Override
     public String toString() {
         return "ServiceTicket{" +
-                "serviceTicketID='" + serviceTicketID + '\'' +
+                "serviceID='" + serviceID + '\'' +
                 ", monthlyRentBillID='" + monthlyRentBillID + '\'' +
-                ", serviceID='" + serviceID + '\'' +
                 ", quantity=" + quantity +
                 ", totalAmount=" + totalAmount +
                 ", date=" + date +

@@ -22,7 +22,7 @@ public class TenantDAO implements DAOInterface<Tenant> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO Tenant (tenantID, lastName, firstName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Tenant (tenantID, lastName, firstName, phoneNumber, dob, gender, citizenIdentityCard) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setString(1, tenant.getTenantID());
             preparedStatement.setString(2, tenant.getLastName());

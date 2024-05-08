@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="05/05 Nam">
+      <change afterPath="$PROJECT_DIR$/src/main/java/BUS/ServiceBUS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DAO/ServiceTicketDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DTO/ServiceTicket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/BuildingDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/BuildingDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ServiceDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ServiceDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/TenantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/TenantDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,43 +79,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Boss.executor": "Run",
-    "Application.BuildingManager.executor": "Run",
-    "Application.Customer.executor": "Run",
-    "Application.DTO.main.executor": "Run",
-    "Application.HelloApplication.executor": "Run",
-    "Application.Login.executor": "Run",
-    "Application.Test.executor": "Run",
-    "Application.TrangChu.executor": "Run",
-    "Application.com.example.managingbuildingjava.main.executor": "Run",
-    "Application.config.main.executor": "Run",
-    "Application.main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/NAMFORK",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.16089965",
-    "project.structure.side.proportion": "0.36673555",
-    "settings.editor.selected.configurable": "preferences.JavaFX",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Boss.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BuildingManager.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Customer.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DTO.main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Login.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Test.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TrangChu.executor&quot;: &quot;Run&quot;,
+    &quot;Application.com.example.managingbuildingjava.main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.config.main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/BuildingOperationsApplication&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.16089965&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.36673555&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Downloads\JavaProject\BuildingOperationsApplication\src\main\resources\com\example\managingbuildingjava" />
@@ -233,7 +239,9 @@
       <workItem from="1714820415649" duration="206000" />
       <workItem from="1714825884638" duration="7213000" />
       <workItem from="1714868469016" duration="2459000" />
-      <workItem from="1714959656833" duration="3523000" />
+      <workItem from="1714959656833" duration="7529000" />
+      <workItem from="1714971796104" duration="4469000" />
+      <workItem from="1715043120241" duration="2173000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />

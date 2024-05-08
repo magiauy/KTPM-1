@@ -1,15 +1,16 @@
 package DTO;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ViolationTicket {
     private String violationID;
     private String monthlyRentBillID;
     private Double price;
-    private Date date;
+    private LocalDate date;
     private String note;
 
-    public ViolationTicket(String violationID, String monthlyRentBillID, Double price, Date date, String note) {
+    public ViolationTicket(String violationID, String monthlyRentBillID, Double price, LocalDate date, String note) {
         this.violationID = violationID;
         this.monthlyRentBillID = monthlyRentBillID;
         this.price = price;
@@ -44,11 +45,11 @@ public class ViolationTicket {
         this.price = price;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

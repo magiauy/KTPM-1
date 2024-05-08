@@ -9,8 +9,7 @@ public class Service {
     private String name;
     private Double pricePerUnit;
     private String unit;
-    private String type; // Thêm trường type vào class
-
+    private String type;
     public Service(String serviceID, String name, Double pricePerUnit, String unit, String type) {
         this.serviceID = serviceID;
         this.name = name;
@@ -20,6 +19,13 @@ public class Service {
     }
 
     public Service() {
+    }
+    public Service(Service service) {
+        this.serviceID = service.serviceID;
+        this.name = service.name;
+        this.pricePerUnit = service.pricePerUnit;
+        this.unit = service.unit;
+        this.type = service.type;
     }
 
     public String getServiceID() {
