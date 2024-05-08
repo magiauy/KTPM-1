@@ -34,7 +34,7 @@ public class main extends Application {
 
 
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
-        loginScene = new Scene(loginLoader.load(), 600, 500);
+        loginScene = new Scene(loginLoader.load(), 400, 400);
 
 
         FXMLLoader bossLoader = new FXMLLoader(getClass().getResource("Boss-view-Page0.fxml"));
@@ -90,7 +90,6 @@ public class main extends Application {
             }
             if (userType.equals("customer") || userType.equals("khachHang")){
                 CustomerController.getInstance().setID(validLogin);
-                CustomerController.getInstance().loadPage0();
                 primaryStage.setScene(cusScene);
             }
             if (userType.equals("manager")||userType.equals("quanLy")){

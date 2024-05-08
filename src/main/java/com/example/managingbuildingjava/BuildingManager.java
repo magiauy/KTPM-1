@@ -26,9 +26,9 @@ public class BuildingManager extends Application {
             primaryStage.setTitle("Quản lý tòa nhà!");
             primaryStage.setScene(scene);
             primaryStage.setOnCloseRequest(event -> {
-                // Thực hiện các hành động cần thiết trước khi thoát ứng dụng
+                
                 System.out.println("Application is closing...");
-                // Đóng ứng dụng
+           
                 primaryStage.close();
             });
             primaryStage.show();

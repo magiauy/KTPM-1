@@ -88,11 +88,11 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="noteInternets" style="-fx-background-color: #ffff;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <TextField fx:id="noteGyms" style="-fx-background-color: #ffff;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <TextField fx:id="notePools" style="-fx-background-color: #ffff;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <TextField fx:id="noteParkings" style="-fx-background-color: #ffff;" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                        <TextField fx:id="notePlayGrounds" style="-fx-background-color: #ffff;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <TextField fx:id="noteInternets" style="-fx-background-color: #808080;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="noteGyms" style="-fx-background-color: #808080;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <TextField fx:id="notePools" style="-fx-background-color: #808080;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <TextField fx:id="noteParkings" style="-fx-background-color: #808080;" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <TextField fx:id="notePlayGrounds" style="-fx-background-color: #808080;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                         <Label alignment="CENTER" prefHeight="30.0" prefWidth="162.0" text="Tên dịch vụ">
                            <font>
                               <Font name="System Bold" size="13.0" />
@@ -160,11 +160,11 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TableView fx:id="registeredSerTable1" layoutX="495.0" layoutY="312.0" prefHeight="385.0" prefWidth="499.0">
+            <TableView fx:id="registeredSerOldTable" layoutX="495.0" layoutY="312.0" prefHeight="385.0" prefWidth="499.0">
                <columns>
                   <TableColumn fx:id="nameSerOldCol" prefWidth="109.0" text="Tên dịch vụ" />
                   <TableColumn fx:id="priceSerOldCol" prefWidth="121.0" text="Chi phí" />
-                  <TableColumn fx:id="quantitySersCol" prefWidth="95.0" text="Số lượng" />
+                  <TableColumn fx:id="quantitySersOldCol" prefWidth="95.0" text="Số lượng" />
                   <TableColumn fx:id="regisSerOldCol" prefWidth="173.0" text="Ngày đăng ký" />
                </columns>
             </TableView>

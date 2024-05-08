@@ -44,7 +44,7 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE ServiceTicket SET monthlyRentBillID = ?, serviceID = ?, quantity = ?, totalAmount = ?, date = ?, note = ? " +
+                    "UPDATE ServiceTicket SET monthlyRentBillID = ?, serviceID = ?,  quantity = ?, totalAmount = ?, date = ?, note = ? " +
                             "WHERE serviceTicketID = ?");
 
             preparedStatement.setString(1, t.getMonthlyRentBillID());

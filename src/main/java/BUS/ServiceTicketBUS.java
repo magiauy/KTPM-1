@@ -1,13 +1,24 @@
 package BUS;
 
 import DAO.ServiceTicketDAO;
+import DTO.MonthlyRentBill;
 import DTO.Service;
 import DTO.ServiceTicket;
+import DTO.ServiceUsuage;
 import com.example.managingbuildingjava.CustomerController;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
+import java.awt.*;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.Objects;
 
 public class ServiceTicketBUS {
@@ -77,16 +88,114 @@ public class ServiceTicketBUS {
         }
         LocalDate currentDate = LocalDate.now();
 
-        ServiceTicket serviceTicket = new ServiceTicket(servTID,mrBillID,servID, 1.0,price,currentDate,"note");
-//        if(ServiceTicketBUS.getInstance().add(serviceTicket)){
-//            CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công", Alert.AlertType.CONFIRMATION);?
-//        }
-//        else{
-//            CustomerController.getInstance().showAlert("Lỗi", "Vui lòng thử lại", Alert.AlertType.ERROR);
-//        }
-        System.out.println(serviceTicket.getQuantity() + 1);
-        System.out.println(servTID + " " + mrBillID + " " + servID + " " + 1.0 + " " + price + " " + currentDate + " " + note);
-//        System.out.println(ServiceTicketBUS.getInstance().add(serviceTicket));
+        ServiceTicket serviceTicket = new ServiceTicket();
+        serviceTicket.setServiceTicketID(servTID);
+        serviceTicket.setServiceID(servID);
+        serviceTicket.setNote(note);
+        serviceTicket.setDate(currentDate);
+        serviceTicket.setMonthlyRentBillID(mrBillID);
+        serviceTicket.setQuantity(1.0);
+        serviceTicket.setTotalAmount(price);
+
+
+        if(ServiceTicketBUS.getInstance().add(serviceTicket)){
+            CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công", Alert.AlertType.CONFIRMATION);
+        }
+        else{
+            CustomerController.getInstance().showAlert("Lỗi", "Vui lòng thử lại", Alert.AlertType.ERROR);
+        }
     }
+
+//    public void setTableRegisServ(TableView<String[]> registeredSerTable ){
+//        ArrayList<String> servName = new ArrayList<>();
+//        ArrayList<String> note = new ArrayList<>();
+//        ArrayList<Double> price = new ArrayList<>();
+//        ArrayList<LocalDate> date = new ArrayList<>();
+//        ArrayList<String> serviceID = new ArrayList<>();
+//
+//        LocalDate currentDate = LocalDate.now();
+//        Month currentMonth = currentDate.getMonth();
+//
+//        String mrBillID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+//
+//        for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()){
+//            if (mrBillID.equals(serviceTicket.getServiceTicketID()) && currentMonth.equals(serviceTicket.getDate().getMonth())){
+//                price.add(serviceTicket.getTotalAmount());
+//                date.add(serviceTicket.getDate());
+//                note.add(serviceTicket.getNote());
+//
+//                serviceID.add(serviceTicket.getServiceID());
+//            }
+//        }
+//        int count = 0;
+//        for (Service service : ServiceBUS.getInstance().getAll()){
+//            if (service.getServiceID().equals(serviceID.get(count))){
+//                count++;
+//                servName.add(service.getName());
+//            }
+//        }
+//
+//        String[][] data = new String[servName.size()][5];
+//        for (int i = 0; i < servName.size(); i++) {
+//            data[i][0] = servName.get(i);
+//            data[i][1] = note.get(i);
+//            data[i][2] = String.valueOf(price.get(i));
+//            data[i][3] = date.get(i).toString();
+//            data[i][4] = serviceID.get(i);
+//        }
+//
+//        registeredSerTable.setItems(FXCollections.observableArrayList(data));
+//    }
+public void setTableRegisServ(TableView<ServiceUsuage> registeredSerTable) {
+    ArrayList<String> servName = new ArrayList<>();
+    ArrayList<String> note = new ArrayList<>();
+    ArrayList<Double> price = new ArrayList<>();
+    ArrayList<LocalDate> date = new ArrayList<>();
+    ArrayList<String> serviceID = new ArrayList<>();
+
+    try {
+        LocalDate currentDate = LocalDate.now();
+        Month currentMonth = currentDate.getMonth();
+
+        // Handle potential null value from ServiceTicketDAO
+        String mrBillID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+        if (mrBillID == null) {
+            return;
+        }
+
+        for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()) {
+            if (mrBillID.equals(serviceTicket.getMonthlyRentBillID()) && currentMonth.equals(serviceTicket.getDate().getMonth())) {
+                price.add(serviceTicket.getTotalAmount());
+                date.add(serviceTicket.getDate());
+                note.add(serviceTicket.getNote());
+
+                serviceID.add(serviceTicket.getServiceID());
+            }
+        }
+        if (serviceID.isEmpty()){
+            return;
+        }
+
+        int count = 0;
+        for (Service service : ServiceBUS.getInstance().getAll()) {
+            if (service.getServiceID().equals(serviceID.get(count))) {
+                count++;
+                servName.add(service.getName());
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        return;
+    }
+
+    ObservableList<ServiceUsuage> data = FXCollections.observableArrayList();
+    for (int i = 0; i < servName.size(); i++) {
+        ServiceUsuage serviceUsage = new ServiceUsuage(servName.get(i), String.valueOf(price.get(i)), String.valueOf(date.get(i)), note.get(i));
+        data.add(serviceUsage);
+    }
+
+    registeredSerTable.setItems(FXCollections.observableArrayList(data));
+}
+
 
 }
