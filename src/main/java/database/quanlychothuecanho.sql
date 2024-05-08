@@ -118,7 +118,7 @@ CREATE TABLE ServiceTicket (
                                quantity DECIMAL(10, 2),
                                totalAmount DECIMAL(20, 2),
                                Date DATE,
-                               Note TEXT,
+                               note NVARCHAR(250),
                                PRIMARY KEY (serviceTicketID),
                                FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
                                FOREIGN KEY (serviceID) REFERENCES Service(serviceID)
@@ -135,7 +135,7 @@ CREATE TABLE ViolationTicket (
                                  monthlyRentBillID NVARCHAR(100),
                                  price DECIMAL(20, 2),
                                  Date DATE,
-                                 note TEXT,
+                                 note NVARCHAR(250),
                                  PRIMARY KEY (violationID, monthlyRentBillID),
                                  FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
                                  FOREIGN KEY (violationID) REFERENCES Violation(violationID)
@@ -444,7 +444,7 @@ VALUES
 
 
 -- Dữ liệu cho bảng ServiceTicket
-INSERT INTO ServiceTicket (serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, Date, Note)
+INSERT INTO ServiceTicket (serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, Date, note)
 VALUES
     ('SERVT1', 'MRB1', 'SERV1', 2, 200000, '2024-05-01', NULL),
 	('SERVT2', 'MRB1', 'SERV1', 2, 200000, '2024-05-01', NULL),
@@ -537,3 +537,17 @@ VALUES
 	('V3', 'MRB3', 2000000, '2024-04-01', N'Sử dụng bếp gas không đảm bảo an toàn'),
 	('V4', 'MRB1', 1500000, '2024-04-24', N'Mang theo vật nuôi không được phép'),
 	('V1', 'MRB2', 500000, '2024-02-01', N'Quá hạn thanh toán tiền internet');
+
+SELECT 
+    MRB.monthlyRentBillID
+FROM 
+    MonthlyRentBill MRB
+INNER JOIN 
+    ServiceTicket ST ON MRB.monthlyRentBillID = ST.monthlyRentBillID
+WHERE MRB.tenantID = 'T1'
+
+SELECT monthlyRentBillID 
+FROM MonthlyRentBill 
+WHERE tenantID = 'T1' 
+AND monthlyRentBillID IN 
+(SELECT monthlyRentBillID FROM ServiceTicket)
