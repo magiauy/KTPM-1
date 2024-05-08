@@ -643,6 +643,14 @@ public class BossController implements Initializable {
         }
     }
 
+    private boolean containsNumber(String s) {
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
     // =======Building======
     public void handleaddBuilding() {
         try {
@@ -661,6 +669,10 @@ public class BossController implements Initializable {
 
             if (numberOfApartment_Building <= 0) {
                 showAlert("Lỗi", "Số lượng căn hộ phải là một số nguyên dương.", AlertType.ERROR);
+                return;
+            }
+            if (containsNumber(nameBuilding)) {
+                showAlert("Lỗi", "Tên tòa nhà không được chứa số.", AlertType.ERROR);
                 return;
             }
             Building newBuilding = new Building();
@@ -691,7 +703,8 @@ public class BossController implements Initializable {
 
     public void handleDelete() {
         if (selectedBuildingToDelete == null) {
-            System.out.println("Không có tòa nhà nào được chọn để xóa.");
+    
+            showAlert("Lỗi", "Không có tòa nhà nào được chọn để xóa.", AlertType.ERROR);
             return;
         }
 
@@ -719,6 +732,11 @@ public class BossController implements Initializable {
     }
 
     public void handleEdit() {
+        if (selectedBuildingToDelete == null) {
+
+            showAlert("Lỗi", "Không có tòa nhà nào được chọn để Sửa.", AlertType.ERROR);
+            return;
+        }
         String buildingId = TxtField__P1__1.getText().trim();
         String nameBuilding = TxtField__P1__2.getText();
         String city_Building = TxtField__P1__3.getText();
