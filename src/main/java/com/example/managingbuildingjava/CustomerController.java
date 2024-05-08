@@ -1,7 +1,6 @@
 package com.example.managingbuildingjava;
 
 import BUS.*;
-import DAO.ServiceDAO;
 import DAO.ServiceTicketDAO;
 import DTO.*;
 import javafx.application.Platform;
@@ -11,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -21,15 +19,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -190,6 +184,27 @@ public class CustomerController implements Initializable {
     private TextField notePlayGrounds = new TextField();
     @FXML
     private TextField notePools = new TextField();
+    @FXML
+    TableColumn<ServiceUsuage, String> nameSerCol = new TableColumn<>();
+    @FXML
+    TableColumn<ServiceUsuage, String> noteSersCol = new TableColumn<>();
+    @FXML
+    TableColumn<ServiceUsuage, String> priceSerCol = new TableColumn<>();
+    @FXML
+    TableColumn<ServiceUsuage, String> regisSerCol = new TableColumn<>();
+    @FXML
+    TableColumn<String[], String>quantitySersOldCol = new TableColumn<>();
+    @FXML
+    TableColumn<String[], String>nameSerOldCol = new TableColumn<>();
+    @FXML
+    TableColumn<String[], String> priceSerOldCol = new TableColumn<>();
+    @FXML
+    TableColumn<String[], String> regisSerOldCol = new TableColumn<>();
+    @FXML
+    TableView<ServiceUsuage> registeredSerTable = new TableView<>();
+    @FXML
+    TableView<String[]> registeredSerOldTable = new TableView<>();
+
 
     public void loadPage0(){
 
@@ -198,6 +213,7 @@ public class CustomerController implements Initializable {
         updatePieChart();
         setTabelLeaseAgreement();
         setTableCohabitant();
+
     }
     public void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -207,6 +223,18 @@ public class CustomerController implements Initializable {
         alert.showAndWait();
     }
 
+    void updateTableNewRegisServ(){
+        nameSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("name"));
+        noteSersCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("note"));
+        priceSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("totalAmount"));
+        regisSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("date"));
+
+        ServiceTicketBUS.getInstance().setTableRegisServ(registeredSerTable);
+
+        for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()){
+            System.out.println(serviceTicket);
+        }
+    }
 
     @FXML
     void regisFixed(MouseEvent event) {
@@ -216,18 +244,26 @@ public class CustomerController implements Initializable {
         else{
             if(parkingRegis.isSelected()){
                 ServiceTicketBUS.getInstance().regisFixedServ("SERV3",noteParkings.getText());
-
+                updateTableNewRegisServ();
             }
             if(playGroundRegis.isSelected()){
+                ServiceTicketBUS.getInstance().regisFixedServ("SERV11",notePlayGrounds.getText());
+                updateTableNewRegisServ();
 
             }
             if(poolRegis.isSelected()){
+                ServiceTicketBUS.getInstance().regisFixedServ("SERV9",notePools.getText());
+                updateTableNewRegisServ();
 
             }
             if(gymRegis.isSelected()){
+                ServiceTicketBUS.getInstance().regisFixedServ("SERV5",noteGyms.getText());
+                updateTableNewRegisServ();
 
             }
             if(internetRegis.isSelected()){
+                ServiceTicketBUS.getInstance().regisFixedServ("SERV4",noteInternets.getText());
+                updateTableNewRegisServ();
 
             }
         }
@@ -249,6 +285,8 @@ public class CustomerController implements Initializable {
 
         ObservableList<Cohabitant> data = FXCollections.observableArrayList(CohabitantBUS.getInstance().getCohabitantsWithTenantId(this.ID));
         cohabitantTable.setItems(data);
+
+
     }
 
     void setTabelLeaseAgreement(){
@@ -292,15 +330,15 @@ public class CustomerController implements Initializable {
         statusColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("status"));
 
         ObservableList<MonthlyRentBill> data = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(this.ID));
-        System.out.println("setTableMonthlyRentBill _____________"+data.isEmpty());
         table__P3__1.setItems(data);
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Page 0
         loadPage0();
-        System.out.println("Check check");
 
+        //Page 1
+        updateTableNewRegisServ();
 
         //Page 2
         setTableMonthlyRentBill();

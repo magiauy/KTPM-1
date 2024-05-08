@@ -23,10 +23,10 @@ public class ServiceTicket {
         this.note = serviceTicket.getNote();
     }
 
-    public ServiceTicket(String serviceTicketID, String serviceID, String monthlyRentBillID, Double quantity, Double totalAmount, LocalDate date, String note) {
+    public ServiceTicket(String serviceTicketID, String monthlyRentBillID, String serviceID, Double quantity, Double totalAmount, LocalDate date, String note) {
         this.serviceTicketID = serviceTicketID;
-        this.serviceID = serviceID;
         this.monthlyRentBillID = monthlyRentBillID;
+        this.serviceID = serviceID;
         this.quantity = quantity;
         this.totalAmount = totalAmount;
         this.date = date;
@@ -34,20 +34,11 @@ public class ServiceTicket {
     }
 
     public String getServiceTicketID() {
-
         return serviceTicketID;
     }
 
     public void setServiceTicketID(String serviceTicketID) {
         this.serviceTicketID = serviceTicketID;
-    }
-
-    public String getServiceID() {
-        return serviceID;
-    }
-
-    public void setServiceID(String serviceID) {
-        this.serviceID = serviceID;
     }
 
     public String getMonthlyRentBillID() {
@@ -56,6 +47,14 @@ public class ServiceTicket {
 
     public void setMonthlyRentBillID(String monthlyRentBillID) {
         this.monthlyRentBillID = monthlyRentBillID;
+    }
+
+    public String getServiceID() {
+        return serviceID;
+    }
+
+    public void setServiceID(String serviceID) {
+        this.serviceID = serviceID;
     }
 
     public Double getQuantity() {
@@ -93,8 +92,9 @@ public class ServiceTicket {
     @Override
     public String toString() {
         return "ServiceTicket{" +
-                "serviceID='" + serviceID + '\'' +
+                "serviceTicketID='" + serviceTicketID + '\'' +
                 ", monthlyRentBillID='" + monthlyRentBillID + '\'' +
+                ", serviceID='" + serviceID + '\'' +
                 ", quantity=" + quantity +
                 ", totalAmount=" + totalAmount +
                 ", date=" + date +
