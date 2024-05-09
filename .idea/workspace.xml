@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="05/05 Nam" />
+    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="LOGIN" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,8 +14,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
-        <option value="Class" />
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -350,7 +350,23 @@
       <option name="project" value="LOCAL" />
       <updated>1713788399643</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="05/05 Nam">
+      <option name="closed" value="true" />
+      <created>1715254972442</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1715254972442</updated>
+    </task>
+    <task id="LOCAL-00016" summary="LOGIN">
+      <option name="closed" value="true" />
+      <created>1715257488169</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1715257488169</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,7 +398,8 @@
     <MESSAGE value="revert commit (22/4)" />
     <MESSAGE value="24/05 Nam" />
     <MESSAGE value="05/05 Nam" />
-    <option name="LAST_COMMIT_MESSAGE" value="05/05 Nam" />
+    <MESSAGE value="LOGIN" />
+    <option name="LAST_COMMIT_MESSAGE" value="LOGIN" />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />
