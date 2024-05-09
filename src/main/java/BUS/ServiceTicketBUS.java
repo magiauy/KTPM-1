@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -77,7 +78,7 @@ public class ServiceTicketBUS {
         }
         return -1; // Not found
     }
-    public void regisFixedServ(String servID, String note, LocalDate currentDate){
+    public void regisServ(String servID, String note, LocalDate currentDate){
         String servTID = "SERVT" + (ServiceTicketDAO.getInstance().countRows() + 1);
 
         String mrBillID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
@@ -97,7 +98,6 @@ public class ServiceTicketBUS {
         serviceTicket.setMonthlyRentBillID(mrBillID);
         serviceTicket.setQuantity(1.0);
         serviceTicket.setTotalAmount(price);
-
 
         if(ServiceTicketBUS.getInstance().add(serviceTicket)){
             CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công", Alert.AlertType.CONFIRMATION);
@@ -147,53 +147,116 @@ public class ServiceTicketBUS {
 //
 //        registeredSerTable.setItems(FXCollections.observableArrayList(data));
 //    }
-public void setTableRegisServ(TableView<ServiceUsuage> registeredSerTable) {
-    ArrayList<String> servName = new ArrayList<>();
-    ArrayList<String> note = new ArrayList<>();
-    ArrayList<Double> price = new ArrayList<>();
-    ArrayList<LocalDate> date = new ArrayList<>();
-    ArrayList<String> serviceID = new ArrayList<>();
+    public void setTableRegisServ(TableView<ServiceUsuage> registeredSerTable) {
+        ArrayList<String> servName = new ArrayList<>();
+        ArrayList<String> note = new ArrayList<>();
+        ArrayList<Double> price = new ArrayList<>();
+        ArrayList<LocalDate> date = new ArrayList<>();
+        ArrayList<String> serviceID = new ArrayList<>();
 
-    try {
-        LocalDate currentDate = LocalDate.now();
-        Month currentMonth = currentDate.getMonth();
+        try {
+            LocalDate currentDate = LocalDate.now();
+            Month currentMonth = currentDate.getMonth();
 
-        String mrBillID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
-        if (mrBillID == null) {
+            String mrBillID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+            if (mrBillID == null) {
+                return;
+            }
+
+            for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()) {
+                if (mrBillID.equals(serviceTicket.getMonthlyRentBillID()) && currentMonth.equals(serviceTicket.getDate().getMonth())) {
+                    price.add(serviceTicket.getTotalAmount());
+                    date.add(serviceTicket.getDate());
+                    note.add(serviceTicket.getNote());
+
+                    serviceID.add(serviceTicket.getServiceID());
+
+                }
+            }
+            if (serviceID.isEmpty()){
+                return;
+            }
+            ArrayList<Service> services = ServiceBUS.getInstance().getAll();
+            for (String sID : serviceID) {
+               for (Service service : services){
+                   if(service.getServiceID().equals(sID)){
+                       servName.add(service.getName());
+                   }
+               }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return;
         }
 
-        for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()) {
-            if (mrBillID.equals(serviceTicket.getMonthlyRentBillID()) && currentMonth.equals(serviceTicket.getDate().getMonth())) {
-                price.add(serviceTicket.getTotalAmount());
-                date.add(serviceTicket.getDate());
-                note.add(serviceTicket.getNote());
-
-                serviceID.add(serviceTicket.getServiceID());
-            }
+        ObservableList<ServiceUsuage> data = FXCollections.observableArrayList();
+        for (int i = 0; i < servName.size(); i++) {
+            ServiceUsuage serviceUsage = new ServiceUsuage(servName.get(i), String.valueOf(price.get(i)), String.valueOf(date.get(i)), note.get(i));
+            data.add(serviceUsage);
         }
-        if (serviceID.isEmpty()){
+        System.out.println(data+"____________");
+        registeredSerTable.setItems(data);
+    }
+
+    public void repairInforRegis(ComboBox<String> comboBox, LocalDate date, String note){
+            String serName = comboBox.getValue();
+            String serID = "";
+            for (Service service : ServiceBUS.getInstance().getAll()) {
+                if (service.getName().equals(serName)) {
+                    serID = service.getServiceID();
+                }
+            }
+            regisServ(serID, note, date);
+    }
+
+    public void setTableOldRegisServ(TableView<ServiceUsuage> registeredSerTable) {
+        ArrayList<String> servName = new ArrayList<>();
+        ArrayList<Double> price = new ArrayList<>();
+        ArrayList<LocalDate> date = new ArrayList<>();
+        ArrayList<String> serviceID = new ArrayList<>();
+        ArrayList<Double> quantity = new ArrayList<>();
+
+        try {
+            LocalDate currentDate = LocalDate.now();
+
+            String mrBillID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+            if (mrBillID == null) {
+                return;
+            }
+
+            for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()) {
+                if (mrBillID.equals(serviceTicket.getMonthlyRentBillID()) && serviceTicket.getDate().isBefore(currentDate.withDayOfMonth(1))) {
+                    price.add(serviceTicket.getTotalAmount());
+                    date.add(serviceTicket.getDate());
+                    quantity.add(serviceTicket.getQuantity());
+
+                    serviceID.add(serviceTicket.getServiceID());
+
+                }
+            }
+            if (serviceID.isEmpty()){
+                return;
+            }
+            ArrayList<Service> services = ServiceBUS.getInstance().getAll();
+            for (String sID : serviceID) {
+                for (Service service : services){
+                    if(service.getServiceID().equals(sID)){
+                        servName.add(service.getName());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return;
         }
 
-        for (Service service : ServiceBUS.getInstance().getAll()) {
-            if (serviceID.contains(service.getServiceID())) {
-                servName.add(service.getName());
-            }
+        ObservableList<ServiceUsuage> data = FXCollections.observableArrayList();
+        for (int i = 0; i < servName.size(); i++) {
+            ServiceUsuage serviceUsage = new ServiceUsuage(servName.get(i), String.valueOf(price.get(i)),quantity.get(i), String.valueOf(date.get(i)));
+            data.add(serviceUsage);
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-        return;
+
+        registeredSerTable.setItems(data);
     }
-
-    ObservableList<ServiceUsuage> data = FXCollections.observableArrayList();
-    for (int i = 0; i < servName.size(); i++) {
-        ServiceUsuage serviceUsage = new ServiceUsuage(servName.get(i), String.valueOf(price.get(i)), String.valueOf(date.get(i)), note.get(i));
-        data.add(serviceUsage);
-    }
-
-    registeredSerTable.setItems(data);
-}
-
 
 }
