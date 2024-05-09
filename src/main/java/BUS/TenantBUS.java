@@ -72,7 +72,7 @@ public class TenantBUS {
     public void setInfor(Label fullName, Label phone, Label dob, Label gender, Label cccd, String ID){
         Tenant tenant = getTenantById(ID);
         if(tenant != null){
-            fullName.setText("Họ & Tên: "+tenant.getLastName() + " " + tenant.getFirstName());
+            fullName.setText("Họ & Tên: "+ tenant.getLastName() + " " + tenant.getFirstName());
             phone.setText("SDT: "+tenant.getPhoneNumber());
             dob.setText("Dob: "+ tenant.getDateOfBirthDay());
             gender.setText("Giới tính: "+tenant.getGender());

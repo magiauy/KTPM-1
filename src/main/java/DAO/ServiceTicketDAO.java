@@ -26,7 +26,15 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
             preparedStatement.setString(3, t.getServiceID());
             preparedStatement.setDouble(4, t.getQuantity());
             preparedStatement.setDouble(5, t.getTotalAmount());
-            preparedStatement.setDate(6, Date.valueOf(t.getDate()));
+//            preparedStatement.setDate(6, Date.valueOf(t.getDate()));
+            LocalDate date = t.getDate();
+            if (date != null) {
+                preparedStatement.setDate(6, Date.valueOf(date));
+            } else {
+                preparedStatement.setNull(6, Types.DATE); // Thiết lập giá trị null cho tham số số 6
+            }
+
+
             preparedStatement.setString(7, t.getNote());
 
             result = preparedStatement.executeUpdate();
@@ -207,7 +215,7 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
         String serviceID = resultSet.getString("serviceID");
         Double quantity = resultSet.getDouble("quantity");
         Double totalAmount = resultSet.getDouble("totalAmount");
-        LocalDate date = resultSet.getDate("date").toLocalDate();
+        LocalDate date = resultSet.getDate("Date").toLocalDate();
         String note = resultSet.getString("note");
 
         return new ServiceTicket(serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, date, note);
