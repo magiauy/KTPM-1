@@ -1,5 +1,6 @@
 package com.example.managingbuildingjava;
 
+import BUS.AdminsAccountBUS;
 import BUS.CustomersAccountBUS;
 import BUS.StaffsAccountBUS;
 import DTO.StaffsAccount;
@@ -34,7 +35,7 @@ public class main extends Application {
 
 
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
-        loginScene = new Scene(loginLoader.load(), 400, 400);
+        loginScene = new Scene(loginLoader.load(), 498, 272);
 
 
         FXMLLoader bossLoader = new FXMLLoader(getClass().getResource("Boss-view-Page0.fxml"));
@@ -90,15 +91,17 @@ public class main extends Application {
                 BuildingManagerController.getInstance().setID(validLogin);
                 primaryStage.setScene(buiScene);
             }
-            else{
-                System.out.println("ko dn dc");
+            else {
+                AdminsAccountBUS adminsAccountBUS = new AdminsAccountBUS();
+                validLogin = adminsAccountBUS.checkLogin(username, password);
+                if (!validLogin.equals("0")) {
+                    BossController.getInstance().setID(validLogin);
+                    primaryStage.setScene(bossScene);
+                } else {
+                    System.out.println("ko dn dc");
+                }
             }
-//            else{
-//                validLogin = AdminAccountBUS.checkLogin(username, password);
-//                if (!validLogin.equals("0")) {
-//                    BossController.getInstance().setID(validLogin);
-//                    primaryStage.setScene(bossScene);
-//                }
+//
 //                else{
 //                    //        showStatusMessage("Invalid username or password.");
 //                }
