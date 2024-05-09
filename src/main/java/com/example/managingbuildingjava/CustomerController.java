@@ -194,25 +194,27 @@ public class CustomerController implements Initializable {
     TableColumn<ServiceUsuage, String> regisSerCol = new TableColumn<>();
 
     @FXML
+    private TextField noteFixedRegis = new TextField();
+    @FXML
     private ComboBox<String> comboBox__P1__21 = new ComboBox<>();
     @FXML
     private DatePicker selectSersDate = new DatePicker();
     @FXML
-    TableColumn<String[], String>quantitySersOldCol = new TableColumn<>();
+    TableColumn<ServiceUsuage, Double>quantitySersOldCol = new TableColumn<>();
     @FXML
-    TableColumn<String[], String>nameSerOldCol = new TableColumn<>();
+    TableColumn<ServiceUsuage, String>nameSerOldCol = new TableColumn<>();
     @FXML
-    TableColumn<String[], String> priceSerOldCol = new TableColumn<>();
+    TableColumn<ServiceUsuage, String> priceSerOldCol = new TableColumn<>();
     @FXML
-    TableColumn<String[], String> regisSerOldCol = new TableColumn<>();
+    TableColumn<ServiceUsuage, String> regisSerOldCol = new TableColumn<>();
     @FXML
     TableView<ServiceUsuage> registeredSerTable = new TableView<>();
     @FXML
-    TableView<String[]> registeredSerOldTable = new TableView<>();
+    TableView<ServiceUsuage> registeredSerOldTable = new TableView<>();
 
 
     public void loadPage0(){
-
+        TimeNow();
         setMonthlyBillLabel();
         updateInfor();
         updatePieChart();
@@ -230,50 +232,83 @@ public class CustomerController implements Initializable {
 
     @FXML
     void regisMobile(){
-        ServiceBUS.getInstance().setCombox(comboBox__P1__21);
 
         LocalDate dateRegis = selectSersDate.getValue();
-        
+
+        String note = noteFixedRegis.getText();
+
+        ServiceTicketBUS.getInstance().repairInforRegis(comboBox__P1__21, dateRegis, note);
+    }
+
+    void updateTableOldRegisServ(){
+        ServiceBUS.getInstance().setCombox(comboBox__P1__21);
+
+        nameSerOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("name"));
+        priceSerOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("totalAmount"));
+        quantitySersOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, Double>("quantity"));
+        regisSerOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("date"));
+
+        ServiceTicketBUS.getInstance().setTableOldRegisServ(registeredSerOldTable);
     }
 
     void updateTableNewRegisServ(){
 
         nameSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("name"));
-        noteSersCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("note"));
         priceSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("totalAmount"));
         regisSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("date"));
+        noteSersCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("note"));
 
         ServiceTicketBUS.getInstance().setTableRegisServ(registeredSerTable);
     }
 
     @FXML
     void regisFixed() {
-        LocalDate currentDate = selectSersDate.getValue();
         if (!parkingRegis.isSelected() && !playGroundRegis.isSelected() && !poolRegis.isSelected() && !gymRegis.isSelected() && !internetRegis.isSelected()){
             showAlert("Lỗi", "Vui lòng tích vào ô đăng ký.", Alert.AlertType.ERROR);
         }
         else{
+            LocalDate currentDate = LocalDate.now();
             if(parkingRegis.isSelected()){
-                ServiceTicketBUS.getInstance().regisFixedServ("SERV3",noteParkings.getText(), currentDate);
+                String note = "";
+                if (noteParkings.getText() != null){
+                    note = noteParkings.getText();
+                }
+                ServiceTicketBUS.getInstance().regisServ("SERV3",note, currentDate);
                 updateTableNewRegisServ();
             }
             if(playGroundRegis.isSelected()){
-                ServiceTicketBUS.getInstance().regisFixedServ("SERV11",notePlayGrounds.getText(), currentDate);
+                String note = "";
+                if (noteGyms.getText() != null){
+                    note = noteGyms.getText();
+                }
+                ServiceTicketBUS.getInstance().regisServ("SERV11",note, currentDate);
                 updateTableNewRegisServ();
 
             }
             if(poolRegis.isSelected()){
-                ServiceTicketBUS.getInstance().regisFixedServ("SERV9",notePools.getText(), currentDate);
+                String note = "";
+                if (notePools.getText() != null){
+                    note = notePools.getText();
+                }
+                ServiceTicketBUS.getInstance().regisServ("SERV9",note, currentDate);
                 updateTableNewRegisServ();
 
             }
             if(gymRegis.isSelected()){
-                ServiceTicketBUS.getInstance().regisFixedServ("SERV5",noteGyms.getText(), currentDate);
+                String note = "";
+                if (noteInternets.getText() != null){
+                    note = noteInternets.getText();
+                }
+                ServiceTicketBUS.getInstance().regisServ("SERV5",note, currentDate);
                 updateTableNewRegisServ();
 
             }
             if(internetRegis.isSelected()){
-                ServiceTicketBUS.getInstance().regisFixedServ("SERV4",noteInternets.getText(), currentDate);
+                String note = "";
+                if (noteInternets.getText() != null){
+                    note = noteInternets.getText();
+                }
+                ServiceTicketBUS.getInstance().regisServ("SERV4",note, currentDate);
                 updateTableNewRegisServ();
 
             }
@@ -362,7 +397,7 @@ public class CustomerController implements Initializable {
 
         //Page 1
         updateTableNewRegisServ();
-        regisMobile();
+        updateTableOldRegisServ();
 
         //Page 2
         setTableMonthlyRentBill();

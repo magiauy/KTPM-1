@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class ServiceUsuage {
     private String name;
     private String totalAmount;
+    private Double quantity;
     private String date;
     private String note;
 
@@ -13,6 +14,21 @@ public class ServiceUsuage {
         this.totalAmount = totalAmout;
         this.date = date;
         this.note = note;
+    }
+
+    public ServiceUsuage(String name, String totalAmount, Double quantity, String date) {
+        this.name = name;
+        this.totalAmount = totalAmount;
+        this.quantity = quantity;
+        this.date = date;
+    }
+
+    public Double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
     }
 
     public String getName() {
@@ -51,7 +67,8 @@ public class ServiceUsuage {
     public String toString() {
         return "ServiceUsuage{" +
                 "name='" + name + '\'' +
-                ", totalAmout='" + totalAmount + '\'' +
+                ", totalAmount='" + totalAmount + '\'' +
+                ", quantity=" + quantity +
                 ", date='" + date + '\'' +
                 ", note='" + note + '\'' +
                 '}';

@@ -20,7 +20,6 @@
           <children>
               <Pane prefHeight="720.0" prefWidth="1022.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
-                      <ComboBox fx:id="comboBox__P1__2" layoutX="894.0" layoutY="68.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
             <Pane layoutX="23.0" layoutY="80.0" prefHeight="308.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
                   <GridPane layoutX="35.0" layoutY="14.0" prefHeight="230.0" prefWidth="371.0">
@@ -132,8 +131,8 @@
             </TableView>
             <Pane layoutX="38.0" layoutY="470.0" prefHeight="217.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                  <DatePicker fx:id="selectSersDate" layoutX="188.0" layoutY="39.0" prefHeight="38.0" prefWidth="191.0" />
-                  <ComboBox fx:id="comboBox__P1__21" layoutX="27.0" layoutY="39.0" prefHeight="38.0" prefWidth="144.0" style="-fx-background-radius: 10px;" />
+                  <DatePicker fx:id="selectSersDate" layoutX="182.0" layoutY="90.0" prefHeight="38.0" prefWidth="191.0" />
+                  <ComboBox fx:id="comboBox__P1__21" layoutX="21.0" layoutY="90.0" prefHeight="38.0" prefWidth="144.0" promptText="Chọn dịch vụ" style="-fx-background-radius: 10px;" />
                           <Button fx:id="regisMobile1" contentDisplay="GRAPHIC_ONLY" layoutX="147.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#regisMobile" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
                               <graphic>
                                   <ImageView fx:id="regisMobile" fitHeight="30" fitWidth="40" onMouseClicked="#regisMobile" pickOnBounds="true" preserveRatio="true">
@@ -143,6 +142,12 @@
                                   </ImageView>
                               </graphic>
                   </Button>
+                  <TextField fx:id="noteFixedRegis" layoutX="165.0" layoutY="38.0" prefHeight="27.0" prefWidth="248.0" style="-fx-background-color: #808080;" />
+                  <Label alignment="CENTER" layoutX="21.0" layoutY="37.0" prefHeight="30.0" prefWidth="122.0" text="Chú thich">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="408.0" prefHeight="30.0" prefWidth="248.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Đăng ký dịch vụ">
