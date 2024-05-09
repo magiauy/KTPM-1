@@ -2,8 +2,10 @@ package BUS;
 
 import DAO.FurnitureDAO;
 import DTO.Furniture;
+import DTO.MonthlyRentBill;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FurnitureBUS {
     private ArrayList<Furniture> listFurniture = new ArrayList<>();
@@ -50,5 +52,15 @@ public class FurnitureBUS {
             }
         }
         return vitri;
+    }
+
+    public ArrayList<Furniture> getFurnitureByApartmentID(String ApartmentID){
+        ArrayList<Furniture> furnitureByApartmentID = new ArrayList<>();
+        for (Furniture furniture : listFurniture) {
+            if (Objects.equals(furniture.getApartmentID(), ApartmentID)) {
+                furnitureByApartmentID.add(furniture);
+            }
+        }
+        return  furnitureByApartmentID;
     }
 }

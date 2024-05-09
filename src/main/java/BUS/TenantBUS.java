@@ -1,6 +1,7 @@
 package BUS;
 
 import DAO.TenantDAO;
+import DTO.LeaseAgreement;
 import DTO.MonthlyRentBill;
 import DTO.Tenant;
 import javafx.collections.FXCollections;
@@ -8,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class TenantBUS {
@@ -78,5 +80,18 @@ public class TenantBUS {
             gender.setText("Giới tính: "+tenant.getGender());
             cccd.setText("CCCD: "+tenant.getCitizenIdentityCard());
         }
+    }
+
+    public ArrayList<Tenant> getTenantWithBuildingID(String buildingID) {
+        ArrayList<Tenant> tenants = new ArrayList<>();
+        LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
+        for (LeaseAgreement leaseAgreement: leaseAgreementBUS.getAll()){
+            if (leaseAgreement.getBuildingManagerID().equals(buildingID)){
+                Tenant tenant = TenantDAO.getInstance().selectById(leaseAgreement.getTenantID());
+                tenants.add(tenant);
+            }
+        }
+
+        return tenants;
     }
 }

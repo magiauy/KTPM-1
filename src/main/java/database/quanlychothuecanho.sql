@@ -1,166 +1,165 @@
+create database quanlychothuecanho 
+go
+use quanlychothuecanho
+go 
 
-CREATE TABLE Building (
-                          buildingID NVARCHAR(100) PRIMARY KEY,
-                          name NVARCHAR(255),
-                          city NVARCHAR(255),
-                          district NVARCHAR(255),
-                          address NVARCHAR(255),
-                          numberOfApartment INT
-);
+	CREATE TABLE Building (
+							  buildingID VARCHAR(100) PRIMARY KEY,
+							  name NVARCHAR(255),
+							  city NVARCHAR(255),
+							  district NVARCHAR(255),
+							  address NVARCHAR(255),
+							  numberOfApartment INT
+	);
 
-CREATE TABLE BuildingManager (
-                                 buildingManagerID NVARCHAR(100) PRIMARY KEY,
-                                 buildingID NVARCHAR(100),
-                                 lastName NVARCHAR(255),
-                                 firstName NVARCHAR(255),
-                                 phoneNumber NVARCHAR(255),
-                                 dob DATE,
-                                 gender NVARCHAR(10),
-                                 citizenIdentityCard NVARCHAR(100),
-                                 salary DECIMAL(20, 2),
-                                 FOREIGN KEY (buildingID) REFERENCES Building(buildingID)
-);
+	CREATE TABLE BuildingManager (
+									 buildingManagerID VARCHAR(100) PRIMARY KEY,
+									 buildingID VARCHAR(100),
+									 lastName NVARCHAR(255),
+									 firstName NVARCHAR(255),
+									 phoneNumber VARCHAR(255),
+									 dob DATE,
+									 gender NVARCHAR(10),
+									 citizenIdentityCard VARCHAR(100),
+									 salary DECIMAL(20, 2),
+									 FOREIGN KEY (buildingID) REFERENCES Building(buildingID)
+	);
 
-CREATE TABLE FinancialReport (
-                                 financialReportID NVARCHAR(100) PRIMARY KEY,
-                                 buildingID NVARCHAR(100),
-                                 buildingManagerID NVARCHAR(100),
-                                 Date DATE,
-                                 monthlyRevenue DECIMAL(20, 2),
-                                 monthlyOpex DECIMAL(20, 2),
-                                 monthlyProfit DECIMAL(20, 2),
-                                 FOREIGN KEY (buildingID) REFERENCES Building(buildingID),
-                                 FOREIGN KEY (buildingManagerID) REFERENCES BuildingManager(buildingManagerID)
-);
+	CREATE TABLE FinancialReport (
+									 financialReportID VARCHAR(100) PRIMARY KEY,
+									 buildingID VARCHAR(100),
+									 buildingManagerID VARCHAR(100),
+									 Date DATE,
+									 monthlyRevenue DECIMAL(20, 2),
+									 monthlyOpex DECIMAL(20, 2),
+									 monthlyProfit DECIMAL(20, 2),
+									 FOREIGN KEY (buildingID) REFERENCES Building(buildingID),
+									 FOREIGN KEY (buildingManagerID) REFERENCES BuildingManager(buildingManagerID)
+	);
 
-CREATE TABLE Tenant (
-                        tenantID NVARCHAR(100) PRIMARY KEY,
-                        lastName NVARCHAR(255),
-                        firstName NVARCHAR(255),
-                        phoneNumber NVARCHAR(255),
-                        dob DATE,
-                        gender NVARCHAR(255),
-                        citizenIdentityCard NVARCHAR(100)
-);
+	CREATE TABLE Tenant (
+							tenantID VARCHAR(100) PRIMARY KEY,
+							lastName VARCHAR(255),
+							firstName NVARCHAR(255),
+							phoneNumber NVARCHAR(255),
+							dob DATE,
+							gender NVARCHAR(255),
+							citizenIdentityCard VARCHAR(100)
+	);
 
-CREATE TABLE Apartment (
-                           apartmentID NVARCHAR(100) PRIMARY KEY,
-                           buildingID NVARCHAR(100),
-                           roomNumber NVARCHAR(255),
-                           area float,
-                           bedrooms INT,
-                           bathrooms INT,
-                           furniture NVARCHAR(255),
-                           FOREIGN KEY (buildingID) REFERENCES Building(buildingID)
-);
+	CREATE TABLE Apartment (
+							   apartmentID VARCHAR(100) PRIMARY KEY,
+							   buildingID VARCHAR(100),
+							   roomNumber VARCHAR(255),
+							   area float,
+							   bedrooms INT,
+							   bathrooms INT,
+								   furniture NVARCHAR(255),
+								   FOREIGN KEY (buildingID) REFERENCES Building(buildingID)
+		);
 
-CREATE TABLE Cohabitant (
-                            cohabitantID NVARCHAR(100) PRIMARY KEY,
-                            tenantID NVARCHAR(100),
-                            lastName NVARCHAR(255),
-                            firstName NVARCHAR(255),
-                            phoneNumber NVARCHAR(255),
-                            dob DATE,
-                            gender NVARCHAR(10),
-                            citizenIdentityCard NVARCHAR(100),
-                            FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
-);
+		CREATE TABLE Cohabitant (
+									cohabitantID VARCHAR(100) PRIMARY KEY,
+									tenantID VARCHAR(100),
+									lastName NVARCHAR(255),
+									firstName NVARCHAR(255),
+									phoneNumber VARCHAR(100),
+									dob DATE,
+									gender NVARCHAR(10),
+									citizenIdentityCard VARCHAR(100),
+									FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
+		);
 
-CREATE TABLE LeaseAgreement (
-                                leaseAgreementID NVARCHAR(100) PRIMARY KEY,
-                                tenantID NVARCHAR(100),
-                                apartmentID NVARCHAR(100),
-                                buildingManagerID NVARCHAR(100),
-                                signingDate DATE,
-                                LeaseStartDate DATE,
-                                LeaseEndDate DATE,
-                                LeaseTerm INT,
-                                deposit DECIMAL(20, 2),
-                                monthlyRent DECIMAL(20, 2),
-                                FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID),
-                                FOREIGN KEY (buildingManagerID) REFERENCES BuildingManager(buildingManagerID),
-                                FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID)
-);
+		CREATE TABLE LeaseAgreement (
+										leaseAgreementID VARCHAR(100) PRIMARY KEY,
+										tenantID VARCHAR(100),
+										apartmentID VARCHAR(100),
+										buildingManagerID VARCHAR(100),
+										signingDate DATE,
+										LeaseStartDate DATE,
+										LeaseEndDate DATE,
+										LeaseTerm INT,
+										deposit DECIMAL(20, 2),
+										monthlyRent DECIMAL(20, 2),
+										FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID),
+										FOREIGN KEY (buildingManagerID) REFERENCES BuildingManager(buildingManagerID),
+										FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID)
+		);
 
-CREATE TABLE Furniture (
-                           furnitureID NVARCHAR(100) PRIMARY KEY,
-                           apartmentID NVARCHAR(100),
-                           name NVARCHAR(255),
-                           condition NVARCHAR(255),
-                           price DECIMAL(20, 2),
-                           FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID)
-);
+		CREATE TABLE Furniture (
+								   furnitureID VARCHAR(100) PRIMARY KEY,
+								   apartmentID VARCHAR(100),
+								   name NVARCHAR(255),
+								   condition NVARCHAR(255),
+								   price DECIMAL(20, 2),
+								   FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID)
+		);
 
-CREATE TABLE MonthlyRentBill (
-                                 monthlyRentBillID NVARCHAR(100) PRIMARY KEY,
-                                 apartmentID NVARCHAR(100),
-                                 tenantID NVARCHAR(100),
-                                 date DATE,
-                                 repaymentPeriod INT,
-                                 totalPayment DECIMAL(20, 2),
-                                 status NVARCHAR(255),
-                                 FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID),
-                                 FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
-);
+		CREATE TABLE MonthlyRentBill (
+										 monthlyRentBillID VARCHAR(100) PRIMARY KEY,
+										 apartmentID VARCHAR(100),
+										 tenantID VARCHAR(100),
+										 date DATE,
+										 repaymentPeriod INT,
+										 totalPayment DECIMAL(20, 2),
+										 status NVARCHAR(255),
+										 FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID),
+										 FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
+		);
 
-CREATE TABLE Service (
-                              serviceID NVARCHAR(100) PRIMARY KEY,
-                              name NVARCHAR(255),
-                              pricePerUnit DECIMAL(20, 2),
-                              unit NVARCHAR(255),
-							  type NVARCHAR(255)
-);
+		CREATE TABLE Service (
+									  serviceID VARCHAR(100) PRIMARY KEY,
+									  name NVARCHAR(255),
+									  pricePerUnit DECIMAL(20, 2),
+									  unit NVARCHAR(255),
+									  type NVARCHAR(255)
+		);
 
-CREATE TABLE ServiceTicket (
-							   serviceTicketID NVARCHAR(100),
-                               monthlyRentBillID NVARCHAR(100),
-                               serviceID NVARCHAR(100),
-                               quantity DECIMAL(10, 2),
-                               totalAmount DECIMAL(20, 2),
-                               Date DATE,
-                               Note TEXT,
-                               PRIMARY KEY (serviceTicketID),
-                               FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
-                               FOREIGN KEY (serviceID) REFERENCES Service(serviceID)
-);
+		CREATE TABLE ServiceTicket (
+									   serviceTicketID VARCHAR(100),
+									   monthlyRentBillID VARCHAR(100),
+									   serviceID VARCHAR(100),
+									   quantity DECIMAL(10, 2),
+									   totalAmount DECIMAL(20, 2),
+									   Date DATE,
+									   note NVARCHAR(250),
+									   PRIMARY KEY (serviceTicketID),
+									   FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
+									   FOREIGN KEY (serviceID) REFERENCES Service(serviceID)
+		);
 
-CREATE TABLE Violation (
-                           violationID NVARCHAR(100) PRIMARY KEY,
-                           name NVARCHAR(255),
-                           price DECIMAL(20, 2),
-);
+		CREATE TABLE Violation (
+								   violationID VARCHAR(100) PRIMARY KEY,
+								   name NVARCHAR(255),
+								   price DECIMAL(20, 2),
+		);
 
-CREATE TABLE ViolationTicket (
-                                 violationID NVARCHAR(100),
-                                 monthlyRentBillID NVARCHAR(100),
-                                 price DECIMAL(20, 2),
-                                 Date DATE,
-                                 note TEXT,
-                                 PRIMARY KEY (violationID, monthlyRentBillID),
-                                 FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
-                                 FOREIGN KEY (violationID) REFERENCES Violation(violationID)
-);
+		CREATE TABLE ViolationTicket (
+										violationTicketID VARCHAR(100),
+										 violationID VARCHAR(100),
+										 monthlyRentBillID VARCHAR(100),
+										 price DECIMAL(20, 2),
+										 Date DATE,
+										 note NVARCHAR(250),
+										 PRIMARY KEY (violationTicketID),
+										 FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
+										 FOREIGN KEY (violationID) REFERENCES Violation(violationID)
+		);
 
-CREATE TABLE TaiKhoan (
-                          id NVARCHAR(100) PRIMARY KEY,
-                          username NVARCHAR(255),
-                          password NVARCHAR(255),
-                          role NVARCHAR(255)
-);
+		CREATE TABLE StaffsAccount (
+										username VARCHAR(100) PRIMARY KEY,
+										password NVARCHAR(255),
+										id VARCHAR(100),
+										FOREIGN KEY (id) REFERENCES BuildingManager(buildingManagerID)
+								);
+		CREATE TABLE CustomersAccount (
+										username VARCHAR(100) PRIMARY KEY,
+										password NVARCHAR(255),
+										id VARCHAR(100),
+										FOREIGN KEY (id) REFERENCES Tenant(tenantID)	
+,
+								);
 
-
-INSERT INTO TaiKhoan  (Id, username, password, role)
-VALUES ('admin', 'admin', '123', 'admin'),
-       ('BM1', 'BM1', '123', 'manager'),
-       ('BM2', 'BM2', '123', 'manager'),
-       ('BM3', 'BM3', '123', 'manager'),
-       ('BM4', 'BM4', '123', 'manager'),
-       ('BM5', 'BM5', '123', 'manager'),
-       ('T1', 'T1', '123', 'customer'),
-       ('T2', 'T2', '123', 'customer'),
-       ('T3', 'T3', '123', 'customer'),
-       ('T4', 'T4', '123', 'customer'),
-       ('T5', 'T5', '123', 'customer');
 
 INSERT INTO Building (buildingID, name, city, district, address, numberOfApartment)
 VALUES ('B1', N'Tòa nhà A', N'Hà Nội', N'Cầu Giấy', N'Số 123 Đường ABC', 50),
@@ -169,7 +168,8 @@ VALUES ('B1', N'Tòa nhà A', N'Hà Nội', N'Cầu Giấy', N'Số 123 Đườn
        ('B4', N'Tòa nhà D', N'Hải Phòng', N'Đồ Sơn', N'Số 321 Đường PQR', 20),
        ('B5', N'Tòa nhà E', N'Cần Thơ', N'Ninh Kiều', N'Số 555 Đường STU', 10);
 INSERT INTO BuildingManager (buildingManagerID, buildingID, lastName, firstName, phoneNumber, dob, gender, citizenIdentityCard, salary)
-VALUES ('BM1', 'B1', N'Nguyễn', N'Văn A', '0123456789', '1980-01-01', N'Nam', '123456789', 15000000.00),
+VALUES 
+		('BM1', 'B1', N'Nguyễn', N'Văn A', '0123456789', '1980-01-01', N'Nam', '123456789', 15000000.00),
        ('BM2', 'B2', N'Trần', N'Thị B', '0987654321', '1985-05-10', N'Nữ', '987654321', 12000000.00),
        ('BM3', 'B3', N'Lê', N'Văn C', '0369852147', '1990-12-20', N'Nam', '654789321', 13500000.00),
        ('BM4', 'B4', N'Phạm', N'Thị D', '0932154789', '1982-08-15', N'Nữ', '852963147', 14000000.00),
@@ -306,36 +306,36 @@ VALUES ('CH1', 'T1', N'Nguyễn', N'Thị A', '0123456789', '1990-01-10', N'Nữ
 		('CH60', 'T26', N'Trần', N'Văn JJJ', '0789456132', '1997-04-05', N'Nam', '8529631480');
 
 INSERT INTO LeaseAgreement (leaseAgreementID, tenantID, apartmentID, buildingManagerID, signingDate, LeaseStartDate, LeaseEndDate, LeaseTerm, deposit, monthlyRent)
-VALUES ('LA1', 'T1', 'APT1', 'BM1', '2024-01-01', '2024-04-15', '2025-04-15', 12, 11000000, 5500000),
+VALUES ('LA1', 'T1', 'APT1', 'BM1', '2024-01-01', '2024-04-15', '2025-01-15', 9, 11000000, 5500000),
        ('LA2', 'T2', 'APT2', 'BM2', '2024-02-01', '2024-04-15', '2025-04-15', 12, 13400000, 6700000),
-       ('LA3', 'T3', 'APT3', 'BM3', '2023-07-01', '2024-04-15', '2025-04-15', 24, 11000000, 5500000),
-       ('LA4', 'T4', 'APT4', 'BM4', '2024-04-01', '2024-04-15', '2025-04-15',36, 12000000, 6000000),
-       ('LA5', 'T5', 'APT5', 'BM5', '2024-01-01', '2024-04-15', '2025-04-15', 24, 15000000, 7500000),
+       ('LA3', 'T3', 'APT3', 'BM3', '2023-07-01', '2024-04-15', '2025-04-15', 12, 11000000, 5500000),
+       ('LA4', 'T4', 'APT4', 'BM4', '2024-04-01', '2024-04-15', '2025-04-15',12, 12000000, 6000000),
+       ('LA5', 'T5', 'APT5', 'BM5', '2024-01-01', '2024-04-15', '2025-04-15', 12, 15000000, 7500000),
 	   ('LA6', 'T6', 'APT6', 'BM1', '2024-01-01', '2024-04-15', '2025-04-15', 12, 22000000, 11000000),
 		('LA7', 'T7', 'APT7', 'BM2', '2024-02-01', '2024-04-15', '2025-04-15', 12, 26800000, 13400000),
-		('LA8', 'T8', 'APT8', 'BM1', '2024-01-01', '2024-04-15', '2025-04-15', 24, 22000000, 11000000),
-		('LA9', 'T9', 'APT9', 'BM3', '2024-01-01', '2024-04-15', '2025-04-15', 36, 24000000, 12000000),
-		('LA10', 'T10', 'APT10', 'BM4', '2024-01-01', '2024-04-15', '2025-04-15', 24, 30000000, 15000000),
+		('LA8', 'T8', 'APT8', 'BM1', '2024-01-01', '2024-04-15', '2025-04-15', 12, 22000000, 11000000),
+		('LA9', 'T9', 'APT9', 'BM3', '2024-01-01', '2024-04-15', '2025-04-15', 12, 24000000, 12000000),
+		('LA10', 'T10', 'APT10', 'BM4', '2024-01-01', '2024-04-15', '2025-04-15', 12, 30000000, 15000000),
 		('LA11', 'T11', 'APT11', 'BM5', '2024-04-01', '2024-04-15', '2025-04-15', 12, 22000000, 11000000),
 		('LA12', 'T12', 'APT12', 'BM1', '2024-02-01', '2024-04-15', '2025-04-15', 12, 26800000, 13400000),
-		('LA13', 'T13', 'APT13', 'BM1', '2024-04-01', '2024-04-15', '2025-04-15', 24, 22000000, 11000000),
-		('LA14', 'T14', 'APT14', 'BM3', '2024-04-01', '2024-04-15', '2025-04-15', 36, 24000000, 12000000),
-		('LA15', 'T15', 'APT15', 'BM1', '2024-05-01', '2024-04-15', '2025-04-15', 24, 30000000, 15000000),
+		('LA13', 'T13', 'APT13', 'BM1', '2024-04-01', '2024-04-15', '2025-04-15', 12, 22000000, 11000000),
+		('LA14', 'T14', 'APT14', 'BM3', '2024-04-01', '2024-04-15', '2025-04-15', 12, 24000000, 12000000),
+		('LA15', 'T15', 'APT15', 'BM1', '2024-05-01', '2024-04-15', '2025-04-15', 12, 30000000, 15000000),
 		('LA16', 'T16', 'APT16', 'BM1', '2024-04-01', '2024-04-15', '2025-04-15', 12, 22000000, 11000000),
 		('LA17', 'T17', 'APT17', 'BM1', '2024-03-01', '2024-04-15', '2025-04-15', 12, 26800000, 13400000),
-		('LA18', 'T18', 'APT18', 'BM1', '2024-03-01', '2024-04-15', '2025-04-15', 24, 22000000, 11000000),
-		('LA19', 'T19', 'APT19', 'BM2', '2024-04-01', '2024-04-15', '2025-04-15', 36, 24000000, 12000000),
-		('LA20', 'T20', 'APT20', 'BM3', '2024-04-01', '2024-04-15', '2025-04-15', 24, 30000000, 15000000),
+		('LA18', 'T18', 'APT18', 'BM1', '2024-03-01', '2024-04-15', '2025-04-15', 12, 22000000, 11000000),
+		('LA19', 'T19', 'APT19', 'BM2', '2024-04-01', '2024-04-15', '2025-04-15', 12, 24000000, 12000000),
+		('LA20', 'T20', 'APT20', 'BM3', '2024-04-01', '2024-04-15', '2025-04-15', 12, 30000000, 15000000),
 		('LA21', 'T21', 'APT21', 'BM4', '2024-03-01', '2024-04-15', '2025-04-15', 12, 22000000, 11000000),
 		('LA22', 'T22', 'APT22', 'BM4', '2024-04-01', '2024-04-15', '2025-04-15', 12, 26800000, 13400000),
-		('LA23', 'T23', 'APT23', 'BM3', '2024-03-01', '2024-04-15', '2025-04-15', 24, 22000000, 11000000),
-		('LA24', 'T24', 'APT24', 'BM5', '2024-05-01', '2024-04-15', '2025-04-15', 36, 24000000, 12000000),
-		('LA25', 'T25', 'APT25', 'BM5', '2024-04-01', '2024-04-15', '2025-04-15', 24, 30000000, 15000000),
+		('LA23', 'T23', 'APT23', 'BM3', '2024-03-01', '2024-04-15', '2025-04-15', 12, 22000000, 11000000),
+		('LA24', 'T24', 'APT24', 'BM5', '2024-05-01', '2024-04-15', '2025-04-15', 12, 24000000, 12000000),
+		('LA25', 'T25', 'APT25', 'BM5', '2024-04-01', '2024-04-15', '2025-04-15', 12, 30000000, 15000000),
 		('LA26', 'T26', 'APT26', 'BM2', '2024-01-01', '2024-04-15', '2025-04-15', 12, 22000000, 11000000),
 		('LA27', 'T27', 'APT27', 'BM1', '2024-04-01', '2024-04-15', '2025-04-15', 12, 26800000, 13400000),
-		('LA28', 'T28', 'APT28', 'BM3', '2024-05-01', '2024-04-15', '2025-04-15', 24, 22000000, 11000000),
-		('LA29', 'T29', 'APT29', 'BM4', '2024-04-01', '2024-04-15', '2025-04-15', 36, 24000000, 12000000),
-		('LA30', 'T30', 'APT30', 'BM5', '2024-02-01', '2024-04-15', '2025-04-15', 24, 30000000, 15000000);
+		('LA28', 'T28', 'APT28', 'BM3', '2024-05-01', '2024-04-15', '2025-04-15', 12, 22000000, 11000000),
+		('LA29', 'T29', 'APT29', 'BM4', '2024-04-01', '2024-04-15', '2025-04-15', 12, 24000000, 12000000),
+		('LA30', 'T30', 'APT30', 'BM5', '2024-02-01', '2024-04-15', '2025-04-15', 12, 30000000, 15000000);
 
 -- Dữ liệu cho bảng Furniture
 INSERT INTO Furniture (furnitureID, apartmentID, name, condition, price)
@@ -345,47 +345,47 @@ VALUES
     ('FURN3', 'APT2', N'Tủ lạnh', N'Mới', 100000),
     ('FURN4', 'APT3', N'Kệ sách', N'Cũ', 80000),
     ('FURN5', 'APT3', N'Bàn làm việc', N'Mới', 100000),
-	('FURN6', 'APT2', 'Giường ngủ', 'Mới', 200000),
-	('FURN7', 'APT2', 'Tủ quần áo', 'Mới', 150000),
-	('FURN8', 'APT2', 'Bàn trà', 'Mới', 50000),
-	('FURN9', 'APT5', 'Giường ngủ', 'Mới', 300000),
-	('FURN10', 'APT5', 'Tủ quần áo', 'Mới', 200000),
-	('FURN11', 'APT5', 'Sofa', 'Mới', 150000),
-	('FURN12', 'APT5', 'Bàn ăn', 'Mới', 100000),
-	('FURN13', 'APT5', 'Ghế', 'Mới', 50000),
-	('FURN14', 'APT10', 'Giường ngủ', 'Mới', 400000),
-	('FURN15', 'APT10', 'Tủ quần áo', 'Mới', 300000),
-	('FURN16', 'APT10', 'Sofa', 'Mới', 200000),
-	('FURN17', 'APT10', 'Bàn ăn', 'Mới', 150000),
-	('FURN18', 'APT10', 'Ghế', 'Mới', 100000),
-	('FURN19', 'APT12', 'Giường ngủ', 'Mới', 200000),
-	('FURN20', 'APT12', 'Tủ quần áo', 'Mới', 150000),
-	('FURN21', 'APT12', 'Bàn trà', 'Mới', 50000),
-	('FURN22', 'APT15', 'Giường ngủ', 'Mới', 300000),
-	('FURN23', 'APT15', 'Tủ quần áo', 'Mới', 200000),
-	('FURN24', 'APT15', 'Sofa', 'Mới', 150000),
-	('FURN25', 'APT15', 'Bàn ăn', 'Mới', 100000),
-	('FURN26', 'APT15', 'Ghế', 'Mới', 50000),
-	('FURN27', 'APT17', 'Giường ngủ', 'Mới', 200000),
-	('FURN28', 'APT17', 'Tủ quần áo', 'Mới', 150000),
-	('FURN29', 'APT17', 'Bàn trà', 'Mới', 50000),
-	('FURN30', 'APT19', 'Giường ngủ', 'Mới', 200000),
-	('FURN31', 'APT19', 'Tủ quần áo', 'Mới', 150000),
-	('FURN32', 'APT19', 'Bàn trà', 'Mới', 50000),
-	('FURN33', 'APT22', 'Giường ngủ', 'Mới', 200000),
-	('FURN34', 'APT22', 'Tủ quần áo', 'Mới', 150000),
-	('FURN35', 'APT22', 'Bàn trà', 'Mới', 50000),
-	('FURN36', 'APT24', 'Giường ngủ', 'Mới', 300000),
-	('FURN37', 'APT24', 'Tủ quần áo gỗ', 'Mới', 15000000),
-	('FURN38', 'APT24', 'Sofa', 'Mới', 200000),
-	('FURN39', 'APT24', 'Bàn ăn', 'Mới', 150000),
-	('FURN40', 'APT24', 'Ghế', 'Mới', 100000),
-	('FURN41', 'APT27', 'Giường ngủ', 'Mới', 200000),
-	('FURN42', 'APT27', 'Tủ quần áo', 'Mới', 150000),
-	('FURN43', 'APT27', 'Bàn trà', 'Mới', 50000),
-	('FURN44', 'APT29', 'Giường ngủ', 'Mới', 200000),
-	('FURN45', 'APT29', 'Tủ quần áo', 'Mới', 150000),
-	('FURN46', 'APT29', 'Bàn trà', 'Mới', 50000);
+	('FURN6', 'APT2', N'Giường ngủ', 'Mới', 200000),
+	('FURN7', 'APT2', N'Tủ quần áo', 'Mới', 150000),
+	('FURN8', 'APT2', N'Bàn trà', 'Mới', 50000),
+	('FURN9', 'APT5', N'Giường ngủ', 'Mới', 300000),
+	('FURN10', 'APT5', N'Tủ quần áo', 'Mới', 200000),
+	('FURN11', 'APT5', N'Sofa', 'Mới', 150000),
+	('FURN12', 'APT5', N'Bàn ăn', 'Mới', 100000),
+	('FURN13', 'APT5', N'Ghế', 'Mới', 50000),
+	('FURN14', 'APT10', N'Giường ngủ', 'Mới', 400000),
+	('FURN15', 'APT10', N'Tủ quần áo', 'Mới', 300000),
+	('FURN16', 'APT10', N'Sofa', 'Mới', 200000),
+	('FURN17', 'APT10', N'Bàn ăn', 'Mới', 150000),
+	('FURN18', 'APT10', N'Ghế', 'Mới', 100000),
+	('FURN19', 'APT12', N'Giường ngủ', 'Mới', 200000),
+	('FURN20', 'APT12', N'Tủ quần áo', 'Mới', 150000),
+	('FURN21', 'APT12', N'Bàn trà', 'Mới', 50000),
+	('FURN22', 'APT15', N'Giường ngủ', 'Mới', 300000),
+	('FURN23', 'APT15', N'Tủ quần áo', 'Mới', 200000),
+	('FURN24', 'APT15', N'Sofa', 'Mới', 150000),
+	('FURN25', 'APT15', N'Bàn ăn', 'Mới', 100000),
+	('FURN26', 'APT15', N'Ghế', 'Mới', 50000),
+	('FURN27', 'APT17', N'Giường ngủ', 'Mới', 200000),
+	('FURN28', 'APT17', N'Tủ quần áo', 'Mới', 150000),
+	('FURN29', 'APT17', N'Bàn trà', 'Mới', 50000),
+	('FURN30', 'APT19', N'Giường ngủ', 'Mới', 200000),
+	('FURN31', 'APT19', N'Tủ quần áo', 'Mới', 150000),
+	('FURN32', 'APT19', N'Bàn trà', 'Mới', 50000),
+	('FURN33', 'APT22', N'Giường ngủ', 'Mới', 200000),
+	('FURN34', 'APT22', N'Tủ quần áo', 'Mới', 150000),
+	('FURN35', 'APT22', N'Bàn trà', 'Mới', 50000),
+	('FURN36', 'APT24', N'Giường ngủ', 'Mới', 300000),
+	('FURN37', 'APT24', N'Tủ quần áo gỗ', 'Mới', 15000000),
+	('FURN38', 'APT24', N'Sofa', 'Mới', 200000),
+	('FURN39', 'APT24', N'Bàn ăn', 'Mới', 150000),
+	('FURN40', 'APT24', N'Ghế', 'Mới', 100000),
+	('FURN41', 'APT27', N'Giường ngủ', 'Mới', 200000),
+	('FURN42', 'APT27', N'Tủ quần áo', 'Mới', 150000),
+	('FURN43', 'APT27', N'Bàn trà', 'Mới', 50000),
+	('FURN44', 'APT29', N'Giường ngủ', 'Mới', 200000),
+	('FURN45', 'APT29', N'Tủ quần áo', 'Mới', 150000),
+	('FURN46', 'APT29', N'Bàn trà', 'Mới', 50000);
 -- Dữ liệu cho bảng MonthlyRentBill
 INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status)
 VALUES
@@ -444,7 +444,7 @@ VALUES
 
 
 -- Dữ liệu cho bảng ServiceTicket
-INSERT INTO ServiceTicket (serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, Date, Note)
+INSERT INTO ServiceTicket (serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, Date, note)
 VALUES
     ('SERVT1', 'MRB1', 'SERV1', 2, 200000, '2024-05-01', NULL),
 	('SERVT2', 'MRB1', 'SERV1', 2, 200000, '2024-05-01', NULL),
@@ -528,12 +528,28 @@ VALUES
     ('V3', N'Cháy nổ', 2000000),
     ('V4', N'Vi phạm an ninh', 1500000)
 -- Dữ liệu cho bảng ViolationTicket
-INSERT INTO ViolationTicket (violationID, monthlyRentBillID, price, Date, note)
+INSERT INTO ViolationTicket (violationTicketID,violationID, monthlyRentBillID, price, Date, note)
 VALUES
-    ('V1', 'MRB1',  700000, '2024-04-05', N'Quá hạn 5 ngày'),
-    ('V2', 'MRB2',  500000, '2024-04-15', N'Đề nghị khắc phục ngay'),
-	('V4', 'MRB2', 1500000, '2024-04-12', N'Đỗ xe sai quy định'),
-	('V2', 'MRB1', 500000, '2024-04-01', N'Đổ rác bừa bãi'),
-	('V3', 'MRB3', 2000000, '2024-04-01', N'Sử dụng bếp gas không đảm bảo an toàn'),
-	('V4', 'MRB1', 1500000, '2024-04-24', N'Mang theo vật nuôi không được phép'),
-	('V1', 'MRB2', 500000, '2024-02-01', N'Quá hạn thanh toán tiền internet');
+    ('VT1','V1', 'MRB1',  700000, '2024-04-05', N'Quá hạn 5 ngày'),
+    ('VT2','V2', 'MRB2',  500000, '2024-04-15', N'Đề nghị khắc phục ngay'),
+	('VT3','V4', 'MRB2', 1500000, '2024-04-12', N'Đỗ xe sai quy định'),
+	('VT4','V2', 'MRB1', 500000, '2024-04-01', N'Đổ rác bừa bãi'),
+	('VT5','V3', 'MRB3', 2000000, '2024-04-01', N'Sử dụng bếp gas không đảm bảo an toàn'),
+	('VT6','V4', 'MRB1', 1500000, '2024-04-24', N'Mang theo vật nuôi không được phép'),
+	('VT7','V1', 'MRB2', 500000, '2024-02-01', N'Quá hạn thanh toán tiền internet');
+
+	
+INSERT INTO StaffsAccount  (username, id, password)
+VALUES
+       ('TKBM1', 'BM1', '123'),
+       ('TKBM2', 'BM2', '123'),
+       ('TKBM3', 'BM3', '123'),
+       ('TKBM4', 'BM4', '123'),
+       ('TKBM5', 'BM5', '123')
+INSERT INTO CustomersAccount  (username, id, password)
+VALUES
+       ('TKT1', 'T1', '123'),
+       ('TKT2', 'T2', '123'),
+       ('TKT3', 'T3', '123'),
+       ('TKT4', 'T4', '123'),
+       ('TKT5', 'T5', '123');

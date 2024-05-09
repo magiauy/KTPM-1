@@ -57,7 +57,7 @@ public class CustomerController implements Initializable {
     @FXML
     public TableView<MonthlyRentBill> table__P3__1 = new TableView<>();
     @FXML
-    TableColumn<MonthlyRentBill, String> monthlyRentBillIdColumn = new TableColumn<MonthlyRentBill, String >("Mã phiếu");
+    TableColumn<MonthlyRentBill, String> monthlyRentBillIdColumn = new TableColumn<MonthlyRentBill, String >();
     @FXML
     TableColumn<MonthlyRentBill, LocalDate> dateColumn = new TableColumn<MonthlyRentBill, LocalDate>();
     @FXML

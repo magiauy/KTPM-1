@@ -25,13 +25,13 @@ public class LeaseAgreementDAO implements DAOInterface<LeaseAgreement>{
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
-            String sql = "INSERT INTO LeaseAgreement (leaseAgreementID, apartmentID, tenantID, buildingManagerID, signingDate, leaseStartDate, leaseEndDate, leaseTerm, deposit, monthlyRent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO LeaseAgreement (leaseAgreementID, tenantID , apartmentID, buildingManagerID, signingDate, leaseStartDate, leaseEndDate, leaseTerm, deposit, monthlyRent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL
             preparedStatement.setString(1, t.getLeaseAgreementID());
-            preparedStatement.setString(2, t.getApartmentID());
-            preparedStatement.setString(3, t.getTenantID());
+            preparedStatement.setString(2, t.getTenantID());
+            preparedStatement.setString(3, t.getApartmentID());
             preparedStatement.setString(4, t.getBuildingManagerID());
             preparedStatement.setDate(5, Date.valueOf(t.getSigningDate()));
             preparedStatement.setDate(6, Date.valueOf(t.getLeaseStartDate()));
@@ -56,11 +56,11 @@ public class LeaseAgreementDAO implements DAOInterface<LeaseAgreement>{
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
-            String sql = "UPDATE LeaseAgreement SET apartmentID = ?, tenantID = ?, buildingManagerID = ?, signingDate = ?, leaseStartDate = ?, leaseEndDate = ?, leaseTerm = ?, deposit = ?, monthlyRent = ? WHERE leaseAgreementID = ?";
+            String sql = "UPDATE LeaseAgreement SET tenantID = ?, apartmentID = ?, buildingManagerID = ?, signingDate = ?, leaseStartDate = ?, leaseEndDate = ?, leaseTerm = ?, deposit = ?, monthlyRent = ? WHERE leaseAgreementID = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, t.getApartmentID());
-            preparedStatement.setString(2, t.getTenantID());
+            preparedStatement.setString(1, t.getTenantID());
+            preparedStatement.setString(2, t.getApartmentID());
             preparedStatement.setString(3, t.getBuildingManagerID());
             preparedStatement.setDate(4, Date.valueOf(t.getSigningDate()));
             preparedStatement.setDate(5, Date.valueOf(t.getLeaseStartDate()));
@@ -150,8 +150,8 @@ public class LeaseAgreementDAO implements DAOInterface<LeaseAgreement>{
 
     private LeaseAgreement createLeaseAgreementFromResultSet(ResultSet resultSet) throws SQLException {
         String leaseAgreementID = resultSet.getString("leaseAgreementID");
-        String apartmentID = resultSet.getString("apartmentID");
         String tenantID = resultSet.getString("tenantID");
+        String apartmentID = resultSet.getString("apartmentID");
         String buildingManagerID = resultSet.getString("buildingManagerID");
         LocalDate signingDate = resultSet.getDate("signingDate").toLocalDate();
         LocalDate leaseStartDate = resultSet.getDate("leaseStartDate").toLocalDate();
@@ -160,7 +160,7 @@ public class LeaseAgreementDAO implements DAOInterface<LeaseAgreement>{
         Double deposit = resultSet.getDouble("deposit");
         Double monthlyRent = resultSet.getDouble("monthlyRent");
 
-        return new LeaseAgreement(leaseAgreementID, apartmentID, tenantID, buildingManagerID, signingDate, leaseStartDate, leaseEndDate, leaseTerm, deposit, monthlyRent);
+        return new LeaseAgreement(leaseAgreementID, tenantID, apartmentID, buildingManagerID, signingDate, leaseStartDate, leaseEndDate, leaseTerm, deposit, monthlyRent);
     }
 
 

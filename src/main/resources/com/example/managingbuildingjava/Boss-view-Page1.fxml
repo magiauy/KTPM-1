@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BossController">
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BossController">
           <children>
-              <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
+              <Pane layoutX="7.0" layoutY="14.0" prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
-                      <TextField fx:id="seacrch_namepage1" alignment="CENTER" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" styleClass="black-text"/>
-                      <ComboBox fx:id="box_dress" layoutX="600.0" layoutY="70.0" prefHeight="25.0" prefWidth="130.0" style="-fx-background-radius: 10px;"  promptText="Lọc Theo Quận" onAction="#selectDresss" />
-                      <ComboBox fx:id="" layoutX="740.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+                      <TextField fx:id="seacrch_namepage1" alignment="CENTER" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" styleClass="black-text" />
+                      <ComboBox fx:id="box_dress" layoutX="600.0" layoutY="70.0" onAction="#selectDresss" prefHeight="25.0" prefWidth="130.0" promptText="Lọc Theo Quận" style="-fx-background-radius: 10px;" />
                       <Button fx:id="exportExcel" layoutX="860.0" layoutY="70.0" mnemonicParsing="false" text="Export Excel" />
 
                       <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="230.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
@@ -22,11 +21,11 @@
                       </ImageView>
             <Pane layoutX="33.0" layoutY="121.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                          <TextField fx:id="TxtField__P1__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
-                          <TextField fx:id="TxtField__P1__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text" />
-                          <TextField fx:id="TxtField__P1__4" layoutX="216.0" layoutY="213.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
-                          <TextField fx:id="TxtField__P1__3" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
-                          <TextField fx:id="TxtField__P1__5" layoutX="216.0" layoutY="271.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text" />
+                          <TextField fx:id="TxtField__P1__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                          <TextField fx:id="TxtField__P1__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                          <TextField fx:id="TxtField__P1__4" layoutX="216.0" layoutY="213.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                          <TextField fx:id="TxtField__P1__3" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                          <TextField fx:id="TxtField__P1__5" layoutX="216.0" layoutY="271.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                           <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="345.0" prefHeight="32.0" prefWidth="120.0" text="Số lượng căn hộ" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
@@ -37,7 +36,7 @@
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="213.0" prefHeight="32.0" prefWidth="120.0" text="Quân" textFill="WHITE">
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="213.0" prefHeight="32.0" prefWidth="120.0" text="Quận" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
@@ -57,10 +56,10 @@
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                  <TextField fx:id="TxtField__P1__6" layoutX="216.0" layoutY="345.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                  <TextField fx:id="TxtField__P1__6" layoutX="216.0" layoutY="345.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                </children>
             </Pane>
-                    <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE" onAction ="#handleaddBuilding">
+                    <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleaddBuilding" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -69,8 +68,8 @@
                             </ImageView>
                         </graphic>
             </Button>
-                    <Button fx:id="bnt__P1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Sửa" textFill="WHITE" onAction="#handleEdit" />
-                    <Button fx:id="bnt__P1__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="644.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Xóa" textFill="WHITE" onAction="#handleDelete">
+                    <Button fx:id="bnt__P1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleEdit" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Sửa" textFill="WHITE" />
+                    <Button fx:id="bnt__P1__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Xóa" textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -81,7 +80,7 @@
             </Button>
                     <TableView fx:id="table__view" layoutX="497.0" layoutY="117.0" prefHeight="580.0" prefWidth="540.0" style="-fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                         <columns>
-                         <TableColumn fx:id="maToaNhaColumn" prefWidth="75.0" text="Mã Tòa Nhà"  />
+                         <TableColumn fx:id="maToaNhaColumn" prefWidth="75.0" text="Mã Tòa Nhà" />
                         <TableColumn fx:id="tenColumn" prefWidth="75.0" text="Tên" />
                         <TableColumn fx:id="thanhPhoColumn" prefWidth="75.0" text="Thành Phố" />
                         <TableColumn fx:id="quanColumn" prefWidth="75.0" text="Quận" />

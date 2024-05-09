@@ -26,16 +26,16 @@
                                  </ImageView>
                                  <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20;">
                                      <children>
-                                         <TextField fx:id="TxtField__P4__1" layoutX="216.0" layoutY="27.0" prefHeight="34.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                         <TextField fx:id="TxtField__P4__2" layoutX="216.0" layoutY="82.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                         <TextField fx:id="TxtField__P4__4" layoutX="216.0" layoutY="202.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                         <ComboBox fx:id="comboBox__P4__3" layoutX="214.0" layoutY="159.0" prefHeight="29.0" prefWidth="155.0" />
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="202.0" prefHeight="32.0" prefWidth="120.0" text="Số lượng" textFill="WHITE">
+                                         <TextField fx:id="maPhieuDVField" layoutX="216.0" layoutY="27.0" prefHeight="34.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text"/>
+                                         <TextField fx:id="maPhieuThuField" layoutX="216.0" layoutY="82.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                                         <TextField fx:id="soLuongField" layoutX="216.0" layoutY="202.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                                        <TextField fx:id="maDichVuField" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.07" layoutY="202.0" prefHeight="32.0" prefWidth="120.0" text="Số lượng" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
                                          </Label>
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="143.0" prefHeight="32.0" prefWidth="120.0" text="Loại dịch vụ" textFill="WHITE">
+                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="143.0" prefHeight="32.0" prefWidth="120.0" text="Mã dịch vụ" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
@@ -55,22 +55,22 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="TxtField__P4__6" layoutX="225.0" layoutY="267.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                                    <TextField fx:id="thanhTienField" layoutX="225.0" layoutY="267.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text"/>
                                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="328.0" prefHeight="32.0" prefWidth="120.0" text="Ngày ghi" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <DatePicker layoutX="224.0" layoutY="328.0" prefHeight="25.0" prefWidth="169.0" />
+                                    <DatePicker fx:id="ngayGhiPicker" layoutX="224.0" layoutY="328.0" prefHeight="25.0" prefWidth="169.0" styleClass="black-text" />
                                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="417.0" prefHeight="32.0" prefWidth="120.0" text="Ghi chú" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextArea layoutX="179.0" layoutY="385.0" prefHeight="83.0" prefWidth="202.0" />
+                                    <TextArea  fx:id="ghiChuArea" layoutX="179.0" layoutY="385.0" prefHeight="83.0" prefWidth="202.0" styleClass="black-text" />
                                      </children>
                                  </Pane>
-                                 <Button fx:id="bnt__P4__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
+                                 <Button fx:id="bnt__P4__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE" onAction="#handleAddServiceTicket">
                                      <graphic>
                                          <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -79,7 +79,7 @@
                                          </ImageView>
                                      </graphic>
                                  </Button>
-                                 <Button fx:id="bnt__P4__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE">
+                                 <Button fx:id="bnt__P4__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE" onAction="#handleUpdateServiceTicket">
                                      <graphic>
                                          <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -88,7 +88,7 @@
                                          </ImageView>
                                      </graphic>
                                  </Button>
-                                 <Button fx:id="bnt__P4__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
+                                 <Button fx:id="bnt__P4__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE" onAction="#handleDeleteServiceTicket">
                                      <graphic>
                                          <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -97,10 +97,15 @@
                                          </ImageView>
                                      </graphic>
                                  </Button>
-                                 <TableView fx:id="table__P4__1" layoutX="497.0" layoutY="117.0" prefHeight="557.0" prefWidth="340.0" style="-fx-background-radius: 20;">
+                                 <TableView fx:id="table__sericetiket" layoutX="497.0" layoutY="117.0" prefHeight="557.0" prefWidth="340.0" style="-fx-background-radius: 20;">
                                      <columns>
-                                         <TableColumn prefWidth="75.0" text="C1" />
-                                         <TableColumn prefWidth="75.0" text="C2" />
+                                         <TableColumn prefWidth="75.0" text="Mã Phiếu Dịch Vụ" fx:id="maPDV" />
+                                         <TableColumn prefWidth="75.0" text="Mã Phiếu Thu"   fx:id="maPhieuThu"/>
+                                       <TableColumn prefWidth="75.0" text="Mã Dịch Vụ"   fx:id="maDichVu"/>
+                                          <TableColumn prefWidth="75.0" text="Số Lượng"   fx:id="soLuong"/>
+                                          <TableColumn prefWidth="75.0" text="Thành Tiền"  fx:id="thanhTien"/>
+                                            <TableColumn prefWidth="75.0" text="Ngày Tạo Phiếu"   fx:id="ngayTaoPhieu"/>
+                                             <TableColumn prefWidth="75.0" text="Ghi Chú"  fx:id="ghiChu"/>
                                      </columns>
                                  </TableView>
                                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="74.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin dịch vụ ">
@@ -130,9 +135,9 @@
                                  </ImageView>
                                  <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                                      <children>
-                                         <TextField fx:id="TxtField__P4_1__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                         <TextField fx:id="TxtField__P4_1__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                         <TextField fx:id="TxtField__P4_1__3" layoutX="197.0" layoutY="220.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                                         <TextField fx:id="maPPField" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text" />
+                                         <TextField fx:id="maPThuField" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text"  />
+                                         <TextField fx:id="thanhTienField" layoutX="197.0" layoutY="220.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text" />
                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="415.0" prefHeight="32.0" prefWidth="120.0" text="Ngày ghi" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
@@ -143,7 +148,7 @@
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
                                          </Label>
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="148.0" prefHeight="32.0" prefWidth="120.0" text="Loại phạt" textFill="WHITE">
+                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="148.0" prefHeight="32.0" prefWidth="120.0" text="Ghi Chú" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
@@ -158,11 +163,12 @@
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
                                          </Label>
-                                    <DatePicker layoutX="180.0" layoutY="409.0" prefHeight="35.0" prefWidth="211.0" />
-                                    <ComboBox fx:id="comboBox__P4__32" layoutX="202.0" layoutY="164.0" prefHeight="29.0" prefWidth="155.0" />
+                                    <DatePicker fx:id="ngayGhiPPField" layoutX="180.0" layoutY="409.0" prefHeight="35.0" prefWidth="211.0"  styleClass="black-text"  />
+                                    
+                                     <TextArea  fx:id="ghiChuPPField" layoutX="202.0" layoutY="164.0" prefHeight="29.0" prefWidth="155.0" styleClass="black-text" />
                                      </children>
                                  </Pane>
-                                 <Button fx:id="bnt__P4_1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="638.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
+                                 <Button fx:id="bnt__P4_1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="638.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE" onAction="#handleAddViolationTicket">
                                      <graphic>
                                          <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -171,7 +177,7 @@
                                          </ImageView>
                                      </graphic>
                                  </Button>
-                                 <Button fx:id="bnt__P4_1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="638.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE">
+                                 <Button fx:id="bnt__P4_1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="638.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE" onAction="#handleUpdateViolationTicket">
                                      <graphic>
                                          <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -180,7 +186,7 @@
                                          </ImageView>
                                      </graphic>
                                  </Button>
-                                 <Button fx:id="bnt__P4_1__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="638.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
+                                 <Button fx:id="bnt__P4_1__delete" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="638.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE" onAction="#handleDeleteViolationTicket">
                                      <graphic>
                                          <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -189,10 +195,13 @@
                                          </ImageView>
                                      </graphic>
                                  </Button>
-                                 <TableView fx:id="table__P4_1__1" layoutX="497.0" layoutY="117.0" prefHeight="580.0" prefWidth="340.0">
+                                 <TableView fx:id="tableviolationticket" layoutX="497.0" layoutY="117.0" prefHeight="580.0" prefWidth="340.0">
                                      <columns>
-                                         <TableColumn prefWidth="75.0" text="C1" />
-                                         <TableColumn prefWidth="75.0" text="C2" />
+                                         <TableColumn prefWidth="75.0" text="Mã Phiếu Phạt" fx:id="mxPP"  />
+                                         <TableColumn prefWidth="75.0" text="Mã Phiếu Thu" fx:id="mxPThu" />
+                                          <TableColumn prefWidth="75.0" text="Thành Tiền"  fx:id="mxThanhTien"/>
+                                         <TableColumn prefWidth="75.0" text="Ngày Ghi"  fx:id="mxNgayghi"/>
+                                         <TableColumn prefWidth="75.0" text="Ghi Chú" fx:id="mxghichu" />
                                      </columns>
                                  </TableView>
                                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="76.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin phiếu phạt">
@@ -212,7 +221,7 @@
                      <children>
                         <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                            <children>
-                              <TextField fx:id="TxtField__P4__search1" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px;" />
+                              <TextField fx:id="TxtField__P4__search1" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px;"  styleClass="black-text" />
                               <ComboBox fx:id="comboBox__P4__11" layoutX="623.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
                               <ComboBox fx:id="comboBox__P4__21" layoutX="740.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
                               <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="234.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
@@ -222,9 +231,9 @@
                               </ImageView>
                               <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20;">
                                  <children>
-                                    <TextField fx:id="TxtField__P4__11" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                    <TextField fx:id="TxtField__P4__31" layoutX="216.0" layoutY="143.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                    <TextField fx:id="TxtField__P4__51" layoutX="196.0" layoutY="252.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                                    <TextField fx:id="TxtField__P4__11" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text"  />
+                                    <TextField fx:id="TxtField__P4__31" layoutX="216.0" layoutY="143.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text"  />
+                                    <TextField fx:id="TxtField__P4__51" layoutX="196.0" layoutY="252.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text" />
                                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="317.0" prefHeight="32.0" prefWidth="120.0" text="Đơn giá" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
@@ -235,7 +244,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="143.0" prefHeight="32.0" prefWidth="120.0" text="Loại dịch vụ" textFill="WHITE">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="143.0" prefHeight="32.0" prefWidth="120.0" text="Tên Dịch Vụ" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -245,16 +254,17 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="TxtField__P4__61" layoutX="202.0" layoutY="317.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                    <DatePicker layoutX="206.0" layoutY="397.0" prefHeight="25.0" prefWidth="169.0" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="397.0" prefHeight="32.0" prefWidth="120.0" text="Ngày ghi" textFill="WHITE">
+                                    <TextField fx:id="TxtField__P4__61" layoutX="202.0" layoutY="317.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
+                                   <ComboBox fx:id="fill_type" layoutX="202.0" layoutY="417.0" prefHeight="32.0" prefWidth="165.0"  styleClass="black-text" promptText="Chọn Loại Dịch Vụ"  />
+
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="397.0" prefHeight="32.0" prefWidth="120.0" text="Loại" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </Pane>
-                              <Button fx:id="bnt__P4__add1" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
+                              <Button fx:id="bnt__P4__add1" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE" onAction="#handleAddService">
                                  <graphic>
                                     <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -263,7 +273,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="bnt__P4__update1" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE">
+                              <Button fx:id="bnt__P4__update1" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE" onAction="#handleUpdateService">
                                  <graphic>
                                     <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -272,7 +282,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="bnt__P4__delete1" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
+                              <Button fx:id="bnt__P4__delete1" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE" onAction="#handleDeleteService">
                                  <graphic>
                                     <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -283,8 +293,13 @@
                               </Button>
                               <TableView fx:id="table__P4__11" layoutX="497.0" layoutY="117.0" prefHeight="557.0" prefWidth="340.0" style="-fx-background-radius: 20;">
                                  <columns>
-                                    <TableColumn prefWidth="75.0" text="C1" />
-                                    <TableColumn prefWidth="75.0" text="C2" />
+                                   <TableColumn prefWidth="75.0" text="Mã Dịch Vụ" fx:id="madv" />
+                                    <TableColumn prefWidth="75.0" text="Tên Dịch Vụ" fx:id="tenDV" />
+                                    <TableColumn prefWidth="75.0" text="Giá Mỗi Đơn Vị" fx:id="giaDV" />
+                                    <TableColumn prefWidth="75.0" text="Đơn Vị" fx:id="donVi" />
+                                    <TableColumn prefWidth="75.0" text="Loại" fx:id="loai" />
+
+                                   
                                  </columns>
                               </TableView>
                               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="74.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin dịch vụ ">
@@ -314,9 +329,9 @@
                               </ImageView>
                               <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20;">
                                  <children>
-                                    <TextField fx:id="TxtField__P4__111" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                    <TextField fx:id="TxtField__P4__311" layoutX="216.0" layoutY="143.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="143.0" prefHeight="32.0" prefWidth="120.0" text="Loại dịch vụ" textFill="WHITE">
+                                    <TextField fx:id="maPhatField" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                                    <TextField fx:id="viphamField" layoutX="216.0" layoutY="143.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="143.0" prefHeight="32.0" prefWidth="120.0" text="Vi phạm" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -331,10 +346,10 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="TxtField__P4__611" layoutX="217.0" layoutY="375.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                                    <TextField fx:id="tienPhatField" layoutX="217.0" layoutY="375.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
                                  </children>
                               </Pane>
-                              <Button fx:id="bnt__P4__add11" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
+                              <Button fx:id="bnt__P4__add11" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE" onAction="#handleAddViolation">
                                  <graphic>
                                     <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -343,7 +358,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="bnt__P4__update11" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE">
+                              <Button fx:id="bnt__P4__update11" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Sửa" textFill="WHITE" onAction="#handleUpdateViolation">
                                  <graphic>
                                     <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -352,7 +367,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="bnt__P4__delete11" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE">
+                              <Button fx:id="bnt__P4__delete11" contentDisplay="GRAPHIC_ONLY" layoutX="342.0" layoutY="634.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="90.0" text="Xóa" textFill="WHITE" onAction="#handleDeleteViolation">
                                  <graphic>
                                     <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -361,10 +376,11 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <TableView fx:id="table__P4__111" layoutX="497.0" layoutY="117.0" prefHeight="557.0" prefWidth="340.0" style="-fx-background-radius: 20;">
+                              <TableView fx:id="tableViolation" layoutX="497.0" layoutY="117.0" prefHeight="557.0" prefWidth="340.0" style="-fx-background-radius: 20;">
                                  <columns>
-                                    <TableColumn prefWidth="75.0" text="C1" />
-                                    <TableColumn prefWidth="75.0" text="C2" />
+                                    <TableColumn prefWidth="75.0" text="Mã Phạt" fx:id="maphat"/>
+                                    <TableColumn prefWidth="75.0" text="Vi Phạm"  fx:id="vipham" />
+                                     <TableColumn prefWidth="75.0" text="Số Tiền Phạt" fx:id="tienphat" />
                                  </columns>
                               </TableView>
                               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="74.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin dịch vụ ">

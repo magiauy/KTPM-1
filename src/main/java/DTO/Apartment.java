@@ -12,13 +12,13 @@ public class Apartment {
     private String apartmentID;
     private String buildingID;
     private String roomNumber;
-    private String area;
+    private Double area;
     private int bedrooms;
     private int bathrooms;
     private String furniture;
 
     public Apartment(String apartmentID, String buildingID, String roomNumber,
-            String area, int bedrooms, int bathrooms, String furniture) {
+            Double area, int bedrooms, int bathrooms, String furniture) {
         this.apartmentID = apartmentID;
         this.buildingID = buildingID;
         this.roomNumber = roomNumber;
@@ -65,11 +65,11 @@ public class Apartment {
         this.roomNumber = roomNumber;
     }
 
-    public String getArea() {
+    public Double getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea(Double area) {
         this.area = area;
     }
 
