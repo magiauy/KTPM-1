@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update ID (23/4)">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/LeaseAgreementDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/LeaseAgreementDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/LeaseAgreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/LeaseAgreement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ApartmentBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ApartmentBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/FurnitureBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/FurnitureBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/LeaseAgreementBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/LeaseAgreementBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/TenantBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/TenantBUS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page6.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page6.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +262,12 @@
       <workItem from="1713966188778" duration="780000" />
       <workItem from="1715091368306" duration="896000" />
       <workItem from="1715149859496" duration="3958000" />
-      <workItem from="1715178750540" duration="3873000" />
+      <workItem from="1715178750540" duration="4096000" />
+      <workItem from="1715184494593" duration="3913000" />
+      <workItem from="1715197426927" duration="748000" />
+      <workItem from="1715200496909" duration="2086000" />
+      <workItem from="1715237469293" duration="7220000" />
+      <workItem from="1715245497331" duration="337000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />

@@ -251,9 +251,17 @@ public class BuildingManagerController implements Initializable {
 
     public ObservableList<Apartment> getApartmentList() {
         ObservableList<Apartment> apartmentObservableList = FXCollections.observableArrayList();
-        ApartmentBUS apartmentBUS = new ApartmentBUS();
-        List<Apartment> apartments = apartmentBUS.getAll();
-        apartmentObservableList.addAll(apartments);
+        BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+        List<BuildingManager> buildingManagerList = buildingManagerBUS.getAll();
+        for (BuildingManager buildingManager : buildingManagerList) {
+            if (buildingManager.getBuildingManagerId().equals(ID)){
+                ApartmentBUS apartmentBUS = new ApartmentBUS();
+                List<Apartment> apartments = apartmentBUS.getApartmentByBuildingID(buildingManager.getBuildingId());
+                apartmentObservableList.addAll(apartments);
+                break;
+            }
+        }
+
         return apartmentObservableList;
     }
 
@@ -275,6 +283,7 @@ public class BuildingManagerController implements Initializable {
         soPhongTamTable.setCellValueFactory(new PropertyValueFactory<>("bathrooms"));
         noiThatTable.setCellValueFactory(new PropertyValueFactory<>("furniture"));
         apartmentObservableList = getApartmentList();
+        System.out.println(apartmentObservableList.isEmpty());
         table__P1__1.setItems(apartmentObservableList);
     }
 
@@ -505,7 +514,7 @@ public class BuildingManagerController implements Initializable {
     public ObservableList<Tenant> getTenantObservableList() {
         ObservableList<Tenant> tenantObservableLists = FXCollections.observableArrayList();
         TenantBUS tenantBUS = new TenantBUS();
-        List<Tenant> tenants = tenantBUS.getAll();
+        List<Tenant> tenants = tenantBUS.getTenantWithBuildingID(this.ID);
         tenantObservableLists.addAll(tenants);
         return tenantObservableLists;
     }
@@ -514,9 +523,14 @@ public class BuildingManagerController implements Initializable {
 
     public ObservableList<Cohabitant> getCohabitantObservableList() {
         ObservableList<Cohabitant> cohabitantObservableLists = FXCollections.observableArrayList();
+        TenantBUS tenantBUS = new TenantBUS();
         CohabitantBUS cohabitantBUS = new CohabitantBUS();
-        List<Cohabitant> cohabitants = cohabitantBUS.getAll();
-        cohabitantObservableLists.addAll(cohabitants);
+        List<Tenant> tenants = tenantBUS.getTenantWithBuildingID(this.ID);
+        for (Tenant tenant: tenants){
+            List<Cohabitant> cohabitants = cohabitantBUS.getCohabitantsWithTenantId(tenant.getTenantID());
+            cohabitantObservableLists.addAll(cohabitants);
+        }
+
         return cohabitantObservableLists;
     }
 
@@ -791,9 +805,14 @@ public class BuildingManagerController implements Initializable {
 
     public ObservableList<MonthlyRentBill> getMonthlyRentBillObservableList() {
         ObservableList<MonthlyRentBill> monthlyRentBillsObservableLists = FXCollections.observableArrayList();
+        TenantBUS tenantBUS = new TenantBUS();
+        List<Tenant> tenants = tenantBUS.getTenantWithBuildingID(this.ID);
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-        List<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getAll();
-        monthlyRentBillsObservableLists.addAll(monthlyRentBills);
+        for (Tenant tenant: tenants){
+            List<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getMonthlyRentBillsWithTenantId(tenant.getTenantID());
+            monthlyRentBillsObservableLists.addAll(monthlyRentBills);
+        }
+
         return monthlyRentBillsObservableLists;
     }
 
@@ -1574,9 +1593,14 @@ public class BuildingManagerController implements Initializable {
 
     public ObservableList<Furniture> getFurnitureObservableList(){
         ObservableList<Furniture> furnitureObservableList1 = FXCollections.observableArrayList();
+        LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
         FurnitureBUS furnitureBUS = new FurnitureBUS();
-        List<Furniture> furnitureList = furnitureBUS.getAll();
-        furnitureObservableList1.addAll(furnitureList);
+        List<LeaseAgreement> leaseAgreements = leaseAgreementBUS.getLeaseAgreementsWithBuildingManagerID(this.ID);
+        for (LeaseAgreement leaseAgreement: leaseAgreements){
+            List<Furniture> furnitureList = furnitureBUS.getFurnitureByApartmentID(leaseAgreement.getApartmentID());
+            furnitureObservableList1.addAll(furnitureList);
+        }
+
         return furnitureObservableList1;
     }
 
@@ -1749,7 +1773,8 @@ public class BuildingManagerController implements Initializable {
     public ObservableList<LeaseAgreement> getLeaseAgreementObservableList(){
         ObservableList<LeaseAgreement> leaseAgreementObservableList1 = FXCollections.observableArrayList();
         LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
-        List<LeaseAgreement> leaseAgreementList = leaseAgreementBUS.getAll();
+        List<LeaseAgreement> leaseAgreementList = leaseAgreementBUS.getLeaseAgreementsWithBuildingManagerID(this.ID
+        );
         leaseAgreementObservableList1.addAll(leaseAgreementList);
         return leaseAgreementObservableList1;
     }

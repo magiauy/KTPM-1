@@ -59,4 +59,16 @@ public class ApartmentBUS {
         }
         return vitri;
     }
+
+    public ArrayList<Apartment> getApartmentByBuildingID(String buildingID){
+        ArrayList<Apartment> apartments = new ArrayList<>();
+        ApartmentBUS apartmentBUS = new ApartmentBUS();
+        for (Apartment apartment : apartmentBUS.getAll()) {
+            if (apartment.getBuildingID().equals(buildingID)){
+                apartments.add(apartment);
+            }
+        }
+
+        return apartments;
+    }
 }
