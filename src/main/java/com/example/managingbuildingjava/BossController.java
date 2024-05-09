@@ -155,7 +155,7 @@ public class BossController implements Initializable {
     @FXML
     private TextField TxtField__P1__3;
     @FXML
-    private TextField TxtField__P1__4;
+    private ComboBox<String> TxtField__P1__4;
     @FXML
     private TextField TxtField__P1__5;
     @FXML
@@ -374,6 +374,7 @@ public class BossController implements Initializable {
         box_page1();
         keyenter();
         keyenter1();
+        box_page0();
 
     }
 
@@ -382,7 +383,7 @@ public class BossController implements Initializable {
             TxtField__P1__search.setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.ENTER) {
                     handleSearch();
-                    handleseacrhName();
+                   
                 }
             });
         });
@@ -439,6 +440,37 @@ public class BossController implements Initializable {
                         "Quận Tân Phú",
                         "Quận Thủ Đức");
                 box_dress.setItems(districts);
+            } else {
+                System.err.println("box_dressmbo is null. Check FXML and controller connection.");
+            }
+        });
+    }
+
+    public void box_page0() {
+        Platform.runLater(() -> {
+            if (TxtField__P1__4 != null) {
+                ObservableList<String> districts = FXCollections.observableArrayList(
+                     
+                        "Quận 1",
+                        "Quận 2",
+                        "Quận 3",
+                        "Quận 4",
+                        "Quận 5",
+                        "Quận 6",
+                        "Quận 7",
+                        "Quận 8",
+                        "Quận 9",
+                        "Quận 10",
+                        "Quận 11",
+                        "Quận 12",
+                        "Quận Bình Tân",
+                        "Quận Bình Thạnh",
+                        "Quận Gò Vấp",
+                        "Quận Phú Nhuận",
+                        "Quận Tân Bình",
+                        "Quận Tân Phú",
+                        "Quận Thủ Đức");
+                TxtField__P1__4.setItems(districts);
             } else {
                 System.err.println("box_dressmbo is null. Check FXML and controller connection.");
             }
@@ -546,16 +578,16 @@ public class BossController implements Initializable {
                     TxtField__P1__1.setText(selectedRow.getBuildingId());
                     TxtField__P1__2.setText(selectedRow.getNameBuilding());
                     TxtField__P1__3.setText(selectedRow.getCity_Building());
-                    TxtField__P1__4.setText(selectedRow.getDistrict_Building());
+                    // Sử dụng setValue để chọn giá trị trong ComboBox
+                    TxtField__P1__4.setValue(selectedRow.getDistrict_Building()); // districtComboBox là tên của
+                                                                                   // ComboBox của bạn
                     TxtField__P1__5.setText(selectedRow.getAddress_Building());
                     int numberOfApartments = selectedRow.getNumberOfApartment_Building();
                     TxtField__P1__6.setText(String.valueOf(numberOfApartments));
                     selectedBuildingToDelete = selectedRow;
                 }
-
             }
         });
-
     }
 
     public void handbuildingmanager() {
@@ -642,22 +674,25 @@ public class BossController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    private boolean containsNumber(String s) {
-        for (char c : s.toCharArray()) {
-            if (Character.isDigit(c)) {
-                return true;
-            }
+private boolean containsNumber(String s) {
+    for (char c : s.toCharArray()) {
+        if (Character.isDigit(c)) {
+            return true;
         }
-        return false;
     }
+    return false;
+}
     // =======Building======
     public void handleaddBuilding() {
         try {
             String buildingId = TxtField__P1__1.getText();
             String nameBuilding = TxtField__P1__2.getText();
             String city_Building = TxtField__P1__3.getText();
-            String district_Building = TxtField__P1__4.getText();
+            String district_Building = TxtField__P1__4.getValue();
+            if (district_Building == null || district_Building.isEmpty()) {
+                showAlert("Lỗi", "Vui lòng chọn quận.", AlertType.ERROR);
+                return;
+            }
             String address_Building = TxtField__P1__5.getText();
             int numberOfApartment_Building = Integer.parseInt(TxtField__P1__6.getText());
 
@@ -726,7 +761,8 @@ public class BossController implements Initializable {
         TxtField__P1__1.setText("");
         TxtField__P1__2.setText("");
         TxtField__P1__3.setText("");
-        TxtField__P1__4.setText("");
+  
+       
         TxtField__P1__5.setText("");
         TxtField__P1__6.setText("");
     }
@@ -740,7 +776,11 @@ public class BossController implements Initializable {
         String buildingId = TxtField__P1__1.getText().trim();
         String nameBuilding = TxtField__P1__2.getText();
         String city_Building = TxtField__P1__3.getText();
-        String district_Building = TxtField__P1__4.getText();
+        String district_Building = TxtField__P1__4.getValue();
+        if (district_Building == null || district_Building.isEmpty()) {
+            showAlert("Lỗi", "Vui lòng chọn quận.", AlertType.ERROR);
+            return;
+        }
         String address_Building = TxtField__P1__5.getText();
         int numberOfApartment_Building = 0;
 
@@ -748,6 +788,10 @@ public class BossController implements Initializable {
             numberOfApartment_Building = Integer.parseInt(TxtField__P1__6.getText());
         } catch (NumberFormatException e) {
             showAlert("Lỗi", "Số lượng căn hộ không hợp lệ.", AlertType.ERROR);
+            return;
+        }
+        if (containsNumber(nameBuilding)) {
+            showAlert("Lỗi", "Tên tòa nhà không được chứa số.", AlertType.ERROR);
             return;
         }
         Building editedBuilding = new Building();
@@ -773,49 +817,41 @@ public class BossController implements Initializable {
 
     public void selectDresss() {
         String dress = box_dress.getValue();
-        if (dress == null) {
-            return;
-        }
-        buildingsList.clear();
-        BuildingBUS buildingBUS = new BuildingBUS();
-        ArrayList<Building> buildings = buildingBUS.getAll();
-
-        if (dress.equals("Tất Cả")) {
-
-            buildingsList.addAll(buildings);
-        } else {
-
-            for (Building manager : buildings) {
-                if (manager.getDistrict_Building().equals(dress)) {
-                    buildingsList.add(manager);
-                }
-            }
+        if(dress.equals("Tất Cả")){
+            BuildingBUS buildingBUS = new BuildingBUS();
+            ArrayList<Building> searchResult = buildingBUS.getAll();
+            buildingsList.addAll(searchResult);
+            ObservableList<Building> observableBuildingList = FXCollections
+                    .observableArrayList(searchResult);
+            table__view.setItems(observableBuildingList);
+        }else {
+            BuildingBUS buildingBUS = new BuildingBUS();
+            ArrayList<Building> searchResult = buildingBUS.search(dress, "quận");
+            ObservableList<Building> observableBuildingList = FXCollections
+                    .observableArrayList(searchResult);
+            table__view.setItems(observableBuildingList);
         }
 
-        ObservableList<Building> observableBuildingList = FXCollections
-                .observableArrayList(buildingsList);
-        table__view.setItems(observableBuildingList);
+
+       
     }
 
     public void handleseacrhName() {
-        String name = seacrch_namepage1.getText();
-        buildingsList.clear();
-        BuildingBUS buildingBUS = new BuildingBUS();
-        ArrayList<Building> buildingBUSs = buildingBUS.getAll();
-        boolean found = false;
-        for (Building manager : buildingBUSs) {
-            if (manager.getNameBuilding().equals(name)) {
-                buildingsList.add(manager);
-                found = true;
-            }
-        }
-        if (!found) {
-            System.out.println("Không tìm thấy quản lý có tên: " + name);
-        }
-
-        ObservableList<Building> observableBuildingList = FXCollections
-                .observableArrayList(buildingsList);
-        table__view.setItems(observableBuildingList);
+       String name = seacrch_namepage1.getText();
+       if(name.equals("")){
+           BuildingBUS buildingBUS = new BuildingBUS();
+           ArrayList<Building> searchResult = buildingBUS.getAll();
+           buildingsList.addAll(searchResult);
+           ObservableList<Building> observableBuildingList = FXCollections
+                   .observableArrayList(searchResult);
+           table__view.setItems(observableBuildingList);
+       }else {
+           BuildingBUS buildingBUS = new BuildingBUS();
+           ArrayList<Building> searchResult = buildingBUS.search(name, "Tên Tòa Nhà");
+           ObservableList<Building> observableBuildingList = FXCollections.observableArrayList(searchResult);
+           table__view.setItems(observableBuildingList);
+       }
+       
     }
 
     /////// BuildingManeger///====================
@@ -830,13 +866,26 @@ public class BossController implements Initializable {
         String citizenIdentityCard = TxtField__b6.getText();
         Float salary = Float.parseFloat(TxtField__b7.getText().replaceAll(",", ""));
 
-        if (buildingManagerId.isEmpty() || buildingId.isEmpty() || lastName.isEmpty() || firstName.isEmpty() ||
-                phoneNumber.isEmpty() || dob == null || gender.isEmpty() || citizenIdentityCard.isEmpty()
-                || salary.isNaN()) {
-
-            System.out.println("Vui lòng nhập đầy đủ thông tin.");
+        if (buildingManagerId.isEmpty() || buildingId.isEmpty() || lastName.isEmpty() || firstName.isEmpty()
+                || phoneNumber.isEmpty() || dob == null || gender == null) {
+            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
             return;
         }
+
+        if (lastName.length() > 40 || firstName.length() > 40) {
+            showAlert("Lỗi", "Họ và tên không được quá 255 ký tự.", AlertType.ERROR);
+            return;
+        }
+
+        if (containsNumber(lastName)) {
+            showAlert("Lỗi", "Tên  không được chứa số.", AlertType.ERROR);
+            return;
+        }
+        if (containsNumber(firstName)) {
+            showAlert("Lỗi", "Tên  không được chứa số.", AlertType.ERROR);
+            return;
+        }
+
         DTO.BuildingManager newBuildingManager = new DTO.BuildingManager();
         newBuildingManager.setBuildingManagerId(buildingManagerId);
         newBuildingManager.setBuildingId(buildingId);
@@ -874,7 +923,6 @@ public class BossController implements Initializable {
 
     public void updateBuildingManeger() {
         BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-
         buildingManagersList.clear();
         ArrayList<DTO.BuildingManager> buildings = buildingManagerBUS.getAll();
         buildingManagersList.addAll(buildings);
@@ -910,6 +958,26 @@ public class BossController implements Initializable {
         LocalDate dob = datePickerDOB.getValue();
         String gender = fruitCombo.getValue();
 
+        if (buildingManagerId.isEmpty() || buildingId.isEmpty() || lastName.isEmpty() || firstName.isEmpty()
+                || phoneNumber.isEmpty() || dob == null || gender == null) {
+            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
+            return;
+        }
+
+        if (lastName.length() > 40 || firstName.length() > 40) {
+            showAlert("Lỗi", "Họ và tên không được quá 255 ký tự.", AlertType.ERROR);
+            return;
+        }
+
+        if (containsNumber(lastName) ) {
+            showAlert("Lỗi", "Tên  không được chứa số.", AlertType.ERROR);
+            return;
+        }
+        if (containsNumber(firstName)) {
+            showAlert("Lỗi", "Tên  không được chứa số.", AlertType.ERROR);
+            return;
+        }
+
         String citizenIdentityCard = TxtField__b6.getText();
         Float salary = Float.parseFloat(TxtField__b7.getText().replaceAll(",", ""));
         BuildingManager buildingManager = new BuildingManager();
@@ -941,45 +1009,22 @@ public class BossController implements Initializable {
         if (gender == null) {
             return;
         }
-        buildingManagersList.clear();
+   
         BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-        ArrayList<BuildingManager> buildingManagers = buildingManagerBUS.getAll();
+        ArrayList<BuildingManager> buildingManagers = buildingManagerBUS.search(gender,"Giới Tính");
 
-        if (gender.equals("Tất Cả")) {
-
-            buildingManagersList.addAll(buildingManagers);
-        } else {
-
-            for (BuildingManager manager : buildingManagers) {
-                if (manager.getGender().equals(gender)) {
-                    buildingManagersList.add(manager);
-                }
-            }
-        }
-
+       
         ObservableList<BuildingManager> observableBuildingList = FXCollections
-                .observableArrayList(buildingManagersList);
+                .observableArrayList(buildingManagers);
         table__view2.setItems(observableBuildingList);
     }
 
     public void handleSearch() {
         String name = TxtField__P1__search.getText();
-        buildingManagersList.clear();
-        BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-        ArrayList<BuildingManager> buildingManagers = buildingManagerBUS.getAll();
-        boolean found = false;
-        for (BuildingManager manager : buildingManagers) {
-            if (manager.getFirstName().equals(name)) {
-                buildingManagersList.add(manager);
-                found = true;
-            }
-        }
-        if (!found) {
-            System.out.println("Không tìm thấy quản lý có tên: " + name);
-        }
-
+      BuildingManagerBUS buildingManager = new BuildingManagerBUS();
+      ArrayList<BuildingManager> buildingManagers = buildingManager.search(name,"Tìm Theo Ten");
         ObservableList<BuildingManager> observableBuildingList = FXCollections
-                .observableArrayList(buildingManagersList);
+                .observableArrayList(buildingManagers);
         table__view2.setItems(observableBuildingList);
     }
 
@@ -997,6 +1042,28 @@ public class BossController implements Initializable {
         monthlyRevenue = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
         monthlyOpex = Float.parseFloat(TxtField__r5.getText().replaceAll(",", ""));
         monthlyProfit = Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
+           String revenueInput = TxtField__r3.getText().replaceAll(",", "");
+        if (!isValidNumber(revenueInput)) {
+            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Doanh thu hàng tháng.", AlertType.ERROR);
+            return;
+        }
+        monthlyRevenue = Float.parseFloat(revenueInput);
+
+        // Kiểm tra và xử lý monthlyOpex
+        String opexInput = TxtField__r5.getText().replaceAll(",", "");
+        if (!isValidNumber(opexInput)) {
+            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Chi phí hoạt động hàng tháng.", AlertType.ERROR);
+            return;
+        }
+        monthlyOpex = Float.parseFloat(opexInput);
+
+        // Kiểm tra và xử lý monthlyProfit
+        String profitInput = TxtField__r6.getText().replaceAll(",", "");
+        if (!isValidNumber(profitInput)) {
+            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Lợi nhuận hàng tháng.", AlertType.ERROR);
+            return;
+        }
+        monthlyProfit = Float.parseFloat(profitInput);
 
         FinancialReport newFinancialReport = new FinancialReport();
         newFinancialReport.setFinancialReportID(financialReportID);
@@ -1042,6 +1109,15 @@ public class BossController implements Initializable {
             }
         });
     }
+    
+    private boolean isValidNumber(String input) {
+        try {
+            Float.parseFloat(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
     public void handEditReport() {
         String financialReportID = TxtField__r1.getText();
@@ -1051,10 +1127,29 @@ public class BossController implements Initializable {
         Float monthlyRevenue = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
         Float monthlyOpex = Float.parseFloat(TxtField__r5.getText().replaceAll(",", ""));
         Float monthlyProfit = Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
+   
+        String revenueInput = TxtField__r3.getText().replaceAll(",", "");
+        if (!isValidNumber(revenueInput)) {
+            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Doanh thu hàng tháng.", AlertType.ERROR);
+            return;
+        }
+        monthlyRevenue = Float.parseFloat(revenueInput);
 
-        System.out.println(
-                financialReportID + ", " + buildingID + ", " + buildingManagerID + ", " + date + ", " + monthlyOpex);
+        // Kiểm tra và xử lý monthlyOpex
+        String opexInput = TxtField__r5.getText().replaceAll(",", "");
+        if (!isValidNumber(opexInput)) {
+            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Chi phí hoạt động hàng tháng.", AlertType.ERROR);
+            return;
+        }
+        monthlyOpex = Float.parseFloat(opexInput);
 
+        // Kiểm tra và xử lý monthlyProfit
+        String profitInput = TxtField__r6.getText().replaceAll(",", "");
+        if (!isValidNumber(profitInput)) {
+            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Lợi nhuận hàng tháng.", AlertType.ERROR);
+            return;
+        }
+        monthlyProfit = Float.parseFloat(profitInput);
         FinancialReport newFinancialReport = new FinancialReport();
         newFinancialReport.setFinancialReportID(financialReportID);
         newFinancialReport.setBuildingID(buildingID);
@@ -1090,24 +1185,17 @@ public class BossController implements Initializable {
     public void searchDaypage3() {
         LocalDate dateFirst = date1.getValue();
         LocalDate dateLast = date2.getValue();
-        System.out.println(dateFirst);
-        financialReportsList.clear();
-        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-        ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
-        for (FinancialReport manager : financialReports) {
-            LocalDate managerDate = manager.getDate();
-            if (!managerDate.isBefore(dateFirst) && !managerDate.isAfter(dateLast)) {
-
-                financialReportsList.add(manager);
-            }
-        }
+       FinancialReportBUS financialReportBUS= new FinancialReportBUS();
+        ArrayList<FinancialReport> financialReports = financialReportBUS.search(dateFirst, dateLast, "Tìm Theo Ngày");
         ObservableList<FinancialReport> observableBuildingList = FXCollections
-                .observableArrayList(financialReportsList);
+                .observableArrayList(financialReports);
         table__view3.setItems(observableBuildingList);
     }
 
     public void resetDay() {
+
         FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+        financialReportsList.clear();
         ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
         financialReportsList.addAll(financialReports);
         ObservableList<FinancialReport> observableList = FXCollections

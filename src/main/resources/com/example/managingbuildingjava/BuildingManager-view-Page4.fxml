@@ -55,7 +55,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="thanhTienField" layoutX="225.0" layoutY="267.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text"/>
+                                    <TextField fx:id="thanhTien1Field" layoutX="225.0" layoutY="267.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text"/>
                                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="328.0" prefHeight="32.0" prefWidth="120.0" text="Ngày ghi" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />

@@ -1108,7 +1108,7 @@ public class BuildingManagerController implements Initializable {
     private TextField soLuongField;
 
     @FXML
-    private TextField thanhTienField;
+    private TextField thanhTien1Field;
 
     @FXML
     private DatePicker ngayGhiPicker;
@@ -1146,12 +1146,12 @@ public class BuildingManagerController implements Initializable {
             if (event.getClickCount() == 1) {
                 ServiceTicket selectedRow = table__sericetiket.getSelectionModel().getSelectedItem();
                 if (selectedRow != null) {
-                    // Hiển thị thông tin hàng đã chọn lên các trường Text/TextArea
+                  System.out.println(selectedRow.getTotalAmount());
                     maPhieuDVField.setText(selectedRow.getServiceTicketID());
                     maPhieuThuField.setText(selectedRow.getMonthlyRentBillID());
                     maDichVuField.setText(selectedRow.getServiceID());
                     soLuongField.setText(String.valueOf(selectedRow.getQuantity()));
-                    thanhTienField.setText(String.valueOf(selectedRow.getTotalAmount()));
+                    thanhTien1Field.setText(String.valueOf(selectedRow.getTotalAmount()));
                     ngayGhiPicker.setValue(selectedRow.getDate());
                     ghiChuArea.setText(selectedRow.getNote());
                     serviceTicketdelete = selectedRow;
@@ -1165,7 +1165,7 @@ public class BuildingManagerController implements Initializable {
         String maPhieuThu = maPhieuThuField.getText();
         String maDichVu = maDichVuField.getText();
         Double soLuong = Double.parseDouble(soLuongField.getText());
-        Double thanhTien = Double.parseDouble(thanhTienField.getText());
+        Double thanhTien = Double.parseDouble(thanhTien1Field.getText());
         LocalDate ngayGhi = ngayGhiPicker.getValue();
         String ghiChu = ghiChuArea.getText();
 
@@ -1216,7 +1216,7 @@ public class BuildingManagerController implements Initializable {
 
         String maPhieuThu = maDichVuField.getText();
         Double soLuong = Double.parseDouble(soLuongField.getText());
-        Double thanhTien = Double.parseDouble(thanhTienField.getText());
+        Double thanhTien = Double.parseDouble(thanhTien1Field.getText());
         LocalDate ngayGhi = ngayGhiPicker.getValue();
         String ghiChu = ghiChuArea.getText();
 
@@ -1394,7 +1394,7 @@ public class BuildingManagerController implements Initializable {
     private TextField maPThuField;
 
     @FXML
-    private TextField thanhTienPPField;
+    private TextField thanhTienField;
 
     @FXML
     private DatePicker ngayGhiPPField;
@@ -1455,31 +1455,42 @@ public class BuildingManagerController implements Initializable {
     }
 
     public void handleAddViolationTicket() {
-        String newViolationID = maPPField.getText();
-        String newMonthlyRentBillID = maPThuField.getText();
-        Double newPrice = Double.parseDouble(thanhTienField.getText());
-        LocalDate newDate = ngayGhiPPField.getValue();
-        String newNote = ghiChuPPField.getText();
-        System.out.println(newViolationID + newMonthlyRentBillID);
-        if (newViolationID.isEmpty() || newMonthlyRentBillID.isEmpty() || newPrice <= 0 || newDate == null
-                || newNote.isEmpty()) {
-            showAlert("Lỗi", "Vui lòng điền đầy đủ thông tin và đúng định dạng", Alert.AlertType.ERROR);
+        String maPDV = maPhieuDVField.getText();
+    String maPhieuThu = maPhieuThuField.getText();
+    String maDichVu = maDichVuField.getText();
+    LocalDate ngayGhi = ngayGhiPicker.getValue();
+    String ghiChu = ghiChuArea.getText();
+
+  
+        // Kiểm tra và xử lý số lượng và thành tiền
+        Double soLuong = Double.parseDouble(soLuongField.getText());
+        Double thanhTien = Double.parseDouble(thanhTienField.getText());
+
+        if (maPDV.isEmpty() || maPhieuThu.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
+            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
             return;
         }
+        ServiceTicket newServiceTicket = new ServiceTicket();
+        newServiceTicket.setServiceTicketID(maPDV);
+        newServiceTicket.setMonthlyRentBillID(maPhieuThu);
+        newServiceTicket.setServiceID(maDichVu);
+        newServiceTicket.setQuantity(soLuong);
+        newServiceTicket.setTotalAmount(thanhTien);
+        newServiceTicket.setDate(ngayGhi);
+        newServiceTicket.setNote(ghiChu);
 
-        ViolationTicket newViolation = new ViolationTicket(newViolationID, newMonthlyRentBillID, newPrice, newDate,
-                newNote);
+        // Thêm phiếu dịch vụ mới vào cơ sở dữ liệu
+        ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+        boolean addResult = serviceTicketBUS.add(newServiceTicket);
 
-        ViolationTicketBUS violationBUS = new ViolationTicketBUS();
-        boolean insertResult = violationBUS.add(newViolation);
-
-        if (insertResult) {
+        if (addResult) {
             showAlert("Thành Công", "Thêm vi phạm thành công", Alert.AlertType.CONFIRMATION);
             initViolationTicket();
 
         } else {
             showAlert("Thất Bại", "Không thể thêm vi phạm", Alert.AlertType.ERROR);
         }
+    
     }
 
     public void handleUpdateViolationTicket() {
