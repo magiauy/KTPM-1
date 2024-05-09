@@ -72,6 +72,26 @@ public class LeaseAgreementBUS {
         return leaseAgreementsWithTenantID;
     }
 
+    public ArrayList<LeaseAgreement> getLeaseAgreementsWithApartmentID(String ApartmentID) {
+        ArrayList<LeaseAgreement> leaseAgreementsWithApartmentID = new ArrayList<>();
+        for (LeaseAgreement leaseAgreement : leaseAgreements) {
+            if (Objects.equals(leaseAgreement.getApartmentID(), ApartmentID)) {
+                leaseAgreementsWithApartmentID.add(leaseAgreement);
+            }
+        }
+        return leaseAgreementsWithApartmentID;
+    }
+
+    public ArrayList<LeaseAgreement> getLeaseAgreementsWithBuildingManagerID(String BuildingManagerID) {
+        ArrayList<LeaseAgreement> leaseAgreementsWithBuildingID = new ArrayList<>();
+        for (LeaseAgreement leaseAgreement : leaseAgreements) {
+            if (Objects.equals(leaseAgreement.getBuildingManagerID(), BuildingManagerID)) {
+                leaseAgreementsWithBuildingID.add(leaseAgreement);
+            }
+        }
+        return leaseAgreementsWithBuildingID;
+    }
+
     public int getIndexByLeaseAgreementID(String leaseAgreementID) {
         for (int i = 0; i < this.leaseAgreements.size(); i++) {
             if (this.leaseAgreements.get(i).getLeaseAgreementID().equals(leaseAgreementID)) {
