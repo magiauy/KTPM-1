@@ -77,16 +77,17 @@ public class ServiceTicketBUS {
         }
         return -1; // Not found
     }
-    public void regisFixedServ(String servID, String note){
+    public void regisFixedServ(String servID, String note, LocalDate currentDate){
         String servTID = "SERVT" + (ServiceTicketDAO.getInstance().countRows() + 1);
+
         String mrBillID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+
         Double price = 0.0;
         for (Service service : ServiceBUS.getInstance().getAll()){
             if (service.getServiceID().equals(servID)){
                 price = service.getPricePerUnit();
             }
         }
-        LocalDate currentDate = LocalDate.now();
 
         ServiceTicket serviceTicket = new ServiceTicket();
         serviceTicket.setServiceTicketID(servTID);
@@ -157,7 +158,6 @@ public void setTableRegisServ(TableView<ServiceUsuage> registeredSerTable) {
         LocalDate currentDate = LocalDate.now();
         Month currentMonth = currentDate.getMonth();
 
-        // Handle potential null value from ServiceTicketDAO
         String mrBillID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
         if (mrBillID == null) {
             return;
@@ -176,10 +176,8 @@ public void setTableRegisServ(TableView<ServiceUsuage> registeredSerTable) {
             return;
         }
 
-        int count = 0;
         for (Service service : ServiceBUS.getInstance().getAll()) {
-            if (service.getServiceID().equals(serviceID.get(count))) {
-                count++;
+            if (serviceID.contains(service.getServiceID())) {
                 servName.add(service.getName());
             }
         }
@@ -194,7 +192,7 @@ public void setTableRegisServ(TableView<ServiceUsuage> registeredSerTable) {
         data.add(serviceUsage);
     }
 
-    registeredSerTable.setItems(FXCollections.observableArrayList(data));
+    registeredSerTable.setItems(data);
 }
 
 

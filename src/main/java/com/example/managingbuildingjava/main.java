@@ -1,5 +1,8 @@
 package com.example.managingbuildingjava;
 
+import BUS.CustomersAccountBUS;
+import BUS.StaffsAccountBUS;
+import DTO.StaffsAccount;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,8 +14,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-import BUS.AccountBUS;
 
 public class main extends Application {
 
@@ -26,7 +27,6 @@ public class main extends Application {
     private PasswordField passwordField;
     private Label statusLabel = new Label();
 
-    private AccountBUS accountBUS;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -54,8 +54,6 @@ public class main extends Application {
         statusLabel = (Label) loginLoader.getNamespace().get("statusLabel");
         Button loginButton = (Button) loginLoader.getNamespace().get("loginButton");
 
-        // Khởi tạo Bus
-        accountBUS = new AccountBUS();
 
         // Xử lý sự kiện khi nhấn nút đăng nhập
         loginButton.setOnAction(event -> {
@@ -73,40 +71,46 @@ public class main extends Application {
         String password = passwordField.getText();
 
         // Validate username and password
-        if (username.isEmpty() || password.isEmpty()) {
-            showStatusMessage("Username and password cannot be empty!");
-            return;
-        }
+//        if (username.isEmpty() || password.isEmpty()) {
+//            showStatusMessage("Username and password cannot be empty!");
+//            return;
+//        }
 
         // Call checkLogin method (implementation in AccountBUS)
-        String validLogin = accountBUS.checkLogin(username, password);
-        String userType = accountBUS.getUserType(username, password);
+        CustomersAccountBUS cus = new CustomersAccountBUS();
+        String validLogin = cus.checkLogin(username, password);
+        System.out.println("validLogin: " + validLogin);
         if (!validLogin.equals("0")) {
-            System.out.println("Login successful!");
-            CustomerController.getInstance().loadPage0();
-            if (userType.equals("admin") || userType.equals("boss")){
-                BossController.getInstance().setID(validLogin);
-                primaryStage.setScene(bossScene);
-            }
-            if (userType.equals("customer") || userType.equals("khachHang")){
-                CustomerController.getInstance().setID(validLogin);
-                primaryStage.setScene(cusScene);
-            }
-            if (userType.equals("manager")||userType.equals("quanLy")){
+            CustomerController.getInstance().setID(validLogin);
+            primaryStage.setScene(cusScene);
+        } else {
+            StaffsAccountBUS staff = new StaffsAccountBUS();
+            validLogin = staff.checkLogin(username, password);
+            if (!validLogin.equals("0")) {
                 BuildingManagerController.getInstance().setID(validLogin);
                 primaryStage.setScene(buiScene);
             }
-            primaryStage.setTitle("Admin");
-        } else {
-            showStatusMessage("Invalid username or password.");
+            else{
+                System.out.println("ko dn dc");
+            }
+//            else{
+//                validLogin = AdminAccountBUS.checkLogin(username, password);
+//                if (!validLogin.equals("0")) {
+//                    BossController.getInstance().setID(validLogin);
+//                    primaryStage.setScene(bossScene);
+//                }
+//                else{
+//                    //        showStatusMessage("Invalid username or password.");
+//                }
+
         }
-    }
 
-    private void showStatusMessage(String message) {
-        statusLabel.setText(message);
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+//    private void showStatusMessage(String message) {
+//        statusLabel.setText(message);
+//    }
+//
+//    public static void main(String[] args) {
+//        launch(args);
+//    }
     }
 }

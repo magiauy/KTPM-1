@@ -2,6 +2,9 @@ package BUS;
 
 import DAO.ServiceDAO;
 import DTO.Service;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -60,5 +63,17 @@ public class ServiceBUS {
             }
         }
         return -1; // Not found
+    }
+
+    public void setCombox(ComboBox<String> combox) {
+        ObservableList<String> services = FXCollections.observableArrayList();
+
+        for (Service service : ServiceBUS.getInstance().getAll()) {
+            if (service.getType().equals("mobile")) {
+                services.add(service.getName());
+            }
+        }
+
+        combox.setItems(services);
     }
 }
