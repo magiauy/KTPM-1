@@ -146,7 +146,7 @@ public class BossController implements Initializable {
     private TextField TxtField__P1__1;
 
     @FXML
-    private TextField TxtField__P1__search;
+    private TextField TxtField__P1__search = new TextField();
     @FXML
     TextField seacrch_namepage1 = new TextField();
 
@@ -239,7 +239,7 @@ public class BossController implements Initializable {
     @FXML
     private TableView<FinancialReport> table__view3;
     @FXML
-    private TableColumn<FinancialReport, String> maBaoCaoColumn;
+    private TableColumn<FinancialReport, String> maBaoCaoColumn =new TableColumn<>();
     @FXML
     private TableColumn<FinancialReport, String> maQuanLiColumn;
     @FXML

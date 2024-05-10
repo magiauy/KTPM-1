@@ -7,14 +7,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DAO.BuildingManagerDAO;
+import DAO.TenantDAO;
 import DTO.BuildingManager;
+import DTO.Tenant;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 
 public class BuildingManagerBUS {
     private List<BuildingManager> listBuildingManagers = new ArrayList<>();
     private int MAX = 100;
+
+    private static BuildingManagerBUS instance;
+
+    public static BuildingManagerBUS getInstance() {
+        if (instance == null) {
+            instance = new BuildingManagerBUS();
+        }
+        return instance;
+    }
 
     public BuildingManagerBUS() {
     }
@@ -39,7 +52,6 @@ public class BuildingManagerBUS {
         }
         return check;
     }
-    
     public boolean update(BuildingManager buildingManager) {
         boolean updated = BuildingManagerDAO.getInstance().update(buildingManager) != 0;
         if (updated) {
@@ -51,6 +63,9 @@ public class BuildingManagerBUS {
         return updated;
     }
 
+    public BuildingManager getBuildingManagerById(String BMID) {
+        return BuildingManagerDAO.getInstance().selectById(BMID);
+    }
     private int getIndexByBuildingId(String buildingManegerId) {
         for (int i = 0; i < listBuildingManagers.size(); i++) {
             if (listBuildingManagers.get(i).getBuildingId().equals(buildingManegerId)) {
@@ -101,5 +116,18 @@ public class BuildingManagerBUS {
 
         barChart.getData().addAll(maleSeries, femaleSeries);
     }
+    public void setInfor(Text id, Text fullName, Text phone, Text dob, Text gender, Text cccd, String ID){
+        BuildingManager buildingManager = getBuildingManagerById(ID);
+        System.out.println("___ "+ buildingManager);
+        if(buildingManager != null){
+            id.setText(buildingManager.getBuildingManagerId());
+            fullName.setText(buildingManager.getLastName() + " " + buildingManager.getFirstName());
+            phone.setText(buildingManager.getPhoneNumber());
+            dob.setText(String.valueOf(buildingManager.getDob()));
+            gender.setText(buildingManager.getGender());
+            cccd.setText(buildingManager.getCitizenIdentityCard());
+        }
+    }
+
 
 }

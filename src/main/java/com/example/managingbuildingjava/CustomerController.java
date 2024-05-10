@@ -3,6 +3,7 @@ package com.example.managingbuildingjava;
 import BUS.*;
 import DAO.ServiceTicketDAO;
 import DTO.*;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +30,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.scene.Scene;
+
 
 public class CustomerController implements Initializable {
     private static CustomerController instance;
@@ -48,13 +51,6 @@ public class CustomerController implements Initializable {
     public String getID() {
         return ID;
     }
-
-    public TextField TxtField__P1__search;
-    public ComboBox comboBox__P1__1;
-    public Label txtField__P1__1;
-    public TextField TxtField__P2__search;
-    public TextField TxtField__P4__search;
-    public Button bnt__P1__search;
     @FXML
     public TableView<MonthlyRentBill> table__P3__1 = new TableView<>();
     @FXML
@@ -75,11 +71,6 @@ public class CustomerController implements Initializable {
     @FXML
     private Pane mp = new Pane();
     @FXML
-    private TextField TxtField__P1__1;
-    @FXML
-    private Button bnt__P1__add;
-
-    @FXML
     private void page0 (MouseEvent event) throws IOException{
         stop = false;
         TimeNow();
@@ -93,10 +84,6 @@ public class CustomerController implements Initializable {
     @FXML
     private void page2 (MouseEvent event) throws IOException {
         loadPage("Customer-view-Page2");
-    }
-    @FXML
-    private void page3 (MouseEvent event) throws IOException {
-        loadPage("Customer-view-Page3");
     }
     @FXML
     private Label time;
@@ -247,6 +234,12 @@ public class CustomerController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    @FXML
+    private Button logout;
+    @FXML
+    void logout(MouseEvent event) throws IOException {
+        Platform.exit();
     }
 
     @FXML
