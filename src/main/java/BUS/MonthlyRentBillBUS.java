@@ -1,5 +1,6 @@
 package BUS;
 import com.example.managingbuildingjava.Customer;
+import com.example.managingbuildingjava.CustomerController;
 import javafx.scene.paint.Color;
 
 import DAO.MonthlyRentBillDAO;
@@ -27,7 +28,6 @@ public class MonthlyRentBillBUS {
         }
         return instance;
     }
-
 
     public MonthlyRentBillBUS() {
         this.monthlyRentBills = MonthlyRentBillDAO.getInstance().selectAll();
@@ -181,5 +181,15 @@ public class MonthlyRentBillBUS {
         }
 
         pieChart.setData(pieChartData);
+    }
+
+    public MonthlyRentBill getMonthlyRentBillWithMRB(String id){
+        ArrayList<MonthlyRentBill> monthlyRentBillArrayList = MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(CustomerController.getInstance().getID());
+        for (MonthlyRentBill monthlyRentBill : monthlyRentBillArrayList){
+            if (Objects.equals(monthlyRentBill.getMonthlyRentBillID(), id)) {
+                return monthlyRentBill;
+            }
+        }
+        return null;
     }
 }
