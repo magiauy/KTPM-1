@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -54,7 +55,6 @@ public class CustomerController implements Initializable {
     public TextField TxtField__P2__search;
     public TextField TxtField__P4__search;
     public Button bnt__P1__search;
-    public TextField TxtField__P3__search;
     @FXML
     public TableView<MonthlyRentBill> table__P3__1 = new TableView<>();
     @FXML
@@ -227,6 +227,11 @@ public class CustomerController implements Initializable {
     @FXML
     TableView<ViolatioUsage> table__P3__2 = new TableView<>();
 
+    @FXML
+    private TextField TxtField__P3__search = new TextField();
+    @FXML
+    private ImageView search = new ImageView();
+
     public void loadPage0(){
         TimeNow();
         setMonthlyBillLabel();
@@ -244,6 +249,29 @@ public class CustomerController implements Initializable {
         alert.showAndWait();
     }
 
+    @FXML
+    void searchBill(MouseEvent event) {
+        String searchText = TxtField__P3__search.getText();
+        if(Objects.equals(searchText, "")){
+            showAlert("Lỗi", "Vui lòng nhập mã phiếu thu.", Alert.AlertType.ERROR);
+        } else {
+            String mrID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+
+            monthlyRentBillIdColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("monthlyRentBillID"));
+            dateColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, LocalDate>("date"));
+            repaymentPeriodColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, Integer>("repaymentPeriod"));
+            totalPaymentColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, Double>("totalPayment"));
+            statusColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("status"));
+
+            ObservableList<MonthlyRentBill> data = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillWithMRB(searchText));
+            if (data.isEmpty() || data.getFirst() == null){
+                showAlert("Lỗi", "Mã phiếu không tồn tại.", Alert.AlertType.ERROR);
+            }else {
+                table__P3__1.setItems(data);
+            }
+        }
+    }
+
     void updateTableVio(){
         violationTicketIDCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, String>("id"));
         nameVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, String>("name"));
@@ -254,15 +282,21 @@ public class CustomerController implements Initializable {
         ViolationTicketBUS.getInstance().setTable(table__P3__2);
 
     }
-
     @FXML
     void regisMobile(){
-
         LocalDate dateRegis = selectSersDate.getValue();
-
         String note = noteFixedRegis.getText();
+        String serName = comboBox__P1__21.getValue();
 
-        ServiceTicketBUS.getInstance().repairInforRegis(comboBox__P1__21, dateRegis, note);
+        if (dateRegis == null || serName == null){
+            showAlert("Lỗi", "Vui lòng thử lại.", Alert.AlertType.ERROR);
+        }
+        else{
+            ServiceTicketBUS.getInstance().repairInforRegis(serName, dateRegis, note);
+            updateTableNewRegisServ();
+            comboBox__P1__21.setValue(null);
+            selectSersDate.setValue(null);
+        }
     }
 
     void updateTableOldRegisServ(){
@@ -285,7 +319,6 @@ public class CustomerController implements Initializable {
 
         ServiceTicketBUS.getInstance().setTableRegisServ(registeredSerTable);
     }
-
     @FXML
     void regisFixed() {
         if (!parkingRegis.isSelected() && !playGroundRegis.isSelected() && !poolRegis.isSelected() && !gymRegis.isSelected() && !internetRegis.isSelected()){

@@ -197,8 +197,7 @@ public class ServiceTicketBUS {
         registeredSerTable.setItems(data);
     }
 
-    public void repairInforRegis(ComboBox<String> comboBox, LocalDate date, String note){
-            String serName = comboBox.getValue();
+    public void repairInforRegis(String serName, LocalDate date, String note){
             String serID = "";
             for (Service service : ServiceBUS.getInstance().getAll()) {
                 if (service.getName().equals(serName)) {
