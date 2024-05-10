@@ -194,7 +194,6 @@ public class ServiceTicketBUS {
             ServiceUsuage serviceUsage = new ServiceUsuage(servName.get(i), String.valueOf(price.get(i)), String.valueOf(date.get(i)), note.get(i));
             data.add(serviceUsage);
         }
-        System.out.println(data+"____________");
         registeredSerTable.setItems(data);
     }
 

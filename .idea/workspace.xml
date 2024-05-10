@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="LOGIN">
+    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="nam">
+      <change afterPath="$PROJECT_DIR$/src/main/java/DTO/ViolatioUsage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ServiceTicketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ServiceTicketDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/ServiceUsuage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/ServiceUsuage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ViolationTicketBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ViolationTicketBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ViolationTicketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ViolationTicketDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/ViolationTicket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/ViolationTicket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page1.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page3.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page3.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,6 +250,9 @@
       <workItem from="1715151121659" duration="2452000" />
       <workItem from="1715160618307" duration="1785000" />
       <workItem from="1715172430384" duration="14949000" />
+      <workItem from="1715308349054" duration="3898000" />
+      <workItem from="1715314071430" duration="622000" />
+      <workItem from="1715331481789" duration="3278000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -381,7 +390,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715257552955</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="nam">
+      <option name="closed" value="true" />
+      <created>1715269931324</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1715269931325</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,7 +431,8 @@
     <MESSAGE value="24/05 Nam" />
     <MESSAGE value="05/05 Nam" />
     <MESSAGE value="LOGIN" />
-    <option name="LAST_COMMIT_MESSAGE" value="LOGIN" />
+    <MESSAGE value="nam" />
+    <option name="LAST_COMMIT_MESSAGE" value="nam" />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />

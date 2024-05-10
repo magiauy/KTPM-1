@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import javax.swing.text.TabableView;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -212,6 +213,19 @@ public class CustomerController implements Initializable {
     @FXML
     TableView<ServiceUsuage> registeredSerOldTable = new TableView<>();
 
+    //Page 2
+    @FXML
+    TableColumn<ViolatioUsage, String> violationTicketIDCol = new TableColumn<>();
+    @FXML
+    TableColumn<ViolatioUsage, String> nameVioCol = new TableColumn<>();
+    @FXML
+    TableColumn<ViolatioUsage, Double> priceVioCol = new TableColumn<>();
+    @FXML
+    TableColumn<ViolatioUsage, LocalDate> dateVioCol = new TableColumn<>();
+    @FXML
+    TableColumn<ViolatioUsage, String> noteVioCol = new TableColumn<>();
+    @FXML
+    TableView<ViolatioUsage> table__P3__2 = new TableView<>();
 
     public void loadPage0(){
         TimeNow();
@@ -228,6 +242,17 @@ public class CustomerController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    void updateTableVio(){
+        violationTicketIDCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, String>("id"));
+        nameVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, String>("name"));
+        priceVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, Double>("price"));
+        dateVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, LocalDate>("date"));
+        noteVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, String>("note"));
+
+        ViolationTicketBUS.getInstance().setTable(table__P3__2);
+
     }
 
     @FXML
@@ -401,5 +426,6 @@ public class CustomerController implements Initializable {
 
         //Page 2
         setTableMonthlyRentBill();
+        updateTableVio();
     }
 }

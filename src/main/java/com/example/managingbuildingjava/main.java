@@ -48,7 +48,7 @@ public class main extends Application {
 
         FXMLLoader CustomerLoader = new FXMLLoader(getClass().getResource("Customer-view-Page0.fxml"));
         Pane Customer = CustomerLoader.load();
-        cusScene = new Scene(Customer, 1182, 720);
+        cusScene = new Scene(Customer, 1260, 720);
 
         usernameField = (TextField) loginLoader.getNamespace().get("usernameField");
         passwordField = (PasswordField) loginLoader.getNamespace().get("passwordField");

@@ -4,21 +4,36 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class ViolationTicket {
+    private String violationTicketID;
     private String violationID;
     private String monthlyRentBillID;
     private Double price;
     private LocalDate date;
     private String note;
 
-    public ViolationTicket(String violationID, String monthlyRentBillID, Double price, LocalDate date, String note) {
+    public ViolationTicket(String violationTicketID, String violationID, String monthlyRentBillID, Double price, LocalDate date, String note) {
+        this.violationTicketID = violationTicketID;
         this.violationID = violationID;
         this.monthlyRentBillID = monthlyRentBillID;
         this.price = price;
         this.date = date;
         this.note = note;
     }
+//Fix tạm thời lôi bên BuildingManagerController
+public ViolationTicket( String violationID, String monthlyRentBillID, Double price, LocalDate date, String note) {
+    this.violationID = violationID;
+    this.monthlyRentBillID = monthlyRentBillID;
+    this.price = price;
+    this.date = date;
+    this.note = note;
+}
 
-    public ViolationTicket() {
+    public String getViolationTicketID() {
+        return violationTicketID;
+    }
+
+    public void setViolationTicketID(String violationTicketID) {
+        this.violationTicketID = violationTicketID;
     }
 
     public String getViolationID() {
@@ -64,7 +79,8 @@ public class ViolationTicket {
     @Override
     public String toString() {
         return "ViolationTicket{" +
-                "violationID='" + violationID + '\'' +
+                "violationTicketID='" + violationTicketID + '\'' +
+                ", violationID='" + violationID + '\'' +
                 ", monthlyRentBillID='" + monthlyRentBillID + '\'' +
                 ", price=" + price +
                 ", date=" + date +

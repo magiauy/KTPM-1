@@ -1,8 +1,14 @@
 package BUS;
 
+import DAO.ServiceTicketDAO;
 import DAO.ViolationTicketDAO;
-import DTO.ViolationTicket;
+import DTO.*;
+import com.example.managingbuildingjava.CustomerController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -61,5 +67,47 @@ public class ViolationTicketBUS {
             }
         }
         return -1; // Not found
+    }
+
+    public void setTable(TableView<ViolatioUsage> table__P3__2){
+        String mrbID = "";
+        try{
+            mrbID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        ArrayList<String> ticketId = new ArrayList<>();
+        ArrayList<String> vioID =  new ArrayList<>();
+        ArrayList<String> name = new ArrayList<>();
+        ArrayList<Double> price = new ArrayList<>();
+        ArrayList<LocalDate> date = new ArrayList<>();
+        ArrayList<String> note = new ArrayList<>();
+
+        for (ViolationTicket violationTicket : ViolationTicketBUS.getInstance().getAll()) {
+            if (Objects.equals(violationTicket.getMonthlyRentBillID(), mrbID)) {
+                vioID.add(violationTicket.getViolationID());
+                ticketId.add(violationTicket.getViolationTicketID());
+
+                date.add(violationTicket.getDate());
+                note.add(violationTicket.getNote());
+                price.add(violationTicket.getPrice());
+            }
+        }
+        ArrayList<Violation> violations = ViolationBUS.getInstance().getAll();
+        for (String sID : vioID) {
+            for (Violation violation : violations){
+                if(violation.getViolationID().equals(sID)){
+                    name.add(violation.getName());
+                }
+            }
+        }
+
+        ObservableList<ViolatioUsage> data = FXCollections.observableArrayList();
+        for (int i = 0; i < name.size(); i++) {
+            ViolatioUsage violatioUsage = new ViolatioUsage(ticketId.get(i), name.get(i), price.get(i), date.get(i), note.get(i));
+            data.add(violatioUsage);
+        }
+        table__P3__2.setItems(data);
     }
 }
