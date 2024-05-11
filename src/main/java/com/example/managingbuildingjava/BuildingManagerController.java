@@ -20,6 +20,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -1444,6 +1445,31 @@ public class BuildingManagerController implements Initializable {
 
     private ObservableList<ViolationTicket> violationsList;
     private ViolationTicket violationTicketdelete;
+    //Page 0
+    @FXML
+    private Text cccdnfor = new Text();
+    @FXML
+    private Text dobnfor = new Text();
+    @FXML
+    private Text gendernfor = new Text();
+    @FXML
+    private Text IDInfor = new Text();
+    @FXML
+    private Text nameInfor = new Text();
+    @FXML
+    private Text phonenfor = new Text();
+
+    public void loadPage0() {
+        TimeNow();
+        updateInfor();
+        totalOfBuldings();
+        updatePieChart();
+        drawBarChart();
+    }
+
+        public void updateInfor(){
+        BuildingManagerBUS.getInstance().setInfor(IDInfor,nameInfor, phonenfor, dobnfor, gendernfor, cccdnfor, BuildingManagerController.getInstance().getID());
+    }
 
     public void initViolationTicket() {
         violationsList = FXCollections.observableArrayList();
@@ -1922,9 +1948,7 @@ public class BuildingManagerController implements Initializable {
             comboBox__P5__3.setPromptText("");
             initFurniture();
             //Chạy page 0
-            totalOfBuldings();
-            updatePieChart();
-            drawBarChart();
+            loadPage0();
 
             // Dich Vu
             initService();

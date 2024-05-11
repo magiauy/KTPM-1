@@ -3,6 +3,7 @@ package com.example.managingbuildingjava;
 import BUS.*;
 import DAO.ServiceTicketDAO;
 import DTO.*;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,10 +17,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
+import javax.swing.text.TabableView;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -27,6 +30,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.scene.Scene;
+
 
 public class CustomerController implements Initializable {
     private static CustomerController instance;
@@ -46,14 +51,6 @@ public class CustomerController implements Initializable {
     public String getID() {
         return ID;
     }
-
-    public TextField TxtField__P1__search;
-    public ComboBox comboBox__P1__1;
-    public Label txtField__P1__1;
-    public TextField TxtField__P2__search;
-    public TextField TxtField__P4__search;
-    public Button bnt__P1__search;
-    public TextField TxtField__P3__search;
     @FXML
     public TableView<MonthlyRentBill> table__P3__1 = new TableView<>();
     @FXML
@@ -74,11 +71,6 @@ public class CustomerController implements Initializable {
     @FXML
     private Pane mp = new Pane();
     @FXML
-    private TextField TxtField__P1__1;
-    @FXML
-    private Button bnt__P1__add;
-
-    @FXML
     private void page0 (MouseEvent event) throws IOException{
         stop = false;
         TimeNow();
@@ -92,10 +84,6 @@ public class CustomerController implements Initializable {
     @FXML
     private void page2 (MouseEvent event) throws IOException {
         loadPage("Customer-view-Page2");
-    }
-    @FXML
-    private void page3 (MouseEvent event) throws IOException {
-        loadPage("Customer-view-Page3");
     }
     @FXML
     private Label time;
@@ -192,22 +180,47 @@ public class CustomerController implements Initializable {
     TableColumn<ServiceUsuage, String> priceSerCol = new TableColumn<>();
     @FXML
     TableColumn<ServiceUsuage, String> regisSerCol = new TableColumn<>();
+
     @FXML
-    TableColumn<String[], String>quantitySersOldCol = new TableColumn<>();
+    private TextField noteFixedRegis = new TextField();
     @FXML
-    TableColumn<String[], String>nameSerOldCol = new TableColumn<>();
+    private ComboBox<String> comboBox__P1__21 = new ComboBox<>();
     @FXML
-    TableColumn<String[], String> priceSerOldCol = new TableColumn<>();
+    private DatePicker selectSersDate = new DatePicker();
     @FXML
-    TableColumn<String[], String> regisSerOldCol = new TableColumn<>();
+    TableColumn<ServiceUsuage, Double>quantitySersOldCol = new TableColumn<>();
+    @FXML
+    TableColumn<ServiceUsuage, String>nameSerOldCol = new TableColumn<>();
+    @FXML
+    TableColumn<ServiceUsuage, String> priceSerOldCol = new TableColumn<>();
+    @FXML
+    TableColumn<ServiceUsuage, String> regisSerOldCol = new TableColumn<>();
     @FXML
     TableView<ServiceUsuage> registeredSerTable = new TableView<>();
     @FXML
-    TableView<String[]> registeredSerOldTable = new TableView<>();
+    TableView<ServiceUsuage> registeredSerOldTable = new TableView<>();
 
+    //Page 2
+    @FXML
+    TableColumn<ViolatioUsage, String> violationTicketIDCol = new TableColumn<>();
+    @FXML
+    TableColumn<ViolatioUsage, String> nameVioCol = new TableColumn<>();
+    @FXML
+    TableColumn<ViolatioUsage, Double> priceVioCol = new TableColumn<>();
+    @FXML
+    TableColumn<ViolatioUsage, LocalDate> dateVioCol = new TableColumn<>();
+    @FXML
+    TableColumn<ViolatioUsage, String> noteVioCol = new TableColumn<>();
+    @FXML
+    TableView<ViolatioUsage> table__P3__2 = new TableView<>();
+
+    @FXML
+    private TextField TxtField__P3__search = new TextField();
+    @FXML
+    private ImageView search = new ImageView();
 
     public void loadPage0(){
-
+        TimeNow();
         setMonthlyBillLabel();
         updateInfor();
         updatePieChart();
@@ -222,51 +235,147 @@ public class CustomerController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    void updateTableNewRegisServ(){
-        nameSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("name"));
-        noteSersCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("note"));
-        priceSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("totalAmount"));
-        regisSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("date"));
-
-        ServiceTicketBUS.getInstance().setTableRegisServ(registeredSerTable);
-
-        for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()){
-            System.out.println(serviceTicket);
-        }
+    @FXML
+    private Button logout;
+    @FXML
+    void logout(MouseEvent event) throws IOException {
+        Platform.exit();
     }
 
     @FXML
-    void regisFixed(MouseEvent event) {
+    void searchBill(MouseEvent event) {
+        String searchText = TxtField__P3__search.getText();
+        if(Objects.equals(searchText, "")){
+            showAlert("Lỗi", "Vui lòng nhập mã phiếu thu.", Alert.AlertType.ERROR);
+        } else {
+            String mrID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+
+            monthlyRentBillIdColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("monthlyRentBillID"));
+            dateColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, LocalDate>("date"));
+            repaymentPeriodColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, Integer>("repaymentPeriod"));
+            totalPaymentColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, Double>("totalPayment"));
+            statusColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("status"));
+
+            ObservableList<MonthlyRentBill> data = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillWithMRB(searchText));
+            if (data.isEmpty() || data.getFirst() == null){
+                showAlert("Lỗi", "Mã phiếu không tồn tại.", Alert.AlertType.ERROR);
+            }else {
+                table__P3__1.setItems(data);
+            }
+        }
+    }
+
+    void updateTableVio(){
+        violationTicketIDCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, String>("id"));
+        nameVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, String>("name"));
+        priceVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, Double>("price"));
+        dateVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, LocalDate>("date"));
+        noteVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, String>("note"));
+
+        ViolationTicketBUS.getInstance().setTable(table__P3__2);
+
+    }
+    @FXML
+    void regisMobile(){
+        LocalDate dateRegis = selectSersDate.getValue();
+        String note = noteFixedRegis.getText();
+        String serName = comboBox__P1__21.getValue();
+
+        if (dateRegis == null || serName == null){
+            showAlert("Lỗi", "Vui lòng thử lại.", Alert.AlertType.ERROR);
+        }
+        else{
+            ServiceTicketBUS.getInstance().repairInforRegis(serName, dateRegis, note);
+            updateTableNewRegisServ();
+            comboBox__P1__21.setValue(null);
+            selectSersDate.setValue(null);
+        }
+    }
+
+    void updateTableOldRegisServ(){
+        ServiceBUS.getInstance().setCombox(comboBox__P1__21);
+
+        nameSerOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("name"));
+        priceSerOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("totalAmount"));
+        quantitySersOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, Double>("quantity"));
+        regisSerOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("date"));
+
+        ServiceTicketBUS.getInstance().setTableOldRegisServ(registeredSerOldTable);
+    }
+
+    void updateTableNewRegisServ(){
+
+        nameSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("name"));
+        priceSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("totalAmount"));
+        regisSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("date"));
+        noteSersCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("note"));
+
+        ServiceTicketBUS.getInstance().setTableRegisServ(registeredSerTable);
+    }
+    @FXML
+    void regisFixed() {
         if (!parkingRegis.isSelected() && !playGroundRegis.isSelected() && !poolRegis.isSelected() && !gymRegis.isSelected() && !internetRegis.isSelected()){
             showAlert("Lỗi", "Vui lòng tích vào ô đăng ký.", Alert.AlertType.ERROR);
         }
         else{
+            LocalDate currentDate = LocalDate.now();
             if(parkingRegis.isSelected()){
-                ServiceTicketBUS.getInstance().regisFixedServ("SERV3",noteParkings.getText());
+                String note = "";
+                if (noteParkings.getText() != null){
+                    note = noteParkings.getText();
+                }
+                ServiceTicketBUS.getInstance().regisServ("SERV3",note, currentDate);
                 updateTableNewRegisServ();
             }
             if(playGroundRegis.isSelected()){
-                ServiceTicketBUS.getInstance().regisFixedServ("SERV11",notePlayGrounds.getText());
+                String note = "";
+                if (noteGyms.getText() != null){
+                    note = noteGyms.getText();
+                }
+                ServiceTicketBUS.getInstance().regisServ("SERV11",note, currentDate);
                 updateTableNewRegisServ();
 
             }
             if(poolRegis.isSelected()){
-                ServiceTicketBUS.getInstance().regisFixedServ("SERV9",notePools.getText());
+                String note = "";
+                if (notePools.getText() != null){
+                    note = notePools.getText();
+                }
+                ServiceTicketBUS.getInstance().regisServ("SERV9",note, currentDate);
                 updateTableNewRegisServ();
 
             }
             if(gymRegis.isSelected()){
-                ServiceTicketBUS.getInstance().regisFixedServ("SERV5",noteGyms.getText());
+                String note = "";
+                if (noteInternets.getText() != null){
+                    note = noteInternets.getText();
+                }
+                ServiceTicketBUS.getInstance().regisServ("SERV5",note, currentDate);
                 updateTableNewRegisServ();
 
             }
             if(internetRegis.isSelected()){
-                ServiceTicketBUS.getInstance().regisFixedServ("SERV4",noteInternets.getText());
+                String note = "";
+                if (noteInternets.getText() != null){
+                    note = noteInternets.getText();
+                }
+                ServiceTicketBUS.getInstance().regisServ("SERV4",note, currentDate);
                 updateTableNewRegisServ();
 
             }
         }
+        internetRegis.setSelected(false);
+        parkingRegis.setSelected(false);
+        playGroundRegis.setSelected(false);
+        poolRegis.setSelected(false);
+        gymRegis.setSelected(false);
+
+        noteInternets.setText(null);
+        notePools.setText(null);
+        noteGyms.setText(null);
+        notePlayGrounds.setText(null);
+        noteParkings.setText(null);
+
     }
 
     void setTableCohabitant(){
@@ -339,8 +448,10 @@ public class CustomerController implements Initializable {
 
         //Page 1
         updateTableNewRegisServ();
+        updateTableOldRegisServ();
 
         //Page 2
         setTableMonthlyRentBill();
+        updateTableVio();
     }
 }

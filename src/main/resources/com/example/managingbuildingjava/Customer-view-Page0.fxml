@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1182.0" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.CustomerController">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1260.0" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.CustomerController">
    <left>
       <Pane prefHeight="720.0" prefWidth="160.0" style="-fx-background-color: rgb(240,240,240); -fx-border-color: rgb(255,255,255); -fx-border-width: 0px 2px 0px 0px;" BorderPane.alignment="CENTER">
          <children>
@@ -23,7 +23,7 @@
                   <Image url="@../../../Picture/shutterstock_1692834160-copy-scaled.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="20.0" layoutY="671.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
+            <Button fx:id="logout" layoutX="20.0" layoutY="671.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="3.0" layoutY="420.0" mnemonicParsing="false" onMouseClicked="#page2" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Phiếu thu" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
@@ -38,15 +38,6 @@
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../Picture/service.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="4.0" layoutY="523.0" mnemonicParsing="false" onMouseClicked="#page3" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Thống kê" textAlignment="CENTER" textFill="#4a4a4a">
-               <graphic>
-                  <ImageView fitHeight="30" fitWidth="40" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../Picture/statistical.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -70,13 +61,13 @@
       </Pane>
    </left>
    <center>
-      <Pane fx:id="mp" onMouseClicked="#loadPage0" prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240);" BorderPane.alignment="CENTER">
+      <Pane fx:id="mp" onMouseClicked="#loadPage0" prefHeight="720.0" prefWidth="940.0" style="-fx-background-color: rgb(240,240,240);" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="28.0" prefHeight="30.0" prefWidth="990.0" style="-fx-background-color: rgb(145,205,175);" text="Start Sky" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="18.0" layoutY="28.0" prefHeight="30.0" prefWidth="1055.0" style="-fx-background-color: rgb(145,205,175);" text="Start Sky" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Pane layoutX="78.0" layoutY="431.0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <Pane layoutX="90.0" layoutY="431.0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <children>
                   <Label alignment="CENTER" layoutX="33.0" layoutY="8.0" prefHeight="30.0" prefWidth="170.0" text="Hóa đơn tháng hiện tại" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -92,7 +83,7 @@
                      </font>
                   </Label>
                </children></Pane>
-            <Pane layoutX="357.0" layoutY="431.0" onMouseClicked="#loadPage0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <Pane layoutX="396.0" layoutY="431.0" onMouseClicked="#loadPage0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                <children>
                   <Label alignment="CENTER" layoutX="25.0" layoutY="7.0" prefHeight="30.0" prefWidth="186.0" styleClass="\\]" text="Tổng quát những hóa đơn" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -100,20 +91,20 @@
                      </font></Label>
                   <PieChart fx:id="pieChart" layoutX="-4.0" layoutY="22.0" prefHeight="248.0" prefWidth="244.0" />
                </children></Pane>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="703.0" layoutY="442.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Sơ lược thông tin" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="748.0" layoutY="440.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Sơ lược thông tin" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TableView fx:id="cohabitantTable" layoutX="363.0" layoutY="107.0" prefHeight="318.0" prefWidth="640.0">
+            <TableView fx:id="cohabitantTable" layoutX="363.0" layoutY="107.0" prefHeight="318.0" prefWidth="715.0">
                <columns>
-                  <TableColumn fx:id="nameCol" prefWidth="170.0" text="Họ &amp; Tên" />
-                  <TableColumn fx:id="phoneCol" prefWidth="159.0" text="Số điện thoại" />
-                  <TableColumn fx:id="dobCol" prefWidth="129.0" text="Năm sinh" />
-                  <TableColumn fx:id="genderCol" prefWidth="179.0" text="Giới tình" />
+                  <TableColumn fx:id="nameCol" prefWidth="214.0" text="Họ &amp; Tên" />
+                  <TableColumn fx:id="phoneCol" prefWidth="151.0" text="Số điện thoại" />
+                  <TableColumn fx:id="dobCol" prefWidth="155.0" text="Năm sinh" />
+                  <TableColumn fx:id="genderCol" prefWidth="192.0" text="Giới tình" />
                </columns>
             </TableView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="592.0" layoutY="76.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Thông tin người ở chung" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="610.0" layoutY="76.0" prefHeight="25.0" prefWidth="222.0" style="-fx-background-color: rgb(145,205,175);" text="Thông tin người ở chung" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -166,7 +157,7 @@
                   </Label>
                </children>
             </GridPane>
-            <GridPane layoutX="676.0" layoutY="475.0" prefHeight="218.0" prefWidth="235.0">
+            <GridPane layoutX="721.0" layoutY="473.0" prefHeight="218.0" prefWidth="235.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>

@@ -1,17 +1,14 @@
 package GUI.FromRegister;
 
-import javax.swing.*;
-import javax.swing.border.Border;
+import BUS.CustomersAccountBUS;
+import BUS.StaffsAccountBUS;
 
-import BUS.AccountBUS;
-import DAO.AcountDAO;
-import DTO.Acount;
+import javax.swing.*;
 
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class Login extends JFrame {
     JLabel userLabel = new JLabel("username:");
@@ -67,26 +64,24 @@ public class Login extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String username = userTextField.getText();
-                String password = new String(passwordField.getPassword());
-                if (username.isEmpty() || password.isEmpty()) {
-                    JOptionPane.showMessageDialog(Login.this, "Vui lòng nhập email và password!");
-                } else {
-                    AccountBUS accountBUS = new AccountBUS();
-                    String loginResult = accountBUS.checkLogin(username, password);
-                    if (!loginResult.equals("0")) {
-                        JOptionPane.showMessageDialog(Login.this, "Đăng nhập thành công!");
-                   
-                    } else {
-                        JOptionPane.showMessageDialog(Login.this,
-                                "Đăng nhập thất bại! Vui lòng kiểm tra lại thông tin.");
-                    }
-                }
-            }
-        });
+//        loginButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                String username = userTextField.getText();
+//                String password = new String(passwordField.getPassword());
+//                if (username.isEmpty() || password.isEmpty()) {
+//                    JOptionPane.showMessageDialog(Login.this, "Vui lòng nhập email và password!");
+//                } else {
+//                    if (CustomersAccountBUS.checkLogin(username, password).equals("0") && StaffsAccountBUS.getInstance().checkLogin(username, password).equals("0")) {
+//                        JOptionPane.showMessageDialog(Login.this,
+//                                "Đăng nhập thất bại! Vui lòng kiểm tra lại thông tin.");
+//                    } else {
+//                        JOptionPane.showMessageDialog(Login.this, "Đăng nhập thành công!");
+//
+//                    }
+//                }
+//            }
+//        });
 
         resetButton.addActionListener(new ActionListener() {
             @Override
@@ -97,7 +92,7 @@ public class Login extends JFrame {
         });
     }
 
-    
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

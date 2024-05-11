@@ -18,9 +18,8 @@
 
 <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.CustomerController">
           <children>
-              <Pane prefHeight="720.0" prefWidth="1022.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
+              <Pane prefHeight="720.0" prefWidth="1100.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
-                      <ComboBox fx:id="comboBox__P1__2" layoutX="894.0" layoutY="68.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
             <Pane layoutX="23.0" layoutY="80.0" prefHeight="308.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
                   <GridPane layoutX="35.0" layoutY="14.0" prefHeight="230.0" prefWidth="371.0">
@@ -122,27 +121,33 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TableView fx:id="registeredSerTable" layoutX="495.0" layoutY="101.0" prefHeight="163.0" prefWidth="499.0">
+            <TableView fx:id="registeredSerTable" layoutX="495.0" layoutY="101.0" prefHeight="163.0" prefWidth="583.0">
               <columns>
-                <TableColumn fx:id="nameSerCol" prefWidth="109.0" text="Tên dịch vụ" />
-                <TableColumn fx:id="priceSerCol" prefWidth="121.0" text="Chi phí" />
-                  <TableColumn fx:id="regisSerCol" prefWidth="109.0" text="Ngày đăng ký" />
-                  <TableColumn fx:id="noteSersCol" prefWidth="158.0" text="Chú thích" />
+                <TableColumn fx:id="nameSerCol" prefWidth="169.0" text="Tên dịch vụ" />
+                <TableColumn fx:id="priceSerCol" prefWidth="89.0" text="Chi phí" />
+                  <TableColumn fx:id="regisSerCol" prefWidth="125.0" text="Ngày đăng ký" />
+                  <TableColumn fx:id="noteSersCol" prefWidth="199.0" text="Chú thích" />
               </columns>
             </TableView>
             <Pane layoutX="38.0" layoutY="470.0" prefHeight="217.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                  <DatePicker fx:id="selectSersDate" layoutX="188.0" layoutY="39.0" prefHeight="38.0" prefWidth="191.0" />
-                  <ComboBox fx:id="comboBox__P1__21" layoutX="27.0" layoutY="39.0" prefHeight="38.0" prefWidth="144.0" style="-fx-background-radius: 10px;" />
-                          <Button fx:id="regisMobile1" contentDisplay="GRAPHIC_ONLY" layoutX="147.0" layoutY="154.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
+                  <DatePicker fx:id="selectSersDate" layoutX="182.0" layoutY="90.0" prefHeight="38.0" prefWidth="191.0" />
+                  <ComboBox fx:id="comboBox__P1__21" layoutX="21.0" layoutY="90.0" prefHeight="38.0" prefWidth="144.0" promptText="Chọn dịch vụ" style="-fx-background-radius: 10px;" />
+                          <Button fx:id="regisMobile1" contentDisplay="GRAPHIC_ONLY" layoutX="147.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#regisMobile" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
                               <graphic>
-                                  <ImageView fx:id="regisMobile" fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
+                                  <ImageView fx:id="regisMobile" fitHeight="30" fitWidth="40" onMouseClicked="#regisMobile" pickOnBounds="true" preserveRatio="true">
                                       <image>
                                           <Image url="@../../../Picture/add2.png" />
                                       </image>
                                   </ImageView>
                               </graphic>
                   </Button>
+                  <TextField fx:id="noteFixedRegis" layoutX="165.0" layoutY="38.0" prefHeight="27.0" prefWidth="248.0" style="-fx-background-color: #808080;" />
+                  <Label alignment="CENTER" layoutX="21.0" layoutY="37.0" prefHeight="30.0" prefWidth="122.0" text="Chú thich">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="408.0" prefHeight="30.0" prefWidth="248.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Đăng ký dịch vụ">
@@ -160,12 +165,12 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TableView fx:id="registeredSerOldTable" layoutX="495.0" layoutY="312.0" prefHeight="385.0" prefWidth="499.0">
+            <TableView fx:id="registeredSerOldTable" layoutX="495.0" layoutY="313.0" prefHeight="385.0" prefWidth="577.0">
                <columns>
-                  <TableColumn fx:id="nameSerOldCol" prefWidth="109.0" text="Tên dịch vụ" />
-                  <TableColumn fx:id="priceSerOldCol" prefWidth="121.0" text="Chi phí" />
-                  <TableColumn fx:id="quantitySersOldCol" prefWidth="95.0" text="Số lượng" />
-                  <TableColumn fx:id="regisSerOldCol" prefWidth="173.0" text="Ngày đăng ký" />
+                  <TableColumn fx:id="nameSerOldCol" prefWidth="157.0" text="Tên dịch vụ" />
+                  <TableColumn fx:id="priceSerOldCol" prefWidth="126.0" text="Chi phí" />
+                  <TableColumn fx:id="quantitySersOldCol" prefWidth="77.0" text="Số lượng" />
+                  <TableColumn fx:id="regisSerOldCol" prefWidth="215.0" text="Ngày đăng ký" />
                </columns>
             </TableView>
                   </children>
