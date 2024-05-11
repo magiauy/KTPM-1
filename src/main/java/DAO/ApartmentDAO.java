@@ -121,6 +121,7 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         }
         return apartments;
     }
+
     @Override
     public Apartment selectById(String ID) {
         Apartment apartment = null;
@@ -154,5 +155,29 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         String furniture = resultSet.getString("furniture");
 
         return new Apartment(apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture);
+    }
+
+    public ArrayList<Apartment> search(String keyword) {
+        ArrayList<Apartment> searchResults = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            String sql = "SELECT * FROM Apartment WHERE apartmentID LIKE ? OR roomNumber LIKE ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + keyword + "%");
+            preparedStatement.setString(2, "%" + keyword + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Apartment apartment = createApartmentFromResultSet(resultSet);
+                searchResults.add(apartment);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResults;
     }
 }

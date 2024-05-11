@@ -7,11 +7,9 @@
     <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update ID (23/4)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ApartmentBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ApartmentBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/FurnitureBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/FurnitureBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/LeaseAgreementBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/LeaseAgreementBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/TenantBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/TenantBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +125,7 @@
       <recent name="com.example.managingbuildingjava" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.main">
     <configuration name="Boss" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.Boss" />
       <module name="ManagingBuildingJava" />
@@ -267,7 +265,11 @@
       <workItem from="1715197426927" duration="748000" />
       <workItem from="1715200496909" duration="2086000" />
       <workItem from="1715237469293" duration="7220000" />
-      <workItem from="1715245497331" duration="337000" />
+      <workItem from="1715245497331" duration="649000" />
+      <workItem from="1715246504819" duration="601000" />
+      <workItem from="1715257150440" duration="643000" />
+      <workItem from="1715262162696" duration="1714000" />
+      <workItem from="1715264083651" duration="2682000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
