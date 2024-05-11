@@ -32,10 +32,12 @@ public class MonthlyRentBillBUS {
     public MonthlyRentBillBUS() {
         this.monthlyRentBills = MonthlyRentBillDAO.getInstance().selectAll();
     }
+
     public ArrayList<MonthlyRentBill> getAll() {
         MonthlyRentBillDAO monthlyRentBillDAO = MonthlyRentBillDAO.getInstance();
         return monthlyRentBillDAO.selectAll();
     }
+
     public boolean add(MonthlyRentBill monthlyRentBill) {
         boolean check = MonthlyRentBillDAO.getInstance().insert(monthlyRentBill) != 0;
         if (check) {
@@ -43,6 +45,7 @@ public class MonthlyRentBillBUS {
         }
         return check;
     }
+
     public boolean delete(MonthlyRentBill monthlyRentBill) {
         boolean check = MonthlyRentBillDAO.getInstance().delete(monthlyRentBill.getMonthlyRentBillID()) != 0;
         if (check) {
@@ -50,6 +53,7 @@ public class MonthlyRentBillBUS {
         }
         return check;
     }
+
     public boolean update(MonthlyRentBill monthlyRentBill) {
         boolean check = MonthlyRentBillDAO.getInstance().update(monthlyRentBill) != 0;
         if (check) {

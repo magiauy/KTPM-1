@@ -12,8 +12,8 @@ import java.time.LocalDate;
  */
 public class LeaseAgreement {
     private String leaseAgreementID;
-    private String apartmentID;
     private String tenantID;
+    private String apartmentID;
     private String buildingManagerID;
     private LocalDate signingDate;
     private LocalDate leaseStartDate;
@@ -21,7 +21,7 @@ public class LeaseAgreement {
     private Double leaseTerm;
     private Double deposit;
     private Double monthlyRent;
-    public LeaseAgreement(String leaseAgreementID, String apartmentID, String tenantID,
+    public LeaseAgreement(String leaseAgreementID, String tenantID, String apartmentID,
                           String buildingManagerID, LocalDate signingDate, LocalDate leaseStartDate,
                           LocalDate leaseEndDate, Double leaseTerm, Double deposit, Double monthlyRent) {
         this.leaseAgreementID = leaseAgreementID;
@@ -110,12 +110,13 @@ public class LeaseAgreement {
     public void setMonthlyRent(Double monthlyRent) {
         this.monthlyRent = monthlyRent;
     }
+
     @Override
     public String toString() {
         return "LeaseAgreement{" +
                 "leaseAgreementID='" + leaseAgreementID + '\'' +
-                ", apartmentID='" + apartmentID + '\'' +
                 ", tenantID='" + tenantID + '\'' +
+                ", apartmentID='" + apartmentID + '\'' +
                 ", buildingManagerID='" + buildingManagerID + '\'' +
                 ", signingDate=" + signingDate +
                 ", leaseStartDate=" + leaseStartDate +

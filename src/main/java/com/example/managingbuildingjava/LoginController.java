@@ -1,6 +1,7 @@
 package com.example.managingbuildingjava;
 
-import BUS.AccountBUS;
+import BUS.CustomersAccountBUS;
+import BUS.StaffsAccountBUS;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,53 +23,67 @@ public class LoginController {
     @FXML
     private Button loginButton;
 
-    private AccountBUS accountBUS = new AccountBUS(); // Placeholder
     private Stage bossStage;
 
     public LoginController() {
-        // Constructor mặc định được thêm vào
     }
 
-    // Thêm constructor có tham số để nhận Stage từ Boss
     public LoginController(Stage bossStage) {
         this.bossStage = bossStage;
     }
-    // Constructor to receive Stage reference
 
     @FXML
     protected void onHelloButtonClick() {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        // Validate username and password (replace with actual validation logic)
         if (username.isEmpty() || password.isEmpty()) {
             showError("Username and password cannot be empty!");
             return;
         }
 
-        // Call checkLogin method (implementation in AccountBUS)
-        String validLogin = accountBUS.checkLogin(username, password);
 
+//        if (CustomersAccountBUS.checkLogin(username, password).equals("0") && StaffsAccountBUS.checkLogin(username, password).equals("0")) {
+//            showError("Invalid username or password.");
+//        } else {
+//            System.out.println("Login successful!");
+//            try {
+//                if (username.equals("admin"))
+//                    Boss.main(null);
+//                if (StaffsAccountBUS.getUserType(username, password).equals("staff"))
+//                    BuildingManager.openBuildingManagerView();
+//                if (CustomersAccountBUS.getUserType(username, password).equals("tenant"))
+//                    Customer.openCustomerView();
+//            } catch (Exception e) {
+//                System.out.println("Error opening Boss view: " + e.getMessage());
+//                e.printStackTrace();
+//            }
+//        }
+        CustomersAccountBUS customersAccountBUS = new CustomersAccountBUS();
+        String validLogin = customersAccountBUS.checkLogin(username, password);
         if (!validLogin.equals("0")) {
-            System.out.println("Login successful!");
-            try {
-                String userType = accountBUS.getUserType(username, password);
-                if (userType.equals("admin"))
-                    Boss.main(null);
-                if (userType.equals("khachhang"))
-                    BuildingManager.openBuildingManagerView();
-                if (userType.equals("quanli"))
-                   Customer.openCustomerView();
-            } catch (Exception e) {
-                System.out.println("Error opening Boss view: " + e.getMessage());
-                e.printStackTrace();
-            }
+            Customer.openCustomerView();
         } else {
-            showError("Invalid username or password.");
+            StaffsAccountBUS staffsAccountBUS = new StaffsAccountBUS();
+            validLogin = staffsAccountBUS.checkLogin(username, password);
+            if (!validLogin.equals("0")) {
+
+                BuildingManager.openBuildingManagerView();
+            }
+//            else{
+//                validLogin = AdminAccountBUS.checkLogin(username, password);
+//                if (!validLogin.equals("0")) {
+//
+//                   Boss.main(null);
+//                }
+//                else{
+//                    //        showStatusMessage("Invalid username or password.");
+//                }
+
         }
     }
     private void showError(String message) {
-        System.err.println("Error: " + message); // Placeholder for user feedback
+        System.err.println("Error: " + message);
     }
 
 }

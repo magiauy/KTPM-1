@@ -1006,17 +1006,21 @@ private boolean containsNumber(String s) {
 
     public void SelectGender() {
         String gender = comboBox__P1__1.getValue();
-        if (gender == null) {
-            return;
+        if (gender.equals("Tất Cả")) {
+            BuildingManagerBUS buildingBUS = new BuildingManagerBUS();
+            ArrayList<BuildingManager> searchResult = buildingBUS.getAll();
+            buildingManagersList.addAll(searchResult);
+            ObservableList<BuildingManager> observableBuildingList = FXCollections
+                    .observableArrayList(searchResult);
+            table__view2.setItems(observableBuildingList);
+        } else {
+            BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+            ArrayList<BuildingManager> buildingManagers = buildingManagerBUS.search(gender, "Giới Tính");
+            ObservableList<BuildingManager> observableBuildingList = FXCollections
+                    .observableArrayList(buildingManagers);
+            table__view2.setItems(observableBuildingList);
         }
-   
-        BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-        ArrayList<BuildingManager> buildingManagers = buildingManagerBUS.search(gender,"Giới Tính");
-
-       
-        ObservableList<BuildingManager> observableBuildingList = FXCollections
-                .observableArrayList(buildingManagers);
-        table__view2.setItems(observableBuildingList);
+  
     }
 
     public void handleSearch() {

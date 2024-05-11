@@ -251,9 +251,17 @@ public class BuildingManagerController implements Initializable {
 
     public ObservableList<Apartment> getApartmentList() {
         ObservableList<Apartment> apartmentObservableList = FXCollections.observableArrayList();
-        ApartmentBUS apartmentBUS = new ApartmentBUS();
-        List<Apartment> apartments = apartmentBUS.getAll();
-        apartmentObservableList.addAll(apartments);
+        BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+        List<BuildingManager> buildingManagerList = buildingManagerBUS.getAll();
+        for (BuildingManager buildingManager : buildingManagerList) {
+            if (buildingManager.getBuildingManagerId().equals(ID)){
+                ApartmentBUS apartmentBUS = new ApartmentBUS();
+                List<Apartment> apartments = apartmentBUS.getApartmentByBuildingID(buildingManager.getBuildingId());
+                apartmentObservableList.addAll(apartments);
+                break;
+            }
+        }
+
         return apartmentObservableList;
     }
 
@@ -275,6 +283,7 @@ public class BuildingManagerController implements Initializable {
         soPhongTamTable.setCellValueFactory(new PropertyValueFactory<>("bathrooms"));
         noiThatTable.setCellValueFactory(new PropertyValueFactory<>("furniture"));
         apartmentObservableList = getApartmentList();
+        System.out.println(apartmentObservableList.isEmpty());
         table__P1__1.setItems(apartmentObservableList);
     }
 
@@ -283,7 +292,7 @@ public class BuildingManagerController implements Initializable {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
         TxtField__P1__1.setText(selectedApartment.getApartmentID());
         TxtField__P1__2.setText(selectedApartment.getRoomNumber());
-        TxtField__P1__3.setText(selectedApartment.getArea());
+        TxtField__P1__3.setText(String.valueOf(selectedApartment.getArea()));
         TxtField__P1__4.setText(String.valueOf(selectedApartment.getBedrooms()));
         TxtField__P1__5.setText(String.valueOf(selectedApartment.getBathrooms()));
         comboBox__P1__3.setValue(selectedApartment.getFurniture());
@@ -293,9 +302,18 @@ public class BuildingManagerController implements Initializable {
     void suaCanHo(ActionEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
         selectedApartment.setApartmentID(TxtField__P1__1.getText());
-        selectedApartment.setBuildingID("B1");
+
+        BuildingManagerBUS bus = new BuildingManagerBUS();
+        List<BuildingManager> buildingManagers = bus.getAll();
+
+        for (BuildingManager buildingManager : buildingManagers) {
+            if (ID.equals(buildingManager.getBuildingManagerId())) {
+                selectedApartment.setBuildingID(buildingManager.getBuildingId());
+                break;
+            }
+        }
         selectedApartment.setRoomNumber(TxtField__P1__2.getText());
-        selectedApartment.setArea(TxtField__P1__3.getText() + "m\u00B2");
+        selectedApartment.setArea(Double.parseDouble(TxtField__P1__3.getText()));
         selectedApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
         selectedApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
         selectedApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
@@ -325,7 +343,7 @@ public class BuildingManagerController implements Initializable {
             }
             newApartment.setApartmentID(TxtField__P1__1.getText());
             newApartment.setRoomNumber(TxtField__P1__2.getText());
-            newApartment.setArea(TxtField__P1__3.getText() + "m\u00B2");
+            newApartment.setArea(Double.parseDouble(TxtField__P1__3.getText()));
             newApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
             newApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
             newApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
@@ -496,7 +514,7 @@ public class BuildingManagerController implements Initializable {
     public ObservableList<Tenant> getTenantObservableList() {
         ObservableList<Tenant> tenantObservableLists = FXCollections.observableArrayList();
         TenantBUS tenantBUS = new TenantBUS();
-        List<Tenant> tenants = tenantBUS.getAll();
+        List<Tenant> tenants = tenantBUS.getTenantWithBuildingID(this.ID);
         tenantObservableLists.addAll(tenants);
         return tenantObservableLists;
     }
@@ -505,9 +523,14 @@ public class BuildingManagerController implements Initializable {
 
     public ObservableList<Cohabitant> getCohabitantObservableList() {
         ObservableList<Cohabitant> cohabitantObservableLists = FXCollections.observableArrayList();
+        TenantBUS tenantBUS = new TenantBUS();
         CohabitantBUS cohabitantBUS = new CohabitantBUS();
-        List<Cohabitant> cohabitants = cohabitantBUS.getAll();
-        cohabitantObservableLists.addAll(cohabitants);
+        List<Tenant> tenants = tenantBUS.getTenantWithBuildingID(this.ID);
+        for (Tenant tenant: tenants){
+            List<Cohabitant> cohabitants = cohabitantBUS.getCohabitantsWithTenantId(tenant.getTenantID());
+            cohabitantObservableLists.addAll(cohabitants);
+        }
+
         return cohabitantObservableLists;
     }
 
@@ -683,12 +706,13 @@ public class BuildingManagerController implements Initializable {
             System.out.println(selectedCohatitant);
             CohabitantBUS cohabitantBUS = new CohabitantBUS();
             boolean deleteSuccess = cohabitantBUS.delete(selectedCohatitant);
+            System.out.println(deleteSuccess);
             if (deleteSuccess) {
                 cohabitantObservableList.remove(selectedCohatitant);
                 table__P2_1__1.refresh();
                 refreshFormCohabitant();
             } else {
-                System.err.println("Không thể xóa căn hộ từ cơ sở dữ liệu.");
+                System.err.println("Không thể xóa cư dân từ cơ sở dữ liệu.");
             }
         }
     }
@@ -781,9 +805,14 @@ public class BuildingManagerController implements Initializable {
 
     public ObservableList<MonthlyRentBill> getMonthlyRentBillObservableList() {
         ObservableList<MonthlyRentBill> monthlyRentBillsObservableLists = FXCollections.observableArrayList();
+        TenantBUS tenantBUS = new TenantBUS();
+        List<Tenant> tenants = tenantBUS.getTenantWithBuildingID(this.ID);
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-        List<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getAll();
-        monthlyRentBillsObservableLists.addAll(monthlyRentBills);
+        for (Tenant tenant: tenants){
+            List<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getMonthlyRentBillsWithTenantId(tenant.getTenantID());
+            monthlyRentBillsObservableLists.addAll(monthlyRentBills);
+        }
+
         return monthlyRentBillsObservableLists;
     }
 
@@ -890,43 +919,43 @@ public class BuildingManagerController implements Initializable {
     private TableColumn<Service, String> madv = new TableColumn<>();
 
     @FXML
-    private TableColumn<Service, String> tenDV;
+    private TableColumn<Service, String> tenDV = new TableColumn<>();
 
     @FXML
-    private TableColumn<Service, Double> giaDV;
+    private TableColumn<Service, Double> giaDV = new TableColumn<>();
 
     @FXML
-    private TableColumn<Service, String> donVi;
+    private TableColumn<Service, String> donVi = new TableColumn<>();
 
     @FXML
-    private TableColumn<Service, String> loai;
+    private TableColumn<Service, String> loai = new TableColumn<>();
 
     @FXML
     private TableView<Service> table__P4__11 = new TableView<>();
 
     @FXML
-    private ComboBox<String> fill_type;
+    private ComboBox<String> fill_type = new ComboBox<>();
 
     @FXML
-    private TextField TxtField__P4__search1;
+    private TextField TxtField__P4__search1 = new TextField();
 
     @FXML
-    private ComboBox<String> comboBox__P4__11;
+    private ComboBox<String> comboBox__P4__11 = new ComboBox<>();
 
     @FXML
-    private ComboBox<String> comboBox__P4__21;
+    private ComboBox<String> comboBox__P4__21 = new ComboBox<>();
 
     @FXML
-    private TextField TxtField__P4__11;
+    private TextField TxtField__P4__11 = new TextField();
 
     @FXML
-    private TextField TxtField__P4__31;
+    private TextField TxtField__P4__31 = new TextField();
 
     @FXML
-    private TextField TxtField__P4__51;
+    private TextField TxtField__P4__51 = new TextField();
 
     @FXML
-    private TextField TxtField__P4__61;
+    private TextField TxtField__P4__61 = new TextField();
 
     private ObservableList<Service> ServiceList;
     private Service servicedelete;
@@ -1075,49 +1104,49 @@ public class BuildingManagerController implements Initializable {
     // Phiếu Dichj Vụ
 
     @FXML
-    private TableColumn<ServiceTicket, String> maPDV;
+    private TableColumn<ServiceTicket, String> maPDV = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, String> maPhieuThu;
+    private TableColumn<ServiceTicket, String> maPhieuThu = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, String> maDichVu;
+    private TableColumn<ServiceTicket, String> maDichVu = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, Double> soLuong;
+    private TableColumn<ServiceTicket, Double> soLuong = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, Double> thanhTien;
+    private TableColumn<ServiceTicket, Double> thanhTien = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, LocalDate> ngayTaoPhieu;
+    private TableColumn<ServiceTicket, LocalDate> ngayTaoPhieu = new TableColumn<>();
 
     @FXML
-    private TableColumn<ServiceTicket, String> ghiChu;
+    private TableColumn<ServiceTicket, String> ghiChu = new TableColumn<>();
 
     @FXML
-    private TextField maPhieuDVField;
+    private TextField maPhieuDVField = new TextField();
 
     @FXML
-    private TextField maPhieuThuField;
+    private TextField maPhieuThuField = new TextField();
 
     @FXML
-    private TextField maDichVuField;
+    private TextField maDichVuField = new TextField();
 
     @FXML
-    private TextField soLuongField;
+    private TextField soLuongField = new TextField();
 
     @FXML
-    private TextField thanhTien1Field;
+    private TextField thanhTien1Field = new TextField();
 
     @FXML
-    private DatePicker ngayGhiPicker;
+    private DatePicker ngayGhiPicker = new DatePicker();
 
     @FXML
-    private TextArea ghiChuArea;
+    private TextArea ghiChuArea = new TextArea();
 
     @FXML
-    private TableView<ServiceTicket> table__sericetiket;
+    private TableView<ServiceTicket> table__sericetiket = new TableView<>();
 
     private ObservableList<ServiceTicket> serviceTicketslist;
     private ServiceTicket serviceTicket;
@@ -1247,22 +1276,22 @@ public class BuildingManagerController implements Initializable {
     // Phạt
 
     @FXML
-    private TableView<Violation> tableViolation;
+    private TableView<Violation> tableViolation = new TableView<>();
 
     @FXML
-    private TableColumn<Violation, String> maphat;
+    private TableColumn<Violation, String> maphat = new TableColumn<>();
 
     @FXML
-    private TableColumn<Violation, String> vipham;
+    private TableColumn<Violation, String> vipham = new TableColumn<>();
 
     @FXML
-    private TableColumn<Violation, Double> tienphat;
+    private TableColumn<Violation, Double> tienphat = new TableColumn<>();
     @FXML
-    private TextField maPhatField;
+    private TextField maPhatField = new TextField();
     @FXML
-    private TextField viphamField;
+    private TextField viphamField = new TextField();
     @FXML
-    private TextField tienPhatField;
+    private TextField tienPhatField = new TextField();
     private ObservableList<Violation> violationslist;
     private Violation violation;
     private Violation violationdelete;
@@ -1377,29 +1406,29 @@ public class BuildingManagerController implements Initializable {
     // Phiếu Phạt
 
     @FXML
-    private TableView<ViolationTicket> tableviolationticket;
+    private TableView<ViolationTicket> tableviolationticket = new TableView<>();
     @FXML
-    private TableColumn<ViolationTicket, String> mxPP;
+    private TableColumn<ViolationTicket, String> mxPP = new TableColumn<>();
     @FXML
-    private TableColumn<ViolationTicket, String> mxPThu;
+    private TableColumn<ViolationTicket, String> mxPThu = new TableColumn<>();
     @FXML
-    private TableColumn<ViolationTicket, Double> mxThanhTien;
+    private TableColumn<ViolationTicket, Double> mxThanhTien = new TableColumn<>();
     @FXML
-    private TableColumn<ViolationTicket, LocalDate> mxNgayghi;
+    private TableColumn<ViolationTicket, LocalDate> mxNgayghi = new TableColumn<>();
     @FXML
-    private TableColumn<ViolationTicket, String> mxghichu;
+    private TableColumn<ViolationTicket, String> mxghichu = new TableColumn<>();
     @FXML
-    private TextField maPPField;
+    private TextField maPPField = new TextField();
     @FXML
-    private TextField maPThuField;
+    private TextField maPThuField = new TextField();
 
     @FXML
-    private TextField thanhTienField;
+    private TextField thanhTienField = new TextField();
 
     @FXML
-    private DatePicker ngayGhiPPField;
+    private DatePicker ngayGhiPPField = new DatePicker();
     @FXML
-    private TextArea ghiChuPPField;
+    private TextArea ghiChuPPField = new TextArea();
 
     private ObservableList<ViolationTicket> violationsList;
     private ViolationTicket violationTicketdelete;
@@ -1575,9 +1604,14 @@ public class BuildingManagerController implements Initializable {
 
     public ObservableList<Furniture> getFurnitureObservableList(){
         ObservableList<Furniture> furnitureObservableList1 = FXCollections.observableArrayList();
+        LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
         FurnitureBUS furnitureBUS = new FurnitureBUS();
-        List<Furniture> furnitureList = furnitureBUS.getAll();
-        furnitureObservableList1.addAll(furnitureList);
+        List<LeaseAgreement> leaseAgreements = leaseAgreementBUS.getLeaseAgreementsWithBuildingManagerID(this.ID);
+        for (LeaseAgreement leaseAgreement: leaseAgreements){
+            List<Furniture> furnitureList = furnitureBUS.getFurnitureByApartmentID(leaseAgreement.getApartmentID());
+            furnitureObservableList1.addAll(furnitureList);
+        }
+
         return furnitureObservableList1;
     }
 
@@ -1601,8 +1635,33 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
-    void suaNoiThat(ActionEvent event) {
+    void showFurniture(MouseEvent event) {
+        Furniture furniture = table__P5__1.getSelectionModel().getSelectedItem();
+        TxtField__P5__1.setText(furniture.getFurnitureID());
+        TxtField__P5__2.setText(furniture.getApartmentID());
+        TxtField__P5__3.setText(furniture.getName());
+        comboBox__P5__3.setValue(furniture.getCondition());
+        TxtField__P5__4.setText(String.valueOf(furniture.getPrice()));
+    }
 
+    @FXML
+    void suaNoiThat(ActionEvent event) {
+        Furniture furniture = table__P5__1.getSelectionModel().getSelectedItem();
+        furniture.setFurnitureID(TxtField__P5__1.getText());
+        furniture.setApartmentID(TxtField__P5__2.getText());
+        furniture.setName(TxtField__P5__3.getText());
+        furniture.setConditionFurniture(comboBox__P5__3.getSelectionModel().getSelectedItem());
+        furniture.setPrice(Double.parseDouble(TxtField__P5__4.getText()));
+        FurnitureBUS furnitureBUS = new FurnitureBUS();
+        boolean updateSuccess = furnitureBUS.update(furniture);
+        if (updateSuccess) {
+            int selectedIndex = table__P5__1.getSelectionModel().getSelectedIndex();
+            furnitureObservableList.set(selectedIndex, furniture);
+            table__P5__1.refresh();
+            refreshFormFurniture();
+        } else {
+            System.err.println("Không thể cập nhật nội thất trong cơ sở dữ liệu.");
+        }
     }
 
     @FXML
@@ -1628,7 +1687,216 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     void xoaNoiThat(ActionEvent event) {
+        Furniture selectedApartment = table__P5__1.getSelectionModel().getSelectedItem();
+        if (selectedApartment != null) {
+            FurnitureBUS apartmentBUS = new FurnitureBUS();
+            boolean deleteSuccess = apartmentBUS.delete(selectedApartment);
+            if (deleteSuccess) {
+                furnitureObservableList.remove(selectedApartment);
+                table__P5__1.refresh();
+                refreshFormFurniture();
+            } else {
+                System.err.println("Không thể xóa căn hộ từ cơ sở dữ liệu.");
+            }
+        }
+    }
 
+    @FXML
+    private TableColumn<LeaseAgreement, String> ColumnP6__1 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LeaseAgreement, String> ColumnP6__2 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LeaseAgreement, String> ColumnP6__3 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LeaseAgreement, String> ColumnP6__4 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LeaseAgreement, LocalDate> ColumnP6__5 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LeaseAgreement, LocalDate> ColumnP6__6 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LeaseAgreement, LocalDate> ColumnP6__7 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LeaseAgreement, Double> ColumnP6__8 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<LeaseAgreement, Double> ColumnP6__9 = new TableColumn<>();
+
+    @FXML
+    private DatePicker DP_P6_1 = new DatePicker();
+
+    @FXML
+    private DatePicker DP_P6_2 = new DatePicker();
+
+    @FXML
+    private DatePicker DP_P6_3 = new DatePicker();
+
+    @FXML
+    private TextField TxtField__P6__1 = new TextField();
+
+    @FXML
+    private TextField TxtField__P6__2 = new TextField();
+
+    @FXML
+    private TextField TxtField__P6__3 = new TextField();
+
+    @FXML
+    private TextField TxtField__P6__4 = new TextField();
+
+    @FXML
+    private TextField TxtField__P6__5 = new TextField();
+
+    @FXML
+    private TextField TxtField__P6__6 = new TextField();
+
+    @FXML
+    private TextField TxtField__P6__search = new TextField();
+
+    @FXML
+    private Button bnt__P6__add;
+
+    @FXML
+    private Button bnt__P6__delete;
+
+    @FXML
+    private Button bnt__P6__update;
+
+    @FXML
+    private ComboBox<String> comboBox__P6__1 = new ComboBox<>();
+
+    @FXML
+    private ComboBox<String> comboBox__P6__2 = new ComboBox<>();
+
+    @FXML
+    private ComboBox<Double> comboBox__P6__3 = new ComboBox<>();
+
+    @FXML
+    private TableView<LeaseAgreement> table__P6__1 = new TableView<>();
+
+    private ObservableList<LeaseAgreement> leaseAgreementObservableList;
+
+    public ObservableList<LeaseAgreement> getLeaseAgreementObservableList(){
+        ObservableList<LeaseAgreement> leaseAgreementObservableList1 = FXCollections.observableArrayList();
+        LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
+        List<LeaseAgreement> leaseAgreementList = leaseAgreementBUS.getLeaseAgreementsWithBuildingManagerID(this.ID
+        );
+        leaseAgreementObservableList1.addAll(leaseAgreementList);
+        return leaseAgreementObservableList1;
+    }
+
+    public void initLeaseAgreement(){
+        ColumnP6__1.setCellValueFactory(new PropertyValueFactory<>("leaseAgreementID"));
+        ColumnP6__2.setCellValueFactory(new PropertyValueFactory<>("tenantID"));
+        ColumnP6__3.setCellValueFactory(new PropertyValueFactory<>("apartmentID"));
+        ColumnP6__4.setCellValueFactory(new PropertyValueFactory<>("buildingManagerID"));
+        ColumnP6__5.setCellValueFactory(new PropertyValueFactory<>("signingDate"));
+        ColumnP6__6.setCellValueFactory(new PropertyValueFactory<>("leaseStartDate"));
+        ColumnP6__7.setCellValueFactory(new PropertyValueFactory<>("leaseEndDate"));
+        ColumnP6__8.setCellValueFactory(new PropertyValueFactory<>("deposit"));
+        ColumnP6__9.setCellValueFactory(new PropertyValueFactory<>("monthlyRent"));
+
+        leaseAgreementObservableList = getLeaseAgreementObservableList();
+        table__P6__1.setItems(leaseAgreementObservableList);
+    }
+
+    @FXML
+    void showLeaseAgreement(MouseEvent event) {
+        LeaseAgreement leaseAgreement = table__P6__1.getSelectionModel().getSelectedItem();
+        TxtField__P6__1.setText(leaseAgreement.getLeaseAgreementID());
+        TxtField__P6__2.setText(leaseAgreement.getTenantID());
+        TxtField__P6__3.setText(leaseAgreement.getBuildingManagerID());
+        TxtField__P6__4.setText(leaseAgreement.getApartmentID());
+        DP_P6_1.setValue(leaseAgreement.getSigningDate());
+        DP_P6_2.setValue(leaseAgreement.getLeaseStartDate());
+        DP_P6_3.setValue(leaseAgreement.getLeaseEndDate());
+        comboBox__P6__3.setValue(leaseAgreement.getLeaseTerm());
+        TxtField__P6__5.setText(String.valueOf(leaseAgreement.getDeposit()));
+        TxtField__P6__6.setText(String.valueOf(leaseAgreement.getMonthlyRent()));
+    }
+
+    private void refreshFormLeaseAgreement() {
+        TxtField__P6__1.setText("");
+        TxtField__P6__2.setText("");
+        TxtField__P6__3.setText("");
+        TxtField__P6__4.setText("");
+        DP_P6_1.setValue(null);
+        DP_P6_2.setValue(null);
+        DP_P6_3.setValue(null);
+        comboBox__P6__3.setValue(null);
+        TxtField__P6__5.setText("");
+        TxtField__P6__6.setText("");
+    }
+
+    @FXML
+    void suaHopDong(ActionEvent event) {
+        LeaseAgreement leaseAgreement = table__P6__1.getSelectionModel().getSelectedItem();
+        leaseAgreement.setLeaseAgreementID(TxtField__P6__1.getText());
+        leaseAgreement.setTenantID(TxtField__P6__2.getText());
+        leaseAgreement.setBuildingManagerID(TxtField__P6__3.getText());
+        leaseAgreement.setApartmentID((TxtField__P6__4.getText()));
+        leaseAgreement.setSigningDate(DP_P6_1.getValue());
+        leaseAgreement.setLeaseStartDate(DP_P6_2.getValue());
+        leaseAgreement.setLeaseEndDate(DP_P6_3.getValue());
+        leaseAgreement.setLeaseTerm(comboBox__P6__3.getValue());
+        leaseAgreement.setDeposit(Double.parseDouble(TxtField__P6__5.getText()));
+        leaseAgreement.setMonthlyRent(Double.parseDouble(TxtField__P6__6.getText()));
+        LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
+        boolean updateSuccess = leaseAgreementBUS.update(leaseAgreement);
+        if (updateSuccess) {
+            int selectedIndex = table__P6__1.getSelectionModel().getSelectedIndex();
+            leaseAgreementObservableList.set(selectedIndex, leaseAgreement);
+            table__P6__1.refresh();
+            refreshFormLeaseAgreement();
+        } else {
+            System.err.println("Không thể cập nhật hợp đồng trong cơ sở dữ liệu.");
+        }
+    }
+
+    @FXML
+    void themHopDong(ActionEvent event) {
+        try{
+            LeaseAgreement leaseAgreement = new LeaseAgreement();
+            leaseAgreement.setLeaseAgreementID(TxtField__P6__1.getText());
+            leaseAgreement.setTenantID(TxtField__P6__2.getText());
+            leaseAgreement.setBuildingManagerID(TxtField__P6__3.getText());
+            leaseAgreement.setApartmentID((TxtField__P6__4.getText()));
+            leaseAgreement.setSigningDate(DP_P6_1.getValue());
+            leaseAgreement.setLeaseStartDate(DP_P6_2.getValue());
+            leaseAgreement.setLeaseEndDate(DP_P6_3.getValue());
+            leaseAgreement.setLeaseTerm(comboBox__P6__3.getValue());
+            leaseAgreement.setDeposit(Double.parseDouble(TxtField__P6__5.getText()));
+            leaseAgreement.setMonthlyRent(Double.parseDouble(TxtField__P6__6.getText()));
+            LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
+            leaseAgreementBUS.add(leaseAgreement);
+
+            leaseAgreementObservableList.add(leaseAgreement);
+            refreshFormLeaseAgreement();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void xoaHopDong(ActionEvent event) {
+        LeaseAgreement select = table__P6__1.getSelectionModel().getSelectedItem();
+        if (select != null) {
+            LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
+            boolean deleteSuccess = leaseAgreementBUS.delete(select);
+            if (deleteSuccess) {
+                leaseAgreementObservableList.remove(select);
+                table__P6__1.refresh();
+                refreshFormLeaseAgreement();
+            } else {
+                System.err.println("Không thể xóa hợp đồng từ cơ sở dữ liệu.");
+            }
+        }
     }
 
 
@@ -1670,6 +1938,10 @@ public class BuildingManagerController implements Initializable {
             // Phieu Phat
 
             initViolationTicket();
+
+            comboBox__P6__3.getItems().addAll(6.0, 12.0);
+            comboBox__P6__3.setPromptText("");
+            initLeaseAgreement();
         } catch (Exception e) {
             e.printStackTrace();
         }

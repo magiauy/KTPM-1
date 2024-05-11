@@ -25,10 +25,10 @@
                       </ImageView>
             <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                          <TextField fx:id="TxtField__P5__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P5__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P5__4" layoutX="216.0" layoutY="277.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
-                          <TextField fx:id="TxtField__P5__3" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" />
+                          <TextField fx:id="TxtField__P5__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
+                          <TextField fx:id="TxtField__P5__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
+                          <TextField fx:id="TxtField__P5__4" layoutX="216.0" layoutY="277.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
+                          <TextField fx:id="TxtField__P5__3" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
                           <ComboBox fx:id="comboBox__P5__3" layoutX="226.0" layoutY="214.0" prefHeight="30.0" prefWidth="145.0" />
                           <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="277.0" prefHeight="32.0" prefWidth="120.0" text="Giá trị" textFill="WHITE">
                               <font>
@@ -84,7 +84,7 @@
                             </ImageView>
                         </graphic>
             </Button>
-                    <TableView fx:id="table__P5__1" layoutX="497.0" layoutY="117.0" prefHeight="580.0" prefWidth="340.0">
+                    <TableView fx:id="table__P5__1" layoutX="497.0" layoutY="117.0" onMouseClicked="#showFurniture" prefHeight="580.0" prefWidth="340.0">
                         <columns>
                             <TableColumn fx:id="ColumnP5__1" prefWidth="75.0" text="Mã nội thất" />
                             <TableColumn fx:id="ColumnP5__2" prefWidth="75.0" text="Mã căn hộ" />
