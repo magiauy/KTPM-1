@@ -16,6 +16,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -375,15 +376,13 @@ public class BuildingManagerController implements Initializable {
         }
     }
 
-
-//    @FXML
-//    void timCanHo(KeyEvent event) {
-//        ApartmentBUS apartmentBUS = new ApartmentBUS();
-//        ArrayList<Apartment> apartments= apartmentBUS.searchApartments(TxtField__P1__search.getText());
-//        ObservableList<Apartment> apartmentSearch = FXCollections.observableArrayList(apartments);
-//        apartmentObservableList.setAll(apartmentSearch);
-//        System.out.println(apartments);
-//    }
+    @FXML
+    void timCanHo(KeyEvent event) {
+        ApartmentBUS apartmentBUS = new ApartmentBUS();
+        ArrayList<Apartment> apartments = apartmentBUS.searchApartments(TxtField__P1__search.getText(), this.ID);
+        ObservableList<Apartment> apartmentSearch = FXCollections.observableArrayList(apartments);
+        apartmentObservableList.setAll(apartmentSearch);
+    }
 
     //cu dan
 

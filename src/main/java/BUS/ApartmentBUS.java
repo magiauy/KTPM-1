@@ -72,7 +72,7 @@ public class ApartmentBUS {
         return apartments;
     }
 
-    public ArrayList<Apartment> searchApartments(String keyword) {
-        return ApartmentDAO.getInstance().search(keyword);
+    public ArrayList<Apartment> searchApartments(String keyword, String buildingManagerID) {
+        return ApartmentDAO.getInstance().search(keyword, buildingManagerID);
     }
 }
