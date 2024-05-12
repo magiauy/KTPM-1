@@ -8,11 +8,13 @@ import java.util.List;
 
 import DAO.BuildingDAO;
 import DAO.BuildingManagerDAO;
-import DTO.Building;
+import DAO.TenantDAO;
 import DTO.BuildingManager;
-import DTO.BuildingManager;
+import DTO.Tenant;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 public class BuildingManagerBUS {
 
@@ -20,6 +22,16 @@ public class BuildingManagerBUS {
 
    private final BuildingManagerDAO BlDAO = new BuildingManagerDAO();
     public ArrayList<BuildingManager> listBuildingManagerDAOs = new ArrayList<>();
+
+    private static BuildingManagerBUS instance;
+
+    public static BuildingManagerBUS getInstance() {
+        if (instance == null) {
+            instance = new BuildingManagerBUS();
+        }
+        return instance;
+    }
+
 
     public BuildingManagerBUS() {
         listBuildingManagerDAOs = BlDAO.selectAll();
@@ -48,7 +60,6 @@ public class BuildingManagerBUS {
         }
         return check;
     }
-
     public boolean update(BuildingManager buildingManager) {
         boolean updated = BuildingManagerDAO.getInstance().update(buildingManager) != 0;
         if (updated) {
@@ -60,6 +71,9 @@ public class BuildingManagerBUS {
         return updated;
     }
 
+    public BuildingManager getBuildingManagerById(String BMID) {
+        return BuildingManagerDAO.getInstance().selectById(BMID);
+    }
     private int getIndexByBuildingId(String buildingManegerId) {
         for (int i = 0; i < listBuildingManagerDAOs.size(); i++) {
             if (listBuildingManagerDAOs.get(i).getBuildingId().equals(buildingManegerId)) {
@@ -113,6 +127,19 @@ public class BuildingManagerBUS {
 
         barChart.getData().addAll(maleSeries, femaleSeries);
     }
+    public void setInfor(Text id, Text fullName, Text phone, Text dob, Text gender, Text cccd, String ID){
+        BuildingManager buildingManager = getBuildingManagerById(ID);
+        System.out.println("___ "+ buildingManager);
+        if(buildingManager != null){
+            id.setText(buildingManager.getBuildingManagerId());
+            fullName.setText(buildingManager.getLastName() + " " + buildingManager.getFirstName());
+            phone.setText(buildingManager.getPhoneNumber());
+            dob.setText(String.valueOf(buildingManager.getDob()));
+            gender.setText(buildingManager.getGender());
+            cccd.setText(buildingManager.getCitizenIdentityCard());
+        }
+    }
+
 
     public ArrayList<BuildingManager> search(String text, String type) {
         ArrayList<BuildingManager> result = new ArrayList<>();

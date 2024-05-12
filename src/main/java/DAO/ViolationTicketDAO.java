@@ -1,13 +1,9 @@
 package DAO;
 
-import DTO.ServiceTicket;
 import DTO.ViolationTicket;
 import config.JDBCUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -15,76 +11,94 @@ public class ViolationTicketDAO implements DAOInterface<ViolationTicket> {
     public static ViolationTicketDAO getInstance() {
         return new ViolationTicketDAO();
     }
+
     @Override
-    public int insert(ViolationTicket violationTicket) {
-        int rowsAffected = 0;
-        String query = "INSERT INTO ViolationTicket (violationID, monthlyRentBillID, price, Date, note) VALUES (?, ?, ?, ?, ?)";
-        try (Connection connection = JDBCUtil.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, violationTicket.getViolationID());
-            preparedStatement.setString(2, violationTicket.getMonthlyRentBillID());
-            preparedStatement.setDouble(3, violationTicket.getPrice());
-            preparedStatement.setDate(4, java.sql.Date.valueOf(violationTicket.getDate()));
-            preparedStatement.setString(5, violationTicket.getNote());
-            rowsAffected = preparedStatement.executeUpdate();
+    public int insert(ViolationTicket t) {
+        int result = 0;
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO ViolationTicket (violationTicketID, violationID, monthlyRentBillID, price, date, note) VALUES (?, ?, ?, ?, ?, ?)");
+
+            preparedStatement.setString(1, t.getViolationTicketID());
+            preparedStatement.setString(2, t.getViolationID());
+            preparedStatement.setString(3, t.getMonthlyRentBillID());
+            preparedStatement.setDouble(4, t.getPrice());
+            preparedStatement.setDate(5, Date.valueOf(t.getDate()));
+            preparedStatement.setString(6, t.getNote());
+
+            result = preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rowsAffected;
+        return result;
     }
 
     @Override
-    public int update(ViolationTicket violationTicket) {
-        int rowsAffected = 0;
-        String query = "UPDATE ViolationTicket SET monthlyRentBillID=?, price=?, Date=?, note=? WHERE violationID=?";
-        try (Connection connection = JDBCUtil.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, violationTicket.getMonthlyRentBillID());
-            preparedStatement.setDouble(2, violationTicket.getPrice());
-            preparedStatement.setDate(3, java.sql.Date.valueOf(violationTicket.getDate()));
+    public int update(ViolationTicket t) {
+        int result = 0;
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE ViolationTicket SET violationID = ?, monthlyRentBillID = ?, price = ?, date = ?, note = ? WHERE violationTicketID = ?");
 
-            preparedStatement.setString(4, violationTicket.getNote());
-            preparedStatement.setString(5, violationTicket.getViolationID());
-            rowsAffected = preparedStatement.executeUpdate();
+            preparedStatement.setString(1, t.getViolationID());
+            preparedStatement.setString(2, t.getMonthlyRentBillID());
+            preparedStatement.setDouble(3, t.getPrice());
+            preparedStatement.setDate(4, Date.valueOf(t.getDate()));
+            preparedStatement.setString(5, t.getNote());
+            preparedStatement.setString(6, t.getViolationTicketID());
+
+            result = preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rowsAffected;
+        return result;
     }
 
     @Override
-    public int delete(String violationID) {
-        int rowsAffected = 0;
-        String query = "DELETE FROM ViolationTicket WHERE violationID=?";
-        try (Connection connection = JDBCUtil.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, violationID);
-            rowsAffected = preparedStatement.executeUpdate();
+    public int delete(String violationTicketID) {
+        int result = 0;
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "DELETE FROM ViolationTicket WHERE violationTicketID = ?");
+
+            preparedStatement.setString(1, violationTicketID);
+
+            result = preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return rowsAffected;
+        return result;
     }
 
     @Override
     public ArrayList<ViolationTicket> selectAll() {
         ArrayList<ViolationTicket> violationTickets = new ArrayList<>();
-        String query = "SELECT * FROM ViolationTicket";
-        try (Connection connection = JDBCUtil.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM ViolationTicket";
+            ResultSet resultSet = statement.executeQuery(sql);
+
             while (resultSet.next()) {
-                String violationID = resultSet.getString("violationID");
-                String monthlyRentBillID = resultSet.getString("monthlyRentBillID");
-                double price = resultSet.getDouble("price");
-                LocalDate date = resultSet.getDate("Date").toLocalDate();
-                String note = resultSet.getString("note");
-                if (violationID != null && monthlyRentBillID != null && date != null) {
-                    ViolationTicket violationTicket = new ViolationTicket(violationID, monthlyRentBillID, price, date,
-                            note);
-                    violationTickets.add(violationTicket);
-                }
+                ViolationTicket violationTicket = createViolationTicketFromResultSet(resultSet);
+                violationTickets.add(violationTicket);
             }
+
+            resultSet.close();
+            statement.close();
+            JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,16 +106,22 @@ public class ViolationTicketDAO implements DAOInterface<ViolationTicket> {
     }
 
     @Override
-    public ViolationTicket selectById(String violationID) {
+    public ViolationTicket selectById(String ID) {
         ViolationTicket violationTicket = null;
-        String query = "SELECT * FROM ViolationTicket WHERE violationID=?";
-        try (Connection connection = JDBCUtil.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, violationID);
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            String sql = "SELECT * FROM ViolationTicket WHERE violationTicketID = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, ID);
             ResultSet resultSet = preparedStatement.executeQuery();
+
             if (resultSet.next()) {
                 violationTicket = createViolationTicketFromResultSet(resultSet);
             }
+
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -109,13 +129,13 @@ public class ViolationTicketDAO implements DAOInterface<ViolationTicket> {
     }
 
     private ViolationTicket createViolationTicketFromResultSet(ResultSet resultSet) throws SQLException {
+        String violationTicketID = resultSet.getString("violationTicketID");
         String violationID = resultSet.getString("violationID");
         String monthlyRentBillID = resultSet.getString("monthlyRentBillID");
-        double price = resultSet.getDouble("price");
-        LocalDate date = resultSet.getDate("Date").toLocalDate();
+        Double price = resultSet.getDouble("price");
+        LocalDate date = resultSet.getDate("date").toLocalDate();
         String note = resultSet.getString("note");
 
-        return new ViolationTicket(violationID, monthlyRentBillID, price, date, note);
+        return new ViolationTicket(violationTicketID, violationID, monthlyRentBillID, price, date, note);
     }
-
 }

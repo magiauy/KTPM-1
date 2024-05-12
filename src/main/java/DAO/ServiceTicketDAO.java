@@ -13,31 +13,23 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
     }
 
     @Override
-    public int insert(ServiceTicket t) {
+    public int insert(ServiceTicket serviceTicket) {
         int result = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO ServiceTicket (serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, date, note) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO ServiceTicket (serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, Date, note) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-            preparedStatement.setString(1, t.getServiceTicketID());
-            preparedStatement.setString(2, t.getMonthlyRentBillID());
-            preparedStatement.setString(3, t.getServiceID());
-            preparedStatement.setDouble(4, t.getQuantity());
-            preparedStatement.setDouble(5, t.getTotalAmount());
-//            preparedStatement.setDate(6, Date.valueOf(t.getDate()));
-            LocalDate date = t.getDate();
-            if (date != null) {
-                preparedStatement.setDate(6, Date.valueOf(date));
-            } else {
-                preparedStatement.setNull(6, Types.DATE); // Thiết lập giá trị null cho tham số số 6
-            }
-
-
-            preparedStatement.setString(7, t.getNote());
+            preparedStatement.setString(1, serviceTicket.getServiceTicketID());
+            preparedStatement.setString(2, serviceTicket.getMonthlyRentBillID());
+            preparedStatement.setString(3, serviceTicket.getServiceID());
+            preparedStatement.setDouble(4, serviceTicket.getQuantity());
+            preparedStatement.setDouble(5, serviceTicket.getTotalAmount());
+            preparedStatement.setDate(6, Date.valueOf(serviceTicket.getDate()));
+            preparedStatement.setString(7, serviceTicket.getNote());
 
             result = preparedStatement.executeUpdate();
+
             preparedStatement.close();
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
@@ -47,23 +39,23 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
     }
 
     @Override
-    public int update(ServiceTicket t) {
+    public int update(ServiceTicket serviceTicket) {
         int result = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE ServiceTicket SET monthlyRentBillID = ?, serviceID = ?,  quantity = ?, totalAmount = ?, date = ?, note = ? " +
-                            "WHERE serviceTicketID = ?");
+                    "UPDATE ServiceTicket SET monthlyRentBillID = ?, serviceID = ?, quantity = ?, totalAmount = ?, Date = ?, note = ? WHERE serviceTicketID = ?");
 
-            preparedStatement.setString(1, t.getMonthlyRentBillID());
-            preparedStatement.setString(2, t.getServiceID());
-            preparedStatement.setDouble(3, t.getQuantity());
-            preparedStatement.setDouble(4, t.getTotalAmount());
-            preparedStatement.setDate(5, Date.valueOf(t.getDate()));
-            preparedStatement.setString(6, t.getNote());
-            preparedStatement.setString(7, t.getServiceTicketID());
+            preparedStatement.setString(1, serviceTicket.getMonthlyRentBillID());
+            preparedStatement.setString(2, serviceTicket.getServiceID());
+            preparedStatement.setDouble(3, serviceTicket.getQuantity());
+            preparedStatement.setDouble(4, serviceTicket.getTotalAmount());
+            preparedStatement.setDate(5, Date.valueOf(serviceTicket.getDate()));
+            preparedStatement.setString(6, serviceTicket.getNote());
+            preparedStatement.setString(7, serviceTicket.getServiceTicketID());
 
             result = preparedStatement.executeUpdate();
+
             preparedStatement.close();
             JDBCUtil.closeConnection(connection);
         } catch (SQLException e) {
@@ -73,14 +65,13 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
     }
 
     @Override
-    public int delete(String t) {
+    public int delete(String serviceTicketID) {
         int result = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "DELETE FROM ServiceTicket WHERE serviceTicketID = ?");
-
-            preparedStatement.setString(1, t);
+            preparedStatement.setString(1, serviceTicketID);
 
             result = preparedStatement.executeUpdate();
 
@@ -102,7 +93,15 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                ServiceTicket serviceTicket = createServiceTicketFromResultSet(resultSet);
+                String serviceTicketID = resultSet.getString("serviceTicketID");
+                String monthlyRentBillID = resultSet.getString("monthlyRentBillID");
+                String serviceID = resultSet.getString("serviceID");
+                Double quantity = resultSet.getDouble("quantity");
+                Double totalAmount = resultSet.getDouble("totalAmount");
+                LocalDate date = resultSet.getDate("Date").toLocalDate();
+                String note = resultSet.getString("note");
+
+                ServiceTicket serviceTicket = new ServiceTicket(serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, date, note);
                 serviceTickets.add(serviceTicket);
             }
 
@@ -116,17 +115,24 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
     }
 
     @Override
-    public ServiceTicket selectById(String ID) {
+    public ServiceTicket selectById(String serviceTicketID) {
         ServiceTicket serviceTicket = null;
         try {
             Connection connection = JDBCUtil.getConnection();
             String sql = "SELECT * FROM ServiceTicket WHERE serviceTicketID = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, ID);
+            preparedStatement.setString(1, serviceTicketID);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                serviceTicket = createServiceTicketFromResultSet(resultSet);
+                String monthlyRentBillID = resultSet.getString("monthlyRentBillID");
+                String serviceID = resultSet.getString("serviceID");
+                Double quantity = resultSet.getDouble("quantity");
+                Double totalAmount = resultSet.getDouble("totalAmount");
+                LocalDate date = resultSet.getDate("Date").toLocalDate();
+                String note = resultSet.getString("note");
+
+                serviceTicket = new ServiceTicket(serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, date, note);
             }
 
             resultSet.close();
@@ -209,15 +215,4 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
         return monthlyRentBillIDs;
     }
 
-    private ServiceTicket createServiceTicketFromResultSet(ResultSet resultSet) throws SQLException {
-        String serviceTicketID = resultSet.getString("serviceTicketID");
-        String monthlyRentBillID = resultSet.getString("monthlyRentBillID");
-        String serviceID = resultSet.getString("serviceID");
-        Double quantity = resultSet.getDouble("quantity");
-        Double totalAmount = resultSet.getDouble("totalAmount");
-        LocalDate date = resultSet.getDate("Date").toLocalDate();
-        String note = resultSet.getString("note");
-
-        return new ServiceTicket(serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, date, note);
-    }
 }

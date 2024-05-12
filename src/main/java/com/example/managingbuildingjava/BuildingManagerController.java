@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -254,7 +255,7 @@ public class BuildingManagerController implements Initializable {
         BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
         List<BuildingManager> buildingManagerList = buildingManagerBUS.getAll();
         for (BuildingManager buildingManager : buildingManagerList) {
-            if (buildingManager.getBuildingManagerId().equals(ID)){
+            if (buildingManager.getBuildingManagerId().equals(ID)) {
                 ApartmentBUS apartmentBUS = new ApartmentBUS();
                 List<Apartment> apartments = apartmentBUS.getApartmentByBuildingID(buildingManager.getBuildingId());
                 apartmentObservableList.addAll(apartments);
@@ -526,7 +527,7 @@ public class BuildingManagerController implements Initializable {
         TenantBUS tenantBUS = new TenantBUS();
         CohabitantBUS cohabitantBUS = new CohabitantBUS();
         List<Tenant> tenants = tenantBUS.getTenantWithBuildingID(this.ID);
-        for (Tenant tenant: tenants){
+        for (Tenant tenant : tenants) {
             List<Cohabitant> cohabitants = cohabitantBUS.getCohabitantsWithTenantId(tenant.getTenantID());
             cohabitantObservableLists.addAll(cohabitants);
         }
@@ -808,8 +809,9 @@ public class BuildingManagerController implements Initializable {
         TenantBUS tenantBUS = new TenantBUS();
         List<Tenant> tenants = tenantBUS.getTenantWithBuildingID(this.ID);
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-        for (Tenant tenant: tenants){
-            List<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getMonthlyRentBillsWithTenantId(tenant.getTenantID());
+        for (Tenant tenant : tenants) {
+            List<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS
+                    .getMonthlyRentBillsWithTenantId(tenant.getTenantID());
             monthlyRentBillsObservableLists.addAll(monthlyRentBills);
         }
 
@@ -912,7 +914,6 @@ public class BuildingManagerController implements Initializable {
         }
     }
 
-
     // Dich Vu
 
     @FXML
@@ -944,6 +945,9 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     private ComboBox<String> comboBox__P4__21 = new ComboBox<>();
+
+    @FXML
+    private ComboBox<String> combox_loaidv = new ComboBox<>();
 
     @FXML
     private TextField TxtField__P4__11 = new TextField();
@@ -989,6 +993,20 @@ public class BuildingManagerController implements Initializable {
         });
     }
 
+    public void showcomboboxService1() {
+        Platform.runLater(() -> {
+            if (combox_loaidv != null) {
+                ObservableList<String> genders = FXCollections.observableArrayList(
+                        "Tất Cả",
+                        "mobile",
+                        "fixed");
+                combox_loaidv.setItems(genders);
+            } else {
+                System.err.println("comboBox__P1__1 is null. Check FXML and controller connection.");
+            }
+        });
+    }
+
     public void handleService() {
         table__P4__11.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
@@ -1018,18 +1036,51 @@ public class BuildingManagerController implements Initializable {
         alert.showAndWait();
     }
 
+    private boolean containsNumber(String s) {
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isValidNumber(String input) {
+        for (char c : input.toCharArray()) {
+            if (!Character.isDigit(c) && c != '.' && c != '-') {
+                return false; // Nếu không phải số, dấu chấm hoặc dấu trừ, trả về false
+            }
+        }
+        return true;
+    }
+
     public void handleAddService() {
         String serviceID = TxtField__P4__11.getText();
         String name = TxtField__P4__31.getText();
-        Double pricePerUnit = Double.parseDouble(TxtField__P4__51.getText());
+        Double pricePerUnitText = Double.parseDouble(TxtField__P4__51.getText());
         String unit = TxtField__P4__61.getText();
         String type = fill_type.getValue();
 
-        if (serviceID.isEmpty() || name.isEmpty() || unit.isEmpty() || type == null) {
+        String revenueInput = TxtField__P4__51.getText().replaceAll(",", "");
+        if (serviceID.isEmpty() || name.isEmpty() || unit.isEmpty()) {
             showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
             return;
         }
-        Service newService = new Service(serviceID, name, pricePerUnit, unit, type);
+        if (containsNumber(name)) {
+            showAlert("Lỗi", "Tên không được chứa số.", AlertType.ERROR);
+            return;
+        }
+        if (!isValidNumber(revenueInput)) {
+            showAlert("Lỗi", "Vui Lòng Nhập Số Giá Dịch Vụ.", AlertType.ERROR);
+            return;
+        }
+
+        Service newService = new Service();
+        newService.setServiceID(serviceID);
+        newService.setName(name);
+        newService.setPricePerUnit(pricePerUnitText);
+        newService.setUnit(unit);
+        newService.setType(type);
         ServiceBUS serviceBUS = new ServiceBUS();
         boolean isSuccess = serviceBUS.add(newService);
 
@@ -1074,33 +1125,69 @@ public class BuildingManagerController implements Initializable {
 
     public void handleUpdateService() {
         if (servicedelete == null) {
-            showAlert("Lỗi", "Không có dịch vụ nào chọn để cập nhật", AlertType.ERROR);
+            showAlert("Lỗi", "Không có dịch vụ nào chọn để sửa", AlertType.ERROR);
             return;
         }
-        String newName = TxtField__P4__31.getText();
-        Double newPricePerUnit = Double.parseDouble(TxtField__P4__51.getText());
-        String newUnit = TxtField__P4__61.getText();
-        String newType = fill_type.getValue();
+        String serviceID = TxtField__P4__11.getText();
+        String name = TxtField__P4__31.getText();
+        Double pricePerUnitText = Double.parseDouble(TxtField__P4__51.getText());
+        String unit = TxtField__P4__61.getText();
+        String type = fill_type.getValue();
 
-        if (newName.isEmpty() || newUnit.isEmpty() || newType == null) {
-            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin mới", AlertType.ERROR);
+        String revenueInput = TxtField__P4__51.getText().replaceAll(",", "");
+        if (serviceID.isEmpty() || name.isEmpty() || unit.isEmpty() || type == null) {
+            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
             return;
         }
-        servicedelete.setName(newName);
-        servicedelete.setPricePerUnit(newPricePerUnit);
-        servicedelete.setUnit(newUnit);
-        servicedelete.setType(newType);
+        if (containsNumber(name)) {
+            showAlert("Lỗi", "Tên không được chứa số.", AlertType.ERROR);
+            return;
+        }
+        if (!isValidNumber(revenueInput)) {
+            showAlert("Lỗi", "Vui Lòng Nhập Số Giá Dịch Vụ.", AlertType.ERROR);
+            return;
+        }
+
+        Service newService = new Service();
+        newService.setServiceID(serviceID);
+        newService.setName(name);
+        newService.setPricePerUnit(pricePerUnitText);
+        newService.setUnit(unit);
+        newService.setType(type);
         ServiceBUS serviceBUS = new ServiceBUS();
-        boolean updateResult = serviceBUS.update(servicedelete);
+        boolean isSuccess = serviceBUS.update(newService);
 
-        if (updateResult) {
-            showAlert("Thành Công", "Cập nhật thông tin thành công", AlertType.CONFIRMATION);
+        if (isSuccess) {
+            showAlert("Thành Công", "Sửa Thành Công.", AlertType.CONFIRMATION);
             initService();
         } else {
-            showAlert("Thất Bại", "Không thể cập nhật thông tin", AlertType.ERROR);
+            showAlert("Lỗi", "Không Thể Sửa.", AlertType.ERROR);
         }
     }
+ public void handleSelectType(){
 
+        String type = combox_loaidv.getValue();
+        if(type.equals("Tất Cả")){
+            ServiceBUS serviceBUS = new ServiceBUS();
+            ArrayList<Service> services = serviceBUS.getAll();
+            ServiceList.addAll(services);
+            ObservableList<Service> observableBuildingList = FXCollections
+                    .observableArrayList(services);
+            table__P4__11.setItems(observableBuildingList);
+
+        }else {
+            ServiceBUS serviceBUS = new ServiceBUS();
+            ArrayList<Service> services = serviceBUS.search(type, "Lọc Theo Loại");
+            ObservableList<Service> observableBuildingList = FXCollections
+                    .observableArrayList(services);
+            table__P4__11.setItems(observableBuildingList);
+        }
+
+
+
+   
+     
+ }
     // Phiếu Dichj Vụ
 
     @FXML
@@ -1175,7 +1262,7 @@ public class BuildingManagerController implements Initializable {
             if (event.getClickCount() == 1) {
                 ServiceTicket selectedRow = table__sericetiket.getSelectionModel().getSelectedItem();
                 if (selectedRow != null) {
-                  System.out.println(selectedRow.getTotalAmount());
+                    System.out.println(selectedRow.getTotalAmount());
                     maPhieuDVField.setText(selectedRow.getServiceTicketID());
                     maPhieuThuField.setText(selectedRow.getMonthlyRentBillID());
                     maDichVuField.setText(selectedRow.getServiceID());
@@ -1190,9 +1277,10 @@ public class BuildingManagerController implements Initializable {
     }
 
     public void handleAddServiceTicket() {
+
         String maPDV = maPhieuDVField.getText();
-        String maPhieuThu = maPhieuThuField.getText();
-        String maDichVu = maDichVuField.getText();
+        String maDichVu = maPhieuThuField.getText();
+        String maPhieuThu = maDichVuField.getText();
         Double soLuong = Double.parseDouble(soLuongField.getText());
         Double thanhTien = Double.parseDouble(thanhTien1Field.getText());
         LocalDate ngayGhi = ngayGhiPicker.getValue();
@@ -1203,17 +1291,25 @@ public class BuildingManagerController implements Initializable {
             return;
         }
 
-        // Tạo đối tượng ServiceTicket mới
-        ServiceTicket newTicket = new ServiceTicket(maPDV, maPhieuThu, maDichVu, soLuong, thanhTien, ngayGhi, ghiChu);
+        ServiceTicket service = new ServiceTicket();
+        service.setServiceTicketID(maPDV);
+        service.setMonthlyRentBillID(maDichVu);
+        service.setServiceID(maPhieuThu);
+        service.setQuantity(soLuong);
+        service.setTotalAmount(thanhTien);
+        service.setDate(ngayGhi);
+        service.setNote(ghiChu);
 
         ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
-        boolean addResult = serviceTicketBUS.add(newTicket);
+        boolean addResult = serviceTicketBUS.add(service);
+
         if (addResult) {
             showAlert("Thành Công", "Thêm Phiếu Dịch Vụ Thành Công", AlertType.CONFIRMATION);
-            initServiceTicket(); // Load lại danh sách sau khi thêm
+            initServiceTicket();
         } else {
             showAlert("Thất Bại", "Không Thể Thêm Phiếu Dịch Vụ", AlertType.ERROR);
         }
+
     }
 
     public void handleDeleteServiceTicket() {
@@ -1242,30 +1338,31 @@ public class BuildingManagerController implements Initializable {
 
         String maPDV = maPhieuDVField.getText();
         String maDichVu = maPhieuThuField.getText();
-
         String maPhieuThu = maDichVuField.getText();
         Double soLuong = Double.parseDouble(soLuongField.getText());
         Double thanhTien = Double.parseDouble(thanhTien1Field.getText());
         LocalDate ngayGhi = ngayGhiPicker.getValue();
         String ghiChu = ghiChuArea.getText();
 
-        if (maPDV.isEmpty() || maPhieuThu.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
+        if (maPDV.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
             showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
             return;
         }
 
-        System.out.println(maDichVu + maPhieuThu + maDichVu);
+        String maPDVCu = serviceTicketdelete.getServiceTicketID();
 
-        serviceTicketdelete.setServiceTicketID(maPDV);
-        serviceTicketdelete.setMonthlyRentBillID(maPhieuThu);
-        serviceTicketdelete.setServiceID(maDichVu);
-        serviceTicketdelete.setQuantity(soLuong);
-        serviceTicketdelete.setTotalAmount(thanhTien);
-        serviceTicketdelete.setDate(ngayGhi);
-        serviceTicketdelete.setNote(ghiChu);
+        ServiceTicket service = new ServiceTicket();
+        service.setServiceTicketID(maPDVCu); // Sử dụng ID của bản ghi cần cập nhật
+        service.setMonthlyRentBillID(maDichVu);
+        service.setServiceID(maPhieuThu);
+        service.setQuantity(soLuong);
+        service.setTotalAmount(thanhTien);
+        service.setDate(ngayGhi);
+        service.setNote(ghiChu);
 
         ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
-        boolean updateResult = serviceTicketBUS.update(serviceTicketdelete);
+        boolean updateResult = serviceTicketBUS.update(service);
+
         if (updateResult) {
             showAlert("Thành Công", "Cập Nhật Phiếu Dịch Vụ Thành Công", AlertType.CONFIRMATION);
             initServiceTicket();
@@ -1273,8 +1370,8 @@ public class BuildingManagerController implements Initializable {
             showAlert("Thất Bại", "Không Thể Cập Nhật Phiếu Dịch Vụ", AlertType.ERROR);
         }
     }
-    // Phạt
 
+    // Phạt
     @FXML
     private TableView<Violation> tableViolation = new TableView<>();
 
@@ -1331,20 +1428,21 @@ public class BuildingManagerController implements Initializable {
             return;
         }
 
-        ViolationBUS violationBUS = new ViolationBUS();
-        boolean deleteResult = violationBUS.delete(violationdelete);
+        confirmAndDelete(violationdelete, "Bạn có chắc chắn muốn hình phạt này không?", () -> {
+            ViolationBUS violationBUS = new ViolationBUS();
+            boolean deleteResult = violationBUS.delete(violationdelete);
 
-        if (deleteResult) {
-            showAlert("Thành Công", "Xóa vi phạm thành công", AlertType.CONFIRMATION);
-            initViolation();
-
-            maPhatField.clear();
-            viphamField.clear();
-            tienPhatField.clear();
-            violationdelete = null;
-        } else {
-            showAlert("Thất Bại", "Không thể xóa vi phạm", AlertType.ERROR);
-        }
+            if (deleteResult) {
+                showAlert("Thành Công", "Xóa vi phạm thành công", AlertType.CONFIRMATION);
+                initViolation();
+                maPhatField.clear();
+                viphamField.clear();
+                tienPhatField.clear();
+                violationdelete = null;
+            } else {
+                showAlert("Thất Bại", "Không thể xóa vi phạm", AlertType.ERROR);
+            }
+        });
     }
 
     public void handleUpdateViolation() {
@@ -1353,25 +1451,39 @@ public class BuildingManagerController implements Initializable {
             return;
         }
 
+        String newViolationID = maPhatField.getText();
         String newName = viphamField.getText();
         Double newPrice = Double.parseDouble(tienPhatField.getText());
-
-        if (newName.isEmpty()) {
+        if (newName.isEmpty() || newViolationID.isEmpty() || newPrice == null) {
             showAlert("Lỗi", "Tên vi phạm không được để trống", AlertType.ERROR);
             return;
         }
 
-        violationdelete.setName(newName);
-        violationdelete.setPrice(newPrice);
+        if (containsNumber(newName)) {
+            showAlert("Lỗi", "Tên Không Được Nhập Bằng Số", AlertType.ERROR);
+            return;
+        }
+        String revenueInput1 = tienPhatField.getText().replaceAll(",", "");
 
+        if (!isValidNumber(revenueInput1)) {
+            showAlert("Lỗi", "Tiền Phạt Vui Lòng Nhập Bằng Số", AlertType.ERROR);
+            return;
+        }
+
+        Violation newViolation = new Violation();
+        newViolation.setViolationID((newViolationID));
+        newViolation.setName(newName);
+        newViolation.setPrice(newPrice);
         ViolationBUS violationBUS = new ViolationBUS();
-        boolean updateResult = violationBUS.update(violationdelete);
-
-        if (updateResult) {
-            showAlert("Thành Công", "Cập nhật vi phạm thành công", AlertType.CONFIRMATION);
+        boolean insertResult = violationBUS.update(newViolation);
+        if (insertResult) {
+            showAlert("Thành Công", "Sửa vi phạm thành công", AlertType.CONFIRMATION);
             initViolation();
+            maPhatField.clear();
+            viphamField.clear();
+            tienPhatField.clear();
         } else {
-            showAlert("Thất Bại", "Không thể cập nhật vi phạm", AlertType.ERROR);
+            showAlert("Thất Bại", "Không thể thêm vi phạm", AlertType.ERROR);
         }
     }
 
@@ -1380,21 +1492,36 @@ public class BuildingManagerController implements Initializable {
         String newViolationID = maPhatField.getText();
         String newName = viphamField.getText();
         Double newPrice = Double.parseDouble(tienPhatField.getText());
-
         if (newName.isEmpty()) {
             showAlert("Lỗi", "Tên vi phạm không được để trống", AlertType.ERROR);
             return;
         }
 
-        Violation newViolation = new Violation(newViolationID, newName, newPrice);
+        if (newName.isEmpty() || newViolationID.isEmpty() || newPrice == null) {
+            showAlert("Lỗi", "Tên vi phạm không được để trống", AlertType.ERROR);
+            return;
+        }
 
+        if (containsNumber(newName)) {
+            showAlert("Lỗi", "Tên Không Được Nhập Bằng Số", AlertType.ERROR);
+            return;
+        }
+        String revenueInput1 = tienPhatField.getText().replaceAll(",", "");
+
+        if (!isValidNumber(revenueInput1)) {
+            showAlert("Lỗi", "Tiền Phạt Vui Lòng Nhập Bằng Số", AlertType.ERROR);
+            return;
+        }
+
+        Violation newViolation = new Violation();
+        newViolation.setViolationID((newViolationID));
+        newViolation.setName(newName);
+        newViolation.setPrice(newPrice);
         ViolationBUS violationBUS = new ViolationBUS();
         boolean insertResult = violationBUS.add(newViolation);
-
         if (insertResult) {
             showAlert("Thành Công", "Thêm vi phạm thành công", AlertType.CONFIRMATION);
             initViolation();
-
             maPhatField.clear();
             viphamField.clear();
             tienPhatField.clear();
@@ -1410,6 +1537,9 @@ public class BuildingManagerController implements Initializable {
     @FXML
     private TableColumn<ViolationTicket, String> mxPP = new TableColumn<>();
     @FXML
+    private TableColumn<ViolationTicket, String> mxP = new TableColumn<>();
+
+    @FXML
     private TableColumn<ViolationTicket, String> mxPThu = new TableColumn<>();
     @FXML
     private TableColumn<ViolationTicket, Double> mxThanhTien = new TableColumn<>();
@@ -1423,6 +1553,8 @@ public class BuildingManagerController implements Initializable {
     private TextField maPThuField = new TextField();
 
     @FXML
+    private TextField maphatfied = new TextField();
+    @FXML
     private TextField thanhTienField = new TextField();
 
     @FXML
@@ -1432,15 +1564,41 @@ public class BuildingManagerController implements Initializable {
 
     private ObservableList<ViolationTicket> violationsList;
     private ViolationTicket violationTicketdelete;
+    // Page 0
+    @FXML
+    private Text cccdnfor = new Text();
+    @FXML
+    private Text dobnfor = new Text();
+    @FXML
+    private Text gendernfor = new Text();
+    @FXML
+    private Text IDInfor = new Text();
+    @FXML
+    private Text nameInfor = new Text();
+    @FXML
+    private Text phonenfor = new Text();
+
+    public void loadPage0() {
+        TimeNow();
+        updateInfor();
+        totalOfBuldings();
+        updatePieChart();
+        drawBarChart();
+    }
+
+    public void updateInfor() {
+        BuildingManagerBUS.getInstance().setInfor(IDInfor, nameInfor, phonenfor, dobnfor, gendernfor, cccdnfor,
+                BuildingManagerController.getInstance().getID());
+    }
 
     public void initViolationTicket() {
         violationsList = FXCollections.observableArrayList();
         ViolationTicketBUS violationTicketBUS = new ViolationTicketBUS();
         ArrayList<ViolationTicket> violationTickets = violationTicketBUS.getAll();
         violationsList.addAll(violationTickets);
-
         ObservableList<ViolationTicket> observableList = FXCollections.observableArrayList(violationsList);
-        mxPP.setCellValueFactory(new PropertyValueFactory<>("violationID"));
+        mxPP.setCellValueFactory(new PropertyValueFactory<>("violationTicketID"));
+        mxP.setCellValueFactory(new PropertyValueFactory<>("violationID"));
         mxPThu.setCellValueFactory(new PropertyValueFactory<>("monthlyRentBillID"));
         mxThanhTien.setCellValueFactory(new PropertyValueFactory<>("price"));
         mxNgayghi.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -1454,7 +1612,8 @@ public class BuildingManagerController implements Initializable {
             if (event.getClickCount() == 1) {
                 ViolationTicket selectedRow = tableviolationticket.getSelectionModel().getSelectedItem();
                 if (selectedRow != null) {
-                    maPPField.setText(selectedRow.getViolationID());
+                    maPPField.setText(selectedRow.getViolationTicketID());
+                    maphatfied.setText(selectedRow.getViolationID());
                     maPThuField.setText(selectedRow.getMonthlyRentBillID());
                     thanhTienField.setText(String.valueOf(selectedRow.getPrice()));
                     ngayGhiPPField.setValue(selectedRow.getDate());
@@ -1466,88 +1625,100 @@ public class BuildingManagerController implements Initializable {
     }
 
     public void handleDeleteViolationTicket() {
-        ViolationTicket selectedRow = tableviolationticket.getSelectionModel().getSelectedItem();
-        if (selectedRow == null) {
+        if (violationTicketdelete == null) {
             showAlert("Lỗi", "Không có phiếu vi phạm nào được chọn để xóa", Alert.AlertType.ERROR);
             return;
         }
 
-        boolean deleteResult = ViolationTicketBUS.getInstance().delete(selectedRow);
+        confirmAndDelete(violationTicketdelete, "Bạn có chắc xóa phiếu vi pham này không ", () -> {
+            try {
+                ViolationTicketBUS violationTicketBUS = new ViolationTicketBUS();
+                boolean deleteResult = violationTicketBUS
+                        .delete(violationTicketdelete);
 
-        if (deleteResult) {
-            showAlert("Thành Công", "Xóa phiếu vi phạm thành công", Alert.AlertType.CONFIRMATION);
-            initViolationTicket();
-
-        } else {
-            showAlert("Thất Bại", "Không thể xóa phiếu vi phạm", Alert.AlertType.ERROR);
-        }
+                if (deleteResult) {
+                    showAlert("Thành Công", "Xóa phiếu vi phạm thành công", Alert.AlertType.CONFIRMATION);
+                    initViolationTicket();
+                } else {
+                    showAlert("Thất Bại", "Không thể xóa phiếu vi phạm", Alert.AlertType.ERROR);
+                }
+            } catch (Exception e) {
+                showAlert("Lỗi", "Đã xảy ra lỗi khi xóa phiếu vi phạm: " + e.getMessage(), Alert.AlertType.ERROR);
+                e.printStackTrace();
+            }
+        });
     }
 
     public void handleAddViolationTicket() {
-        String maPDV = maPhieuDVField.getText();
-    String maPhieuThu = maPhieuThuField.getText();
-    String maDichVu = maDichVuField.getText();
-    LocalDate ngayGhi = ngayGhiPicker.getValue();
-    String ghiChu = ghiChuArea.getText();
 
-  
-        // Kiểm tra và xử lý số lượng và thành tiền
-        Double soLuong = Double.parseDouble(soLuongField.getText());
+        String maPPhat = maPPField.getText();
+        String maPhieuThu = maphatfied.getText();
+        String maDichVu = maPThuField.getText();
+        LocalDate ngayGhi = ngayGhiPPField.getValue();
+        String ghiChu = ghiChuPPField.getText();
         Double thanhTien = Double.parseDouble(thanhTienField.getText());
 
-        if (maPDV.isEmpty() || maPhieuThu.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
+        if (maPPhat.isEmpty() || maPhieuThu.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
             showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
             return;
         }
-        ServiceTicket newServiceTicket = new ServiceTicket();
-        newServiceTicket.setServiceTicketID(maPDV);
-        newServiceTicket.setMonthlyRentBillID(maPhieuThu);
-        newServiceTicket.setServiceID(maDichVu);
-        newServiceTicket.setQuantity(soLuong);
-        newServiceTicket.setTotalAmount(thanhTien);
-        newServiceTicket.setDate(ngayGhi);
-        newServiceTicket.setNote(ghiChu);
 
-        // Thêm phiếu dịch vụ mới vào cơ sở dữ liệu
-        ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
-        boolean addResult = serviceTicketBUS.add(newServiceTicket);
+        ViolationTicket violationTickets = new ViolationTicket();
+        violationTickets.setViolationTicketID(maPPhat);
+        violationTickets.setMonthlyRentBillID(maDichVu);
+        violationTickets.setViolationID(maPhieuThu);
+        violationTickets.setDate(ngayGhi);
+        violationTickets.setPrice(thanhTien);
+        violationTickets.setNote(ghiChu);
 
-        if (addResult) {
+        ViolationTicketBUS violationTicketBUS = new ViolationTicketBUS();
+        boolean updateResult = violationTicketBUS.add(violationTickets);
+
+        if (updateResult) {
             showAlert("Thành Công", "Thêm vi phạm thành công", Alert.AlertType.CONFIRMATION);
             initViolationTicket();
 
         } else {
             showAlert("Thất Bại", "Không thể thêm vi phạm", Alert.AlertType.ERROR);
         }
-    
+
     }
 
     public void handleUpdateViolationTicket() {
-        String newViolationID = maPPField.getText();
-        String newMonthlyRentBillID = maPThuField.getText();
-        Double newPrice = Double.parseDouble(thanhTienField.getText());
-        LocalDate newDate = ngayGhiPPField.getValue();
-        String newNote = ghiChuPPField.getText();
-        if (newViolationID.isEmpty() || newMonthlyRentBillID.isEmpty() || newPrice <= 0 || newDate == null
-                || newNote.isEmpty()) {
-            showAlert("Lỗi", "Vui lòng điền đầy đủ thông tin và đúng định dạng", Alert.AlertType.ERROR);
+        if (violationTicketdelete == null) {
+            showAlert("Thất Bại", "Không có phiếu phạt nào chọn để sửa", Alert.AlertType.ERROR);
+        }
+        String maPPhat = maPPField.getText();
+        String maPhieuThu = maphatfied.getText();
+        String maDichVu = maPThuField.getText();
+        LocalDate ngayGhi = ngayGhiPPField.getValue();
+        String ghiChu = ghiChuPPField.getText();
+        Double thanhTien = Double.parseDouble(thanhTienField.getText());
+
+        if (maPPhat.isEmpty() || maPhieuThu.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
+            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
             return;
         }
-        ViolationTicket newViolation = new ViolationTicket(newViolationID, newMonthlyRentBillID, newPrice,
-                newDate, newNote);
 
-        ViolationTicketBUS violationBUS = new ViolationTicketBUS();
-        boolean insertResult = violationBUS.update(newViolation);
+        ViolationTicket violationTickets = new ViolationTicket();
+        violationTickets.setViolationTicketID(maPPhat);
+        violationTickets.setMonthlyRentBillID(maDichVu);
+        violationTickets.setViolationID(maPhieuThu);
+        violationTickets.setDate(ngayGhi);
+        violationTickets.setPrice(thanhTien);
+        violationTickets.setNote(ghiChu);
 
-        if (insertResult) {
+        ViolationTicketBUS violationTicketBUS = new ViolationTicketBUS();
+        boolean updateResult = violationTicketBUS.update(violationTickets);
+
+        if (updateResult) {
             showAlert("Thành Công", "Sửa vi phạm thành công", Alert.AlertType.CONFIRMATION);
             initViolationTicket();
-
         } else {
             showAlert("Thất Bại", "Không thể sửa vi phạm", Alert.AlertType.ERROR);
         }
-    }
 
+    }
 
     @FXML
     private TableColumn<Furniture, String> ColumnP5__1 = new TableColumn<>();
@@ -1602,12 +1773,12 @@ public class BuildingManagerController implements Initializable {
 
     private ObservableList<Furniture> furnitureObservableList;
 
-    public ObservableList<Furniture> getFurnitureObservableList(){
+    public ObservableList<Furniture> getFurnitureObservableList() {
         ObservableList<Furniture> furnitureObservableList1 = FXCollections.observableArrayList();
         LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
         FurnitureBUS furnitureBUS = new FurnitureBUS();
         List<LeaseAgreement> leaseAgreements = leaseAgreementBUS.getLeaseAgreementsWithBuildingManagerID(this.ID);
-        for (LeaseAgreement leaseAgreement: leaseAgreements){
+        for (LeaseAgreement leaseAgreement : leaseAgreements) {
             List<Furniture> furnitureList = furnitureBUS.getFurnitureByApartmentID(leaseAgreement.getApartmentID());
             furnitureObservableList1.addAll(furnitureList);
         }
@@ -1615,18 +1786,17 @@ public class BuildingManagerController implements Initializable {
         return furnitureObservableList1;
     }
 
-    public void initFurniture(){
+    public void initFurniture() {
         ColumnP5__1.setCellValueFactory(new PropertyValueFactory<>("furnitureID"));
         ColumnP5__2.setCellValueFactory(new PropertyValueFactory<>("apartmentID"));
         ColumnP5__3.setCellValueFactory(new PropertyValueFactory<>("nameFurniture"));
         ColumnP5__4.setCellValueFactory(new PropertyValueFactory<>("conditionFurniture"));
         ColumnP5__5.setCellValueFactory(new PropertyValueFactory<>("price"));
-
         furnitureObservableList = getFurnitureObservableList();
         table__P5__1.setItems(furnitureObservableList);
     }
 
-    public void refreshFormFurniture(){
+    public void refreshFormFurniture() {
         TxtField__P5__1.setText("");
         TxtField__P5__2.setText("");
         TxtField__P5__3.setText("");
@@ -1666,7 +1836,7 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     void themNoiThat(ActionEvent event) {
-        try{
+        try {
             Furniture furniture = new Furniture();
             furniture.setFurnitureID(TxtField__P5__1.getText());
             furniture.setApartmentID(TxtField__P5__2.getText());
@@ -1680,7 +1850,7 @@ public class BuildingManagerController implements Initializable {
             furnitureObservableList.add(furniture);
             refreshFormFurniture();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -1781,16 +1951,15 @@ public class BuildingManagerController implements Initializable {
 
     private ObservableList<LeaseAgreement> leaseAgreementObservableList;
 
-    public ObservableList<LeaseAgreement> getLeaseAgreementObservableList(){
+    public ObservableList<LeaseAgreement> getLeaseAgreementObservableList() {
         ObservableList<LeaseAgreement> leaseAgreementObservableList1 = FXCollections.observableArrayList();
         LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
-        List<LeaseAgreement> leaseAgreementList = leaseAgreementBUS.getLeaseAgreementsWithBuildingManagerID(this.ID
-        );
+        List<LeaseAgreement> leaseAgreementList = leaseAgreementBUS.getLeaseAgreementsWithBuildingManagerID(this.ID);
         leaseAgreementObservableList1.addAll(leaseAgreementList);
         return leaseAgreementObservableList1;
     }
 
-    public void initLeaseAgreement(){
+    public void initLeaseAgreement() {
         ColumnP6__1.setCellValueFactory(new PropertyValueFactory<>("leaseAgreementID"));
         ColumnP6__2.setCellValueFactory(new PropertyValueFactory<>("tenantID"));
         ColumnP6__3.setCellValueFactory(new PropertyValueFactory<>("apartmentID"));
@@ -1800,7 +1969,6 @@ public class BuildingManagerController implements Initializable {
         ColumnP6__7.setCellValueFactory(new PropertyValueFactory<>("leaseEndDate"));
         ColumnP6__8.setCellValueFactory(new PropertyValueFactory<>("deposit"));
         ColumnP6__9.setCellValueFactory(new PropertyValueFactory<>("monthlyRent"));
-
         leaseAgreementObservableList = getLeaseAgreementObservableList();
         table__P6__1.setItems(leaseAgreementObservableList);
     }
@@ -1860,7 +2028,7 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     void themHopDong(ActionEvent event) {
-        try{
+        try {
             LeaseAgreement leaseAgreement = new LeaseAgreement();
             leaseAgreement.setLeaseAgreementID(TxtField__P6__1.getText());
             leaseAgreement.setTenantID(TxtField__P6__2.getText());
@@ -1878,7 +2046,7 @@ public class BuildingManagerController implements Initializable {
             leaseAgreementObservableList.add(leaseAgreement);
             refreshFormLeaseAgreement();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -1898,7 +2066,6 @@ public class BuildingManagerController implements Initializable {
             }
         }
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -1920,14 +2087,14 @@ public class BuildingManagerController implements Initializable {
             comboBox__P5__3.getItems().addAll("Mới", "Cũ");
             comboBox__P5__3.setPromptText("");
             initFurniture();
-            //Chạy page 0
-            totalOfBuldings();
-            updatePieChart();
-            drawBarChart();
+            // Chạy page 0
+            loadPage0();
 
             // Dich Vu
             initService();
             showcomboboxService();
+            showcomboboxService1();
+     
 
             // Phieu Dich Vu
             initServiceTicket();
