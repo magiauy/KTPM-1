@@ -1,6 +1,7 @@
 package BUS;
 
 import DAO.FinancialReportDAO;
+import DTO.Building;
 import DTO.FinancialReport;
 import com.example.managingbuildingjava.CustomerController;
 import javafx.collections.FXCollections;
@@ -18,17 +19,21 @@ public class FinancialReportBUS {
     public FinancialReportBUS(ArrayList<FinancialReport> financialReports) {
         this.financialReports = financialReports;
     }
+
     private ArrayList<FinancialReport> financialReports = new ArrayList<>();
     private static FinancialReportBUS instance;
+
     public static FinancialReportBUS getInstance() {
         if (instance == null) {
             instance = new FinancialReportBUS();
         }
         return instance;
     }
+
     public FinancialReportBUS() {
         this.financialReports = FinancialReportDAO.getInstance().selectAll();
     }
+
     public ArrayList<FinancialReport> getAll() {
         FinancialReportDAO financialReportDAO = FinancialReportDAO.getInstance();
         return financialReportDAO.selectAll();
@@ -41,6 +46,7 @@ public class FinancialReportBUS {
         }
         return check;
     }
+
     public boolean delete(FinancialReport financialReport) {
         boolean check = FinancialReportDAO.getInstance().delete(financialReport.getFinancialReportID()) != 0;
         if (check) {
@@ -48,6 +54,7 @@ public class FinancialReportBUS {
         }
         return check;
     }
+
     public boolean update(FinancialReport financialReport) {
         boolean check = FinancialReportDAO.getInstance().update(financialReport) != 0;
         if (check) {
@@ -58,6 +65,7 @@ public class FinancialReportBUS {
         }
         return check;
     }
+
     public int getIndexByFinancialReportID(String financialReportID) {
         for (int i = 0; i < this.financialReports.size(); i++) {
             if (this.financialReports.get(i).getFinancialReportID().equals(financialReportID)) {
@@ -66,14 +74,16 @@ public class FinancialReportBUS {
         }
         return -1; // Not found
     }
-    public void setMonthlyRevenueLabel(Label monthlyRevenueLabel){
+
+    public void setMonthlyRevenueLabel(Label monthlyRevenueLabel) {
         FinancialReportBUS financialReportBUS = new FinancialReportBUS();
         ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
 
         // Lấy ngày hiện tại
         LocalDate currentDate = LocalDate.now();
 
-        // Lọc danh sách financialReports để chỉ chọn ra các báo cáo tài chính có ngày tương ứng với tháng hiện tại
+        // Lọc danh sách financialReports để chỉ chọn ra các báo cáo tài chính có ngày
+        // tương ứng với tháng hiện tại
         ArrayList<FinancialReport> currentMonthReports = new ArrayList<>();
         for (FinancialReport report : financialReports) {
             LocalDate reportDate = LocalDate.parse(report.getDate().toString());
@@ -86,14 +96,16 @@ public class FinancialReportBUS {
 
         // Kiểm tra xem có báo cáo nào cho tháng hiện tại không
         if (!currentMonthReports.isEmpty()) {
-            // Lấy giá trị monthlyRevenue của báo cáo đầu tiên trong danh sách và gán vào monthlyRevenueLabel
+            // Lấy giá trị monthlyRevenue của báo cáo đầu tiên trong danh sách và gán vào
+            // monthlyRevenueLabel
             double monthlyRevenue = currentMonthReports.get(0).getMonthlyRevenue();
             monthlyRevenueLabel.setText(String.valueOf(monthlyRevenue));
         } else {
             monthlyRevenueLabel.setText("N/A");
         }
     }
-    public void setMonthlyOpexLabel(BarChart barChartOfMonthlyOpex){
+
+    public void setMonthlyOpexLabel(BarChart barChartOfMonthlyOpex) {
         // Tạo danh sách chứa dữ liệu cho Bar Chart
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Phí Vận Hành Hàng Tháng");
@@ -118,6 +130,40 @@ public class FinancialReportBUS {
 
         // Xóa chú thích của Bar Chart
         barChartOfMonthlyOpex.setLegendVisible(false);
+    }
+
+    public ArrayList<FinancialReport> search(LocalDate text, LocalDate text1, String type) {
+        ArrayList<FinancialReport> result = new ArrayList<>();
+
+        if (text == null || text1 == null || type == null || type.isEmpty()) {
+            return result;
+        }
+
+        switch (type) {
+
+            case "Tìm Theo Ngày" -> {
+                for (FinancialReport i : this.financialReports) {
+                    LocalDate res = i.getDate();
+                    if (!res.isBefore(text) && !res.isAfter(text1)) {
+                        result.add(i);
+                    }
+
+                }
+            }
+
+            case "Tìm Theo Ten" -> {
+                for (FinancialReport i : this.financialReports) {
+                    LocalDate res = i.getDate();
+                    if (!res.isBefore(text) && !res.isAfter(text1)) {
+                        result.add(i);
+                    }
+
+                }
+            }
+
+        }
+        System.out.println("Kết quả tìm kiếm: " + result);
+        return result;
     }
 
 }

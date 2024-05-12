@@ -1,10 +1,12 @@
 package BUS;
 
 import DAO.ServiceDAO;
+import DTO.BuildingManager;
 import DTO.Service;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -13,6 +15,7 @@ public class ServiceBUS {
     private ArrayList<Service> services = new ArrayList<>();
 
     private static ServiceBUS instance;
+
     public static ServiceBUS getInstance() {
         if (instance == null) {
             instance = new ServiceBUS();
@@ -76,4 +79,24 @@ public class ServiceBUS {
 
         combox.setItems(services);
     }
+
+    public ArrayList<Service> search(String text, String type) {
+        ArrayList<Service> result = new ArrayList<>();
+        text = text.toLowerCase();
+        if (text == null || type == null || type.isEmpty()) {
+            return result;
+        }
+
+        switch (type) {
+            case "Lọc Theo Loại" -> {
+                for (Service i : services) {
+                    if (i.getType().toLowerCase().contains(text)) {
+                        result.add(i);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 }

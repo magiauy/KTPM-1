@@ -1,5 +1,6 @@
 package BUS;
 
+import DAO.BuildingDAO;
 import DAO.ServiceTicketDAO;
 import DAO.ViolationTicketDAO;
 import DTO.*;
@@ -42,31 +43,30 @@ public class ViolationTicketBUS {
     }
 
     public boolean delete(ViolationTicket violationTicket) {
-        boolean check = ViolationTicketDAO.getInstance().delete(violationTicket.getViolationID()) != 0;
+        boolean check = ViolationTicketDAO.getInstance().delete(violationTicket.getViolationTicketID()) != 0;
         if (check) {
             this.violationTickets.remove(violationTicket);
         }
         return check;
     }
 
-    public boolean update(ViolationTicket violationTicket) {
-        boolean check = ViolationTicketDAO.getInstance().update(violationTicket) != 0;
-        if (check) {
-            int index = getIndexByViolationID(violationTicket.getViolationID());
+   public boolean update(ViolationTicket violationTicket) {
+        boolean updated = ViolationTicketDAO.getInstance().update(violationTicket) != 0;
+        if (updated) {
+            int index = getIndexByBuildingId(violationTicket.getViolationTicketID());
             if (index != -1) {
                 this.violationTickets.set(index, violationTicket);
             }
         }
-        return check;
+        return updated;
     }
-
-    public int getIndexByViolationID(String violationID) {
-        for (int i = 0; i < this.violationTickets.size(); i++) {
-            if (Objects.equals(this.violationTickets.get(i).getViolationID(), violationID)) {
-                return i;
+    private int getIndexByBuildingId(String ViolationTicketID) {
+        for (int i = 0; i < violationTickets.size(); i++) {
+            if (violationTickets.get(i).getViolationTicketID().equals(ViolationTicketID)) {
+                return i; // Trả về chỉ mục khi tìm thấy
             }
         }
-        return -1; // Not found
+        return -1; 
     }
 
     public void setTable(TableView<ViolatioUsage> table__P3__2){

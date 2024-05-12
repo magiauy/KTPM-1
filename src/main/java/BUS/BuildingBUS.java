@@ -11,16 +11,19 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 
 public class BuildingBUS {
-    private ArrayList<Building> listBuildings = new ArrayList<>();
+    private final BuildingDAO BlDAO = new BuildingDAO();
+    public ArrayList<Building> listBuildings = new ArrayList<>();
+
     public BuildingBUS() {
-        
+        listBuildings = BlDAO.selectAll();
     }
-    public BuildingBUS(ArrayList<Building> listBuildings) {
-        this.listBuildings = listBuildings;
-    }
+
     public ArrayList<Building> getAll() {
-        BuildingDAO buildingDAO = BuildingDAO.getInstance(); 
-        return buildingDAO.selectAll();
+        return this.listBuildings;
+    }
+
+    public Building getByIndex(int index) {
+        return this.listBuildings.get(index);
     }
     public boolean insert(Building building) {
         boolean check = BuildingDAO.getInstance().insert(building) > 0;
@@ -29,6 +32,7 @@ public class BuildingBUS {
         }
         return check;
     }
+
     public boolean delete(Building building) {
         boolean check = BuildingDAO.getInstance().delete(building.getBuildingId()) != 0;
         if (check) {
@@ -36,6 +40,7 @@ public class BuildingBUS {
         }
         return check;
     }
+
     public boolean update(Building building) {
         boolean updated = BuildingDAO.getInstance().update(building) != 0;
         if (updated) {
@@ -68,27 +73,62 @@ public class BuildingBUS {
     public void setLocationOfBuildings(PieChart pieChart){
         BuildingBUS buildingBUS = new BuildingBUS();
         ArrayList<Building> buildings = buildingBUS.getAll();
-
-        // Tạo một HashMap để lưu số lượng tòa nhà của mỗi thành phố
         HashMap<String, Integer> cityCounts = new HashMap<>();
-
-        // Đếm số lượng tòa nhà trong mỗi thành phố
         for (Building building : buildings) {
             String city = building.getCity_Building();
             cityCounts.put(city, cityCounts.getOrDefault(city, 0) + 1);
         }
-
-        // Tạo danh sách dữ liệu cho Pie Chart
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-
-        // Thêm dữ liệu vào danh sách
         for (String city : cityCounts.keySet()) {
             int count = cityCounts.get(city);
             pieChartData.add(new PieChart.Data(city + " (" + count + ")", count));
         }
-
-        // Đặt dữ liệu cho Pie Chart
         pieChart.setData(pieChartData);
+    }
+
+    public ArrayList<Building> search(String text, String type) {
+        ArrayList<Building> result = new ArrayList<>();
+        if (text == null || text.isEmpty() || type == null || type.isEmpty()) {
+            // Xử lý khi dữ liệu đầu vào không hợp lệ
+            return result;
+        }
+
+        for (Building i : this.listBuildings) {
+            System.out.println(i); 
+        }
+
+        text = text.toLowerCase();
+
+        switch (type) {
+            case "Tất cả"  ->
+                {
+                    for (Building i : this.listBuildings) {
+                            result.add(i);
+                    }
+                }
+            case "Tên Tòa Nhà"  ->
+                {
+                    for (Building i : this.listBuildings) {
+                      
+                        if ((i.getNameBuilding()).toLowerCase().contains(text)) {
+                            result.add(i);
+                        }
+                    }
+                }
+                case "quận" -> {
+                    for (Building i : this.listBuildings) {
+                       
+                        if ((i.getDistrict_Building()).toLowerCase().contains(text)) {
+                            result.add(i);
+                        }
+                    }
+                }
+
+               
+            
+        }
+        System.out.println("Kết quả tìm kiếm: " + result);
+        return result;
     }
 
 }
