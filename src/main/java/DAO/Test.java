@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import BUS.MonthlyRentBillBUS;
 import DTO.Apartment;
 
 
@@ -14,8 +15,7 @@ import DTO.Apartment;
  */
 public class Test {
     public static void main(String[] args) {
-      
-       
-
+        MonthlyRentBillBUS mRB = new MonthlyRentBillBUS();
+        mRB.XuatExcelPhieuThang("MRB1", "D:/OneDrive/Desktop");
     }
 }

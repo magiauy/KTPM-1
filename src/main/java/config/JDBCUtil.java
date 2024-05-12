@@ -12,10 +12,10 @@ public class JDBCUtil {
     public static Connection getConnection() {
         Connection connection = null;
         try {
-              Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-              String url = "jdbc:sqlserver://PHAMNAM:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
-              String userName = "sa";
-              String password = "123456789";
+//              Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//              String url = "jdbc:sqlserver://PHAMNAM:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
+//              String userName = "sa";
+//              String password = "123456789";
 //
 //         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 //         String url = "jdbc:sqlserver://TEN:1433;databaseName=qlcanho;trustServerCertificate=true";
@@ -28,34 +28,34 @@ public class JDBCUtil {
 //             String userName = "sa";
 //             String password = "123456789";
 
-//             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//             String url = "jdbc:sqlserver://KAI:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
-//             String userName = "sa";
-//             String password = "123456";
+             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+             String url = "jdbc:sqlserver://KAI:1433;databaseName=quanlychothuecanho;trustServerCertificate=true";
+             String userName = "sa";
+             String password = "123456";
 
             connection = DriverManager.getConnection(url, userName, password);
-            printInfo(connection);
-            String sql = "SELECT * FROM Apartment";
-            try (Statement statement = connection.createStatement();
-                    ResultSet resultSet = statement.executeQuery(sql)) {
-//                System.out.println("Danh sách thông tin căn hộ:");
-//                System.out.println("---------------------------------");
-//                while (resultSet.next()) {
-//                    String maCanHo = resultSet.getString("apartmentID");
-//                    String soPhong = resultSet.getString("roomNumber");
-//                    System.out.println("Mã căn hộ: " + maCanHo);
-//                    System.out.println("Số phòng: " + soPhong);
-//                    System.out.println();
-//                }
-                System.out.println("Kết nối thành công.");
-            } catch (SQLException e) {
-                e.printStackTrace();
-           
-                System.out.println("Lỗi khi thực hiện truy vấn: " + e.getMessage());
-            }
+//            printInfo(connection);
+//            String sql = "SELECT * FROM Apartment";
+//            try (Statement statement = connection.createStatement();
+//                    ResultSet resultSet = statement.executeQuery(sql)) {
+////                System.out.println("Danh sách thông tin căn hộ:");
+////                System.out.println("---------------------------------");
+////                while (resultSet.next()) {
+////                    String maCanHo = resultSet.getString("apartmentID");
+////                    String soPhong = resultSet.getString("roomNumber");
+////                    System.out.println("Mã căn hộ: " + maCanHo);
+////                    System.out.println("Số phòng: " + soPhong);
+////                    System.out.println();
+////                }
+////                System.out.println("Kết nối thành công.");
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//
+//                System.out.println("Lỗi khi thực hiện truy vấn: " + e.getMessage());
+//            }
         } catch (Exception e) {
             e.printStackTrace();
-           
+
             System.out.println("Lỗi khi kết nối cơ sở dữ liệu: " + e.getMessage());
         }
         return connection;
@@ -65,7 +65,7 @@ public class JDBCUtil {
         try {
             if (connection != null) {
                 connection.close();
-                System.out.println("Đã đóng kết nối với cơ sở dữ liệu.");
+//                System.out.println("Đã đóng kết nối với cơ sở dữ liệu.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
