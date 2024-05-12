@@ -21,7 +21,7 @@ public class BuildingManager extends Application {
     public static void openBuildingManagerView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(
-                    BuildingManager.class.getResource("BuildingManager-view-Page0.fxml"));
+            BuildingManager.class.getResource("BuildingManager-view-Page0.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1024, 720);
             primaryStage.setTitle("Quản lý tòa nhà!");
             primaryStage.setScene(scene);

@@ -6,6 +6,7 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.List;
 
+import DAO.BuildingDAO;
 import DAO.BuildingManagerDAO;
 import DAO.TenantDAO;
 import DTO.BuildingManager;
@@ -15,10 +16,12 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
-
 public class BuildingManagerBUS {
-    private List<BuildingManager> listBuildingManagers = new ArrayList<>();
+
     private int MAX = 100;
+
+   private final BuildingManagerDAO BlDAO = new BuildingManagerDAO();
+    public ArrayList<BuildingManager> listBuildingManagerDAOs = new ArrayList<>();
 
     private static BuildingManagerBUS instance;
 
@@ -29,26 +32,31 @@ public class BuildingManagerBUS {
         return instance;
     }
 
+
     public BuildingManagerBUS() {
+        listBuildingManagerDAOs = BlDAO.selectAll();
     }
-    public BuildingManagerBUS(List<BuildingManager> listBuildingManagers) {
-        this.listBuildingManagers = listBuildingManagers;
-    }
+
     public ArrayList<BuildingManager> getAll() {
-        BuildingManagerDAO buildingManagerDAO = BuildingManagerDAO.getInstance();
-        return buildingManagerDAO.selectAll();
+        return this.listBuildingManagerDAOs;
     }
+
+    public BuildingManager getByIndex(int index) {
+        return this.listBuildingManagerDAOs.get(index);
+    }
+
     public boolean insert(BuildingManager buildingManager) {
         boolean check = BuildingManagerDAO.getInstance().insert(buildingManager) > 0;
         if (check) {
-            this.listBuildingManagers.add(buildingManager);
+            this.listBuildingManagerDAOs.add(buildingManager);
         }
         return check;
     }
+
     public boolean delete(BuildingManager buildingManager) {
         boolean check = BuildingManagerDAO.getInstance().delete(buildingManager.getBuildingManagerId()) != 0;
         if (check) {
-            this.listBuildingManagers.remove(buildingManager);
+            this.listBuildingManagerDAOs.remove(buildingManager);
         }
         return check;
     }
@@ -57,7 +65,7 @@ public class BuildingManagerBUS {
         if (updated) {
             int index = getIndexByBuildingId(buildingManager.getBuildingId());
             if (index != -1) {
-                this.listBuildingManagers.set(index, buildingManager);
+                this.listBuildingManagerDAOs.set(index, buildingManager);
             }
         }
         return updated;
@@ -67,15 +75,17 @@ public class BuildingManagerBUS {
         return BuildingManagerDAO.getInstance().selectById(BMID);
     }
     private int getIndexByBuildingId(String buildingManegerId) {
-        for (int i = 0; i < listBuildingManagers.size(); i++) {
-            if (listBuildingManagers.get(i).getBuildingId().equals(buildingManegerId)) {
+        for (int i = 0; i < listBuildingManagerDAOs.size(); i++) {
+            if (listBuildingManagerDAOs.get(i).getBuildingId().equals(buildingManegerId)) {
                 return i;
             }
         }
         return -1;
     }
+
     public void getGenderOfBDManager(BarChart<String, Number> barChart) {
-        // Khởi tạo mảng hai chiều để lưu số lượng người quản lý theo từng độ tuổi và giới tính
+        // Khởi tạo mảng hai chiều để lưu số lượng người quản lý theo từng độ tuổi và
+        // giới tính
         int[][] genderAgeCount = new int[100][2]; // Giả sử tuổi tối đa là 100
 
         BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
@@ -83,7 +93,8 @@ public class BuildingManagerBUS {
 
         LocalDate currentDate = LocalDate.now();
 
-        // Duyệt qua danh sách người quản lý tòa nhà và tính độ tuổi của mỗi người quản lý
+        // Duyệt qua danh sách người quản lý tòa nhà và tính độ tuổi của mỗi người quản
+        // lý
         for (BuildingManager buildingManager : buildingManagers) {
             LocalDate managersDOB = buildingManager.getDob();
             Period calculate = Period.between(managersDOB, currentDate);
@@ -129,5 +140,38 @@ public class BuildingManagerBUS {
         }
     }
 
+
+    public ArrayList<BuildingManager> search(String text, String type) {
+        ArrayList<BuildingManager> result = new ArrayList<>();
+        text = text.toLowerCase();
+        if (text == null || type == null || type.isEmpty()) {
+            return result;
+        }
+
+        switch (type) {
+            case "Tìm Theo Ten" -> {
+                for (BuildingManager i : this.listBuildingManagerDAOs) {
+                    if (i.getLastName().toLowerCase().contains(text)) {
+                        result.add(i);
+                    }
+
+                }
+            }
+
+        
+
+          case "Giới Tính" -> {
+                    for (BuildingManager i : this.listBuildingManagerDAOs) {
+                       
+                        if ((i.getGender()).toLowerCase().contains(text)) {
+                            result.add(i);
+                        }
+                    }
+                }
+            }
+            
+        System.out.println("Kết quả tìm kiếm: " + result);
+        return result;
+    }
 
 }

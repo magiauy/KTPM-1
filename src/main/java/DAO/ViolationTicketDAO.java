@@ -65,14 +65,14 @@ public class ViolationTicketDAO implements DAOInterface<ViolationTicket> {
     }
 
     @Override
-    public int delete(String t) {
+    public int delete(String violationTicketID) {
         int result = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "DELETE FROM ViolationTicket WHERE violationTicketID = ?");
 
-            preparedStatement.setString(1, t);
+            preparedStatement.setString(1, violationTicketID);
 
             result = preparedStatement.executeUpdate();
 

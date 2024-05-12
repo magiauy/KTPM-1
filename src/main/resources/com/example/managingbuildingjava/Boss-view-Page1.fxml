@@ -21,11 +21,11 @@
                       </ImageView>
             <Pane layoutX="33.0" layoutY="121.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                          <TextField fx:id="TxtField__P1__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <TextField fx:id="TxtField__P1__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <TextField fx:id="TxtField__P1__4" layoutX="216.0" layoutY="213.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <TextField fx:id="TxtField__P1__3" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <TextField fx:id="TxtField__P1__5" layoutX="216.0" layoutY="271.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                          <TextField fx:id="TxtField__P1__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
+                          <TextField fx:id="TxtField__P1__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text" />
+                          <TextField fx:id="TxtField__P1__3" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"  />
+                         <ComboBox fx:id="TxtField__P1__4" layoutX="216.0" layoutY="213.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-radius: 10px;" promptText=" Quận" />
+                          <TextField fx:id="TxtField__P1__5" layoutX="216.0" layoutY="271.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;"  styleClass="black-text" />
                           <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="345.0" prefHeight="32.0" prefWidth="120.0" text="Số lượng căn hộ" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />

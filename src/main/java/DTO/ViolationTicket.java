@@ -20,13 +20,11 @@ public class ViolationTicket {
         this.note = note;
     }
 //Fix tạm thời lôi bên BuildingManagerController
-public ViolationTicket( String violationID, String monthlyRentBillID, Double price, LocalDate date, String note) {
-    this.violationID = violationID;
-    this.monthlyRentBillID = monthlyRentBillID;
-    this.price = price;
-    this.date = date;
-    this.note = note;
-}
+
+
+    public ViolationTicket() {
+    }
+
 
     public String getViolationTicketID() {
         return violationTicketID;

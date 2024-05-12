@@ -3,162 +3,162 @@ go
 use quanlychothuecanho
 go 
 
-	CREATE TABLE Building (
-							  buildingID VARCHAR(100) PRIMARY KEY,
-							  name NVARCHAR(255),
-							  city NVARCHAR(255),
-							  district NVARCHAR(255),
-							  address NVARCHAR(255),
-							  numberOfApartment INT
-	);
+CREATE TABLE Building (
+                          buildingID VARCHAR(100) PRIMARY KEY,
+                          name NVARCHAR(255),
+                          city NVARCHAR(255),
+                          district NVARCHAR(255),
+                          address NVARCHAR(255),
+                          numberOfApartment INT
+);
 
-	CREATE TABLE BuildingManager (
-									 buildingManagerID VARCHAR(100) PRIMARY KEY,
-									 buildingID VARCHAR(100),
-									 lastName NVARCHAR(255),
-									 firstName NVARCHAR(255),
-									 phoneNumber VARCHAR(255),
-									 dob DATE,
-									 gender NVARCHAR(10),
-									 citizenIdentityCard VARCHAR(100),
-									 salary DECIMAL(20, 2),
-									 FOREIGN KEY (buildingID) REFERENCES Building(buildingID)
-	);
+CREATE TABLE BuildingManager (
+                                 buildingManagerID VARCHAR(100) PRIMARY KEY,
+                                 buildingID VARCHAR(100),
+                                 lastName NVARCHAR(255),
+                                 firstName NVARCHAR(255),
+                                 phoneNumber VARCHAR(255),
+                                 dob DATE,
+                                 gender NVARCHAR(10),
+                                 citizenIdentityCard VARCHAR(100),
+                                 salary DECIMAL(20, 2),
+                                 FOREIGN KEY (buildingID) REFERENCES Building(buildingID)
+);
 
-	CREATE TABLE FinancialReport (
-									 financialReportID VARCHAR(100) PRIMARY KEY,
-									 buildingID VARCHAR(100),
-									 buildingManagerID VARCHAR(100),
-									 Date DATE,
-									 monthlyRevenue DECIMAL(20, 2),
-									 monthlyOpex DECIMAL(20, 2),
-									 monthlyProfit DECIMAL(20, 2),
-									 FOREIGN KEY (buildingID) REFERENCES Building(buildingID),
-									 FOREIGN KEY (buildingManagerID) REFERENCES BuildingManager(buildingManagerID)
-	);
+CREATE TABLE FinancialReport (
+                                 financialReportID VARCHAR(100) PRIMARY KEY,
+                                 buildingID VARCHAR(100),
+                                 buildingManagerID VARCHAR(100),
+                                 Date DATE,
+                                 monthlyRevenue DECIMAL(20, 2),
+                                 monthlyOpex DECIMAL(20, 2),
+                                 monthlyProfit DECIMAL(20, 2),
+                                 FOREIGN KEY (buildingID) REFERENCES Building(buildingID),
+                                 FOREIGN KEY (buildingManagerID) REFERENCES BuildingManager(buildingManagerID)
+);
 
-	CREATE TABLE Tenant (
-							tenantID VARCHAR(100) PRIMARY KEY,
-							lastName VARCHAR(255),
-							firstName NVARCHAR(255),
-							phoneNumber NVARCHAR(255),
-							dob DATE,
-							gender NVARCHAR(255),
-							citizenIdentityCard VARCHAR(100)
-	);
+CREATE TABLE Tenant (
+                        tenantID VARCHAR(100) PRIMARY KEY,
+                        lastName VARCHAR(255),
+                        firstName NVARCHAR(255),
+                        phoneNumber NVARCHAR(255),
+                        dob DATE,
+                        gender NVARCHAR(255),
+                        citizenIdentityCard VARCHAR(100)
+);
 
-	CREATE TABLE Apartment (
-							   apartmentID VARCHAR(100) PRIMARY KEY,
-							   buildingID VARCHAR(100),
-							   roomNumber VARCHAR(255),
-							   area float,
-							   bedrooms INT,
-							   bathrooms INT,
-								   furniture NVARCHAR(255),
-								   FOREIGN KEY (buildingID) REFERENCES Building(buildingID)
-		);
+CREATE TABLE Apartment (
+                           apartmentID VARCHAR(100) PRIMARY KEY,
+                           buildingID VARCHAR(100),
+                           roomNumber VARCHAR(255),
+                           area float,
+                           bedrooms INT,
+                           bathrooms INT,
+                           furniture NVARCHAR(255),
+                           FOREIGN KEY (buildingID) REFERENCES Building(buildingID)
+    );
 
-		CREATE TABLE Cohabitant (
-									cohabitantID VARCHAR(100) PRIMARY KEY,
-									tenantID VARCHAR(100),
-									lastName NVARCHAR(255),
-									firstName NVARCHAR(255),
-									phoneNumber VARCHAR(100),
-									dob DATE,
-									gender NVARCHAR(10),
-									citizenIdentityCard VARCHAR(100),
-									FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
-		);
+CREATE TABLE Cohabitant (
+                            cohabitantID VARCHAR(100) PRIMARY KEY,
+                            tenantID VARCHAR(100),
+                            lastName NVARCHAR(255),
+                            firstName NVARCHAR(255),
+                            phoneNumber VARCHAR(100),
+                            dob DATE,
+                            gender NVARCHAR(10),
+                            citizenIdentityCard VARCHAR(100),
+                            FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
+);
 
-		CREATE TABLE LeaseAgreement (
-										leaseAgreementID VARCHAR(100) PRIMARY KEY,
-										tenantID VARCHAR(100),
-										apartmentID VARCHAR(100),
-										buildingManagerID VARCHAR(100),
-										signingDate DATE,
-										LeaseStartDate DATE,
-										LeaseEndDate DATE,
-										LeaseTerm INT,
-										deposit DECIMAL(20, 2),
-										monthlyRent DECIMAL(20, 2),
-										FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID),
-										FOREIGN KEY (buildingManagerID) REFERENCES BuildingManager(buildingManagerID),
-										FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID)
-		);
+CREATE TABLE LeaseAgreement (
+                                leaseAgreementID VARCHAR(100) PRIMARY KEY,
+                                tenantID VARCHAR(100),
+                                apartmentID VARCHAR(100),
+                                buildingManagerID VARCHAR(100),
+                                signingDate DATE,
+                                LeaseStartDate DATE,
+                                LeaseEndDate DATE,
+                                LeaseTerm INT,
+                                deposit DECIMAL(20, 2),
+                                monthlyRent DECIMAL(20, 2),
+                                FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID),
+                                FOREIGN KEY (buildingManagerID) REFERENCES BuildingManager(buildingManagerID),
+                                FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID)
+);
 
-		CREATE TABLE Furniture (
-								   furnitureID VARCHAR(100) PRIMARY KEY,
-								   apartmentID VARCHAR(100),
-								   name NVARCHAR(255),
-								   condition NVARCHAR(255),
-								   price DECIMAL(20, 2),
-								   FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID)
-		);
+CREATE TABLE Furniture (
+                           furnitureID VARCHAR(100) PRIMARY KEY,
+                           apartmentID VARCHAR(100),
+                           name NVARCHAR(255),
+                           condition NVARCHAR(255),
+                           price DECIMAL(20, 2),
+                           FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID)
+);
 
-		CREATE TABLE MonthlyRentBill (
-										 monthlyRentBillID VARCHAR(100) PRIMARY KEY,
-										 apartmentID VARCHAR(100),
-										 tenantID VARCHAR(100),
-										 date DATE,
-										 repaymentPeriod INT,
-										 totalPayment DECIMAL(20, 2),
-										 status NVARCHAR(255),
-										 FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID),
-										 FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
-		);
+CREATE TABLE MonthlyRentBill (
+                                 monthlyRentBillID VARCHAR(100) PRIMARY KEY,
+                                 apartmentID VARCHAR(100),
+                                 tenantID VARCHAR(100),
+                                 date DATE,
+                                 repaymentPeriod INT,
+                                 totalPayment DECIMAL(20, 2),
+                                 status NVARCHAR(255),
+                                 FOREIGN KEY (apartmentID) REFERENCES Apartment(apartmentID),
+                                 FOREIGN KEY (tenantID) REFERENCES Tenant(tenantID)
+);
 
-		CREATE TABLE Service (
-									  serviceID VARCHAR(100) PRIMARY KEY,
-									  name NVARCHAR(255),
-									  pricePerUnit DECIMAL(20, 2),
-									  unit NVARCHAR(255),
-									  type NVARCHAR(255)
-		);
+CREATE TABLE Service (
+                              serviceID VARCHAR(100) PRIMARY KEY,
+                              name NVARCHAR(255),
+                              pricePerUnit DECIMAL(20, 2),
+                              unit NVARCHAR(255),
+                              type NVARCHAR(255)
+);
 
-		CREATE TABLE ServiceTicket (
-									   serviceTicketID VARCHAR(100),
-									   monthlyRentBillID VARCHAR(100),
-									   serviceID VARCHAR(100),
-									   quantity DECIMAL(10, 2),
-									   totalAmount DECIMAL(20, 2),
-									   Date DATE,
-									   note NVARCHAR(250),
-									   PRIMARY KEY (serviceTicketID),
-									   FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
-									   FOREIGN KEY (serviceID) REFERENCES Service(serviceID)
-		);
+CREATE TABLE ServiceTicket (
+                               serviceTicketID VARCHAR(100),
+                               monthlyRentBillID VARCHAR(100),
+                               serviceID VARCHAR(100),
+                               quantity DECIMAL(10, 2),
+                               totalAmount DECIMAL(20, 2),
+                               Date DATE,
+                               note NVARCHAR(250),
+                               PRIMARY KEY (serviceTicketID),
+                               FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
+                               FOREIGN KEY (serviceID) REFERENCES Service(serviceID)
+);
 
-		CREATE TABLE Violation (
-								   violationID VARCHAR(100) PRIMARY KEY,
-								   name NVARCHAR(255),
-								   price DECIMAL(20, 2),
-		);
+CREATE TABLE Violation (
+                           violationID VARCHAR(100) PRIMARY KEY,
+                           name NVARCHAR(255),
+                           price DECIMAL(20, 2),
+);
 
-		CREATE TABLE ViolationTicket (
-										violationTicketID VARCHAR(100),
-										 violationID VARCHAR(100),
-										 monthlyRentBillID VARCHAR(100),
-										 price DECIMAL(20, 2),
-										 Date DATE,
-										 note NVARCHAR(250),
-										 PRIMARY KEY (violationTicketID),
-										 FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
-										 FOREIGN KEY (violationID) REFERENCES Violation(violationID)
-		);
+CREATE TABLE ViolationTicket (
+                                violationTicketID VARCHAR(100),
+                                 violationID VARCHAR(100),
+                                 monthlyRentBillID VARCHAR(100),
+                                 price DECIMAL(20, 2),
+                                 Date DATE,
+                                 note NVARCHAR(250),
+                                 PRIMARY KEY (violationTicketID),
+                                 FOREIGN KEY (monthlyRentBillID) REFERENCES MonthlyRentBill(monthlyRentBillID),
+                                 FOREIGN KEY (violationID) REFERENCES Violation(violationID)
+);
 
-		CREATE TABLE StaffsAccount (
-										username VARCHAR(100) PRIMARY KEY,
-										password NVARCHAR(255),
-										id VARCHAR(100),
-										FOREIGN KEY (id) REFERENCES BuildingManager(buildingManagerID)
-								);
-		CREATE TABLE CustomersAccount (
-										username VARCHAR(100) PRIMARY KEY,
-										password NVARCHAR(255),
-										id VARCHAR(100),
-										FOREIGN KEY (id) REFERENCES Tenant(tenantID)	
+CREATE TABLE StaffsAccount (
+                                username VARCHAR(100) PRIMARY KEY,
+                                password NVARCHAR(255),
+                                id VARCHAR(100),
+                                FOREIGN KEY (id) REFERENCES BuildingManager(buildingManagerID)
+                        );
+CREATE TABLE CustomersAccount (
+                                username VARCHAR(100) PRIMARY KEY,
+                                password NVARCHAR(255),
+                                id VARCHAR(100),
+                                FOREIGN KEY (id) REFERENCES Tenant(tenantID)
 ,
-								);
+                        );
 
 
 INSERT INTO Building (buildingID, name, city, district, address, numberOfApartment)
