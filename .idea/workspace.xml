@@ -4,17 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="nam">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_9_2024_6_41_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_9_2024_6_41_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_9_2024_6_42_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_9_2024_6_42_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="LogOut - (lỗi: ko login vào lại đc)">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Picture/OIG3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Picture/OIG3_background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Picture/export.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ApartmentBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ApartmentBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/AdminsAccountBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/AdminsAccountBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Boss.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/TestImport.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page3.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page3.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/login-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +37,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
-        <option value="CSS File" />
         <option value="Class" />
       </list>
     </option>
@@ -60,11 +71,11 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/NghiaNguyen04/BuildingOperationsApplication.git&quot;,
-    &quot;accountId&quot;: &quot;d9c24db4-c8d8-4c9c-9dfb-b74a9afbe00e&quot;
+    &quot;accountId&quot;: &quot;6387b31e-0c04-462a-8819-0a6a7eee3584&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/module-info.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/BUS/CohabitantBUS.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -86,8 +97,8 @@
     &quot;Application.DTO.main.executor&quot;: &quot;Run&quot;,
     &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.Login.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.Test.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestImport.executor&quot;: &quot;Run&quot;,
     &quot;Application.TrangChu.executor&quot;: &quot;Run&quot;,
     &quot;Application.com.example.managingbuildingjava.main.executor&quot;: &quot;Run&quot;,
     &quot;Application.config.main.executor&quot;: &quot;Run&quot;,
@@ -100,11 +111,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Kai__Excel&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/BuildingOperationsApplication&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/OneDrive/Desktop/Data/code/Java/BuildingOperationsApplication/lib/poi-bin-5.2.3/auxiliary/xmlsec-3.0.0.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -113,20 +123,18 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.16089965&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.36673555&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;copyright&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Downloads\JavaProject\BuildingOperationsApplication\src\main\resources\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\java\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\NAMFORK\src\main\resources\com\example\managingbuildingjava\Css" />
       <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
     </key>
@@ -136,6 +144,32 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="Boss" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.Boss" />
+      <module name="ManagingBuildingJava" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.managingbuildingjava.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Customer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.Customer" />
+      <module name="ManagingBuildingJava" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.managingbuildingjava.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="20" />
       <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.BuildingManager" />
@@ -144,19 +178,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="NAMFORK" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="NAMFORK" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Customer" />
+        <item itemvalue="Application.Boss" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -228,56 +255,19 @@
       <workItem from="1713373972347" duration="1931000" />
       <workItem from="1713515380664" duration="15241000" />
       <workItem from="1713787931991" duration="4041000" />
-      <workItem from="1713840870451" duration="10259000" />
-      <workItem from="1713963815467" duration="339000" />
-      <workItem from="1713965067255" duration="2024000" />
-      <workItem from="1713980298303" duration="1193000" />
-      <workItem from="1713985345703" duration="2630000" />
-      <workItem from="1714016399862" duration="2516000" />
-      <workItem from="1714193350479" duration="2609000" />
-      <workItem from="1714204818617" duration="3276000" />
-      <workItem from="1714218970635" duration="742000" />
-      <workItem from="1714226663351" duration="1749000" />
-      <workItem from="1714404563838" duration="160000" />
-      <workItem from="1714455262379" duration="208000" />
-      <workItem from="1714957059700" duration="217000" />
-      <workItem from="1714958738260" duration="353000" />
-      <workItem from="1714972135754" duration="35000" />
-      <workItem from="1714972219270" duration="4297000" />
-      <workItem from="1715137742627" duration="558000" />
       <workItem from="1713840870451" duration="11084000" />
       <workItem from="1713943785940" duration="704000" />
       <workItem from="1713944513031" duration="2063000" />
       <workItem from="1713966188778" duration="780000" />
       <workItem from="1715091368306" duration="896000" />
-      <workItem from="1715149859496" duration="3958000" />
-      <workItem from="1715178750540" duration="4096000" />
-      <workItem from="1715184494593" duration="3913000" />
-      <workItem from="1715197426927" duration="748000" />
-      <workItem from="1715200496909" duration="2086000" />
-      <workItem from="1715237469293" duration="7220000" />
-      <workItem from="1715245497331" duration="649000" />
-      <workItem from="1715246504819" duration="601000" />
-      <workItem from="1715257150440" duration="643000" />
-      <workItem from="1715262162696" duration="1714000" />
-      <workItem from="1715264083651" duration="2682000" />
-      <workItem from="1714820415649" duration="206000" />
-      <workItem from="1714825884638" duration="7213000" />
-      <workItem from="1714868469016" duration="2459000" />
-      <workItem from="1714959656833" duration="7529000" />
-      <workItem from="1714971796104" duration="4469000" />
-      <workItem from="1715043120241" duration="14774000" />
-      <workItem from="1715132051353" duration="1686000" />
-      <workItem from="1715151121659" duration="2452000" />
-      <workItem from="1715160618307" duration="1785000" />
-      <workItem from="1715172430384" duration="14949000" />
-      <workItem from="1715308349054" duration="3898000" />
-      <workItem from="1715314071430" duration="622000" />
-      <workItem from="1715331481789" duration="3278000" />
-      <workItem from="1715340398748" duration="4285000" />
-      <workItem from="1715350935570" duration="3311000" />
-      <workItem from="1715418070914" duration="1390000" />
-      <workItem from="1715435488968" duration="1636000" />
+      <workItem from="1715149859496" duration="6374000" />
+      <workItem from="1715180859008" duration="1378000" />
+      <workItem from="1715432547485" duration="4135000" />
+      <workItem from="1715444914334" duration="56000" />
+      <workItem from="1715444980571" duration="106000" />
+      <workItem from="1715445097628" duration="3736000" />
+      <workItem from="1715498258462" duration="10951000" />
+      <workItem from="1715512443197" duration="7441000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -391,55 +381,31 @@
       <option name="project" value="LOCAL" />
       <updated>1713788399643</updated>
     </task>
-    <task id="LOCAL-00015" summary="05/05 Nam">
+    <task id="LOCAL-00015" summary="update ID (23/4)">
       <option name="closed" value="true" />
-      <created>1715254972442</created>
+      <created>1713864968954</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1715254972442</updated>
+      <updated>1713864968954</updated>
     </task>
-    <task id="LOCAL-00016" summary="LOGIN">
+    <task id="LOCAL-00016" summary="TEN GUI">
       <option name="closed" value="true" />
-      <created>1715257488169</created>
+      <created>1715157051265</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1715257488169</updated>
+      <updated>1715157051265</updated>
     </task>
-    <task id="LOCAL-00017" summary="LOGIN">
+    <task id="LOCAL-00017" summary="Excel">
       <option name="closed" value="true" />
-      <created>1715257552955</created>
+      <created>1715504265171</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1715257552955</updated>
+      <updated>1715504265171</updated>
     </task>
-    <task id="LOCAL-00018" summary="nam">
-      <option name="closed" value="true" />
-      <created>1715269931324</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1715269931325</updated>
-    </task>
-    <task id="LOCAL-00019" summary="nam">
-      <option name="closed" value="true" />
-      <created>1715340483632</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1715340483632</updated>
-    </task>
-    <task id="LOCAL-00020" summary="nam">
-      <option name="closed" value="true" />
-      <created>1715344389376</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1715344389376</updated>
-    </task>
-    <option name="localTasksCounter" value="21" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -469,11 +435,11 @@
     <MESSAGE value="Customer, them FinancialReport" />
     <MESSAGE value="update from Kai 19/4" />
     <MESSAGE value="revert commit (22/4)" />
-    <MESSAGE value="24/05 Nam" />
-    <MESSAGE value="05/05 Nam" />
-    <MESSAGE value="LOGIN" />
-    <MESSAGE value="nam" />
-    <option name="LAST_COMMIT_MESSAGE" value="nam" />
+    <MESSAGE value="update ID (23/4)" />
+    <MESSAGE value="TEN GUI" />
+    <MESSAGE value="Excel" />
+    <MESSAGE value="LogOut - (lỗi: ko login vào lại đc)" />
+    <option name="LAST_COMMIT_MESSAGE" value="LogOut - (lỗi: ko login vào lại đc)" />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />

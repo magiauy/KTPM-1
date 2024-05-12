@@ -8,6 +8,21 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Customer extends Application {
+    private static Customer instance;
+    public static Customer getInstance() {
+        if (instance == null) {
+            instance = new Customer();
+        }
+        return instance;
+    }
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static void setPrimaryStage(Stage primaryStage) {
+        Customer.primaryStage = primaryStage;
+    }
 
     private static Stage primaryStage;
 

@@ -8,7 +8,22 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class BuildingManager extends Application {
+    private static BuildingManager instance;
 
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static void setPrimaryStage(Stage primaryStage) {
+        BuildingManager.primaryStage = primaryStage;
+    }
+
+    public static BuildingManager getInstance() {
+        if (instance == null) {
+            instance = new BuildingManager();
+        }
+        return instance;
+    }
     private static Stage primaryStage;
 
     @Override
@@ -20,6 +35,7 @@ public class BuildingManager extends Application {
 
     public static void openBuildingManagerView() {
         try {
+//            primaryStage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(
             BuildingManager.class.getResource("BuildingManager-view-Page0.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1024, 720);

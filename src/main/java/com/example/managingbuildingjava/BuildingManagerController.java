@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
@@ -22,8 +23,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -36,6 +40,7 @@ import java.util.Date;
 
 public class BuildingManagerController implements Initializable {
     private static BuildingManagerController instance;
+
 
     public static BuildingManagerController getInstance() {
         if (instance == null) {
@@ -61,6 +66,7 @@ public class BuildingManagerController implements Initializable {
     public TextField TxtField__P4__search = new TextField();
     public Button bnt__P1__search;
     public TextField TxtField__P3__search = new TextField();
+
     @FXML
     private Button bnt__P1__add;
 
@@ -266,6 +272,34 @@ public class BuildingManagerController implements Initializable {
         }
 
         return apartmentObservableList;
+    }
+
+    @FXML
+    private void exportExcel(){
+//        MonthlyRentBillBUS.getInstance().XuatExcelPhieuThang()
+        if (!TxtField__P3__1.getText().isEmpty()){
+            Stage primaryStage = new Stage();
+            primaryStage.setTitle("JavaFX File Chooser Example");
+            // Tạo một đối tượng FileChooser
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Resource File");
+
+            // Hiển thị cửa sổ và lấy đường dẫn được chọn
+            File selectedFile = fileChooser.showOpenDialog(primaryStage);
+            if (selectedFile != null) {
+//            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                MonthlyRentBillBUS.getInstance().XuatExcelPhieuThang(TxtField__P3__1.getText(), selectedFile.getAbsolutePath());
+            }
+        }else{
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText(null);
+            alert.setContentText("Vui lòng nhập mã phiếu thu.");
+
+            // Hiển thị cửa sổ thông báo và chờ người dùng đóng
+            alert.showAndWait();
+        }
+
     }
 
     private void refreshFormApartment() {
@@ -1637,7 +1671,7 @@ public class BuildingManagerController implements Initializable {
 
     public void handleDeleteViolationTicket() {
         if (violationTicketdelete == null) {
-            showAlert("Lỗi", "Không có phiếu vi phạm nào được chọn để xóa", Alert.AlertType.ERROR);
+            showAlert("Lỗi", "Không có phiếu vi phạm nào được chọn để xóa", AlertType.ERROR);
             return;
         }
 
@@ -1648,13 +1682,13 @@ public class BuildingManagerController implements Initializable {
                         .delete(violationTicketdelete);
 
                 if (deleteResult) {
-                    showAlert("Thành Công", "Xóa phiếu vi phạm thành công", Alert.AlertType.CONFIRMATION);
+                    showAlert("Thành Công", "Xóa phiếu vi phạm thành công", AlertType.CONFIRMATION);
                     initViolationTicket();
                 } else {
-                    showAlert("Thất Bại", "Không thể xóa phiếu vi phạm", Alert.AlertType.ERROR);
+                    showAlert("Thất Bại", "Không thể xóa phiếu vi phạm", AlertType.ERROR);
                 }
             } catch (Exception e) {
-                showAlert("Lỗi", "Đã xảy ra lỗi khi xóa phiếu vi phạm: " + e.getMessage(), Alert.AlertType.ERROR);
+                showAlert("Lỗi", "Đã xảy ra lỗi khi xóa phiếu vi phạm: " + e.getMessage(), AlertType.ERROR);
                 e.printStackTrace();
             }
         });
@@ -1686,18 +1720,18 @@ public class BuildingManagerController implements Initializable {
         boolean updateResult = violationTicketBUS.add(violationTickets);
 
         if (updateResult) {
-            showAlert("Thành Công", "Thêm vi phạm thành công", Alert.AlertType.CONFIRMATION);
+            showAlert("Thành Công", "Thêm vi phạm thành công", AlertType.CONFIRMATION);
             initViolationTicket();
 
         } else {
-            showAlert("Thất Bại", "Không thể thêm vi phạm", Alert.AlertType.ERROR);
+            showAlert("Thất Bại", "Không thể thêm vi phạm", AlertType.ERROR);
         }
 
     }
 
     public void handleUpdateViolationTicket() {
         if (violationTicketdelete == null) {
-            showAlert("Thất Bại", "Không có phiếu phạt nào chọn để sửa", Alert.AlertType.ERROR);
+            showAlert("Thất Bại", "Không có phiếu phạt nào chọn để sửa", AlertType.ERROR);
         }
         String maPPhat = maPPField.getText();
         String maPhieuThu = maphatfied.getText();
@@ -1723,10 +1757,10 @@ public class BuildingManagerController implements Initializable {
         boolean updateResult = violationTicketBUS.update(violationTickets);
 
         if (updateResult) {
-            showAlert("Thành Công", "Sửa vi phạm thành công", Alert.AlertType.CONFIRMATION);
+            showAlert("Thành Công", "Sửa vi phạm thành công", AlertType.CONFIRMATION);
             initViolationTicket();
         } else {
-            showAlert("Thất Bại", "Không thể sửa vi phạm", Alert.AlertType.ERROR);
+            showAlert("Thất Bại", "Không thể sửa vi phạm", AlertType.ERROR);
         }
 
     }
@@ -2121,6 +2155,22 @@ public class BuildingManagerController implements Initializable {
             comboBox__P6__3.setPromptText("");
             initLeaseAgreement();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void logOut(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = com.example.managingbuildingjava.BuildingManager.getPrimaryStage();
+        if (primaryStage==null){
+            primaryStage = main.getInstance().getPrimaryStage();
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
