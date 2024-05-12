@@ -23,7 +23,7 @@
                   <Image url="@../../../Picture/shutterstock_1692834160-copy-scaled.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="logout" layoutX="20.0" layoutY="671.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
+            <Button fx:id="logout" layoutX="20.0" layoutY="671.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="3.0" layoutY="420.0" mnemonicParsing="false" onMouseClicked="#page2" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Phiếu thu" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">

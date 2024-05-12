@@ -7,10 +7,12 @@ import DTO.MonthlyRentBill;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
@@ -45,6 +47,7 @@ import BUS.BuildingBUS;
 import BUS.BuildingManagerBUS;
 import DTO.Building;
 import DTO.BuildingManager;
+import javafx.stage.Stage;
 
 public class BossController implements Initializable {
 
@@ -1208,4 +1211,19 @@ private boolean containsNumber(String s) {
         table__view3.setItems(observableList);
     }
 
+    public void logOut(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = Boss.getBossStage();
+        if (primaryStage == null){
+            primaryStage = main.getInstance().getPrimaryStage();
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

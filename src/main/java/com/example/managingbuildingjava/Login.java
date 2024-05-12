@@ -10,8 +10,8 @@ public class Login extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Login.class.getResource("login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 600);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(fxmlLoader.load(), 500, 272);
+        stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
     }
