@@ -23,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -278,17 +279,21 @@ public class BuildingManagerController implements Initializable {
     private void exportExcel(){
 //        MonthlyRentBillBUS.getInstance().XuatExcelPhieuThang()
         if (!TxtField__P3__1.getText().isEmpty()){
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            directoryChooser.setTitle("Chọn thư mục lưu file");
             Stage primaryStage = new Stage();
-            primaryStage.setTitle("JavaFX File Chooser Example");
-            // Tạo một đối tượng FileChooser
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Open Resource File");
+            // Hiển thị cửa sổ thư mục và lấy thư mục được chọn
+            File selectedDirectory = directoryChooser.showDialog(primaryStage);
 
-            // Hiển thị cửa sổ và lấy đường dẫn được chọn
-            File selectedFile = fileChooser.showOpenDialog(primaryStage);
-            if (selectedFile != null) {
-//            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-                MonthlyRentBillBUS.getInstance().XuatExcelPhieuThang(TxtField__P3__1.getText(), selectedFile.getAbsolutePath());
+            if (selectedDirectory != null) {
+                MonthlyRentBillBUS.getInstance().XuatExcelPhieuThang(TxtField__P3__1.getText(), selectedDirectory.getAbsolutePath());
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Xuất phiếu thành công.");
+
+                // Hiển thị cửa sổ thông báo và chờ người dùng đóng
+                alert.showAndWait();
             }
         }else{
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -2159,7 +2164,7 @@ public class BuildingManagerController implements Initializable {
         }
     }
 
-    public void logOut(ActionEvent actionEvent) throws IOException {
+    public void logOut(ActionEvent actionEvent) {
         Stage primaryStage = com.example.managingbuildingjava.BuildingManager.getPrimaryStage();
         if (primaryStage==null){
             primaryStage = main.getInstance().getPrimaryStage();
