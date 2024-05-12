@@ -8,11 +8,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BUS/BuildingManagerBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/BuildingManagerBUS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ApartmentBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ApartmentBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page3.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page3.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,6 +239,29 @@
       <workItem from="1714204818617" duration="3276000" />
       <workItem from="1714218970635" duration="742000" />
       <workItem from="1714226663351" duration="1749000" />
+      <workItem from="1714404563838" duration="160000" />
+      <workItem from="1714455262379" duration="208000" />
+      <workItem from="1714957059700" duration="217000" />
+      <workItem from="1714958738260" duration="353000" />
+      <workItem from="1714972135754" duration="35000" />
+      <workItem from="1714972219270" duration="4297000" />
+      <workItem from="1715137742627" duration="558000" />
+      <workItem from="1713840870451" duration="11084000" />
+      <workItem from="1713943785940" duration="704000" />
+      <workItem from="1713944513031" duration="2063000" />
+      <workItem from="1713966188778" duration="780000" />
+      <workItem from="1715091368306" duration="896000" />
+      <workItem from="1715149859496" duration="3958000" />
+      <workItem from="1715178750540" duration="4096000" />
+      <workItem from="1715184494593" duration="3913000" />
+      <workItem from="1715197426927" duration="748000" />
+      <workItem from="1715200496909" duration="2086000" />
+      <workItem from="1715237469293" duration="7220000" />
+      <workItem from="1715245497331" duration="649000" />
+      <workItem from="1715246504819" duration="601000" />
+      <workItem from="1715257150440" duration="643000" />
+      <workItem from="1715262162696" duration="1714000" />
+      <workItem from="1715264083651" duration="2682000" />
       <workItem from="1714820415649" duration="206000" />
       <workItem from="1714825884638" duration="7213000" />
       <workItem from="1714868469016" duration="2459000" />

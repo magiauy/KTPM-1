@@ -16,6 +16,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -53,12 +54,12 @@ public class BuildingManagerController implements Initializable {
     }
     //
 
-    public TextField TxtField__P1__search;
+    public TextField TxtField__P1__search = new TextField();
     public Label txtField__P1__1;
-    public TextField TxtField__P2__search;
-    public TextField TxtField__P4__search;
+    public TextField TxtField__P2__search = new TextField();
+    public TextField TxtField__P4__search = new TextField();
     public Button bnt__P1__search;
-    public TextField TxtField__P3__search;
+    public TextField TxtField__P3__search = new TextField();
     @FXML
     private Button bnt__P1__add;
 
@@ -284,7 +285,6 @@ public class BuildingManagerController implements Initializable {
         soPhongTamTable.setCellValueFactory(new PropertyValueFactory<>("bathrooms"));
         noiThatTable.setCellValueFactory(new PropertyValueFactory<>("furniture"));
         apartmentObservableList = getApartmentList();
-        System.out.println(apartmentObservableList.isEmpty());
         table__P1__1.setItems(apartmentObservableList);
     }
 
@@ -300,7 +300,7 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
-    void suaCanHo(ActionEvent event) {
+    void suaCanHo(MouseEvent event)  {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
         selectedApartment.setApartmentID(TxtField__P1__1.getText());
 
@@ -331,7 +331,7 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
-    void themCanHo(ActionEvent event) {
+    void themCanHo(MouseEvent event) {
         try {
             Apartment newApartment = new Apartment();
             BuildingManagerBUS bus = new BuildingManagerBUS();
@@ -360,7 +360,7 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
-    void xoaCanHo(ActionEvent event) {
+    void xoaCanHo(MouseEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
         if (selectedApartment != null) {
             ApartmentBUS apartmentBUS = new ApartmentBUS();
@@ -374,6 +374,18 @@ public class BuildingManagerController implements Initializable {
             }
         }
     }
+
+
+//    @FXML
+//    void timCanHo(KeyEvent event) {
+//        ApartmentBUS apartmentBUS = new ApartmentBUS();
+//        ArrayList<Apartment> apartments= apartmentBUS.searchApartments(TxtField__P1__search.getText());
+//        ObservableList<Apartment> apartmentSearch = FXCollections.observableArrayList(apartments);
+//        apartmentObservableList.setAll(apartmentSearch);
+//        System.out.println(apartments);
+//    }
+
+    //cu dan
 
     @FXML
     private TextField TxtField__P2_1__1 = new TextField();
