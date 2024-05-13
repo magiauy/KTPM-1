@@ -110,4 +110,26 @@ public class ViolationTicketBUS {
         }
         table__P3__2.setItems(data);
     }
+    public ArrayList<ViolationTicket> search(Double text1,Double text2,String type){
+        ArrayList<ViolationTicket> result = new ArrayList<>();
+
+        if(text1==null || text2==null){
+            return result;
+
+        }
+        switch(type){
+            case "Lọc Theo Giá"->{
+                for(ViolationTicket i : violationTickets ){
+                   Double price = i.getPrice();
+                   if(price>=text1 && price<=text2){
+                    result.add(i);
+                   }
+                }
+            }
+        }
+        return result;
+    }
+
+
+
 }

@@ -32,7 +32,7 @@ public class BuildingManager extends Application {
         BuildingManager.primaryStage = primaryStage;
         openBuildingManagerView();
     }
-
+    
     public static void openBuildingManagerView() {
         try {
 //            primaryStage = new Stage();
@@ -42,9 +42,7 @@ public class BuildingManager extends Application {
             primaryStage.setTitle("Quản lý tòa nhà!");
             primaryStage.setScene(scene);
             primaryStage.setOnCloseRequest(event -> {
-                
                 System.out.println("Application is closing...");
-           
                 primaryStage.close();
             });
             primaryStage.show();

@@ -151,16 +151,6 @@ public class FinancialReportBUS {
                 }
             }
 
-            case "Tìm Theo Ten" -> {
-                for (FinancialReport i : this.financialReports) {
-                    LocalDate res = i.getDate();
-                    if (!res.isBefore(text) && !res.isAfter(text1)) {
-                        result.add(i);
-                    }
-
-                }
-            }
-
         }
         System.out.println("Kết quả tìm kiếm: " + result);
         return result;

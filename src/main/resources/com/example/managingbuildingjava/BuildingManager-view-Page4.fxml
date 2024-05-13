@@ -17,17 +17,19 @@
 
 <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: rgb(240,240,240);" stylesheets="@Css/BuildingManager-CSS.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.managingbuildingjava.BuildingManagerController">
           <children>
-      <TabPane prefHeight="720.0" prefWidth="938.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="720.0" prefWidth="966.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Phiếu dịch vụ">
                <content>
-                  <Pane prefHeight="691.0" prefWidth="973.0">
+                  <Pane prefHeight="662.0" prefWidth="961.0">
                      <children>
                          <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                              <children>
-                                 <TextField fx:id="TxtField__P4__search" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255);" />
-                                 <ComboBox fx:id="comboBox__P4__1" layoutX="489.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
-                                 <ComboBox fx:id="comboBox__P4__2" layoutX="638.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
+                                 <TextField fx:id="search_phieudv" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Tìm Theo Mã" style="-fx-background-color: rgb(255, 255, 255);" styleClass="black-text" />
+                                 <DatePicker fx:id="dateStart" layoutX="511.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+                                 <DatePicker fx:id="dateEnd" layoutX="645.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+                                 <Button fx:id="searchday" layoutX="760.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchDayPPDV" text="Tìm Kiếm" />
+                                 <Button fx:id="resetday" layoutX="850.0" layoutY="70.0" mnemonicParsing="false" onAction="#resetDay" text="Đặt Lại" />
                                  <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="234.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                      <image>
                                          <Image url="@../../../Picture/search.png" />
@@ -106,15 +108,15 @@
                                          </ImageView>
                                      </graphic>
                                  </Button>
-                                 <TableView fx:id="table__sericetiket" layoutX="489.0" layoutY="117.0" prefHeight="557.0" prefWidth="447.0" style="-fx-background-radius: 20;">
+                                 <TableView fx:id="table__sericetiket" layoutX="489.0" layoutY="117.0" prefHeight="557.0" prefWidth="444.0" style="-fx-background-radius: 20;">
                                      <columns>
                                          <TableColumn fx:id="maPDV" prefWidth="101.60003662109375" text="Mã Phiếu Dịch Vụ" />
                                          <TableColumn fx:id="maPhieuThu" prefWidth="70.39996337890625" text="Mã Phiếu Thu" />
                                        <TableColumn fx:id="maDichVu" prefWidth="53.60003662109375" text="Mã Dịch Vụ" />
                                           <TableColumn fx:id="soLuong" prefWidth="75.0" text="Số Lượng" />
                                           <TableColumn fx:id="thanhTien" prefWidth="75.0" text="Thành Tiền" />
-                                            <TableColumn fx:id="ngayTaoPhieu" prefWidth="75.0" text="Ngày Tạo Phiếu" />
-                                             <TableColumn fx:id="ghiChu" prefWidth="75.0" text="Ghi Chú" />
+                                            <TableColumn fx:id="ngayTaoPhieu" prefWidth="103.2000732421875" text="Ngày Tạo Phiếu" />
+                                             <TableColumn fx:id="ghiChu" prefWidth="47.199951171875" text="Ghi Chú" />
                                      </columns>
                                  </TableView>
                                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="74.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin dịch vụ ">
@@ -122,6 +124,16 @@
                                          <Font size="16.0" />
                                      </font>
                                  </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="480.0" layoutY="70.0" prefHeight="29.0" prefWidth="34.0" text="Từ" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="611.0" layoutY="70.0" prefHeight="29.0" prefWidth="34.0" text="Đến" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
                              </children>
                          </Pane>
                      </children>
@@ -130,13 +142,11 @@
           </Tab>
           <Tab text="Phiếu phạt">
                <content>
-                  <Pane prefHeight="691.0" prefWidth="938.0">
+                  <Pane prefHeight="662.0" prefWidth="954.0">
                      <children>
                          <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                              <children>
-                                 <TextField fx:id="TxtField__P4_1__search" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255);" />
-                                 <ComboBox fx:id="comboBox__P4_1__1" layoutX="491.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
-                                 <ComboBox fx:id="comboBox__P4_1__2" layoutX="611.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
+                                 <TextField fx:id="TxtField__P4_1__search" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255);" styleClass="black-text" />
                                  <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="234.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                      <image>
                                          <Image url="@../../../Picture/search.png" />
@@ -225,8 +235,26 @@
                                          <Font size="16.0" />
                                      </font>
                                  </Label>
+                              <TextField fx:id="price_start" layoutX="537.0" layoutY="89.0" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="611.0" layoutY="60.0" prefHeight="32.0" prefWidth="120.0" text="Lọc Theo Giá Tiền" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="497.0" layoutY="90.0" prefHeight="32.0" prefWidth="40.0" text="Từ" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="price_end" layoutX="707.0" layoutY="89.0" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="667.0" layoutY="90.0" prefHeight="32.0" prefWidth="40.0" text="Đến" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
                              </children>
                          </Pane>
+                        <Button fx:id="search_price" layoutX="848.0" layoutY="87.0" mnemonicParsing="false" onAction="#search_price" text="Tìm Kiếm" />
                      </children>
                   </Pane>
                </content>
@@ -238,7 +266,7 @@
                         <Pane prefHeight="720.0" prefWidth="902.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                            <children>
                               <TextField fx:id="TxtField__P4__search1" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px;" styleClass="black-text" />
-                              <ComboBox fx:id="combox_loaidv" layoutX="497.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0"  promptText="Lọc Theo Loại" onAction="#handleSelectType" />
+                              <ComboBox fx:id="combox_loaidv" layoutX="497.0" layoutY="70.0" onAction="#handleSelectType" prefHeight="25.0" prefWidth="100.0" promptText="Lọc Theo Loại" />
                               <ComboBox fx:id="comboBox__P4__21" layoutX="630.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
                               <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="234.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

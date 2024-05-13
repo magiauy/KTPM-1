@@ -340,7 +340,7 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
-    void suaCanHo(MouseEvent event)  {
+    void suaCanHo(MouseEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
         selectedApartment.setApartmentID(TxtField__P1__1.getText());
 
@@ -1214,10 +1214,11 @@ public class BuildingManagerController implements Initializable {
             showAlert("Lỗi", "Không Thể Sửa.", AlertType.ERROR);
         }
     }
- public void handleSelectType(){
+
+    public void handleSelectType() {
 
         String type = combox_loaidv.getValue();
-        if(type.equals("Tất Cả")){
+        if (type.equals("Tất Cả")) {
             ServiceBUS serviceBUS = new ServiceBUS();
             ArrayList<Service> services = serviceBUS.getAll();
             ServiceList.addAll(services);
@@ -1225,7 +1226,7 @@ public class BuildingManagerController implements Initializable {
                     .observableArrayList(services);
             table__P4__11.setItems(observableBuildingList);
 
-        }else {
+        } else {
             ServiceBUS serviceBUS = new ServiceBUS();
             ArrayList<Service> services = serviceBUS.search(type, "Lọc Theo Loại");
             ObservableList<Service> observableBuildingList = FXCollections
@@ -1233,11 +1234,7 @@ public class BuildingManagerController implements Initializable {
             table__P4__11.setItems(observableBuildingList);
         }
 
-
-
-   
-     
- }
+    }
     // Phiếu Dichj Vụ
 
     @FXML
@@ -1281,6 +1278,21 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     private TextArea ghiChuArea = new TextArea();
+
+    @FXML
+    private TextField search_phieudv = new TextField();
+
+    @FXML
+    private DatePicker dateStart = new DatePicker();
+
+    @FXML
+    private DatePicker dateEnd = new DatePicker();
+
+    @FXML
+    private Button searchPDV = new Button();
+
+    @FXML
+    private Button resetPDV = new Button();
 
     @FXML
     private TableView<ServiceTicket> table__sericetiket = new TableView<>();
@@ -1418,6 +1430,55 @@ public class BuildingManagerController implements Initializable {
             initServiceTicket();
         } else {
             showAlert("Thất Bại", "Không Thể Cập Nhật Phiếu Dịch Vụ", AlertType.ERROR);
+        }
+    }
+
+    public void searchDayPPDV() {
+        LocalDate day1 = dateStart.getValue();
+        LocalDate day2 = dateEnd.getValue();
+        ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+        ArrayList<ServiceTicket> serviceTickets = serviceTicketBUS.search(day1, day2, "Tìm Theo Ngày");
+        ObservableList<ServiceTicket> observableBuildingList = FXCollections
+                .observableArrayList(serviceTickets);
+        table__sericetiket.setItems(observableBuildingList);
+    }
+
+    public void resetDay() {
+        ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+        ArrayList<ServiceTicket> serviceTickets = serviceTicketBUS.getAll();
+        serviceTicketslist.addAll(serviceTickets);
+        ObservableList<ServiceTicket> observableBuildingList = FXCollections
+                .observableArrayList(serviceTickets);
+        table__sericetiket.setItems(observableBuildingList);
+    }
+
+    public void keyenter() {
+        Platform.runLater(() -> {
+            search_phieudv.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    handlesearchId();
+
+                }
+            });
+        });
+
+    }
+
+    public void handlesearchId() {
+        String id = search_phieudv.getText();
+        if (id.equals("")) {
+            ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+            ArrayList<ServiceTicket> serviceTickets = serviceTicketBUS.getAll();
+            serviceTicketslist.addAll(serviceTickets);
+            ObservableList<ServiceTicket> observableBuildingList = FXCollections
+                    .observableArrayList(serviceTickets);
+            table__sericetiket.setItems(observableBuildingList);
+        } else {
+            ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+            ArrayList<ServiceTicket> serviceTickets = serviceTicketBUS.searchID(id, "Tìm Theo Mã");
+            ObservableList<ServiceTicket> observableBuildingList = FXCollections
+                    .observableArrayList(serviceTickets);
+            table__sericetiket.setItems(observableBuildingList);
         }
     }
 
@@ -1612,6 +1673,12 @@ public class BuildingManagerController implements Initializable {
     @FXML
     private TextArea ghiChuPPField = new TextArea();
 
+    @FXML
+    private TextField price_start = new TextField();
+
+    @FXML
+    private TextField price_end = new TextField();
+
     private ObservableList<ViolationTicket> violationsList;
     private ViolationTicket violationTicketdelete;
     // Page 0
@@ -1768,6 +1835,15 @@ public class BuildingManagerController implements Initializable {
             showAlert("Thất Bại", "Không thể sửa vi phạm", AlertType.ERROR);
         }
 
+    }
+
+    public void search_price() {
+        Double text1=Double.parseDouble(price_start.getText());
+        Double text2 = Double.parseDouble(price_end.getText());
+        ViolationTicketBUS violationTicketBUS = new ViolationTicketBUS();
+        ArrayList<ViolationTicket> violationTickets = violationTicketBUS.search(text1, text2,"Lọc Theo Giá");
+        ObservableList<ViolationTicket> observableList = FXCollections.observableArrayList(violationTickets);
+        tableviolationticket.setItems(observableList);
     }
 
     @FXML
@@ -2144,7 +2220,6 @@ public class BuildingManagerController implements Initializable {
             initService();
             showcomboboxService();
             showcomboboxService1();
-     
 
             // Phieu Dich Vu
             initServiceTicket();
@@ -2153,7 +2228,7 @@ public class BuildingManagerController implements Initializable {
             initViolation();
 
             // Phieu Phat
-
+            keyenter();
             initViolationTicket();
 
             comboBox__P6__3.getItems().addAll(6.0, 12.0);
