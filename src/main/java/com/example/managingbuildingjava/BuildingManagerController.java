@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
@@ -22,8 +23,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -36,6 +41,7 @@ import java.util.Date;
 
 public class BuildingManagerController implements Initializable {
     private static BuildingManagerController instance;
+
 
     public static BuildingManagerController getInstance() {
         if (instance == null) {
@@ -61,6 +67,7 @@ public class BuildingManagerController implements Initializable {
     public TextField TxtField__P4__search = new TextField();
     public Button bnt__P1__search;
     public TextField TxtField__P3__search = new TextField();
+
     @FXML
     private Button bnt__P1__add;
 
@@ -268,6 +275,38 @@ public class BuildingManagerController implements Initializable {
         return apartmentObservableList;
     }
 
+    @FXML
+    private void exportExcel(){
+//        MonthlyRentBillBUS.getInstance().XuatExcelPhieuThang()
+        if (!TxtField__P3__1.getText().isEmpty()){
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            directoryChooser.setTitle("Chọn thư mục lưu file");
+            Stage primaryStage = new Stage();
+            // Hiển thị cửa sổ thư mục và lấy thư mục được chọn
+            File selectedDirectory = directoryChooser.showDialog(primaryStage);
+
+            if (selectedDirectory != null) {
+                MonthlyRentBillBUS.getInstance().XuatExcelPhieuThang(TxtField__P3__1.getText(), selectedDirectory.getAbsolutePath());
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Xuất phiếu thành công.");
+
+                // Hiển thị cửa sổ thông báo và chờ người dùng đóng
+                alert.showAndWait();
+            }
+        }else{
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText(null);
+            alert.setContentText("Vui lòng nhập mã phiếu thu.");
+
+            // Hiển thị cửa sổ thông báo và chờ người dùng đóng
+            alert.showAndWait();
+        }
+
+    }
+
     private void refreshFormApartment() {
         TxtField__P1__1.setText("");
         TxtField__P1__2.setText("");
@@ -301,7 +340,7 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
-    void suaCanHo(MouseEvent event)  {
+    void suaCanHo(MouseEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
         selectedApartment.setApartmentID(TxtField__P1__1.getText());
 
@@ -1191,10 +1230,11 @@ public class BuildingManagerController implements Initializable {
             showAlert("Lỗi", "Không Thể Sửa.", AlertType.ERROR);
         }
     }
- public void handleSelectType(){
+
+    public void handleSelectType() {
 
         String type = combox_loaidv.getValue();
-        if(type.equals("Tất Cả")){
+        if (type.equals("Tất Cả")) {
             ServiceBUS serviceBUS = new ServiceBUS();
             ArrayList<Service> services = serviceBUS.getAll();
             ServiceList.addAll(services);
@@ -1202,7 +1242,7 @@ public class BuildingManagerController implements Initializable {
                     .observableArrayList(services);
             table__P4__11.setItems(observableBuildingList);
 
-        }else {
+        } else {
             ServiceBUS serviceBUS = new ServiceBUS();
             ArrayList<Service> services = serviceBUS.search(type, "Lọc Theo Loại");
             ObservableList<Service> observableBuildingList = FXCollections
@@ -1210,11 +1250,7 @@ public class BuildingManagerController implements Initializable {
             table__P4__11.setItems(observableBuildingList);
         }
 
-
-
-   
-     
- }
+    }
     // Phiếu Dichj Vụ
 
     @FXML
@@ -1258,6 +1294,21 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     private TextArea ghiChuArea = new TextArea();
+
+    @FXML
+    private TextField search_phieudv = new TextField();
+
+    @FXML
+    private DatePicker dateStart = new DatePicker();
+
+    @FXML
+    private DatePicker dateEnd = new DatePicker();
+
+    @FXML
+    private Button searchPDV = new Button();
+
+    @FXML
+    private Button resetPDV = new Button();
 
     @FXML
     private TableView<ServiceTicket> table__sericetiket = new TableView<>();
@@ -1395,6 +1446,55 @@ public class BuildingManagerController implements Initializable {
             initServiceTicket();
         } else {
             showAlert("Thất Bại", "Không Thể Cập Nhật Phiếu Dịch Vụ", AlertType.ERROR);
+        }
+    }
+
+    public void searchDayPPDV() {
+        LocalDate day1 = dateStart.getValue();
+        LocalDate day2 = dateEnd.getValue();
+        ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+        ArrayList<ServiceTicket> serviceTickets = serviceTicketBUS.search(day1, day2, "Tìm Theo Ngày");
+        ObservableList<ServiceTicket> observableBuildingList = FXCollections
+                .observableArrayList(serviceTickets);
+        table__sericetiket.setItems(observableBuildingList);
+    }
+
+    public void resetDay() {
+        ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+        ArrayList<ServiceTicket> serviceTickets = serviceTicketBUS.getAll();
+        serviceTicketslist.addAll(serviceTickets);
+        ObservableList<ServiceTicket> observableBuildingList = FXCollections
+                .observableArrayList(serviceTickets);
+        table__sericetiket.setItems(observableBuildingList);
+    }
+
+    public void keyenter() {
+        Platform.runLater(() -> {
+            search_phieudv.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    handlesearchId();
+
+                }
+            });
+        });
+
+    }
+
+    public void handlesearchId() {
+        String id = search_phieudv.getText();
+        if (id.equals("")) {
+            ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+            ArrayList<ServiceTicket> serviceTickets = serviceTicketBUS.getAll();
+            serviceTicketslist.addAll(serviceTickets);
+            ObservableList<ServiceTicket> observableBuildingList = FXCollections
+                    .observableArrayList(serviceTickets);
+            table__sericetiket.setItems(observableBuildingList);
+        } else {
+            ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+            ArrayList<ServiceTicket> serviceTickets = serviceTicketBUS.searchID(id, "Tìm Theo Mã");
+            ObservableList<ServiceTicket> observableBuildingList = FXCollections
+                    .observableArrayList(serviceTickets);
+            table__sericetiket.setItems(observableBuildingList);
         }
     }
 
@@ -1589,6 +1689,12 @@ public class BuildingManagerController implements Initializable {
     @FXML
     private TextArea ghiChuPPField = new TextArea();
 
+    @FXML
+    private TextField price_start = new TextField();
+
+    @FXML
+    private TextField price_end = new TextField();
+
     private ObservableList<ViolationTicket> violationsList;
     private ViolationTicket violationTicketdelete;
     // Page 0
@@ -1653,7 +1759,7 @@ public class BuildingManagerController implements Initializable {
 
     public void handleDeleteViolationTicket() {
         if (violationTicketdelete == null) {
-            showAlert("Lỗi", "Không có phiếu vi phạm nào được chọn để xóa", Alert.AlertType.ERROR);
+            showAlert("Lỗi", "Không có phiếu vi phạm nào được chọn để xóa", AlertType.ERROR);
             return;
         }
 
@@ -1664,13 +1770,13 @@ public class BuildingManagerController implements Initializable {
                         .delete(violationTicketdelete);
 
                 if (deleteResult) {
-                    showAlert("Thành Công", "Xóa phiếu vi phạm thành công", Alert.AlertType.CONFIRMATION);
+                    showAlert("Thành Công", "Xóa phiếu vi phạm thành công", AlertType.CONFIRMATION);
                     initViolationTicket();
                 } else {
-                    showAlert("Thất Bại", "Không thể xóa phiếu vi phạm", Alert.AlertType.ERROR);
+                    showAlert("Thất Bại", "Không thể xóa phiếu vi phạm", AlertType.ERROR);
                 }
             } catch (Exception e) {
-                showAlert("Lỗi", "Đã xảy ra lỗi khi xóa phiếu vi phạm: " + e.getMessage(), Alert.AlertType.ERROR);
+                showAlert("Lỗi", "Đã xảy ra lỗi khi xóa phiếu vi phạm: " + e.getMessage(), AlertType.ERROR);
                 e.printStackTrace();
             }
         });
@@ -1702,18 +1808,18 @@ public class BuildingManagerController implements Initializable {
         boolean updateResult = violationTicketBUS.add(violationTickets);
 
         if (updateResult) {
-            showAlert("Thành Công", "Thêm vi phạm thành công", Alert.AlertType.CONFIRMATION);
+            showAlert("Thành Công", "Thêm vi phạm thành công", AlertType.CONFIRMATION);
             initViolationTicket();
 
         } else {
-            showAlert("Thất Bại", "Không thể thêm vi phạm", Alert.AlertType.ERROR);
+            showAlert("Thất Bại", "Không thể thêm vi phạm", AlertType.ERROR);
         }
 
     }
 
     public void handleUpdateViolationTicket() {
         if (violationTicketdelete == null) {
-            showAlert("Thất Bại", "Không có phiếu phạt nào chọn để sửa", Alert.AlertType.ERROR);
+            showAlert("Thất Bại", "Không có phiếu phạt nào chọn để sửa", AlertType.ERROR);
         }
         String maPPhat = maPPField.getText();
         String maPhieuThu = maphatfied.getText();
@@ -1739,12 +1845,21 @@ public class BuildingManagerController implements Initializable {
         boolean updateResult = violationTicketBUS.update(violationTickets);
 
         if (updateResult) {
-            showAlert("Thành Công", "Sửa vi phạm thành công", Alert.AlertType.CONFIRMATION);
+            showAlert("Thành Công", "Sửa vi phạm thành công", AlertType.CONFIRMATION);
             initViolationTicket();
         } else {
-            showAlert("Thất Bại", "Không thể sửa vi phạm", Alert.AlertType.ERROR);
+            showAlert("Thất Bại", "Không thể sửa vi phạm", AlertType.ERROR);
         }
 
+    }
+
+    public void search_price() {
+        Double text1=Double.parseDouble(price_start.getText());
+        Double text2 = Double.parseDouble(price_end.getText());
+        ViolationTicketBUS violationTicketBUS = new ViolationTicketBUS();
+        ArrayList<ViolationTicket> violationTickets = violationTicketBUS.search(text1, text2,"Lọc Theo Giá");
+        ObservableList<ViolationTicket> observableList = FXCollections.observableArrayList(violationTickets);
+        tableviolationticket.setItems(observableList);
     }
 
     @FXML
@@ -2124,7 +2239,6 @@ public class BuildingManagerController implements Initializable {
             initService();
             showcomboboxService();
             showcomboboxService1();
-     
 
             // Phieu Dich Vu
             initServiceTicket();
@@ -2133,13 +2247,29 @@ public class BuildingManagerController implements Initializable {
             initViolation();
 
             // Phieu Phat
-
+            keyenter();
             initViolationTicket();
 
             comboBox__P6__3.getItems().addAll(6.0, 12.0);
             comboBox__P6__3.setPromptText("");
             initLeaseAgreement();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void logOut(ActionEvent actionEvent) {
+        Stage primaryStage = com.example.managingbuildingjava.BuildingManager.getPrimaryStage();
+        if (primaryStage==null){
+            primaryStage = main.getInstance().getPrimaryStage();
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

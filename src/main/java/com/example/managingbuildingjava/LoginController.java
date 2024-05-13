@@ -1,5 +1,6 @@
 package com.example.managingbuildingjava;
 
+import BUS.AdminsAccountBUS;
 import BUS.CustomersAccountBUS;
 import BUS.StaffsAccountBUS;
 import javafx.fxml.FXML;
@@ -70,15 +71,16 @@ public class LoginController {
 
                 BuildingManager.openBuildingManagerView();
             }
-//            else{
-//                validLogin = AdminAccountBUS.checkLogin(username, password);
-//                if (!validLogin.equals("0")) {
-//
-//                   Boss.main(null);
-//                }
-//                else{
-//                    //        showStatusMessage("Invalid username or password.");
-//                }
+            else{
+                AdminsAccountBUS adminsAccountBUS = new AdminsAccountBUS();
+                validLogin = adminsAccountBUS.checkLogin(username, password);
+                if (!validLogin.equals("0")) {
+                   Boss.main(null);
+                }
+                else{
+                    //        showStatusMessage("Invalid username or password.");
+                }
+            }
 
         }
     }

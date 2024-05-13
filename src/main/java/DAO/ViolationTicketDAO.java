@@ -1,11 +1,13 @@
 package DAO;
 
+import DTO.ServiceTicket;
 import DTO.ViolationTicket;
 import config.JDBCUtil;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ViolationTicketDAO implements DAOInterface<ViolationTicket> {
     public static ViolationTicketDAO getInstance() {
@@ -104,6 +106,34 @@ public class ViolationTicketDAO implements DAOInterface<ViolationTicket> {
         }
         return violationTickets;
     }
+
+    public List<ViolationTicket> selectByMonthlyRentBillID(String monthlyRentBillID) {
+        ArrayList<ViolationTicket> violationTickets = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM ViolationTicket WHERE monthlyRentBillID = '" + monthlyRentBillID + "'";
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String violationTicketID = resultSet.getString("violationTicketID");
+                String violationID = resultSet.getString("violationID");
+                Double price = resultSet.getDouble("price");
+                LocalDate date = resultSet.getDate("Date").toLocalDate();
+                String note = resultSet.getString("note");
+
+                ViolationTicket violationTicket = new ViolationTicket (violationTicketID, violationID, monthlyRentBillID, price, date, note);
+                violationTickets.add(violationTicket);
+            }
+
+            resultSet.close();
+            statement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return violationTickets;
+    }
+
 
     @Override
     public ViolationTicket selectById(String ID) {

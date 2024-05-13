@@ -18,7 +18,24 @@ import java.io.IOException;
 
 public class main extends Application {
 
-    private Stage primaryStage = new Stage();
+    private static main instance;
+    public static main getInstance() {
+        if (instance == null) {
+            instance = new main();
+        }
+        return instance;
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    private static Stage primaryStage = new Stage();
+
     private Scene loginScene;
     private Scene bossScene;
     private Scene buiScene;
@@ -32,7 +49,6 @@ public class main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-
 
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
         loginScene = new Scene(loginLoader.load(), 498, 272);
