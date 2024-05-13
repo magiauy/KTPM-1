@@ -1,6 +1,8 @@
 package BUS;
 
+import DAO.ApartmentDAO;
 import DAO.TenantDAO;
+import DTO.Apartment;
 import DTO.LeaseAgreement;
 import DTO.MonthlyRentBill;
 import DTO.Tenant;
@@ -93,5 +95,9 @@ public class TenantBUS {
         }
 
         return tenants;
+    }
+
+    public ArrayList<Tenant> searchTenants(String keyword, String buildingManagerID) {
+        return TenantDAO.getInstance().search(keyword, buildingManagerID);
     }
 }

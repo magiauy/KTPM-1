@@ -5,6 +5,7 @@
 package DAO;
 
 import DTO.Cohabitant;
+import DTO.Tenant;
 import config.JDBCUtil;
 
 import java.sql.*;
@@ -152,6 +153,38 @@ public class CohabitantDAO implements DAOInterface<Cohabitant>{
         String citizenIdentityCard = resultSet.getString("citizenIdentityCard");
 
         return new Cohabitant(cohabitantID, tenantID, firstName, lastName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard);
+    }
+
+    public ArrayList<Cohabitant> search(String keyword, String buildingManagerID){
+        ArrayList<Cohabitant> searchResults = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            String sql = "SELECT * \n" +
+                    "FROM Tenant A \n" +
+                    "JOIN LeaseAgreement B ON A.tenantID = B.tenantID \n" +
+                    "JOIN Cohabitant C ON A.tenantID = C.TenantID \n" +
+                    "WHERE (C.cohabitantID LIKE ? OR C.lastName LIKE ? OR C.firstName LIKE ?) \n" +
+                    "AND B.buildingManagerID = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + keyword + "%");
+            preparedStatement.setString(2, "%" + keyword + "%");
+            preparedStatement.setString(3, "%" + keyword + "%");
+            preparedStatement.setString(4, buildingManagerID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Cohabitant cohabitant = createCohabitantFromResultSet(resultSet);
+                searchResults.add(cohabitant);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResults;
     }
 
     

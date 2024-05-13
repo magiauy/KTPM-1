@@ -1,5 +1,6 @@
 package DAO;
 
+import DTO.Apartment;
 import config.JDBCUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -145,5 +146,44 @@ public class TenantDAO implements DAOInterface<Tenant> {
             e.printStackTrace();
         }
         return tenant;
+    }
+
+    private Tenant createTenantFromResultSet(ResultSet resultSet) throws SQLException {
+        String tenantID = resultSet.getString("tenantID");
+        String lastName = resultSet.getString("lastName");
+        String firstName = resultSet.getString("firstName");
+        String phoneNumber = resultSet.getString("phoneNumber");
+        LocalDate dateOfBirthDay = resultSet.getDate("dob").toLocalDate();
+        String gender = resultSet.getString("gender");
+        String citizenIdentityCard = resultSet.getString("citizenIdentityCard");
+
+        return new Tenant(tenantID, lastName, firstName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard);
+    }
+
+    public ArrayList<Tenant> search(String keyword, String buildingManagerID){
+        ArrayList<Tenant> searchResults = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            String sql = "SELECT * FROM Tenant A JOIN LeaseAgreement B ON A.tenantID = B.tenantID WHERE (A.tenantID LIKE ? OR A.lastName LIKE ? OR A.firstName LIKE ?) AND B.buildingManagerID = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + keyword + "%");
+            preparedStatement.setString(2, "%" + keyword + "%");
+            preparedStatement.setString(3, "%" + keyword + "%");
+            preparedStatement.setString(4, buildingManagerID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Tenant tenant = createTenantFromResultSet(resultSet);
+                searchResults.add(tenant);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResults;
     }
 }

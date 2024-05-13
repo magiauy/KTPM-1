@@ -2,8 +2,10 @@ package BUS;
 
 import DAO.CohabitantDAO;
 import DAO.MonthlyRentBillDAO;
+import DAO.TenantDAO;
 import DTO.Cohabitant;
 import DTO.MonthlyRentBill;
+import DTO.Tenant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
@@ -76,5 +78,9 @@ public class CohabitantBUS {
             }
         }
         return  cohabitantsWithTenantID;
+    }
+
+    public ArrayList<Cohabitant> searchCohabitants(String keyword, String buildingManagerID) {
+        return CohabitantDAO.getInstance().search(keyword, buildingManagerID);
     }
 }

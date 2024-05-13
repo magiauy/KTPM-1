@@ -26,9 +26,9 @@
                       </ImageView>
             <Pane layoutX="33.0" layoutY="115.0" prefHeight="490.0" prefWidth="340.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                          <TextField fx:id="TxtField__P6__1" layoutX="160.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
-                          <TextField fx:id="TxtField__P6__2" layoutX="160.0" layoutY="69.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
-                          <TextField fx:id="TxtField__P6__3" layoutX="160.0" layoutY="108.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
+                          <TextField fx:id="TxtField__P6__1" layoutX="160.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                          <TextField fx:id="TxtField__P6__2" layoutX="160.0" layoutY="69.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                          <TextField fx:id="TxtField__P6__3" layoutX="160.0" layoutY="108.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
                           <ComboBox fx:id="comboBox__P6__3" layoutX="160.0" layoutY="324.0" prefHeight="32.0" prefWidth="165.0" />
                           <Label alignment="CENTER" contentDisplay="CENTER" layoutY="321.0" prefHeight="32.0" prefWidth="120.0" text="Thời hạn" textFill="WHITE">
                               <font>
@@ -70,12 +70,12 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="TxtField__P6__6" layoutX="160.0" layoutY="422.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
-                  <TextField fx:id="TxtField__P6__5" layoutX="160.0" layoutY="373.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
+                  <TextField fx:id="TxtField__P6__6" layoutX="160.0" layoutY="422.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                  <TextField fx:id="TxtField__P6__5" layoutX="160.0" layoutY="373.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
                   <DatePicker fx:id="DP_P6_1" layoutX="160.0" layoutY="192.0" prefHeight="32.0" prefWidth="165.0" />
                   <DatePicker fx:id="DP_P6_3" layoutX="160.0" layoutY="272.0" prefHeight="32.0" prefWidth="165.0" />
-                  <TextField fx:id="TxtField__P6__4" layoutX="160.0" layoutY="147.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text"/>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="144.0" prefHeight="32.0" prefWidth="120.0" text="Mã tòa nhà" textFill="WHITE">
+                  <TextField fx:id="TxtField__P6__4" layoutX="160.0" layoutY="147.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutY="144.0" prefHeight="32.0" prefWidth="120.0" text="Mã ql tòa nhà" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -120,7 +120,7 @@
                             <TableColumn fx:id="ColumnP6__1" prefWidth="56.00006103515625" text="Mã hợp đồng" />
                             <TableColumn fx:id="ColumnP6__2" prefWidth="55.3333740234375" text="Mã khách hàng" />
                   <TableColumn fx:id="ColumnP6__3" prefWidth="53.3333740234375" text="Mã căn hộ" />
-                  <TableColumn fx:id="ColumnP6__4" prefWidth="51.33331298828125" text="Mã tòa nhà" />
+                  <TableColumn fx:id="ColumnP6__4" prefWidth="51.33331298828125" text="Mã ql tòa nhà" />
                   <TableColumn fx:id="ColumnP6__5" prefWidth="43.33331298828125" text="Ngày ký" />
                   <TableColumn fx:id="ColumnP6__6" prefWidth="30.0" text="Ngày bắt đầu" />
                   <TableColumn fx:id="ColumnP6__7" prefWidth="40.666748046875" text="Ngày kết thúc" />
