@@ -6,6 +6,7 @@ import config.JDBCUtil;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
     public static ServiceTicketDAO getInstance() {
@@ -95,6 +96,35 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
             while (resultSet.next()) {
                 String serviceTicketID = resultSet.getString("serviceTicketID");
                 String monthlyRentBillID = resultSet.getString("monthlyRentBillID");
+                String serviceID = resultSet.getString("serviceID");
+                Double quantity = resultSet.getDouble("quantity");
+                Double totalAmount = resultSet.getDouble("totalAmount");
+                LocalDate date = resultSet.getDate("Date").toLocalDate();
+                String note = resultSet.getString("note");
+
+                ServiceTicket serviceTicket = new ServiceTicket(serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, date, note);
+                serviceTickets.add(serviceTicket);
+            }
+
+            resultSet.close();
+            statement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return serviceTickets;
+    }
+
+    public List<ServiceTicket> selectByMonthlyRentBillID(String monthlyRentBillID) {
+        ArrayList<ServiceTicket> serviceTickets = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM ServiceTicket WHERE monthlyRentBillID = '" + monthlyRentBillID + "'";
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                String serviceTicketID = resultSet.getString("serviceTicketID");
                 String serviceID = resultSet.getString("serviceID");
                 Double quantity = resultSet.getDouble("quantity");
                 Double totalAmount = resultSet.getDouble("totalAmount");

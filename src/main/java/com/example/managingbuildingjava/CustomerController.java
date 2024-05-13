@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,6 +32,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 public class CustomerController implements Initializable {
@@ -441,6 +443,23 @@ public class CustomerController implements Initializable {
         ObservableList<MonthlyRentBill> data = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(this.ID));
         table__P3__1.setItems(data);
     }
+
+    public void logOut(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = Customer.getPrimaryStage();
+        if (primaryStage == null){
+            primaryStage = main.getInstance().getPrimaryStage();
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Page 0

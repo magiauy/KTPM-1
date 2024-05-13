@@ -3,7 +3,12 @@ package BUS;
 import DAO.FurnitureDAO;
 import DTO.Furniture;
 import DTO.MonthlyRentBill;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -62,5 +67,32 @@ public class FurnitureBUS {
             }
         }
         return  furnitureByApartmentID;
+    }
+
+    public int importExcel(String url){
+        try {
+            FileInputStream fis = new FileInputStream(url);
+            Workbook workbook = new XSSFWorkbook(fis);
+            Sheet sheet = workbook.getSheetAt(0);
+            for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+                Row row = sheet.getRow(rowIndex);
+                if (row != null) {
+                    String furnitureID = row.getCell(0).getStringCellValue();
+                    String apartmentID = row.getCell(1).getStringCellValue();
+                    String nameFurniture = row.getCell(2).getStringCellValue();
+                    String conditionFurniture = row.getCell(3).getStringCellValue();
+                    double price = row.getCell(4).getNumericCellValue();
+                    Furniture furniture = new Furniture(furnitureID, apartmentID, nameFurniture, conditionFurniture, price);
+                    listFurniture.add(furniture);
+                    add(furniture);
+                }
+            }
+
+            fis.close();
+            workbook.close();
+        } catch (Exception e) {
+            return 0;
+        }
+        return 1;
     }
 }

@@ -1,21 +1,28 @@
 package BUS;
+import DAO.*;
+import DTO.*;
 import com.example.managingbuildingjava.Customer;
 import com.example.managingbuildingjava.CustomerController;
 import javafx.scene.paint.Color;
 
-import DAO.MonthlyRentBillDAO;
-import DTO.FinancialReport;
-import DTO.MonthlyRentBill;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import org.apache.poi.xwpf.usermodel.*;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPageSz;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MonthlyRentBillBUS {
@@ -191,5 +198,157 @@ public class MonthlyRentBillBUS {
             }
         }
         return null;
+    }
+
+    public int XuatExcelPhieuThang(String maPhieuNhap, String url){
+        MonthlyRentBill monthlyRentBill = MonthlyRentBillDAO.getInstance().selectById(maPhieuNhap);
+        List<ServiceTicket> ListServiceTicket = ServiceTicketDAO.getInstance().selectByMonthlyRentBillID(maPhieuNhap);
+        List<ViolationTicket> ListViolationTicket = ViolationTicketDAO.getInstance().selectByMonthlyRentBillID(maPhieuNhap);
+        XWPFDocument document = new XWPFDocument();
+        // Thiết lập kích thước trang
+        CTSectPr sectPr = document.getDocument().getBody().addNewSectPr();
+        CTPageSz pageSize = sectPr.addNewPgSz();
+        pageSize.setW(BigInteger.valueOf(15840)); // Width: 12240 twips (tương đương khoảng 8.5 inches)
+        pageSize.setH(BigInteger.valueOf(15840)); // Height: 15840 twips (tương đương khoảng 11 inches)
+
+        XWPFParagraph logo = document.createParagraph();
+        XWPFRun logoRun = logo.createRun();
+        logoRun.setFontSize(8);
+        logoRun.setText("Công ty bất động sản Star Sky");
+        logoRun.addBreak();
+        logoRun.setText("Địa chỉ: 273 An Dương Vương, Phường 3, Quận 5,Thành phố Hồ Chí Minh");
+        logoRun.addBreak();
+        logoRun.setText("Điện thoại: (028)38354004");
+        logoRun.addBreak();
+        logoRun.setText("Email: StarSkyVipPro@gmail");
+        logo.createRun().addCarriageReturn();
+        //title
+        XWPFParagraph title = document.createParagraph();
+
+        title.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun titleRun = title.createRun();
+        titleRun.setBold(true);
+        titleRun.setFontSize(16);
+        titleRun.setText("HÓA ĐƠN PHIẾU THU TIỀN THÁNG");
+
+        //Thong tin nhanh
+        XWPFParagraph info = document.createParagraph();
+        XWPFRun infoRun = info.createRun();
+        infoRun.addBreak();
+        infoRun.setText("Mã phiếu thu tiền: " + monthlyRentBill.getMonthlyRentBillID());
+        infoRun.addBreak();
+        infoRun.addBreak();
+        LocalDate localDate = monthlyRentBill.getDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String ngayNhap = localDate.format(formatter);
+        infoRun.setText("Ngày xuất phiếu: " + ngayNhap);
+        infoRun.addBreak();
+
+        // Bang thong tin chi tiet
+        XWPFTable table = document.createTable();
+        XWPFTableRow tableRow = table.getRow(0);
+        tableRow.getCell(0).setText("STT");
+        XWPFTableCell cell = tableRow.createCell();
+        cell.setText("Ngày");
+        cell.setWidth(String.valueOf(10));
+        XWPFTableCell cell2 = tableRow.createCell();
+        cell2.setText("Tên phiếu dịch vụ/phạt");
+        cell2.setWidth(String.valueOf(4));
+        tableRow.createCell().setText("Đơn vị");
+        tableRow.createCell().setText("Giá/đơn vị (VND)");
+        tableRow.createCell().setText("Số lượng");
+        tableRow.createCell().setText("Thành tiền");
+        XWPFTableCell cell3 = tableRow.createCell();
+        cell3.setText("Ghi chú");
+        cell3.setWidth(String.valueOf(4));
+
+        // Đặt kiểu căn giữa cho nội dung của tất cả các ô trong bảng
+        for (XWPFTableRow row : table.getRows()) {
+            for (XWPFTableCell cell0 : row.getTableCells()) {
+                XWPFParagraph paragraph = cell0.getParagraphs().get(0); // Lấy đối tượng đoạn văn bản trong ô
+                paragraph.setAlignment(ParagraphAlignment.CENTER); // Đặt căn giữa cho đoạn văn bản
+            }
+        }
+
+        int dem=1;
+        for (ServiceTicket serviceTicket:ListServiceTicket){
+            Service service = ServiceDAO.getInstance().selectById(serviceTicket.getServiceID());
+            XWPFTableRow dataRow = table.createRow();
+            dataRow.getCell(0).setText(String.valueOf(dem));
+            dataRow.getCell(1).setText(String.valueOf(serviceTicket.getDate()));
+            dataRow.getCell(2).setText(service.getName());
+            dataRow.getCell(3).setText(service.getUnit());
+            dataRow.getCell(4).setText(String.valueOf(service.getPricePerUnit()));
+            dataRow.getCell(5).setText(String.valueOf(serviceTicket.getQuantity()));
+            dataRow.getCell(6).setText(String.valueOf(serviceTicket.getTotalAmount()));
+            if (serviceTicket.getNote()!=null){
+                dataRow.getCell(7).setText(String.valueOf(serviceTicket.getNote()));
+            }
+            dem++;
+        }
+        for (ViolationTicket serviceTicket:ListViolationTicket){
+            Violation violation = ViolationDAO.getInstance().selectById(serviceTicket.getViolationID());
+            XWPFTableRow dataRow = table.createRow();
+            dataRow.getCell(0).setText(String.valueOf(dem));
+            dataRow.getCell(1).setText(String.valueOf(serviceTicket.getDate()));
+            dataRow.getCell(2).setText(violation.getName());
+            dataRow.getCell(5).setText("1");
+            dataRow.getCell(6).setText(String.valueOf(serviceTicket.getPrice()));
+            dataRow.getCell(7).setText(String.valueOf(serviceTicket.getNote()));
+            dem++;
+        }
+
+        XWPFTableRow dataRow = table.createRow();
+        dataRow.getCell(1).setText("TỔNG: ");
+        dataRow.getCell(6).setText(String.valueOf(monthlyRentBill.getTotalPayment()));
+        dataRow.getCell(7).setText("VND");
+
+        // Đặt padding cho nội dung của tất cả các ô trong bảng
+        for (XWPFTableRow row : table.getRows()) {
+            for (XWPFTableCell cell1 : row.getTableCells()) {
+                // Lấy hoặc tạo một đối tượng XWPFParagraph trong ô
+                XWPFParagraph paragraph;
+                if (!cell1.getParagraphs().isEmpty()) {
+                    paragraph = cell1.getParagraphs().get(0);
+                } else {
+                    paragraph = cell1.addParagraph();
+                }
+
+                // Thiết lập khoảng cách giữa nội dung văn bản và biên của ô
+                paragraph.setIndentationLeft(100); // Khoảng cách bên trái
+                paragraph.setIndentationRight(100); // Khoảng cách bên phải
+                paragraph.setSpacingAfter(100); // Khoảng cách dưới
+                paragraph.setSpacingBefore(100); // Khoảng cách trên
+            }
+        }
+
+
+        XWPFParagraph footer = document.createParagraph();
+        XWPFRun footerRun = footer.createRun();
+        footerRun.setFontSize(11);
+        footerRun.addBreak();
+        footerRun.setText("Quản lý tòa nhà      ");
+        footerRun.addBreak();
+        footerRun.setText("    (ký tên)     ");
+        footerRun.addBreak();
+        footerRun.addBreak();
+        footerRun.addBreak();
+        footer.setAlignment(ParagraphAlignment.RIGHT);
+
+        // Thêm ngày in cho footer
+        XWPFParagraph dateStamp = document.createParagraph();
+        //  dateStamp.setAlignment(ParagraphAlignment.RIGHT);
+        XWPFRun dateStampRun = dateStamp.createRun();
+        dateStampRun.setText("Ngày in: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        String fileName = "PhieuThu" +monthlyRentBill.getMonthlyRentBillID() +".doc"; // Tên tệp Word
+        File destFile = new File(url, fileName);
+        try (FileOutputStream fos = new FileOutputStream(destFile)) {
+            document.write(fos);
+        } catch (Exception e) {
+            //e.printStackTrace();
+            return 0;
+        }
+        return 1;
     }
 }
