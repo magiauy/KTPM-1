@@ -4,7 +4,9 @@
  */
 package DAO;
 
+import DTO.Apartment;
 import DTO.Furniture;
+import DTO.Tenant;
 import config.JDBCUtil;
 
 import java.sql.*;
@@ -151,5 +153,35 @@ public class FurnitureDAO implements DAOInterface<Furniture>{
         return new Furniture(furnitureID, apartmentID, nameFurniture, conditionFurniture, price);
     }
 
+    public ArrayList<Furniture> search(String keyword, String buildingManagerID) {
+        ArrayList<Furniture> searchResults = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            String sql = "SELECT * \n" +
+                    "FROM Furniture A \n" +
+                    "JOIN Apartment B ON A.apartmentID = B.apartmentID \n" +
+                    "JOIN BuildingManager C ON B.buildingID = C.buildingID \n" +
+                    "WHERE (A.furnitureID LIKE ? OR A.apartmentID LIKE ? OR A.name LIKE ?) \n" +
+                    "AND C.buildingManagerID = ?\n";
 
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + keyword + "%");
+            preparedStatement.setString(2, "%" + keyword + "%");
+            preparedStatement.setString(3, "%" + keyword + "%");
+            preparedStatement.setString(4, buildingManagerID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Furniture furniture = createFurnitureFromResultSet(resultSet);
+                searchResults.add(furniture);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResults;
+    }
 }

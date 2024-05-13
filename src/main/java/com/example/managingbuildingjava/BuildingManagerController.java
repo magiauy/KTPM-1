@@ -1998,6 +1998,14 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
+    void timNoiThat(KeyEvent event) {
+        FurnitureBUS furnitureBUS = new FurnitureBUS();
+        ArrayList<Furniture> furnitures = furnitureBUS.searchApartments(TxtField__P5__search.getText(), this.ID);
+        ObservableList<Furniture> furnitureSearch = FXCollections.observableArrayList(furnitures);
+        furnitureObservableList.setAll(furnitureSearch);
+    }
+
+    @FXML
     void xoaNoiThat(ActionEvent event) {
         Furniture selectedApartment = table__P5__1.getSelectionModel().getSelectedItem();
         if (selectedApartment != null) {
@@ -2191,6 +2199,14 @@ public class BuildingManagerController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void timHopDong(KeyEvent event) {
+        LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
+        ArrayList<LeaseAgreement> leaseAgreements = leaseAgreementBUS.searchApartments(TxtField__P6__search.getText(), this.ID);
+        ObservableList<LeaseAgreement> leaseAgreementSearch = FXCollections.observableArrayList(leaseAgreements);
+        leaseAgreementObservableList.setAll(leaseAgreementSearch);
     }
 
     @FXML

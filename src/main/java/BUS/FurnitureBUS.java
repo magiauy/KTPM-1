@@ -1,6 +1,8 @@
 package BUS;
 
+import DAO.ApartmentDAO;
 import DAO.FurnitureDAO;
+import DTO.Apartment;
 import DTO.Furniture;
 import DTO.MonthlyRentBill;
 import org.apache.poi.ss.usermodel.Row;
@@ -94,5 +96,9 @@ public class FurnitureBUS {
             return 0;
         }
         return 1;
+    }
+
+    public ArrayList<Furniture> searchApartments(String keyword, String buildingManagerID) {
+        return FurnitureDAO.getInstance().search(keyword, buildingManagerID);
     }
 }
