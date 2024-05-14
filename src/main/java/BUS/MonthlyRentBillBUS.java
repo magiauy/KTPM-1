@@ -351,4 +351,12 @@ public class MonthlyRentBillBUS {
         }
         return 1;
     }
+
+    public ArrayList<MonthlyRentBill> searchMonthlyRentBills(String keyword, String buildingManagerID) {
+        return MonthlyRentBillDAO.getInstance().search(keyword, buildingManagerID);
+    }
+
+    public ArrayList<MonthlyRentBill> fill(String buildingManager, LocalDate dayStart, LocalDate dayEnd){
+        return MonthlyRentBillDAO.getInstance().fill(buildingManager, dayStart, dayEnd);
+    }
 }

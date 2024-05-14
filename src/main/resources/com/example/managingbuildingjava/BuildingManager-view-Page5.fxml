@@ -15,9 +15,7 @@
           <children>
               <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
-                      <TextField fx:id="TxtField__P5__search" layoutX="281.0" layoutY="16.0" onKeyReleased="#timNoiThat" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px;" styleClass="black-text"/>
-                      <ComboBox fx:id="comboBox__P5__1" layoutX="623.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
-                      <ComboBox fx:id="comboBox__P5__2" layoutX="740.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" />
+                      <TextField fx:id="TxtField__P5__search" layoutX="281.0" layoutY="16.0" onKeyReleased="#timNoiThat" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px;" styleClass="black-text" />
                       <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="234.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../../../Picture/search.png" />
