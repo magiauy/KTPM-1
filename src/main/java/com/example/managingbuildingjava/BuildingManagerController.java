@@ -1301,6 +1301,8 @@ public class BuildingManagerController implements Initializable {
     private ServiceTicket serviceTicket;
     private ServiceTicket serviceTicketdelete;
 
+    
+
     public void initServiceTicket() {
         serviceTicketslist = FXCollections.observableArrayList();
         ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
@@ -1316,9 +1318,9 @@ public class BuildingManagerController implements Initializable {
         ghiChu.setCellValueFactory(new PropertyValueFactory<>("Note"));
         table__sericetiket.setItems(observableList);
         handleServiceTicket();
-
     }
 
+    
     public void handleServiceTicket() {
         table__sericetiket.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {

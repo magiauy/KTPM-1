@@ -104,7 +104,7 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager> {
         try {
             Connection connection = JDBCUtil.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM BuildingManager";
+            String sql = "SELECT * FROM BuildingManager ";
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
