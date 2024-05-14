@@ -161,12 +161,13 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         ArrayList<Apartment> searchResults = new ArrayList<>();
         try {
             Connection connection = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM Apartment A JOIN BuildingManager B ON A.buildingID = B.buildingID WHERE (A.apartmentID LIKE ? OR A.roomNumber LIKE ?) AND B.buildingManagerID = ?";
+            String sql = "SELECT * FROM Apartment A JOIN BuildingManager B ON A.buildingID = B.buildingID WHERE (A.apartmentID LIKE ? OR A.roomNumber LIKE ? OR A.furniture LIKE ?) AND B.buildingManagerID = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, "%" + keyword + "%");
             preparedStatement.setString(2, "%" + keyword + "%");
-            preparedStatement.setString(3, buildingManagerID);
+            preparedStatement.setString(3, "%" + keyword + "%");
+            preparedStatement.setString(4, buildingManagerID);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
