@@ -254,6 +254,9 @@ public class BuildingManagerController implements Initializable {
     @FXML
     private TableColumn<Apartment, Integer> soPhongTamTable = new TableColumn<>();
 
+    @FXML 
+    private TableColumn<Apartment,String> trangthai = new TableColumn<>();
+
     @FXML
     private TableView<Apartment> table__P1__1 = new TableView<>();
 
@@ -324,6 +327,7 @@ public class BuildingManagerController implements Initializable {
         soPhongNguTable.setCellValueFactory(new PropertyValueFactory<>("bedrooms"));
         soPhongTamTable.setCellValueFactory(new PropertyValueFactory<>("bathrooms"));
         noiThatTable.setCellValueFactory(new PropertyValueFactory<>("furniture"));
+        trangthai.setCellValueFactory(new PropertyValueFactory<>("status"));
         apartmentObservableList = getApartmentList();
         table__P1__1.setItems(apartmentObservableList);
     }
@@ -1625,16 +1629,8 @@ public class BuildingManagerController implements Initializable {
             return;
         }
 
-        if (containsNumber(newName)) {
-            showAlert("Lỗi", "Tên Không Được Nhập Bằng Số", AlertType.ERROR);
-            return;
-        }
-        String revenueInput1 = tienPhatField.getText().replaceAll(",", "");
 
-        if (!isValidNumber(revenueInput1)) {
-            showAlert("Lỗi", "Tiền Phạt Vui Lòng Nhập Bằng Số", AlertType.ERROR);
-            return;
-        }
+       
 
         Violation newViolation = new Violation();
         newViolation.setViolationID((newViolationID));

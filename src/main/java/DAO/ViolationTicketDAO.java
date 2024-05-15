@@ -90,7 +90,9 @@ public class ViolationTicketDAO implements DAOInterface<ViolationTicket> {
         try {
             Connection connection = JDBCUtil.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM ViolationTicket";
+            String sql = "SELECT ViolationTicket.violationID,ViolationTicket.violationTicketID,ViolationTicket.Date,ViolationTicket.monthlyRentBillID,ViolationTicket.note,Violation.price\r\n" + //
+                                "from Violation,ViolationTicket\r\n" + //
+                                "where Violation.violationID=ViolationTicket.violationID";
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {

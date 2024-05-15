@@ -105,7 +105,17 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         try {
             Connection connection = JDBCUtil.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM Apartment";
+            String sql = "SELECT B.apartmentID, " + // Added space after comma
+                    "CASE " +
+                    "    WHEN LA.apartmentID IS NOT NULL THEN 'Đã thuê' " + 
+                    "    ELSE N'Còn trống' " + 
+                    "END AS status, B.area, B.bathrooms, B.bedrooms, B.buildingID, B.furniture, B.roomNumber " + 
+                                                                                                                    
+                                                                                                                 
+                                                                                                                  
+                    "FROM Apartment B " + // Added space after B
+                    "LEFT JOIN LeaseAgreement LA ON B.apartmentID = LA.apartmentID"; 
+
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
@@ -153,8 +163,9 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         int bedrooms = resultSet.getInt("bedrooms");
         int bathrooms = resultSet.getInt("bathrooms");
         String furniture = resultSet.getString("furniture");
+        String status = resultSet.getString("status");
 
-        return new Apartment(apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture);
+        return new Apartment(apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture, status);
     }
 
     public ArrayList<Apartment> search(String keyword, String buildingManagerID) {
