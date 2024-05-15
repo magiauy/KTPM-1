@@ -587,8 +587,8 @@ public class BuildingManagerController implements Initializable {
 
     public void initTenant() {
         maKhachHangTable_1.setCellValueFactory(new PropertyValueFactory<>("tenantID"));
-        hoKhachHangTable.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        tenKhachHangTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        hoKhachHangTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        tenKhachHangTable.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         soDienThoaiKhachHangTable.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         ngaySinhKhachHangTable.setCellValueFactory(new PropertyValueFactory<>("dateOfBirthDay"));
         gioiTinhKhachHangTable.setCellValueFactory(new PropertyValueFactory<>("gender"));
@@ -854,6 +854,12 @@ public class BuildingManagerController implements Initializable {
     private Button bnt__P3__update;
 
     @FXML
+    private Button btn_huyLoc;
+
+    @FXML
+    private Button btn_loc;
+
+    @FXML
     private ComboBox<String> comboBox__P3__1 = new ComboBox<>();
 
     @FXML
@@ -864,6 +870,12 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     private DatePicker datePicker__P3 = new DatePicker();
+
+    @FXML
+    private DatePicker Date__P3__1 = new DatePicker();
+
+    @FXML
+    private DatePicker Date__P3__2 = new DatePicker();
 
     @FXML
     private TableView<MonthlyRentBill> table__P3__1 = new TableView<>();
@@ -965,6 +977,14 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
+    void timPhieuThu(KeyEvent event) {
+        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+        ArrayList<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.searchMonthlyRentBills(TxtField__P3__search.getText(), this.ID);
+        ObservableList<MonthlyRentBill> search = FXCollections.observableArrayList(monthlyRentBills);
+        monthlyRentBillObservableList.setAll(search);
+    }
+
+    @FXML
     void xoaPhieuThu(ActionEvent event) {
         MonthlyRentBill monthlyRentBill = table__P3__1.getSelectionModel().getSelectedItem();
         if (monthlyRentBill != null) {
@@ -979,6 +999,23 @@ public class BuildingManagerController implements Initializable {
             }
         }
     }
+
+    @FXML
+    void huyLocPhieuThu(MouseEvent event) {
+            monthlyRentBillObservableList = getMonthlyRentBillObservableList();
+            table__P3__1.setItems(monthlyRentBillObservableList);
+    }
+
+    @FXML
+    void locPhieuThu(MouseEvent event) {
+        if (Date__P3__1!=null&&Date__P3__2!=null) {
+            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+            ArrayList<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.fill(this.ID, Date__P3__1.getValue(), Date__P3__2.getValue());
+            ObservableList<MonthlyRentBill> fill = FXCollections.observableArrayList(monthlyRentBills);
+            monthlyRentBillObservableList.setAll(fill);
+        }
+    }
+
 
     // Dich Vu
 
@@ -2230,7 +2267,7 @@ public class BuildingManagerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            comboBox__P1__3.getItems().addAll("Basis", "Full", "No");
+            comboBox__P1__3.getItems().addAll("Cơ bản", "Đầy đủ", "Không có");
             comboBox__P1__3.setPromptText("");
             initApartment();
             comboBox__P2__3.getItems().addAll("Nam", "Nữ");
@@ -2248,7 +2285,7 @@ public class BuildingManagerController implements Initializable {
             comboBox__P5__3.setPromptText("");
             initFurniture();
 
-            comboBox__P1__2.getItems().addAll("Basis", "Full", "No");
+            comboBox__P1__2.getItems().addAll("Cơ bản", "Đầy đủ", "Không có");
             comboBox__P1__2.setPromptText("");
             // Chạy page 0
             loadPage0();
