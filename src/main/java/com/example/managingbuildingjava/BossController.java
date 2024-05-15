@@ -49,6 +49,8 @@ import DTO.Building;
 import DTO.BuildingManager;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 public class BossController implements Initializable {
 
     private static BossController instance;
@@ -121,32 +123,39 @@ public class BossController implements Initializable {
     private void page4(MouseEvent event) throws IOException {
         loadPage("Boss-view-Page4");
     }
+    @FXML
+    void loadHour(MouseEvent event) {
+        TimeNow();
+        drawLineChartOfMonthlyOpex();
+        updateNumberOfStatus();
+        updateMonthlyRevenueLabel();
+    }
 
     @FXML
-    private TableView<Building> table__view;
+    private TableView<Building> table__view = new TableView<>();
 
     @FXML
-    private TableView<DTO.BuildingManager> table__view2;
+    private TableView<DTO.BuildingManager> table__view2 = new TableView<>();
 
     @FXML
-    private TableColumn<Building, String> maToaNhaColumn;
+    private TableColumn<Building, String> maToaNhaColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<Building, String> tenColumn;
+    private TableColumn<Building, String> tenColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<Building, String> thanhPhoColumn;
+    private TableColumn<Building, String> thanhPhoColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<Building, String> quanColumn;
+    private TableColumn<Building, String> quanColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<Building, String> diaChiColumn;
+    private TableColumn<Building, String> diaChiColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<Building, Integer> soLuongCanHoColumn;
+    private TableColumn<Building, Integer> soLuongCanHoColumn = new TableColumn<>();
     @FXML
-    private TextField TxtField__P1__1;
+    private TextField TxtField__P1__1 = new TextField();
 
     @FXML
     private TextField TxtField__P1__search = new TextField();
@@ -154,44 +163,44 @@ public class BossController implements Initializable {
     TextField seacrch_namepage1 = new TextField();
 
     @FXML
-    private TextField TxtField__P1__2;
+    private TextField TxtField__P1__2 = new TextField();
     @FXML
-    private TextField TxtField__P1__3;
+    private TextField TxtField__P1__3 = new TextField();
     @FXML
-    private ComboBox<String> TxtField__P1__4;
+    private ComboBox<String> TxtField__P1__4 = new ComboBox<>();
     @FXML
-    private TextField TxtField__P1__5;
+    private TextField TxtField__P1__5 = new TextField();
     @FXML
-    private TextField TxtField__P1__6;
+    private TextField TxtField__P1__6 = new TextField();
 
     @FXML
-    private TableColumn<DTO.BuildingManager, String> buildingManagerIdColumn;
+    private TableColumn<DTO.BuildingManager, String> buildingManagerIdColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<DTO.BuildingManager, String> buildingIdColumn;
+    private TableColumn<DTO.BuildingManager, String> buildingIdColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<DTO.BuildingManager, String> lastNameColumn;
+    private TableColumn<DTO.BuildingManager, String> lastNameColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<DTO.BuildingManager, String> firstNameColumn;
+    private TableColumn<DTO.BuildingManager, String> firstNameColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<DTO.BuildingManager, String> phoneNumberColumn;
+    private TableColumn<DTO.BuildingManager, String> phoneNumberColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<DTO.BuildingManager, LocalDate> dobColumn;
+    private TableColumn<DTO.BuildingManager, LocalDate> dobColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<DTO.BuildingManager, String> genderColumn;
+    private TableColumn<DTO.BuildingManager, String> genderColumn = new TableColumn<>();
     @FXML
-    private TableColumn<DTO.BuildingManager, String> positionColumn;
+    private TableColumn<DTO.BuildingManager, String> positionColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<DTO.BuildingManager, String> citizenIdentityCardColumn;
+    private TableColumn<DTO.BuildingManager, String> citizenIdentityCardColumn = new TableColumn<>();
 
     @FXML
-    private TableColumn<DTO.BuildingManager, Float> salaryColumn;
+    private TableColumn<DTO.BuildingManager, Float> salaryColumn = new TableColumn<>();
 
     @FXML
     private TextField TxtField__b1;
@@ -218,12 +227,12 @@ public class BossController implements Initializable {
     private DatePicker datePickerDOB;
 
     @FXML
-    private ComboBox<String> fruitCombo;
+    private ComboBox<String> fruitCombo = new ComboBox<>();
     @FXML
-    private ComboBox<String> box_dress;
+    private ComboBox<String> box_dress = new ComboBox<>();
 
     @FXML
-    private ComboBox<String> comboBox__P1__1;
+    private ComboBox<String> comboBox__P1__1 = new ComboBox<>();
     @FXML
     private ComboBox<String> comboBox__P1__2;
     @FXML
@@ -240,21 +249,21 @@ public class BossController implements Initializable {
     // Page 3
 
     @FXML
-    private TableView<FinancialReport> table__view3;
+    private TableView<FinancialReport> table__view3 = new TableView<>();
     @FXML
     private TableColumn<FinancialReport, String> maBaoCaoColumn =new TableColumn<>();
     @FXML
-    private TableColumn<FinancialReport, String> maQuanLiColumn;
+    private TableColumn<FinancialReport, String> maQuanLiColumn = new TableColumn<>();
     @FXML
-    private TableColumn<FinancialReport, String> maToaNha1Column;
+    private TableColumn<FinancialReport, String> maToaNha1Column = new TableColumn<>();
     @FXML
-    private TableColumn<FinancialReport, Date> ngayColumn;
+    private TableColumn<FinancialReport, Date> ngayColumn = new TableColumn<>();
     @FXML
-    private TableColumn<FinancialReport, Float> doanhThuColumn;
+    private TableColumn<FinancialReport, Float> doanhThuColumn = new TableColumn<>();
     @FXML
-    private TableColumn<FinancialReport, Float> monthlyOpexColumn;
+    private TableColumn<FinancialReport, Float> monthlyOpexColumn = new TableColumn<>();
     @FXML
-    private TableColumn<FinancialReport, Float> loiNhuanColumn;
+    private TableColumn<FinancialReport, Float> loiNhuanColumn = new TableColumn<>();
 
     @FXML
     private TextField TxtField__r1;
@@ -317,6 +326,7 @@ public class BossController implements Initializable {
             }
         });
         thread.start();
+        datePage0.setText(LocalDate.now().toString());
     }
 
     public void updateMonthlyRevenueLabel() {
@@ -357,6 +367,9 @@ public class BossController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML
+    private Label datePage0 = new Label();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
