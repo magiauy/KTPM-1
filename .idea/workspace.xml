@@ -6,18 +6,24 @@
   <component name="ChangeListManager">
     <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="nam">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/MonthlyRentBillDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/MonthlyRentBillDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/TenantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/TenantDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NhapNoiThat.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/NhapNoiThat.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/AdminsAccountBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/AdminsAccountBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ViolationTicketBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ViolationTicketBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page2.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page3.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page3.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page4.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page4.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Picture/1110753_Animation_Blurred_Glitter_1280x720.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Picture/1110756_Animation_Blurred_Glitter_1280x720.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Picture/1118488_Liquid_4k_Shiny_1280x720.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Picture/1118499_Liquid_4k_Shiny_1280x720.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page5.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page5.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page6.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page6.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Customer-view-Page0.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +34,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
+        <option value="CSS File" />
         <option value="Class" />
       </list>
     </option>
@@ -48,7 +55,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Kai_Excel" />
+        <entry key="$PROJECT_DIR$" value="ok" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,11 +69,11 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/NghiaNguyen04/BuildingOperationsApplication.git&quot;,
-    &quot;accountId&quot;: &quot;6387b31e-0c04-462a-8819-0a6a7eee3584&quot;
+    &quot;accountId&quot;: &quot;d9c24db4-c8d8-4c9c-9dfb-b74a9afbe00e&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/BUS/CohabitantBUS.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/module-info.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -80,44 +87,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Boss.executor&quot;: &quot;Run&quot;,
-    &quot;Application.BuildingManager.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Customer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.DTO.main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Login.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Test.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TestImport.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TrangChu.executor&quot;: &quot;Run&quot;,
-    &quot;Application.com.example.managingbuildingjava.main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.config.main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/OneDrive/Desktop/Data/code/Java/BuildingOperationsApplication/lib/poi-bin-5.2.3/auxiliary/xmlsec-3.0.0.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.16089965&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.36673555&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Boss.executor": "Run",
+    "Application.BuildingManager.executor": "Run",
+    "Application.Customer.executor": "Run",
+    "Application.DTO.main.executor": "Run",
+    "Application.HelloApplication.executor": "Run",
+    "Application.Login.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.Test.executor": "Run",
+    "Application.TrangChu.executor": "Run",
+    "Application.com.example.managingbuildingjava.main.executor": "Run",
+    "Application.config.main.executor": "Run",
+    "Application.main.executor": "Run",
+    "Application.t.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/BuildingOperationsApplication",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.16089965",
+    "project.structure.side.proportion": "0.36673555",
+    "settings.editor.selected.configurable": "copyright",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Downloads\JavaProject\BuildingOperationsApplication\src\main\resources\com\example\managingbuildingjava" />
@@ -137,32 +146,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Boss" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.Boss" />
-      <module name="ManagingBuildingJava" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.managingbuildingjava.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Customer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.Customer" />
-      <module name="ManagingBuildingJava" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.managingbuildingjava.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="20" />
       <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.BuildingManager" />
@@ -171,14 +154,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Customer" />
-        <item itemvalue="Application.Boss" />
-        <item itemvalue="Application.Customer" />
-        <item itemvalue="Application.Boss" />
-      </list>
-    </recent_temporary>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="NAMFORK" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="NAMFORK" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -260,29 +248,6 @@
       <workItem from="1714204818617" duration="3276000" />
       <workItem from="1714218970635" duration="742000" />
       <workItem from="1714226663351" duration="1749000" />
-      <workItem from="1714404563838" duration="160000" />
-      <workItem from="1714455262379" duration="208000" />
-      <workItem from="1714957059700" duration="217000" />
-      <workItem from="1714958738260" duration="353000" />
-      <workItem from="1714972135754" duration="35000" />
-      <workItem from="1714972219270" duration="4297000" />
-      <workItem from="1715137742627" duration="558000" />
-      <workItem from="1713840870451" duration="11084000" />
-      <workItem from="1713943785940" duration="704000" />
-      <workItem from="1713944513031" duration="2063000" />
-      <workItem from="1713966188778" duration="780000" />
-      <workItem from="1715091368306" duration="896000" />
-      <workItem from="1715149859496" duration="3958000" />
-      <workItem from="1715178750540" duration="4096000" />
-      <workItem from="1715184494593" duration="3913000" />
-      <workItem from="1715197426927" duration="748000" />
-      <workItem from="1715200496909" duration="2086000" />
-      <workItem from="1715237469293" duration="7220000" />
-      <workItem from="1715245497331" duration="649000" />
-      <workItem from="1715246504819" duration="601000" />
-      <workItem from="1715257150440" duration="643000" />
-      <workItem from="1715262162696" duration="1714000" />
-      <workItem from="1715264083651" duration="2682000" />
       <workItem from="1714820415649" duration="206000" />
       <workItem from="1714825884638" duration="7213000" />
       <workItem from="1714868469016" duration="2459000" />
@@ -297,16 +262,14 @@
       <workItem from="1715314071430" duration="622000" />
       <workItem from="1715331481789" duration="3278000" />
       <workItem from="1715340398748" duration="4285000" />
-      <workItem from="1715350935570" duration="3311000" />
-      <workItem from="1715418070914" duration="1390000" />
-      <workItem from="1715435488968" duration="1636000" />
-      <workItem from="1715569474960" duration="1249000" />
-      <workItem from="1715570898249" duration="645000" />
-      <workItem from="1715599444406" duration="1771000" />
-      <workItem from="1715658182548" duration="885000" />
-      <workItem from="1715667267488" duration="2072000" />
-      <workItem from="1715673462833" duration="1655000" />
-      <workItem from="1715675282021" duration="581000" />
+      <workItem from="1715350935570" duration="3573000" />
+      <workItem from="1715484445653" duration="598000" />
+      <workItem from="1715496488426" duration="379000" />
+      <workItem from="1715497851665" duration="11000" />
+      <workItem from="1715500132949" duration="40000" />
+      <workItem from="1715737538688" duration="1126000" />
+      <workItem from="1715745475579" duration="2430000" />
+      <workItem from="1715752739163" duration="5400000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -468,7 +431,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715344389376</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="nam">
+      <option name="closed" value="true" />
+      <created>1715354443927</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1715354443927</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

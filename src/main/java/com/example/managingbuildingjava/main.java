@@ -79,7 +79,7 @@ public class main extends Application {
 
         // Hiển thị cửa sổ đăng nhập
         primaryStage.setScene(loginScene);
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("TITLE");
         primaryStage.show();
     }
 
@@ -108,8 +108,7 @@ public class main extends Application {
                 primaryStage.setScene(buiScene);
             }
             else {
-                AdminsAccountBUS adminsAccountBUS = new AdminsAccountBUS();
-                validLogin = adminsAccountBUS.checkLogin(username, password);
+                validLogin = AdminsAccountBUS.checkLogin(username, password);
                 if (!validLogin.equals("0")) {
                     BossController.getInstance().setID(validLogin);
                     primaryStage.setScene(bossScene);

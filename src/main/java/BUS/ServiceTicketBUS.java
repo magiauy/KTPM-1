@@ -161,12 +161,13 @@ public class ServiceTicketBUS {
         try {
             LocalDate currentDate = LocalDate.now();
             Month currentMonth = currentDate.getMonth();
-
-            String mrBillID = ServiceTicketDAO.getInstance()
-                    .getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
-            if (mrBillID == null) {
+            if (ServiceTicketDAO.getInstance()
+                    .getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).isEmpty()) {
                 return;
             }
+            String mrBillID = ServiceTicketDAO.getInstance()
+                    .getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+
 
             for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()) {
                 if (mrBillID.equals(serviceTicket.getMonthlyRentBillID())
@@ -223,12 +224,13 @@ public class ServiceTicketBUS {
 
         try {
             LocalDate currentDate = LocalDate.now();
-
-            String mrBillID = ServiceTicketDAO.getInstance()
-                    .getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
-            if (mrBillID == null) {
+            if (ServiceTicketDAO.getInstance()
+                    .getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).isEmpty()) {
                 return;
             }
+            String mrBillID = ServiceTicketDAO.getInstance()
+                    .getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+
 
             for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()) {
                 if (mrBillID.equals(serviceTicket.getMonthlyRentBillID())
