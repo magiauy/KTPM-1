@@ -26,7 +26,7 @@ public class AdminsAccountBUS {
         return accountDAO.selectAll();
     }
 
-    public String checkLogin(String username, String password) {
+    public static String checkLogin(String username, String password) {
         if (username.equals("admin") && password.equals("admin")) {
             return "1";
         }

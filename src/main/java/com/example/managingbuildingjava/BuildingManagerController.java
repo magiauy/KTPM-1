@@ -17,6 +17,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -152,6 +153,34 @@ public class BuildingManagerController implements Initializable {
             }
         });
         thread.start();
+    }
+    @FXML
+    private ImageView importButton = new ImageView();
+    @FXML
+    void importExcel(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+
+        // Thiết lập tiêu đề của cửa sổ File Chooser
+        fileChooser.setTitle("Chọn file Excel");
+
+        // Thiết lập bộ lọc để chỉ chấp nhận các file Excel
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx, *.xls)", "*.xlsx", "*.xls");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Hiển thị File Chooser và lấy file được chọn
+        File selectedFile = fileChooser.showOpenDialog(importButton.getScene().getWindow());
+
+        if (selectedFile != null) {
+            // Xử lý file đã chọn ở đây
+            String filePath = selectedFile.getAbsolutePath();
+            System.out.println("File đã chọn: " + filePath);
+            FurnitureBUS fb = new FurnitureBUS();
+            fb.importExcel(filePath);
+        } else {
+            // Người dùng đã hủy bỏ việc chọn file
+            System.out.println("Không có file nào được chọn.");
+        }
+
     }
 
     @FXML
@@ -1377,7 +1406,7 @@ public class BuildingManagerController implements Initializable {
             if (event.getClickCount() == 1) {
                 ServiceTicket selectedRow = table__sericetiket.getSelectionModel().getSelectedItem();
                 if (selectedRow != null) {
-                    System.out.println(selectedRow.getTotalAmount());
+//                    System.out.println(selectedRow.getTotalAmount());
                     maPhieuDVField.setText(selectedRow.getServiceTicketID());
                     maPhieuThuField.setText(selectedRow.getMonthlyRentBillID());
                     maDichVuField.setText(selectedRow.getServiceID());
@@ -1747,6 +1776,8 @@ public class BuildingManagerController implements Initializable {
     private Text nameInfor = new Text();
     @FXML
     private Text phonenfor = new Text();
+    @FXML
+    private Label datePage0 = new Label();
 
     public void loadPage0() {
         TimeNow();
@@ -1754,6 +1785,7 @@ public class BuildingManagerController implements Initializable {
         totalOfBuldings();
         updatePieChart();
         drawBarChart();
+        datePage0.setText(LocalDate.now().toString());
     }
 
     public void updateInfor() {

@@ -109,7 +109,6 @@ public class CustomerController implements Initializable {
                     if (time!=null) time.setText(timenow);
                 });
                 dem++;
-//                System.out.println(dem);
             }
         });
         thread.start();
@@ -228,8 +227,10 @@ public class CustomerController implements Initializable {
         updatePieChart();
         setTabelLeaseAgreement();
         setTableCohabitant();
-
+        datePage0.setText(LocalDate.now().toString());
     }
+    @FXML
+    private Label datePage0 = new Label();
     public void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

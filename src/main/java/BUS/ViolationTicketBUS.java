@@ -72,6 +72,9 @@ public class ViolationTicketBUS {
     public void setTable(TableView<ViolatioUsage> table__P3__2){
         String mrbID = "";
         try{
+            if (ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).isEmpty()) {
+                return;
+            }
             mrbID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
         }
         catch(Exception e){

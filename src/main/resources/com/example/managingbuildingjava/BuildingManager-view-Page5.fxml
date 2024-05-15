@@ -21,7 +21,7 @@
                               <Image url="@../../../Picture/search.png" />
                           </image>
                       </ImageView>
-            <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
+            <Pane layoutX="43.0" layoutY="115.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
                           <TextField fx:id="TxtField__P5__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
                           <TextField fx:id="TxtField__P5__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
@@ -53,6 +53,11 @@
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
+                  <ImageView fx:id="importButton" fitHeight="54.0" fitWidth="46.0" layoutX="187.0" layoutY="410.0" onMouseClicked="#importExcel" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Picture/excel.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
                     <Button fx:id="bnt__P5__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="638.0" mnemonicParsing="false" onAction="#themNoiThat" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">

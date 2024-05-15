@@ -25,7 +25,7 @@
                   <Image url="@../../../Picture/shutterstock_1692834160-copy-scaled.jpg" />
                </image>
             </ImageView>
-            <Button onAction="#logOut" layoutX="20.0" layoutY="670.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
+            <Button layoutX="20.0" layoutY="670.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="120.0" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="481.0" mnemonicParsing="false" onMouseClicked="#page6" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Hợp đồng" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
@@ -136,7 +136,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" layoutX="65.0" layoutY="25.0" prefHeight="30.0" prefWidth="170.0" text="24/ 03/ 2024" textAlignment="CENTER" textFill="WHITE" />
+                  <Label fx:id="datePage0" alignment="CENTER" layoutX="65.0" layoutY="25.0" prefHeight="30.0" prefWidth="170.0" textAlignment="CENTER" textFill="WHITE" />
                   <Label alignment="CENTER" layoutX="47.0" layoutY="252.0" prefHeight="35.0" prefWidth="206.0" text="TP.HCM" textAlignment="CENTER" textFill="WHITE" />
                </children>
             </Pane>
