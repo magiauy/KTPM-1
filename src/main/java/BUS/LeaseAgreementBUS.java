@@ -1,6 +1,8 @@
 package BUS;
 
+import DAO.FurnitureDAO;
 import DAO.LeaseAgreementDAO;
+import DTO.Furniture;
 import DTO.LeaseAgreement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -107,5 +109,9 @@ public class LeaseAgreementBUS {
             rentLabel.setText(String.valueOf(leaseAgreement.getMonthlyRent()));
         }
 
+    }
+
+    public ArrayList<LeaseAgreement> searchApartments(String keyword, String buildingManagerID) {
+        return LeaseAgreementDAO.getInstance().search(keyword, buildingManagerID);
     }
 }

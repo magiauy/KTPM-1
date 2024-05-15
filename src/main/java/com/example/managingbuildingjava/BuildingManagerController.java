@@ -784,6 +784,22 @@ public class BuildingManagerController implements Initializable {
         }
     }
 
+    @FXML
+    void timKhachHang(KeyEvent event) {
+        TenantBUS tenantBUS = new TenantBUS();
+        ArrayList<Tenant> tenants = tenantBUS.searchTenants(TxtField__P2__search.getText(), this.ID);
+        ObservableList<Tenant> tenantSearch = FXCollections.observableArrayList(tenants);
+        tenantObservableList.setAll(tenantSearch);
+    }
+
+    @FXML
+    void timCuDan(KeyEvent event) {
+        CohabitantBUS cohabitantBUS = new CohabitantBUS();
+        ArrayList<Cohabitant> cohabitants = cohabitantBUS.searchCohabitants(TxtField__P2_1__search.getText(), this.ID);
+        ObservableList<Cohabitant> cohabitantSearch = FXCollections.observableArrayList(cohabitants);
+        cohabitantObservableList.setAll(cohabitantSearch);
+    }
+
     //
 
     @FXML
@@ -1984,6 +2000,14 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
+    void timNoiThat(KeyEvent event) {
+        FurnitureBUS furnitureBUS = new FurnitureBUS();
+        ArrayList<Furniture> furnitures = furnitureBUS.searchApartments(TxtField__P5__search.getText(), this.ID);
+        ObservableList<Furniture> furnitureSearch = FXCollections.observableArrayList(furnitures);
+        furnitureObservableList.setAll(furnitureSearch);
+    }
+
+    @FXML
     void xoaNoiThat(ActionEvent event) {
         Furniture selectedApartment = table__P5__1.getSelectionModel().getSelectedItem();
         if (selectedApartment != null) {
@@ -2160,8 +2184,8 @@ public class BuildingManagerController implements Initializable {
             LeaseAgreement leaseAgreement = new LeaseAgreement();
             leaseAgreement.setLeaseAgreementID(TxtField__P6__1.getText());
             leaseAgreement.setTenantID(TxtField__P6__2.getText());
-            leaseAgreement.setBuildingManagerID(TxtField__P6__3.getText());
-            leaseAgreement.setApartmentID((TxtField__P6__4.getText()));
+            leaseAgreement.setApartmentID((TxtField__P6__3.getText()));
+            leaseAgreement.setBuildingManagerID(ID);
             leaseAgreement.setSigningDate(DP_P6_1.getValue());
             leaseAgreement.setLeaseStartDate(DP_P6_2.getValue());
             leaseAgreement.setLeaseEndDate(DP_P6_3.getValue());
@@ -2177,6 +2201,14 @@ public class BuildingManagerController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    void timHopDong(KeyEvent event) {
+        LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
+        ArrayList<LeaseAgreement> leaseAgreements = leaseAgreementBUS.searchApartments(TxtField__P6__search.getText(), this.ID);
+        ObservableList<LeaseAgreement> leaseAgreementSearch = FXCollections.observableArrayList(leaseAgreements);
+        leaseAgreementObservableList.setAll(leaseAgreementSearch);
     }
 
     @FXML
@@ -2198,7 +2230,7 @@ public class BuildingManagerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            comboBox__P1__3.getItems().addAll("Cơ bản", "Tiện nghi", "Cao cấp");
+            comboBox__P1__3.getItems().addAll("Basis", "Full", "No");
             comboBox__P1__3.setPromptText("");
             initApartment();
             comboBox__P2__3.getItems().addAll("Nam", "Nữ");
@@ -2215,6 +2247,9 @@ public class BuildingManagerController implements Initializable {
             comboBox__P5__3.getItems().addAll("Mới", "Cũ");
             comboBox__P5__3.setPromptText("");
             initFurniture();
+
+            comboBox__P1__2.getItems().addAll("Basis", "Full", "No");
+            comboBox__P1__2.setPromptText("");
             // Chạy page 0
             loadPage0();
 

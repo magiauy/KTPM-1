@@ -5,6 +5,7 @@
 package DAO;
 
 import DTO.LeaseAgreement;
+import DTO.Tenant;
 import config.JDBCUtil;
 
 import java.sql.*;
@@ -163,5 +164,34 @@ public class LeaseAgreementDAO implements DAOInterface<LeaseAgreement>{
         return new LeaseAgreement(leaseAgreementID, tenantID, apartmentID, buildingManagerID, signingDate, leaseStartDate, leaseEndDate, leaseTerm, deposit, monthlyRent);
     }
 
+    public ArrayList<LeaseAgreement> search(String keyword, String buildingManagerID){
+        ArrayList<LeaseAgreement> searchResults = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            String sql = "SELECT * \n" +
+                    "FROM LeaseAgreement A \n" +
+                    "WHERE (A.leaseAgreementID LIKE ? OR A.tenantID LIKE ? OR A.apartmentID LIKE ?) \n" +
+                    "AND A.buildingManagerID = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + keyword + "%");
+            preparedStatement.setString(2, "%" + keyword + "%");
+            preparedStatement.setString(3, "%" + keyword + "%");
+            preparedStatement.setString(4, buildingManagerID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                LeaseAgreement leaseAgreement = createLeaseAgreementFromResultSet(resultSet);
+                searchResults.add(leaseAgreement);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return searchResults;
+    }
 
 }
