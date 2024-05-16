@@ -1064,7 +1064,7 @@ public class BuildingManagerController implements Initializable {
 
                     Double totalPayment = list.getMonthlyRent();
                     monthlyRentBill.setTotalPayment(totalPayment);
-                    monthlyRentBill.setStatus("Chưa trả");
+                    monthlyRentBill.setStatus("Chưa thanh toán");
 
                     MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
                     monthlyRentBillBUS.add(monthlyRentBill);

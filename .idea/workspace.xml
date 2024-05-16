@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="nam">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/LeaseAgreementBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/LeaseAgreementBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ViolationTicketBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ViolationTicketBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,6 +257,7 @@
       <workItem from="1715752739163" duration="5400000" />
       <workItem from="1715766977276" duration="1476000" />
       <workItem from="1715772733286" duration="1167000" />
+      <workItem from="1715867213563" duration="417000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
