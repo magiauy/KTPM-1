@@ -28,7 +28,7 @@ public class MonthlyRentBillDAO implements DAOInterface<MonthlyRentBill> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             preparedStatement.setString(1, monthlyRentBill.getMonthlyRentBillID());
             preparedStatement.setString(2, monthlyRentBill.getApartmentID());

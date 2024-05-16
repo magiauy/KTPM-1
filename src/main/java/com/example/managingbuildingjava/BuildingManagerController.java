@@ -201,6 +201,12 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
+    private Label Regex__P1__1 = new Label();
+
+    @FXML
+    private Label Regex__P1__2 = new Label();
+
+    @FXML
     private TextField TxtField__P1__1 = new TextField();
 
     @FXML
@@ -253,6 +259,26 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     private TableColumn<Apartment, Integer> soPhongTamTable = new TableColumn<>();
+
+    public boolean isInteger(String str) {
+        if (str == null) {
+            return false;
+        }
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isString(String str) {
+        if (str == null || str.isEmpty()) {
+            return true;
+        }
+        return !str.matches(".*\\d.*");
+    }
+
 
     @FXML
     private TableView<Apartment> table__P1__1 = new TableView<>();
@@ -314,6 +340,8 @@ public class BuildingManagerController implements Initializable {
         TxtField__P1__4.setText("");
         TxtField__P1__5.setText("");
         comboBox__P1__3.getSelectionModel().clearSelection();
+        Regex__P1__1.setText("");
+        Regex__P1__2.setText("");
     }
 
     private void initApartment() {
@@ -337,11 +365,22 @@ public class BuildingManagerController implements Initializable {
         TxtField__P1__4.setText(String.valueOf(selectedApartment.getBedrooms()));
         TxtField__P1__5.setText(String.valueOf(selectedApartment.getBathrooms()));
         comboBox__P1__3.setValue(selectedApartment.getFurniture());
+        Regex__P1__1.setText("");
+        Regex__P1__2.setText("");
     }
 
     @FXML
     void suaCanHo(MouseEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
+        if (!isInteger(TxtField__P1__4.getText())){
+            Regex__P1__1.setText("Only number");
+        }
+        if (!isInteger(TxtField__P1__5.getText())){
+            Regex__P1__2.setText("Only number");
+        }
+        if (!isInteger(TxtField__P1__4.getText())||!isInteger(TxtField__P1__5.getText())){
+            return;
+        }
         selectedApartment.setApartmentID(TxtField__P1__1.getText());
 
         BuildingManagerBUS bus = new BuildingManagerBUS();
@@ -373,6 +412,15 @@ public class BuildingManagerController implements Initializable {
     @FXML
     void themCanHo(MouseEvent event) {
         try {
+            if (!isInteger(TxtField__P1__4.getText())){
+                Regex__P1__1.setText("phải là số");
+            }
+            if (!isInteger(TxtField__P1__5.getText())){
+                Regex__P1__2.setText("phải là số");
+            }
+            if (!isInteger(TxtField__P1__4.getText())||!isInteger(TxtField__P1__5.getText())){
+                return;
+            }
             Apartment newApartment = new Apartment();
             BuildingManagerBUS bus = new BuildingManagerBUS();
             List<BuildingManager> buildingManagers = bus.getAll();
@@ -495,7 +543,7 @@ public class BuildingManagerController implements Initializable {
     private TableColumn<Cohabitant, String> cCCDCuDanTable = new TableColumn<>();
 
     @FXML
-    private TableColumn<?, String> cCCDTable = new TableColumn<>();
+    private TableColumn<Tenant, String> cCCDTable = new TableColumn<>();
 
     @FXML
     private ComboBox<String> comboBox__P2_1__1 = new ComboBox<>();
@@ -559,6 +607,18 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     private TableColumn<Tenant, String> tenKhachHangTable = new TableColumn<>();
+
+    @FXML
+    private Label Regex__P2__1 = new Label();
+
+    @FXML
+    private Label Regex__P2__2 = new Label();
+
+    @FXML
+    private Label Regex__P2__3 = new Label();
+
+    @FXML
+    private Label Regex__P2__4 = new Label();
 
     private ObservableList<Tenant> tenantObservableList;
 
@@ -730,6 +790,11 @@ public class BuildingManagerController implements Initializable {
     @FXML
     void themKhachHang(ActionEvent event) {
         try {
+            if (TxtField__P2__2.getText().equals("")){
+                Regex__P2__1.setText("Tên không được bỏ trống");
+            } else if (!isString(TxtField__P2__2.getText())) {
+                Regex__P2__1.setText("Tên không được chứa số");
+            }
             Tenant tenant = new Tenant();
             tenant.setTenantID(TxtField__P2__1.getText());
             tenant.setFirstName(TxtField__P2__2.getText());
@@ -958,19 +1023,33 @@ public class BuildingManagerController implements Initializable {
         try {
             MonthlyRentBill monthlyRentBill = new MonthlyRentBill();
             monthlyRentBill.setMonthlyRentBillID(TxtField__P3__1.getText());
-            monthlyRentBill.setApartmentID(TxtField__P3__2.getText());
-            monthlyRentBill.setTenantID(TxtField__P3__3.getText());
-            monthlyRentBill.setDate(datePicker__P3.getValue());
-            monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
-            monthlyRentBill.setTotalPayment(Double.parseDouble(TxtField__P3__6.getText()));
-            monthlyRentBill.setStatus(comboBox__P3__3.getSelectionModel().getSelectedItem());
+            String apartmentID = TxtField__P3__2.getText();
+            LeaseAgreementBUS checkApartmentID = new LeaseAgreementBUS();
+            List<LeaseAgreement> leaseAgreementList = checkApartmentID.getAll();
+            for (LeaseAgreement list: leaseAgreementList) {
+                if (list.getApartmentID().equals(apartmentID)){
+                    monthlyRentBill.setApartmentID(apartmentID);
+                    monthlyRentBill.setTenantID(list.getTenantID());
+                    monthlyRentBill.setDate(LocalDate.now());
+                    monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
 
-            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-            monthlyRentBillBUS.add(monthlyRentBill);
+                    Double totalPayment = list.getMonthlyRent();
+                    monthlyRentBill.setTotalPayment(totalPayment);
+                    monthlyRentBill.setStatus("Chưa trả");
 
-            monthlyRentBillObservableList.add(monthlyRentBill);
-            table__P3__1.setItems(monthlyRentBillObservableList);
-            refreshFormMonthlyRentBill();
+                    MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+                    monthlyRentBillBUS.add(monthlyRentBill);
+
+                    monthlyRentBillObservableList.add(monthlyRentBill);
+                    table__P3__1.setItems(monthlyRentBillObservableList);
+                    refreshFormMonthlyRentBill();
+
+
+
+                    break;
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1425,6 +1504,35 @@ public class BuildingManagerController implements Initializable {
             showAlert("Thất Bại", "Không Thể Thêm Phiếu Dịch Vụ", AlertType.ERROR);
         }
 
+        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+        List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
+        LocalDate now = LocalDate.now();
+        LocalDate sameDayLastMonth = now.minusMonths(1);
+
+        for (int i = 0; i < monthlyRentBillList.size(); i++) {
+            MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
+            if (monthlyRentBill.getMonthlyRentBillID().equals(service.getMonthlyRentBillID()) &&
+                    (service.getDate().isAfter(sameDayLastMonth) || service.getDate().isEqual(sameDayLastMonth)) &&
+                    (service.getDate().isBefore(now) || service.getDate().isEqual(now))) {
+
+
+                monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + service.getTotalAmount());
+
+
+                // Cập nhật dữ liệu trong ObservableList
+                MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
+                boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
+                if (updateSuccess) {
+                    monthlyRentBillObservableList.set(i, monthlyRentBill);
+                    table__P3__1.refresh();
+                } else {
+                    System.err.println("Không thể cập nhật phiếu thu trong cơ sở dữ liệu.");
+                }
+                break;
+            }
+        }
+
+
     }
 
     public void handleDeleteServiceTicket() {
@@ -1850,6 +1958,34 @@ public class BuildingManagerController implements Initializable {
 
         } else {
             showAlert("Thất Bại", "Không thể thêm vi phạm", AlertType.ERROR);
+        }
+
+        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+        List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
+        LocalDate now = LocalDate.now();
+        LocalDate sameDayLastMonth = now.minusMonths(1);
+
+        for (int i = 0; i < monthlyRentBillList.size(); i++) {
+            MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
+            if (monthlyRentBill.getMonthlyRentBillID().equals(violationTickets.getMonthlyRentBillID()) &&
+                    (violationTickets.getDate().isAfter(sameDayLastMonth) || violationTickets.getDate().isEqual(sameDayLastMonth)) &&
+                    (violationTickets.getDate().isBefore(now) || violationTickets.getDate().isEqual(now))) {
+
+
+                monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + violationTickets.getPrice());
+
+
+                // Cập nhật dữ liệu trong ObservableList
+                MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
+                boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
+                if (updateSuccess) {
+                    monthlyRentBillObservableList.set(i, monthlyRentBill);
+                    table__P3__1.refresh();
+                } else {
+                    System.err.println("Không thể cập nhật phiếu thu trong cơ sở dữ liệu.");
+                }
+                break;
+            }
         }
 
     }

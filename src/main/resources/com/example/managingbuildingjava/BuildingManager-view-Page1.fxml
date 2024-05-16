@@ -59,6 +59,8 @@
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Label>
+                  <Label fx:id="Regex__P1__1" layoutX="133.0" layoutY="196.0" prefHeight="17.0" prefWidth="165.0"/>
+                  <Label fx:id="Regex__P1__2" layoutX="133.0" layoutY="252.0" prefHeight="17.0" prefWidth="165.0" />
                     </children>
                 </Pane>
                 <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="40.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#themCanHo" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
