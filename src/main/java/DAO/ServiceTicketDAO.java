@@ -1,6 +1,7 @@
 package DAO;
 
 import DTO.ServiceTicket;
+import DTO.ViolationTicket;
 import config.JDBCUtil;
 
 import java.sql.*;
@@ -245,6 +246,40 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
             e.printStackTrace();
         }
         return monthlyRentBillIDs;
+    }
+
+     public ArrayList<ServiceTicket> getidSerVice(String id) {
+        ArrayList<ServiceTicket> rentBills = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            String sql = "SELECT * FROM ServiceTicket  WHERE monthlyRentBillID = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                ServiceTicket rentBill = createServiceTicketFromResultSet(resultSet);
+                rentBills.add(rentBill);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rentBills;
+    }
+
+    private ServiceTicket createServiceTicketFromResultSet(ResultSet resultSet) throws SQLException {
+         String serviceTicketID = resultSet.getString("serviceTicketID");
+         String monthlyRentBillID =resultSet.getString("monthlyRentBillID");
+         String serviceID=resultSet.getString("serviceID");
+         Double quantity=resultSet.getDouble("quantity");
+         Double totalAmount= resultSet.getDouble("totalAmount");
+         LocalDate date= resultSet.getDate("date").toLocalDate();
+         String note= resultSet.getString("note");
+         return new ServiceTicket(serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, date, note);
     }
 
 }

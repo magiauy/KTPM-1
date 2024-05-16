@@ -652,15 +652,7 @@ public class BossController implements Initializable {
                     String formattedSalary = df.format(opex);
                     TxtField__r3.setText(formattedSalary);
 
-                    double Revenue = selectedRow.getMonthlyRevenue();
-                    DecimalFormat df1 = new DecimalFormat("#,##0.00");
-                    String formattedSalary1 = df1.format(Revenue);
-                    TxtField__r5.setText(formattedSalary1);
 
-                    double Profit = selectedRow.getMonthlyProfit();
-                    DecimalFormat df2 = new DecimalFormat("#,##0.00");
-                    String formattedSalary2 = df2.format(Profit);
-                    TxtField__r6.setText(formattedSalary2);
 
                     Date_page3.setValue(selectedRow.getDate());
                     selecFinancialReport = selectedRow;
@@ -949,11 +941,17 @@ private boolean containsNumber(String s) {
     }
 
     public void handleDeletepage2() {
+
+        if (selectedBuildingToDelete1 == null) {
+
+            showAlert("Lỗi", "Không có Quản Lí nào được chọn để xóa.", AlertType.ERROR);
+            return;
+        }
         if (selectedBuildingToDelete1 == null) {
             System.out.println("Không có tòa nhà nào được chọn để xóa.");
             return;
         }
-        confirmAndDelete(selectedBuildingToDelete1, "Bạn có chắc chắn muốn xóa tòa nhà này không?", () -> {
+        confirmAndDelete(selectedBuildingToDelete1, "Bạn có chắc chắn muốn xóa quản lí này không?", () -> {
             BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
             boolean deleteResult = buildingManagerBUS.delete(selectedBuildingToDelete1);
             if (deleteResult) {
@@ -967,6 +965,12 @@ private boolean containsNumber(String s) {
     }
 
     public void handleEditBuildingManeger() {
+        if (selectedBuildingToDelete1 == null) {
+
+            showAlert("Lỗi", "Không có Quản Lí nào được chọn để sửa.", AlertType.ERROR);
+            return;
+        }
+        
         String buildingManagerId = TxtField__b1.getText();
         String buildingId = TxtField__b2.getText();
         String lastName = TxtField__b3.getText();
@@ -1052,6 +1056,7 @@ private boolean containsNumber(String s) {
     /// ReanialReport///////==========
 
    public void handleAddReport() {
+
        String financialReportID = TxtField__r1.getText();
        String buildingID = TxtField__r2.getText();
        String buildingManagerID = TxtField__r4.getText();
@@ -1066,28 +1071,15 @@ private boolean containsNumber(String s) {
        System.out.println(doanhthu);
      
        Float monthlyOpex = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
-       Float monthlyProfit = Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
- 
-    //    // Xử lý dữ liệu nhập vào cho monthlyRevenue
-    //    String revenueInput = TxtField__r3.getText().replaceAll(",", "");
-     
+       
 
-    //    // Xử lý dữ liệu nhập vào cho monthlyOpex
-    //    String opexInput = TxtField__r5.getText().replaceAll(",", "");
-    //    System.out.println(opexInput);
-    //    if (!isValidNumber(opexInput)) {
-    //        showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Chi phí hoạt động hàng tháng.", AlertType.ERROR);
-    //        return;
-    //    }
-    //    monthlyOpex = Float.parseFloat(opexInput);
+       Float LoiNhuan = reportBUS.LoiNhuan(buildingID, month, year, monthlyOpex);
+       String LoiNhuan1 = String.valueOf(LoiNhuan);
+       String LoiNhuan2 = LoiNhuan1.replaceAll(",", "");
+       Float LoiNhuan3 = Float.parseFloat(LoiNhuan2);
 
-    //    // Xử lý dữ liệu nhập vào cho monthlyProfit
-    //    String profitInput = TxtField__r6.getText().replaceAll(",", "");
-    //    if (!isValidNumber(profitInput)) {
-    //        showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Lợi nhuận hàng tháng.", AlertType.ERROR);
-    //        return;
-    //    }
-    //    monthlyProfit = Float.parseFloat(profitInput);
+       System.out.println(LoiNhuan3);
+
 
        FinancialReport newFinancialReport = new FinancialReport();
        newFinancialReport.setFinancialReportID(financialReportID);
@@ -1096,7 +1088,7 @@ private boolean containsNumber(String s) {
        newFinancialReport.setDate(date);
        newFinancialReport.setMonthlyRevenue(doanhthu);
        newFinancialReport.setMonthlyOpex(monthlyOpex);
-       newFinancialReport.setMonthlyProfit(monthlyProfit);
+       newFinancialReport.setMonthlyProfit(LoiNhuan3);
 
        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
        boolean check = financialReportBUS.add(newFinancialReport);
@@ -1122,6 +1114,12 @@ private boolean containsNumber(String s) {
     }
 
     public void handleDeleReport() {
+        if (selecFinancialReport == null) {
+
+            showAlert("Lỗi", "Không có báo cáo nào được chọn để xóa.", AlertType.ERROR);
+            return;
+        }
+
         FinancialReportBUS financialReportBUS = new FinancialReportBUS();
         confirmAndDelete(selecFinancialReport, "Bạn có chắc chắn muốn xóa báo cáo này không?", () -> {
             boolean check = financialReportBUS.delete(selecFinancialReport);
@@ -1146,52 +1144,51 @@ private boolean containsNumber(String s) {
     }
 
     public void handEditReport() {
+        if (selecFinancialReport == null) {
+
+            showAlert("Lỗi", "Không có báo cáo nào được chọn để sửa.", AlertType.ERROR);
+            return;
+        }
+
         String financialReportID = TxtField__r1.getText();
         String buildingID = TxtField__r2.getText();
         String buildingManagerID = TxtField__r4.getText();
         LocalDate date = Date_page3.getValue();
-        Float monthlyRevenue = Float.parseFloat(TxtField__r5.getText().replaceAll(",", ""));
+        FinancialReportBUS reportBUS = new FinancialReportBUS();
+        Month month = date.getMonth();
+        int year = date.getYear();
+        Float revenue = (reportBUS.calculateMonthlyRevenueForBuilding(buildingID, month, year));
+        String revenueStr = String.valueOf(revenue);
+        String revenueWithoutComma = revenueStr.replaceAll(",", "");
+        Float doanhthu = Float.parseFloat(revenueWithoutComma);
+        System.out.println(doanhthu);
+
         Float monthlyOpex = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
-        Float monthlyProfit = Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
-   
-        String revenueInput = TxtField__r3.getText().replaceAll(",", "");
-        if (!isValidNumber(revenueInput)) {
-            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Doanh thu hàng tháng.", AlertType.ERROR);
-            return;
-        }
-        monthlyRevenue = Float.parseFloat(revenueInput);
 
-        // Kiểm tra và xử lý monthlyOpex
-        String opexInput = TxtField__r5.getText().replaceAll(",", "");
-        if (!isValidNumber(opexInput)) {
-            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Chi phí hoạt động hàng tháng.", AlertType.ERROR);
-            return;
-        }
-        monthlyOpex = Float.parseFloat(opexInput);
+        Float LoiNhuan = reportBUS.LoiNhuan(buildingID, month, year, monthlyOpex);
+        String LoiNhuan1 = String.valueOf(LoiNhuan);
+        String LoiNhuan2 = LoiNhuan1.replaceAll(",", "");
+        Float LoiNhuan3 = Float.parseFloat(LoiNhuan2);
 
-        // Kiểm tra và xử lý monthlyProfit
-        String profitInput = TxtField__r6.getText().replaceAll(",", "");
-        if (!isValidNumber(profitInput)) {
-            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Lợi nhuận hàng tháng.", AlertType.ERROR);
-            return;
-        }
-        monthlyProfit = Float.parseFloat(profitInput);
+        System.out.println(LoiNhuan3);
+
         FinancialReport newFinancialReport = new FinancialReport();
         newFinancialReport.setFinancialReportID(financialReportID);
         newFinancialReport.setBuildingID(buildingID);
         newFinancialReport.setBuildingManagerID(buildingManagerID);
         newFinancialReport.setDate(date);
-        newFinancialReport.setMonthlyRevenue(monthlyRevenue);
+        newFinancialReport.setMonthlyRevenue(doanhthu);
         newFinancialReport.setMonthlyOpex(monthlyOpex);
-        newFinancialReport.setMonthlyProfit(monthlyProfit);
+        newFinancialReport.setMonthlyProfit(LoiNhuan3);
+
         FinancialReportBUS financialReportBUS = new FinancialReportBUS();
         boolean check = financialReportBUS.update(newFinancialReport);
         if (check) {
-            showAlert("Thành Công", "Sửa Thêm Thành Công", AlertType.CONFIRMATION);
+            showAlert("Thành Công", "Đã sửa Thành Công", AlertType.CONFIRMATION);
             updateFianReport();
             clearFildReport();
         } else {
-            showAlert("Thất Bai", "Sửa Thất Bại", AlertType.ERROR);
+            showAlert("Thất Bai", "sửa Thất Bại", AlertType.ERROR);
         }
 
     }
