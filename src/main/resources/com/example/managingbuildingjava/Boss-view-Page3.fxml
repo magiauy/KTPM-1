@@ -31,17 +31,6 @@
                           <TextField fx:id="TxtField__r2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                           <TextField fx:id="TxtField__r3" layoutX="216.0" layoutY="213.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                           <TextField fx:id="TxtField__r4" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <TextField fx:id="TxtField__r5" layoutX="216.0" layoutY="271.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="345.0" prefHeight="32.0" prefWidth="120.0" text="lợi nhuận" textFill="WHITE">
-                              <font>
-                                  <Font name="System Bold" size="13.0" />
-                              </font>
-                  </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="277.0" prefHeight="32.0" prefWidth="120.0" text="Doanh thu" textFill="WHITE">
-                              <font>
-                                  <Font name="System Bold" size="13.0" />
-                              </font>
-                  </Label>
                           <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="213.0" prefHeight="32.0" prefWidth="120.0" text="Chi phí vận hành" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
@@ -62,13 +51,12 @@
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                  <TextField fx:id="TxtField__r6" layoutX="216.0" layoutY="336.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="417.0" prefHeight="32.0" prefWidth="120.0" text="Ngày" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="277.0" prefHeight="32.0" prefWidth="120.0" text="Ngày" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="Date_page3" layoutX="216.0" layoutY="418.0" prefHeight="30.0" prefWidth="165.0" />
+                  <DatePicker fx:id="Date_page3" layoutX="216.0" layoutY="278.0" prefHeight="30.0" prefWidth="165.0" />
                </children>
             </Pane>
                     <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleAddReport" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
@@ -97,7 +85,7 @@
                                     <TableColumn fx:id="maToaNha1Column" prefWidth="75.0" text="Mã Tòa Nhà" />
                                     <TableColumn fx:id="ngayColumn" prefWidth="75.0" text="Ngày" />
                                     <TableColumn fx:id="doanhThuColumn" prefWidth="75.0" text="Doanh Thu Hàng Tháng" />
-                                    <TableColumn fx:id="monthlyOpexColumn" prefWidth="75.0" text="Monthly Opex" />
+                                    <TableColumn fx:id="monthlyOpexColumn" prefWidth="75.0" text="Chi Phí Vân " />
                                     <TableColumn fx:id="loiNhuanColumn" prefWidth="75.0" text="Lợi Nhuận Hàng Tháng" />
                                 </columns>
                         </TableView>
