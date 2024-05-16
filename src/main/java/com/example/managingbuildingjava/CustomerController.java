@@ -28,10 +28,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -251,8 +254,6 @@ public class CustomerController implements Initializable {
         if(Objects.equals(searchText, "")){
             showAlert("Lỗi", "Vui lòng nhập mã phiếu thu.", Alert.AlertType.ERROR);
         } else {
-            String mrID = ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
-
             monthlyRentBillIdColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, String>("monthlyRentBillID"));
             dateColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, LocalDate>("date"));
             repaymentPeriodColumn.setCellValueFactory(new PropertyValueFactory<MonthlyRentBill, Integer>("repaymentPeriod"));
@@ -275,20 +276,93 @@ public class CustomerController implements Initializable {
         dateVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, LocalDate>("date"));
         noteVioCol.setCellValueFactory(new PropertyValueFactory<ViolatioUsage, String>("note"));
 
-        ViolationTicketBUS.getInstance().setTable(table__P3__2);
+        String mrbID = "";
+        try{
+            if (ViolationTicketBUS.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(ID).isEmpty()) {
+                return;
+            }
+            mrbID = ViolationTicketBUS.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(ID).getFirst();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        ArrayList<String> ticketId = new ArrayList<>();
+        ArrayList<String> vioID =  new ArrayList<>();
+        ArrayList<String> name = new ArrayList<>();
+        ArrayList<Double> price = new ArrayList<>();
+        ArrayList<LocalDate> date = new ArrayList<>();
+        ArrayList<String> note = new ArrayList<>();
+
+        for (ViolationTicket violationTicket : ViolationTicketBUS.getInstance().getAll()) {
+            if (Objects.equals(violationTicket.getMonthlyRentBillID(), mrbID)) {
+                vioID.add(violationTicket.getViolationID());
+                ticketId.add(violationTicket.getViolationTicketID());
+
+                date.add(violationTicket.getDate());
+                note.add(violationTicket.getNote());
+                price.add(violationTicket.getPrice());
+            }
+        }
+        ArrayList<Violation> violations = ViolationBUS.getInstance().getAll();
+        for (String sID : vioID) {
+            for (Violation violation : violations){
+                if(violation.getViolationID().equals(sID)){
+                    name.add(violation.getName());
+                }
+            }
+        }
+
+        ObservableList<ViolatioUsage> data = FXCollections.observableArrayList();
+        for (int i = 0; i < name.size(); i++) {
+            ViolatioUsage violatioUsage = new ViolatioUsage(ticketId.get(i), name.get(i), price.get(i), date.get(i), note.get(i));
+            data.add(violatioUsage);
+        }
+        table__P3__2.setItems(data);
 
     }
     @FXML
     void regisMobile(){
-        LocalDate dateRegis = selectSersDate.getValue();
+        LocalDate currentDate = selectSersDate.getValue();
         String note = noteFixedRegis.getText();
         String serName = comboBox__P1__21.getValue();
 
-        if (dateRegis == null || serName == null){
+        if (currentDate == null || serName == null){
             showAlert("Lỗi", "Vui lòng thử lại.", Alert.AlertType.ERROR);
         }
         else{
-            ServiceTicketBUS.getInstance().repairInforRegis(serName, dateRegis, note);
+            String servID = "";
+            for (Service service : ServiceBUS.getInstance().getAll()) {
+                if (service.getName().equals(serName)) {
+                    servID = service.getServiceID();
+                }
+            }
+            String servTID = "SERVT" + (ServiceTicketBUS.getInstance().countRows());
+
+            String mrBillID = ServiceTicketBUS.getInstance()
+                    .getCurrentMonthMonthlyRentBillIDsByTenantID(ID).getFirst();
+
+            Double price = 0.0;
+            for (Service service : ServiceBUS.getInstance().getAll()) {
+                if (service.getServiceID().equals(servID)) {
+                    price = service.getPricePerUnit();
+                }
+            }
+
+            ServiceTicket serviceTicket = new ServiceTicket();
+            serviceTicket.setServiceTicketID(servTID);
+            serviceTicket.setServiceID(servID);
+            serviceTicket.setNote(note);
+            serviceTicket.setDate(currentDate);
+            serviceTicket.setMonthlyRentBillID(mrBillID);
+            serviceTicket.setQuantity(1.0);
+            serviceTicket.setTotalAmount(price);
+
+            if (ServiceTicketBUS.getInstance().add(serviceTicket)) {
+                CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công",
+                        Alert.AlertType.CONFIRMATION);
+            } else {
+                CustomerController.getInstance().showAlert("Lỗi", "Vui lòng thử lại", Alert.AlertType.ERROR);
+            }
             updateTableNewRegisServ();
             comboBox__P1__21.setValue(null);
             selectSersDate.setValue(null);
@@ -303,7 +377,57 @@ public class CustomerController implements Initializable {
         quantitySersOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, Double>("quantity"));
         regisSerOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("date"));
 
-        ServiceTicketBUS.getInstance().setTableOldRegisServ(registeredSerOldTable);
+        ArrayList<String> servName = new ArrayList<>();
+        ArrayList<Double> price = new ArrayList<>();
+        ArrayList<LocalDate> date = new ArrayList<>();
+        ArrayList<String> serviceID = new ArrayList<>();
+        ArrayList<Double> quantity = new ArrayList<>();
+
+        try {
+            LocalDate currentDate = LocalDate.now();
+            if (ServiceTicketBUS.getInstance()
+                    .getCurrentMonthMonthlyRentBillIDsByTenantID(ID).isEmpty()) {
+                return;
+            }
+            String mrBillID = ServiceTicketBUS.getInstance()
+                    .getCurrentMonthMonthlyRentBillIDsByTenantID(ID).getFirst();
+
+
+            for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()) {
+                if (mrBillID.equals(serviceTicket.getMonthlyRentBillID())
+                        && serviceTicket.getDate().isBefore(currentDate.withDayOfMonth(1))) {
+                    price.add(serviceTicket.getTotalAmount());
+                    date.add(serviceTicket.getDate());
+                    quantity.add(serviceTicket.getQuantity());
+
+                    serviceID.add(serviceTicket.getServiceID());
+
+                }
+            }
+            if (serviceID.isEmpty()) {
+                return;
+            }
+            ArrayList<Service> services = ServiceBUS.getInstance().getAll();
+            for (String sID : serviceID) {
+                for (Service service : services) {
+                    if (service.getServiceID().equals(sID)) {
+                        servName.add(service.getName());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
+        ObservableList<ServiceUsuage> data = FXCollections.observableArrayList();
+        for (int i = 0; i < servName.size(); i++) {
+            ServiceUsuage serviceUsage = new ServiceUsuage(servName.get(i), String.valueOf(price.get(i)),
+                    quantity.get(i), String.valueOf(date.get(i)));
+            data.add(serviceUsage);
+        }
+
+        registeredSerOldTable.setItems(data);
     }
 
     void updateTableNewRegisServ(){
@@ -313,7 +437,57 @@ public class CustomerController implements Initializable {
         regisSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("date"));
         noteSersCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("note"));
 
-        ServiceTicketBUS.getInstance().setTableRegisServ(registeredSerTable);
+        ArrayList<String> servName = new ArrayList<>();
+        ArrayList<String> note = new ArrayList<>();
+        ArrayList<Double> price = new ArrayList<>();
+        ArrayList<LocalDate> date = new ArrayList<>();
+        ArrayList<String> serviceID = new ArrayList<>();
+
+        try {
+            LocalDate currentDate = LocalDate.now();
+            Month currentMonth = currentDate.getMonth();
+            if (ServiceTicketBUS.getInstance()
+                    .getCurrentMonthMonthlyRentBillIDsByTenantID(ID).isEmpty()) {
+                return;
+            }
+            String mrBillID = ServiceTicketBUS.getInstance()
+                    .getCurrentMonthMonthlyRentBillIDsByTenantID(ID).getFirst();
+
+
+            for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()) {
+                if (mrBillID.equals(serviceTicket.getMonthlyRentBillID())
+                        && currentMonth.equals(serviceTicket.getDate().getMonth())) {
+                    price.add(serviceTicket.getTotalAmount());
+                    date.add(serviceTicket.getDate());
+                    note.add(serviceTicket.getNote());
+
+                    serviceID.add(serviceTicket.getServiceID());
+
+                }
+            }
+            if (serviceID.isEmpty()) {
+                return;
+            }
+            ArrayList<Service> services = ServiceBUS.getInstance().getAll();
+            for (String sID : serviceID) {
+                for (Service service : services) {
+                    if (service.getServiceID().equals(sID)) {
+                        servName.add(service.getName());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
+        ObservableList<ServiceUsuage> data = FXCollections.observableArrayList();
+        for (int i = 0; i < servName.size(); i++) {
+            ServiceUsuage serviceUsage = new ServiceUsuage(servName.get(i), String.valueOf(price.get(i)),
+                    String.valueOf(date.get(i)), note.get(i));
+            data.add(serviceUsage);
+        }
+        registeredSerTable.setItems(data);
     }
     @FXML
     void regisFixed() {
@@ -327,7 +501,7 @@ public class CustomerController implements Initializable {
                 if (noteParkings.getText() != null){
                     note = noteParkings.getText();
                 }
-                ServiceTicketBUS.getInstance().regisServ("SERV3",note, currentDate);
+                regisServ("SERV3",note, currentDate);
                 updateTableNewRegisServ();
             }
             if(playGroundRegis.isSelected()){
@@ -335,7 +509,7 @@ public class CustomerController implements Initializable {
                 if (noteGyms.getText() != null){
                     note = noteGyms.getText();
                 }
-                ServiceTicketBUS.getInstance().regisServ("SERV11",note, currentDate);
+                regisServ("SERV11",note, currentDate);
                 updateTableNewRegisServ();
 
             }
@@ -344,7 +518,7 @@ public class CustomerController implements Initializable {
                 if (notePools.getText() != null){
                     note = notePools.getText();
                 }
-                ServiceTicketBUS.getInstance().regisServ("SERV9",note, currentDate);
+                regisServ("SERV9",note, currentDate);
                 updateTableNewRegisServ();
 
             }
@@ -353,7 +527,7 @@ public class CustomerController implements Initializable {
                 if (noteInternets.getText() != null){
                     note = noteInternets.getText();
                 }
-                ServiceTicketBUS.getInstance().regisServ("SERV5",note, currentDate);
+                regisServ("SERV5",note, currentDate);
                 updateTableNewRegisServ();
 
             }
@@ -362,7 +536,7 @@ public class CustomerController implements Initializable {
                 if (noteInternets.getText() != null){
                     note = noteInternets.getText();
                 }
-                ServiceTicketBUS.getInstance().regisServ("SERV4",note, currentDate);
+                regisServ("SERV4",note, currentDate);
                 updateTableNewRegisServ();
 
             }
@@ -379,6 +553,35 @@ public class CustomerController implements Initializable {
         notePlayGrounds.setText(null);
         noteParkings.setText(null);
 
+    }
+    public void regisServ(String servID, String note, LocalDate currentDate) {
+        String servTID = "SERVT" + (ServiceTicketDAO.getInstance().countRows() + 1);
+
+        String mrBillID = ServiceTicketDAO.getInstance()
+                .getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
+
+        Double price = 0.0;
+        for (Service service : ServiceBUS.getInstance().getAll()) {
+            if (service.getServiceID().equals(servID)) {
+                price = service.getPricePerUnit();
+            }
+        }
+
+        ServiceTicket serviceTicket = new ServiceTicket();
+        serviceTicket.setServiceTicketID(servTID);
+        serviceTicket.setServiceID(servID);
+        serviceTicket.setNote(note);
+        serviceTicket.setDate(currentDate);
+        serviceTicket.setMonthlyRentBillID(mrBillID);
+        serviceTicket.setQuantity(1.0);
+        serviceTicket.setTotalAmount(price);
+
+        if (ServiceTicketBUS.getInstance().add(serviceTicket)) {
+            CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công",
+                    Alert.AlertType.CONFIRMATION);
+        } else {
+            CustomerController.getInstance().showAlert("Lỗi", "Vui lòng thử lại", Alert.AlertType.ERROR);
+        }
     }
 
     void setTableCohabitant(){
@@ -404,12 +607,56 @@ public class CustomerController implements Initializable {
     void setTabelLeaseAgreement(){
         ObservableList<LeaseAgreement> data = FXCollections.observableArrayList(LeaseAgreementBUS.getInstance().getLeaseAgreementsWithTenantId(this.ID));
 
-        LeaseAgreementBUS.getInstance().updateTabelLeaseAgreement(data, termLabel, deposiLabel, rentLabel);
+        for (LeaseAgreement leaseAgreement : data) {
+            termLabel.setText(String.valueOf(leaseAgreement.getLeaseEndDate()));
+            deposiLabel.setText(String.valueOf(leaseAgreement.getDeposit()));
+            rentLabel.setText(String.valueOf(leaseAgreement.getMonthlyRent()));
+        }
     }
 
     void updatePieChart() {
         try {
-            MonthlyRentBillBUS.getInstance().updatePiechart(pieChart,this.ID);
+
+            ObservableList<MonthlyRentBill> monthlyRentBills = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(ID));
+
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+            int unpaidTotal = 0;
+            int unpaidCount = 0;
+            int paidTotal = 0;
+            int paidCount = 0;
+            int overdueTotal = 0;
+            int overdueCount = 0;
+
+            for (MonthlyRentBill bill : monthlyRentBills) {
+                switch (bill.getStatus()) {
+                    case "Unpaid":
+                        unpaidTotal += bill.getTotalPayment();
+                        unpaidCount++;
+                        break;
+                    case "Paid":
+                        paidTotal += bill.getTotalPayment();
+                        paidCount++;
+                        break;
+                    case "Overdue":
+                        overdueTotal += bill.getTotalPayment();
+                        overdueCount++;
+                        break;
+                }
+            }
+
+            // Add data to the pie chart
+            if (unpaidCount > 0) {
+                pieChartData.add(new PieChart.Data("Unpaid (" + unpaidCount + ")", unpaidTotal));
+            }
+            if (paidCount > 0) {
+                pieChartData.add(new PieChart.Data("Paid (" + paidCount + ")", paidTotal));
+            }
+            if (overdueCount > 0) {
+                pieChartData.add(new PieChart.Data("Overdue (" + overdueCount + ")", overdueTotal));
+            }
+
+            pieChart.setData(pieChartData);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -418,7 +665,14 @@ public class CustomerController implements Initializable {
 
     void updateInfor(){
         try{
-            TenantBUS.getInstance().setInfor(fullname, phone,dob,gender,CCCD,this.ID);
+            Tenant tenant = TenantBUS.getInstance().getTenantById(ID);
+            if(tenant != null){
+                fullname.setText("Họ & Tên: "+ tenant.getLastName() + " " + tenant.getFirstName());
+                phone.setText("SDT: "+tenant.getPhoneNumber());
+                dob.setText("Dob: "+ tenant.getDateOfBirthDay());
+                gender.setText("Giới tính: "+tenant.getGender());
+                CCCD.setText("CCCD: "+tenant.getCitizenIdentityCard());
+            }
         }
         catch (Exception e){
             e.printStackTrace();
@@ -427,7 +681,29 @@ public class CustomerController implements Initializable {
 
     void setMonthlyBillLabel() {
         try{
-            MonthlyRentBillBUS.getInstance().updateMonthlyBill(monthlyBillLabel, statusOfMonthlyBills, this.ID);
+
+            ObservableList<MonthlyRentBill> monthlyRentBills = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(ID));
+
+            double totalPayment = 0;
+            String status = "";
+            Month currentDate = LocalDate.now().getMonth();
+            for (MonthlyRentBill monthlyRentBill : monthlyRentBills){
+                if (Objects.equals(monthlyRentBill.getTenantID(), ID)) {
+                    if (monthlyRentBill.getDate().getMonth() == currentDate) {
+                        totalPayment += monthlyRentBill.getTotalPayment();
+                        status = monthlyRentBill.getStatus();
+                    }
+                }
+            }
+            if ("Paid".equals(status)) {
+                statusOfMonthlyBills.setTextFill(Color.BLUE);
+                statusOfMonthlyBills.setText(status);
+            } else {
+                statusOfMonthlyBills.setTextFill(Color.RED);
+                statusOfMonthlyBills.setText(status);
+            }
+
+            monthlyBillLabel.setText(totalPayment+"");
         }
         catch (Exception e){
             e.printStackTrace();

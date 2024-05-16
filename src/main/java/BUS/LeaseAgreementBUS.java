@@ -102,14 +102,6 @@ public class LeaseAgreementBUS {
         }
         return -1; // Not found
     }
-    public void updateTabelLeaseAgreement(ObservableList<LeaseAgreement> leaseAgreements, Label termLabel,Label deposiLabel,Label rentLabel ) {
-        for (LeaseAgreement leaseAgreement : leaseAgreements) {
-            termLabel.setText(String.valueOf(leaseAgreement.getLeaseEndDate()));
-            deposiLabel.setText(String.valueOf(leaseAgreement.getDeposit()));
-            rentLabel.setText(String.valueOf(leaseAgreement.getMonthlyRent()));
-        }
-
-    }
 
     public ArrayList<LeaseAgreement> searchApartments(String keyword, String buildingManagerID) {
         return LeaseAgreementDAO.getInstance().search(keyword, buildingManagerID);
