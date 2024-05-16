@@ -90,7 +90,9 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
         try {
             Connection connection = JDBCUtil.getConnection();
             Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM ServiceTicket";
+            String sql = "SELECT (pricePerUnit*quantity) as tongtien ,ServiceTicket.serviceTicketID,ServiceTicket.monthlyRentBillID,ServiceTicket.serviceID,ServiceTicket.quantity,ServiceTicket.Date,ServiceTicket.note"+
+                               " FROM Service,ServiceTicket "+
+                               "WHERE Service.serviceID=ServiceTicket.serviceID";
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
@@ -98,7 +100,7 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
                 String monthlyRentBillID = resultSet.getString("monthlyRentBillID");
                 String serviceID = resultSet.getString("serviceID");
                 Double quantity = resultSet.getDouble("quantity");
-                Double totalAmount = resultSet.getDouble("totalAmount");
+                Double totalAmount = resultSet.getDouble("tongtien");
                 LocalDate date = resultSet.getDate("Date").toLocalDate();
                 String note = resultSet.getString("note");
 

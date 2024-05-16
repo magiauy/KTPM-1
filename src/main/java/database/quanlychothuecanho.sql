@@ -210,7 +210,7 @@ VALUES ('T1', N'Nguyễn', N'Thị A', '0123456789', '1990-01-10', N'Nữ', '123
        ('T28', N'Văn', N'Văn DD', '0369852152', '1988-08-15', N'Nam', '9876543214'),
        ('T29', N'Hoàng', N'Thị EE', '0932154784', '1992-03-10', N'Nữ', '6547893214'),
        ('T30', N'Dương', N'Văn FF', '0789456126', '1997-10-05', N'Nam', '8529631474');
-INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture)
+INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture,status)
 VALUES ('APT1', 'B1', '101', 50, 1, 1, N'Cơ bản'),
        ('APT2', 'B1', '102', 60, 2, 1, N'Đầy đủ'),
        ('APT3', 'B2', '201', 50, 1, 1, N'Cơ bản'),

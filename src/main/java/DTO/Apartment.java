@@ -16,9 +16,10 @@ public class Apartment {
     private int bedrooms;
     private int bathrooms;
     private String furniture;
+    private String status;
 
     public Apartment(String apartmentID, String buildingID, String roomNumber,
-            Double area, int bedrooms, int bathrooms, String furniture) {
+            Double area, int bedrooms, int bathrooms, String furniture ,String status) {
         this.apartmentID = apartmentID;
         this.buildingID = buildingID;
         this.roomNumber = roomNumber;
@@ -26,6 +27,7 @@ public class Apartment {
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
         this.furniture = furniture;
+        this.status=status;
     }
 
     public Apartment() {
@@ -39,6 +41,7 @@ public class Apartment {
         this.bedrooms = apartment.bedrooms;
         this.bathrooms = apartment.bathrooms;
         this.furniture = apartment.furniture;
+        this.status=apartment.status;
     }
 
     public String getApartmentID() {
@@ -51,6 +54,10 @@ public class Apartment {
 
     public String getBuildingID() {
         return buildingID;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setBuildingID(String buildingID) {
@@ -93,6 +100,10 @@ public class Apartment {
         return furniture;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public void setFurniture(String furniture) {
         this.furniture = furniture;
     }
@@ -107,6 +118,7 @@ public class Apartment {
                 ", bedrooms=" + bedrooms +
                 ", bathrooms=" + bathrooms +
                 ", furniture='" + furniture + '\'' +
+                ", furniture='" + status + '\'' +
                 '}';
     }
 }

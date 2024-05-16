@@ -310,6 +310,9 @@ public class BuildingManagerController implements Initializable {
 
 
     @FXML
+    private TableColumn<Apartment,String> trangthai = new TableColumn<>();
+
+    @FXML
     private TableView<Apartment> table__P1__1 = new TableView<>();
 
     private ObservableList<Apartment> apartmentObservableList;
@@ -381,6 +384,7 @@ public class BuildingManagerController implements Initializable {
         soPhongNguTable.setCellValueFactory(new PropertyValueFactory<>("bedrooms"));
         soPhongTamTable.setCellValueFactory(new PropertyValueFactory<>("bathrooms"));
         noiThatTable.setCellValueFactory(new PropertyValueFactory<>("furniture"));
+        trangthai.setCellValueFactory(new PropertyValueFactory<>("status"));
         apartmentObservableList = getApartmentList();
         table__P1__1.setItems(apartmentObservableList);
     }
