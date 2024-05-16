@@ -232,12 +232,10 @@ public class MonthlyRentBillDAO implements DAOInterface<MonthlyRentBill> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, apartmentID);
             ResultSet resultSet = preparedStatement.executeQuery();
-
             while (resultSet.next()) {
                 MonthlyRentBill rentBill = createMonthlyRentBillFromResultSet(resultSet);
                 rentBills.add(rentBill);
             }
-
             resultSet.close();
             preparedStatement.close();
             JDBCUtil.closeConnection(connection);

@@ -1,5 +1,6 @@
 package DAO;
 
+import DTO.MonthlyRentBill;
 import DTO.ServiceTicket;
 import DTO.ViolationTicket;
 import config.JDBCUtil;
@@ -169,5 +170,28 @@ public class ViolationTicketDAO implements DAOInterface<ViolationTicket> {
         String note = resultSet.getString("note");
 
         return new ViolationTicket(violationTicketID, violationID, monthlyRentBillID, price, date, note);
+    }
+
+    public ArrayList<ViolationTicket> getidViolationTicket(String id) {
+        ArrayList<ViolationTicket> rentBills = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            String sql = "SELECT * FROM ViolationTicket  WHERE monthlyRentBillID = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                ViolationTicket rentBill = createViolationTicketFromResultSet(resultSet);
+                rentBills.add(rentBill);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rentBills;
     }
 }
