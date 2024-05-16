@@ -100,4 +100,6 @@ public class TenantBUS {
     public ArrayList<Tenant> searchTenants(String keyword, String buildingManagerID) {
         return TenantDAO.getInstance().search(keyword, buildingManagerID);
     }
+
+
 }
