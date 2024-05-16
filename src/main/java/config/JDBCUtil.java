@@ -18,15 +18,11 @@ public class JDBCUtil {
 //               String password = "123456789";
 // //
 
+
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String url = "jdbc:sqlserver://TEN:1433;databaseName=ql_canho;trustServerCertificate=true";
         String userName = "sa";
         String password = "12345678";
-
-//         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//         String url = "jdbc:sqlserver://TEN:1433;databaseName=qlcanho;trustServerCertificate=true";
-//         String userName = "sa";
-//         String password = "12345678";
 //
 //             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 //             String url =

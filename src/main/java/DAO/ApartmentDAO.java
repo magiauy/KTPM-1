@@ -194,5 +194,30 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         }
         return searchResults;
     }
+    
+    public ArrayList<Apartment> getApartmentsByBuildingID(String buildingID) {
+        ArrayList<Apartment> apartments = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            String sql = "SELECT * FROM Apartment WHERE buildingID = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, buildingID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Apartment apartment = createApartmentFromResultSet(resultSet);
+                apartments.add(apartment);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return apartments;
+    }
+
+    
 
 }
