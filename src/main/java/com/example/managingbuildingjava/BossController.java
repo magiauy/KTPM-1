@@ -37,6 +37,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -203,28 +204,28 @@ public class BossController implements Initializable {
     private TableColumn<DTO.BuildingManager, Float> salaryColumn = new TableColumn<>();
 
     @FXML
-    private TextField TxtField__b1;
+    private TextField TxtField__b1 = new TextField();
 
     @FXML
 
-    private TextField TxtField__b2;
+    private TextField TxtField__b2 = new TextField();
     @FXML
 
-    private TextField TxtField__b3;
+    private TextField TxtField__b3 = new TextField();
     @FXML
 
-    private TextField TxtField__b4;
+    private TextField TxtField__b4 = new TextField();
     @FXML
 
-    private TextField TxtField__b5;
+    private TextField TxtField__b5 = new TextField();
     @FXML
 
-    private TextField TxtField__b6;
+    private TextField TxtField__b6 = new TextField();
     @FXML
 
-    private TextField TxtField__b7;
+    private TextField TxtField__b7 = new TextField();
     @FXML
-    private DatePicker datePickerDOB;
+    private DatePicker datePickerDOB = new DatePicker();
 
     @FXML
     private ComboBox<String> fruitCombo = new ComboBox<>();
@@ -234,14 +235,14 @@ public class BossController implements Initializable {
     @FXML
     private ComboBox<String> comboBox__P1__1 = new ComboBox<>();
     @FXML
-    private ComboBox<String> comboBox__P1__2;
+    private ComboBox<String> comboBox__P1__2 = new ComboBox<>();
     @FXML
-    private Label time, numberOfBuildings, monthlyRevenueLabel;
+    private Label time, numberOfBuildings, monthlyRevenueLabel = new Label();
     @FXML
-    private PieChart pieChart;
+    private PieChart pieChart = new PieChart();
 
     @FXML
-    private PieChart numberOfStatusLabel;
+    private PieChart numberOfStatusLabel = new PieChart();
     @FXML
     private BarChart barChartOfMonthlyOpex;
     private BarChart<String, Number> barChart;
@@ -266,23 +267,23 @@ public class BossController implements Initializable {
     private TableColumn<FinancialReport, Float> loiNhuanColumn = new TableColumn<>();
 
     @FXML
-    private TextField TxtField__r1;
+    private TextField TxtField__r1 = new TextField();
     @FXML
-    private TextField TxtField__r2;
+    private TextField TxtField__r2 = new TextField();
     @FXML
-    private TextField TxtField__r3;
+    private TextField TxtField__r3 = new TextField();
     @FXML
-    private TextField TxtField__r4;
+    private TextField TxtField__r4 = new TextField();
     @FXML
-    private TextField TxtField__r5;
+    private TextField TxtField__r5 = new TextField();
     @FXML
-    private TextField TxtField__r6;
+    private TextField TxtField__r6 = new TextField();
     @FXML
-    private DatePicker Date_page3;
+    private DatePicker Date_page3 = new DatePicker();
     @FXML
-    private DatePicker date1;
+    private DatePicker date1 = new DatePicker();
     @FXML
-    private DatePicker date2;
+    private DatePicker date2 = new DatePicker();
 
     private void loadPage(String page) throws IOException {
         stop = true;
@@ -1050,58 +1051,62 @@ private boolean containsNumber(String s) {
 
     /// ReanialReport///////==========
 
-    public void handleAddReport() {
-        String financialReportID = TxtField__r1.getText();
-        String buildingID = TxtField__r2.getText();
-        String buildingManagerID = TxtField__r4.getText();
-        LocalDate date = Date_page3.getValue();
+   public void handleAddReport() {
+       String financialReportID = TxtField__r1.getText();
+       String buildingID = TxtField__r2.getText();
+       String buildingManagerID = TxtField__r4.getText();
+       LocalDate date = Date_page3.getValue();
+       FinancialReportBUS reportBUS = new FinancialReportBUS();
+       Month month = date.getMonth();
+       int year = date.getYear();
+       Float revenue = (reportBUS.calculateMonthlyRevenueForBuilding(buildingID, month, year));
+       String revenueStr = String.valueOf(revenue);
+       String revenueWithoutComma = revenueStr.replaceAll(",", "");
+       Float doanhthu = Float.parseFloat(revenueWithoutComma);
+       System.out.println(doanhthu);
+     
+       Float monthlyOpex = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
+       Float monthlyProfit = Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
+ 
+    //    // Xử lý dữ liệu nhập vào cho monthlyRevenue
+    //    String revenueInput = TxtField__r3.getText().replaceAll(",", "");
+     
 
-        Float monthlyRevenue;
-        Float monthlyOpex;
-        Float monthlyProfit;
-        monthlyRevenue = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
-        monthlyOpex = Float.parseFloat(TxtField__r5.getText().replaceAll(",", ""));
-        monthlyProfit = Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
-           String revenueInput = TxtField__r3.getText().replaceAll(",", "");
-        if (!isValidNumber(revenueInput)) {
-            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Doanh thu hàng tháng.", AlertType.ERROR);
-            return;
-        }
-        monthlyRevenue = Float.parseFloat(revenueInput);
+    //    // Xử lý dữ liệu nhập vào cho monthlyOpex
+    //    String opexInput = TxtField__r5.getText().replaceAll(",", "");
+    //    System.out.println(opexInput);
+    //    if (!isValidNumber(opexInput)) {
+    //        showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Chi phí hoạt động hàng tháng.", AlertType.ERROR);
+    //        return;
+    //    }
+    //    monthlyOpex = Float.parseFloat(opexInput);
 
-        // Kiểm tra và xử lý monthlyOpex
-        String opexInput = TxtField__r5.getText().replaceAll(",", "");
-        if (!isValidNumber(opexInput)) {
-            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Chi phí hoạt động hàng tháng.", AlertType.ERROR);
-            return;
-        }
-        monthlyOpex = Float.parseFloat(opexInput);
+    //    // Xử lý dữ liệu nhập vào cho monthlyProfit
+    //    String profitInput = TxtField__r6.getText().replaceAll(",", "");
+    //    if (!isValidNumber(profitInput)) {
+    //        showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Lợi nhuận hàng tháng.", AlertType.ERROR);
+    //        return;
+    //    }
+    //    monthlyProfit = Float.parseFloat(profitInput);
 
-        // Kiểm tra và xử lý monthlyProfit
-        String profitInput = TxtField__r6.getText().replaceAll(",", "");
-        if (!isValidNumber(profitInput)) {
-            showAlert("Lỗi", "Vui lòng nhập số hợp lệ cho Lợi nhuận hàng tháng.", AlertType.ERROR);
-            return;
-        }
-        monthlyProfit = Float.parseFloat(profitInput);
+       FinancialReport newFinancialReport = new FinancialReport();
+       newFinancialReport.setFinancialReportID(financialReportID);
+       newFinancialReport.setBuildingID(buildingID);
+       newFinancialReport.setBuildingManagerID(buildingManagerID);
+       newFinancialReport.setDate(date);
+       newFinancialReport.setMonthlyRevenue(doanhthu);
+       newFinancialReport.setMonthlyOpex(monthlyOpex);
+       newFinancialReport.setMonthlyProfit(monthlyProfit);
 
-        FinancialReport newFinancialReport = new FinancialReport();
-        newFinancialReport.setFinancialReportID(financialReportID);
-        newFinancialReport.setBuildingID(buildingID);
-        newFinancialReport.setBuildingManagerID(buildingManagerID);
-        newFinancialReport.setDate(date);
-        newFinancialReport.setMonthlyRevenue(monthlyRevenue);
-        newFinancialReport.setMonthlyOpex(monthlyOpex);
-        newFinancialReport.setMonthlyProfit(monthlyProfit);
-        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-        boolean check = financialReportBUS.add(newFinancialReport);
-        if (check) {
-            showAlert("Thành Công", "Đã Thêm Thành Công", AlertType.CONFIRMATION);
-            updateFianReport();
-            clearFildReport();
-        } else {
-            showAlert("Thất Bai", "Thêm Thất Bại", AlertType.ERROR);
-        }
+       FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+       boolean check = financialReportBUS.add(newFinancialReport);
+       if (check) {
+           showAlert("Thành Công", "Đã Thêm Thành Công", AlertType.CONFIRMATION);
+           updateFianReport();
+           clearFildReport();
+       } else {
+           showAlert("Thất Bai", "Thêm Thất Bại", AlertType.ERROR);
+       }
 
     }
 
@@ -1145,8 +1150,8 @@ private boolean containsNumber(String s) {
         String buildingID = TxtField__r2.getText();
         String buildingManagerID = TxtField__r4.getText();
         LocalDate date = Date_page3.getValue();
-        Float monthlyRevenue = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
-        Float monthlyOpex = Float.parseFloat(TxtField__r5.getText().replaceAll(",", ""));
+        Float monthlyRevenue = Float.parseFloat(TxtField__r5.getText().replaceAll(",", ""));
+        Float monthlyOpex = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
         Float monthlyProfit = Float.parseFloat(TxtField__r6.getText().replaceAll(",", ""));
    
         String revenueInput = TxtField__r3.getText().replaceAll(",", "");

@@ -1,8 +1,13 @@
 package BUS;
 
+import DAO.ApartmentDAO;
 import DAO.FinancialReportDAO;
+import DAO.MonthlyRentBillDAO;
+import DTO.Apartment;
 import DTO.Building;
 import DTO.FinancialReport;
+import DTO.MonthlyRentBill;
+
 import com.example.managingbuildingjava.CustomerController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,11 +16,16 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Comparator;
 
 public class FinancialReportBUS {
+
+    private MonthlyRentBillDAO monthlyRentBillDAO;
+    private ApartmentDAO apartmentDAO;
+
     public FinancialReportBUS(ArrayList<FinancialReport> financialReports) {
         this.financialReports = financialReports;
     }
@@ -32,6 +42,8 @@ public class FinancialReportBUS {
 
     public FinancialReportBUS() {
         this.financialReports = FinancialReportDAO.getInstance().selectAll();
+        this.monthlyRentBillDAO = new MonthlyRentBillDAO();
+        this.apartmentDAO = new ApartmentDAO();
     }
 
     public ArrayList<FinancialReport> getAll() {
@@ -154,6 +166,25 @@ public class FinancialReportBUS {
         }
         System.out.println("Kết quả tìm kiếm: " + result);
         return result;
+    }
+
+    public Float calculateMonthlyRevenueForBuilding(String buildingID, Month month, int year) {
+        ArrayList<Apartment> apartments = apartmentDAO.getApartmentsByBuildingID(buildingID);
+        float totalRevenue = 0.0f; // Sử dụng float thay vì double
+        for (Apartment apartment : apartments) {
+            ArrayList<MonthlyRentBill> rentBills = monthlyRentBillDAO
+                    .getMonthlyRentBillsByApartmentID(apartment.getApartmentID());
+            for (MonthlyRentBill bill : rentBills) {
+                if (bill.getDate().getMonth() == month && bill.getDate().getYear() == year ) {
+                    System.out.println(bill);
+                    totalRevenue += bill.getTotalPayment().floatValue(); 
+
+                }
+            }
+        }
+
+        System.out.println("Tổng doanh thu: " + totalRevenue); 
+        return totalRevenue;
     }
 
 }
