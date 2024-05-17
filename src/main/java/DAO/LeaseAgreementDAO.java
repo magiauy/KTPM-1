@@ -83,18 +83,41 @@ public class LeaseAgreementDAO implements DAOInterface<LeaseAgreement>{
     }
 
     @Override
-    public int delete(String ID) {
+    public int delete(String leaseAgreementID) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
-            String sql = "DELETE FROM LeaseAgreement WHERE leaseAgreementID = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, ID);
+            // Fetch the tenantID associated with the leaseAgreementID
+            String fetchTenantSQL = "SELECT tenantID FROM LeaseAgreement WHERE leaseAgreementID = ?";
+            PreparedStatement fetchTenantStmt = connection.prepareStatement(fetchTenantSQL);
+            fetchTenantStmt.setString(1, leaseAgreementID);
+            ResultSet rs = fetchTenantStmt.executeQuery();
 
-             ketQua = preparedStatement.executeUpdate();
+            String tenantID = null;
+            if (rs.next()) {
+                tenantID = rs.getString("tenantID");
+            }
+            rs.close();
+            fetchTenantStmt.close();
 
-            preparedStatement.close();
+            // Proceed if tenantID was found
+            if (tenantID != null) {
+                // Delete from LeaseAgreement
+                String deleteLeaseSQL = "DELETE FROM LeaseAgreement WHERE leaseAgreementID = ?";
+                PreparedStatement deleteLeaseStmt = connection.prepareStatement(deleteLeaseSQL);
+                deleteLeaseStmt.setString(1, leaseAgreementID);
+                ketQua += deleteLeaseStmt.executeUpdate();
+                deleteLeaseStmt.close();
+
+                // Delete from Tenant
+                String deleteTenantSQL = "DELETE FROM Tenant WHERE tenantID = ?";
+                PreparedStatement deleteTenantStmt = connection.prepareStatement(deleteTenantSQL);
+                deleteTenantStmt.setString(1, tenantID);
+                ketQua += deleteTenantStmt.executeUpdate();
+                deleteTenantStmt.close();
+            }
+
             JDBCUtil.closeConnection(connection);
 
         } catch (SQLException e) {
@@ -102,6 +125,7 @@ public class LeaseAgreementDAO implements DAOInterface<LeaseAgreement>{
         }
         return ketQua;
     }
+
 
     @Override
     public ArrayList<LeaseAgreement> selectAll() {
