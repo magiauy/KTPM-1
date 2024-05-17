@@ -526,6 +526,7 @@ public class BuildingManagerController implements Initializable {
             newApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
             newApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
             newApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
+            newApartment.setStatus("Chưa được thuê");
 
             ApartmentBUS apartmentBUS = new ApartmentBUS();
             apartmentBUS.add(newApartment);
@@ -793,6 +794,8 @@ public class BuildingManagerController implements Initializable {
         TxtField__P2__5.setValue(selectedTenant.getDateOfBirthDay());
         comboBox__P2__3.setValue(selectedTenant.getGender());
         TxtField__P2__51.setText(selectedTenant.getCitizenIdentityCard());
+        Regex__P2__1.setText("");
+        Regex__P2__2.setText("");
     }
 
     @FXML
@@ -833,6 +836,20 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     void suaKhachHang(ActionEvent event) {
+        if (TxtField__P2__2.getText().equals("")){
+            Regex__P2__1.setText("Họ không được bỏ trống");
+        } else if (!isString(TxtField__P2__2.getText())) {
+            Regex__P2__1.setText("Họ không được chứa số");
+        }
+        if (TxtField__P2__2.getText().equals("")){
+            Regex__P2__2.setText("Tên không được bỏ trống");
+        } else if (!isString(TxtField__P2__2.getText())){
+            Regex__P2__2.setText("Tên không được chứa số");
+        }
+
+        if (TxtField__P2__2.getText().equals("")||TxtField__P2__2.getText().equals("")||!isString(TxtField__P2__2.getText())||!isString(TxtField__P2__2.getText())){
+            return;
+        }
         Tenant selectedTenant = table__P2__1.getSelectionModel().getSelectedItem();
         selectedTenant.setTenantID(TxtField__P2__1.getText());
         selectedTenant.setFirstName(TxtField__P2__2.getText());
@@ -881,9 +898,18 @@ public class BuildingManagerController implements Initializable {
     void themKhachHang(ActionEvent event) {
         try {
             if (TxtField__P2__2.getText().equals("")){
-                Regex__P2__1.setText("Tên không được bỏ trống");
+                Regex__P2__1.setText("Họ không được bỏ trống");
             } else if (!isString(TxtField__P2__2.getText())) {
-                Regex__P2__1.setText("Tên không được chứa số");
+                Regex__P2__1.setText("Họ không được chứa số");
+            }
+            if (TxtField__P2__2.getText().equals("")){
+                Regex__P2__2.setText("Tên không được bỏ trống");
+            } else if (!isString(TxtField__P2__2.getText())){
+                Regex__P2__2.setText("Tên không được chứa số");
+            }
+
+            if (TxtField__P2__2.getText().equals("")||TxtField__P2__2.getText().equals("")||!isString(TxtField__P2__2.getText())||!isString(TxtField__P2__2.getText())){
+                return;
             }
             Tenant tenant = new Tenant();
             tenant.setTenantID(TxtField__P2__1.getText());

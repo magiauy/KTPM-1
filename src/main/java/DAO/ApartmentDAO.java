@@ -29,7 +29,7 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
             Connection connection = JDBCUtil.getConnection();
 
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL
             preparedStatement.setString(1, (apartment.getApartmentID() != null) ? apartment.getApartmentID() : null);
@@ -38,12 +38,8 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
             preparedStatement.setDouble(4, apartment.getArea());
             preparedStatement.setInt(5, apartment.getBedrooms());
             preparedStatement.setInt(6, apartment.getBathrooms());
-            //Luu Y
-//            preparedStatement.setDouble(4, (t.getArea() != null) ? t.getArea() : null);
-//            preparedStatement.setInt(5, (t.getBedrooms() == -1) ? t.getBedrooms() : 0);
-//            preparedStatement.setInt(6, (t.getBathrooms() == -1) ? t.getBathrooms() : 0);
-            //??
             preparedStatement.setString(7, (apartment.getFurniture() != null) ? apartment.getFurniture() : null);
+            preparedStatement.setString(8, (apartment.getStatus() != null) ? apartment.getStatus() : null);
 
             // Thực thi câu lệnh SQL và nhận kết quả
             ketQua = preparedStatement.executeUpdate();
@@ -62,7 +58,7 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE Apartment SET buildingID=?, roomNumber=?, area=?, bedrooms=?, bathrooms=?, furniture=? WHERE apartmentID=?";
+            String sql = "UPDATE Apartment SET buildingID=?, roomNumber=?, area=?, bedrooms=?, bathrooms=?, furniture=?, status=? WHERE apartmentID=?";
             PreparedStatement pst = con.prepareStatement(sql);
 
             pst.setString(1, apartment.getBuildingID());
@@ -71,7 +67,8 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
             pst.setInt(4, apartment.getBedrooms());
             pst.setInt(5, apartment.getBathrooms());
             pst.setString(6, apartment.getFurniture());
-            pst.setString(7, apartment.getApartmentID());
+            pst.setString(7, apartment.getStatus());
+            pst.setString(8, apartment.getApartmentID());
 
             ketQua = pst.executeUpdate();
 
@@ -107,7 +104,7 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
             Statement statement = connection.createStatement();
             String sql = "SELECT B.apartmentID, " + // Added space after comma
                     "CASE " +
-                    "    WHEN LA.apartmentID IS NOT NULL THEN 'Đã thuê' " + 
+                    "    WHEN LA.apartmentID IS NOT NULL THEN N'Đã được thuê' " +
                     "    ELSE N'Còn trống' " + 
                     "END AS status, B.area, B.bathrooms, B.bedrooms, B.buildingID, B.furniture, B.roomNumber " + 
                                                                                                                     
