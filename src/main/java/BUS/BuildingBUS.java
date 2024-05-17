@@ -59,32 +59,6 @@ public class BuildingBUS {
         }
         return -1; 
     }
-    public void setTotalNumberOfBuildings(Label numberOfBuildings){
-        BuildingBUS buildingBUS = new BuildingBUS();
-        ArrayList<Building> buildings = buildingBUS.getAll();
-
-        int total = 0;
-
-        for(Building building : buildings){
-            total += building.getNumberOfApartment_Building();
-        }
-        numberOfBuildings.setText(String.valueOf(total));
-    }
-    public void setLocationOfBuildings(PieChart pieChart){
-        BuildingBUS buildingBUS = new BuildingBUS();
-        ArrayList<Building> buildings = buildingBUS.getAll();
-        HashMap<String, Integer> cityCounts = new HashMap<>();
-        for (Building building : buildings) {
-            String city = building.getCity_Building();
-            cityCounts.put(city, cityCounts.getOrDefault(city, 0) + 1);
-        }
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
-        for (String city : cityCounts.keySet()) {
-            int count = cityCounts.get(city);
-            pieChartData.add(new PieChart.Data(city + " (" + count + ")", count));
-        }
-        pieChart.setData(pieChartData);
-    }
 
     public ArrayList<Building> search(String text, String type) {
         ArrayList<Building> result = new ArrayList<>();

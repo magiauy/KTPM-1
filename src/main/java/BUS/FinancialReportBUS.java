@@ -97,63 +97,6 @@ public class FinancialReportBUS {
         return -1; // Not found
     }
 
-    public void setMonthlyRevenueLabel(Label monthlyRevenueLabel) {
-        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-        ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
-
-        // Lấy ngày hiện tại
-        LocalDate currentDate = LocalDate.now();
-
-        // Lọc danh sách financialReports để chỉ chọn ra các báo cáo tài chính có ngày
-        // tương ứng với tháng hiện tại
-        ArrayList<FinancialReport> currentMonthReports = new ArrayList<>();
-        for (FinancialReport report : financialReports) {
-            LocalDate reportDate = LocalDate.parse(report.getDate().toString());
-            YearMonth reportYearMonth = YearMonth.from(reportDate);
-            YearMonth currentYearMonth = YearMonth.from(currentDate);
-            if (reportYearMonth.equals(currentYearMonth)) {
-                currentMonthReports.add(report);
-            }
-        }
-
-        // Kiểm tra xem có báo cáo nào cho tháng hiện tại không
-        if (!currentMonthReports.isEmpty()) {
-            // Lấy giá trị monthlyRevenue của báo cáo đầu tiên trong danh sách và gán vào
-            // monthlyRevenueLabel
-            double monthlyRevenue = currentMonthReports.get(0).getMonthlyRevenue();
-            monthlyRevenueLabel.setText(String.valueOf(monthlyRevenue));
-        } else {
-            monthlyRevenueLabel.setText("N/A");
-        }
-    }
-
-    public void setMonthlyOpexLabel(BarChart barChartOfMonthlyOpex) {
-        // Tạo danh sách chứa dữ liệu cho Bar Chart
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.setName("Phí Vận Hành Hàng Tháng");
-
-        // Lấy 12 báo cáo tài chính gần nhất
-        int startIndex = Math.max(financialReports.size() - 12, 0);
-        for (int i = startIndex; i < financialReports.size(); i++) {
-            FinancialReport report = financialReports.get(i);
-            // Lấy tháng từ ngày báo cáo
-            String month = report.getDate().toString().substring(5, 7);
-            // Thêm dữ liệu cho series
-            series.getData().add(new XYChart.Data<>(month, report.getMonthlyOpex()));
-        }
-
-        // Sắp xếp lại dữ liệu theo tháng
-        series.getData().sort(Comparator.comparing(data -> Integer.parseInt(data.getXValue())));
-
-        // Xóa dữ liệu cũ trước khi cập nhật
-        barChartOfMonthlyOpex.getData().clear();
-        // Thêm series vào Bar Chart
-        barChartOfMonthlyOpex.getData().add(series);
-
-        // Xóa chú thích của Bar Chart
-        barChartOfMonthlyOpex.setLegendVisible(false);
-    }
-
     public ArrayList<FinancialReport> search(LocalDate text, LocalDate text1, String type) {
         ArrayList<FinancialReport> result = new ArrayList<>();
 
