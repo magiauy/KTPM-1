@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="LogOut - (lỗi: ko login vào lại đc)">
-      <change afterPath="$PROJECT_DIR$/src/DejaVuSans.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Picture/logo.jpg" afterDir="false" />
+    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update pdf - 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NhapNoiThat.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/NhapNoiThat.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page4.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page4.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +258,7 @@
       <workItem from="1715862962365" duration="3510000" />
       <workItem from="1715867578294" duration="1860000" />
       <workItem from="1715922091832" duration="2736000" />
-      <workItem from="1715926057372" duration="3997000" />
+      <workItem from="1715926057372" duration="5409000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
@@ -418,7 +412,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715520630884</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="update pdf - 1">
+      <option name="closed" value="true" />
+      <created>1715935221909</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1715935221909</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -452,7 +454,8 @@
     <MESSAGE value="TEN GUI" />
     <MESSAGE value="Excel" />
     <MESSAGE value="LogOut - (lỗi: ko login vào lại đc)" />
-    <option name="LAST_COMMIT_MESSAGE" value="LogOut - (lỗi: ko login vào lại đc)" />
+    <MESSAGE value="update pdf - 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="update pdf - 1" />
   </component>
   <component name="XPathView.XPathProjectComponent">
     <history />

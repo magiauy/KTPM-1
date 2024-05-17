@@ -44,6 +44,7 @@ import java.util.Date;
 
 public class BuildingManagerController implements Initializable {
     private static BuildingManagerController instance;
+    public ImageView exportPDF;
 
 
     public static BuildingManagerController getInstance() {
@@ -183,6 +184,37 @@ public class BuildingManagerController implements Initializable {
             System.out.println("Không có file nào được chọn.");
         }
 
+    }
+
+    @FXML
+    public void setExportPDF(MouseEvent event){
+        System.out.println("hi");
+        if (!maPhieuDVField.getText().isEmpty()){
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            directoryChooser.setTitle("Chọn thư mục lưu file");
+            Stage primaryStage = new Stage();
+            // Hiển thị cửa sổ thư mục và lấy thư mục được chọn
+            File selectedDirectory = directoryChooser.showDialog(primaryStage);
+
+            if (selectedDirectory != null) {
+                ServiceTicketBUS.getInstance().exportDPF(selectedDirectory.getAbsolutePath(), maPhieuDVField.getText());
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Xuất phiếu thành công.");
+
+                // Hiển thị cửa sổ thông báo và chờ người dùng đóng
+                alert.showAndWait();
+            }
+        }else{
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText(null);
+            alert.setContentText("Vui lòng nhập mã phiếu.");
+
+            // Hiển thị cửa sổ thông báo và chờ người dùng đóng
+            alert.showAndWait();
+        }
     }
 
     @FXML
