@@ -91,37 +91,6 @@ public class MonthlyRentBillBUS {
         return -1; // Not found
     }
 
-    public void setMonthlyRentBillsLabel(PieChart numberOfStatusLabel){
-        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-        ArrayList<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getAll();
-
-        int paid = 0, pending = 0, unpaid = 0;
-        for (MonthlyRentBill monthlyRentBill : monthlyRentBills) {
-            String status = monthlyRentBill.getStatus();
-            if (Objects.equals(status, "Paid")) {
-                paid++;
-            } else if (Objects.equals(status, "Pending")) {
-                pending++;
-            } else {
-                unpaid++;
-            }
-        }
-        // Tạo các đối tượng PieChart.Data với chú thích tương ứng
-        PieChart.Data paidData = new PieChart.Data("Paid (" + paid + ")", paid);
-        PieChart.Data pendingData = new PieChart.Data("Pending (" + pending + ")", pending);
-        PieChart.Data unpaidData = new PieChart.Data("Unpaid (" + unpaid + ")", unpaid);
-
-        // Thêm các đối tượng PieChart.Data vào danh sách pieChartData
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                paidData, pendingData, unpaidData
-        );
-
-        // Cập nhật dữ liệu cho numberOfStatusLabel
-        numberOfStatusLabel.setData(pieChartData);
-    }
-
-
-
     public MonthlyRentBill getMonthlyRentBillWithMRB(String id){
         ArrayList<MonthlyRentBill> monthlyRentBillArrayList = MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(CustomerController.getInstance().getID());
         for (MonthlyRentBill monthlyRentBill : monthlyRentBillArrayList){
