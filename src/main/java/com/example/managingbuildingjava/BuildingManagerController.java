@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -36,6 +37,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 import java.sql.*;
 import java.util.Date;
@@ -194,7 +196,14 @@ public class BuildingManagerController implements Initializable {
         }
         try {
             BuildingBUS buildingBUS = new BuildingBUS();
-            buildingBUS.setTotalNumberOfBuildings(numberOfBuildings);
+            ArrayList<Building> buildings = buildingBUS.getAll();
+
+            int total = 0;
+
+            for(Building building : buildings){
+                total += building.getNumberOfApartment_Building();
+            }
+            numberOfBuildings.setText(String.valueOf(total));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -207,7 +216,18 @@ public class BuildingManagerController implements Initializable {
         }
         try {
             BuildingBUS buildingBUS = new BuildingBUS();
-            buildingBUS.setLocationOfBuildings(pieChart);
+            ArrayList<Building> buildings = buildingBUS.getAll();
+            HashMap<String, Integer> cityCounts = new HashMap<>();
+            for (Building building : buildings) {
+                String city = building.getCity_Building();
+                cityCounts.put(city, cityCounts.getOrDefault(city, 0) + 1);
+            }
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+            for (String city : cityCounts.keySet()) {
+                int count = cityCounts.get(city);
+                pieChartData.add(new PieChart.Data(city + " (" + count + ")", count));
+            }
+            pieChart.setData(pieChartData);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -220,9 +240,46 @@ public class BuildingManagerController implements Initializable {
         }
 
         try {
-            buildingManagerList = FXCollections.observableArrayList();
+            int[][] genderAgeCount = new int[100][2];
+
             BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-            buildingManagerBUS.getGenderOfBDManager(barChart);
+            ArrayList<BuildingManager> buildingManagers = buildingManagerBUS.getAll();
+
+            LocalDate currentDate = LocalDate.now();
+
+            // Duyệt qua danh sách người quản lý tòa nhà và tính độ tuổi của mỗi người quản
+            // lý
+            for (BuildingManager buildingManager : buildingManagers) {
+                LocalDate managersDOB = buildingManager.getDob();
+                Period calculate = Period.between(managersDOB, currentDate);
+                int managersAge = calculate.getYears();
+
+                // Xác định giới tính của người quản lý (0 là nam, 1 là nữ)
+                int genderIndex = buildingManager.getGender().equals("Nam") ? 0 : 1;
+
+                // Cập nhật mảng hai chiều
+                genderAgeCount[managersAge][genderIndex]++;
+            }
+
+            // Xóa các dữ liệu cũ trong biểu đồ
+            barChart.getData().clear();
+
+            // Thêm dữ liệu mới vào biểu đồ
+            XYChart.Series<String, Number> maleSeries = new XYChart.Series<>();
+            maleSeries.setName("Nam");
+            XYChart.Series<String, Number> femaleSeries = new XYChart.Series<>();
+            femaleSeries.setName("Nữ");
+
+            for (int i = genderAgeCount.length - 1; i >= 0; i--) {
+                if (genderAgeCount[i][0] > 0) {
+                    maleSeries.getData().add(new XYChart.Data<>(String.valueOf(currentDate.getYear() - i), i));
+                }
+                if (genderAgeCount[i][1] > 0) {
+                    femaleSeries.getData().add(new XYChart.Data<>(String.valueOf(currentDate.getYear() - i), i));
+                }
+            }
+
+            barChart.getData().addAll(maleSeries, femaleSeries);
 
         } catch (Exception e) {
             e.printStackTrace();
