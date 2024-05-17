@@ -6,6 +6,9 @@ module com.example.managingbuildingjava {
         requires java.desktop;
         requires org.apache.poi.poi;
         requires org.apache.poi.ooxml;
+    requires layout;
+    requires kernel;
+    requires io;
 
     opens com.example.managingbuildingjava to javafx.fxml;
         opens DTO to javafx.base; // Mở gói DTO

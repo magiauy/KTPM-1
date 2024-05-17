@@ -32,10 +32,10 @@ public class BuildingManager extends Application {
         BuildingManager.primaryStage = primaryStage;
         openBuildingManagerView();
     }
-    
+
     public static void openBuildingManagerView() {
         try {
-//            primaryStage = new Stage();
+//          primaryStage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(
             BuildingManager.class.getResource("BuildingManager-view-Page0.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1024, 720);
