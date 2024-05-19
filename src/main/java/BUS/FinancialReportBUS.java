@@ -187,22 +187,18 @@ public class FinancialReportBUS {
             for (MonthlyRentBill bill : rentBills) {
                 if (bill.getDate().getMonth() == month && bill.getDate().getYear() == year
                         && bill.getStatus().equals("Paid")) {
-                    System.out.println(bill);
                     totalRevenue += bill.getTotalPayment().floatValue();
-
                 }
             }
         }
-
-        System.out.println("Tổng doanh thu: " + totalRevenue);
         return totalRevenue;
     }
 
     public Float LoiNhuan(String buildingID, Month month, int year, Float cPhiVanHanh) {
         Float totalRevenue = 0.0f;
         Float totalExpenses = 0.0f;
-        Float totalExpenses1 = 0.0f; 
-        String idphieu = null; 
+        Float totalExpenses1 = 0.0f;
+        String idphieu = null;
 
         ArrayList<Apartment> apartments = apartmentDAO.getApartmentsByBuildingID(buildingID);
         for (Apartment apartment : apartments) {
@@ -216,7 +212,6 @@ public class FinancialReportBUS {
                 }
             }
         }
-
         if (idphieu != null) {
             ArrayList<ServiceTicket> services = serviceTicketDAO.getidSerVice(idphieu);
             if (services != null) {
@@ -226,7 +221,6 @@ public class FinancialReportBUS {
                     }
                 }
             }
-
             ArrayList<ViolationTicket> violations = violationTicketDAO.getidViolationTicket(idphieu);
             if (violations != null) {
                 for (ViolationTicket violation : violations) {
@@ -237,8 +231,7 @@ public class FinancialReportBUS {
             }
         }
 
-        Float profit = totalRevenue - totalExpenses - cPhiVanHanh - (totalExpenses1 * 0.8f);
-        System.out.println("Tổng Lợi Nhuận: " + profit);
+        Float profit = totalRevenue - totalExpenses1 - cPhiVanHanh - (totalExpenses * 0.8f);
         return profit;
     }
 
