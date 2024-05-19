@@ -36,7 +36,7 @@ public class Customer extends Application {
     public static void openCustomerView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Customer.class.getResource("Customer-view-Page0.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1024, 720);
+            Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
             primaryStage.setTitle("Quản lý tòa nhà - Khách hàng");
             primaryStage.setScene(scene);
             primaryStage.setOnCloseRequest(event -> {
