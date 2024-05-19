@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -38,11 +39,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.time.YearMonth;
+import java.util.*;
 
 import BUS.BuildingBUS;
 import BUS.BuildingManagerBUS;
@@ -303,7 +301,14 @@ public class BossController implements Initializable {
         }
         try {
             BuildingBUS buildingBUS = new BuildingBUS();
-            buildingBUS.setTotalNumberOfBuildings(numberOfBuildings);
+            ArrayList<Building> buildings = buildingBUS.getAll();
+
+            int total = 0;
+
+            for(Building building : buildings){
+                total += building.getNumberOfApartment_Building();
+            }
+            numberOfBuildings.setText(String.valueOf(total));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -335,7 +340,33 @@ public class BossController implements Initializable {
             return;
         }
         try {
-            FinancialReportBUS.getInstance().setMonthlyRevenueLabel(monthlyRevenueLabel);
+            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+            ArrayList<FinancialReport> financialReports = financialReportBUS.getAll();
+
+            // Lấy ngày hiện tại
+            LocalDate currentDate = LocalDate.now();
+
+            // Lọc danh sách financialReports để chỉ chọn ra các báo cáo tài chính có ngày
+            // tương ứng với tháng hiện tại
+            ArrayList<FinancialReport> currentMonthReports = new ArrayList<>();
+            for (FinancialReport report : financialReports) {
+                LocalDate reportDate = LocalDate.parse(report.getDate().toString());
+                YearMonth reportYearMonth = YearMonth.from(reportDate);
+                YearMonth currentYearMonth = YearMonth.from(currentDate);
+                if (reportYearMonth.equals(currentYearMonth)) {
+                    currentMonthReports.add(report);
+                }
+            }
+
+            // Kiểm tra xem có báo cáo nào cho tháng hiện tại không
+            if (!currentMonthReports.isEmpty()) {
+                // Lấy giá trị monthlyRevenue của báo cáo đầu tiên trong danh sách và gán vào
+                // monthlyRevenueLabel
+                double monthlyRevenue = currentMonthReports.get(0).getMonthlyRevenue();
+                monthlyRevenueLabel.setText(String.valueOf(monthlyRevenue));
+            } else {
+                monthlyRevenueLabel.setText("N/A");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -348,7 +379,31 @@ public class BossController implements Initializable {
         }
         try {
             MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-            monthlyRentBillBUS.setMonthlyRentBillsLabel(numberOfStatusLabel);
+            ArrayList<MonthlyRentBill> monthlyRentBills = monthlyRentBillBUS.getAll();
+
+            int paid = 0, pending = 0, unpaid = 0;
+            for (MonthlyRentBill monthlyRentBill : monthlyRentBills) {
+                String status = monthlyRentBill.getStatus();
+                if (Objects.equals(status, "Paid")) {
+                    paid++;
+                } else if (Objects.equals(status, "Pending")) {
+                    pending++;
+                } else {
+                    unpaid++;
+                }
+            }
+            // Tạo các đối tượng PieChart.Data với chú thích tương ứng
+            PieChart.Data paidData = new PieChart.Data("Paid (" + paid + ")", paid);
+            PieChart.Data pendingData = new PieChart.Data("Pending (" + pending + ")", pending);
+            PieChart.Data unpaidData = new PieChart.Data("Unpaid (" + unpaid + ")", unpaid);
+
+            // Thêm các đối tượng PieChart.Data vào danh sách pieChartData
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                    paidData, pendingData, unpaidData
+            );
+
+            // Cập nhật dữ liệu cho numberOfStatusLabel
+            numberOfStatusLabel.setData(pieChartData);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -361,8 +416,32 @@ public class BossController implements Initializable {
         }
 
         try {
-            FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-            financialReportBUS.setMonthlyOpexLabel(barChartOfMonthlyOpex);
+            ArrayList<FinancialReport> financialReports = FinancialReportBUS.getInstance().getAll();
+
+            // Tạo danh sách chứa dữ liệu cho Bar Chart
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Phí Vận Hành Hàng Tháng");
+
+            // Lấy 12 báo cáo tài chính gần nhất
+            int startIndex = Math.max(financialReports.size() - 12, 0);
+            for (int i = startIndex; i < financialReports.size(); i++) {
+                FinancialReport report = financialReports.get(i);
+                // Lấy tháng từ ngày báo cáo
+                String month = report.getDate().toString().substring(5, 7);
+                // Thêm dữ liệu cho series
+                series.getData().add(new XYChart.Data<>(month, report.getMonthlyOpex()));
+            }
+
+            // Sắp xếp lại dữ liệu theo tháng
+            series.getData().sort(Comparator.comparing(data -> Integer.parseInt(data.getXValue())));
+
+            // Xóa dữ liệu cũ trước khi cập nhật
+            barChartOfMonthlyOpex.getData().clear();
+            // Thêm series vào Bar Chart
+            barChartOfMonthlyOpex.getData().add(series);
+
+            // Xóa chú thích của Bar Chart
+            barChartOfMonthlyOpex.setLegendVisible(false);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -36,12 +37,14 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 import java.sql.*;
 import java.util.Date;
 
 public class BuildingManagerController implements Initializable {
     private static BuildingManagerController instance;
+    public ImageView exportPDF;
 
 
     public static BuildingManagerController getInstance() {
@@ -184,6 +187,37 @@ public class BuildingManagerController implements Initializable {
     }
 
     @FXML
+    public void setExportPDF(MouseEvent event){
+        System.out.println("hi");
+        if (!maPhieuDVField.getText().isEmpty()){
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            directoryChooser.setTitle("Chọn thư mục lưu file");
+            Stage primaryStage = new Stage();
+            // Hiển thị cửa sổ thư mục và lấy thư mục được chọn
+            File selectedDirectory = directoryChooser.showDialog(primaryStage);
+
+            if (selectedDirectory != null) {
+                ServiceTicketBUS.getInstance().exportDPF(selectedDirectory.getAbsolutePath(), maPhieuDVField.getText());
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Xuất phiếu thành công.");
+
+                // Hiển thị cửa sổ thông báo và chờ người dùng đóng
+                alert.showAndWait();
+            }
+        }else{
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText(null);
+            alert.setContentText("Vui lòng nhập mã phiếu.");
+
+            // Hiển thị cửa sổ thông báo và chờ người dùng đóng
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
     void Close_Clicked(MouseEvent event) {
         stop = true;
     }
@@ -194,7 +228,14 @@ public class BuildingManagerController implements Initializable {
         }
         try {
             BuildingBUS buildingBUS = new BuildingBUS();
-            buildingBUS.setTotalNumberOfBuildings(numberOfBuildings);
+            ArrayList<Building> buildings = buildingBUS.getAll();
+
+            int total = 0;
+
+            for(Building building : buildings){
+                total += building.getNumberOfApartment_Building();
+            }
+            numberOfBuildings.setText(String.valueOf(total));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -207,7 +248,18 @@ public class BuildingManagerController implements Initializable {
         }
         try {
             BuildingBUS buildingBUS = new BuildingBUS();
-            buildingBUS.setLocationOfBuildings(pieChart);
+            ArrayList<Building> buildings = buildingBUS.getAll();
+            HashMap<String, Integer> cityCounts = new HashMap<>();
+            for (Building building : buildings) {
+                String city = building.getCity_Building();
+                cityCounts.put(city, cityCounts.getOrDefault(city, 0) + 1);
+            }
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+            for (String city : cityCounts.keySet()) {
+                int count = cityCounts.get(city);
+                pieChartData.add(new PieChart.Data(city + " (" + count + ")", count));
+            }
+            pieChart.setData(pieChartData);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -220,14 +272,57 @@ public class BuildingManagerController implements Initializable {
         }
 
         try {
-            buildingManagerList = FXCollections.observableArrayList();
+            int[][] genderAgeCount = new int[100][2];
+
             BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-            buildingManagerBUS.getGenderOfBDManager(barChart);
+            ArrayList<BuildingManager> buildingManagers = buildingManagerBUS.getAll();
+
+            LocalDate currentDate = LocalDate.now();
+
+            // Duyệt qua danh sách người quản lý tòa nhà và tính độ tuổi của mỗi người quản
+            // lý
+            for (BuildingManager buildingManager : buildingManagers) {
+                LocalDate managersDOB = buildingManager.getDob();
+                Period calculate = Period.between(managersDOB, currentDate);
+                int managersAge = calculate.getYears();
+
+                // Xác định giới tính của người quản lý (0 là nam, 1 là nữ)
+                int genderIndex = buildingManager.getGender().equals("Nam") ? 0 : 1;
+
+                // Cập nhật mảng hai chiều
+                genderAgeCount[managersAge][genderIndex]++;
+            }
+
+            // Xóa các dữ liệu cũ trong biểu đồ
+            barChart.getData().clear();
+
+            // Thêm dữ liệu mới vào biểu đồ
+            XYChart.Series<String, Number> maleSeries = new XYChart.Series<>();
+            maleSeries.setName("Nam");
+            XYChart.Series<String, Number> femaleSeries = new XYChart.Series<>();
+            femaleSeries.setName("Nữ");
+
+            for (int i = genderAgeCount.length - 1; i >= 0; i--) {
+                if (genderAgeCount[i][0] > 0) {
+                    maleSeries.getData().add(new XYChart.Data<>(String.valueOf(currentDate.getYear() - i), i));
+                }
+                if (genderAgeCount[i][1] > 0) {
+                    femaleSeries.getData().add(new XYChart.Data<>(String.valueOf(currentDate.getYear() - i), i));
+                }
+            }
+
+            barChart.getData().addAll(maleSeries, femaleSeries);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private Label Regex__P1__1 = new Label();
+
+    @FXML
+    private Label Regex__P1__2 = new Label();
 
     @FXML
     private TextField TxtField__P1__1 = new TextField();
@@ -283,7 +378,27 @@ public class BuildingManagerController implements Initializable {
     @FXML
     private TableColumn<Apartment, Integer> soPhongTamTable = new TableColumn<>();
 
-    @FXML 
+    public boolean isInteger(String str) {
+        if (str == null) {
+            return false;
+        }
+        try {
+            Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isString(String str) {
+        if (str == null || str.isEmpty()) {
+            return true;
+        }
+        return !str.matches(".*\\d.*");
+    }
+
+
+    @FXML
     private TableColumn<Apartment,String> trangthai = new TableColumn<>();
 
     @FXML
@@ -346,6 +461,8 @@ public class BuildingManagerController implements Initializable {
         TxtField__P1__4.setText("");
         TxtField__P1__5.setText("");
         comboBox__P1__3.getSelectionModel().clearSelection();
+        Regex__P1__1.setText("");
+        Regex__P1__2.setText("");
     }
 
     private void initApartment() {
@@ -370,11 +487,22 @@ public class BuildingManagerController implements Initializable {
         TxtField__P1__4.setText(String.valueOf(selectedApartment.getBedrooms()));
         TxtField__P1__5.setText(String.valueOf(selectedApartment.getBathrooms()));
         comboBox__P1__3.setValue(selectedApartment.getFurniture());
+        Regex__P1__1.setText("");
+        Regex__P1__2.setText("");
     }
 
     @FXML
     void suaCanHo(MouseEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
+        if (!isInteger(TxtField__P1__4.getText())){
+            Regex__P1__1.setText("Only number");
+        }
+        if (!isInteger(TxtField__P1__5.getText())){
+            Regex__P1__2.setText("Only number");
+        }
+        if (!isInteger(TxtField__P1__4.getText())||!isInteger(TxtField__P1__5.getText())){
+            return;
+        }
         selectedApartment.setApartmentID(TxtField__P1__1.getText());
 
         BuildingManagerBUS bus = new BuildingManagerBUS();
@@ -406,6 +534,15 @@ public class BuildingManagerController implements Initializable {
     @FXML
     void themCanHo(MouseEvent event) {
         try {
+            if (!isInteger(TxtField__P1__4.getText())){
+                Regex__P1__1.setText("phải là số");
+            }
+            if (!isInteger(TxtField__P1__5.getText())){
+                Regex__P1__2.setText("phải là số");
+            }
+            if (!isInteger(TxtField__P1__4.getText())||!isInteger(TxtField__P1__5.getText())){
+                return;
+            }
             Apartment newApartment = new Apartment();
             BuildingManagerBUS bus = new BuildingManagerBUS();
             List<BuildingManager> buildingManagers = bus.getAll();
@@ -421,6 +558,7 @@ public class BuildingManagerController implements Initializable {
             newApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
             newApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
             newApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
+            newApartment.setStatus("Chưa được thuê");
 
             ApartmentBUS apartmentBUS = new ApartmentBUS();
             apartmentBUS.add(newApartment);
@@ -528,7 +666,7 @@ public class BuildingManagerController implements Initializable {
     private TableColumn<Cohabitant, String> cCCDCuDanTable = new TableColumn<>();
 
     @FXML
-    private TableColumn<?, String> cCCDTable = new TableColumn<>();
+    private TableColumn<Tenant, String> cCCDTable = new TableColumn<>();
 
     @FXML
     private ComboBox<String> comboBox__P2_1__1 = new ComboBox<>();
@@ -592,6 +730,18 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     private TableColumn<Tenant, String> tenKhachHangTable = new TableColumn<>();
+
+    @FXML
+    private Label Regex__P2__1 = new Label();
+
+    @FXML
+    private Label Regex__P2__2 = new Label();
+
+    @FXML
+    private Label Regex__P2__3 = new Label();
+
+    @FXML
+    private Label Regex__P2__4 = new Label();
 
     private ObservableList<Tenant> tenantObservableList;
 
@@ -676,6 +826,8 @@ public class BuildingManagerController implements Initializable {
         TxtField__P2__5.setValue(selectedTenant.getDateOfBirthDay());
         comboBox__P2__3.setValue(selectedTenant.getGender());
         TxtField__P2__51.setText(selectedTenant.getCitizenIdentityCard());
+        Regex__P2__1.setText("");
+        Regex__P2__2.setText("");
     }
 
     @FXML
@@ -716,6 +868,20 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     void suaKhachHang(ActionEvent event) {
+        if (TxtField__P2__2.getText().equals("")){
+            Regex__P2__1.setText("Họ không được bỏ trống");
+        } else if (!isString(TxtField__P2__2.getText())) {
+            Regex__P2__1.setText("Họ không được chứa số");
+        }
+        if (TxtField__P2__2.getText().equals("")){
+            Regex__P2__2.setText("Tên không được bỏ trống");
+        } else if (!isString(TxtField__P2__2.getText())){
+            Regex__P2__2.setText("Tên không được chứa số");
+        }
+
+        if (TxtField__P2__2.getText().equals("")||TxtField__P2__2.getText().equals("")||!isString(TxtField__P2__2.getText())||!isString(TxtField__P2__2.getText())){
+            return;
+        }
         Tenant selectedTenant = table__P2__1.getSelectionModel().getSelectedItem();
         selectedTenant.setTenantID(TxtField__P2__1.getText());
         selectedTenant.setFirstName(TxtField__P2__2.getText());
@@ -763,6 +929,20 @@ public class BuildingManagerController implements Initializable {
     @FXML
     void themKhachHang(ActionEvent event) {
         try {
+            if (TxtField__P2__2.getText().equals("")){
+                Regex__P2__1.setText("Họ không được bỏ trống");
+            } else if (!isString(TxtField__P2__2.getText())) {
+                Regex__P2__1.setText("Họ không được chứa số");
+            }
+            if (TxtField__P2__2.getText().equals("")){
+                Regex__P2__2.setText("Tên không được bỏ trống");
+            } else if (!isString(TxtField__P2__2.getText())){
+                Regex__P2__2.setText("Tên không được chứa số");
+            }
+
+            if (TxtField__P2__2.getText().equals("")||TxtField__P2__2.getText().equals("")||!isString(TxtField__P2__2.getText())||!isString(TxtField__P2__2.getText())){
+                return;
+            }
             Tenant tenant = new Tenant();
             tenant.setTenantID(TxtField__P2__1.getText());
             tenant.setFirstName(TxtField__P2__2.getText());
@@ -991,19 +1171,33 @@ public class BuildingManagerController implements Initializable {
         try {
             MonthlyRentBill monthlyRentBill = new MonthlyRentBill();
             monthlyRentBill.setMonthlyRentBillID(TxtField__P3__1.getText());
-            monthlyRentBill.setApartmentID(TxtField__P3__2.getText());
-            monthlyRentBill.setTenantID(TxtField__P3__3.getText());
-            monthlyRentBill.setDate(datePicker__P3.getValue());
-            monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
-            monthlyRentBill.setTotalPayment(Double.parseDouble(TxtField__P3__6.getText()));
-            monthlyRentBill.setStatus(comboBox__P3__3.getSelectionModel().getSelectedItem());
+            String apartmentID = TxtField__P3__2.getText();
+            LeaseAgreementBUS checkApartmentID = new LeaseAgreementBUS();
+            List<LeaseAgreement> leaseAgreementList = checkApartmentID.getAll();
+            for (LeaseAgreement list: leaseAgreementList) {
+                if (list.getApartmentID().equals(apartmentID)){
+                    monthlyRentBill.setApartmentID(apartmentID);
+                    monthlyRentBill.setTenantID(list.getTenantID());
+                    monthlyRentBill.setDate(LocalDate.now());
+                    monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
 
-            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-            monthlyRentBillBUS.add(monthlyRentBill);
+                    Double totalPayment = list.getMonthlyRent();
+                    monthlyRentBill.setTotalPayment(totalPayment);
+                    monthlyRentBill.setStatus("Chưa thanh toán");
 
-            monthlyRentBillObservableList.add(monthlyRentBill);
-            table__P3__1.setItems(monthlyRentBillObservableList);
-            refreshFormMonthlyRentBill();
+                    MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+                    monthlyRentBillBUS.add(monthlyRentBill);
+
+                    monthlyRentBillObservableList.add(monthlyRentBill);
+                    table__P3__1.setItems(monthlyRentBillObservableList);
+                    refreshFormMonthlyRentBill();
+
+
+
+                    break;
+                }
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1387,8 +1581,6 @@ public class BuildingManagerController implements Initializable {
     private ServiceTicket serviceTicket;
     private ServiceTicket serviceTicketdelete;
 
-    
-
     public void initServiceTicket() {
         serviceTicketslist = FXCollections.observableArrayList();
         ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
@@ -1404,9 +1596,9 @@ public class BuildingManagerController implements Initializable {
         ghiChu.setCellValueFactory(new PropertyValueFactory<>("Note"));
         table__sericetiket.setItems(observableList);
         handleServiceTicket();
+
     }
 
-    
     public void handleServiceTicket() {
         table__sericetiket.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
@@ -1459,6 +1651,35 @@ public class BuildingManagerController implements Initializable {
         } else {
             showAlert("Thất Bại", "Không Thể Thêm Phiếu Dịch Vụ", AlertType.ERROR);
         }
+
+        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+        List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
+        LocalDate now = LocalDate.now();
+        LocalDate sameDayLastMonth = now.minusMonths(1);
+
+        for (int i = 0; i < monthlyRentBillList.size(); i++) {
+            MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
+            if (monthlyRentBill.getMonthlyRentBillID().equals(service.getMonthlyRentBillID()) &&
+                    (service.getDate().isAfter(sameDayLastMonth) || service.getDate().isEqual(sameDayLastMonth)) &&
+                    (service.getDate().isBefore(now) || service.getDate().isEqual(now))) {
+
+
+                monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + service.getTotalAmount());
+
+
+                // Cập nhật dữ liệu trong ObservableList
+                MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
+                boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
+                if (updateSuccess) {
+                    monthlyRentBillObservableList.set(i, monthlyRentBill);
+                    table__P3__1.refresh();
+                } else {
+                    System.err.println("Không thể cập nhật phiếu thu trong cơ sở dữ liệu.");
+                }
+                break;
+            }
+        }
+
 
     }
 
@@ -1658,8 +1879,16 @@ public class BuildingManagerController implements Initializable {
             return;
         }
 
+        if (containsNumber(newName)) {
+            showAlert("Lỗi", "Tên Không Được Nhập Bằng Số", AlertType.ERROR);
+            return;
+        }
+        String revenueInput1 = tienPhatField.getText().replaceAll(",", "");
 
-       
+        if (!isValidNumber(revenueInput1)) {
+            showAlert("Lỗi", "Tiền Phạt Vui Lòng Nhập Bằng Số", AlertType.ERROR);
+            return;
+        }
 
         Violation newViolation = new Violation();
         newViolation.setViolationID((newViolationID));
@@ -1880,6 +2109,34 @@ public class BuildingManagerController implements Initializable {
 
         } else {
             showAlert("Thất Bại", "Không thể thêm vi phạm", AlertType.ERROR);
+        }
+
+        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+        List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
+        LocalDate now = LocalDate.now();
+        LocalDate sameDayLastMonth = now.minusMonths(1);
+
+        for (int i = 0; i < monthlyRentBillList.size(); i++) {
+            MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
+            if (monthlyRentBill.getMonthlyRentBillID().equals(violationTickets.getMonthlyRentBillID()) &&
+                    (violationTickets.getDate().isAfter(sameDayLastMonth) || violationTickets.getDate().isEqual(sameDayLastMonth)) &&
+                    (violationTickets.getDate().isBefore(now) || violationTickets.getDate().isEqual(now))) {
+
+
+                monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + violationTickets.getPrice());
+
+
+                // Cập nhật dữ liệu trong ObservableList
+                MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
+                boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
+                if (updateSuccess) {
+                    monthlyRentBillObservableList.set(i, monthlyRentBill);
+                    table__P3__1.refresh();
+                } else {
+                    System.err.println("Không thể cập nhật phiếu thu trong cơ sở dữ liệu.");
+                }
+                break;
+            }
         }
 
     }

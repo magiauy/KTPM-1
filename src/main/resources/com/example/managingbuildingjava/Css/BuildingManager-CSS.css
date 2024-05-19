@@ -54,3 +54,19 @@
 .black-text {
   -fx-text-fill: #000000; /* Màu chữ đen */
 }
+
+#Regex__P1__1{
+  -fx-text-fill: red;
+}
+
+#Regex__P1__2{
+  -fx-text-fill: red;
+}
+
+#Regex__P2__1{
+  -fx-text-fill: red;
+}
+
+#Regex__P2__2{
+  -fx-text-fill: red;
+}

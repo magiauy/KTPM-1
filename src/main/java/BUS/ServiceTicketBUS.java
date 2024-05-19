@@ -1,11 +1,23 @@
 package BUS;
 
+import DAO.ServiceDAO;
 import DAO.ServiceTicketDAO;
 import DTO.MonthlyRentBill;
 import DTO.Service;
 import DTO.ServiceTicket;
 import DTO.ServiceUsuage;
 import com.example.managingbuildingjava.CustomerController;
+import com.itextpdf.io.font.PdfEncodings;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.TextAlignment;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -128,6 +140,71 @@ public class ServiceTicketBUS {
 
         return resul;
 
+    }
+
+    public void exportDPF(String url, String id) {
+        ServiceTicket ticket = ServiceTicketDAO.getInstance().selectById(id);
+        Service service = ServiceDAO.getInstance().selectById(ticket.getServiceID());
+        String dest = url + "\\PhieuDichVu"+ticket.getServiceTicketID()+".pdf";
+        try {
+            // Tạo PdfWriter
+            PdfWriter writer = new PdfWriter(dest);
+
+            // Tạo PdfDocument
+            PdfDocument pdfDoc = new PdfDocument(writer);
+
+            // Tạo Document
+            Document document = new Document(pdfDoc);
+
+            // Sử dụng font hỗ trợ tiếng Việt
+            String fontPath = "src/DejaVuSans.ttf";  // Cập nhật đường dẫn tới font của bạn
+            PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H, true);
+
+            String logoPath = "src/main/resources/Picture/logo.jpg";  // Đường dẫn tới logo của bạn
+            ImageData imageData = ImageDataFactory.create(logoPath);
+            com.itextpdf.layout.element.Image logo = new Image(imageData).scaleToFit(100, 100).setFixedPosition(20, 750);  // Định vị và kích thước logo
+            document.add(logo);
+
+            Paragraph companyInfo = new Paragraph("Công ty bất động sản Star Sky\n"
+                    + "Địa chỉ: 273 An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh\n"
+                    + "Điện thoại: (028) 38354004\n"
+                    + "Email: StarSkyVipPro@gmail")
+                    .setFont(font)
+                    .setFontSize(8)
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setMarginBottom(10);  // Add space after company info
+            document.add(companyInfo);
+
+            // Thêm tiêu đề
+            Paragraph title = new Paragraph("Phiếu Dịch Vụ")
+                    .setFont(font)
+                    .setBold()
+                    .setFontSize(20)
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setMarginBottom(20);  // Add space after title
+            document.add(title);
+
+            document.add(new Paragraph("Dịch vụ: " + service.getName()).setFont(font));
+            document.add(new Paragraph("---------------------------------------------------------------------------------").setFont(font));
+            document.add(new Paragraph("Mã phiếu dịch vụ: " + ticket.getServiceTicketID()).setFont(font));
+            document.add(new Paragraph("---------------------------------------------------------------------------------").setFont(font));
+            document.add(new Paragraph("Mã hóa đơn tiền thuê hàng tháng: " + ticket.getMonthlyRentBillID()).setFont(font));
+            document.add(new Paragraph("---------------------------------------------------------------------------------").setFont(font));
+            document.add(new Paragraph("Mã dịch vụ: " + ticket.getServiceID()).setFont(font));
+            document.add(new Paragraph("---------------------------------------------------------------------------------").setFont(font));
+            document.add(new Paragraph("Số lượng: " + (ticket.getQuantity() != null ? ticket.getQuantity().toString() : "")).setFont(font));
+            document.add(new Paragraph("---------------------------------------------------------------------------------").setFont(font));
+            document.add(new Paragraph("Tổng số tiền: " + (ticket.getTotalAmount() != null ? ticket.getTotalAmount().toString() : "")).setFont(font));
+            document.add(new Paragraph("---------------------------------------------------------------------------------").setFont(font));
+            document.add(new Paragraph("Ngày: " + (ticket.getDate() != null ? ticket.getDate().toString() : "")).setFont(font));
+            document.add(new Paragraph("---------------------------------------------------------------------------------").setFont(font));
+            document.add(new Paragraph("Ghi chú: " + ticket.getNote()).setFont(font));
+
+            // Đóng tài liệu
+            document.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
