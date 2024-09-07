@@ -43,47 +43,46 @@ public class LoginController {
             return;
         }
 
-
-//        if (CustomersAccountBUS.checkLogin(username, password).equals("0") && StaffsAccountBUS.checkLogin(username, password).equals("0")) {
-//            showError("Invalid username or password.");
-//        } else {
-//            System.out.println("Login successful!");
-//            try {
-//                if (username.equals("admin"))
-//                    Boss.main(null);
-//                if (StaffsAccountBUS.getUserType(username, password).equals("staff"))
-//                    BuildingManager.openBuildingManagerView();
-//                if (CustomersAccountBUS.getUserType(username, password).equals("tenant"))
-//                    Customer.openCustomerView();
-//            } catch (Exception e) {
-//                System.out.println("Error opening Boss view: " + e.getMessage());
-//                e.printStackTrace();
-//            }
-//        }
         CustomersAccountBUS customersAccountBUS = new CustomersAccountBUS();
         String validLogin = customersAccountBUS.checkLogin(username, password);
+
         if (!validLogin.equals("0")) {
-            Customer.openCustomerView();
+            try {
+                Customer customer = new Customer();
+                customer.setID(validLogin); // Set ID for Customer if needed
+                customer.start(new Stage());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             StaffsAccountBUS staffsAccountBUS = new StaffsAccountBUS();
             validLogin = staffsAccountBUS.checkLogin(username, password);
             if (!validLogin.equals("0")) {
-
-                BuildingManager.openBuildingManagerView();
-            }
-            else{
+                try {
+                    BuildingManager manager = new BuildingManager();
+                    manager.setID(validLogin); // Set ID for BuildingManager
+                    manager.start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
                 AdminsAccountBUS adminsAccountBUS = new AdminsAccountBUS();
                 validLogin = adminsAccountBUS.checkLogin(username, password);
                 if (!validLogin.equals("0")) {
-                   Boss.main(null);
-                }
-                else{
-                    //        showStatusMessage("Invalid username or password.");
+                    try {
+                        Boss boss = new Boss();
+//                        boss.setID(validLogin); // Set ID for Boss if needed
+                        boss.start(new Stage());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    showError("Invalid username or password.");
                 }
             }
-
         }
     }
+
     private void showError(String message) {
         System.err.println("Error: " + message);
     }

@@ -29,10 +29,8 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
+
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -324,7 +322,8 @@ public class CustomerController implements Initializable {
     void regisMobile(){
         LocalDate currentDate = selectSersDate.getValue();
         String note = noteFixedRegis.getText();
-        String serName = comboBox__P1__21.getValue();
+        String serName = comboBox__P1__21.getSelectionModel().getSelectedItem();
+        System.out.println(currentDate+" "+note+" "+serName);
 
         if (currentDate == null || serName == null){
             showAlert("Lỗi", "Vui lòng thử lại.", Alert.AlertType.ERROR);
@@ -371,7 +370,6 @@ public class CustomerController implements Initializable {
 
     void updateTableOldRegisServ(){
         ServiceBUS.getInstance().setCombox(comboBox__P1__21);
-
         nameSerOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("name"));
         priceSerOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("totalAmount"));
         quantitySersOldCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, Double>("quantity"));
@@ -385,23 +383,19 @@ public class CustomerController implements Initializable {
 
         try {
             LocalDate currentDate = LocalDate.now();
-            if (ServiceTicketBUS.getInstance()
-                    .getCurrentMonthMonthlyRentBillIDsByTenantID(ID).isEmpty()) {
-                return;
-            }
-            String mrBillID = ServiceTicketBUS.getInstance()
-                    .getCurrentMonthMonthlyRentBillIDsByTenantID(ID).getFirst();
-
-
+            System.out.println(ServiceTicketBUS.getInstance().getOldMonthMonthlyRentBillIDsByTenantID(ID));
+            List<String> mrBillIDs = ServiceTicketBUS.getInstance().getOldMonthMonthlyRentBillIDsByTenantID(ID);
             for (ServiceTicket serviceTicket : ServiceTicketBUS.getInstance().getAll()) {
-                if (mrBillID.equals(serviceTicket.getMonthlyRentBillID())
-                        && serviceTicket.getDate().isBefore(currentDate.withDayOfMonth(1))) {
-                    price.add(serviceTicket.getTotalAmount());
-                    date.add(serviceTicket.getDate());
-                    quantity.add(serviceTicket.getQuantity());
+                for (int i = 0; i < mrBillIDs.size(); i++) {
+                    if (mrBillIDs.get(i).equals(serviceTicket.getMonthlyRentBillID()) &&
+                            serviceTicket.getDate().isBefore(currentDate.withDayOfMonth(1))) {
+                        price.add(serviceTicket.getTotalAmount());
+                        date.add(serviceTicket.getDate());
+                        quantity.add(serviceTicket.getQuantity());
 
-                    serviceID.add(serviceTicket.getServiceID());
+                        serviceID.add(serviceTicket.getServiceID());
 
+                    }
                 }
             }
             if (serviceID.isEmpty()) {
@@ -431,7 +425,6 @@ public class CustomerController implements Initializable {
     }
 
     void updateTableNewRegisServ(){
-
         nameSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("name"));
         priceSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("totalAmount"));
         regisSerCol.setCellValueFactory(new PropertyValueFactory<ServiceUsuage, String>("date"));
@@ -630,15 +623,15 @@ public class CustomerController implements Initializable {
 
             for (MonthlyRentBill bill : monthlyRentBills) {
                 switch (bill.getStatus()) {
-                    case "Unpaid":
+                    case "Chưa thanh toán":
                         unpaidTotal += bill.getTotalPayment();
                         unpaidCount++;
                         break;
-                    case "Paid":
+                    case "Đã thanh toán":
                         paidTotal += bill.getTotalPayment();
                         paidCount++;
                         break;
-                    case "Overdue":
+                    case "Quá hạn":
                         overdueTotal += bill.getTotalPayment();
                         overdueCount++;
                         break;

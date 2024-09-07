@@ -8,7 +8,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class BuildingManager extends Application {
+    private static String userID;
+
+    public static void setID(String id) {
+        userID = id;
+    }
     private static BuildingManager instance;
+
+    private static Stage primaryStage;
 
     public static Stage getPrimaryStage() {
         return primaryStage;
@@ -24,11 +31,13 @@ public class BuildingManager extends Application {
         }
         return instance;
     }
-    private static Stage primaryStage;
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        BuildingManagerController.getInstance().setID("BM1");
+
+        // Pass the userID to BuildingManagerController
+        BuildingManagerController.getInstance().setID(userID);
         BuildingManager.primaryStage = primaryStage;
         openBuildingManagerView();
     }

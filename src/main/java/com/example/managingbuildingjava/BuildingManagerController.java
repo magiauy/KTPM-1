@@ -29,6 +29,8 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+
+
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
@@ -753,6 +755,8 @@ public class BuildingManagerController implements Initializable {
         return tenantObservableLists;
     }
 
+
+
     private ObservableList<Cohabitant> cohabitantObservableList;;
 
     public ObservableList<Cohabitant> getCohabitantObservableList() {
@@ -1055,6 +1059,9 @@ public class BuildingManagerController implements Initializable {
     private TextField TxtField__P3__5 = new TextField();
 
     @FXML
+    private TextField TxtField__P3__51 = new TextField();
+
+    @FXML
     private TextField TxtField__P3__6 = new TextField();
 
     @FXML
@@ -1130,6 +1137,7 @@ public class BuildingManagerController implements Initializable {
         TxtField__P3__3.setText(monthlyRentBill.getTenantID());
         datePicker__P3.setValue(monthlyRentBill.getDate());
         TxtField__P3__5.setText(String.valueOf(monthlyRentBill.getRepaymentPeriod()));
+        TxtField__P3__51.setText(monthlyRentBill.getStatus());
         TxtField__P3__6.setText(String.valueOf(monthlyRentBill.getTotalPayment()));
         comboBox__P3__3.setValue(monthlyRentBill.getStatus());
     }
@@ -1141,6 +1149,7 @@ public class BuildingManagerController implements Initializable {
         datePicker__P3.setValue(null);
         TxtField__P3__5.setText("");
         TxtField__P3__6.setText("");
+        TxtField__P3__51.setText("");
         comboBox__P3__3.getSelectionModel().clearSelection();
     }
 
@@ -1149,11 +1158,10 @@ public class BuildingManagerController implements Initializable {
         MonthlyRentBill monthlyRentBill = table__P3__1.getSelectionModel().getSelectedItem();
         monthlyRentBill.setMonthlyRentBillID(TxtField__P3__1.getText());
         monthlyRentBill.setApartmentID(TxtField__P3__2.getText());
-        monthlyRentBill.setTenantID(TxtField__P3__3.getText());
-        monthlyRentBill.setDate(datePicker__P3.getValue());
         monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
+        monthlyRentBill.setStatus(TxtField__P3__51.getText());
+        System.out.println(TxtField__P3__51.getText());
         monthlyRentBill.setTotalPayment(Double.parseDouble(TxtField__P3__6.getText()));
-        monthlyRentBill.setStatus(comboBox__P3__3.getSelectionModel().getSelectedItem());
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
         boolean updateSuccess = monthlyRentBillBUS.update(monthlyRentBill);
         if (updateSuccess) {
@@ -2421,6 +2429,9 @@ public class BuildingManagerController implements Initializable {
     private ComboBox<Double> comboBox__P6__3 = new ComboBox<>();
 
     @FXML
+    private ComboBox<String> combobox_TxtField__P6__2 = new ComboBox<>();
+
+    @FXML
     private TableView<LeaseAgreement> table__P6__1 = new TableView<>();
 
     private ObservableList<LeaseAgreement> leaseAgreementObservableList;
@@ -2452,8 +2463,7 @@ public class BuildingManagerController implements Initializable {
         LeaseAgreement leaseAgreement = table__P6__1.getSelectionModel().getSelectedItem();
         TxtField__P6__1.setText(leaseAgreement.getLeaseAgreementID());
         TxtField__P6__2.setText(leaseAgreement.getTenantID());
-        TxtField__P6__3.setText(leaseAgreement.getBuildingManagerID());
-        TxtField__P6__4.setText(leaseAgreement.getApartmentID());
+        TxtField__P6__3.setText(leaseAgreement.getApartmentID());
         DP_P6_1.setValue(leaseAgreement.getSigningDate());
         DP_P6_2.setValue(leaseAgreement.getLeaseStartDate());
         DP_P6_3.setValue(leaseAgreement.getLeaseEndDate());
@@ -2510,8 +2520,9 @@ public class BuildingManagerController implements Initializable {
             leaseAgreement.setBuildingManagerID(ID);
             leaseAgreement.setSigningDate(DP_P6_1.getValue());
             leaseAgreement.setLeaseStartDate(DP_P6_2.getValue());
-            leaseAgreement.setLeaseEndDate(DP_P6_3.getValue());
+
             leaseAgreement.setLeaseTerm(comboBox__P6__3.getValue());
+            leaseAgreement.setLeaseEndDate(DP_P6_2.getValue().plusMonths(leaseAgreement.getLeaseTerm().longValue()));
             leaseAgreement.setDeposit(Double.parseDouble(TxtField__P6__5.getText()));
             leaseAgreement.setMonthlyRent(Double.parseDouble(TxtField__P6__6.getText()));
             LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
@@ -2592,7 +2603,40 @@ public class BuildingManagerController implements Initializable {
 
             comboBox__P6__3.getItems().addAll(6.0, 12.0);
             comboBox__P6__3.setPromptText("");
+
+
+            TenantBUS tenant_c = new TenantBUS();
+            List<Tenant> listTenent_C = tenant_c.getAll();
+            List<String> differenceList = new ArrayList<>();
+
+
+
+            // Duyệt qua tất cả các phần tử trong tenantObservableList_c
+            for (Tenant tenant : listTenent_C) {
+
+                    differenceList.add(tenant.getTenantID());
+
+            }
+            combobox_TxtField__P6__2.getItems().addAll(differenceList);
+
+            // Lắng nghe sự thay đổi văn bản trong TextField
+            TxtField__P6__2.textProperty().addListener((obs, oldText, newText) -> {
+                if (newText.isEmpty()) {
+                    combobox_TxtField__P6__2.setVisible(true); // Hiển thị ComboBox khi không có văn bản
+                } else {
+                    combobox_TxtField__P6__2.setVisible(false); // Ẩn ComboBox khi có văn bản
+                }
+            });
+
+            // Xử lý sự kiện khi chọn một mục từ ComboBox
+            combobox_TxtField__P6__2.setOnAction(event -> {
+                TxtField__P6__2.setText(combobox_TxtField__P6__2.getValue());
+                combobox_TxtField__P6__2.setVisible(false); // Ẩn ComboBox sau khi chọn mục
+            });
+
+
             initLeaseAgreement();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

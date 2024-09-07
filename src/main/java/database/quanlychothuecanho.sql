@@ -146,6 +146,7 @@ CREATE TABLE ViolationTicket (
                                  FOREIGN KEY (violationID) REFERENCES Violation(violationID)
 );
 
+
 CREATE TABLE StaffsAccount (
                                username VARCHAR(100) PRIMARY KEY,
                                password NVARCHAR(255),
@@ -546,6 +547,7 @@ VALUES
     ('TKBM3', 'BM3', '123'),
     ('TKBM4', 'BM4', '123'),
     ('TKBM5', 'BM5', '123')
+
     INSERT INTO CustomersAccount  (username, id, password)
 VALUES
     ('TKT1', 'T1', '123'),
@@ -553,3 +555,12 @@ VALUES
     ('TKT3', 'T3', '123'),
     ('TKT4', 'T4', '123'),
     ('TKT5', 'T5', '123');
+
+CREATE TABLE AdminsAccount (
+                               username VARCHAR(100) PRIMARY KEY,
+                               password NVARCHAR(255),
+                               id VARCHAR(100)
+);
+
+INSERT INTO AdminsAccount (username, password, id)
+VALUES ('admin', 'admin', 'admin');

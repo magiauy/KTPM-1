@@ -8,6 +8,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Customer extends Application {
+    private static String userID;
+
+    public static void setID(String id) {
+        userID = id;
+    }
     private static Customer instance;
     public static Customer getInstance() {
         if (instance == null) {
@@ -28,7 +33,7 @@ public class Customer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        CustomerController.getInstance().setID(CustomerController.getInstance().getID());
+        CustomerController.getInstance().setID(userID);
         Customer.primaryStage = primaryStage;
         openCustomerView();
     }

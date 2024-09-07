@@ -223,6 +223,34 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
         return monthlyRentBillIDs;
     }
 
+    public ArrayList<String> getOldMonthMonthlyRentBillIDsByTenantID(String tenantID) {
+        ArrayList<String> monthlyRentBillIDs = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            String sql = "SELECT monthlyRentBillID " +
+                    "FROM MonthlyRentBill " +
+                    "WHERE tenantID = ?"
+                    ;
+
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, tenantID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String monthlyRentBillID = resultSet.getString("monthlyRentBillID");
+                monthlyRentBillIDs.add(monthlyRentBillID);
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return monthlyRentBillIDs;
+    }
     public ArrayList<String> getMonthlyRentBillIDsByTenantID(String tenantID) {
         ArrayList<String> monthlyRentBillIDs = new ArrayList<>();
         try {

@@ -28,7 +28,7 @@ public class Boss extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         bossStage = primaryStage;
-        BossController.getInstance().setID("Admin");
+        BossController.getInstance().setID("admin");
         openBossView();
     }
     public static void openBossView() throws IOException {

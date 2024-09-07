@@ -14,4 +14,7 @@ module com.example.managingbuildingjava {
         opens DTO to javafx.base; // Mở gói DTO
 
         exports com.example.managingbuildingjava;
+
+
+
 }

@@ -59,7 +59,7 @@
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Label>
-                  <Label fx:id="Regex__P1__1" layoutX="133.0" layoutY="196.0" prefHeight="17.0" prefWidth="165.0"/>
+                  <Label fx:id="Regex__P1__1" layoutX="133.0" layoutY="196.0" prefHeight="17.0" prefWidth="165.0" />
                   <Label fx:id="Regex__P1__2" layoutX="133.0" layoutY="252.0" prefHeight="17.0" prefWidth="165.0" />
                     </children>
                 </Pane>
@@ -99,7 +99,7 @@
                   <TableColumn fx:id="soPhongNguTable" prefWidth="75.3333740234375" text="Số phòng ngủ" />
                   <TableColumn fx:id="soPhongTamTable" minWidth="2.6666259765625" prefWidth="30.6666259765625" text="Số phòng tắm" />
                   <TableColumn fx:id="noiThatTable" prefWidth="86.66668701171875" text="Nội thất" />
-                  <TableColumn fx:id="trangthai" prefWidth="72.7999267578125" text="Tình Trạng " />
+                  <TableColumn fx:id="trangthai" prefWidth="94.0" text="Tình Trạng " />
                     </columns>
                 </TableView>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="77.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin căn hộ">

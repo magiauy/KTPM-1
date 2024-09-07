@@ -96,6 +96,9 @@ public class ServiceTicketBUS {
     public ArrayList<String> getCurrentMonthMonthlyRentBillIDsByTenantID(String tenantID) {
         return ServiceTicketDAO.getInstance().getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID());
     }
+    public ArrayList<String> getOldMonthMonthlyRentBillIDsByTenantID(String tenantID) {
+        return ServiceTicketDAO.getInstance().getOldMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID());
+    }
 
 
     public ArrayList<ServiceTicket> search(LocalDate day1, LocalDate day2, String type) {
