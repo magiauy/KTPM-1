@@ -13,6 +13,7 @@ public class Login extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 500, 272);
         stage.setTitle("Login");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 

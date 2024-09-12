@@ -83,6 +83,15 @@ public class BuildingManagerBUS {
         return -1;
     }
 
+    public BuildingManager getBuildingManagerByBuildingID(String buildingID) {
+        for (int i = 0; i < listBuildingManagerDAOs.size(); i++) {
+            if (listBuildingManagerDAOs.get(i).getBuildingId().equals(buildingID)) {
+                return listBuildingManagerDAOs.get(i);
+            }
+        }
+        return null;
+    }
+
     public void setInfor(Text id, Text fullName, Text phone, Text dob, Text gender, Text cccd, String ID){
         BuildingManager buildingManager = getBuildingManagerById(ID);
         System.out.println("___ "+ buildingManager);

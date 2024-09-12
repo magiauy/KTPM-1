@@ -151,10 +151,10 @@ public class MonthlyRentBillBUS {
         tableRow.getCell(0).setText("STT");
         XWPFTableCell cell = tableRow.createCell();
         cell.setText("Ngày");
-        cell.setWidth(String.valueOf(10));
+        cell.setWidth("400");
         XWPFTableCell cell2 = tableRow.createCell();
         cell2.setText("Tên phiếu dịch vụ/phạt");
-        cell2.setWidth(String.valueOf(4));
+        cell2.setWidth("500");
         tableRow.createCell().setText("Đơn vị");
         tableRow.createCell().setText("Giá/đơn vị (VND)");
         tableRow.createCell().setText("Số lượng");

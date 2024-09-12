@@ -21,11 +21,29 @@ public class CohabitantDAO implements DAOInterface<Cohabitant>{
         return new CohabitantDAO();
     }
 
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(cohabitantID, 3, LEN(cohabitantID) - 2) AS INT)), 0) FROM Cohabitant";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "CH" + (lastId + 1);
+        }
+        return "CH1";
+    }
+
     @Override
     public int insert(Cohabitant t) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
+
+            if (t.getCohabitantID() == null) {
+                String newId = generateNewID(connection);
+                t.setCohabitantID(newId); // Gán ID mới cho đối tượng Apartment
+            }
+
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO Cohabitant (cohabitantID, tenantID, firstName, lastName, phoneNumber, dob, gender, citizenIdentityCard) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 

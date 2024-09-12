@@ -726,20 +726,22 @@ public class BossController implements Initializable {
                     TxtField__r2.setText(selectedRow.getBuildingID());
                     TxtField__r4.setText(selectedRow.getBuildingManagerID());
 
-                    double opex = selectedRow.getMonthlyOpex();
-                    DecimalFormat df = new DecimalFormat("#,##0.00");
-                    String formattedSalary = df.format(opex);
-                    TxtField__r3.setText(formattedSalary);
-
-
+                    // Xử lý monthlyOpex dạng Float
+                    Float opex = selectedRow.getMonthlyOpex();
+                    if (opex != null) {
+                        DecimalFormat df = new DecimalFormat("#,###.##");
+                        TxtField__r3.setText(df.format(opex));
+                    } else {
+                        TxtField__r3.setText("N/A");
+                    }
 
                     Date_page3.setValue(selectedRow.getDate());
                     selecFinancialReport = selectedRow;
-
                 }
             }
         });
     }
+
 
     private void showAlert(String title, String message, AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -1315,6 +1317,7 @@ private boolean containsNumber(String s) {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
+            primaryStage.centerOnScreen();
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

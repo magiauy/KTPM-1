@@ -138,6 +138,7 @@ CREATE TABLE ViolationTicket (
                                  violationTicketID VARCHAR(100),
                                  violationID VARCHAR(100),
                                  monthlyRentBillID VARCHAR(100),
+                                 quantity INT,
                                  price DECIMAL(20, 2),
                                  Date DATE,
                                  note NVARCHAR(250),
@@ -529,15 +530,15 @@ VALUES
     ('V3', N'Cháy nổ', 2000000),
     ('V4', N'Vi phạm an ninh', 1500000)
 -- Dữ liệu cho bảng ViolationTicket
-    INSERT INTO ViolationTicket (violationTicketID,violationID, monthlyRentBillID, price, Date, note)
+    INSERT INTO ViolationTicket (violationTicketID,violationID, monthlyRentBillID, quantity, price, Date, note)
 VALUES
-    ('VT1','V1', 'MRB1',  700000, '2024-04-05', N'Quá hạn 5 ngày'),
-    ('VT2','V2', 'MRB2',  500000, '2024-04-15', N'Đề nghị khắc phục ngay'),
-    ('VT3','V4', 'MRB2', 1500000, '2024-04-12', N'Đỗ xe sai quy định'),
-    ('VT4','V2', 'MRB1', 500000, '2024-04-01', N'Đổ rác bừa bãi'),
-    ('VT5','V3', 'MRB3', 2000000, '2024-04-01', N'Sử dụng bếp gas không đảm bảo an toàn'),
-    ('VT6','V4', 'MRB1', 1500000, '2024-04-24', N'Mang theo vật nuôi không được phép'),
-    ('VT7','V1', 'MRB2', 500000, '2024-02-01', N'Quá hạn thanh toán tiền internet');
+    ('VT1','V1', 'MRB1', 1 ,  700000, '2024-04-05', N'Quá hạn 5 ngày'),
+    ('VT2','V2', 'MRB2', 1 ,  500000, '2024-04-15', N'Đề nghị khắc phục ngay'),
+    ('VT3','V4', 'MRB2', 1 , 1500000, '2024-04-12', N'Đỗ xe sai quy định'),
+    ('VT4','V2', 'MRB1', 1 , 500000, '2024-04-01', N'Đổ rác bừa bãi'),
+    ('VT5','V3', 'MRB3', 1 , 2000000, '2024-04-01', N'Sử dụng bếp gas không đảm bảo an toàn'),
+    ('VT6','V4', 'MRB1', 1 , 1500000, '2024-04-24', N'Mang theo vật nuôi không được phép'),
+    ('VT7','V1', 'MRB2', 1 , 500000, '2024-02-01', N'Quá hạn thanh toán tiền internet');
 
 
 INSERT INTO StaffsAccount  (username, id, password)
@@ -559,8 +560,9 @@ VALUES
 CREATE TABLE AdminsAccount (
                                username VARCHAR(100) PRIMARY KEY,
                                password NVARCHAR(255),
-                               id VARCHAR(100)
+                               id VARCHAR(100),
+                               FOREIGN KEY (id) REFERENCES BuildingManager(buildingManagerID)
 );
 
 INSERT INTO AdminsAccount (username, password, id)
-VALUES ('admin', 'admin', 'admin');
+VALUES ('admin', 'admin', 'BM1');

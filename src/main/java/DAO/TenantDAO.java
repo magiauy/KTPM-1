@@ -17,11 +17,29 @@ public class TenantDAO implements DAOInterface<Tenant> {
         return new TenantDAO();
     }
 
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(tenantID, 2, LEN(tenantID) - 1) AS INT)), 0) FROM Tenant";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "T" + (lastId + 1);
+        }
+        return "T1"; // Nếu bảng rỗng thì bắt đầu từ T1
+    }
+
     @Override
     public int insert(Tenant tenant) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
+
+            if (tenant.getTenantID() == null) {
+                String newId = generateNewID(connection);
+                tenant.setTenantID(newId); // Gán ID mới cho đối tượng Apartment
+            }
+
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO Tenant (tenantID, lastName, firstName, phoneNumber, dob, gender, citizenIdentityCard) VALUES (?, ?, ?, ?, ?, ?, ?)");
 

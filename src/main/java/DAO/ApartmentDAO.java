@@ -22,17 +22,35 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
     public static ApartmentDAO getInstance(){
         return new ApartmentDAO();
     }
+
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(apartmentID, 4, LEN(apartmentID) - 3) AS INT)), 0) FROM Apartment";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "APT" + (lastId + 1);
+        }
+        return "APT1"; // Nếu bảng rỗng thì bắt đầu từ APT1
+    }
+
     @Override
     public int insert(Apartment apartment) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
 
+            if (apartment.getApartmentID() == null) {
+                String newId = generateNewID(connection);
+                apartment.setApartmentID(newId); // Gán ID mới cho đối tượng Apartment
+            }
+
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL
-            preparedStatement.setString(1, (apartment.getApartmentID() != null) ? apartment.getApartmentID() : null);
+            preparedStatement.setString(1, apartment.getApartmentID());
             preparedStatement.setString(2, (apartment.getBuildingID() != null) ? apartment.getBuildingID() : null);
             preparedStatement.setString(3, apartment.getRoomNumber());
             preparedStatement.setDouble(4, apartment.getArea());

@@ -43,6 +43,9 @@ public class LoginController {
             return;
         }
 
+        // Lấy Stage hiện tại từ nút đăng nhập
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+
         CustomersAccountBUS customersAccountBUS = new CustomersAccountBUS();
         String validLogin = customersAccountBUS.checkLogin(username, password);
 
@@ -51,6 +54,9 @@ public class LoginController {
                 Customer customer = new Customer();
                 customer.setID(validLogin); // Set ID for Customer if needed
                 customer.start(new Stage());
+
+                // Đóng cửa sổ đăng nhập sau khi đăng nhập thành công
+                stage.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -62,6 +68,9 @@ public class LoginController {
                     BuildingManager manager = new BuildingManager();
                     manager.setID(validLogin); // Set ID for BuildingManager
                     manager.start(new Stage());
+
+                    // Đóng cửa sổ đăng nhập sau khi đăng nhập thành công
+                    stage.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -71,8 +80,10 @@ public class LoginController {
                 if (!validLogin.equals("0")) {
                     try {
                         Boss boss = new Boss();
-//                        boss.setID(validLogin); // Set ID for Boss if needed
                         boss.start(new Stage());
+
+                        // Đóng cửa sổ đăng nhập sau khi đăng nhập thành công
+                        stage.close();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -82,6 +93,7 @@ public class LoginController {
             }
         }
     }
+
 
     private void showError(String message) {
         System.err.println("Error: " + message);

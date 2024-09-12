@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -55,7 +56,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="TxtField__P3__51" layoutX="120.0" layoutY="180.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                  <ComboBox fx:id="comboBox_P3_status" layoutX="120.0" layoutY="180.0" prefHeight="32.0" prefWidth="165.0" />
                </children>
             </Pane>
                     <Button fx:id="bnt__P3__add" contentDisplay="GRAPHIC_ONLY" layoutX="37.0" layoutY="433.0" mnemonicParsing="false" onAction="#themPhieuThu" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">

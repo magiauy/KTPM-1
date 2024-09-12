@@ -7,24 +7,23 @@ public class ViolationTicket {
     private String violationTicketID;
     private String violationID;
     private String monthlyRentBillID;
+    private int quantity;
     private Double price;
     private LocalDate date;
     private String note;
 
-    public ViolationTicket(String violationTicketID, String violationID, String monthlyRentBillID, Double price, LocalDate date, String note) {
+    public ViolationTicket() {
+    }
+
+    public ViolationTicket(String violationTicketID, String violationID, String monthlyRentBillID, int quantity, Double price, LocalDate date, String note) {
         this.violationTicketID = violationTicketID;
         this.violationID = violationID;
         this.monthlyRentBillID = monthlyRentBillID;
+        this.quantity = quantity;
         this.price = price;
         this.date = date;
         this.note = note;
     }
-//Fix tạm thời lôi bên BuildingManagerController
-
-
-    public ViolationTicket() {
-    }
-
 
     public String getViolationTicketID() {
         return violationTicketID;
@@ -48,6 +47,14 @@ public class ViolationTicket {
 
     public void setMonthlyRentBillID(String monthlyRentBillID) {
         this.monthlyRentBillID = monthlyRentBillID;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Double getPrice() {
@@ -80,6 +87,7 @@ public class ViolationTicket {
                 "violationTicketID='" + violationTicketID + '\'' +
                 ", violationID='" + violationID + '\'' +
                 ", monthlyRentBillID='" + monthlyRentBillID + '\'' +
+                ", quantity=" + quantity +
                 ", price=" + price +
                 ", date=" + date +
                 ", note='" + note + '\'' +

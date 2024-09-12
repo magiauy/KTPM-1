@@ -23,38 +23,32 @@
                 </ImageView>
                 <Pane layoutX="41.0" layoutY="124.0" prefHeight="490.0" prefWidth="351.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                     <children>
-                        <TextField fx:id="TxtField__P1__1" layoutX="133.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                        <TextField fx:id="TxtField__P1__2" layoutX="133.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                        <TextField fx:id="TxtField__P1__4" layoutX="133.0" layoutY="213.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                        <TextField fx:id="TxtField__P1__3" layoutX="133.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                        <TextField fx:id="TxtField__P1__5" layoutX="133.0" layoutY="269.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                        <ComboBox fx:id="comboBox__P1__3" layoutX="133.0" layoutY="345.0" prefHeight="32.0" prefWidth="90.0" style="-fx-background-radius: 10px;" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="345.0" prefHeight="32.0" prefWidth="120.0" text="Nội thất" textFill="WHITE">
+                        <TextField fx:id="TxtField__P1__2" layoutX="133.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                        <TextField fx:id="TxtField__P1__4" layoutX="133.0" layoutY="154.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                        <TextField fx:id="TxtField__P1__3" layoutX="133.0" layoutY="91.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                        <TextField fx:id="TxtField__P1__5" layoutX="133.0" layoutY="210.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                        <ComboBox fx:id="comboBox__P1__3" layoutX="133.0" layoutY="286.0" prefHeight="32.0" prefWidth="90.0" style="-fx-background-radius: 10px;" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="286.0" prefHeight="32.0" prefWidth="120.0" text="Nội thất" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="277.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng tắm" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="218.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng tắm" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="213.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng ngủ" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="154.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng ngủ" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="150.0" prefHeight="32.0" prefWidth="120.0" text="Diện tích" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="91.0" prefHeight="32.0" prefWidth="120.0" text="Diện tích" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="86.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="13.0" />
-                            </font>
-                        </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="27.0" prefHeight="32.0" prefWidth="120.0" text="Mã căn hộ" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="27.0" prefHeight="32.0" prefWidth="120.0" text="Số phòng" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
@@ -93,13 +87,12 @@
                 <TableView fx:id="table__P1__1" layoutX="414.0" layoutY="117.0" onMouseClicked="#showApartment" prefHeight="580.0" prefWidth="520.0" style="-fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                     <columns>
                         <TableColumn fx:id="maCanHoTable" prefWidth="75.0" text="Mã căn hộ" />
-                        <TableColumn fx:id="soPhongTable" prefWidth="34.000030517578125" text="Số phòng" />
-                  <TableColumn fx:id="maToaNhaTable" prefWidth="52.66668701171875" text="Mã tòa nhà" />
-                  <TableColumn fx:id="dienTichTable" prefWidth="66.00006103515625" text="Diện tích" />
-                  <TableColumn fx:id="soPhongNguTable" prefWidth="75.3333740234375" text="Số phòng ngủ" />
-                  <TableColumn fx:id="soPhongTamTable" minWidth="2.6666259765625" prefWidth="30.6666259765625" text="Số phòng tắm" />
-                  <TableColumn fx:id="noiThatTable" prefWidth="86.66668701171875" text="Nội thất" />
-                  <TableColumn fx:id="trangthai" prefWidth="94.0" text="Tình Trạng " />
+                        <TableColumn fx:id="soPhongTable" prefWidth="60.0" text="Số phòng" />
+                  <TableColumn fx:id="dienTichTable" prefWidth="46.0" text="Diện tích" />
+                  <TableColumn fx:id="soPhongNguTable" prefWidth="79.0" text="Số phòng ngủ" />
+                  <TableColumn fx:id="soPhongTamTable" minWidth="2.6666259765625" prefWidth="77.0" text="Số phòng tắm" />
+                  <TableColumn fx:id="noiThatTable" prefWidth="70.0" text="Nội thất" />
+                  <TableColumn fx:id="trangthai" prefWidth="109.0" text="Tình Trạng " />
                     </columns>
                 </TableView>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="77.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin căn hộ">

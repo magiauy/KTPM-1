@@ -640,13 +640,13 @@ public class CustomerController implements Initializable {
 
             // Add data to the pie chart
             if (unpaidCount > 0) {
-                pieChartData.add(new PieChart.Data("Unpaid (" + unpaidCount + ")", unpaidTotal));
+                pieChartData.add(new PieChart.Data("Chưa thanh toán (" + unpaidCount + ")", unpaidTotal));
             }
             if (paidCount > 0) {
-                pieChartData.add(new PieChart.Data("Paid (" + paidCount + ")", paidTotal));
+                pieChartData.add(new PieChart.Data("Đã thanh toán (" + paidCount + ")", paidTotal));
             }
             if (overdueCount > 0) {
-                pieChartData.add(new PieChart.Data("Overdue (" + overdueCount + ")", overdueTotal));
+                pieChartData.add(new PieChart.Data("Quá hạn (" + overdueCount + ")", overdueTotal));
             }
 
             pieChart.setData(pieChartData);
@@ -724,6 +724,7 @@ public class CustomerController implements Initializable {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
+            primaryStage.centerOnScreen();
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
