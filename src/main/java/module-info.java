@@ -9,6 +9,7 @@ module com.example.managingbuildingjava {
     requires layout;
     requires kernel;
     requires io;
+    requires org.bouncycastle.pkix;
 
     opens com.example.managingbuildingjava to javafx.fxml;
         opens DTO to javafx.base; // Mở gói DTO

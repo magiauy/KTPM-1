@@ -16,13 +16,7 @@
           <children>
               <Pane layoutX="4.0" layoutY="4.0" prefHeight="720.0" prefWidth="1093.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
-                  <TextField fx:id="TxtField__P1__search" alignment="CENTER" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Tìm Kiếm Theo Tên" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" styleClass="black-text" />
                       <ComboBox fx:id="comboBox__P1__1" layoutX="497.0" layoutY="70.0" onAction="#SelectGender" prefHeight="25.0" prefWidth="130.0" promptText="Lọc Theo Giới Tính" style="-fx-background-radius: 10px;" />
-                      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="230.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../../../Picture/search.png" />
-                          </image>
-                      </ImageView>
             <Pane layoutX="33.0" layoutY="117.0" prefHeight="510.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
                           <TextField fx:id="TxtField__b1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />

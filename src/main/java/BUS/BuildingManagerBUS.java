@@ -106,7 +106,7 @@ public class BuildingManagerBUS {
     }
 
 
-    public ArrayList<BuildingManager> search(String text, String type) {
+    public ArrayList<BuildingManager>   search(String text, String type) {
         ArrayList<BuildingManager> result = new ArrayList<>();
         text = text.toLowerCase();
         if (text == null || type == null || type.isEmpty()) {

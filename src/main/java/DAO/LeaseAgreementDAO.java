@@ -21,11 +21,29 @@ public class LeaseAgreementDAO implements DAOInterface<LeaseAgreement>{
         return new LeaseAgreementDAO();
     }
 
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(leaseAgreementID, 3, LEN(leaseAgreementID) - 2) AS INT)), 0) FROM LeaseAgreement";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "LA" + (lastId + 1);
+        }
+        return "LA1";
+    }
+
     @Override
     public int insert(LeaseAgreement t) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
+
+            if (t.getLeaseAgreementID() == null) {
+                String newId = generateNewID(connection);
+                t.setLeaseAgreementID(newId);
+            }
+
             String sql = "INSERT INTO LeaseAgreement (leaseAgreementID, tenantID , apartmentID, buildingManagerID, signingDate, leaseStartDate, leaseEndDate, leaseTerm, deposit, monthlyRent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 

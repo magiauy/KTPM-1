@@ -557,12 +557,3 @@ VALUES
     ('TKT4', 'T4', '123'),
     ('TKT5', 'T5', '123');
 
-CREATE TABLE AdminsAccount (
-                               username VARCHAR(100) PRIMARY KEY,
-                               password NVARCHAR(255),
-                               id VARCHAR(100),
-                               FOREIGN KEY (id) REFERENCES BuildingManager(buildingManagerID)
-);
-
-INSERT INTO AdminsAccount (username, password, id)
-VALUES ('admin', 'admin', 'BM1');

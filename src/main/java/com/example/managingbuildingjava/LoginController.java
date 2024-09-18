@@ -1,6 +1,5 @@
 package com.example.managingbuildingjava;
 
-import BUS.AdminsAccountBUS;
 import BUS.CustomersAccountBUS;
 import BUS.StaffsAccountBUS;
 import javafx.fxml.FXML;
@@ -75,8 +74,9 @@ public class LoginController {
                     e.printStackTrace();
                 }
             } else {
-                AdminsAccountBUS adminsAccountBUS = new AdminsAccountBUS();
-                validLogin = adminsAccountBUS.checkLogin(username, password);
+                if (username.equals("admin") && password.equals("admin")) {
+                    validLogin = "1";
+                }
                 if (!validLogin.equals("0")) {
                     try {
                         Boss boss = new Boss();

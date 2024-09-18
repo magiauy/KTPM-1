@@ -5,27 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update pdf final">
+      <change afterPath="$PROJECT_DIR$/src/main/java/DTO/Table_User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/AdminsAccountBUS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/BuildingBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/BuildingBUS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BUS/BuildingManagerBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/BuildingManagerBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/CustomersAccountBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/CustomersAccountBUS.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/MonthlyRentBillBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/CohabitantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/CohabitantDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/TenantBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/TenantBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/AdminsAccountDAO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/LeaseAgreementDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/LeaseAgreementDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/MonthlyRentBillDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/MonthlyRentBillDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ServiceTicketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ServiceTicketDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DAO/TenantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/TenantDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ViolationTicketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ViolationTicketDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/ViolationTicket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/ViolationTicket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/FromRegister/Login.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/FromRegister/Register.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/FromRegister/imgs/anh1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/GUI/TrangChu.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/AdminsAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Boss.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page0.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page1.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page2.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page3.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page3.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page1.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page4.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page4.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page0.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page2.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page3.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page3.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page4.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page4.fxml" afterDir="false" />
@@ -40,6 +48,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="module-info" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -118,7 +127,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/NGOC/IdeaProjects/BuildingOperationsApplication&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/NGOC/IdeaProjects/BuildingOperationsApplication/src/main/resources/Picture&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -133,6 +142,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\NGOC\IdeaProjects\BuildingOperationsApplication\src\main\resources\Picture" />
       <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\java\com\example\managingbuildingjava" />
       <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
@@ -324,7 +334,23 @@
       <workItem from="1726045962932" duration="1363000" />
       <workItem from="1726062146360" duration="4919000" />
       <workItem from="1726114397871" duration="5743000" />
-      <workItem from="1726145915772" duration="7531000" />
+      <workItem from="1726145915772" duration="11723000" />
+      <workItem from="1726195763227" duration="464000" />
+      <workItem from="1726198452546" duration="2124000" />
+      <workItem from="1726200815112" duration="793000" />
+      <workItem from="1726208352502" duration="1340000" />
+      <workItem from="1726214831542" duration="769000" />
+      <workItem from="1726231356369" duration="1240000" />
+      <workItem from="1726235192634" duration="7638000" />
+      <workItem from="1726306013361" duration="1128000" />
+      <workItem from="1726311265910" duration="3817000" />
+      <workItem from="1726328503404" duration="4395000" />
+      <workItem from="1726368631732" duration="4147000" />
+      <workItem from="1726375335352" duration="3836000" />
+      <workItem from="1726384897711" duration="3334000" />
+      <workItem from="1726557690401" duration="4269000" />
+      <workItem from="1726573588953" duration="10394000" />
+      <workItem from="1726639350170" duration="394000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />

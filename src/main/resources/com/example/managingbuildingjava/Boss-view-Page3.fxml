@@ -15,16 +15,10 @@
           <children>
               <Pane prefHeight="720.0" prefWidth="1136.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
-                      <TextField fx:id="TxtField__P1__search" alignment="CENTER" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Search" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" />
                       <DatePicker fx:id="date1" layoutX="497.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
                       <DatePicker fx:id="date2" layoutX="622.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
                       <Button fx:id="searchButton" layoutX="734.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchDaypage3" text="Tìm Kiếm" />
                       <Button fx:id="resetButton" layoutX="827.0" layoutY="70.0" mnemonicParsing="false" onAction="#resetDay" text="Đặt Lại" />
-                      <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="230.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../../../Picture/search.png" />
-                          </image>
-                      </ImageView>
             <Pane layoutX="33.0" layoutY="121.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
                           <TextField fx:id="TxtField__r1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />

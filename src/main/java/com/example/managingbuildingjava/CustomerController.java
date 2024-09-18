@@ -357,10 +357,30 @@ public class CustomerController implements Initializable {
             serviceTicket.setTotalAmount(price);
 
             if (ServiceTicketBUS.getInstance().add(serviceTicket)) {
-                CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công",
+                CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công. Quí khách vui lòng đăng nhập lại để xem tổng tiền hóa đơn tháng hiện tại.",
                         Alert.AlertType.CONFIRMATION);
             } else {
                 CustomerController.getInstance().showAlert("Lỗi", "Vui lòng thử lại", Alert.AlertType.ERROR);
+            }
+            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+            List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
+
+
+            for (int i = 0; i < monthlyRentBillList.size(); i++) {
+                MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
+                LocalDate sameDayNextMonth = monthlyRentBill.getDate().plusMonths(1);
+                if (monthlyRentBill.getMonthlyRentBillID().equals(serviceTicket.getMonthlyRentBillID()) &&
+                        (serviceTicket.getDate().isBefore(sameDayNextMonth) || serviceTicket.getDate().isEqual(sameDayNextMonth)) &&
+                        (serviceTicket.getDate().isAfter(monthlyRentBill.getDate()) || serviceTicket.getDate().isEqual(monthlyRentBill.getDate()))) {
+
+                    monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + serviceTicket.getTotalAmount());
+
+
+                    // Cập nhật dữ liệu trong ObservableList
+                    MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
+                    boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
+                    break;
+                }
             }
             updateTableNewRegisServ();
             comboBox__P1__21.setValue(null);
@@ -546,6 +566,7 @@ public class CustomerController implements Initializable {
         notePlayGrounds.setText(null);
         noteParkings.setText(null);
 
+
     }
     public void regisServ(String servID, String note, LocalDate currentDate) {
         String servTID = "SERVT" + (ServiceTicketDAO.getInstance().countRows() + 1);
@@ -570,10 +591,31 @@ public class CustomerController implements Initializable {
         serviceTicket.setTotalAmount(price);
 
         if (ServiceTicketBUS.getInstance().add(serviceTicket)) {
-            CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công",
+            CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công. Quí khách vui lòng đăng nhập lại để xem tổng tiền hóa đơn tháng hiện tại",
                     Alert.AlertType.CONFIRMATION);
         } else {
             CustomerController.getInstance().showAlert("Lỗi", "Vui lòng thử lại", Alert.AlertType.ERROR);
+        }
+
+        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+        List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
+
+
+        for (int i = 0; i < monthlyRentBillList.size(); i++) {
+            MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
+            LocalDate sameDayNextMonth = monthlyRentBill.getDate().plusMonths(1);
+            if (monthlyRentBill.getMonthlyRentBillID().equals(serviceTicket.getMonthlyRentBillID()) &&
+                    (serviceTicket.getDate().isBefore(sameDayNextMonth) || serviceTicket.getDate().isEqual(sameDayNextMonth)) &&
+                    (serviceTicket.getDate().isAfter(monthlyRentBill.getDate()) || serviceTicket.getDate().isEqual(monthlyRentBill.getDate()))) {
+
+                monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + serviceTicket.getTotalAmount());
+
+
+                // Cập nhật dữ liệu trong ObservableList
+                MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
+                boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
+                break;
+            }
         }
     }
 
@@ -688,7 +730,7 @@ public class CustomerController implements Initializable {
                     }
                 }
             }
-            if ("Paid".equals(status)) {
+            if ("Chưa thanh toán".equals(status)) {
                 statusOfMonthlyBills.setTextFill(Color.BLUE);
                 statusOfMonthlyBills.setText(status);
             } else {
@@ -697,6 +739,8 @@ public class CustomerController implements Initializable {
             }
 
             monthlyBillLabel.setText(totalPayment+"");
+
+
         }
         catch (Exception e){
             e.printStackTrace();
@@ -735,7 +779,6 @@ public class CustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Page 0
         loadPage0();
-
         //Page 1
         updateTableNewRegisServ();
         updateTableOldRegisServ();

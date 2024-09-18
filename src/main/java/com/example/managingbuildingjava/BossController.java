@@ -1,9 +1,8 @@
 package com.example.managingbuildingjava;
 
-import BUS.FinancialReportBUS;
-import BUS.MonthlyRentBillBUS;
-import DTO.FinancialReport;
-import DTO.MonthlyRentBill;
+import BUS.*;
+import DTO.*;
+import DTO.BuildingManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,14 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
@@ -42,10 +34,6 @@ import java.time.Month;
 import java.time.YearMonth;
 import java.util.*;
 
-import BUS.BuildingBUS;
-import BUS.BuildingManagerBUS;
-import DTO.Building;
-import DTO.BuildingManager;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -283,6 +271,108 @@ public class BossController implements Initializable {
     @FXML
     private DatePicker date2 = new DatePicker();
 
+    //page 4
+    @FXML
+    private TableColumn<Table_User, String> Colum_P7_3 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Table_User, String> Column_P7_1 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Table_User, LocalDate> Column_P7_2 = new TableColumn<>();
+
+    @FXML
+    private TextField TxtField__P7__search = new TextField();
+
+    @FXML
+    private Button bnt__P7__add = new Button();
+
+    @FXML
+    private Button bnt__P7__delete = new Button();
+
+    @FXML
+    private Button bnt__P7__update = new Button();
+
+    @FXML
+    private TableView<Table_User> table__P7__1 = new TableView<>();
+
+    private ObservableList<Table_User> tableUserObservableList;
+
+    public ObservableList<Table_User> getUserList() {
+        ObservableList<Table_User> tableUserObservableList = FXCollections.observableArrayList();
+        List<LeaseAgreement> leaseAgreements = LeaseAgreementBUS.getInstance().getAll();
+        for (LeaseAgreement leaseAgreement : leaseAgreements) {
+            Table_User tableUser = new Table_User();
+            tableUser.setT(leaseAgreement.getTenantID());
+            tableUser.setLa(leaseAgreement.getLeaseAgreementID());
+            tableUser.setDe(leaseAgreement.getLeaseEndDate());
+            tableUserObservableList.add(tableUser);
+        }
+        List<Tenant> tenants = TenantBUS.getInstance().getTenantsNotInLeaseAgreement();
+        for (Tenant tenant : tenants) {
+            Table_User tableUser = new Table_User();
+            tableUser.setT(tenant.getTenantID());
+            tableUser.setLa("");
+            tableUser.setDe(null);
+            tableUserObservableList.add(tableUser);
+        }
+
+
+        return tableUserObservableList;
+    }
+
+    private void initTableUser() {
+        Column_P7_1.setCellValueFactory(new PropertyValueFactory<>("t"));
+        Column_P7_2.setCellValueFactory(new PropertyValueFactory<>("la"));
+        Colum_P7_3.setCellValueFactory(new PropertyValueFactory<>("de"));
+        tableUserObservableList = getUserList();
+        table__P7__1.setItems(tableUserObservableList);
+    }
+
+    @FXML
+    void themTaiKhoan(MouseEvent event) {
+        Table_User selected = table__P7__1.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            CustomersAccountBUS customersAccountBUS = new CustomersAccountBUS();
+            CustomersAccount customersAccount = new CustomersAccount("TK"+selected.getT(), "123", selected.getT());
+            boolean Success = customersAccountBUS.add(customersAccount);
+            if (Success) {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Thêm thành công tài khoản của khách hàng "+selected.getT());
+
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Đã có tài khoản "+selected.getT());
+                alert.showAndWait();
+            }
+        }
+
+
+    }
+
+    @FXML
+    void xoaTaiKhoan(MouseEvent event) {
+        Table_User selectedTenant = table__P7__1.getSelectionModel().getSelectedItem();
+        if (selectedTenant != null) {
+            Tenant tenant = new Tenant();
+            tenant.setTenantID(selectedTenant.getT());
+            TenantBUS tenantBUS = new TenantBUS();
+            boolean deleteSuccess = tenantBUS.delete(tenant);
+            if (deleteSuccess) {
+                tableUserObservableList.remove(selectedTenant);
+                table__P7__1.refresh();
+            } else {
+                System.err.println("Không thể xóa khách hàng từ cơ sở dữ liệu.");
+            }
+        }
+    }
+    //
+
     private void loadPage(String page) throws IOException {
         stop = true;
         Parent root = null;
@@ -384,18 +474,18 @@ public class BossController implements Initializable {
             int paid = 0, pending = 0, unpaid = 0;
             for (MonthlyRentBill monthlyRentBill : monthlyRentBills) {
                 String status = monthlyRentBill.getStatus();
-                if (Objects.equals(status, "Paid")) {
+                if (Objects.equals(status, "Đã thanh toán")) {
                     paid++;
-                } else if (Objects.equals(status, "Pending")) {
+                } else if (Objects.equals(status, "Quá hạn")) {
                     pending++;
                 } else {
                     unpaid++;
                 }
             }
             // Tạo các đối tượng PieChart.Data với chú thích tương ứng
-            PieChart.Data paidData = new PieChart.Data("Paid (" + paid + ")", paid);
-            PieChart.Data pendingData = new PieChart.Data("Pending (" + pending + ")", pending);
-            PieChart.Data unpaidData = new PieChart.Data("Unpaid (" + unpaid + ")", unpaid);
+            PieChart.Data paidData = new PieChart.Data("Đã thanh toán (" + paid + ")", paid);
+            PieChart.Data pendingData = new PieChart.Data("Quá hạn (" + pending + ")", pending);
+            PieChart.Data unpaidData = new PieChart.Data("Chưa thanh toán (" + unpaid + ")", unpaid);
 
             // Thêm các đối tượng PieChart.Data vào danh sách pieChartData
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
@@ -468,23 +558,24 @@ public class BossController implements Initializable {
         showcomboboxBuildingManager();
         showcombobox();
         box_page1();
-        keyenter();
+//        keyenter();
         keyenter1();
         box_page0();
+        initTableUser();
 
     }
 
-    public void keyenter() {
-        Platform.runLater(() -> {
-            TxtField__P1__search.setOnKeyPressed(event -> {
-                if (event.getCode() == KeyCode.ENTER) {
-                    handleSearch();
-                   
-                }
-            });
-        });
-
-    }
+//    public void keyenter() {
+//        Platform.runLater(() -> {
+//            TxtField__P1__search.setOnKeyPressed(event -> {
+//                if (event.getCode() == KeyCode.ENTER) {
+//                    handleSearch();
+//
+//                }
+//            });
+//        });
+//
+//    }
 
     public void keyenter1() {
         Platform.runLater(() -> {
@@ -1028,19 +1119,24 @@ private boolean containsNumber(String s) {
             showAlert("Lỗi", "Không có Quản Lí nào được chọn để xóa.", AlertType.ERROR);
             return;
         }
-        if (selectedBuildingToDelete1 == null) {
-            System.out.println("Không có tòa nhà nào được chọn để xóa.");
-            return;
-        }
+
         confirmAndDelete(selectedBuildingToDelete1, "Bạn có chắc chắn muốn xóa quản lí này không?", () -> {
-            BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-            boolean deleteResult = buildingManagerBUS.delete(selectedBuildingToDelete1);
-            if (deleteResult) {
-                showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
-                clearInputFields();
-                updateBuildingManeger();
+            if (selectedBuildingToDelete1.getFirstName().equals("")&&selectedBuildingToDelete1.getLastName().equals("TxtField__P1__search")) {
+                BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+                boolean deleteResult = buildingManagerBUS.delete(selectedBuildingToDelete1);
+                if (deleteResult) {
+                    showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
+                    clearInputFields();
+                    updateBuildingManeger();
+                } else {
+                    showAlert("Thất Bại", "Không Thể Xóa", AlertType.ERROR);
+                }
             } else {
-                showAlert("Thất Bại", "Không Thể Xóa", AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Nhân viên " + selectedBuildingToDelete1.getFirstName()+" "+selectedBuildingToDelete1.getLastName()+" đang quản lý toàn nhà "+selectedBuildingToDelete1.getBuildingId());
+                alert.showAndWait();
             }
         });
     }
@@ -1060,7 +1156,7 @@ private boolean containsNumber(String s) {
         LocalDate dob = datePickerDOB.getValue();
         String gender = fruitCombo.getValue();
 
-        if (buildingManagerId.isEmpty() || buildingId.isEmpty() || lastName.isEmpty() || firstName.isEmpty()
+        if (buildingManagerId.isEmpty() || buildingId.isEmpty()
                 || phoneNumber.isEmpty() || dob == null || gender == null) {
             showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
             return;
@@ -1125,14 +1221,14 @@ private boolean containsNumber(String s) {
   
     }
 
-    public void handleSearch() {
-        String name = TxtField__P1__search.getText();
-      BuildingManagerBUS buildingManager = new BuildingManagerBUS();
-      ArrayList<BuildingManager> buildingManagers = buildingManager.search(name,"Tìm Theo Ten");
-        ObservableList<BuildingManager> observableBuildingList = FXCollections
-                .observableArrayList(buildingManagers);
-        table__view2.setItems(observableBuildingList);
-    }
+//    public void handleSearch() {
+//        String name = TxtField__P1__search.getText();
+//      BuildingManagerBUS buildingManager = new BuildingManagerBUS();
+//      ArrayList<BuildingManager> buildingManagers = buildingManager.search(name,"Tìm Theo Ten");
+//        ObservableList<BuildingManager> observableBuildingList = FXCollections
+//                .observableArrayList(buildingManagers);
+//        table__view2.setItems(observableBuildingList);
+//    }
 
     /// ReanialReport///////==========
 

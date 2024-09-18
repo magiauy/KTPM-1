@@ -23,7 +23,7 @@
                <content>
                   <Pane prefHeight="691.0" prefWidth="995.0">
                      <children>
-                         <Pane prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
+                         <Pane prefHeight="691.0" prefWidth="1089.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                              <children>
                                  <TextField fx:id="search_phieudv" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Tìm Theo Mã" style="-fx-background-color: rgb(255, 255, 255);" styleClass="black-text" />
                                  <DatePicker fx:id="dateStart" layoutX="511.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
@@ -37,47 +37,41 @@
                                  </ImageView>
                                  <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20;">
                                      <children>
-                                         <TextField fx:id="maPhieuDVField" layoutX="216.0" layoutY="27.0" prefHeight="34.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                         <TextField fx:id="maPhieuThuField" layoutX="216.0" layoutY="82.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                         <TextField fx:id="soLuongField" layoutX="216.0" layoutY="202.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                        <TextField fx:id="maDichVuField" layoutX="216.0" layoutY="143.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="202.0" prefHeight="32.0" prefWidth="120.0" text="Số lượng" textFill="WHITE">
+                                         <TextField fx:id="soLuongField" layoutX="216.0" layoutY="152.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                                        <TextField fx:id="maDichVuField" layoutX="216.0" layoutY="93.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="152.0" prefHeight="32.0" prefWidth="120.0" text="Số lượng" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
                                          </Label>
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="143.0" prefHeight="32.0" prefWidth="120.0" text="Mã dịch vụ" textFill="WHITE">
+                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="93.0" prefHeight="32.0" prefWidth="120.0" text="Mã dịch vụ" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
                                          </Label>
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="82.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu thu" textFill="WHITE">
+                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="32.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu thu" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
                                          </Label>
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="28.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu dịch vụ" textFill="WHITE">
-                                             <font>
-                                                 <Font name="System Bold" size="13.0" />
-                                             </font>
-                                         </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="332.0" prefHeight="32.0" prefWidth="120.0" text="Ngày ghi" textFill="WHITE">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="212.0" prefHeight="32.0" prefWidth="120.0" text="Ngày ghi" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <DatePicker fx:id="ngayGhiPicker" layoutX="216.0" layoutY="332.0" prefHeight="33.0" prefWidth="169.0" styleClass="black-text" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="385.0" prefHeight="32.0" prefWidth="120.0" text="Ghi chú" textFill="WHITE">
+                                    <DatePicker fx:id="ngayGhiPicker" layoutX="216.0" layoutY="212.0" prefHeight="33.0" prefWidth="169.0" styleClass="black-text" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="272.0" prefHeight="32.0" prefWidth="120.0" text="Ghi chú" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextArea fx:id="ghiChuArea" layoutX="216.0" layoutY="385.0" prefHeight="83.0" prefWidth="192.0" styleClass="black-text" />
+                                    <TextArea fx:id="ghiChuArea" layoutX="216.0" layoutY="272.0" prefHeight="147.0" prefWidth="197.0" styleClass="black-text" />
                                     <ImageView fx:id="exportPDF" fitHeight="53.0" fitWidth="51.0" layoutX="55.0" layoutY="427.0" onMouseClicked="#setExportPDF" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../../Picture/pdf.png" />
                                        </image>
                                     </ImageView>
+                                    <ComboBox fx:id="maPhieuThuCombobox" layoutX="216.0" layoutY="31.0" prefHeight="34.0" prefWidth="166.0" />
                                      </children>
                                  </Pane>
                                  <Button fx:id="bnt__P4__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="634.0" mnemonicParsing="false" onAction="#handleAddServiceTicket" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
@@ -153,9 +147,8 @@
                                  </ImageView>
                                  <Pane layoutX="33.0" layoutY="115.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                                      <children>
-                                         <TextField fx:id="maPPField" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                         <TextField fx:id="maPThuField" layoutX="216.0" layoutY="117.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="213.0" prefHeight="32.0" prefWidth="120.0" text="Ngày ghi" textFill="WHITE">
+                                         <TextField fx:id="maPThuField" layoutX="216.0" layoutY="99.0" prefHeight="32.0" prefWidth="166.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="205.0" prefHeight="32.0" prefWidth="120.0" text="Ngày ghi" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
@@ -165,31 +158,26 @@
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
                                          </Label>
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="117.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu thu" textFill="WHITE">
+                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="99.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu thu" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
                                          </Label>
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="27.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu phạt" textFill="WHITE">
-                                             <font>
-                                                 <Font name="System Bold" size="13.0" />
-                                             </font>
-                                         </Label>
-                                    <DatePicker fx:id="ngayGhiPPField" layoutX="217.0" layoutY="212.0" prefHeight="35.0" prefWidth="168.0" styleClass="black-text" />
+                                    <DatePicker fx:id="ngayGhiPPField" layoutX="215.0" layoutY="204.0" prefHeight="35.0" prefWidth="168.0" styleClass="black-text" />
                                     
-                                     <TextArea fx:id="ghiChuPPField" layoutX="212.0" layoutY="263.0" prefHeight="112.0" prefWidth="174.0" styleClass="black-text" />
-                                    <TextField fx:id="maphatfied" layoutX="216.0" layoutY="70.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="70.0" prefHeight="32.0" prefWidth="120.0" text="Mã  phạt" textFill="WHITE">
+                                     <TextArea fx:id="ghiChuPPField" layoutX="212.0" layoutY="263.0" prefHeight="170.0" prefWidth="174.0" styleClass="black-text" />
+                                    <TextField fx:id="maphatfied" layoutX="216.0" layoutY="41.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="41.0" prefHeight="32.0" prefWidth="120.0" text="Mã  phạt" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="162.0" prefHeight="32.0" prefWidth="120.0" text="Số lượng" textFill="WHITE">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="153.0" prefHeight="32.0" prefWidth="120.0" text="Số lượng" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="maSluongField1" layoutX="216.0" layoutY="162.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                                    <TextField fx:id="maSluongField1" layoutX="216.0" layoutY="153.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                                      </children>
                                  </Pane>
                                  <Button fx:id="bnt__P4_1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleAddViolationTicket" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">

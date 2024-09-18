@@ -1,7 +1,10 @@
 package BUS;
 
 import java.util.ArrayList;
+
+import DAO.CohabitantDAO;
 import DAO.CustomersAccountDAO;
+import DTO.Cohabitant;
 import DTO.CustomersAccount;
 import javafx.application.Platform;
 
@@ -23,5 +26,14 @@ public class CustomersAccountBUS {
         }
         return "0"; // Đăng nhập không thành công
     }
+
+    public boolean add(CustomersAccount customersAccount) {
+        boolean check = CustomersAccountDAO.getInstance().insert(customersAccount) != 0;
+        if (check) {
+            this.listAccount.add(customersAccount);
+        }
+        return check;
+    }
+
 
 }

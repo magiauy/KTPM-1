@@ -22,11 +22,27 @@ public class MonthlyRentBillDAO implements DAOInterface<MonthlyRentBill> {
         return new MonthlyRentBillDAO();
     }
 
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(monthlyRentBillID, 4, LEN(monthlyRentBillID) - 3) AS INT)), 0) FROM MonthlyRentBill";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "MRB" + (lastId + 1);
+        }
+        return "MRB1";
+    }
+
     @Override
     public int insert(MonthlyRentBill monthlyRentBill) {
         int result = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
+            if (monthlyRentBill.getMonthlyRentBillID() == null) {
+                String newId = generateNewID(connection);
+                monthlyRentBill.setMonthlyRentBillID(newId);
+            }
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO MonthlyRentBill (monthlyRentBillID, apartmentID, tenantID, date, repaymentPeriod, totalPayment, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
 

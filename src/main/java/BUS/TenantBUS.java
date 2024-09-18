@@ -97,9 +97,15 @@ public class TenantBUS {
         return tenants;
     }
 
+
+
     public ArrayList<Tenant> searchTenants(String keyword, String buildingManagerID) {
         return TenantDAO.getInstance().search(keyword, buildingManagerID);
     }
 
+    public ArrayList<Tenant> getTenantsNotInLeaseAgreement() {
+        TenantDAO tenantDAO = TenantDAO.getInstance();
+        return tenantDAO.tenantNotInLA();
+    }
 
 }

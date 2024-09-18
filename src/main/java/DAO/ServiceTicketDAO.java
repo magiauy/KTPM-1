@@ -14,11 +14,27 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
         return new ServiceTicketDAO();
     }
 
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(serviceTicketID, 6, LEN(serviceTicketID) - 5) AS INT)), 0) FROM ServiceTicket";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "SERVT" + (lastId + 1);
+        }
+        return "SERVT1"; // Nếu bảng rỗng thì bắt đầu từ APT1
+    }
+
     @Override
     public int insert(ServiceTicket serviceTicket) {
         int result = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
+            if (serviceTicket.getServiceTicketID() == null) {
+                String newId = generateNewID(connection);
+                serviceTicket.setServiceTicketID(newId);
+            }
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO ServiceTicket (serviceTicketID, monthlyRentBillID, serviceID, quantity, totalAmount, Date, note) VALUES (?, ?, ?, ?, ?, ?, ?)");
 

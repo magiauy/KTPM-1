@@ -1,9 +1,7 @@
 package com.example.managingbuildingjava;
 
-import BUS.AdminsAccountBUS;
 import BUS.CustomersAccountBUS;
 import BUS.StaffsAccountBUS;
-import DTO.StaffsAccount;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,8 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class main extends Application {
 
@@ -94,28 +90,28 @@ public class main extends Application {
 //        }
 
         // Call checkLogin method (implementation in AccountBUS)
-        CustomersAccountBUS cus = new CustomersAccountBUS();
-        String validLogin = cus.checkLogin(username, password);
-        System.out.println("validLogin: " + validLogin);
-        if (!validLogin.equals("0")) {
-            CustomerController.getInstance().setID(validLogin);
-            primaryStage.setScene(cusScene);
-        } else {
-            StaffsAccountBUS staff = new StaffsAccountBUS();
-            validLogin = staff.checkLogin(username, password);
-            if (!validLogin.equals("0")) {
-                BuildingManagerController.getInstance().setID(validLogin);
-                primaryStage.setScene(buiScene);
-            }
-            else {
-                validLogin = AdminsAccountBUS.checkLogin(username, password);
-                if (!validLogin.equals("0")) {
-                    BossController.getInstance().setID(validLogin);
-                    primaryStage.setScene(bossScene);
-                } else {
-                    System.out.println("ko dn dc");
-                }
-            }
+//        CustomersAccountBUS cus = new CustomersAccountBUS();
+//        String validLogin = cus.checkLogin(username, password);
+//        System.out.println("validLogin: " + validLogin);
+//        if (!validLogin.equals("0")) {
+//            CustomerController.getInstance().setID(validLogin);
+//            primaryStage.setScene(cusScene);
+//        } else {
+//            StaffsAccountBUS staff = new StaffsAccountBUS();
+//            validLogin = staff.checkLogin(username, password);
+//            if (!validLogin.equals("0")) {
+//                BuildingManagerController.getInstance().setID(validLogin);
+//                primaryStage.setScene(buiScene);
+//            }
+//            else {
+//                validLogin = AdminsAccountBUS.checkLogin(username, password);
+//                if (!validLogin.equals("0")) {
+//                    BossController.getInstance().setID(validLogin);
+//                    primaryStage.setScene(bossScene);
+//                } else {
+//                    System.out.println("ko dn dc");
+//                }
+//            }
 //
 //                else{
 //                    //        showStatusMessage("Invalid username or password.");
@@ -130,5 +126,5 @@ public class main extends Application {
 //    public static void main(String[] args) {
 //        launch(args);
 //    }
-    }
+//    }
 }

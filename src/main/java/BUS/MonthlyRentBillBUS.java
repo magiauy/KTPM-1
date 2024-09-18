@@ -74,9 +74,28 @@ public class MonthlyRentBillBUS {
 
     public ArrayList<MonthlyRentBill> getMonthlyRentBillsWithTenantId(String tenantId) {
         ArrayList<MonthlyRentBill> monthlyRentBillsWithTenantID = new ArrayList<>();
+        LocalDate currentDate = LocalDate.now();
         for (MonthlyRentBill monthlyRentBill : monthlyRentBills) {
             if (Objects.equals(monthlyRentBill.getTenantID(), tenantId)) {
-                monthlyRentBillsWithTenantID.add(monthlyRentBill);
+                LocalDate dueDate = monthlyRentBill.getDate().plusMonths(1).plusDays(monthlyRentBill.getRepaymentPeriod()+1);
+                if (currentDate.isAfter(dueDate) && monthlyRentBill.getStatus().equals("Chưa thanh toán")) {
+                    // Nếu hóa đơn quá hạn, cập nhật trạng thái thành "Quá hạn"
+                    monthlyRentBill.setStatus("Quá hạn");
+                    MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+                    boolean updateSuccess = monthlyRentBillBUS.update(monthlyRentBill);
+                    ViolationTicket violationTickets = new ViolationTicket();
+                    violationTickets.setMonthlyRentBillID(monthlyRentBill.getMonthlyRentBillID());
+                    violationTickets.setViolationID("V1");
+                    violationTickets.setQuantity(1);
+                    violationTickets.setDate(LocalDate.now());
+                    violationTickets.setPrice(200000.0);
+                    violationTickets.setNote("");
+                    ViolationTicketBUS violationTicketBUS = new ViolationTicketBUS();
+                    boolean updateResult = violationTicketBUS.add(violationTickets);
+                } else {
+                    monthlyRentBillsWithTenantID.add(monthlyRentBill);
+                }
+
             }
         }
         return  monthlyRentBillsWithTenantID;
@@ -151,11 +170,12 @@ public class MonthlyRentBillBUS {
         tableRow.getCell(0).setText("STT");
         XWPFTableCell cell = tableRow.createCell();
         cell.setText("Ngày");
-        cell.setWidth("400");
+//        cell.setWidth("400");
         XWPFTableCell cell2 = tableRow.createCell();
         cell2.setText("Tên phiếu dịch vụ/phạt");
-        cell2.setWidth("500");
+//        cell2.setWidth("500");
         tableRow.createCell().setText("Đơn vị");
+
         tableRow.createCell().setText("Giá/đơn vị (VND)");
         tableRow.createCell().setText("Số lượng");
         tableRow.createCell().setText("Thành tiền");
