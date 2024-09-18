@@ -3,22 +3,36 @@ package DAO;
 import DTO.Violation;
 import config.JDBCUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ViolationDAO implements DAOInterface<Violation> {
     public static ViolationDAO getInstance() {
         return new ViolationDAO();
     }
+
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(violationID, 2, LEN(violationID) - 1) AS INT)), 0) FROM Violation";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "V" + (lastId + 1);
+        }
+        return "V1"; // Nếu bảng rỗng thì bắt đầu từ APT1
+    }
     @Override
     public int insert(Violation violation) {
         int rowsAffected = 0;
         String query = "INSERT INTO Violation (violationID, name, price) VALUES (?, ?, ?)";
-        try (Connection connection = JDBCUtil.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            if (violation.getViolationID() == null) {
+                String newId = generateNewID(connection);
+                violation.setViolationID(newId);
+            }
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, violation.getViolationID());
             preparedStatement.setString(2, violation.getName());
             preparedStatement.setDouble(3, violation.getPrice());

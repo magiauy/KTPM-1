@@ -11,11 +11,28 @@ public class ServiceDAO implements DAOInterface<Service>{
         return new ServiceDAO();
     }
 
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(serviceID, 5, LEN(serviceID) - 4) AS INT)), 0) FROM Service";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "SERV" + (lastId + 1);
+        }
+        return "SERV1"; //
+    }
+
     @Override
     public int insert(Service t) {
         int result = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
+
+            if (t.getServiceID() == null) {
+                String newId = generateNewID(connection);
+                t.setServiceID(newId);
+            }
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO Service (serviceID, name, pricePerUnit, unit, type) VALUES (?, ?, ?, ?, ?)");
 

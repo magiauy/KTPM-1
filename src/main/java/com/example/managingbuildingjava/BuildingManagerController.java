@@ -1443,14 +1443,13 @@ public class BuildingManagerController implements Initializable {
     }
 
     public void handleAddService() {
-        String serviceID = TxtField__P4__11.getText();
         String name = TxtField__P4__31.getText();
         Double pricePerUnitText = Double.parseDouble(TxtField__P4__51.getText());
         String unit = TxtField__P4__61.getText();
         String type = fill_type.getValue();
 
         String revenueInput = TxtField__P4__51.getText().replaceAll(",", "");
-        if (serviceID.isEmpty() || name.isEmpty() || unit.isEmpty()) {
+        if (name.isEmpty() || unit.isEmpty()) {
             showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
             return;
         }
@@ -1464,7 +1463,7 @@ public class BuildingManagerController implements Initializable {
         }
 
         Service newService = new Service();
-        newService.setServiceID(serviceID);
+//        newService.setServiceID(serviceID);
         newService.setName(name);
         newService.setPricePerUnit(pricePerUnitText);
         newService.setUnit(unit);
@@ -1978,8 +1977,8 @@ public class BuildingManagerController implements Initializable {
     }
 
     public void handleAddViolation() {
-
-        String newViolationID = maPhatField.getText();
+//
+//        String newViolationID = maPhatField.getText();
         String newName = viphamField.getText();
         Double newPrice = Double.parseDouble(tienPhatField.getText());
         if (newName.isEmpty()) {
@@ -1987,7 +1986,7 @@ public class BuildingManagerController implements Initializable {
             return;
         }
 
-        if (newName.isEmpty() || newViolationID.isEmpty() || newPrice == null) {
+        if (newName.isEmpty() || newPrice == null) {
             showAlert("Lỗi", "Tên vi phạm không được để trống", AlertType.ERROR);
             return;
         }
@@ -2004,7 +2003,7 @@ public class BuildingManagerController implements Initializable {
         }
 
         Violation newViolation = new Violation();
-        newViolation.setViolationID((newViolationID));
+//        newViolation.setViolationID((newViolationID));
         newViolation.setName(newName);
         newViolation.setPrice(newPrice);
         ViolationBUS violationBUS = new ViolationBUS();

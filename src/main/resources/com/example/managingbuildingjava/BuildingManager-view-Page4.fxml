@@ -262,33 +262,27 @@
                               </ImageView>
                               <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20;">
                                  <children>
-                                    <TextField fx:id="TxtField__P4__11" layoutX="210.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                    <TextField fx:id="TxtField__P4__31" layoutX="210.0" layoutY="85.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                    <TextField fx:id="TxtField__P4__51" layoutX="210.0" layoutY="143.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="204.0" prefHeight="32.0" prefWidth="59.0" text="Đơn giá" textFill="WHITE">
+                                    <TextField fx:id="TxtField__P4__31" layoutX="204.0" layoutY="41.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                                    <TextField fx:id="TxtField__P4__51" layoutX="204.0" layoutY="99.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="160.0" prefHeight="32.0" prefWidth="59.0" text="Đơn vị" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="143.0" prefHeight="32.0" prefWidth="50.0" text="Đơn vị" textFill="WHITE">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="79.0" layoutY="99.0" prefHeight="32.0" prefWidth="50.0" text="Đơn giá" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="85.0" prefHeight="32.0" prefWidth="84.0" text="Tên Dịch Vụ" textFill="WHITE">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="41.0" prefHeight="32.0" prefWidth="84.0" text="Tên Dịch Vụ" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="78.0" layoutY="27.0" prefHeight="32.0" prefWidth="81.0" text="Mã dịch vụ" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="TxtField__P4__61" layoutX="210.0" layoutY="204.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                   <ComboBox fx:id="fill_type" layoutX="210.0" layoutY="269.0" prefHeight="32.0" prefWidth="165.0" promptText="Chọn Loại Dịch Vụ" styleClass="black-text" />
+                                    <TextField fx:id="TxtField__P4__61" layoutX="204.0" layoutY="160.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                                   <ComboBox fx:id="fill_type" layoutX="204.0" layoutY="225.0" prefHeight="32.0" prefWidth="165.0" promptText="Chọn Loại Dịch Vụ" styleClass="black-text" />
 
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="93.0" layoutY="269.0" prefHeight="32.0" prefWidth="35.0" text="Loại" textFill="WHITE">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="87.0" layoutY="225.0" prefHeight="32.0" prefWidth="35.0" text="Loại" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -358,14 +352,8 @@
                               </ImageView>
                               <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20;">
                                  <children>
-                                    <TextField fx:id="maPhatField" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                                     <TextField fx:id="viphamField" layoutX="216.0" layoutY="89.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="89.0" prefHeight="32.0" prefWidth="120.0" text="Vi phạm" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="27.0" prefHeight="32.0" prefWidth="120.0" text="Mã phạt" textFill="WHITE">
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="51.0" layoutY="89.0" prefHeight="32.0" prefWidth="120.0" text="Tên vi phạm" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
