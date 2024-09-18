@@ -17,7 +17,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.properties.TextAlignment;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -161,7 +161,7 @@ public class ServiceTicketBUS {
 
             // Sử dụng font hỗ trợ tiếng Việt
             String fontPath = "src/DejaVuSans.ttf";  // Cập nhật đường dẫn tới font của bạn
-            PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H, true);
+            PdfFont font = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
 
             String logoPath = "src/main/resources/Picture/logo.jpg";  // Đường dẫn tới logo của bạn
             ImageData imageData = ImageDataFactory.create(logoPath);
