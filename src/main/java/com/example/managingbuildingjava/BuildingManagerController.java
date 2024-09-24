@@ -564,7 +564,7 @@ public class BuildingManagerController implements Initializable {
                 newApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
             }
 
-            newApartment.setStatus("Chưa được thuê");
+            newApartment.setStatus("Còn trống");
 
             ApartmentBUS apartmentBUS = new ApartmentBUS();
             apartmentBUS.add(newApartment);
@@ -1578,6 +1578,9 @@ public class BuildingManagerController implements Initializable {
     private TableColumn<ServiceTicket, String> maPDV = new TableColumn<>();
 
     @FXML
+    private ComboBox<String> maPThuCombobox = new ComboBox<>();
+
+    @FXML
     private TableColumn<ServiceTicket, String> maPhieuThu = new TableColumn<>();
 
     @FXML
@@ -2116,7 +2119,7 @@ public class BuildingManagerController implements Initializable {
                 if (selectedRow != null) {
                     maPPField.setText(selectedRow.getViolationTicketID());
                     maphatfied.setText(selectedRow.getViolationID());
-                    maPThuField.setText(selectedRow.getMonthlyRentBillID());
+                    maPThuCombobox.setValue(selectedRow.getMonthlyRentBillID());
                     maSluongField1.setText(String.valueOf(selectedRow.getQuantity()));
                     ngayGhiPPField.setValue(selectedRow.getDate());
                     ghiChuPPField.setText(selectedRow.getNote());
@@ -2154,7 +2157,7 @@ public class BuildingManagerController implements Initializable {
 
     public void handleAddViolationTicket() {
         String maPhieuThu = maphatfied.getText();
-        String maDichVu = maPThuField.getText();
+        String maDichVu = maPThuCombobox.getSelectionModel().getSelectedItem();
         int soLuong = Integer.parseInt(maSluongField1.getText());
         LocalDate ngayGhi = ngayGhiPPField.getValue();
         String ghiChu = ghiChuPPField.getText();
@@ -2229,7 +2232,7 @@ public class BuildingManagerController implements Initializable {
         }
         String maPPhat = maPPField.getText();
         String maPhieuThu = maphatfied.getText();
-        String maDichVu = maPThuField.getText();
+        String maDichVu = maPThuCombobox.getSelectionModel().getSelectedItem();
         int soLuong = Integer.parseInt(maSluongField1.getText());
         LocalDate ngayGhi = ngayGhiPPField.getValue();
         String ghiChu = ghiChuPPField.getText();
@@ -2704,6 +2707,7 @@ public class BuildingManagerController implements Initializable {
                 monthlyRentBillListID.add(monthlyRentBill.getMonthlyRentBillID());
             }
             maPhieuThuCombobox.getItems().addAll(monthlyRentBillListID);
+            maPThuCombobox.getItems().addAll(monthlyRentBillListID);
 
 //            List<Service> serviceList = ServiceList;
 //            List<String> serviceListID = new ArrayList<>();
@@ -2741,7 +2745,7 @@ public class BuildingManagerController implements Initializable {
 
             //list id tenant
             TenantBUS tenant_c = new TenantBUS();
-            List<Tenant> listTenent_C = tenant_c.getAll();
+            List<Tenant> listTenent_C = tenant_c.getTenantsNotInLeaseAgreement();
             List<String> differenceList = new ArrayList<>();
 
             for (Tenant tenant : listTenent_C) {
@@ -2753,13 +2757,14 @@ public class BuildingManagerController implements Initializable {
 
             ApartmentBUS apartment_c = new ApartmentBUS();
             BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-            BuildingManager buildingManager = buildingManagerBUS.getBuildingManagerByBuildingID("B1");
+            BuildingManager buildingManager = buildingManagerBUS.getBuildingManagerById(ID);
 
             List<Apartment> listApartment_C = apartment_c.getApartmentByBuildingID(buildingManager.getBuildingId());
             List<String> listApartmentID = new ArrayList<>();
 
 
             for (Apartment apartment: listApartment_C) {
+                if (apartment.getStatus().equals("Còn trống"))
 
                 listApartmentID.add(apartment.getApartmentID());
             }

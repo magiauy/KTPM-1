@@ -147,7 +147,6 @@
                                  </ImageView>
                                  <Pane layoutX="33.0" layoutY="115.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                                      <children>
-                                         <TextField fx:id="maPThuField" layoutX="216.0" layoutY="99.0" prefHeight="32.0" prefWidth="166.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="205.0" prefHeight="32.0" prefWidth="120.0" text="Ngày ghi" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
@@ -158,7 +157,7 @@
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
                                          </Label>
-                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="99.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu thu" textFill="WHITE">
+                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="45.0" prefHeight="32.0" prefWidth="120.0" text="Mã phiếu thu" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
@@ -166,8 +165,8 @@
                                     <DatePicker fx:id="ngayGhiPPField" layoutX="215.0" layoutY="204.0" prefHeight="35.0" prefWidth="168.0" styleClass="black-text" />
                                     
                                      <TextArea fx:id="ghiChuPPField" layoutX="212.0" layoutY="263.0" prefHeight="170.0" prefWidth="174.0" styleClass="black-text" />
-                                    <TextField fx:id="maphatfied" layoutX="216.0" layoutY="41.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="41.0" prefHeight="32.0" prefWidth="120.0" text="Mã  phạt" textFill="WHITE">
+                                    <TextField fx:id="maphatfied" layoutX="215.0" layoutY="99.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="99.0" prefHeight="32.0" prefWidth="120.0" text="Mã  phạt" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -178,6 +177,7 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="maSluongField1" layoutX="216.0" layoutY="153.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                                    <ComboBox fx:id="maPThuCombobox" layoutX="214.0" layoutY="45.0" prefHeight="31.0" prefWidth="167.0" />
                                      </children>
                                  </Pane>
                                  <Button fx:id="bnt__P4_1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleAddViolationTicket" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
