@@ -113,7 +113,7 @@
     "settings.editor.selected.configurable": "MavenSettings",
     "vue.rearranger.settings.migration": "true"
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\NGOC\IdeaProjects\BuildingOperationsApplication\src\main\resources\Picture" />
@@ -331,7 +331,13 @@
       <workItem from="1726384897711" duration="3334000" />
       <workItem from="1726557690401" duration="4269000" />
       <workItem from="1726573588953" duration="10394000" />
-      <workItem from="1726639350170" duration="5419000" />
+      <workItem from="1726639350170" duration="7605000" />
+      <workItem from="1726717587900" duration="1559000" />
+      <workItem from="1726908318846" duration="36000" />
+      <workItem from="1726908828490" duration="1552000" />
+      <workItem from="1727006371288" duration="392000" />
+      <workItem from="1727059147868" duration="664000" />
+      <workItem from="1727182174037" duration="527000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />
