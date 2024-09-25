@@ -4,163 +4,51 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update pdf final">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_8_2024_8_40_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_8_2024_8_40_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_9_2024_6_41_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_9_2024_6_41_PM__Changes_.xml" afterDir="false" />
+    <list default="true" id="7dde5e0c-faa4-4049-bc9d-bdcc9f4e6ba1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/ServiceTicketBUS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/config/JDBCUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/login-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="module-info" />
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <favorite-branches>
-      <branch-storage>
-        <map>
-          <entry type="LOCAL">
-            <value>
-              <list>
-                <branch-info repo="$PROJECT_DIR$" source="nam" />
-              </list>
-            </value>
-          </entry>
-        </map>
-      </branch-storage>
-    </favorite-branches>
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="Kai_practice" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;NghiaNguyen04&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/NghiaNguyen04/BuildingOperationsApplication.git&quot;,
-    &quot;accountId&quot;: &quot;6387b31e-0c04-462a-8819-0a6a7eee3584&quot;
-  }
-}</component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/BUS/CohabitantBUS.java" root0="FORCE_HIGHLIGHTING" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="2eDfIOIMS7ah9Le8ScWqidKbhTk" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2mYIuZITeOQqy7tIYtatnnCCPfq" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Boss.executor": "Run",
-    "Application.BuildingManager.executor": "Run",
-    "Application.Customer.executor": "Run",
-    "Application.DTO.main.executor": "Run",
-    "Application.HelloApplication.executor": "Run",
-    "Application.Login.executor": "Run",
-    "Application.Test.executor": "Run",
-    "Application.TestImport.executor": "Run",
-    "Application.TrangChu.executor": "Run",
-    "Application.Unnamed.executor": "Run",
-    "Application.com.example.managingbuildingjava.main.executor": "Run",
-    "Application.config.main.executor": "Run",
-    "Application.main.executor": "Run",
-    "Application.testPDF.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
-    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/IT_K22/KTPMNhom7",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Global Libraries",
-    "project.structure.proportion": "0.16089965",
-    "project.structure.side.proportion": "0.36673555",
-    "settings.editor.selected.configurable": "MavenSettings",
     "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\NGOC\IdeaProjects\BuildingOperationsApplication\src\main\resources\Picture" />
-      <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
-      <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\java\com\example\managingbuildingjava" />
-      <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
-      <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\OneDrive\Desktop\Data\code\Java\BuildingOperationsApplication\src" />
-      <recent name="D:\OneDrive\Desktop\Data\code\Java\BuildingOperationsApplication\src\main\java\BUS" />
-      <recent name="D:\OneDrive\Desktop\Data\code\Java\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
-      <recent name="D:\OneDrive\Máy tính\Data\code\Java\ProjectJava\ManagingBuildingJava\src\main\resources\com\example\managingbuildingjava" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="DTO" />
-      <recent name="com.example.managingbuildingjava" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.Unnamed">
-    <configuration name="Boss" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.Boss" />
-      <module name="ManagingBuildingJava" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.managingbuildingjava.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Customer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.Customer" />
-      <module name="ManagingBuildingJava" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.managingbuildingjava.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../zulu21.32.17-ca-fx-jdk21.0.2-win_x64" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.Login" />
@@ -169,388 +57,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="20" />
-      <option name="MAIN_CLASS_NAME" value="com.example.managingbuildingjava.BuildingManager" />
-      <module name="ManagingBuildingJava" />
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="KTPMNhom7" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.Unnamed" />
-      <item itemvalue="Application.main" />
-      <item itemvalue="Application.Boss" />
-      <item itemvalue="Application.Customer" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Customer" />
-        <item itemvalue="Application.Boss" />
-        <item itemvalue="Application.Customer" />
-        <item itemvalue="Application.Boss" />
-        <item itemvalue="Application.Customer" />
-      </list>
-    </recent_temporary>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="KTPMNhom7" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.22855.74" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.22855.74" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="" />
-      <created>1711443989288</created>
+      <changelist id="7dde5e0c-faa4-4049-bc9d-bdcc9f4e6ba1" name="Changes" comment="" />
+      <created>1727247306982</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1711443989288</updated>
-      <workItem from="1711443990306" duration="520000" />
-      <workItem from="1711444534828" duration="64000" />
-      <workItem from="1711444611763" duration="49000" />
-      <workItem from="1711444669224" duration="4395000" />
-      <workItem from="1711449113362" duration="5117000" />
-      <workItem from="1711519483344" duration="1215000" />
-      <workItem from="1711547993190" duration="600000" />
-      <workItem from="1711613449482" duration="1854000" />
-      <workItem from="1711615326105" duration="126000" />
-      <workItem from="1711615464436" duration="100000" />
-      <workItem from="1711615575333" duration="681000" />
-      <workItem from="1711865468599" duration="1559000" />
-      <workItem from="1711893307805" duration="356000" />
-      <workItem from="1711893675022" duration="390000" />
-      <workItem from="1711894117067" duration="215000" />
-      <workItem from="1711894353882" duration="464000" />
-      <workItem from="1711896078628" duration="1009000" />
-      <workItem from="1711897099619" duration="1043000" />
-      <workItem from="1711944392173" duration="245000" />
-      <workItem from="1711944647741" duration="307000" />
-      <workItem from="1711944963897" duration="154000" />
-      <workItem from="1711945126199" duration="91000" />
-      <workItem from="1711945594837" duration="2726000" />
-      <workItem from="1711948336243" duration="2407000" />
-      <workItem from="1711960959326" duration="2000" />
-      <workItem from="1711960976943" duration="3115000" />
-      <workItem from="1711970857926" duration="2136000" />
-      <workItem from="1711990755472" duration="2865000" />
-      <workItem from="1712024757176" duration="98000" />
-      <workItem from="1712113820635" duration="1608000" />
-      <workItem from="1712230847448" duration="260000" />
-      <workItem from="1712244945859" duration="717000" />
-      <workItem from="1712255818332" duration="205000" />
-      <workItem from="1712289073769" duration="2290000" />
-      <workItem from="1712294116599" duration="1302000" />
-      <workItem from="1712313963995" duration="308000" />
-      <workItem from="1712331166961" duration="266000" />
-      <workItem from="1712331443214" duration="2441000" />
-      <workItem from="1712582150161" duration="312000" />
-      <workItem from="1712647492456" duration="1299000" />
-      <workItem from="1712729064018" duration="1969000" />
-      <workItem from="1712815906118" duration="5769000" />
-      <workItem from="1712836547109" duration="3260000" />
-      <workItem from="1713266692483" duration="125000" />
-      <workItem from="1713278538103" duration="1260000" />
-      <workItem from="1713313607732" duration="3508000" />
-      <workItem from="1713322479083" duration="1261000" />
-      <workItem from="1713323768538" duration="1412000" />
-      <workItem from="1713333120161" duration="11813000" />
-      <workItem from="1713373962064" duration="224000" />
-      <workItem from="1713374737008" duration="1858000" />
-      <workItem from="1713373972347" duration="1931000" />
-      <workItem from="1713515380664" duration="15241000" />
-      <workItem from="1713787931991" duration="4041000" />
-      <workItem from="1713840870451" duration="11084000" />
-      <workItem from="1713943785940" duration="704000" />
-      <workItem from="1713944513031" duration="2063000" />
-      <workItem from="1713966188778" duration="780000" />
-      <workItem from="1715091368306" duration="896000" />
-      <workItem from="1715149859496" duration="6374000" />
-      <workItem from="1715180859008" duration="1378000" />
-      <workItem from="1715432547485" duration="4135000" />
-      <workItem from="1715444914334" duration="56000" />
-      <workItem from="1715444980571" duration="106000" />
-      <workItem from="1715445097628" duration="3736000" />
-      <workItem from="1715498258462" duration="10951000" />
-      <workItem from="1715512443197" duration="8256000" />
-      <workItem from="1715752691034" duration="4262000" />
-      <workItem from="1715862962365" duration="3510000" />
-      <workItem from="1715867578294" duration="1860000" />
-      <workItem from="1715922091832" duration="2736000" />
-      <workItem from="1715926057372" duration="6787000" />
-      <workItem from="1715937922254" duration="1696000" />
-      <workItem from="1716010447445" duration="94000" />
-      <workItem from="1716024500694" duration="2009000" />
-      <workItem from="1716039827161" duration="43000" />
-      <workItem from="1716101615389" duration="727000" />
-      <workItem from="1716108091025" duration="1282000" />
-      <workItem from="1725461681606" duration="4892000" />
-      <workItem from="1725469205442" duration="617000" />
-      <workItem from="1725469937098" duration="291000" />
-      <workItem from="1725507306635" duration="2974000" />
-      <workItem from="1725512212745" duration="620000" />
-      <workItem from="1725513940659" duration="6324000" />
-      <workItem from="1725520533982" duration="850000" />
-      <workItem from="1725591521777" duration="904000" />
-      <workItem from="1725602187538" duration="251000" />
-      <workItem from="1725602764624" duration="258000" />
-      <workItem from="1725606723033" duration="998000" />
-      <workItem from="1725628407029" duration="3763000" />
-      <workItem from="1725638248668" duration="2749000" />
-      <workItem from="1725695053890" duration="5487000" />
-      <workItem from="1725709428082" duration="1014000" />
-      <workItem from="1725721028156" duration="84000" />
-      <workItem from="1725722473213" duration="604000" />
-      <workItem from="1725808188338" duration="1291000" />
-      <workItem from="1725855987075" duration="2014000" />
-      <workItem from="1725858215856" duration="316000" />
-      <workItem from="1725863205742" duration="1016000" />
-      <workItem from="1725865569005" duration="117000" />
-      <workItem from="1725889780575" duration="485000" />
-      <workItem from="1725891171619" duration="2772000" />
-      <workItem from="1725935550146" duration="5952000" />
-      <workItem from="1725963559452" duration="4052000" />
-      <workItem from="1725970415405" duration="6340000" />
-      <workItem from="1725978136611" duration="208000" />
-      <workItem from="1726019822303" duration="4906000" />
-      <workItem from="1726024791923" duration="13000" />
-      <workItem from="1726027471755" duration="607000" />
-      <workItem from="1726031629520" duration="1242000" />
-      <workItem from="1726034785802" duration="2101000" />
-      <workItem from="1726045962932" duration="1363000" />
-      <workItem from="1726062146360" duration="4919000" />
-      <workItem from="1726114397871" duration="5743000" />
-      <workItem from="1726145915772" duration="11723000" />
-      <workItem from="1726195763227" duration="464000" />
-      <workItem from="1726198452546" duration="2124000" />
-      <workItem from="1726200815112" duration="793000" />
-      <workItem from="1726208352502" duration="1340000" />
-      <workItem from="1726214831542" duration="769000" />
-      <workItem from="1726231356369" duration="1240000" />
-      <workItem from="1726235192634" duration="7638000" />
-      <workItem from="1726306013361" duration="1128000" />
-      <workItem from="1726311265910" duration="3817000" />
-      <workItem from="1726328503404" duration="4395000" />
-      <workItem from="1726368631732" duration="4147000" />
-      <workItem from="1726375335352" duration="3836000" />
-      <workItem from="1726384897711" duration="3334000" />
-      <workItem from="1726557690401" duration="4269000" />
-      <workItem from="1726573588953" duration="10394000" />
-      <workItem from="1726639350170" duration="7605000" />
-      <workItem from="1726717587900" duration="1559000" />
-      <workItem from="1726908318846" duration="36000" />
-      <workItem from="1726908828490" duration="1552000" />
-      <workItem from="1727006371288" duration="392000" />
-      <workItem from="1727059147868" duration="664000" />
-      <workItem from="1727182174037" duration="527000" />
+      <updated>1727247306982</updated>
+      <workItem from="1727247308411" duration="2549000" />
     </task>
-    <task id="LOCAL-00001" summary="create project">
-      <option name="closed" value="true" />
-      <created>1711445716648</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1711445716648</updated>
-    </task>
-    <task id="LOCAL-00002" summary="add more lib">
-      <option name="closed" value="true" />
-      <created>1711446833860</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1711446833860</updated>
-    </task>
-    <task id="LOCAL-00003" summary="update GUI">
-      <option name="closed" value="true" />
-      <created>1711504913856</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1711504913856</updated>
-    </task>
-    <task id="LOCAL-00004" summary="update GUI3">
-      <option name="closed" value="true" />
-      <created>1711510137962</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1711510137962</updated>
-    </task>
-    <task id="LOCAL-00005" summary="update GUI (4/1)">
-      <option name="closed" value="true" />
-      <created>1711972526928</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1711972526928</updated>
-    </task>
-    <task id="LOCAL-00006" summary="update GUI (4/2)-1">
-      <option name="closed" value="true" />
-      <created>1711993616527</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1711993616527</updated>
-    </task>
-    <task id="LOCAL-00007" summary="update GUI (4/3)-1">
-      <option name="closed" value="true" />
-      <created>1712115294677</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1712115294677</updated>
-    </task>
-    <task id="LOCAL-00008" summary="update GUI (8/4)-2">
-      <option name="closed" value="true" />
-      <created>1712582227586</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1712582227586</updated>
-    </task>
-    <task id="LOCAL-00009" summary="update GUI (8/4)-2">
-      <option name="closed" value="true" />
-      <created>1712648056395</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1712648056395</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Customer, them FinancialReport">
-      <option name="closed" value="true" />
-      <created>1713266746499</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1713266746499</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Customer, them FinancialReport">
-      <option name="closed" value="true" />
-      <created>1713266764181</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1713266764181</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Customer, them FinancialReport">
-      <option name="closed" value="true" />
-      <created>1713266794443</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1713266794443</updated>
-    </task>
-    <task id="LOCAL-00013" summary="update from Kai 19/4">
-      <option name="closed" value="true" />
-      <created>1713509335632</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1713509335632</updated>
-    </task>
-    <task id="LOCAL-00014" summary="revert commit (22/4)">
-      <option name="closed" value="true" />
-      <created>1713788399643</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1713788399643</updated>
-    </task>
-    <task id="LOCAL-00015" summary="update ID (23/4)">
-      <option name="closed" value="true" />
-      <created>1713864968954</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1713864968954</updated>
-    </task>
-    <task id="LOCAL-00016" summary="TEN GUI">
-      <option name="closed" value="true" />
-      <created>1715157051265</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1715157051265</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Excel">
-      <option name="closed" value="true" />
-      <created>1715504265171</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1715504265171</updated>
-    </task>
-    <task id="LOCAL-00018" summary="LogOut - (lỗi: ko login vào lại đc)">
-      <option name="closed" value="true" />
-      <created>1715519910699</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1715519910699</updated>
-    </task>
-    <task id="LOCAL-00019" summary="LogOut - (lỗi: ko login vào lại đc)">
-      <option name="closed" value="true" />
-      <created>1715520630884</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1715520630884</updated>
-    </task>
-    <task id="LOCAL-00020" summary="update pdf - 1">
-      <option name="closed" value="true" />
-      <created>1715935221909</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1715935221909</updated>
-    </task>
-    <task id="LOCAL-00021" summary="update pdf final">
-      <option name="closed" value="true" />
-      <created>1715936616963</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1715936616963</updated>
-    </task>
-    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="create project" />
-    <MESSAGE value="add more lib" />
-    <MESSAGE value="update GUI" />
-    <MESSAGE value="update GUI3" />
-    <MESSAGE value="update GUI (4/1)" />
-    <MESSAGE value="update GUI (4/2)-1" />
-    <MESSAGE value="update GUI (4/3)-1" />
-    <MESSAGE value="update GUI (8/4)-2" />
-    <MESSAGE value="update GUI (11/4)" />
-    <MESSAGE value="Customer, them FinancialReport" />
-    <MESSAGE value="update from Kai 19/4" />
-    <MESSAGE value="revert commit (22/4)" />
-    <MESSAGE value="update ID (23/4)" />
-    <MESSAGE value="TEN GUI" />
-    <MESSAGE value="Excel" />
-    <MESSAGE value="LogOut - (lỗi: ko login vào lại đc)" />
-    <MESSAGE value="update pdf - 1" />
-    <MESSAGE value="update pdf final" />
-    <option name="LAST_COMMIT_MESSAGE" value="update pdf final" />
-  </component>
-  <component name="XPathView.XPathProjectComponent">
-    <history />
-    <find-history />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>
