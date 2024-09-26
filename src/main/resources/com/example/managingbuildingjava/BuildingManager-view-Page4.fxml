@@ -38,7 +38,6 @@
                                  <Pane layoutX="33.0" layoutY="117.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20;">
                                      <children>
                                          <TextField fx:id="soLuongField" layoutX="216.0" layoutY="152.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                        <TextField fx:id="maDichVuField" layoutX="216.0" layoutY="93.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="152.0" prefHeight="32.0" prefWidth="120.0" text="Số lượng" textFill="WHITE">
                                              <font>
                                                  <Font name="System Bold" size="13.0" />
@@ -72,6 +71,7 @@
                                        </image>
                                     </ImageView>
                                     <ComboBox fx:id="maPhieuThuCombobox" layoutX="216.0" layoutY="31.0" prefHeight="34.0" prefWidth="166.0" />
+                                    <ComboBox fx:id="maDichVuCombobox" layoutX="216.0" layoutY="92.0" prefHeight="35.0" prefWidth="166.0" />
                                      </children>
                                  </Pane>
                                  <Button fx:id="bnt__P4__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="634.0" mnemonicParsing="false" onAction="#handleAddServiceTicket" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
@@ -165,7 +165,6 @@
                                     <DatePicker fx:id="ngayGhiPPField" layoutX="215.0" layoutY="204.0" prefHeight="35.0" prefWidth="168.0" styleClass="black-text" />
                                     
                                      <TextArea fx:id="ghiChuPPField" layoutX="212.0" layoutY="263.0" prefHeight="170.0" prefWidth="174.0" styleClass="black-text" />
-                                    <TextField fx:id="maphatfied" layoutX="215.0" layoutY="99.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="99.0" prefHeight="32.0" prefWidth="120.0" text="Mã  phạt" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
@@ -177,7 +176,8 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="maSluongField1" layoutX="216.0" layoutY="153.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                                    <ComboBox fx:id="maPThuCombobox" layoutX="214.0" layoutY="45.0" prefHeight="31.0" prefWidth="167.0" />
+                                    <ComboBox fx:id="maPThuCombobox" layoutX="217.0" layoutY="45.0" prefHeight="31.0" prefWidth="164.0" />
+                                    <ComboBox fx:id="maPhatCombobox" layoutX="216.0" layoutY="100.0" prefHeight="30.0" prefWidth="166.0" />
                                      </children>
                                  </Pane>
                                  <Button fx:id="bnt__P4_1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="638.0" mnemonicParsing="false" onAction="#handleAddViolationTicket" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
@@ -214,8 +214,8 @@
                                          <TableColumn fx:id="mxPThu" prefWidth="85.60003662109375" text="Mã Phiếu Thu" />
                                     <TableColumn fx:id="mxSoLuong" prefWidth="72.66668701171875" text="Số lượng" />
                                           <TableColumn fx:id="mxThanhTien" prefWidth="80.66668701171875" text="Thành Tiền" />
-                                         <TableColumn fx:id="mxNgayghi" prefWidth="160.66656494140625" text="Ngày Ghi" />
-                                         <TableColumn fx:id="mxghichu" prefWidth="52.666748046875" text="Ghi Chú" />
+                                         <TableColumn fx:id="mxNgayghi" text="Ngày Ghi" />
+                                         <TableColumn fx:id="mxghichu" prefWidth="56.66668701171875" text="Ghi Chú" />
                                      </columns>
                                  </TableView>
                                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="76.0" prefHeight="30.0" prefWidth="280.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin phiếu phạt">
