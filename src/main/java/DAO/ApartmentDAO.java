@@ -47,17 +47,16 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
             }
 
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO Apartment (apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Apartment (apartmentID, buildingID, area, bedrooms, bathrooms, furniture, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL
             preparedStatement.setString(1, apartment.getApartmentID());
             preparedStatement.setString(2, (apartment.getBuildingID() != null) ? apartment.getBuildingID() : null);
-            preparedStatement.setString(3, apartment.getRoomNumber());
-            preparedStatement.setDouble(4, apartment.getArea());
-            preparedStatement.setInt(5, apartment.getBedrooms());
-            preparedStatement.setInt(6, apartment.getBathrooms());
-            preparedStatement.setString(7, (apartment.getFurniture() != null) ? apartment.getFurniture() : null);
-            preparedStatement.setString(8, (apartment.getStatus() != null) ? apartment.getStatus() : null);
+            preparedStatement.setDouble(3, apartment.getArea());
+            preparedStatement.setInt(4, apartment.getBedrooms());
+            preparedStatement.setInt(5, apartment.getBathrooms());
+            preparedStatement.setString(6, (apartment.getFurniture() != null) ? apartment.getFurniture() : null);
+            preparedStatement.setString(7, (apartment.getStatus() != null) ? apartment.getStatus() : null);
 
             // Thực thi câu lệnh SQL và nhận kết quả
             ketQua = preparedStatement.executeUpdate();
@@ -76,17 +75,16 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
         int ketQua = 0;
         try {
             Connection con = JDBCUtil.getConnection();
-            String sql = "UPDATE Apartment SET buildingID=?, roomNumber=?, area=?, bedrooms=?, bathrooms=?, furniture=?, status=? WHERE apartmentID=?";
+            String sql = "UPDATE Apartment SET buildingID=?, area=?, bedrooms=?, bathrooms=?, furniture=?, status=? WHERE apartmentID=?";
             PreparedStatement pst = con.prepareStatement(sql);
 
             pst.setString(1, apartment.getBuildingID());
-            pst.setString(2, apartment.getRoomNumber());
-            pst.setDouble(3, apartment.getArea());
-            pst.setInt(4, apartment.getBedrooms());
-            pst.setInt(5, apartment.getBathrooms());
-            pst.setString(6, apartment.getFurniture());
-            pst.setString(7, apartment.getStatus());
-            pst.setString(8, apartment.getApartmentID());
+            pst.setDouble(2, apartment.getArea());
+            pst.setInt(3, apartment.getBedrooms());
+            pst.setInt(4, apartment.getBathrooms());
+            pst.setString(5, apartment.getFurniture());
+            pst.setString(6, apartment.getStatus());
+            pst.setString(7, apartment.getApartmentID());
 
             ketQua = pst.executeUpdate();
 
@@ -124,7 +122,7 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
                     "CASE " +
                     "    WHEN LA.apartmentID IS NOT NULL THEN N'Đã được thuê' " +
                     "    ELSE N'Còn trống' " + 
-                    "END AS status, B.area, B.bathrooms, B.bedrooms, B.buildingID, B.furniture, B.roomNumber " + 
+                    "END AS status, B.area, B.bathrooms, B.bedrooms, B.buildingID, B.furniture " +
                                                                                                                     
                                                                                                                  
                                                                                                                   
@@ -173,27 +171,25 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
     private Apartment createApartmentFromResultSet(ResultSet resultSet) throws SQLException {
         String apartmentID = resultSet.getString("apartmentID");
         String buildingID = resultSet.getString("buildingID");
-        String roomNumber = resultSet.getString("roomNumber");
         Double area = resultSet.getDouble("area");
         int bedrooms = resultSet.getInt("bedrooms");
         int bathrooms = resultSet.getInt("bathrooms");
         String furniture = resultSet.getString("furniture");
         String status = resultSet.getString("status");
 
-        return new Apartment(apartmentID, buildingID, roomNumber, area, bedrooms, bathrooms, furniture, status);
+        return new Apartment(apartmentID, buildingID, area, bedrooms, bathrooms, furniture, status);
     }
 
     public ArrayList<Apartment> search(String keyword, String buildingManagerID) {
         ArrayList<Apartment> searchResults = new ArrayList<>();
         try {
             Connection connection = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM Apartment A JOIN BuildingManager B ON A.buildingID = B.buildingID WHERE (A.apartmentID LIKE ? OR A.roomNumber LIKE ? OR A.furniture LIKE ?) AND B.buildingManagerID = ?";
+            String sql = "SELECT * FROM Apartment A JOIN BuildingManager B ON A.buildingID = B.buildingID WHERE (A.apartmentID LIKE ? OR A.furniture LIKE ?) AND B.buildingManagerID = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, "%" + keyword + "%");
             preparedStatement.setString(2, "%" + keyword + "%");
-            preparedStatement.setString(3, "%" + keyword + "%");
-            preparedStatement.setString(4, buildingManagerID);
+            preparedStatement.setString(3, buildingManagerID);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {

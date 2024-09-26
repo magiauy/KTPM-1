@@ -327,6 +327,12 @@ public class BuildingManagerController implements Initializable {
     private Label Regex__P1__2 = new Label();
 
     @FXML
+    private Label Regex__P1__3 = new Label();
+
+    @FXML
+    private Label Regex__P1__4 = new Label();
+
+    @FXML
     private TextField TxtField__P1__1 = new TextField();
 
     @FXML
@@ -465,12 +471,12 @@ public class BuildingManagerController implements Initializable {
         comboBox__P1__3.getSelectionModel().clearSelection();
         Regex__P1__1.setText("");
         Regex__P1__2.setText("");
+        Regex__P1__4.setText("");
     }
 
     private void initApartment() {
         maCanHoTable.setCellValueFactory(new PropertyValueFactory<>("apartmentID"));
         maToaNhaTable.setCellValueFactory(new PropertyValueFactory<>("buildingID"));
-        soPhongTable.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
         dienTichTable.setCellValueFactory(new PropertyValueFactory<>("area"));
         soPhongNguTable.setCellValueFactory(new PropertyValueFactory<>("bedrooms"));
         soPhongTamTable.setCellValueFactory(new PropertyValueFactory<>("bathrooms"));
@@ -484,7 +490,6 @@ public class BuildingManagerController implements Initializable {
     void showApartment(MouseEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
         TxtField__P1__1.setText(selectedApartment.getApartmentID());
-        TxtField__P1__2.setText(selectedApartment.getRoomNumber());
         TxtField__P1__3.setText(String.valueOf(selectedApartment.getArea()));
         TxtField__P1__4.setText(String.valueOf(selectedApartment.getBedrooms()));
         TxtField__P1__5.setText(String.valueOf(selectedApartment.getBathrooms()));
@@ -496,16 +501,52 @@ public class BuildingManagerController implements Initializable {
     @FXML
     void suaCanHo(MouseEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
-        if (!isInteger(TxtField__P1__4.getText())){
-            Regex__P1__1.setText("Only number");
+        boolean isValid = true;
+
+
+
+        // Bedrooms validation
+        if (TxtField__P1__4.getText().isEmpty()) {
+            Regex__P1__1.setText("Không được để trống");
+            isValid = false;
+        } else {
+            try {
+                int bedrooms = Integer.parseInt(TxtField__P1__4.getText());
+                if (bedrooms <= 0) {
+                    Regex__P1__1.setText("Phải là số nguyên dương");
+                    isValid = false;
+                } else {
+                    Regex__P1__1.setText("");
+                }
+            } catch (NumberFormatException e) {
+                Regex__P1__1.setText("Phải là số nguyên dương");
+                isValid = false;
+            }
         }
-        if (!isInteger(TxtField__P1__5.getText())){
-            Regex__P1__2.setText("Only number");
+
+        // Bathrooms validation
+        if (TxtField__P1__5.getText().isEmpty()) {
+            Regex__P1__2.setText("Không được để trống");
+            isValid = false;
+        } else {
+            try {
+                int bathrooms = Integer.parseInt(TxtField__P1__5.getText());
+                if (bathrooms < 0) {
+                    Regex__P1__2.setText("Phải là số nguyên dương");
+                    isValid = false;
+                } else {
+                    Regex__P1__2.setText("");
+                }
+            } catch (NumberFormatException e) {
+                Regex__P1__2.setText("Phải là số nguyên dương");
+                isValid = false;
+            }
         }
-        if (!isInteger(TxtField__P1__4.getText())||!isInteger(TxtField__P1__5.getText())){
+
+        // If validation failed, return early
+        if (!isValid) {
             return;
         }
-        selectedApartment.setApartmentID(TxtField__P1__1.getText());
 
         BuildingManagerBUS bus = new BuildingManagerBUS();
         List<BuildingManager> buildingManagers = bus.getAll();
@@ -516,8 +557,6 @@ public class BuildingManagerController implements Initializable {
                 break;
             }
         }
-        selectedApartment.setRoomNumber(TxtField__P1__2.getText());
-        selectedApartment.setArea(Double.parseDouble(TxtField__P1__3.getText()));
         selectedApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
         selectedApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
         selectedApartment.setFurniture(comboBox__P1__3.getSelectionModel().getSelectedItem());
@@ -536,13 +575,67 @@ public class BuildingManagerController implements Initializable {
     @FXML
     void themCanHo(MouseEvent event) {
         try {
-            if (!isInteger(TxtField__P1__4.getText())){
-                Regex__P1__1.setText("phải là số");
+            boolean isValid = true;
+
+            // Area validation
+            if (TxtField__P1__3.getText().isEmpty()) {
+                Regex__P1__4.setText("Không được để trống");
+                isValid = false;
+            } else {
+                try {
+                    double area = Double.parseDouble(TxtField__P1__3.getText());
+                    if (area <= 0) {
+                        Regex__P1__4.setText("Phải là số dương");
+                        isValid = false;
+                    } else {
+                        Regex__P1__4.setText("");
+                    }
+                } catch (NumberFormatException e) {
+                    Regex__P1__4.setText("Phải là số");
+                    isValid = false;
+                }
             }
-            if (!isInteger(TxtField__P1__5.getText())){
-                Regex__P1__2.setText("phải là số");
+
+            // Bedrooms validation
+            if (TxtField__P1__4.getText().isEmpty()) {
+                Regex__P1__1.setText("Không được để trống");
+                isValid = false;
+            } else {
+                try {
+                    int bedrooms = Integer.parseInt(TxtField__P1__4.getText());
+                    if (bedrooms <= 0) {
+                        Regex__P1__1.setText("Phải là số nguyên dương");
+                        isValid = false;
+                    } else {
+                        Regex__P1__1.setText("");
+                    }
+                } catch (NumberFormatException e) {
+                    Regex__P1__1.setText("Phải là số nguyên dương");
+                    isValid = false;
+                }
             }
-            if (!isInteger(TxtField__P1__4.getText())||!isInteger(TxtField__P1__5.getText())){
+
+            // Bathrooms validation
+            if (TxtField__P1__5.getText().isEmpty()) {
+                Regex__P1__2.setText("Không được để trống");
+                isValid = false;
+            } else {
+                try {
+                    int bathrooms = Integer.parseInt(TxtField__P1__5.getText());
+                    if (bathrooms < 0) {
+                        Regex__P1__2.setText("Phải là số nguyên dương");
+                        isValid = false;
+                    } else {
+                        Regex__P1__2.setText("");
+                    }
+                } catch (NumberFormatException e) {
+                    Regex__P1__2.setText("Phải là số nguyên dương");
+                    isValid = false;
+                }
+            }
+
+            // If validation failed, return early
+            if (!isValid) {
                 return;
             }
             Apartment newApartment = new Apartment();
@@ -554,7 +647,6 @@ public class BuildingManagerController implements Initializable {
                     newApartment.setBuildingID(buildingManager.getBuildingId());
                 }
             }
-            newApartment.setRoomNumber(TxtField__P1__2.getText());
             newApartment.setArea(Double.parseDouble(TxtField__P1__3.getText()));
             newApartment.setBedrooms(Integer.parseInt(TxtField__P1__4.getText()));
             newApartment.setBathrooms(Integer.parseInt(TxtField__P1__5.getText()));
@@ -759,13 +851,16 @@ public class BuildingManagerController implements Initializable {
     private Label Regex__P2__2 = new Label();
 
     @FXML
-    private Label Regex__P3__1 = new Label();
+    private Label Regex__P2__3 = new Label();
 
     @FXML
-    private Label Regex__P3__2 = new Label();
+    private Label Regex__P2__4 = new Label();
 
     @FXML
-    private Label Regex__P3__3 = new Label();
+    private Label Regex__P2__5 = new Label();
+
+    @FXML
+    private Label Regex__P2__6 = new Label();
 
 
     private ObservableList<Tenant> tenantObservableList;
@@ -832,9 +927,6 @@ public class BuildingManagerController implements Initializable {
         TxtField__P2_1__51.setText("");
         comboBox__P2_1__3.getSelectionModel().clearSelection();
         Combobox__P2_1__2.getSelectionModel().clearSelection();
-        Regex__P3__1.setText("");
-        Regex__P3__2.setText("");
-        Regex__P3__3.setText("");
     }
 
     public void refreshFormTenant() {
@@ -935,19 +1027,19 @@ public class BuildingManagerController implements Initializable {
     @FXML
     void themCuDan(ActionEvent event) {
         try {
-            if (Combobox__P2_1__2.getSelectionModel().getSelectedItem().equals("")){
-                Regex__P3__1.setText("Không được bỏ trống");
-            }
-            if (TxtField__P2_1__3.getText().equals("")) {
-                Regex__P3__2.setText("Họ không được bỏ trống");
-            }
-            if(TxtField__P2_1__4.getText().equals("")) {
-                Regex__P3__3.setText("Tên không được bỏ trống");
-            }
-
-            if (TxtField__P2_1__2.getText().equals("")||TxtField__P2_1__3.getText().equals("")||TxtField__P2_1__4.getText().equals("")) {
-                return;
-            }
+//            if (Combobox__P2_1__2.getSelectionModel().getSelectedItem().equals("")){
+//                Regex__P3__1.setText("Không được bỏ trống");
+//            }
+//            if (TxtField__P2_1__3.getText().equals("")) {
+//                Regex__P3__2.setText("Họ không được bỏ trống");
+//            }
+//            if(TxtField__P2_1__4.getText().equals("")) {
+//                Regex__P3__3.setText("Tên không được bỏ trống");
+//            }
+//
+//            if (TxtField__P2_1__2.getText().equals("")||TxtField__P2_1__3.getText().equals("")||TxtField__P2_1__4.getText().equals("")) {
+//                return;
+//            }
             Cohabitant cohabitant = new Cohabitant();
             cohabitant.setTenantID(TxtField__P2_1__2.getText());
             cohabitant.setFirstName(TxtField__P2_1__3.getText());
@@ -977,20 +1069,88 @@ public class BuildingManagerController implements Initializable {
     @FXML
     void themKhachHang(ActionEvent event) {
         try {
-            if (TxtField__P2__2.getText().equals("")){
-                Regex__P2__1.setText("Họ không được bỏ trống");
-            } else if (!isString(TxtField__P2__2.getText())) {
-                Regex__P2__1.setText("Họ không được chứa số");
-            }
-            if (TxtField__P2__2.getText().equals("")){
-                Regex__P2__2.setText("Tên không được bỏ trống");
-            } else if (!isString(TxtField__P2__2.getText())){
-                Regex__P2__2.setText("Tên không được chứa số");
+
+
+            boolean isValid = true;
+
+            if (TxtField__P2__2.getText().isEmpty()) {
+                Regex__P2__1.setText("Không được để trống");
+                isValid = false;
+            } else {
+                String input = TxtField__P2__2.getText();
+                // Kiểm tra xem chuỗi có chứa số hoặc ký tự đặc biệt hay không
+                if (!input.matches("[a-zA-ZÀ-ỹ\\s]+")) {
+                    Regex__P2__1.setText("Họ không được chứa số hoặc ký tự đặc biệt");
+                    isValid = false;
+                } else {
+                    Regex__P2__1.setText("");
+                }
             }
 
-            if (TxtField__P2__2.getText().equals("")||TxtField__P2__2.getText().equals("")||!isString(TxtField__P2__2.getText())||!isString(TxtField__P2__2.getText())){
+            if (TxtField__P2__3.getText().isEmpty()) {
+                Regex__P2__2.setText("Không được để trống");
+                isValid = false;
+            } else {
+                String input = TxtField__P2__3.getText();
+                // Kiểm tra xem chuỗi có chứa số hoặc ký tự đặc biệt hay không
+                if (!input.matches("[a-zA-ZÀ-ỹ\\s]+")) {
+                    Regex__P2__2.setText("Tên không được chứa số hoặc ký tự đặc biệt");
+                    isValid = false;
+                } else {
+                    Regex__P2__2.setText("");
+                }
+            }
+
+            if (TxtField__P2__4.getText().isEmpty()) {
+                Regex__P2__3.setText("Không được để trống");
+                isValid = false;
+            } else {
+                String input = TxtField__P2__4.getText();
+                // Kiểm tra xem chuỗi có chứa số hoặc ký tự đặc biệt hay không
+                if (!input.matches("\\d{10}")) {
+                    Regex__P2__3.setText("10 số");
+                    isValid = false;
+                } else {
+                    Regex__P2__3.setText("");
+                }
+            }
+
+            if (TxtField__P2__5.getValue()==null) {
+                Regex__P2__4.setText("Không được để trống");
+                isValid = false;
+            } else {
+                Regex__P2__4.setText("");
+            }
+
+            if (comboBox__P2__3.getValue()==null) {
+                Regex__P2__5.setText("Không được để trống");
+                isValid = false;
+            } else {
+                Regex__P2__5.setText("");
+            }
+
+            if (TxtField__P2__51.getText().isEmpty()) {
+                Regex__P2__6.setText("Không được để trống");
+                isValid = false;
+            } else {
+                String input = TxtField__P2__51.getText();
+                // Kiểm tra căn cước công dân phải có đúng 12 số
+                if (!input.matches("\\d{12}")) {
+                    Regex__P2__6.setText("Chứa đúng 12 số");
+                    isValid = false;
+                } else {
+                    Regex__P2__6.setText("");
+                }
+            }
+
+
+
+
+            // If validation failed, return early
+            if (!isValid) {
                 return;
             }
+
             Tenant tenant = new Tenant();
             tenant.setFirstName(TxtField__P2__2.getText());
             tenant.setLastName(TxtField__P2__3.getText());
@@ -1115,28 +1275,10 @@ public class BuildingManagerController implements Initializable {
     private TextField TxtField__P3__6 = new TextField();
 
     @FXML
-    private Button bnt__P3__add;
+    private Label Regex__P3__1 = new Label();
 
     @FXML
-    private Button bnt__P3__delete;
-
-    @FXML
-    private Button bnt__P3__update;
-
-    @FXML
-    private Button btn_huyLoc;
-
-    @FXML
-    private Button btn_loc;
-
-    @FXML
-    private ComboBox<String> comboBox__P3__1 = new ComboBox<>();
-
-    @FXML
-    private ComboBox<String> comboBox__P3__2 = new ComboBox<>();
-
-    @FXML
-    private ComboBox<String> comboBox__P3__3 = new ComboBox<>();
+    private Label Regex__P3__2 = new Label();
 
     @FXML
     private ComboBox<String> comboBox_P3_status = new ComboBox<>();
@@ -1188,6 +1330,8 @@ public class BuildingManagerController implements Initializable {
         TxtField__P3__5.setText(String.valueOf(monthlyRentBill.getRepaymentPeriod()));
         TxtField__P3__51.setText(monthlyRentBill.getStatus());
         comboBox_P3_status.setValue(monthlyRentBill.getStatus());
+        Regex__P3__1.setText("");
+        Regex__P3__2.setText("");
     }
 
     public void refreshFormMonthlyRentBill() {
@@ -1200,15 +1344,37 @@ public class BuildingManagerController implements Initializable {
         TxtField__P3__51.setText("");
         comboBox_P3_status.getSelectionModel().clearSelection();
         Combobox__P3__4.setValue(null);
+
     }
 
     @FXML
     void suaPhieuThu(ActionEvent event) {
         MonthlyRentBill monthlyRentBill = table__P3__1.getSelectionModel().getSelectedItem();
-        monthlyRentBill.setApartmentID(Combobox__P3__4.getValue());
-        monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
+        if (monthlyRentBill == null) {
+            System.err.println("Không có phiếu thu được chọn.");
+            return;
+        }
+
+        String repaymentText = TxtField__P3__5.getText();
+        if (!repaymentText.isEmpty()) {
+            try {
+                int repaymentPeriod = Integer.parseInt(repaymentText);
+                if (repaymentPeriod > 0) {
+                    monthlyRentBill.setRepaymentPeriod(repaymentPeriod);
+                    Regex__P3__2.setText("");  // Clear the error message if the input is valid
+                } else {
+                    Regex__P3__2.setText("Phải là số nguyên dương.");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                Regex__P3__2.setText("Phải là số nguyên dương.");
+                return;
+            }
+        } else {
+            Regex__P3__2.setText("Không nhập sẽ giữ nguyên.");
+        }
+
         monthlyRentBill.setStatus(comboBox_P3_status.getSelectionModel().getSelectedItem());
-        monthlyRentBill.setTotalPayment(Double.parseDouble(TxtField__P3__6.getText()));
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
         boolean updateSuccess = monthlyRentBillBUS.update(monthlyRentBill);
         if (updateSuccess) {
@@ -1224,8 +1390,41 @@ public class BuildingManagerController implements Initializable {
     @FXML
     void themPhieuThu(ActionEvent event) {
         try {
+            boolean isValid = true;
             MonthlyRentBill monthlyRentBill = new MonthlyRentBill();
             String apartmentID = Combobox__P3__4.getSelectionModel().getSelectedItem();
+            if (apartmentID == null) {
+                Regex__P3__1.setText("Chọn mã căn hộ");
+                isValid = false;
+            } else {
+                Regex__P3__1.setText("");
+            }
+
+            if (TxtField__P3__5.getText().isEmpty()) {
+                Regex__P3__2.setText("Không được để trống");
+                isValid = false;
+            } else {
+                try {
+                    int repaymentPeriod = Integer.parseInt(TxtField__P3__5.getText());
+                    if (repaymentPeriod <= 0) {
+                        Regex__P3__2.setText("Phải là số nguyên dương");
+                        isValid = false;
+                    } else {
+                        Regex__P3__2.setText("");
+                    }
+                } catch (NumberFormatException e) {
+                    Regex__P3__2.setText("Phải là số nguyên dương");
+                    isValid = false;
+                }
+            }
+
+
+
+            if (!isValid) {
+                return;
+            }
+
+
             LeaseAgreementBUS checkApartmentID = new LeaseAgreementBUS();
             List<LeaseAgreement> leaseAgreementList = checkApartmentID.getAll();
             for (LeaseAgreement list: leaseAgreementList) {
@@ -1234,7 +1433,7 @@ public class BuildingManagerController implements Initializable {
                     monthlyRentBill.setTenantID(list.getTenantID());
                     monthlyRentBill.setDate(LocalDate.now());
 
-                    monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
+
 
                     Double totalPayment = list.getMonthlyRent();
                     monthlyRentBill.setTotalPayment(totalPayment);
@@ -1269,21 +1468,21 @@ public class BuildingManagerController implements Initializable {
         monthlyRentBillObservableList.setAll(search);
     }
 
-    @FXML
-    void xoaPhieuThu(ActionEvent event) {
-        MonthlyRentBill monthlyRentBill = table__P3__1.getSelectionModel().getSelectedItem();
-        if (monthlyRentBill != null) {
-            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-            boolean deleteSuccess = monthlyRentBillBUS.delete(monthlyRentBill);
-            if (deleteSuccess) {
-                monthlyRentBillObservableList.remove(monthlyRentBill);
-                table__P3__1.refresh();
-                refreshFormMonthlyRentBill();
-            } else {
-                System.err.println("Không thể xóa phiếu thu từ cơ sở dữ liệu.");
-            }
-        }
-    }
+//    @FXML
+//    void xoaPhieuThu(ActionEvent event) {
+//        MonthlyRentBill monthlyRentBill = table__P3__1.getSelectionModel().getSelectedItem();
+//        if (monthlyRentBill != null) {
+//            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+//            boolean deleteSuccess = monthlyRentBillBUS.delete(monthlyRentBill);
+//            if (deleteSuccess) {
+//                monthlyRentBillObservableList.remove(monthlyRentBill);
+//                table__P3__1.refresh();
+//                refreshFormMonthlyRentBill();
+//            } else {
+//                System.err.println("Không thể xóa phiếu thu từ cơ sở dữ liệu.");
+//            }
+//        }
+//    }
 
     @FXML
     void huyLocPhieuThu(MouseEvent event) {
@@ -2124,11 +2323,12 @@ public class BuildingManagerController implements Initializable {
                     ngayGhiPPField.setValue(selectedRow.getDate());
                     ghiChuPPField.setText(selectedRow.getNote());
                     violationTicketdelete = selectedRow;
-                    System.out.println(selectedRow.getPrice());
                 }
             }
         });
     }
+
+    //xoa phieu phat
 
     public void handleDeleteViolationTicket() {
         if (violationTicketdelete == null) {
@@ -2761,16 +2961,20 @@ public class BuildingManagerController implements Initializable {
 
             List<Apartment> listApartment_C = apartment_c.getApartmentByBuildingID(buildingManager.getBuildingId());
             List<String> listApartmentID = new ArrayList<>();
+            List<String> listApartmentID1 = new ArrayList<>();
 
 
             for (Apartment apartment: listApartment_C) {
-                if (apartment.getStatus().equals("Còn trống"))
+                if (apartment.getStatus().equals("Còn trống")) {
+                    listApartmentID.add(apartment.getApartmentID());
+                } else {
+                    listApartmentID1.add(apartment.getApartmentID());
+                }
 
-                listApartmentID.add(apartment.getApartmentID());
             }
             combobox_TxtField__P6__3.getItems().addAll(listApartmentID);
 
-            Combobox__P3__4.getItems().addAll(listApartmentID);
+            Combobox__P3__4.getItems().addAll(listApartmentID1);
 
 
             initLeaseAgreement();
@@ -2780,7 +2984,8 @@ public class BuildingManagerController implements Initializable {
         }
     }
 
-    public void logOut(ActionEvent actionEvent) {
+    @FXML
+    void logOut(MouseEvent event) {
         Stage primaryStage = com.example.managingbuildingjava.BuildingManager.getPrimaryStage();
         if (primaryStage==null){
             primaryStage = main.getInstance().getPrimaryStage();
@@ -2796,4 +3001,8 @@ public class BuildingManagerController implements Initializable {
             e.printStackTrace();
         }
     }
+
+//    public void logOut(ActionEvent actionEvent) {
+//
+//    }
 }

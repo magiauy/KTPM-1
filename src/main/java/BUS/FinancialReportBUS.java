@@ -129,7 +129,7 @@ public class FinancialReportBUS {
                     .getMonthlyRentBillsByApartmentID(apartment.getApartmentID());
             for (MonthlyRentBill bill : rentBills) {
                 if (bill.getDate().getMonth() == month && bill.getDate().getYear() == year
-                        && bill.getStatus().equals("Paid")) {
+                        && bill.getStatus().equals("Đã thanh toán")) {
                     totalRevenue += bill.getTotalPayment().floatValue();
                 }
             }
@@ -149,7 +149,7 @@ public class FinancialReportBUS {
                     .getMonthlyRentBillsByApartmentID(apartment.getApartmentID());
             for (MonthlyRentBill bill : rentBills) {
                 if (bill.getDate().getMonth() == month && bill.getDate().getYear() == year
-                        && bill.getStatus().equals("Paid")) {
+                        && bill.getStatus().equals("Đã thanh toán")) {
                     totalRevenue += bill.getTotalPayment().floatValue();
                     idphieu = bill.getMonthlyRentBillID();
                 }

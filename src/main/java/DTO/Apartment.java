@@ -11,18 +11,16 @@ package DTO;
 public class Apartment {
     private String apartmentID;
     private String buildingID;
-    private String roomNumber;
     private Double area;
     private int bedrooms;
     private int bathrooms;
     private String furniture;
     private String status;
 
-    public Apartment(String apartmentID, String buildingID, String roomNumber,
+    public Apartment(String apartmentID, String buildingID,
             Double area, int bedrooms, int bathrooms, String furniture ,String status) {
         this.apartmentID = apartmentID;
         this.buildingID = buildingID;
-        this.roomNumber = roomNumber;
         this.area = area;
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
@@ -36,7 +34,6 @@ public class Apartment {
     public Apartment(Apartment apartment) {
         this.apartmentID = apartment.apartmentID;
         this.buildingID = apartment.buildingID;
-        this.roomNumber = apartment.roomNumber;
         this.area = apartment.area;
         this.bedrooms = apartment.bedrooms;
         this.bathrooms = apartment.bathrooms;
@@ -64,13 +61,6 @@ public class Apartment {
         this.buildingID = buildingID;
     }
 
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
-    }
 
     public Double getArea() {
         return area;
@@ -113,7 +103,6 @@ public class Apartment {
         return "Apartment{" +
                 "apartmentID='" + apartmentID + '\'' +
                 ", buildingID='" + buildingID + '\'' +
-                ", roomNumber='" + roomNumber + '\'' +
                 ", area=" + area +
                 ", bedrooms=" + bedrooms +
                 ", bathrooms=" + bathrooms +
