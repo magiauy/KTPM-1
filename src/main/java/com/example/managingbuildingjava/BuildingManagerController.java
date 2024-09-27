@@ -2976,6 +2976,27 @@ public class BuildingManagerController implements Initializable {
     @FXML
     private TableView<LeaseAgreement> table__P6__1 = new TableView<>();
 
+    @FXML
+    private Label Regex__P6__1 = new Label();
+
+    @FXML
+    private Label Regex__P6__2 = new Label();
+
+    @FXML
+    private Label Regex__P6__3 = new Label();
+
+    @FXML
+    private Label Regex__P6__4 = new Label();
+
+    @FXML
+    private Label Regex__P6__5 = new Label();
+
+    @FXML
+    private Label Regex__P6__6 = new Label();
+
+    @FXML
+    private Label Regex__P6__7 = new Label();
+
     private ObservableList<LeaseAgreement> leaseAgreementObservableList;
 
     public ObservableList<LeaseAgreement> getLeaseAgreementObservableList() {
@@ -3031,13 +3052,7 @@ public class BuildingManagerController implements Initializable {
     @FXML
     void suaHopDong(ActionEvent event) {
         LeaseAgreement leaseAgreement = table__P6__1.getSelectionModel().getSelectedItem();
-//        leaseAgreement.setTenantID(combobox_TxtField__P6__2.getSelectionModel().getSelectedItem());
-//        leaseAgreement.setApartmentID(combobox_TxtField__P6__3.getSelectionModel().getSelectedItem());
-//        leaseAgreement.setSigningDate(DP_P6_1.getValue());
-//        leaseAgreement.setLeaseStartDate(DP_P6_2.getValue());
-//        leaseAgreement.setLeaseEndDate(DP_P6_3.getValue());
-//        leaseAgreement.setLeaseTerm(comboBox__P6__3.getValue());
-//        leaseAgreement.setDeposit(Double.parseDouble(TxtField__P6__5.getText()));
+
         leaseAgreement.setMonthlyRent(Double.parseDouble(TxtField__P6__6.getText()));
         LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
         boolean updateSuccess = leaseAgreementBUS.update(leaseAgreement);
@@ -3053,7 +3068,115 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     void themHopDong(ActionEvent event) {
+        LeaseAgreement selectedLeaseAgreement = table__P6__1.getSelectionModel().getSelectedItem();
+
+        if (selectedLeaseAgreement != null) {
+            // Kiểm tra xem giá trị Tenant ID và Apartment ID có thay đổi hay không
+            String selectedTenantID = selectedLeaseAgreement.getTenantID();
+            String selectedApartmentID = selectedLeaseAgreement.getApartmentID();
+            String currentTenantID = combobox_TxtField__P6__2.getSelectionModel().getSelectedItem();
+            String currentApartmentID = combobox_TxtField__P6__3.getSelectionModel().getSelectedItem();
+
+            boolean isTenantChanged = !selectedTenantID.equals(currentTenantID);
+            boolean isApartmentChanged = !selectedApartmentID.equals(currentApartmentID);
+
+            // Nếu cả Tenant ID và Apartment ID không thay đổi, không cho phép thêm
+            if (!isTenantChanged && !isApartmentChanged) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText(null);
+                alert.setContentText("Hợp đồng giữa khách hàng '" + selectedTenantID + "' và căn hộ '" + selectedApartmentID + "' đã tồn tại.");
+                alert.showAndWait();
+                return; // Thoát khỏi phương thức và không thêm hợp đồng
+            }
+        }
+
         try {
+            boolean isValid = true;
+
+            // Kiểm tra Tenant ID
+            if (combobox_TxtField__P6__2.getValue() == null) {
+                Regex__P6__1.setText("Không được để trống");
+                isValid = false;
+            } else {
+                Regex__P6__1.setText("");
+            }
+
+            // Kiểm tra Apartment ID
+            if (combobox_TxtField__P6__3.getValue() == null) {
+                Regex__P6__2.setText("Không được để trống");
+                isValid = false;
+            } else {
+                Regex__P6__2.setText("");
+            }
+
+            // Kiểm tra ngày ký hợp đồng
+            if (DP_P6_1.getValue() == null) {
+                Regex__P6__3.setText("Không được để trống");
+                isValid = false;
+            } else {
+                Regex__P6__3.setText("");
+            }
+
+            // Kiểm tra ngày bắt đầu thuê
+            if (DP_P6_2.getValue() == null) {
+                Regex__P6__4.setText("Không được để trống");
+                isValid = false;
+            } else {
+                Regex__P6__4.setText("");
+            }
+
+            // Kiểm tra thời hạn thuê
+            if (comboBox__P6__3.getValue() == null) {
+                Regex__P6__5.setText("Không được để trống");
+                isValid = false;
+            } else {
+                Regex__P6__5.setText("");
+            }
+
+            // Kiểm tra tiền đặt cọc
+            if (TxtField__P6__5.getText().isEmpty()) {
+                Regex__P6__6.setText("Không được để trống");
+                isValid = false;
+            } else {
+                try {
+                    double deposit = Double.parseDouble(TxtField__P6__5.getText());
+                    if (deposit < 0) {
+                        Regex__P6__6.setText("Tiền đặt cọc phải lớn hơn hoặc bằng 0");
+                        isValid = false;
+                    } else {
+                        Regex__P6__6.setText("");
+                    }
+                } catch (NumberFormatException e) {
+                    Regex__P6__6.setText("Tiền đặt cọc phải là số hợp lệ");
+                    isValid = false;
+                }
+            }
+
+            // Kiểm tra tiền thuê hàng tháng
+            if (TxtField__P6__6.getText().isEmpty()) {
+                Regex__P6__7.setText("Không được để trống");
+                isValid = false;
+            } else {
+                try {
+                    double monthlyRent = Double.parseDouble(TxtField__P6__6.getText());
+                    if (monthlyRent < 0) {
+                        Regex__P6__7.setText("Tiền thuê phải lớn hơn hoặc bằng 0");
+                        isValid = false;
+                    } else {
+                        Regex__P6__7.setText("");
+                    }
+                } catch (NumberFormatException e) {
+                    Regex__P6__7.setText("Tiền thuê phải là số hợp lệ");
+                    isValid = false;
+                }
+            }
+
+            // Nếu có bất kỳ lỗi nào, thoát khỏi phương thức
+            if (!isValid) {
+                return;
+            }
+
             LeaseAgreement leaseAgreement = new LeaseAgreement();
             leaseAgreement.setTenantID(combobox_TxtField__P6__2.getSelectionModel().getSelectedItem());
             leaseAgreement.setApartmentID(combobox_TxtField__P6__3.getSelectionModel().getSelectedItem());
