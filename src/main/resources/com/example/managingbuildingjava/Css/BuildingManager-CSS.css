@@ -55,7 +55,7 @@
   -fx-text-fill: #000000; /* Màu chữ đen */
 }
 
-#Regex__P1__1, #Regex__P1__4, #Regex__P3__1, #Regex__P3__2, #Regex__P2__3, #Regex__P2__4, #Regex__P2__5, #Regex__P2__6 {
+#Regex__P1__1, #Regex__P1__4, #Regex__P3__1, #Regex__P3__2, #Regex__P1__3, #Regex__P2__3, #Regex__P2__4, #Regex__P2__5, #Regex__P2__6, #Regex__P2__2__1, #Regex__P2__2__2, #Regex__P2__2__3, #Regex__P2__2__4, #Regex__P2__2__5, #Regex__P2__2__6, #Regex__P2__2__7{
   -fx-text-fill: red;
 }
 

@@ -26,7 +26,7 @@
                         <TextField fx:id="TxtField__P1__4" layoutX="134.0" layoutY="91.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                         <TextField fx:id="TxtField__P1__3" layoutX="133.0" layoutY="32.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
                         <TextField fx:id="TxtField__P1__5" layoutX="133.0" layoutY="148.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                        <ComboBox fx:id="comboBox__P1__3" layoutX="131.0" layoutY="213.0" prefHeight="32.0" prefWidth="90.0" style="-fx-background-radius: 10px;" />
+                        <ComboBox fx:id="comboBox__P1__3" layoutX="131.0" layoutY="213.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-radius: 10px;" />
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="213.0" prefHeight="32.0" prefWidth="120.0" text="Nội thất" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
@@ -47,9 +47,10 @@
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Label>
-                  <Label fx:id="Regex__P1__1" layoutX="133.0" layoutY="186.0" prefHeight="17.0" prefWidth="165.0" />
+                  <Label fx:id="Regex__P1__1" layoutX="133.0" layoutY="180.0" prefHeight="17.0" prefWidth="165.0" />
                   <Label fx:id="Regex__P1__2" layoutX="133.0" layoutY="242.0" prefHeight="17.0" prefWidth="165.0" />
                   <Label fx:id="Regex__P1__4" layoutX="134.0" layoutY="123.0" prefHeight="17.0" prefWidth="165.0" />
+                  <Label fx:id="Regex__P1__3" layoutX="134.0" layoutY="64.0" prefHeight="17.0" prefWidth="165.0" />
                     </children>
                 </Pane>
                 <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="40.0" layoutY="644.0" mnemonicParsing="false" onMouseClicked="#themCanHo" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">

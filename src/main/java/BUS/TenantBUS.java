@@ -108,4 +108,9 @@ public class TenantBUS {
         return tenantDAO.tenantNotInLA();
     }
 
+    public ArrayList<Tenant> getTenantsInLeaseAgreement() {
+        TenantDAO tenantDAO = TenantDAO.getInstance();
+        return tenantDAO.tenantsInLA();
+    }
+
 }

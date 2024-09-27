@@ -130,21 +130,21 @@
                                         </ImageView>
                                         <Pane layoutX="29.0" layoutY="124.0" prefHeight="490.0" prefWidth="354.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                                             <children>
-                                                <TextField fx:id="TxtField__P2_1__4" layoutX="159.0" layoutY="155.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                                                <TextField fx:id="TxtField__P2_1__4" layoutX="159.0" layoutY="163.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
                                                 <TextField fx:id="TxtField__P2_1__3" layoutX="159.0" layoutY="93.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
-                                                <TextField fx:id="TxtField__P2_1__5" layoutX="159.0" layoutY="214.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
-                                                <ComboBox fx:id="comboBox__P2_1__3" layoutX="159.0" layoutY="273.0" prefHeight="32.0" prefWidth="164.0" />
-                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="331.0" prefHeight="32.0" prefWidth="120.0" text="Ngày sinh" textFill="WHITE">
+                                                <TextField fx:id="TxtField__P2_1__5" layoutX="159.0" layoutY="230.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                                                <ComboBox fx:id="comboBox__P2_1__3" layoutX="159.0" layoutY="298.0" prefHeight="32.0" prefWidth="164.0" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="363.0" prefHeight="32.0" prefWidth="120.0" text="Ngày sinh" textFill="WHITE">
                                                     <font>
                                                         <Font name="System Bold" size="13.0" />
                                                     </font>
                                                 </Label>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="214.0" prefHeight="32.0" prefWidth="120.0" text="SĐT" textFill="WHITE">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="230.0" prefHeight="32.0" prefWidth="120.0" text="SĐT" textFill="WHITE">
                                                     <font>
                                                         <Font name="System Bold" size="13.0" />
                                                     </font>
                                                 </Label>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="155.0" prefHeight="32.0" prefWidth="120.0" text="Tên" textFill="WHITE">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="163.0" prefHeight="32.0" prefWidth="120.0" text="Tên" textFill="WHITE">
                                                     <font>
                                                         <Font name="System Bold" size="13.0" />
                                                     </font>
@@ -159,22 +159,27 @@
                                                         <Font name="System Bold" size="13.0" />
                                                     </font>
                                                 </Label>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="273.0" prefHeight="32.0" prefWidth="120.0" text="Giới tính" textFill="WHITE">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="298.0" prefHeight="32.0" prefWidth="120.0" text="Giới tính" textFill="WHITE">
                                                     <font>
                                                         <Font name="System Bold" size="13.0" />
                                                     </font>
                                                 </Label>
-                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="386.0" prefHeight="32.0" prefWidth="120.0" text="CCCD" textFill="WHITE">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="30.0" layoutY="419.0" prefHeight="32.0" prefWidth="120.0" text="CCCD" textFill="WHITE">
                                                     <font>
                                                         <Font name="System Bold" size="13.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="TxtField__P2_1__51" layoutX="159.0" layoutY="386.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
-                                    <DatePicker fx:id="TxtField__P2_1__41" layoutX="160.0" layoutY="335.0" prefHeight="28.0" prefWidth="164.0" />
-                                    <Label fx:id="Regex__P3__1" layoutX="159.0" layoutY="63.0" prefHeight="17.0" prefWidth="165.0" textFill="#f22020" />
-                                    <Label fx:id="Regex__P3__2" layoutX="159.0" layoutY="125.0" prefHeight="17.0" prefWidth="165.0" textFill="#e41e1e" />
-                                    <Label fx:id="Regex__P3__3" layoutX="159.0" layoutY="187.0" prefHeight="17.0" prefWidth="165.0" textFill="#eb2626" />
+                                                <TextField fx:id="TxtField__P2_1__51" layoutX="159.0" layoutY="419.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                                    <DatePicker fx:id="TxtField__P2_1__41" layoutX="161.0" layoutY="365.0" prefHeight="28.0" prefWidth="164.0" />
+                                    <Label fx:id="Regex__P2__2__1" layoutX="159.0" layoutY="63.0" prefHeight="17.0" prefWidth="165.0" textFill="#f22020" />
+                                    <Label fx:id="Regex__P2__2__2" layoutX="160.0" layoutY="125.0" prefWidth="165.0" textFill="#e41e1e" wrapText="true" />
+                                    <Label fx:id="Regex__P2__2__3" layoutX="159.0" layoutY="187.0" prefHeight="17.0" prefWidth="165.0" textFill="#eb2626" />
                                     <ComboBox fx:id="Combobox__P2_1__2" layoutX="160.0" layoutY="31.0" prefHeight="32.0" prefWidth="163.0" />
+                                    <Label fx:id="Regex__P2__2__3" layoutX="159.0" layoutY="195.0" prefWidth="165.0" wrapText="true" />
+                                    <Label fx:id="Regex__P2__2__4" layoutX="159.0" layoutY="262.0" prefHeight="17.0" prefWidth="165.0" />
+                                    <Label fx:id="Regex__P2__2__5" layoutX="161.0" layoutY="330.0" prefHeight="17.0" prefWidth="164.0" />
+                                    <Label fx:id="Regex__P2__2__6" layoutX="159.0" layoutY="393.0" prefHeight="17.0" prefWidth="164.0" />
+                                    <Label fx:id="Regex__P2__2__7" layoutX="159.0" layoutY="451.0" prefHeight="17.0" prefWidth="165.0" />
                                             </children>
                                         </Pane>
                                         <Button fx:id="bnt__P2_1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="638.0" mnemonicParsing="false" onAction="#themCuDan" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
