@@ -655,12 +655,12 @@ public class BuildingManagerController implements Initializable {
                 }
             }
 
-            if (comboBox__P1__3.getValue()==null) {
-                Regex__P1__2.setText("Không được để trống");
-                isValid = false;
-            } else {
-                Regex__P1__2.setText("");
-            }
+//            if (comboBox__P1__3.getValue()==null) {
+//                Regex__P1__2.setText("Không được để trống");
+//                isValid = false;
+//            } else {
+//                Regex__P1__2.setText("");
+//            }
 
             // If validation failed, return early
             if (!isValid) {
@@ -1652,6 +1652,7 @@ public class BuildingManagerController implements Initializable {
             boolean isValid = true;
             MonthlyRentBill monthlyRentBill = new MonthlyRentBill();
             String apartmentID = Combobox__P3__4.getSelectionModel().getSelectedItem();
+
             if (apartmentID == null) {
                 Regex__P3__1.setText("Chọn mã căn hộ");
                 isValid = false;
@@ -1677,42 +1678,47 @@ public class BuildingManagerController implements Initializable {
                 }
             }
 
-
-
             if (!isValid) {
                 return;
             }
 
+            boolean checkExist = MonthlyRentBillBUS.getInstance().checkExist(apartmentID);
+            System.out.println(checkExist);
+            if (!checkExist) {
+                LeaseAgreementBUS checkApartmentID = new LeaseAgreementBUS();
+                List<LeaseAgreement> leaseAgreementList = checkApartmentID.getAll();
+                for (LeaseAgreement list: leaseAgreementList) {
+                    if (list.getApartmentID().equals(apartmentID)){
+                        monthlyRentBill.setApartmentID(apartmentID);
+                        monthlyRentBill.setTenantID(list.getTenantID());
+                        monthlyRentBill.setDate(LocalDate.now());
+                        monthlyRentBill.setRepaymentPeriod(Integer.parseInt(TxtField__P3__5.getText()));
 
-            LeaseAgreementBUS checkApartmentID = new LeaseAgreementBUS();
-            List<LeaseAgreement> leaseAgreementList = checkApartmentID.getAll();
-            for (LeaseAgreement list: leaseAgreementList) {
-                if (list.getApartmentID().equals(apartmentID)){
-                    monthlyRentBill.setApartmentID(apartmentID);
-                    monthlyRentBill.setTenantID(list.getTenantID());
-                    monthlyRentBill.setDate(LocalDate.now());
 
+                        Double totalPayment = list.getMonthlyRent();
+                        monthlyRentBill.setTotalPayment(totalPayment);
+                        monthlyRentBill.setStatus("Chưa thanh toán");
 
+                        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+                        monthlyRentBillBUS.add(monthlyRentBill);
 
-                    Double totalPayment = list.getMonthlyRent();
-                    monthlyRentBill.setTotalPayment(totalPayment);
-                    monthlyRentBill.setStatus("Chưa thanh toán");
+                        monthlyRentBillObservableList.add(monthlyRentBill);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Thông báo");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Đã tạo phiếu thu với mã phiếu: " + monthlyRentBill.getMonthlyRentBillID());
+                        alert.showAndWait();
+                        table__P3__1.setItems(monthlyRentBillObservableList);
+                        refreshFormMonthlyRentBill();
 
-                    MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-                    monthlyRentBillBUS.add(monthlyRentBill);
-
-                    monthlyRentBillObservableList.add(monthlyRentBill);
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Thông báo");
-                    alert.setHeaderText(null);
-                    alert.setContentText("Đã tạo phiếu thu với mã phiếu: " + monthlyRentBill.getMonthlyRentBillID());
-                    alert.showAndWait();
-                    table__P3__1.setItems(monthlyRentBillObservableList);
-                    refreshFormMonthlyRentBill();
-
-                    break;
+                        break;
+                    }
                 }
+            } else {
+                showAlert("Thông báo", "Đã có phiếu thu tháng này", AlertType.ERROR);
             }
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -2143,77 +2149,86 @@ public class BuildingManagerController implements Initializable {
     }
 
     public void handleAddServiceTicket() {
-
-        String maDichVu = maPhieuThuCombobox.getSelectionModel().getSelectedItem();
-        String maPhieuThu = maDichVuCombobox.getSelectionModel().getSelectedItem();
-        Double soLuong = Double.parseDouble(soLuongField.getText());
-        Double thanhTien = 0.0;
-        List<Service> serviceList = ServiceBUS.getInstance().getAll();
-        for (Service service : serviceList) {
-            if (service.getServiceID().equals(maPhieuThu)) {
-                thanhTien = service.getPricePerUnit()*soLuong;
-            }
-        }
         LocalDate ngayGhi = ngayGhiPicker.getValue();
-        String ghiChu = ghiChuArea.getText();
-
-        if (maPhieuThu.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
-            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
-            return;
-        }
-
-        ServiceTicket service = new ServiceTicket();
-        service.setMonthlyRentBillID(maDichVu);
-        service.setServiceID(maPhieuThu);
-        service.setQuantity(soLuong);
-        service.setTotalAmount(thanhTien);
-        service.setDate(ngayGhi);
-        service.setNote(ghiChu);
-
-        ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
-        boolean addResult = serviceTicketBUS.add(service);
-
-        if (addResult) {
-            showAlert("Thành Công", "Thêm Phiếu Dịch Vụ Thành Công: "+ service.getServiceTicketID(), AlertType.CONFIRMATION);
-            initServiceTicket();
-            maDichVuField.setText("");
-            soLuongField.setText("");
-            ngayGhiPicker.setValue(null);
-            ghiChuArea.setText("");
-            maPhieuThuCombobox.setValue(null);
-            maDichVuCombobox.setValue(null);
-        } else {
-            showAlert("Thất Bại", "Không Thể Thêm Phiếu Dịch Vụ", AlertType.ERROR);
-        }
-
-        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-        List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
-
-
-        for (int i = 0; i < monthlyRentBillList.size(); i++) {
-            MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
-            LocalDate sameDayNextMonth = monthlyRentBill.getDate().plusMonths(1);
-            if (monthlyRentBill.getMonthlyRentBillID().equals(service.getMonthlyRentBillID()) &&
-                    (service.getDate().isBefore(sameDayNextMonth) || service.getDate().isEqual(sameDayNextMonth)) &&
-                    (service.getDate().isAfter(monthlyRentBill.getDate()) || service.getDate().isEqual(monthlyRentBill.getDate()))) {
-
-                monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + service.getTotalAmount());
-
-
-                // Cập nhật dữ liệu trong ObservableList
-                MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
-                boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
-                if (updateSuccess) {
-                    monthlyRentBillObservableList.set(i, monthlyRentBill);
-                    table__P3__1.refresh();
-                } else {
-                    System.err.println("Không thể cập nhật phiếu thu trong cơ sở dữ liệu.");
+        if (ngayGhi.plusMonths(1).isAfter(LocalDate.now())) {
+            String maDichVu = maPhieuThuCombobox.getSelectionModel().getSelectedItem();
+            String maPhieuThu = maDichVuCombobox.getSelectionModel().getSelectedItem();
+            boolean exist = ServiceTicketBUS.getInstance().checkServiceTicketInList(maDichVu, maPhieuThu);
+            System.out.println(exist);
+            if (exist==false) {
+                Double soLuong = Double.parseDouble(soLuongField.getText());
+                Double thanhTien = 0.0;
+                List<Service> serviceList = ServiceBUS.getInstance().getAll();
+                for (Service service : serviceList) {
+                    if (service.getServiceID().equals(maPhieuThu)) {
+                        thanhTien = service.getPricePerUnit()*soLuong;
+                    }
                 }
-                break;
+
+                String ghiChu = ghiChuArea.getText();
+
+                if (maPhieuThu.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
+                    showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
+                    return;
+                }
+
+                ServiceTicket service = new ServiceTicket();
+                service.setMonthlyRentBillID(maDichVu);
+                service.setServiceID(maPhieuThu);
+                service.setQuantity(soLuong);
+                service.setTotalAmount(thanhTien);
+                service.setDate(ngayGhi);
+                service.setNote(ghiChu);
+
+                ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+                boolean addResult = serviceTicketBUS.add(service);
+
+                if (addResult) {
+                    showAlert("Thành Công", "Thêm Phiếu Dịch Vụ Thành Công: "+ service.getServiceTicketID(), AlertType.CONFIRMATION);
+                    initServiceTicket();
+                    maDichVuField.setText("");
+                    soLuongField.setText("");
+                    ngayGhiPicker.setValue(null);
+                    ghiChuArea.setText("");
+                    maPhieuThuCombobox.setValue(null);
+                    maDichVuCombobox.setValue(null);
+                } else {
+                    showAlert("Thất Bại", "Không Thể Thêm Phiếu Dịch Vụ", AlertType.ERROR);
+                }
+
+                MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+                List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
+
+
+                for (int i = 0; i < monthlyRentBillList.size(); i++) {
+                    MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
+                    LocalDate sameDayNextMonth = monthlyRentBill.getDate().plusMonths(1);
+                    if (monthlyRentBill.getMonthlyRentBillID().equals(service.getMonthlyRentBillID()) &&
+                            (service.getDate().isBefore(sameDayNextMonth) || service.getDate().isEqual(sameDayNextMonth)) &&
+                            (service.getDate().isAfter(monthlyRentBill.getDate()) || service.getDate().isEqual(monthlyRentBill.getDate()))) {
+
+                        monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + service.getTotalAmount());
+
+
+                        // Cập nhật dữ liệu trong ObservableList
+                        MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
+                        boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
+                        if (updateSuccess) {
+                            monthlyRentBillObservableList.set(i, monthlyRentBill);
+                            table__P3__1.refresh();
+                        } else {
+                            System.err.println("Không thể cập nhật phiếu thu trong cơ sở dữ liệu.");
+                        }
+                        break;
+                    }
+                }
+            } else {
+                showAlert("Thông báo", "Khách hàng đã đăng ký dịch vụ này trong tháng", AlertType.ERROR);
             }
+
+        } else {
+            showAlert("Thông báo", "Phiếu dịch vụ đã hết hạn", AlertType.ERROR);
         }
-
-
     }
 
     public void handleDeleteServiceTicket() {

@@ -260,7 +260,6 @@ public class MonthlyRentBillDAO implements DAOInterface<MonthlyRentBill> {
         }
         return rentBills;
     }
-
  
 
 }

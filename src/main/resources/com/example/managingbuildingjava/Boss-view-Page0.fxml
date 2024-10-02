@@ -21,7 +21,7 @@
                   <Image url="@../../../Picture/shutterstock_1692834160-copy-scaled.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="20.0" layoutY="670.0" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="120.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
+            <Button layoutX="20.0" layoutY="670.0" mnemonicParsing="false" onMouseClicked="#logOut" prefHeight="25.0" prefWidth="120.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);" styleClass="logOutBtn" text="Log out" textFill="WHITE" />
             <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="-4.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#page3" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Báo cáo tháng" textAlignment="CENTER" textFill="#4a4a4a">
                <graphic>
                   <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
@@ -58,20 +58,20 @@
                   </ImageView>
                </graphic>
             </Button>
-<!--            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#page1" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Thống kê" textAlignment="CENTER" textFill="#4a4a4a">-->
-<!--               <graphic>-->
-<!--                  <ImageView fitHeight="30" fitWidth="40" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                     <image>-->
-<!--                        <Image url="@../../../Picture/statistical.png" />-->
-<!--                     </image>-->
-<!--                  </ImageView>-->
-<!--               </graphic>-->
-<!--            </Button>-->
+            <!--            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#page1" prefHeight="60.0" prefWidth="160.0" style="-fx-background-color: rgb(255, 0, 0, 0);" text="Thống kê" textAlignment="CENTER" textFill="#4a4a4a">-->
+            <!--               <graphic>-->
+            <!--                  <ImageView fitHeight="30" fitWidth="40" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">-->
+            <!--                     <image>-->
+            <!--                        <Image url="@../../../Picture/statistical.png" />-->
+            <!--                     </image>-->
+            <!--                  </ImageView>-->
+            <!--               </graphic>-->
+            <!--            </Button>-->
          </children>
       </Pane>
    </left>
    <center>
-      <Pane fx:id="mp" onMouseClicked="#loadHour" prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240);" BorderPane.alignment="CENTER">
+      <Pane fx:id="mp" prefHeight="720.0" prefWidth="864.0" style="-fx-background-color: rgb(240,240,240);" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="28.0" prefHeight="30.0" prefWidth="1012.0" style="-fx-background-color: rgb(145,205,175);" text="Start Sky" textFill="WHITE">
                <font>
@@ -89,12 +89,12 @@
                <children>
                   <Label alignment="CENTER" layoutX="189.0" layoutY="2.0" prefHeight="35.0" prefWidth="284.0" text="Phí vận hành tháng (triệu)" textAlignment="CENTER" textFill="WHITE" />
                   <BarChart fx:id="barChartOfMonthlyOpex" layoutX="14.0" layoutY="37.0" prefHeight="281.0" prefWidth="592.0">
-                    <xAxis>
-                      <CategoryAxis label="Tháng" prefHeight="37.0" prefWidth="344.0" side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis label="Triệu" prefHeight="214.0" prefWidth="120.0" side="LEFT" />
-                    </yAxis>
+                     <xAxis>
+                        <CategoryAxis label="Tháng" prefHeight="37.0" prefWidth="344.0" side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis label="Triệu" prefHeight="214.0" prefWidth="120.0" side="LEFT" />
+                     </yAxis>
                   </BarChart>
                </children></Pane>
             <Pane layoutX="303.0" layoutY="433.0" opacity="0.8" prefHeight="269.0" prefWidth="235.0" style="-fx-background-color: rgb(255, 255, 255); -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">

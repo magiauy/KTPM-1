@@ -549,6 +549,7 @@ public class CustomerController implements Initializable {
                 if (noteInternets.getText() != null){
                     note = noteInternets.getText();
                 }
+                System.out.println(internetRegis);
                 regisServ("SERV4",note, currentDate);
                 updateTableNewRegisServ();
 
@@ -568,55 +569,64 @@ public class CustomerController implements Initializable {
 
 
     }
+
     public void regisServ(String servID, String note, LocalDate currentDate) {
         String servTID = "SERVT" + (ServiceTicketDAO.getInstance().countRows() + 1);
 
         String mrBillID = ServiceTicketDAO.getInstance()
                 .getCurrentMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID()).getFirst();
-
-        Double price = 0.0;
-        for (Service service : ServiceBUS.getInstance().getAll()) {
-            if (service.getServiceID().equals(servID)) {
-                price = service.getPricePerUnit();
-            }
-        }
-
         ServiceTicket serviceTicket = new ServiceTicket();
-        serviceTicket.setServiceTicketID(servTID);
         serviceTicket.setServiceID(servID);
-        serviceTicket.setNote(note);
-        serviceTicket.setDate(currentDate);
-        serviceTicket.setMonthlyRentBillID(mrBillID);
-        serviceTicket.setQuantity(1.0);
-        serviceTicket.setTotalAmount(price);
-
-        if (ServiceTicketBUS.getInstance().add(serviceTicket)) {
-            CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công. Quí khách vui lòng đăng nhập lại để xem tổng tiền hóa đơn tháng hiện tại",
-                    Alert.AlertType.CONFIRMATION);
-        } else {
-            CustomerController.getInstance().showAlert("Lỗi", "Vui lòng thử lại", Alert.AlertType.ERROR);
-        }
-
-        MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
-        List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
-
-
-        for (int i = 0; i < monthlyRentBillList.size(); i++) {
-            MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
-            LocalDate sameDayNextMonth = monthlyRentBill.getDate().plusMonths(1);
-            if (monthlyRentBill.getMonthlyRentBillID().equals(serviceTicket.getMonthlyRentBillID()) &&
-                    (serviceTicket.getDate().isBefore(sameDayNextMonth) || serviceTicket.getDate().isEqual(sameDayNextMonth)) &&
-                    (serviceTicket.getDate().isAfter(monthlyRentBill.getDate()) || serviceTicket.getDate().isEqual(monthlyRentBill.getDate()))) {
-
-                monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + serviceTicket.getTotalAmount());
-
-
-                // Cập nhật dữ liệu trong ObservableList
-                MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
-                boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
-                break;
+        boolean exists = ServiceTicketBUS.getInstance().checkServiceTicketInList(mrBillID, servID);
+        System.out.println(exists);
+        if (exists==false) {
+            Double price = 0.0;
+            for (Service service : ServiceBUS.getInstance().getAll()) {
+                if (service.getServiceID().equals(servID)) {
+                    price = service.getPricePerUnit();
+                }
             }
+
+            serviceTicket.setServiceTicketID(servTID);
+
+            serviceTicket.setNote(note);
+            serviceTicket.setDate(currentDate);
+            serviceTicket.setMonthlyRentBillID(mrBillID);
+            serviceTicket.setQuantity(1.0);
+            serviceTicket.setTotalAmount(price);
+
+            if (ServiceTicketBUS.getInstance().add(serviceTicket)) {
+                CustomerController.getInstance().showAlert("Thành công", "Đã đăng ký thành công. Quí khách vui lòng đăng nhập lại để xem tổng tiền hóa đơn tháng hiện tại",
+                        Alert.AlertType.CONFIRMATION);
+            } else {
+                CustomerController.getInstance().showAlert("Lỗi", "Vui lòng thử lại", Alert.AlertType.ERROR);
+            }
+
+            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+            List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
+
+
+            for (int i = 0; i < monthlyRentBillList.size(); i++) {
+                MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
+                LocalDate sameDayNextMonth = monthlyRentBill.getDate().plusMonths(1);
+                if (monthlyRentBill.getMonthlyRentBillID().equals(serviceTicket.getMonthlyRentBillID()) &&
+                        (serviceTicket.getDate().isBefore(sameDayNextMonth) || serviceTicket.getDate().isEqual(sameDayNextMonth)) &&
+                        (serviceTicket.getDate().isAfter(monthlyRentBill.getDate()) || serviceTicket.getDate().isEqual(monthlyRentBill.getDate()))) {
+
+                    monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + serviceTicket.getTotalAmount());
+
+
+                    // Cập nhật dữ liệu trong ObservableList
+                    MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
+                    boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
+                    break;
+                }
+            }
+
+        } else {
+            showAlert("Thông báo", "Bạn đã đăng ký dịch vụ này trong tháng này.", Alert.AlertType.ERROR);
         }
+
     }
 
     void setTableCohabitant(){
@@ -718,7 +728,7 @@ public class CustomerController implements Initializable {
         try{
 
             ObservableList<MonthlyRentBill> monthlyRentBills = FXCollections.observableArrayList(MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(ID));
-
+            System.out.println(monthlyRentBills);
             double totalPayment = 0;
             String status = "";
             Month currentDate = LocalDate.now().getMonth();
@@ -758,7 +768,8 @@ public class CustomerController implements Initializable {
         table__P3__1.setItems(data);
     }
 
-    public void logOut(ActionEvent actionEvent) throws IOException {
+    @FXML
+    void logOut(MouseEvent event) throws IOException{
         Stage primaryStage = Customer.getPrimaryStage();
         if (primaryStage == null){
             primaryStage = main.getInstance().getPrimaryStage();
@@ -774,6 +785,7 @@ public class CustomerController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

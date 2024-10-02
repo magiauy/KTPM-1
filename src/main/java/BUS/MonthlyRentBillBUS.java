@@ -45,6 +45,18 @@ public class MonthlyRentBillBUS {
         return monthlyRentBillDAO.selectAll();
     }
 
+    public boolean checkExist(String id) {
+        ArrayList<MonthlyRentBill> monthlyRentBills = MonthlyRentBillDAO.getInstance().selectAll();
+        for (MonthlyRentBill monthlyRentBill : monthlyRentBills) {
+            if (monthlyRentBill.getApartmentID().equals(id)) {
+                if (monthlyRentBill.getDate().plusMonths(1).isAfter(LocalDate.now())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean add(MonthlyRentBill monthlyRentBill) {
         boolean check = MonthlyRentBillDAO.getInstance().insert(monthlyRentBill) != 0;
         if (check) {
@@ -114,6 +126,16 @@ public class MonthlyRentBillBUS {
         ArrayList<MonthlyRentBill> monthlyRentBillArrayList = MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(CustomerController.getInstance().getID());
         for (MonthlyRentBill monthlyRentBill : monthlyRentBillArrayList){
             if (Objects.equals(monthlyRentBill.getMonthlyRentBillID(), id)) {
+                return monthlyRentBill;
+            }
+        }
+        return null;
+    }
+
+    public MonthlyRentBill getMonthlyRentBillWithMRB_BuildingManager(String monthlyRentBillID){
+        ArrayList<MonthlyRentBill> monthlyRentBillArrayList = MonthlyRentBillBUS.getInstance().getAll();
+        for (MonthlyRentBill monthlyRentBill : monthlyRentBillArrayList){
+            if (Objects.equals(monthlyRentBill.getMonthlyRentBillID(), monthlyRentBillID)) {
                 return monthlyRentBill;
             }
         }

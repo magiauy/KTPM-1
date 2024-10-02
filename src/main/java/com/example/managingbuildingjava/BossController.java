@@ -19,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -109,13 +110,6 @@ public class BossController implements Initializable {
     @FXML
     private void page4(MouseEvent event) throws IOException {
         loadPage("Boss-view-Page4");
-    }
-    @FXML
-    void loadHour(MouseEvent event) {
-        TimeNow();
-        drawLineChartOfMonthlyOpex();
-        updateNumberOfStatus();
-        updateMonthlyRevenueLabel();
     }
 
     @FXML
@@ -543,6 +537,10 @@ public class BossController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        TimeNow();
+        drawLineChartOfMonthlyOpex();
+        updateNumberOfStatus();
+        updateMonthlyRevenueLabel();
         buildingsList = FXCollections.observableArrayList();
         buildingManagersList = FXCollections.observableArrayList();
         financialReportsList = FXCollections.observableArrayList();
@@ -1309,15 +1307,15 @@ private boolean containsNumber(String s) {
             }
         });
     }
-    
+
     private boolean isValidNumber(String input) {
 
         for (char c : input.toCharArray()) {
             if (!Character.isDigit(c) && c != '.' && c != '-') {
-                return false; 
+                return false;
             }
         }
-        return true; 
+        return true;
     }
 
     public void handEditReport() {
@@ -1403,7 +1401,9 @@ private boolean containsNumber(String s) {
         table__view3.setItems(observableList);
     }
 
-    public void logOut(ActionEvent actionEvent) throws IOException {
+
+    @FXML
+    void logOut(MouseEvent event) {
         Stage primaryStage = Boss.getBossStage();
         if (primaryStage == null){
             primaryStage = main.getInstance().getPrimaryStage();
