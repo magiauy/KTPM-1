@@ -32,6 +32,10 @@ public class ServiceBUS {
         return serviceDAO.selectAll();
     }
 
+    public Service getService(String id) {
+        return ServiceDAO.getInstance().selectById(id);
+    }
+
     public boolean add(Service service) {
         boolean check = ServiceDAO.getInstance().insert(service) != 0;
         if (check) {

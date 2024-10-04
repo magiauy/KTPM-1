@@ -56,7 +56,9 @@
 }
 
 #Regex__P1__1, #Regex__P1__4, #Regex__P3__1, #Regex__P3__2, #Regex__P1__3, #Regex__P2__3, #Regex__P2__4, #Regex__P2__5, #Regex__P2__6, #Regex__P2__2__1, #Regex__P2__2__2, #Regex__P2__2__3, #Regex__P2__2__4, #Regex__P2__2__5, #Regex__P2__2__6, #Regex__P2__2__7
-, #Regex__P6__1, #Regex__P6__2, #Regex__P6__3, #Regex__P6__4, #Regex__P6__5, #Regex__P6__6, #Regex__P6__7{
+, #Regex__P6__1, #Regex__P6__2, #Regex__P6__3, #Regex__P6__4, #Regex__P6__5, #Regex__P6__6, #Regex__P6__7, #Regex__P4__1__4, #Regex__P4__1__3, #Regex__P4__1__2, #Regex__P4__1__1,
+#Regex__P4__2__4, #Regex__P4__2__3, #Regex__P4__2__2, #Regex__P4__2__1, #Regex__P4__3__1, #Regex__P4__3__2, #Regex__P4__3__3, #Regex__P4__3__4,
+#Regex__P4__4__1, #Regex__P4__4__2, #Regex__P5__1, #Regex__P5__2, #Regex__P5__3, #Regex__P5__4{
   -fx-text-fill: red;
 }
 

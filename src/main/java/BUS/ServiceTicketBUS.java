@@ -218,12 +218,10 @@ public class ServiceTicketBUS {
     public boolean checkServiceTicketInList(String idMonthlyRentBill, String idServiceTicket) {
         // Lấy danh sách ServiceTicket với id từ phương thức getidSerVice
         ArrayList<ServiceTicket> rentBills = ServiceTicketDAO.getInstance().getidSerVice(idMonthlyRentBill);
-        System.out.println(rentBills);
 
 
         // Lấy thông tin MonthlyRentBill theo idMonthlyRentBill
         MonthlyRentBill monthlyRentBill = MonthlyRentBillBUS.getInstance().getMonthlyRentBillWithMRB_BuildingManager(idMonthlyRentBill);
-        System.out.println(monthlyRentBill);
 
 
         // Duyệt qua danh sách và kiểm tra điều kiện

@@ -44,6 +44,8 @@ import java.util.*;
 import java.sql.*;
 import java.util.Date;
 
+import static java.time.LocalTime.now;
+
 public class BuildingManagerController implements Initializable {
     private static BuildingManagerController instance;
     public ImageView exportPDF;
@@ -486,19 +488,51 @@ public class BuildingManagerController implements Initializable {
         table__P1__1.setItems(apartmentObservableList);
     }
 
+    private Apartment lastSelectedApartment = null;
+
     @FXML
     void showApartment(MouseEvent event) {
         Apartment selectedApartment = table__P1__1.getSelectionModel().getSelectedItem();
-        TxtField__P1__1.setText(selectedApartment.getApartmentID());
-        TxtField__P1__3.setText(String.valueOf(selectedApartment.getArea()));
-        TxtField__P1__4.setText(String.valueOf(selectedApartment.getBedrooms()));
-        TxtField__P1__5.setText(String.valueOf(selectedApartment.getBathrooms()));
-        comboBox__P1__3.setValue(selectedApartment.getFurniture());
-        Regex__P1__1.setText("");
-        Regex__P1__2.setText("");
-        Regex__P1__3.setText("");
-        Regex__P1__4.setText("");
 
+        // Nếu hàng được chọn không null
+        if (selectedApartment != null) {
+            // Nếu hàng được chọn giống với hàng trước đó, xóa các trường nhập liệu
+            if (selectedApartment.equals(lastSelectedApartment)) {
+                TxtField__P1__3.clear();
+                TxtField__P1__4.clear();
+                TxtField__P1__5.clear();
+                comboBox__P1__3.setValue(null);
+
+                // Xóa các thông báo lỗi
+                Regex__P1__1.setText("");
+                Regex__P1__2.setText("");
+                Regex__P1__3.setText("");
+                Regex__P1__4.setText("");
+                bnt__P1__add.setDisable(false);
+
+                // Bỏ chọn hàng trong bảng
+                table__P1__1.getSelectionModel().clearSelection();
+
+                // Reset biến lưu hàng được chọn
+                lastSelectedApartment = null;
+            } else {
+                // Nếu khác hàng trước đó, hiển thị thông tin căn hộ
+                TxtField__P1__3.setText(String.valueOf(selectedApartment.getArea()));
+                TxtField__P1__4.setText(String.valueOf(selectedApartment.getBedrooms()));
+                TxtField__P1__5.setText(String.valueOf(selectedApartment.getBathrooms()));
+                comboBox__P1__3.setValue(selectedApartment.getFurniture());
+
+                // Xóa các thông báo lỗi
+                Regex__P1__1.setText("");
+                Regex__P1__2.setText("");
+                Regex__P1__3.setText("");
+                Regex__P1__4.setText("");
+
+                // Cập nhật lại căn hộ vừa được chọn
+                lastSelectedApartment = selectedApartment;
+                bnt__P1__add.setDisable(true);
+            }
+        }
     }
 
     @FXML
@@ -586,6 +620,7 @@ public class BuildingManagerController implements Initializable {
                 apartmentObservableList.set(selectedIndex, selectedApartment);
                 table__P1__1.refresh();
                 refreshFormApartment();
+                showAlert("Thông báo", "Sửa thành công!", AlertType.INFORMATION);
             } else {
                 System.err.println("Không thể cập nhật căn hộ trong cơ sở dữ liệu.");
             }
@@ -605,14 +640,15 @@ public class BuildingManagerController implements Initializable {
             } else {
                 try {
                     double area = Double.parseDouble(TxtField__P1__3.getText());
-                    if (area <= 0) {
-                        Regex__P1__3.setText("Phải là số dương");
+                    if (area < 20 || area > 200) {
+                        Regex__P1__3.setText("Diện tích phải nằm trong khoảng 20 đến 200 m²");
                         isValid = false;
                     } else {
                         Regex__P1__3.setText("");
                     }
+
                 } catch (NumberFormatException e) {
-                    Regex__P1__3.setText("Phải là số dương");
+                    Regex__P1__3.setText("Diện tích phải nằm trong khoảng 20 đến 200 m²");
                     isValid = false;
                 }
             }
@@ -624,14 +660,15 @@ public class BuildingManagerController implements Initializable {
             } else {
                 try {
                     int bedrooms = Integer.parseInt(TxtField__P1__4.getText());
-                    if (bedrooms <= 0) {
-                        Regex__P1__4.setText("Phải là số nguyên dương");
+                    if (bedrooms < 1 || bedrooms > 5) {
+                        Regex__P1__4.setText("Số phòng ngủ phải từ 1 đến 5");
                         isValid = false;
                     } else {
                         Regex__P1__4.setText("");
                     }
+
                 } catch (NumberFormatException e) {
-                    Regex__P1__4.setText("Phải là số nguyên dương");
+                    Regex__P1__4.setText("Số phòng ngủ phải từ 1 đến 5");
                     isValid = false;
                 }
             }
@@ -643,26 +680,19 @@ public class BuildingManagerController implements Initializable {
             } else {
                 try {
                     int bathrooms = Integer.parseInt(TxtField__P1__5.getText());
-                    if (bathrooms < 0) {
-                        Regex__P1__1.setText("Phải là số nguyên dương");
+                    if (bathrooms < 1 || bathrooms > 3) {
+                        Regex__P1__1.setText("Số phòng tắm phải từ 1 đến 3");
                         isValid = false;
                     } else {
                         Regex__P1__1.setText("");
                     }
+
                 } catch (NumberFormatException e) {
-                    Regex__P1__1.setText("Phải là số nguyên dương");
+                    Regex__P1__1.setText("Số phòng tắm phải từ 1 đến 3");
                     isValid = false;
                 }
             }
 
-//            if (comboBox__P1__3.getValue()==null) {
-//                Regex__P1__2.setText("Không được để trống");
-//                isValid = false;
-//            } else {
-//                Regex__P1__2.setText("");
-//            }
-
-            // If validation failed, return early
             if (!isValid) {
                 return;
             }
@@ -996,37 +1026,118 @@ public class BuildingManagerController implements Initializable {
         comboBox__P2__3.getSelectionModel().clearSelection();
     }
 
+    private Tenant lastSelectedTenant = null;
+
     @FXML
     void showTenant(MouseEvent event) {
         Tenant selectedTenant = table__P2__1.getSelectionModel().getSelectedItem();
-        TxtField__P2__1.setText(selectedTenant.getTenantID());
-        TxtField__P2__2.setText(selectedTenant.getFirstName());
-        TxtField__P2__3.setText(selectedTenant.getLastName());
-        TxtField__P2__4.setText(selectedTenant.getPhoneNumber());
-        TxtField__P2__5.setValue(selectedTenant.getDateOfBirthDay());
-        comboBox__P2__3.setValue(selectedTenant.getGender());
-        TxtField__P2__51.setText(selectedTenant.getCitizenIdentityCard());
-        Regex__P2__1.setText("");
-        Regex__P2__2.setText("");
+
+        // Nếu tenant được chọn không null
+        if (selectedTenant != null) {
+            // Nếu tenant được chọn giống với tenant trước đó, xóa các trường nhập liệu
+            if (selectedTenant.equals(lastSelectedTenant)) {
+                TxtField__P2__1.clear();
+                TxtField__P2__2.clear();
+                TxtField__P2__3.clear();
+                TxtField__P2__4.clear();
+                TxtField__P2__5.setValue(null);
+                comboBox__P2__3.setValue(null);
+                TxtField__P2__51.clear();
+
+                // Xóa các thông báo lỗi
+                Regex__P2__1.setText("");
+                Regex__P2__2.setText("");
+                Regex__P2__3.setText("");
+                Regex__P2__4.setText("");
+                Regex__P2__5.setText("");
+                Regex__P2__6.setText("");
+
+                // Reset biến lưu tenant được chọn
+                lastSelectedTenant = null;
+                table__P2__1.getSelectionModel().clearSelection();
+                bnt__P2__add.setDisable(false);
+            } else {
+                // Nếu khác tenant trước đó, hiển thị thông tin tenant
+                TxtField__P2__1.setText(selectedTenant.getTenantID());
+                TxtField__P2__2.setText(selectedTenant.getFirstName());
+                TxtField__P2__3.setText(selectedTenant.getLastName());
+                TxtField__P2__4.setText(selectedTenant.getPhoneNumber());
+                TxtField__P2__5.setValue(selectedTenant.getDateOfBirthDay());
+                comboBox__P2__3.setValue(selectedTenant.getGender());
+                TxtField__P2__51.setText(selectedTenant.getCitizenIdentityCard());
+
+                // Xóa các thông báo lỗi
+                Regex__P2__1.setText("");
+                Regex__P2__2.setText("");
+                Regex__P2__3.setText("");
+                Regex__P2__4.setText("");
+                Regex__P2__5.setText("");
+                Regex__P2__6.setText("");
+
+                // Cập nhật lại tenant vừa được chọn
+                lastSelectedTenant = selectedTenant;
+
+                bnt__P2__add.setDisable(true);
+            }
+        }
     }
+
+    private Cohabitant lastSelectedCohabitant = null;
 
     @FXML
     void showCohabitant(MouseEvent event) {
         Cohabitant selectedCohabitant = table__P2_1__1.getSelectionModel().getSelectedItem();
-        Combobox__P2_1__2.setValue(selectedCohabitant.getTenantID());
-        TxtField__P2_1__3.setText(selectedCohabitant.getFirstName());
-        TxtField__P2_1__4.setText(selectedCohabitant.getLastName());
-        TxtField__P2_1__5.setText(selectedCohabitant.getPhoneNumber());
-        comboBox__P2_1__3.setValue(selectedCohabitant.getGender());
-        TxtField__P2_1__41.setValue(selectedCohabitant.getDateOfBirthDay());
-        TxtField__P2_1__51.setText(selectedCohabitant.getCitizenIdentityCard());
-        Regex__P2__2__1.setText("");
-        Regex__P2__2__2.setText("");
-        Regex__P2__2__3.setText("");
-        Regex__P2__2__4.setText("");
-        Regex__P2__2__5.setText("");
-        Regex__P2__2__6.setText("");
-        Regex__P2__2__7.setText("");
+
+        // Nếu cohabitant được chọn không null
+        if (selectedCohabitant != null) {
+            // Nếu cohabitant được chọn giống với cohabitant trước đó, xóa các trường nhập liệu
+            if (selectedCohabitant.equals(lastSelectedCohabitant)) {
+                Combobox__P2_1__2.setValue(null);
+                TxtField__P2_1__3.clear();
+                TxtField__P2_1__4.clear();
+                TxtField__P2_1__5.clear();
+                comboBox__P2_1__3.setValue(null);
+                TxtField__P2_1__41.setValue(null);
+                TxtField__P2_1__51.clear();
+
+                // Xóa các thông báo lỗi
+                Regex__P2__2__1.setText("");
+                Regex__P2__2__2.setText("");
+                Regex__P2__2__3.setText("");
+                Regex__P2__2__4.setText("");
+                Regex__P2__2__5.setText("");
+                Regex__P2__2__6.setText("");
+                Regex__P2__2__7.setText("");
+
+                // Reset biến lưu cohabitant được chọn và bỏ chọn dòng trong bảng
+                lastSelectedCohabitant = null;
+                table__P2_1__1.getSelectionModel().clearSelection();  // Bỏ chọn dòng trong bảng
+                bnt__P2_1__add.setDisable(false);
+
+            } else {
+                // Nếu khác cohabitant trước đó, hiển thị thông tin cohabitant
+                Combobox__P2_1__2.setValue(selectedCohabitant.getTenantID());
+                TxtField__P2_1__3.setText(selectedCohabitant.getFirstName());
+                TxtField__P2_1__4.setText(selectedCohabitant.getLastName());
+                TxtField__P2_1__5.setText(selectedCohabitant.getPhoneNumber());
+                comboBox__P2_1__3.setValue(selectedCohabitant.getGender());
+                TxtField__P2_1__41.setValue(selectedCohabitant.getDateOfBirthDay());
+                TxtField__P2_1__51.setText(selectedCohabitant.getCitizenIdentityCard());
+
+                // Xóa các thông báo lỗi
+                Regex__P2__2__1.setText("");
+                Regex__P2__2__2.setText("");
+                Regex__P2__2__3.setText("");
+                Regex__P2__2__4.setText("");
+                Regex__P2__2__5.setText("");
+                Regex__P2__2__6.setText("");
+                Regex__P2__2__7.setText("");
+
+                // Cập nhật lại cohabitant vừa được chọn
+                lastSelectedCohabitant = selectedCohabitant;
+                bnt__P2_1__add.setDisable(true);
+            }
+        }
     }
 
     @FXML
@@ -1082,7 +1193,7 @@ public class BuildingManagerController implements Initializable {
             }
 
             // Kiểm tra ngày sinh
-            if (TxtField__P2_1__41.getValue() != null) {
+            if (TxtField__P2_1__41.getValue() != null&&TxtField__P2_1__41.getValue().isBefore(LocalDate.now())) {
                 selectedCohabitant.setDateOfBirthDay(TxtField__P2_1__41.getValue());
             }
 
@@ -1125,8 +1236,6 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     void suaKhachHang(ActionEvent event) {
-
-
         Tenant selectedTenant = table__P2__1.getSelectionModel().getSelectedItem();
         if (selectedTenant!=null) {
             boolean isValid = true;
@@ -1170,8 +1279,15 @@ public class BuildingManagerController implements Initializable {
             }
 
             if (TxtField__P2__5.getValue() != null) {
-                selectedTenant.setDateOfBirthDay(TxtField__P2__5.getValue());  // Cập nhật ngày sinh nếu hợp lệ
+                if (TxtField__P2__5.getValue().isAfter(LocalDate.now())) {
+                    Regex__P2__4.setText("Ngày sinh phải nhỏ hơn ngày hiện tại");
+                    isValid = false;
+                } else {
+                    Regex__P2__4.setText("");
+                    selectedTenant.setDateOfBirthDay(TxtField__P2__5.getValue());  // Cập nhật ngày sinh nếu hợp lệ
+                }
             }
+
 
             if (comboBox__P2__3.getValue() != null) {
                 selectedTenant.setGender(comboBox__P2__3.getSelectionModel().getSelectedItem());  // Cập nhật giới tính nếu hợp lệ
@@ -1200,12 +1316,13 @@ public class BuildingManagerController implements Initializable {
                 tenantObservableList.set(selectedIndex, selectedTenant);
                 table__P2__1.refresh();
                 refreshFormTenant();
+                showAlert("Thông báo", "Sửa thành công", AlertType.INFORMATION);
             } else {
                 System.err.println("Không thể cập nhật khách hàng trong cơ sở dữ liệu.");
             }
+        } else {
+            showAlert("Thông báo", "Không có khách hàng nào được chọn", AlertType.ERROR);
         }
-
-
     }
 
     @FXML
@@ -1266,6 +1383,8 @@ public class BuildingManagerController implements Initializable {
             if (TxtField__P2_1__41.getValue()==null) {
                 Regex__P2__2__6.setText("Không được để trống");
                 isValid = false;
+            } else if(TxtField__P2_1__41.getValue().isAfter(LocalDate.now())){
+                Regex__P2__2__6.setText("Chọn ngày sinh hợp lệ");
             } else {
                 Regex__P2__2__6.setText("");
             }
@@ -1377,7 +1496,10 @@ public class BuildingManagerController implements Initializable {
             if (TxtField__P2__5.getValue()==null) {
                 Regex__P2__4.setText("Không được để trống");
                 isValid = false;
-            } else {
+            } else  if (TxtField__P2__5.getValue().isAfter(LocalDate.now())){
+                Regex__P2__4.setText("Chọn ngày sinh hợp lệ");
+
+            }else {
                 Regex__P2__4.setText("");
             }
 
@@ -1444,6 +1566,7 @@ public class BuildingManagerController implements Initializable {
             if (deleteSuccess) {
                 cohabitantObservableList.remove(selectedCohatitant);
                 table__P2_1__1.refresh();
+                showAlert("Thông báo", "Xóa thành công", AlertType.CONFIRMATION);
                 refreshFormCohabitant();
             } else {
                 System.err.println("Không thể xóa cư dân từ cơ sở dữ liệu.");
@@ -1552,6 +1675,9 @@ public class BuildingManagerController implements Initializable {
     private DatePicker Date__P3__2 = new DatePicker();
 
     @FXML
+    private Button bnt__P3__add = new Button();
+
+    @FXML
     private TableView<MonthlyRentBill> table__P3__1 = new TableView<>();
 
     private ObservableList<MonthlyRentBill> monthlyRentBillObservableList;
@@ -1582,15 +1708,49 @@ public class BuildingManagerController implements Initializable {
         table__P3__1.setItems(monthlyRentBillObservableList);
     }
 
+    private MonthlyRentBill lastSelectedMonthlyRentBill = null;
+
     @FXML
     void showMonthlyRentBill(MouseEvent event) {
         MonthlyRentBill monthlyRentBill = table__P3__1.getSelectionModel().getSelectedItem();
-        Combobox__P3__4.setValue(monthlyRentBill.getApartmentID());
-        TxtField__P3__5.setText(String.valueOf(monthlyRentBill.getRepaymentPeriod()));
-        TxtField__P3__51.setText(monthlyRentBill.getStatus());
-        comboBox_P3_status.setValue(monthlyRentBill.getStatus());
-        Regex__P3__1.setText("");
-        Regex__P3__2.setText("");
+
+        // Nếu hóa đơn tiền thuê được chọn không null
+        if (monthlyRentBill != null) {
+            // Nếu hóa đơn được chọn giống với hóa đơn trước đó, xóa các trường nhập liệu
+            if (monthlyRentBill.equals(lastSelectedMonthlyRentBill)) {
+                Combobox__P3__4.setValue(null);
+                TxtField__P3__5.clear();
+                TxtField__P3__51.clear();
+                comboBox_P3_status.setValue(null);
+
+                // Xóa các thông báo lỗi
+                Regex__P3__1.setText("");
+                Regex__P3__2.setText("");
+
+                // Reset biến lưu hóa đơn đã chọn và bỏ chọn dòng trong bảng
+                lastSelectedMonthlyRentBill = null;
+                table__P3__1.getSelectionModel().clearSelection();  // Bỏ chọn dòng trong bảng
+                bnt__P3__add.setDisable(false);
+                Combobox__P3__4.setDisable(false);
+                TxtField__P3__5.setDisable(false);
+            } else {
+                // Nếu khác hóa đơn trước đó, hiển thị thông tin hóa đơn
+                Combobox__P3__4.setValue(monthlyRentBill.getApartmentID());
+                TxtField__P3__5.setText(String.valueOf(monthlyRentBill.getRepaymentPeriod()));
+                TxtField__P3__51.setText(monthlyRentBill.getStatus());
+                comboBox_P3_status.setValue(monthlyRentBill.getStatus());
+
+                // Xóa các thông báo lỗi
+                Regex__P3__1.setText("");
+                Regex__P3__2.setText("");
+
+                // Cập nhật lại hóa đơn vừa được chọn
+                lastSelectedMonthlyRentBill = monthlyRentBill;
+                bnt__P3__add.setDisable(true);
+                Combobox__P3__4.setDisable(true);
+                TxtField__P3__5.setDisable(true);
+            }
+        }
     }
 
     public void refreshFormMonthlyRentBill() {
@@ -1614,26 +1774,27 @@ public class BuildingManagerController implements Initializable {
             return;
         }
 
-        String repaymentText = TxtField__P3__5.getText();
-        if (!repaymentText.isEmpty()) {
-            try {
-                int repaymentPeriod = Integer.parseInt(repaymentText);
-                if (repaymentPeriod > 0) {
-                    monthlyRentBill.setRepaymentPeriod(repaymentPeriod);
-                    Regex__P3__2.setText("");  // Clear the error message if the input is valid
-                } else {
-                    Regex__P3__2.setText("Phải là số nguyên dương.");
-                    return;
-                }
-            } catch (NumberFormatException e) {
-                Regex__P3__2.setText("Phải là số nguyên dương.");
-                return;
-            }
-        } else {
-            Regex__P3__2.setText("Không nhập sẽ giữ nguyên.");
-        }
+//        String repaymentText = TxtField__P3__5.getText();
+//        if (!repaymentText.isEmpty()) {
+//            try {
+//                int repaymentPeriod = Integer.parseInt(repaymentText);
+//                if (repaymentPeriod > 0) {
+//                    monthlyRentBill.setRepaymentPeriod(repaymentPeriod);
+//                    Regex__P3__2.setText("");  // Clear the error message if the input is valid
+//                } else {
+//                    Regex__P3__2.setText("Phải là số nguyên dương.");
+//                    return;
+//                }
+//            } catch (NumberFormatException e) {
+//                Regex__P3__2.setText("Phải là số nguyên dương.");
+//                return;
+//            }
+//        } else {
+//            Regex__P3__2.setText("Không nhập sẽ giữ nguyên.");
+//        }
 
         monthlyRentBill.setStatus(comboBox_P3_status.getSelectionModel().getSelectedItem());
+
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
         boolean updateSuccess = monthlyRentBillBUS.update(monthlyRentBill);
         if (updateSuccess) {
@@ -1641,6 +1802,7 @@ public class BuildingManagerController implements Initializable {
             monthlyRentBillObservableList.set(selectedIndex, monthlyRentBill);
             table__P3__1.refresh();
             refreshFormMonthlyRentBill();
+            showAlert("Thông báo", "Cập nhât thành công", AlertType.INFORMATION);
         } else {
             System.err.println("Không thể cập nhật phiếu thu trong cơ sở dữ liệu.");
         }
@@ -1715,7 +1877,7 @@ public class BuildingManagerController implements Initializable {
                     }
                 }
             } else {
-                showAlert("Thông báo", "Đã có phiếu thu tháng này", AlertType.ERROR);
+                showAlert("Thông báo", "Đã có phiếu thu tháng của căn hộ này", AlertType.ERROR);
             }
 
 
@@ -1813,6 +1975,21 @@ public class BuildingManagerController implements Initializable {
     @FXML
     private TextField TxtField__P4__61 = new TextField();
 
+    @FXML
+    private Button bnt__P4__add1 = new Button();
+
+    @FXML
+    private Label Regex__P4__3__1 = new Label();
+
+    @FXML
+    private Label Regex__P4__3__2 = new Label();
+
+    @FXML
+    private Label Regex__P4__3__3 = new Label();
+
+    @FXML
+    private Label Regex__P4__3__4 = new Label();
+
     private ObservableList<Service> ServiceList;
     private Service servicedelete;
 
@@ -1863,22 +2040,42 @@ public class BuildingManagerController implements Initializable {
         table__P4__11.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 Service selectedRow = table__P4__11.getSelectionModel().getSelectedItem();
-                if (selectedRow != null) {
-                    TxtField__P4__11.setText(selectedRow.getServiceID());
-                    TxtField__P4__31.setText(selectedRow.getName());
-                    TxtField__P4__51.setText(String.valueOf(selectedRow.getPricePerUnit()));
-                    TxtField__P4__61.setText(selectedRow.getUnit());
-                    String type = selectedRow.getType();
-                    if (type != null && !type.isEmpty()) {
-                        fill_type.setValue(type);
-                    } else {
-                        fill_type.getSelectionModel().clearSelection();
+
+                // Kiểm tra nếu hàng được chọn là hàng đã chọn trước đó (lần thứ hai)
+                if (selectedRow != null && selectedRow.equals(servicedelete)) {
+                    // Làm trống các trường
+                    TxtField__P4__11.setText("");
+                    TxtField__P4__31.setText("");
+                    TxtField__P4__51.setText("");
+                    TxtField__P4__61.setText("");
+                    fill_type.getSelectionModel().clearSelection();
+                    table__P4__11.getSelectionModel().clearSelection();
+                    servicedelete = null; // Xóa trạng thái hàng đã chọn để có thể chọn lại
+                    bnt__P4__add1.setDisable(false); // Kích hoạt lại nút "Thêm"
+                } else {
+                    // Nếu chọn một hàng mới hoặc lần đầu tiên chọn
+                    if (selectedRow != null) {
+                        TxtField__P4__11.setText(selectedRow.getServiceID());
+                        TxtField__P4__31.setText(selectedRow.getName());
+                        TxtField__P4__51.setText(String.valueOf(selectedRow.getPricePerUnit()));
+                        TxtField__P4__61.setText(selectedRow.getUnit());
+
+                        String type = selectedRow.getType();
+                        if (type != null && !type.isEmpty()) {
+                            fill_type.setValue(type);
+                        } else {
+                            fill_type.getSelectionModel().clearSelection();
+                        }
+
+                        servicedelete = selectedRow; // Lưu trạng thái hàng đã chọn
+                        bnt__P4__add1.setDisable(true); // Vô hiệu hóa nút "Thêm"
                     }
-                    servicedelete = selectedRow; // Lưu lại hàng đã chọn
                 }
             }
         });
     }
+
+
 
     private void showAlert(String title, String message, AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -1907,41 +2104,83 @@ public class BuildingManagerController implements Initializable {
     }
 
     public void handleAddService() {
+        boolean isValid = true;
+
+        // Lấy giá trị từ các trường
         String name = TxtField__P4__31.getText();
-        Double pricePerUnitText = Double.parseDouble(TxtField__P4__51.getText());
+        String pricePerUnitText = TxtField__P4__51.getText().replaceAll(",", ""); // Xóa dấu phẩy nếu có
         String unit = TxtField__P4__61.getText();
         String type = fill_type.getValue();
 
-        String revenueInput = TxtField__P4__51.getText().replaceAll(",", "");
-        if (name.isEmpty() || unit.isEmpty()) {
-            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
-            return;
+        // Validate tên không được để trống
+        if (name == null || name.trim().isEmpty()) {
+            Regex__P4__3__1.setText("Tên dịch vụ không được để trống");
+            isValid = false;
+        } else {
+            Regex__P4__3__1.setText("");
         }
-        if (containsNumber(name)) {
-            showAlert("Lỗi", "Tên không được chứa số.", AlertType.ERROR);
-            return;
+
+        // Validate giá dịch vụ phải là số và lớn hơn 0
+        double pricePerUnit = 0;
+        try {
+            pricePerUnit = Double.parseDouble(pricePerUnitText);
+            if (pricePerUnit <= 0) {
+                Regex__P4__3__2.setText("Giá dịch vụ phải lớn hơn 0");
+                isValid = false;
+            } else {
+                Regex__P4__3__2.setText("");
+            }
+        } catch (NumberFormatException e) {
+            Regex__P4__3__2.setText("Giá dịch vụ phải là số hợp lệ");
+            isValid = false;
         }
-        if (!isValidNumber(revenueInput)) {
-            showAlert("Lỗi", "Vui Lòng Nhập Số Giá Dịch Vụ.", AlertType.ERROR);
+
+        // Validate đơn vị không được để trống
+        if (unit == null || unit.trim().isEmpty()) {
+            Regex__P4__3__3.setText("Đơn vị không được để trống");
+            isValid = false;
+        } else {
+            Regex__P4__3__3.setText("");
+        }
+
+        // Validate loại dịch vụ không được để trống
+        if (type == null || type.trim().isEmpty()) {
+            Regex__P4__3__4.setText("Loại dịch vụ không được để trống.");
+
+            isValid = false;
+        } else {
+            Regex__P4__3__4.setText("");
+        }
+
+        // Nếu có lỗi trong quá trình kiểm tra, dừng xử lý
+        if (!isValid) {
             return;
         }
 
+        // Xử lý thêm dịch vụ mới nếu tất cả đều hợp lệ
         Service newService = new Service();
-//        newService.setServiceID(serviceID);
         newService.setName(name);
-        newService.setPricePerUnit(pricePerUnitText);
+        newService.setPricePerUnit(pricePerUnit);
         newService.setUnit(unit);
         newService.setType(type);
+
         ServiceBUS serviceBUS = new ServiceBUS();
         boolean isSuccess = serviceBUS.add(newService);
 
         if (isSuccess) {
-            showAlert("Thành Công", "Thêm Thành Công.", AlertType.CONFIRMATION);
+            showAlert("Thành Công", "Thêm dịch vụ thành công.", AlertType.CONFIRMATION);
             initService();
+            TxtField__P4__11.setText("");
+            TxtField__P4__31.setText("");
+            TxtField__P4__51.setText("");
+            TxtField__P4__61.setText("");
+            fill_type.getSelectionModel().clearSelection();
+
         } else {
-            showAlert("Lỗi", "Không Thể Thêm.", AlertType.ERROR);
+            showAlert("Lỗi", "Không thể thêm dịch vụ.", AlertType.ERROR);
         }
     }
+
 
     public void confirmAndDelete(Object itemToDelete, String confirmMessage, Runnable onDelete) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -1968,9 +2207,15 @@ public class BuildingManagerController implements Initializable {
             if (deleteResult) {
                 showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
                 initService();
+                TxtField__P4__11.setText("");
+                TxtField__P4__31.setText("");
+                TxtField__P4__51.setText("");
+                TxtField__P4__61.setText("");
+                fill_type.getSelectionModel().clearSelection();
             } else {
                 showAlert("Thất Bại", "Không Thể Xóa", AlertType.ERROR);
             }
+            initService();
         });
     }
 
@@ -1979,30 +2224,63 @@ public class BuildingManagerController implements Initializable {
             showAlert("Lỗi", "Không có dịch vụ nào chọn để sửa", AlertType.ERROR);
             return;
         }
-        String serviceID = TxtField__P4__11.getText();
+
+        boolean isValid = true;
+
+        // Lấy giá trị từ các trường
         String name = TxtField__P4__31.getText();
-        Double pricePerUnitText = Double.parseDouble(TxtField__P4__51.getText());
+        String pricePerUnitText = TxtField__P4__51.getText().replaceAll(",", ""); // Xóa dấu phẩy nếu có
         String unit = TxtField__P4__61.getText();
         String type = fill_type.getValue();
 
-        String revenueInput = TxtField__P4__51.getText().replaceAll(",", "");
-        if (serviceID.isEmpty() || name.isEmpty() || unit.isEmpty() || type == null) {
-            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
-            return;
+        // Validate tên không được để trống
+        if (name == null || name.trim().isEmpty()) {
+            Regex__P4__3__1.setText("Tên dịch vụ không được để trống");
+            isValid = false;
+        } else {
+            Regex__P4__3__1.setText("");
         }
-        if (containsNumber(name)) {
-            showAlert("Lỗi", "Tên không được chứa số.", AlertType.ERROR);
-            return;
+
+        // Validate giá dịch vụ phải là số và lớn hơn 0
+        double pricePerUnit = 0;
+        try {
+            pricePerUnit = Double.parseDouble(pricePerUnitText);
+            if (pricePerUnit <= 0) {
+                Regex__P4__3__2.setText("Giá dịch vụ phải lớn hơn 0");
+                isValid = false;
+            } else {
+                Regex__P4__3__2.setText("");
+            }
+        } catch (NumberFormatException e) {
+            Regex__P4__3__2.setText("Giá dịch vụ phải là số hợp lệ");
+            isValid = false;
         }
-        if (!isValidNumber(revenueInput)) {
-            showAlert("Lỗi", "Vui Lòng Nhập Số Giá Dịch Vụ.", AlertType.ERROR);
+
+        // Validate đơn vị không được để trống
+        if (unit == null || unit.trim().isEmpty()) {
+            Regex__P4__3__3.setText("Đơn vị không được để trống");
+            isValid = false;
+        } else {
+            Regex__P4__3__3.setText("");
+        }
+
+        // Validate loại dịch vụ không được để trống
+        if (type == null || type.trim().isEmpty()) {
+            Regex__P4__3__4.setText("Loại dịch vụ không được để trống.");
+
+            isValid = false;
+        } else {
+            Regex__P4__3__4.setText("");
+        }
+
+        // Nếu có lỗi trong quá trình kiểm tra, dừng xử lý
+        if (!isValid) {
             return;
         }
 
         Service newService = new Service();
-        newService.setServiceID(serviceID);
         newService.setName(name);
-        newService.setPricePerUnit(pricePerUnitText);
+        newService.setPricePerUnit(pricePerUnit);
         newService.setUnit(unit);
         newService.setType(type);
         ServiceBUS serviceBUS = new ServiceBUS();
@@ -2011,6 +2289,11 @@ public class BuildingManagerController implements Initializable {
         if (isSuccess) {
             showAlert("Thành Công", "Sửa Thành Công.", AlertType.CONFIRMATION);
             initService();
+            TxtField__P4__11.setText("");
+            TxtField__P4__31.setText("");
+            TxtField__P4__51.setText("");
+            TxtField__P4__61.setText("");
+            fill_type.getSelectionModel().clearSelection();
         } else {
             showAlert("Lỗi", "Không Thể Sửa.", AlertType.ERROR);
         }
@@ -2065,6 +2348,23 @@ public class BuildingManagerController implements Initializable {
     private TableColumn<ServiceTicket, String> ghiChu = new TableColumn<>();
 
     @FXML
+    private Button bnt__P4_1__add = new Button();
+
+
+    @FXML
+    private Label Regex__P4__2__1 = new Label();
+
+    @FXML
+    private Label Regex__P4__2__2 = new Label();
+
+    @FXML
+    private Label Regex__P4__2__3 = new Label();
+
+    @FXML
+    private Label Regex__P4__2__4 = new Label();
+
+
+    @FXML
     private TextField maPhieuDVField = new TextField();
 
     @FXML
@@ -2104,7 +2404,21 @@ public class BuildingManagerController implements Initializable {
     private Button searchPDV = new Button();
 
     @FXML
-    private Button resetPDV = new Button();
+    private Button bnt__P4__add = new Button();
+
+
+
+    @FXML
+    private Label Regex__P4__1__1 = new Label();
+
+    @FXML
+    private Label Regex__P4__1__2 = new Label();
+
+    @FXML
+    private Label Regex__P4__1__3 = new Label();
+
+    @FXML
+    private Label Regex__P4__1__4 = new Label();
 
     @FXML
     private TableView<ServiceTicket> table__sericetiket = new TableView<>();
@@ -2131,47 +2445,152 @@ public class BuildingManagerController implements Initializable {
 
     }
 
+    ServiceTicket lastSelectedRow = null; // Lưu hàng được chọn cuối cùng
+
     public void handleServiceTicket() {
         table__sericetiket.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 ServiceTicket selectedRow = table__sericetiket.getSelectionModel().getSelectedItem();
+
                 if (selectedRow != null) {
-                    maPhieuDVField.setText(selectedRow.getServiceTicketID());
-                    maPhieuThuCombobox.setValue(selectedRow.getMonthlyRentBillID());
-                    maDichVuCombobox.setValue(selectedRow.getServiceID());
-                    soLuongField.setText(String.valueOf(selectedRow.getQuantity()));
-                    ngayGhiPicker.setValue(selectedRow.getDate());
-                    ghiChuArea.setText(selectedRow.getNote());
-                    serviceTicketdelete = selectedRow;
+                    // Nếu hàng hiện tại được chọn giống với hàng đã chọn trước đó
+                    if (selectedRow.equals(lastSelectedRow)) {
+                        // Hủy chọn hàng
+                        table__sericetiket.getSelectionModel().clearSelection();
+                        maPhieuDVField.clear();
+                        maPhieuThuCombobox.setValue(null);
+                        maDichVuCombobox.setValue(null);
+                        soLuongField.clear();
+                        ngayGhiPicker.setValue(null);
+                        ghiChuArea.clear();
+                        serviceTicketdelete = null;
+
+                        Regex__P4__1__4.setText("");
+                        Regex__P4__1__3.setText("");
+                        Regex__P4__1__2.setText("");
+                        Regex__P4__1__1.setText("");
+
+                        maPhieuThuCombobox.setDisable(false);
+                        maDichVuCombobox.setDisable(false);
+                        soLuongField.setDisable(false);
+                        ngayGhiPicker.setDisable(false);
+
+                        lastSelectedRow = null; // Đặt lại biến để đánh dấu rằng không có hàng nào được chọn
+                        bnt__P4__add.setDisable(false);
+                        table__sericetiket.getSelectionModel().clearSelection();
+                    } else {
+                        // Nếu hàng khác với hàng trước đó, chọn hàng mới
+                        maPhieuDVField.setText(selectedRow.getServiceTicketID());
+                        maPhieuThuCombobox.setValue(selectedRow.getMonthlyRentBillID());
+                        maDichVuCombobox.setValue(selectedRow.getServiceID());
+                        soLuongField.setText(String.valueOf(selectedRow.getQuantity()));
+                        ngayGhiPicker.setValue(selectedRow.getDate());
+                        ghiChuArea.setText(selectedRow.getNote());
+                        serviceTicketdelete = selectedRow;
+
+                        Regex__P4__1__4.setText("");
+                        Regex__P4__1__3.setText("");
+                        Regex__P4__1__2.setText("");
+                        Regex__P4__1__1.setText("");
+
+                        maPhieuThuCombobox.setDisable(true);
+                        maDichVuCombobox.setDisable(true);
+                        soLuongField.setDisable(true);
+                        ngayGhiPicker.setDisable(true);
+
+                        // Cập nhật hàng cuối cùng được chọn
+                        lastSelectedRow = selectedRow;
+                        bnt__P4__add.setDisable(true);
+
+                    }
                 }
             }
         });
     }
 
+
     public void handleAddServiceTicket() {
         LocalDate ngayGhi = ngayGhiPicker.getValue();
-        if (ngayGhi.plusMonths(1).isAfter(LocalDate.now())) {
-            String maDichVu = maPhieuThuCombobox.getSelectionModel().getSelectedItem();
-            String maPhieuThu = maDichVuCombobox.getSelectionModel().getSelectedItem();
-            boolean exist = ServiceTicketBUS.getInstance().checkServiceTicketInList(maDichVu, maPhieuThu);
-            System.out.println(exist);
-            if (exist==false) {
-                Double soLuong = Double.parseDouble(soLuongField.getText());
-                Double thanhTien = 0.0;
-                List<Service> serviceList = ServiceBUS.getInstance().getAll();
-                for (Service service : serviceList) {
-                    if (service.getServiceID().equals(maPhieuThu)) {
-                        thanhTien = service.getPricePerUnit()*soLuong;
-                    }
-                }
+        boolean isValid = true;
 
+        // Kiểm tra nếu ngày ghi trống
+        if (ngayGhi == null) {
+            Regex__P4__1__4.setText("Ngày ghi không được để trống");
+            isValid = false;
+        } else {
+            Regex__P4__1__4.setText("");
+        }
+
+        String maPhieuThu = maDichVuCombobox.getSelectionModel().getSelectedItem();
+        String maDichVu = maPhieuThuCombobox.getSelectionModel().getSelectedItem();
+
+        // Kiểm tra nếu maDichVuCombobox trống
+        if (maDichVu == null || maDichVu.isEmpty()) {
+            Regex__P4__1__1.setText("Vui lòng chọn mã phiếu thu");
+            isValid = false;
+        } else {
+            Regex__P4__1__1.setText("");
+            // Lấy thông tin phiếu thu và dịch vụ
+            MonthlyRentBill monthlyRentBill1 = MonthlyRentBillBUS.getInstance().getMonthlyRentBillWithMRB_BuildingManager(maDichVu);
+            if (LocalDate.now().isAfter(monthlyRentBill1.getDate().plusMonths(1))){
+                showAlert("Thông báo", "Phiếu thu này đã hết hạn", AlertType.ERROR);
+                isValid = false;
+            }
+
+
+
+            // Kiểm tra ngày ghi không được trước ngày bắt đầu của phiếu thu
+            if (ngayGhi != null && ngayGhi.isBefore(monthlyRentBill1.getDate())||ngayGhi != null && ngayGhi.isAfter(monthlyRentBill1.getDate().plusMonths(1))) {
+                Regex__P4__1__4.setText("Ngày ghi phải trong hạn 1 tháng của phiếu thu.");
+                isValid = false;
+            }
+        }
+
+        Service serviceFixed = ServiceBUS.getInstance().getService(maPhieuThu);
+
+        // Kiểm tra nếu maPhieuThuCombobox trống
+        if (maPhieuThu == null || maPhieuThu.isEmpty()) {
+            Regex__P4__1__2.setText("Vui lòng chọn mã dịch vụ");
+            isValid = false;
+        } else {
+            Regex__P4__1__2.setText("");
+        }
+
+        // Kiểm tra số lượng phải hợp lệ (không trống và trong khoảng từ 1 đến 10)
+        double soLuong = 0;
+        if (soLuongField.getText().isEmpty()) {
+            Regex__P4__1__3.setText("Số lượng không được để trống");
+            isValid = false;
+        } else {
+            try {
+                soLuong = Double.parseDouble(soLuongField.getText());
+                if (soLuong < 1 || soLuong > 10) {
+                    Regex__P4__1__3.setText("Số lượng phải nằm trong khoảng từ 1 đến 10");
+                    isValid = false;
+                } else {
+                    Regex__P4__1__3.setText("");
+                }
+            } catch (NumberFormatException e) {
+                Regex__P4__1__3.setText("Số lượng phải nằm trong khoảng từ 1 đến 10");
+                isValid = false;
+            }
+        }
+
+        // Nếu có lỗi trong phần kiểm tra, dừng xử lý
+        if (!isValid) {
+            return;
+        }
+
+
+
+        // Dịch vụ "fixed"
+        if (serviceFixed.getType().equals("fixed")) {
+            boolean exist = ServiceTicketBUS.getInstance().checkServiceTicketInList(maDichVu, maPhieuThu);
+            if (!exist) {
+                Double thanhTien = serviceFixed.getPricePerUnit() * soLuong;
                 String ghiChu = ghiChuArea.getText();
 
-                if (maPhieuThu.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
-                    showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
-                    return;
-                }
-
+                // Tạo phiếu dịch vụ mới
                 ServiceTicket service = new ServiceTicket();
                 service.setMonthlyRentBillID(maDichVu);
                 service.setServiceID(maPhieuThu);
@@ -2184,7 +2603,7 @@ public class BuildingManagerController implements Initializable {
                 boolean addResult = serviceTicketBUS.add(service);
 
                 if (addResult) {
-                    showAlert("Thành Công", "Thêm Phiếu Dịch Vụ Thành Công: "+ service.getServiceTicketID(), AlertType.CONFIRMATION);
+                    showAlert("Thành Công", "Thêm Phiếu Dịch Vụ Thành Công: " + service.getServiceTicketID(), AlertType.CONFIRMATION);
                     initServiceTicket();
                     maDichVuField.setText("");
                     soLuongField.setText("");
@@ -2196,10 +2615,9 @@ public class BuildingManagerController implements Initializable {
                     showAlert("Thất Bại", "Không Thể Thêm Phiếu Dịch Vụ", AlertType.ERROR);
                 }
 
+                // Cập nhật tổng tiền phiếu thu
                 MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
                 List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
-
-
                 for (int i = 0; i < monthlyRentBillList.size(); i++) {
                     MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
                     LocalDate sameDayNextMonth = monthlyRentBill.getDate().plusMonths(1);
@@ -2209,8 +2627,6 @@ public class BuildingManagerController implements Initializable {
 
                         monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + service.getTotalAmount());
 
-
-                        // Cập nhật dữ liệu trong ObservableList
                         MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
                         boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
                         if (updateSuccess) {
@@ -2225,11 +2641,63 @@ public class BuildingManagerController implements Initializable {
             } else {
                 showAlert("Thông báo", "Khách hàng đã đăng ký dịch vụ này trong tháng", AlertType.ERROR);
             }
-
         } else {
-            showAlert("Thông báo", "Phiếu dịch vụ đã hết hạn", AlertType.ERROR);
+            Double thanhTien = serviceFixed.getPricePerUnit() * soLuong;
+            String ghiChu = ghiChuArea.getText();
+
+            // Tạo phiếu dịch vụ mới
+            ServiceTicket service = new ServiceTicket();
+            service.setMonthlyRentBillID(maDichVu);
+            service.setServiceID(maPhieuThu);
+            service.setQuantity(soLuong);
+            service.setTotalAmount(thanhTien);
+            service.setDate(ngayGhi);
+            service.setNote(ghiChu);
+
+            ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
+            boolean addResult = serviceTicketBUS.add(service);
+
+            if (addResult) {
+                showAlert("Thành Công", "Thêm Phiếu Dịch Vụ Thành Công: " + service.getServiceTicketID(), AlertType.CONFIRMATION);
+                initServiceTicket();
+                maDichVuField.setText("");
+                soLuongField.setText("");
+                ngayGhiPicker.setValue(null);
+                ghiChuArea.setText("");
+                maPhieuThuCombobox.setValue(null);
+                maDichVuCombobox.setValue(null);
+            } else {
+                showAlert("Thất Bại", "Không Thể Thêm Phiếu Dịch Vụ", AlertType.ERROR);
+            }
+
+            // Cập nhật tổng tiền phiếu thu
+            MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
+            List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
+            for (int i = 0; i < monthlyRentBillList.size(); i++) {
+                MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
+                LocalDate sameDayNextMonth = monthlyRentBill.getDate().plusMonths(1);
+                if (monthlyRentBill.getMonthlyRentBillID().equals(service.getMonthlyRentBillID()) &&
+                        (service.getDate().isBefore(sameDayNextMonth) || service.getDate().isEqual(sameDayNextMonth)) &&
+                        (service.getDate().isAfter(monthlyRentBill.getDate()) || service.getDate().isEqual(monthlyRentBill.getDate()))) {
+
+                    monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + service.getTotalAmount());
+
+                    MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
+                    boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
+                    if (updateSuccess) {
+                        monthlyRentBillObservableList.set(i, monthlyRentBill);
+                        table__P3__1.refresh();
+                    } else {
+                        System.err.println("Không thể cập nhật phiếu thu trong cơ sở dữ liệu.");
+                    }
+                    break;
+                }
+            }
         }
     }
+
+
+
 
     public void handleDeleteServiceTicket() {
         if (serviceTicketdelete == null) {
@@ -2254,28 +2722,15 @@ public class BuildingManagerController implements Initializable {
             showAlert("Lỗi", "Không có phiếu dịch vụ nào được chọn để sửa", AlertType.ERROR);
             return;
         }
-//
-//        String maDichVu = maPhieuThuField.getText();
-//        String maPhieuThu = maDichVuField.getText();
-//        Double soLuong = Double.parseDouble(soLuongField.getText());
-//        Double thanhTien = Double.parseDouble(thanhTien1Field.getText());
-//        LocalDate ngayGhi = ngayGhiPicker.getValue();
+
         String ghiChu = ghiChuArea.getText();
 
-//        if (maPDV.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
-//            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
-//            return;
-//        }
+
 
         String maPDVCu = serviceTicketdelete.getServiceTicketID();
 
         ServiceTicket service = table__sericetiket.getSelectionModel().getSelectedItem();
-//        service.setServiceTicketID(maPDVCu); // Sử dụng ID của bản ghi cần cập nhật
-//        service.setMonthlyRentBillID(maDichVu);
-//        service.setServiceID(maPhieuThu);
-//        service.setQuantity(soLuong);
-//        service.setTotalAmount(thanhTien);
-//        service.setDate(ngayGhi);
+
         service.setNote(ghiChu);
 
         ServiceTicketBUS serviceTicketBUS = new ServiceTicketBUS();
@@ -2357,6 +2812,16 @@ public class BuildingManagerController implements Initializable {
     private TextField viphamField = new TextField();
     @FXML
     private TextField tienPhatField = new TextField();
+
+    @FXML
+    private Button bnt__P4__add11 = new Button();
+
+    @FXML
+    private Label Regex__P4__4__1 = new Label();
+
+    @FXML
+    private Label Regex__P4__4__2 = new Label();
+
     private ObservableList<Violation> violationslist;
     private Violation violation;
     private Violation violationdelete;
@@ -2376,15 +2841,33 @@ public class BuildingManagerController implements Initializable {
 
     }
 
+    private Violation lastSelectedRow_Violation = null; // Biến lưu hàng được chọn trước đó
+
     public void handleViolation() {
         tableViolation.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 Violation selectedRow = tableViolation.getSelectionModel().getSelectedItem();
                 if (selectedRow != null) {
-                    maPhatField.setText(selectedRow.getViolationID());
-                    viphamField.setText(selectedRow.getName());
-                    tienPhatField.setText(String.valueOf(selectedRow.getPrice()));
-                    violationdelete = selectedRow;
+                    // Nếu hàng được chọn giống hàng trước đó, xóa nội dung các TextField
+                    if (selectedRow.equals(lastSelectedRow_Violation)) {
+                        viphamField.clear();
+                        tienPhatField.clear();
+                        violationdelete = null; // Reset biến vi phạm đã chọn
+                        lastSelectedRow_Violation = null; // Reset hàng được chọn trước đó
+                        bnt__P4__add11.setDisable(false);
+                        Regex__P4__4__1.setText("");
+                        Regex__P4__4__2.setText("");
+                        tableViolation.getSelectionModel().clearSelection();
+                    } else {
+                        // Nếu không giống, hiển thị thông tin của hàng được chọn
+                        viphamField.setText(selectedRow.getName());
+                        tienPhatField.setText(String.valueOf(selectedRow.getPrice()));
+                        violationdelete = selectedRow; // Lưu lại hàng đã chọn
+                        lastSelectedRow_Violation = selectedRow; // Cập nhật hàng được chọn trước đó
+                        bnt__P4__add11.setDisable(true);
+                        Regex__P4__4__1.setText("");
+                        Regex__P4__4__2.setText("");
+                    }
                 }
             }
         });
@@ -2419,27 +2902,46 @@ public class BuildingManagerController implements Initializable {
             return;
         }
 
-        String newViolationID = maPhatField.getText();
-        String newName = viphamField.getText();
-        Double newPrice = Double.parseDouble(tienPhatField.getText());
-        if (newName.isEmpty() || newViolationID.isEmpty() || newPrice == null) {
-            showAlert("Lỗi", "Tên vi phạm không được để trống", AlertType.ERROR);
+        boolean isValid = true; // Biến kiểm tra tính hợp lệ
+
+        String newName = viphamField.getText().trim();
+        String priceText = tienPhatField.getText().trim();
+        Double newPrice = null; // Khai báo nhưng chưa khởi tạo
+
+        // Kiểm tra tên vi phạm không được để trống
+        if (newName.isEmpty()) {
+            Regex__P4__4__1.setText("Tên vi phạm không được để trống");
+            isValid = false;
+        } else if (newName.matches(".*\\d.*")) { // Kiểm tra xem tên có chứa số hay không
+            Regex__P4__4__1.setText("Tên vi phạm không được chứa số");
+            isValid = false;
+        } else {
+            Regex__P4__4__1.setText(""); // Xóa thông báo lỗi
+        }
+
+        // Kiểm tra số tiền
+        try {
+            newPrice = Double.parseDouble(priceText);
+            if (newPrice <= 0) {
+                Regex__P4__4__2.setText("Số tiền phải lớn hơn 0");
+                isValid = false;
+            } else if (newPrice >= 500000) {
+                Regex__P4__4__2.setText("Số tiền phải nhỏ hơn 500000");
+                isValid = false;
+            } else {
+                Regex__P4__4__2.setText(""); // Xóa thông báo lỗi
+            }
+        } catch (NumberFormatException e) {
+            Regex__P4__4__2.setText("Số tiền phải là số hợp lệ");
+            isValid = false;
+        }
+
+        // Nếu không hợp lệ, dừng xử lý
+        if (!isValid) {
             return;
         }
 
-        if (containsNumber(newName)) {
-            showAlert("Lỗi", "Tên Không Được Nhập Bằng Số", AlertType.ERROR);
-            return;
-        }
-        String revenueInput1 = tienPhatField.getText().replaceAll(",", "");
-
-        if (!isValidNumber(revenueInput1)) {
-            showAlert("Lỗi", "Tiền Phạt Vui Lòng Nhập Bằng Số", AlertType.ERROR);
-            return;
-        }
-
-        Violation newViolation = new Violation();
-        newViolation.setViolationID((newViolationID));
+        Violation newViolation = violationdelete;
         newViolation.setName(newName);
         newViolation.setPrice(newPrice);
         ViolationBUS violationBUS = new ViolationBUS();
@@ -2447,56 +2949,70 @@ public class BuildingManagerController implements Initializable {
         if (insertResult) {
             showAlert("Thành Công", "Sửa vi phạm thành công", AlertType.CONFIRMATION);
             initViolation();
-            maPhatField.clear();
             viphamField.clear();
             tienPhatField.clear();
         } else {
-            showAlert("Thất Bại", "Không thể thêm vi phạm", AlertType.ERROR);
+            showAlert("Thất Bại", "Không thể sửa vi phạm", AlertType.ERROR);
         }
     }
 
     public void handleAddViolation() {
-//
-//        String newViolationID = maPhatField.getText();
-        String newName = viphamField.getText();
-        Double newPrice = Double.parseDouble(tienPhatField.getText());
+        boolean isValid = true; // Biến kiểm tra tính hợp lệ
+
+        String newName = viphamField.getText().trim();
+        String priceText = tienPhatField.getText().trim();
+        Double newPrice = null; // Khai báo nhưng chưa khởi tạo
+
+        // Kiểm tra tên vi phạm không được để trống
         if (newName.isEmpty()) {
-            showAlert("Lỗi", "Tên vi phạm không được để trống", AlertType.ERROR);
+            Regex__P4__4__1.setText("Tên vi phạm không được để trống");
+            isValid = false;
+        } else if (newName.matches(".*\\d.*")) { // Kiểm tra xem tên có chứa số hay không
+            Regex__P4__4__1.setText("Tên vi phạm không được chứa số");
+            isValid = false;
+        } else {
+            Regex__P4__4__1.setText(""); // Xóa thông báo lỗi
+        }
+
+        // Kiểm tra số tiền
+        try {
+            newPrice = Double.parseDouble(priceText);
+            if (newPrice <= 0) {
+                Regex__P4__4__2.setText("Số tiền phải lớn hơn 0");
+                isValid = false;
+            } else if (newPrice >= 500000) {
+                Regex__P4__4__2.setText("Số tiền phải nhỏ hơn 500000");
+                isValid = false;
+            } else {
+                Regex__P4__4__2.setText(""); // Xóa thông báo lỗi
+            }
+        } catch (NumberFormatException e) {
+            Regex__P4__4__2.setText("Số tiền phải là số hợp lệ");
+            isValid = false;
+        }
+
+        // Nếu không hợp lệ, dừng xử lý
+        if (!isValid) {
             return;
         }
 
-        if (newName.isEmpty() || newPrice == null) {
-            showAlert("Lỗi", "Tên vi phạm không được để trống", AlertType.ERROR);
-            return;
-        }
-
-        if (containsNumber(newName)) {
-            showAlert("Lỗi", "Tên Không Được Nhập Bằng Số", AlertType.ERROR);
-            return;
-        }
-        String revenueInput1 = tienPhatField.getText().replaceAll(",", "");
-
-        if (!isValidNumber(revenueInput1)) {
-            showAlert("Lỗi", "Tiền Phạt Vui Lòng Nhập Bằng Số", AlertType.ERROR);
-            return;
-        }
-
+        // Tạo đối tượng Violation và thêm vào cơ sở dữ liệu
         Violation newViolation = new Violation();
-//        newViolation.setViolationID((newViolationID));
         newViolation.setName(newName);
         newViolation.setPrice(newPrice);
         ViolationBUS violationBUS = new ViolationBUS();
         boolean insertResult = violationBUS.add(newViolation);
+
         if (insertResult) {
             showAlert("Thành Công", "Thêm vi phạm thành công", AlertType.CONFIRMATION);
             initViolation();
-            maPhatField.clear();
             viphamField.clear();
             tienPhatField.clear();
         } else {
             showAlert("Thất Bại", "Không thể thêm vi phạm", AlertType.ERROR);
         }
     }
+
 
     // Phiếu Phạt
 
@@ -2588,22 +3104,69 @@ public class BuildingManagerController implements Initializable {
         handleViolationTicket();
     }
 
+    // Declare a variable to store the last selected row
+    private ViolationTicket lastSelectedRow_ViolationTicket = null;
+
     public void handleViolationTicket() {
         tableviolationticket.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
                 ViolationTicket selectedRow = tableviolationticket.getSelectionModel().getSelectedItem();
-                if (selectedRow != null) {
-                    maPPField.setText(selectedRow.getViolationTicketID());
-                    maPhatCombobox.setValue(selectedRow.getViolationID());
-                    maPThuCombobox.setValue(selectedRow.getMonthlyRentBillID());
-                    maSluongField1.setText(String.valueOf(selectedRow.getQuantity()));
-                    ngayGhiPPField.setValue(selectedRow.getDate());
-                    ghiChuPPField.setText(selectedRow.getNote());
-                    violationTicketdelete = selectedRow;
+
+                // Kiểm tra nếu hàng được chọn giống với hàng đã chọn trước đó
+                if (selectedRow != null && selectedRow.equals(lastSelectedRow_ViolationTicket)) {
+                    // Nếu nhấp lần thứ hai, xóa các trường và cho phép nhập liệu lại
+                    maPPField.setText("");
+                    maPhatCombobox.setValue(null);
+                    maPThuCombobox.setValue(null);
+                    maSluongField1.setText("");
+                    ngayGhiPPField.setValue(null);
+                    ghiChuPPField.setText("");
+
+                    // Đảm bảo tất cả các trường có thể chỉnh sửa lại
+                    maPPField.setDisable(false);
+                    maPhatCombobox.setDisable(false);
+                    maPThuCombobox.setDisable(false);
+                    maSluongField1.setDisable(false);
+                    ngayGhiPPField.setDisable(false);
+                    ghiChuPPField.setDisable(false);
+
+                    violationTicketdelete = null;
+                    lastSelectedRow_ViolationTicket = null; // Đặt lại hàng được chọn cuối cùng
+
+                    bnt__P4_1__add.setDisable(false);
+                    tableviolationticket.getSelectionModel().clearSelection();
+                } else {
+                    // Nếu chọn một hàng mới, điền dữ liệu vào các trường
+                    if (selectedRow != null) {
+                        maPPField.setText(selectedRow.getViolationTicketID());
+                        maPhatCombobox.setValue(selectedRow.getViolationID());
+                        maPThuCombobox.setValue(selectedRow.getMonthlyRentBillID());
+                        maSluongField1.setText(String.valueOf(selectedRow.getQuantity()));
+                        ngayGhiPPField.setValue(selectedRow.getDate());
+                        ghiChuPPField.setText(selectedRow.getNote());
+                        violationTicketdelete = selectedRow;
+                        lastSelectedRow_ViolationTicket = selectedRow;
+
+                        // Đảm bảo các trường có thể chỉnh sửa
+                        maPPField.setDisable(true);
+                        maPhatCombobox.setDisable(true);
+                        maPThuCombobox.setDisable(true);
+                        maSluongField1.setDisable(true);
+                        ngayGhiPPField.setDisable(true);
+                        ghiChuPPField.setDisable(false);
+                        bnt__P4_1__add.setDisable(true);
+                        // Xóa các thông báo lỗi xác thực trước đó
+                        Regex__P4__2__1.setText("");
+                        Regex__P4__2__2.setText("");
+                        Regex__P4__2__3.setText("");
+                        Regex__P4__2__4.setText("");
+                    }
                 }
             }
         });
     }
+
+
 
     //xoa phieu phat
 
@@ -2633,26 +3196,88 @@ public class BuildingManagerController implements Initializable {
     }
 
     public void handleAddViolationTicket() {
+        boolean isValid = true;
+
         String maPhieuThu = maPhatCombobox.getSelectionModel().getSelectedItem();
         String maDichVu = maPThuCombobox.getSelectionModel().getSelectedItem();
-        int soLuong = Integer.parseInt(maSluongField1.getText());
+        MonthlyRentBill monthlyRentBill1 = MonthlyRentBillBUS.getInstance().getMonthlyRentBillWithMRB_BuildingManager(maDichVu);
+        if (maPhieuThu == null || maPhieuThu.isEmpty()) {
+            Regex__P4__2__2.setText("Vui lòng chọn mã phiếu thu");
+            isValid = false;
+        } else {
+            Regex__P4__2__2.setText("");
+            if (LocalDate.now().isAfter(monthlyRentBill1.getDate().plusMonths(1))) {
+                showAlert("Thông báo", "Phiếu thu này đã hết hạn", AlertType.ERROR);
+                return;
+            }
+        }
+
         LocalDate ngayGhi = ngayGhiPPField.getValue();
         String ghiChu = ghiChuPPField.getText();
         Double thanhTien = 0.0;
+
+        // Validation for maPhieuThu
+
+
+        // Validation for maDichVu
+        if (maDichVu == null || maDichVu.isEmpty()) {
+
+            Regex__P4__2__1.setText("Vui lòng chọn mã phiếu phạt");
+            isValid = false;
+        } else {
+
+            Regex__P4__2__1.setText("");
+        }
+
+        // Validation for ngayGhi
+        if (ngayGhi == null) {
+            Regex__P4__2__4.setText("Ngày ghi không được để trống");
+            isValid = false;
+        } else {
+            Regex__P4__2__4.setText("");
+        }
+
+        if (ngayGhi != null && ngayGhi.isBefore(monthlyRentBill1.getDate())||ngayGhi != null && ngayGhi.isAfter(monthlyRentBill1.getDate().plusMonths(1))) {
+            Regex__P4__2__4.setText("Ngày ghi phải trong hạn 1 tháng của phiếu thu.");
+            isValid = false;
+        }
+
+        // Validation for soLuong
+        int soLuong = 0;
+        if (maSluongField1.getText().isEmpty()) {
+            Regex__P4__2__3.setText("Số lượng không được để trống");
+            isValid = false;
+        } else {
+            try {
+                soLuong = Integer.parseInt(maSluongField1.getText());
+                if (soLuong < 1 || soLuong > 10) {
+                    Regex__P4__2__3.setText("Số lượng phải nằm trong khoảng từ 1 đến 10");
+                    isValid = false;
+                } else {
+                    Regex__P4__2__3.setText("");
+                }
+            } catch (NumberFormatException e) {
+                Regex__P4__2__3.setText("Số lượng phải là một số hợp lệ");
+                isValid = false;
+            }
+        }
+
+        // Stop execution if validation fails
+        if (!isValid) {
+            return;
+        }
+
+        // Calculate total price and proceed with adding ViolationTicket
         ViolationBUS violationBUS = new ViolationBUS();
         List<Violation> violationList = violationBUS.getAll();
-        for (Violation violation1: violationList) {
+        for (Violation violation1 : violationList) {
             if (violation1.getViolationID().equals(maPhieuThu)) {
-                thanhTien = soLuong*violation1.getPrice();
+                thanhTien = soLuong * violation1.getPrice();
                 break;
             }
         }
 
-        if (maPhieuThu.isEmpty() || maDichVu.isEmpty() || ngayGhi == null) {
-            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
-            return;
-        }
-
+        // Add the violation ticket logic (if all validations pass)
         ViolationTicket violationTickets = new ViolationTicket();
         violationTickets.setMonthlyRentBillID(maDichVu);
         violationTickets.setViolationID(maPhieuThu);
@@ -2665,18 +3290,20 @@ public class BuildingManagerController implements Initializable {
         boolean updateResult = violationTicketBUS.add(violationTickets);
 
         if (updateResult) {
-            showAlert("Thành Công", "Thêm phiếu vi phạm thành công: "+violationTickets.getViolationTicketID(), AlertType.CONFIRMATION);
+            showAlert("Thành Công", "Thêm phiếu vi phạm thành công: " + violationTickets.getViolationTicketID(), AlertType.CONFIRMATION);
             initViolationTicket();
-            System.out.println(violationTickets);
-
+            maPPField.setText(null);
+            maPhatCombobox.setValue(null);
+            maPThuCombobox.setValue(null);
+            maSluongField1.setText("");
+            ngayGhiPPField.setValue(null);
+            ghiChuPPField.setText("");
         } else {
             showAlert("Thất Bại", "Không thể thêm phiếu vi phạm", AlertType.ERROR);
         }
 
         MonthlyRentBillBUS monthlyRentBillBUS = new MonthlyRentBillBUS();
         List<MonthlyRentBill> monthlyRentBillList = monthlyRentBillBUS.getAll();
-
-
         for (int i = 0; i < monthlyRentBillList.size(); i++) {
             MonthlyRentBill monthlyRentBill = monthlyRentBillList.get(i);
             LocalDate sameDayNextMonth = monthlyRentBill.getDate().plusMonths(1);
@@ -2684,13 +3311,9 @@ public class BuildingManagerController implements Initializable {
                     (violationTickets.getDate().isBefore(sameDayNextMonth) || violationTickets.getDate().isEqual(sameDayNextMonth)) &&
                     (violationTickets.getDate().isAfter(monthlyRentBill.getDate()) || violationTickets.getDate().isEqual(monthlyRentBill.getDate()))) {
 
-
                 monthlyRentBill.setTotalPayment(monthlyRentBill.getTotalPayment() + violationTickets.getPrice());
 
-
-                // Cập nhật dữ liệu trong ObservableList
-                MonthlyRentBillBUS monthlyRentBillBUS1 = new MonthlyRentBillBUS();
-                boolean updateSuccess = monthlyRentBillBUS1.update(monthlyRentBill);
+                boolean updateSuccess = monthlyRentBillBUS.update(monthlyRentBill);
                 if (updateSuccess) {
                     monthlyRentBillObservableList.set(i, monthlyRentBill);
                     table__P3__1.refresh();
@@ -2700,8 +3323,8 @@ public class BuildingManagerController implements Initializable {
                 break;
             }
         }
-
     }
+
 
     public void handleUpdateViolationTicket() {
         if (violationTicketdelete == null) {
@@ -2709,19 +3332,11 @@ public class BuildingManagerController implements Initializable {
         }
 
         ViolationTicket violationTicket = tableviolationticket.getSelectionModel().getSelectedItem();
-//        String maPPhat = maPPField.getText();
-//        String maPhieuThu = maphatfied.getText();
-//        String maDichVu = maPThuCombobox.getSelectionModel().getSelectedItem();
-//        int soLuong = Integer.parseInt(maSluongField1.getText());
-//        LocalDate ngayGhi = ngayGhiPPField.getValue();
+
         String ghiChu = ghiChuPPField.getText();
-//        Double thanhTien = 0.0;
 
 
-        if (ghiChu.isEmpty()) {
-            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
-            return;
-        }
+
 
 
 
@@ -2779,6 +3394,18 @@ public class BuildingManagerController implements Initializable {
     private TextField TxtField__P5__search = new TextField();
 
     @FXML
+    private Label Regex__P5__1 = new Label();
+
+    @FXML
+    private Label Regex__P5__2 = new Label();
+
+    @FXML
+    private Label Regex__P5__3 = new Label();
+
+    @FXML
+    private Label Regex__P5__4 = new Label();
+
+    @FXML
     private Button bnt__P5__add;
 
     @FXML
@@ -2795,6 +3422,9 @@ public class BuildingManagerController implements Initializable {
 
     @FXML
     private ComboBox<String> comboBox__P5__3 = new ComboBox<>();
+
+    @FXML
+    private ComboBox<String> comboBox__P5__4 = new ComboBox<>();
 
     @FXML
     private TableView<Furniture> table__P5__1 = new TableView<>();
@@ -2825,59 +3455,197 @@ public class BuildingManagerController implements Initializable {
     }
 
     public void refreshFormFurniture() {
-        TxtField__P5__1.setText("");
-        TxtField__P5__2.setText("");
+        comboBox__P5__4.setValue(null);
         TxtField__P5__3.setText("");
         comboBox__P5__3.setValue(null);
         TxtField__P5__4.setText("");
     }
 
+    private Furniture lastSelectedFurniture = null;
+
     @FXML
     void showFurniture(MouseEvent event) {
-        Furniture furniture = table__P5__1.getSelectionModel().getSelectedItem();
-        TxtField__P5__1.setText(furniture.getFurnitureID());
-        TxtField__P5__2.setText(furniture.getApartmentID());
-        TxtField__P5__3.setText(furniture.getName());
-        comboBox__P5__3.setValue(furniture.getCondition());
-        TxtField__P5__4.setText(String.valueOf(furniture.getPrice()));
+        Furniture selectedFurniture = table__P5__1.getSelectionModel().getSelectedItem();
+
+        // Nếu có nội thất được chọn
+        if (selectedFurniture != null) {
+            // Nếu nội thất được chọn giống với nội thất trước đó, xóa các trường nhập liệu
+            if (selectedFurniture.equals(lastSelectedFurniture)) {
+                comboBox__P5__4.setValue(null);
+                TxtField__P5__3.clear();
+                comboBox__P5__3.setValue(null);
+                TxtField__P5__4.clear();
+
+                // Reset biến lưu nội thất được chọn
+                lastSelectedFurniture = null;
+                table__P5__1.getSelectionModel().clearSelection();
+                bnt__P5__add.setDisable(false);
+                Regex__P5__1.setText("");
+                Regex__P5__2.setText("");
+                Regex__P5__3.setText("");
+                Regex__P5__4.setText("");
+                comboBox__P5__4.setDisable(false);
+
+            } else {
+                // Nếu khác nội thất trước đó, hiển thị thông tin nội thất
+                comboBox__P5__4.setValue(selectedFurniture.getApartmentID());
+                TxtField__P5__3.setText(selectedFurniture.getNameFurniture());
+                comboBox__P5__3.setValue(selectedFurniture.getCondition());
+                TxtField__P5__4.setText(String.valueOf(selectedFurniture.getPrice()));
+
+                // Cập nhật lại nội thất vừa được chọn
+                lastSelectedFurniture = selectedFurniture;
+                bnt__P5__add.setDisable(true);
+                Regex__P5__1.setText("");
+                Regex__P5__2.setText("");
+                Regex__P5__3.setText("");
+                Regex__P5__4.setText("");
+                comboBox__P5__4.setDisable(true);
+            }
+        }
     }
 
     @FXML
     void suaNoiThat(ActionEvent event) {
         Furniture furniture = table__P5__1.getSelectionModel().getSelectedItem();
-        furniture.setFurnitureID(TxtField__P5__1.getText());
-        furniture.setApartmentID(TxtField__P5__2.getText());
-        furniture.setName(TxtField__P5__3.getText());
-        furniture.setConditionFurniture(comboBox__P5__3.getSelectionModel().getSelectedItem());
-        furniture.setPrice(Double.parseDouble(TxtField__P5__4.getText()));
-        FurnitureBUS furnitureBUS = new FurnitureBUS();
-        boolean updateSuccess = furnitureBUS.update(furniture);
-        if (updateSuccess) {
-            int selectedIndex = table__P5__1.getSelectionModel().getSelectedIndex();
-            furnitureObservableList.set(selectedIndex, furniture);
-            table__P5__1.refresh();
-            refreshFormFurniture();
+
+        if (furniture == null) {
+            showAlert("Thông báo", "Không có nội thất nào được chọn để cập nhật", AlertType.INFORMATION);
+            return;
+        }
+
+        boolean isValid = true;  // Biến đánh dấu xem có hợp lệ hay không
+
+        // Kiểm tra tên nội thất
+        String nameFurniture = TxtField__P5__3.getText();
+        if (nameFurniture.isEmpty()) {
+            Regex__P5__2.setText("Không được để trống");
+            isValid = false;
+        } else if (!nameFurniture.matches("^[^0-9!@#$%^&*()_+=-]+$")) {
+            Regex__P5__2.setText("Không được chứa số hoặc ký tự đặc biệt");
+            isValid = false;
         } else {
-            System.err.println("Không thể cập nhật nội thất trong cơ sở dữ liệu.");
+            Regex__P5__2.setText("");  // Xóa thông báo lỗi
+            furniture.setNameFurniture(nameFurniture);
+        }
+
+        // Kiểm tra giá
+        String priceText = TxtField__P5__4.getText();
+        if (priceText.isEmpty()) {
+            Regex__P5__3.setText("Không được để trống");
+            isValid = false;
+        } else {
+            try {
+                double price = Double.parseDouble(priceText);
+                if (price <= 0) {
+                    Regex__P5__3.setText("Giá phải lớn hơn 0");
+                    isValid = false;
+                } else {
+                    Regex__P5__3.setText("");  // Xóa thông báo lỗi
+                    furniture.setPrice(price);
+                }
+            } catch (NumberFormatException e) {
+                Regex__P5__3.setText("Giá không hợp lệ");
+                isValid = false;
+            }
+        }
+
+        // Kiểm tra điều kiện
+        String condition = comboBox__P5__3.getSelectionModel().getSelectedItem();
+        if (condition == null) {
+            Regex__P5__4.setText("Không được để trống");
+            isValid = false;
+        } else {
+            Regex__P5__4.setText("");  // Xóa thông báo lỗi
+            furniture.setCondition(condition);
+        }
+
+        // Nếu tất cả các trường hợp hợp lệ
+        if (isValid) {
+            FurnitureBUS furnitureBUS = new FurnitureBUS();
+            boolean updateSuccess = furnitureBUS.update(furniture);
+            if (updateSuccess) {
+                int selectedIndex = table__P5__1.getSelectionModel().getSelectedIndex();
+                furnitureObservableList.set(selectedIndex, furniture);
+                table__P5__1.refresh();
+                refreshFormFurniture();
+                showAlert("Thông báo", "Cập nhật thành công nội thất có mã nội thất: " + furniture.getFurnitureID(), AlertType.INFORMATION);
+            } else {
+                System.err.println("Không thể cập nhật nội thất trong cơ sở dữ liệu.");
+            }
         }
     }
+
 
     @FXML
     void themNoiThat(ActionEvent event) {
         try {
             Furniture furniture = new Furniture();
-            furniture.setFurnitureID(TxtField__P5__1.getText());
-            furniture.setApartmentID(TxtField__P5__2.getText());
-            furniture.setNameFurniture(TxtField__P5__3.getText());
-            furniture.setPrice(Double.parseDouble(TxtField__P5__4.getText()));
-            furniture.setCondition(comboBox__P5__3.getSelectionModel().getSelectedItem());
+            boolean isValid = true;  // Biến đánh dấu xem có hợp lệ hay không
 
-            FurnitureBUS furnitureBUS = new FurnitureBUS();
-            furnitureBUS.add(furniture);
+            // Kiểm tra Apartment ID
+            String apartmentID = comboBox__P5__4.getSelectionModel().getSelectedItem();
+            if (apartmentID == null || apartmentID.isEmpty()) {
+                Regex__P5__1.setText("Không được để trống");
+                isValid = false;
+            } else {
+                Regex__P5__1.setText("");  // Xóa thông báo lỗi
+                furniture.setApartmentID(apartmentID);
+            }
 
-            furnitureObservableList.add(furniture);
-            refreshFormFurniture();
+            // Kiểm tra tên nội thất
+            String nameFurniture = TxtField__P5__3.getText();
+            if (nameFurniture.isEmpty()) {
+                Regex__P5__2.setText("Không được để trống");
+                isValid = false;
+            }   else if (!nameFurniture.matches("^[^0-9!@#$%^&*()_+=-]+$")) {
+                Regex__P5__1.setText("Không được chứa số hoặc ký tự đặc biệt");
+                isValid = false;
+            } else {
+                Regex__P5__2.setText("");  // Xóa thông báo lỗi
+                furniture.setNameFurniture(nameFurniture);
+            }
 
+            // Kiểm tra giá
+            String priceText = TxtField__P5__4.getText();
+            if (priceText.isEmpty()) {
+                Regex__P5__3.setText("Không được để trống");
+                isValid = false;
+            } else {
+                double price = Double.parseDouble(priceText);
+                if (price <= 0) {
+                    Regex__P5__3.setText("Giá phải lớn hơn 0");
+                    isValid = false;
+                } else {
+                    Regex__P5__3.setText("");  // Xóa thông báo lỗi
+                    furniture.setPrice(price);
+                }
+            }
+
+            // Kiểm tra điều kiện
+            String condition = comboBox__P5__3.getSelectionModel().getSelectedItem();
+            if (condition == null) {
+                Regex__P5__4.setText("Không được để trống");
+                isValid = false;
+            } else {
+                Regex__P5__4.setText("");  // Xóa thông báo lỗi
+                furniture.setCondition(condition);
+            }
+
+            // Nếu tất cả các trường hợp hợp lệ
+            if (isValid) {
+                FurnitureBUS furnitureBUS = new FurnitureBUS();
+                furnitureBUS.add(furniture);
+
+                furnitureObservableList.add(furniture);
+                showAlert("Thông báo", "Thêm thành công nội thất có mã nội thất: "+ furniture.getFurnitureID(), AlertType.INFORMATION);
+                refreshFormFurniture();
+            }
+
+        } catch (NumberFormatException e) {
+            // Bắt lỗi nếu không thể chuyển đổi giá
+            Regex__P5__3.setText("Giá không hợp lệ");
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -2900,6 +3668,7 @@ public class BuildingManagerController implements Initializable {
             if (deleteSuccess) {
                 furnitureObservableList.remove(selectedApartment);
                 table__P5__1.refresh();
+                showAlert("Thông báo", "Xóa thành công", AlertType.CONFIRMATION);
                 refreshFormFurniture();
             } else {
                 System.err.println("Không thể xóa căn hộ từ cơ sở dữ liệu.");
@@ -3036,19 +3805,66 @@ public class BuildingManagerController implements Initializable {
         table__P6__1.setItems(leaseAgreementObservableList);
     }
 
+    private LeaseAgreement lastSelectedLeaseAgreement = null;
+
     @FXML
     void showLeaseAgreement(MouseEvent event) {
         LeaseAgreement leaseAgreement = table__P6__1.getSelectionModel().getSelectedItem();
-        TxtField__P6__1.setText(leaseAgreement.getLeaseAgreementID());
-        TxtField__P6__2.setText(leaseAgreement.getTenantID());
-        DP_P6_1.setValue(leaseAgreement.getSigningDate());
-        DP_P6_2.setValue(leaseAgreement.getLeaseStartDate());
-        DP_P6_3.setValue(leaseAgreement.getLeaseEndDate());
-        comboBox__P6__3.setValue(leaseAgreement.getLeaseTerm());
-        TxtField__P6__5.setText(String.valueOf(leaseAgreement.getDeposit()));
-        TxtField__P6__6.setText(String.valueOf(leaseAgreement.getMonthlyRent()));
-        combobox_TxtField__P6__2.setValue(leaseAgreement.getTenantID());
-        combobox_TxtField__P6__3.setValue(leaseAgreement.getApartmentID());
+
+        // Nếu hợp đồng thuê được chọn không null
+        if (leaseAgreement != null) {
+            // Nếu hợp đồng được chọn giống với hợp đồng trước đó, xóa các trường nhập liệu
+            if (leaseAgreement.equals(lastSelectedLeaseAgreement)) {
+                TxtField__P6__1.clear();
+                TxtField__P6__2.clear();
+                DP_P6_1.setValue(null);
+                DP_P6_2.setValue(null);
+                DP_P6_3.setValue(null);
+                comboBox__P6__3.setValue(null);
+                TxtField__P6__5.clear();
+                TxtField__P6__6.clear();
+                combobox_TxtField__P6__2.setValue(null);
+                combobox_TxtField__P6__3.setValue(null);
+
+                combobox_TxtField__P6__2.setDisable(false);
+                combobox_TxtField__P6__3.setDisable(false);
+                DP_P6_1.setDisable(false);
+                DP_P6_2.setDisable(false);
+                comboBox__P6__3.setDisable(false);
+                TxtField__P6__6.setDisable(false);
+
+                // Xóa các thông báo lỗi (nếu có)
+                // Ví dụ:
+                // Regex__P6__1.setText("");
+
+                // Reset biến lưu hợp đồng đã chọn và bỏ chọn hàng trong bảng
+                lastSelectedLeaseAgreement = null;
+                table__P6__1.getSelectionModel().clearSelection();  // Bỏ chọn dòng trong bảng
+                bnt__P6__add.setDisable(false);
+            } else {
+                // Nếu khác hợp đồng trước đó, hiển thị thông tin hợp đồng
+                TxtField__P6__1.setText(leaseAgreement.getLeaseAgreementID());
+                TxtField__P6__2.setText(leaseAgreement.getTenantID());
+                DP_P6_1.setValue(leaseAgreement.getSigningDate());
+                DP_P6_2.setValue(leaseAgreement.getLeaseStartDate());
+                DP_P6_3.setValue(leaseAgreement.getLeaseEndDate());
+                comboBox__P6__3.setValue(leaseAgreement.getLeaseTerm());
+                TxtField__P6__5.setText(String.valueOf(leaseAgreement.getDeposit()));
+                TxtField__P6__6.setText(String.valueOf(leaseAgreement.getMonthlyRent()));
+                combobox_TxtField__P6__2.setValue(leaseAgreement.getTenantID());
+                combobox_TxtField__P6__3.setValue(leaseAgreement.getApartmentID());
+
+                // Cập nhật lại hợp đồng vừa được chọn
+                lastSelectedLeaseAgreement = leaseAgreement;
+                bnt__P6__add.setDisable(true);
+                combobox_TxtField__P6__2.setDisable(true);
+                combobox_TxtField__P6__3.setDisable(true);
+                DP_P6_1.setDisable(true);
+                DP_P6_2.setDisable(true);
+                comboBox__P6__3.setDisable(true);
+                TxtField__P6__6.setDisable(true);
+            }
+        }
     }
 
     private void refreshFormLeaseAgreement() {
@@ -3068,7 +3884,7 @@ public class BuildingManagerController implements Initializable {
     void suaHopDong(ActionEvent event) {
         LeaseAgreement leaseAgreement = table__P6__1.getSelectionModel().getSelectedItem();
 
-        leaseAgreement.setMonthlyRent(Double.parseDouble(TxtField__P6__6.getText()));
+        leaseAgreement.setDeposit(Double.parseDouble(TxtField__P6__5.getText()));
         LeaseAgreementBUS leaseAgreementBUS = new LeaseAgreementBUS();
         boolean updateSuccess = leaseAgreementBUS.update(leaseAgreement);
         if (updateSuccess) {
@@ -3076,6 +3892,7 @@ public class BuildingManagerController implements Initializable {
             leaseAgreementObservableList.set(selectedIndex, leaseAgreement);
             table__P6__1.refresh();
             refreshFormLeaseAgreement();
+            showAlert("Thông báo", "Cập nhật thành công", AlertType.CONFIRMATION);
         } else {
             System.err.println("Không thể cập nhật hợp đồng trong cơ sở dữ liệu.");
         }
@@ -3282,6 +4099,12 @@ public class BuildingManagerController implements Initializable {
             initApartment();
             comboBox__P2__3.getItems().addAll("Nam", "Nữ");
             comboBox__P2__3.setPromptText("");
+            List<Apartment> apartments = apartmentObservableList;
+            List<String> apartmentIDList = new ArrayList<>();
+            for (Apartment apartment : apartments) {
+                apartmentIDList.add(apartment.getApartmentID());
+            }
+            comboBox__P5__4.getItems().addAll(apartmentIDList);
 
             initTenant();
             initCohabitant();
@@ -3323,6 +4146,22 @@ public class BuildingManagerController implements Initializable {
             showcomboboxService1();
 
             // Phieu Dich Vu
+            maDichVuCombobox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    String maPhieuThu_fixed = newValue.toString();
+                    Service service = ServiceBUS.getInstance().getService(maPhieuThu_fixed);
+
+                    if (service.getType().equals("fixed")) {
+                        // Nếu dịch vụ là fixed, đặt số lượng là 1 và vô hiệu hóa trường số lượng
+                        soLuongField.setText("1");
+                        soLuongField.setDisable(true);  // Không cho phép chỉnh sửa
+                    } else {
+                        // Nếu không phải fixed, kích hoạt lại trường số lượng để người dùng có thể chỉnh sửa
+                        soLuongField.setDisable(false);
+                        soLuongField.clear();
+                    }
+                }
+            });
             initServiceTicket();
 
             //list violation combobox

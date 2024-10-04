@@ -149,7 +149,7 @@
                   <Label prefHeight="17.0" prefWidth="117.0" text="SĐT" GridPane.rowIndex="2" />
                   <Label prefHeight="17.0" prefWidth="117.0" text="DOB" GridPane.rowIndex="3" />
                   <Label prefHeight="17.0" prefWidth="117.0" text="Giới tính" GridPane.rowIndex="4" />
-                  <Label prefHeight="17.0" prefWidth="117.0" text="Cắn cước công dân" GridPane.rowIndex="5" />
+                  <Label prefHeight="17.0" prefWidth="117.0" text="Căn cước công dân" GridPane.rowIndex="5" />
                   <Label prefHeight="17.0" prefWidth="117.0" text="Mã định danh" />
                   <Text fx:id="IDInfor" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="117.13671875" GridPane.columnIndex="1" />
                   <Text fx:id="nameInfor" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="117.13671875" GridPane.columnIndex="1" GridPane.rowIndex="1" />

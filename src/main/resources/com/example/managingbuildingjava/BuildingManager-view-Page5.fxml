@@ -23,32 +23,25 @@
                       </ImageView>
             <Pane layoutX="43.0" layoutY="115.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                          <TextField fx:id="TxtField__P5__1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
-                          <TextField fx:id="TxtField__P5__2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
-                          <TextField fx:id="TxtField__P5__4" layoutX="216.0" layoutY="277.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
-                          <TextField fx:id="TxtField__P5__3" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
-                          <ComboBox fx:id="comboBox__P5__3" layoutX="226.0" layoutY="214.0" prefHeight="30.0" prefWidth="145.0" />
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="277.0" prefHeight="32.0" prefWidth="120.0" text="Giá trị" textFill="WHITE">
+                          <TextField fx:id="TxtField__P5__4" layoutX="216.0" layoutY="265.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                          <TextField fx:id="TxtField__P5__3" layoutX="216.0" layoutY="112.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
+                          <ComboBox fx:id="comboBox__P5__3" layoutX="216.0" layoutY="193.0" prefHeight="30.0" prefWidth="165.0" />
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="265.0" prefHeight="32.0" prefWidth="120.0" text="Giá trị" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="213.0" prefHeight="32.0" prefWidth="120.0" text="Trạng thái" textFill="WHITE">
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="192.0" prefHeight="32.0" prefWidth="120.0" text="Trạng thái" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="150.0" prefHeight="32.0" prefWidth="120.0" text="Tên nội thất" textFill="WHITE">
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="112.0" prefHeight="32.0" prefWidth="120.0" text="Tên nội thất" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="86.0" prefHeight="32.0" prefWidth="120.0" text="Mã căn hộ" textFill="WHITE">
-                              <font>
-                                  <Font name="System Bold" size="13.0" />
-                              </font>
-                  </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="27.0" prefHeight="32.0" prefWidth="120.0" text="Mã nội thất" textFill="WHITE">
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="21.0" layoutY="29.0" prefHeight="32.0" prefWidth="120.0" text="Mã căn hộ" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
@@ -58,6 +51,11 @@
                         <Image url="@../../../Picture/excel.png" />
                      </image>
                   </ImageView>
+                  <ComboBox fx:id="comboBox__P5__4" layoutX="216.0" layoutY="26.0" prefHeight="38.0" prefWidth="165.0" />
+                  <Label fx:id="Regex__P5__1" layoutX="216.0" layoutY="64.0" prefWidth="165.0" wrapText="true" />
+                  <Label fx:id="Regex__P5__2" layoutX="219.0" layoutY="144.0" prefWidth="165.0" wrapText="true" />
+                  <Label fx:id="Regex__P5__3" layoutX="216.0" layoutY="297.0" prefWidth="165.0" wrapText="true" />
+                  <Label fx:id="Regex__P5__4" layoutX="216.0" layoutY="224.0" prefWidth="165.0" wrapText="true" />
                </children>
             </Pane>
                     <Button fx:id="bnt__P5__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="638.0" mnemonicParsing="false" onAction="#themNoiThat" prefHeight="32.0" prefWidth="90.0" text="Thêm " textFill="WHITE">
