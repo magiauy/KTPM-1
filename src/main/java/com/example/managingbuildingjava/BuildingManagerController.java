@@ -1820,6 +1820,7 @@ public class BuildingManagerController implements Initializable {
                 isValid = false;
             } else {
                 Regex__P3__1.setText("");
+
             }
 
             if (TxtField__P3__5.getText().isEmpty()) {
@@ -1845,7 +1846,6 @@ public class BuildingManagerController implements Initializable {
             }
 
             boolean checkExist = MonthlyRentBillBUS.getInstance().checkExist(apartmentID);
-            System.out.println(checkExist);
             if (!checkExist) {
                 LeaseAgreementBUS checkApartmentID = new LeaseAgreementBUS();
                 List<LeaseAgreement> leaseAgreementList = checkApartmentID.getAll();
@@ -1877,7 +1877,7 @@ public class BuildingManagerController implements Initializable {
                     }
                 }
             } else {
-                showAlert("Thông báo", "Đã có phiếu thu tháng của căn hộ này", AlertType.ERROR);
+                showAlert("Thông báo", "Đã có phiếu thu tháng này của căn hộ", AlertType.ERROR);
             }
 
 
