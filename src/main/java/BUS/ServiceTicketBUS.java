@@ -1,5 +1,6 @@
 package BUS;
 
+import DAO.MonthlyRentBillDAO;
 import DAO.ServiceDAO;
 import DAO.ServiceTicketDAO;
 import DTO.MonthlyRentBill;
@@ -100,6 +101,10 @@ public class ServiceTicketBUS {
         return ServiceTicketDAO.getInstance().getOldMonthMonthlyRentBillIDsByTenantID(CustomerController.getInstance().getID());
     }
 
+    public ArrayList<ServiceTicket> getServiceTicketWithMonthlyRentBillID(String ID) {
+        ArrayList<ServiceTicket> serviceTicketsWithMonthlyRentBillID = ServiceTicketDAO.getInstance().getidSerVice(ID);
+        return serviceTicketsWithMonthlyRentBillID;
+    }
 
     public ArrayList<ServiceTicket> search(LocalDate day1, LocalDate day2, String type) {
         ArrayList<ServiceTicket> resul = new ArrayList<>();
@@ -209,5 +214,32 @@ public class ServiceTicketBUS {
             e.printStackTrace();
         }
     }
+
+    public boolean checkServiceTicketInList(String idMonthlyRentBill, String idServiceTicket) {
+        // Lấy danh sách ServiceTicket với id từ phương thức getidSerVice
+        ArrayList<ServiceTicket> rentBills = ServiceTicketDAO.getInstance().getidSerVice(idMonthlyRentBill);
+
+
+        // Lấy thông tin MonthlyRentBill theo idMonthlyRentBill
+        MonthlyRentBill monthlyRentBill = MonthlyRentBillBUS.getInstance().getMonthlyRentBillWithMRB_BuildingManager(idMonthlyRentBill);
+
+
+        // Duyệt qua danh sách và kiểm tra điều kiện
+        for (ServiceTicket ticket : rentBills) {
+            // Điều kiện 1: idServiceTicket phải khớp
+            // Điều kiện 2: Ngày của ServiceTicket phải sau ngày của MonthlyRentBill
+            // Điều kiện 3: Ngày của ServiceTicket phải trước một tháng sau ngày của MonthlyRentBill
+            if (ticket.getServiceID().equals(idServiceTicket) &&
+                    (ticket.getDate().isAfter(monthlyRentBill.getDate()) || ticket.getDate().isEqual(monthlyRentBill.getDate())) &&
+                    ticket.getDate().isBefore(monthlyRentBill.getDate().plusMonths(1))) {
+                return true; // Tìm thấy đối tượng có idServiceTicket khớp và trong khoảng thời gian một tháng
+            }
+        }
+
+        // Nếu không tìm thấy đối tượng nào khớp
+        return false;
+    }
+
+
 
 }

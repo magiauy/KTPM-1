@@ -205,6 +205,45 @@ public class TenantDAO implements DAOInterface<Tenant> {
         return tenants;
     }
 
+    public ArrayList<Tenant> tenantsInLA() {
+        ArrayList<Tenant> tenants = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+            Statement statement = connection.createStatement();
+
+            // Câu lệnh SQL để lấy tất cả tenant có trong hợp đồng
+            String sql = "SELECT T.tenantID, T.lastName, T.firstName, T.phoneNumber, T.dob, T.gender, T.citizenIdentityCard " +
+                    "FROM Tenant T " +
+                    "INNER JOIN LeaseAgreement LA ON T.tenantID = LA.tenantID";  // Lấy các tenant có trong LeaseAgreement
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                // Lấy dữ liệu từ ResultSet
+                String tenantID = resultSet.getString("tenantID");
+                String lastName = resultSet.getString("lastName");
+                String firstName = resultSet.getString("firstName");
+                String phoneNumber = resultSet.getString("phoneNumber");
+                LocalDate dateOfBirthDay = resultSet.getDate("dob").toLocalDate();
+                String gender = resultSet.getString("gender");
+                String citizenIdentityCard = resultSet.getString("citizenIdentityCard");
+
+                // Tạo đối tượng Tenant từ các thông tin đã lấy
+                Tenant tenant = new Tenant(tenantID, lastName, firstName, phoneNumber, dateOfBirthDay, gender, citizenIdentityCard);
+                tenants.add(tenant);
+            }
+
+            // Đóng các kết nối và tài nguyên
+            resultSet.close();
+            statement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tenants;
+    }
+
+
 
     private Tenant createTenantFromResultSet(ResultSet resultSet) throws SQLException {
         String tenantID = resultSet.getString("tenantID");

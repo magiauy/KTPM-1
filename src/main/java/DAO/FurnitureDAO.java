@@ -21,12 +21,28 @@ public class FurnitureDAO implements DAOInterface<Furniture>{
         return new FurnitureDAO();
     }
 
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(furnitureID, 5, LEN(furnitureID) - 4) AS INT)), 0) FROM Furniture";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "FURN" + (lastId + 1);
+        }
+        return "FURN1"; // Nếu bảng rỗng thì bắt đầu từ APT1
+    }
+
     @Override
     public int insert(Furniture t) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
             String sql = "INSERT INTO Furniture (furnitureID, apartmentID, name, condition, price) VALUES (?, ?, ?, ?, ?)";
+            if (t.getFurnitureID() == null) {
+                String newId = generateNewID(connection);
+                t.setFurnitureID(newId); // Gán ID mới cho đối tượng Apartment
+            }
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             // Thiết lập các giá trị tham số trong câu lệnh SQL

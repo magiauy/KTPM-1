@@ -96,10 +96,65 @@ public class LoginController {
         }
     }
 
-        public void loginenter(KeyEvent event){
-        if (event.getCode() == KeyCode.ENTER) {
-            onHelloButtonClick();
-            event.consume();
+    @FXML
+    void enter(KeyEvent event) {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            showError("Username and password cannot be empty!");
+            return;
+        }
+
+        // Lấy Stage hiện tại từ nút đăng nhập
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+
+        CustomersAccountBUS customersAccountBUS = new CustomersAccountBUS();
+        String validLogin = customersAccountBUS.checkLogin(username, password);
+
+        if (!validLogin.equals("0")) {
+            try {
+                Customer customer = new Customer();
+                customer.setID(validLogin); // Set ID for Customer if needed
+                customer.start(new Stage());
+
+                // Đóng cửa sổ đăng nhập sau khi đăng nhập thành công
+                stage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            StaffsAccountBUS staffsAccountBUS = new StaffsAccountBUS();
+            validLogin = staffsAccountBUS.checkLogin(username, password);
+            if (!validLogin.equals("0")) {
+                try {
+                    BuildingManager manager = new BuildingManager();
+                    manager.setID(validLogin); // Set ID for BuildingManager
+                    manager.start(new Stage());
+
+                    // Đóng cửa sổ đăng nhập sau khi đăng nhập thành công
+                    stage.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                if (username.equals("admin") && password.equals("admin")) {
+                    validLogin = "1";
+                }
+                if (!validLogin.equals("0")) {
+                    try {
+                        Boss boss = new Boss();
+                        boss.start(new Stage());
+
+                        // Đóng cửa sổ đăng nhập sau khi đăng nhập thành công
+                        stage.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    showError("Invalid username or password.");
+                }
+            }
         }
     }
     

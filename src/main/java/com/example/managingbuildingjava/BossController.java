@@ -19,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -109,13 +110,6 @@ public class BossController implements Initializable {
     @FXML
     private void page4(MouseEvent event) throws IOException {
         loadPage("Boss-view-Page4");
-    }
-    @FXML
-    void loadHour(MouseEvent event) {
-        TimeNow();
-        drawLineChartOfMonthlyOpex();
-        updateNumberOfStatus();
-        updateMonthlyRevenueLabel();
     }
 
     @FXML
@@ -543,6 +537,10 @@ public class BossController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        TimeNow();
+        drawLineChartOfMonthlyOpex();
+        updateNumberOfStatus();
+        updateMonthlyRevenueLabel();
         buildingsList = FXCollections.observableArrayList();
         buildingManagersList = FXCollections.observableArrayList();
         financialReportsList = FXCollections.observableArrayList();
@@ -917,26 +915,26 @@ private boolean containsNumber(String s) {
         }
     }
 
-    public void handleDelete() {
-        if (selectedBuildingToDelete == null) {
-    
-            showAlert("Lỗi", "Không có tòa nhà nào được chọn để xóa.", AlertType.ERROR);
-            return;
-        }
-
-        confirmAndDelete(selectedBuildingToDelete, "Bạn có chắc chắn muốn xóa tòa nhà này không?", () -> {
-            BuildingBUS buildingBUS = new BuildingBUS();
-            boolean deleteResult = buildingBUS.delete(selectedBuildingToDelete);
-
-            if (deleteResult) {
-                showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
-                resetTextfield();
-                updateBuildingList();
-            } else {
-                showAlert("Thất Bại", "Không Thể Xóa", AlertType.ERROR);
-            }
-        });
-    }
+//    public void handleDelete() {
+//        if (selectedBuildingToDelete == null) {
+//
+//            showAlert("Lỗi", "Không có tòa nhà nào được chọn để xóa.", AlertType.ERROR);
+//            return;
+//        }
+//
+//        confirmAndDelete(selectedBuildingToDelete, "Bạn có chắc chắn muốn xóa tòa nhà này không?", () -> {
+//            BuildingBUS buildingBUS = new BuildingBUS();
+//            boolean deleteResult = buildingBUS.delete(selectedBuildingToDelete);
+//
+//            if (deleteResult) {
+//                showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
+//                resetTextfield();
+//                updateBuildingList();
+//            } else {
+//                showAlert("Thất Bại", "Không Thể Xóa", AlertType.ERROR);
+//            }
+//        });
+//    }
 
     public void resetTextfield() {
         TxtField__P1__1.setText("");
@@ -1112,34 +1110,34 @@ private boolean containsNumber(String s) {
         table__view2.setItems(observableBuildingList);
     }
 
-    public void handleDeletepage2() {
-
-        if (selectedBuildingToDelete1 == null) {
-
-            showAlert("Lỗi", "Không có Quản Lí nào được chọn để xóa.", AlertType.ERROR);
-            return;
-        }
-
-        confirmAndDelete(selectedBuildingToDelete1, "Bạn có chắc chắn muốn xóa quản lí này không?", () -> {
-            if (selectedBuildingToDelete1.getFirstName().equals("")&&selectedBuildingToDelete1.getLastName().equals("TxtField__P1__search")) {
-                BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
-                boolean deleteResult = buildingManagerBUS.delete(selectedBuildingToDelete1);
-                if (deleteResult) {
-                    showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
-                    clearInputFields();
-                    updateBuildingManeger();
-                } else {
-                    showAlert("Thất Bại", "Không Thể Xóa", AlertType.ERROR);
-                }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Thông báo");
-                alert.setHeaderText(null);
-                alert.setContentText("Nhân viên " + selectedBuildingToDelete1.getFirstName()+" "+selectedBuildingToDelete1.getLastName()+" đang quản lý toàn nhà "+selectedBuildingToDelete1.getBuildingId());
-                alert.showAndWait();
-            }
-        });
-    }
+//    public void handleDeletepage2() {
+//
+//        if (selectedBuildingToDelete1 == null) {
+//
+//            showAlert("Lỗi", "Không có Quản Lí nào được chọn để xóa.", AlertType.ERROR);
+//            return;
+//        }
+//
+//        confirmAndDelete(selectedBuildingToDelete1, "Bạn có chắc chắn muốn xóa quản lí này không?", () -> {
+//            if (selectedBuildingToDelete1.getFirstName().equals("")&&selectedBuildingToDelete1.getLastName().equals("TxtField__P1__search")) {
+//                BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+//                boolean deleteResult = buildingManagerBUS.delete(selectedBuildingToDelete1);
+//                if (deleteResult) {
+//                    showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
+//                    clearInputFields();
+//                    updateBuildingManeger();
+//                } else {
+//                    showAlert("Thất Bại", "Không Thể Xóa", AlertType.ERROR);
+//                }
+//            } else {
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setTitle("Thông báo");
+//                alert.setHeaderText(null);
+//                alert.setContentText("Nhân viên " + selectedBuildingToDelete1.getFirstName()+" "+selectedBuildingToDelete1.getLastName()+" đang quản lý toàn nhà "+selectedBuildingToDelete1.getBuildingId());
+//                alert.showAndWait();
+//            }
+//        });
+//    }
 
     public void handleEditBuildingManeger() {
         if (selectedBuildingToDelete1 == null) {
@@ -1290,34 +1288,34 @@ private boolean containsNumber(String s) {
         table__view3.setItems(financialReports2);
     }
 
-    public void handleDeleReport() {
-        if (selecFinancialReport == null) {
+//    public void handleDeleReport() {
+//        if (selecFinancialReport == null) {
+//
+//            showAlert("Lỗi", "Không có báo cáo nào được chọn để xóa.", AlertType.ERROR);
+//            return;
+//        }
+//
+//        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+//        confirmAndDelete(selecFinancialReport, "Bạn có chắc chắn muốn xóa báo cáo này không?", () -> {
+//            boolean check = financialReportBUS.delete(selecFinancialReport);
+//            if (check) {
+//                showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
+//                updateFianReport();
+//                clearFildReport();
+//            } else {
+//                showAlert("Thất Bại", "Xóa Thất Bại", AlertType.ERROR);
+//            }
+//        });
+//    }
 
-            showAlert("Lỗi", "Không có báo cáo nào được chọn để xóa.", AlertType.ERROR);
-            return;
-        }
-
-        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-        confirmAndDelete(selecFinancialReport, "Bạn có chắc chắn muốn xóa báo cáo này không?", () -> {
-            boolean check = financialReportBUS.delete(selecFinancialReport);
-            if (check) {
-                showAlert("Thành Công", "Xóa Thành Công", AlertType.CONFIRMATION);
-                updateFianReport();
-                clearFildReport();
-            } else {
-                showAlert("Thất Bại", "Xóa Thất Bại", AlertType.ERROR);
-            }
-        });
-    }
-    
     private boolean isValidNumber(String input) {
 
         for (char c : input.toCharArray()) {
             if (!Character.isDigit(c) && c != '.' && c != '-') {
-                return false; 
+                return false;
             }
         }
-        return true; 
+        return true;
     }
 
     public void handEditReport() {
@@ -1403,7 +1401,9 @@ private boolean containsNumber(String s) {
         table__view3.setItems(observableList);
     }
 
-    public void logOut(ActionEvent actionEvent) throws IOException {
+
+    @FXML
+    void logOut(MouseEvent event) {
         Stage primaryStage = Boss.getBossStage();
         if (primaryStage == null){
             primaryStage = main.getInstance().getPrimaryStage();

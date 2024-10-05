@@ -1,25 +1,16 @@
 package BUS;
 import DAO.*;
 import DTO.*;
-import com.example.managingbuildingjava.Customer;
 import com.example.managingbuildingjava.CustomerController;
-import javafx.scene.paint.Color;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.chart.PieChart;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPageSz;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +34,20 @@ public class MonthlyRentBillBUS {
     public ArrayList<MonthlyRentBill> getAll() {
         MonthlyRentBillDAO monthlyRentBillDAO = MonthlyRentBillDAO.getInstance();
         return monthlyRentBillDAO.selectAll();
+    }
+
+    public boolean checkExist(String id) {
+        ArrayList<MonthlyRentBill> monthlyRentBills = MonthlyRentBillDAO.getInstance().selectAll();
+        for (MonthlyRentBill monthlyRentBill : monthlyRentBills) {
+            if (monthlyRentBill.getApartmentID().equals(id)) {
+                if (LocalDate.now().isAfter(monthlyRentBill.getDate()) && LocalDate.now().isBefore(monthlyRentBill.getDate().plusMonths(1)) ||
+                LocalDate.now().isEqual(monthlyRentBill.getDate()) ||
+                        LocalDate.now().isEqual(monthlyRentBill.getDate().plusMonths(1))){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean add(MonthlyRentBill monthlyRentBill) {
@@ -114,6 +119,22 @@ public class MonthlyRentBillBUS {
         ArrayList<MonthlyRentBill> monthlyRentBillArrayList = MonthlyRentBillBUS.getInstance().getMonthlyRentBillsWithTenantId(CustomerController.getInstance().getID());
         for (MonthlyRentBill monthlyRentBill : monthlyRentBillArrayList){
             if (Objects.equals(monthlyRentBill.getMonthlyRentBillID(), id)) {
+                return monthlyRentBill;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<MonthlyRentBill> getMonthlyRentBillWithAPTID(String id){
+        ArrayList<MonthlyRentBill> monthlyRentBillArrayList = MonthlyRentBillDAO.getInstance().getMonthlyRentBillsByApartmentID(id);
+
+        return monthlyRentBillArrayList;
+    }
+
+    public MonthlyRentBill getMonthlyRentBillWithMRB_BuildingManager(String monthlyRentBillID){
+        ArrayList<MonthlyRentBill> monthlyRentBillArrayList = MonthlyRentBillBUS.getInstance().getAll();
+        for (MonthlyRentBill monthlyRentBill : monthlyRentBillArrayList){
+            if (Objects.equals(monthlyRentBill.getMonthlyRentBillID(), monthlyRentBillID)) {
                 return monthlyRentBill;
             }
         }
