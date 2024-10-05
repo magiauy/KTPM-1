@@ -6,8 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="7dde5e0c-faa4-4049-bc9d-bdcc9f4e6ba1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ApartmentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/CohabitantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/CohabitantDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/FurnitureDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/FurnitureDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/LeaseAgreementDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/LeaseAgreementDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/MonthlyRentBillDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/MonthlyRentBillDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ServiceDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ServiceDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ServiceTicketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ServiceTicketDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/TenantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/TenantDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ViolationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ViolationDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/ViolationTicketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/ViolationTicketDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page6.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page6.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/login-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/login-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/database/quanlychothuecanho.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/database/quanlychothuecanho.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,10 +37,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2mYIuZITeOQqy7tIYtatnnCCPfq" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -45,6 +58,11 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -74,8 +92,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.22855.74" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.22855.74" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -88,6 +106,8 @@
       <option name="presentableId" value="Default" />
       <updated>1727247306982</updated>
       <workItem from="1727247308411" duration="2549000" />
+      <workItem from="1728097717585" duration="2865000" />
+      <workItem from="1728106282146" duration="3527000" />
     </task>
     <servers />
   </component>

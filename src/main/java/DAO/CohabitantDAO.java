@@ -22,7 +22,7 @@ public class CohabitantDAO implements DAOInterface<Cohabitant>{
     }
 
     public String generateNewID(Connection conn) throws SQLException {
-        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(cohabitantID, 3, LEN(cohabitantID) - 2) AS INT)), 0) FROM Cohabitant";
+        String query = "SELECT IFNULL(MAX(CAST(SUBSTRING(cohabitantID, 3, LENGTH(cohabitantID) - 2) AS INT)), 0) FROM Cohabitant";
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);

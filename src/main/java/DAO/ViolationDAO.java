@@ -12,7 +12,7 @@ public class ViolationDAO implements DAOInterface<Violation> {
     }
 
     public String generateNewID(Connection conn) throws SQLException {
-        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(violationID, 2, LEN(violationID) - 1) AS INT)), 0) FROM Violation";
+        String query = "SELECT IFNULL(MAX(CAST(SUBSTRING(violationID, 2, LENGTH(violationID) - 1) AS INT)), 0) FROM Violation";
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);

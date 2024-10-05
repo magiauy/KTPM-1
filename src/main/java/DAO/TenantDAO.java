@@ -18,7 +18,7 @@ public class TenantDAO implements DAOInterface<Tenant> {
     }
 
     public String generateNewID(Connection conn) throws SQLException {
-        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(tenantID, 2, LEN(tenantID) - 1) AS INT)), 0) FROM Tenant";
+        String query = "SELECT IFNULL(MAX(CAST(SUBSTRING(tenantID, 2, LENGTH(tenantID) - 1) AS INT)), 0) FROM Tenant";
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);

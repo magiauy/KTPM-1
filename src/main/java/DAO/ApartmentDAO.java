@@ -24,7 +24,7 @@ public class ApartmentDAO implements DAOInterface<Apartment>{
     }
 
     public String generateNewID(Connection conn) throws SQLException {
-        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(apartmentID, 4, LEN(apartmentID) - 3) AS INT)), 0) FROM Apartment";
+        String query = "SELECT IFNULL(MAX(CAST(SUBSTRING(apartmentID, 4, LENGTH(apartmentID) - 3) AS INT)), 0) FROM Apartment";
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);

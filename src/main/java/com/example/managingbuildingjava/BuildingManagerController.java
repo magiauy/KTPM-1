@@ -40,6 +40,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.sql.*;
 import java.util.Date;
@@ -3943,12 +3944,13 @@ public class BuildingManagerController implements Initializable {
             }
 
             // Kiểm tra ngày ký hợp đồng
-            if (DP_P6_1.getValue() == null) {
-                Regex__P6__3.setText("Không được để trống");
-                isValid = false;
-            } else {
-                Regex__P6__3.setText("");
-            }
+                if (DP_P6_1.getValue() == null) {
+                    Regex__P6__3.setText("Không được để trống");
+                    isValid = false;
+                } else {
+                    Regex__P6__3.setText("");
+                }
+
 
             // Kiểm tra ngày bắt đầu thuê
             if (DP_P6_2.getValue() == null) {
@@ -4224,7 +4226,6 @@ public class BuildingManagerController implements Initializable {
             combobox_TxtField__P6__3.getItems().addAll(listApartmentID);
 
             Combobox__P3__4.getItems().addAll(listApartmentID1);
-
 
             initLeaseAgreement();
 

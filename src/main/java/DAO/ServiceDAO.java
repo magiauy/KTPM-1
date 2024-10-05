@@ -12,7 +12,7 @@ public class ServiceDAO implements DAOInterface<Service>{
     }
 
     public String generateNewID(Connection conn) throws SQLException {
-        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(serviceID, 5, LEN(serviceID) - 4) AS INT)), 0) FROM Service";
+        String query = "SELECT IFNULL(MAX(CAST(SUBSTRING(serviceID, 5, LENGTH(serviceID) - 4) AS INT)), 0) FROM Service";
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);

@@ -22,7 +22,7 @@ public class LeaseAgreementDAO implements DAOInterface<LeaseAgreement>{
     }
 
     public String generateNewID(Connection conn) throws SQLException {
-        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(leaseAgreementID, 3, LEN(leaseAgreementID) - 2) AS INT)), 0) FROM LeaseAgreement";
+        String query = "SELECT IFNULL(MAX(CAST(SUBSTRING(leaseAgreementID, 3, LENGTH(leaseAgreementID) - 2) AS INT)), 0) FROM LeaseAgreement";
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);

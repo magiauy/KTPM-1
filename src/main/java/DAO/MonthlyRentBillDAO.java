@@ -23,7 +23,7 @@ public class MonthlyRentBillDAO implements DAOInterface<MonthlyRentBill> {
     }
 
     public String generateNewID(Connection conn) throws SQLException {
-        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(monthlyRentBillID, 4, LEN(monthlyRentBillID) - 3) AS INT)), 0) FROM MonthlyRentBill";
+        String query = "SELECT IFNULL(MAX(CAST(SUBSTRING(monthlyRentBillID, 4, LENGTH(monthlyRentBillID) - 3) AS INT)), 0) FROM MonthlyRentBill";
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);

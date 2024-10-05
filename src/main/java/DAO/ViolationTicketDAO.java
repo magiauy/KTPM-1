@@ -16,7 +16,7 @@ public class ViolationTicketDAO implements DAOInterface<ViolationTicket> {
     }
 
     public String generateNewID(Connection conn) throws SQLException {
-        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(violationTicketID, 3, LEN(violationTicketID) - 2) AS INT)), 0) FROM ViolationTicket";
+        String query = "SELECT IFNULL(MAX(CAST(SUBSTRING(violationTicketID, 3, LENGTH(violationTicketID) - 2) AS INT)), 0) FROM ViolationTicket";
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);

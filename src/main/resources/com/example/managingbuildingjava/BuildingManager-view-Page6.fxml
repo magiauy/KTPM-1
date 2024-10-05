@@ -62,8 +62,8 @@
                   </Label>
                   <TextField fx:id="TxtField__P6__6" layoutX="166.0" layoutY="408.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
                   <TextField fx:id="TxtField__P6__5" layoutX="167.0" layoutY="337.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240); -fx-background-radius: 20px;" styleClass="black-text" />
-                  <DatePicker fx:id="DP_P6_1" layoutX="167.0" layoutY="158.0" prefHeight="32.0" prefWidth="165.0" />
-                  <DatePicker fx:id="DP_P6_2" layoutX="169.0" layoutY="217.0" prefHeight="32.0" prefWidth="165.0" />
+                  <DatePicker fx:id="DP_P6_1" editable="false" layoutX="167.0" layoutY="158.0" prefHeight="32.0" prefWidth="165.0" />
+                  <DatePicker fx:id="DP_P6_2" editable="false" layoutX="169.0" layoutY="217.0" prefHeight="32.0" prefWidth="165.0" />
                   <ComboBox fx:id="combobox_TxtField__P6__2" layoutX="169.0" layoutY="43.0" prefHeight="30.0" prefWidth="165.0" />
                   <ComboBox fx:id="combobox_TxtField__P6__3" layoutX="169.0" layoutY="101.0" prefHeight="30.0" prefWidth="165.0" />
                   <Label fx:id="Regex__P6__1" layoutX="169.0" layoutY="74.0" prefHeight="17.0" prefWidth="165.0" />

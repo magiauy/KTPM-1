@@ -15,7 +15,7 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
     }
 
     public String generateNewID(Connection conn) throws SQLException {
-        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(serviceTicketID, 6, LEN(serviceTicketID) - 5) AS INT)), 0) FROM ServiceTicket";
+        String query = "SELECT IFNULL(MAX(CAST(SUBSTRING(serviceTicketID, 6, LENGTH(serviceTicketID) - 5) AS INT)), 0) FROM ServiceTicket";
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
@@ -219,8 +219,8 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
             String sql = "SELECT monthlyRentBillID " +
                     "FROM MonthlyRentBill " +
                     "WHERE tenantID = ? AND " +
-                    "MONTH(date) = MONTH(GETDATE()) AND " +
-                    "YEAR(date) = YEAR(GETDATE())";
+                    "MONTH(date) = MONTH(CURDATE()) AND " +
+                    "YEAR(date) = YEAR(CURDATE())";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, tenantID);
             ResultSet resultSet = preparedStatement.executeQuery();

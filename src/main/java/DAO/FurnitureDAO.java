@@ -22,7 +22,7 @@ public class FurnitureDAO implements DAOInterface<Furniture>{
     }
 
     public String generateNewID(Connection conn) throws SQLException {
-        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(furnitureID, 5, LEN(furnitureID) - 4) AS INT)), 0) FROM Furniture";
+        String query = "SELECT IFNULL(MAX(CAST(SUBSTRING(furnitureID, 5, LENGTH(furnitureID) - 4) AS INT)), 0) FROM Furniture";
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
