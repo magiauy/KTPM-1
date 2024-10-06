@@ -71,7 +71,7 @@ public class FurnitureBUS {
         return  furnitureByApartmentID;
     }
 
-    public int importExcel(String url){
+    public int importExcel(String url, Furniture furniture1){
         try {
             FileInputStream fis = new FileInputStream(url);
             Workbook workbook = new XSSFWorkbook(fis);
@@ -79,14 +79,19 @@ public class FurnitureBUS {
             for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
                 Row row = sheet.getRow(rowIndex);
                 if (row != null) {
-                    String furnitureID = row.getCell(0).getStringCellValue();
-                    String apartmentID = row.getCell(1).getStringCellValue();
-                    String nameFurniture = row.getCell(2).getStringCellValue();
-                    String conditionFurniture = row.getCell(3).getStringCellValue();
-                    double price = row.getCell(4).getNumericCellValue();
+                    String furnitureID = null;
+                    String apartmentID = row.getCell(0).getStringCellValue();
+                    String nameFurniture = row.getCell(1).getStringCellValue();
+                    String conditionFurniture = row.getCell(2).getStringCellValue();
+                    double price = row.getCell(3).getNumericCellValue();
                     Furniture furniture = new Furniture(furnitureID, apartmentID, nameFurniture, conditionFurniture, price);
                     listFurniture.add(furniture);
                     add(furniture);
+                    furniture1.setFurnitureID(furniture.getFurnitureID());
+                    furniture1.setApartmentID(furniture.getApartmentID());
+                    furniture1.setNameFurniture(furniture.getNameFurniture());
+                    furniture1.setConditionFurniture(furniture.getConditionFurniture());
+                    furniture1.setPrice(furniture.getPrice());
                 }
             }
 

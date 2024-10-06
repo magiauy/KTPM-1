@@ -182,7 +182,11 @@ public class BuildingManagerController implements Initializable {
             String filePath = selectedFile.getAbsolutePath();
             System.out.println("File đã chọn: " + filePath);
             FurnitureBUS fb = new FurnitureBUS();
-            fb.importExcel(filePath);
+            Furniture furniture = new Furniture();
+            fb.importExcel(filePath, furniture);
+            System.out.println(furniture);
+            furnitureObservableList.add(furniture);
+            table__P5__1.refresh();
         } else {
             // Người dùng đã hủy bỏ việc chọn file
             System.out.println("Không có file nào được chọn.");
