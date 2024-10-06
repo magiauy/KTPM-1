@@ -15,8 +15,8 @@
           <children>
               <Pane prefHeight="720.0" prefWidth="1136.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                   <children>
-                      <DatePicker fx:id="date1" layoutX="497.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
-                      <DatePicker fx:id="date2" layoutX="622.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+                      <DatePicker fx:id="date1" editable="false" layoutX="497.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+                      <DatePicker fx:id="date2" editable="false" layoutX="622.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
                       <Button fx:id="searchButton" layoutX="734.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchDaypage3" text="Tìm Kiếm" />
                       <Button fx:id="resetButton" layoutX="827.0" layoutY="70.0" mnemonicParsing="false" onAction="#resetDay" text="Đặt Lại" />
             <Pane layoutX="33.0" layoutY="121.0" prefHeight="490.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-background-radius: 20px;">
@@ -50,7 +50,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="Date_page3" layoutX="216.0" layoutY="278.0" prefHeight="30.0" prefWidth="165.0" />
+                  <DatePicker fx:id="Date_page3" editable="false" layoutX="216.0" layoutY="278.0" prefHeight="30.0" prefWidth="165.0" />
                </children>
             </Pane>
                     <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleAddReport" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">

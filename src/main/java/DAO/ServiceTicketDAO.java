@@ -274,7 +274,7 @@ public class ServiceTicketDAO implements DAOInterface<ServiceTicket> {
 //            String sql = "SELECT monthlyRentBillID " +
 //                    "FROM MonthlyRentBill " +
 //                    "WHERE tenantID = ?";
-//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//            PreparedStatement = connection.prepareStatement(sql);
 //            preparedStatement.setString(1, tenantID);
 //            ResultSet resultSet = preparedStatement.executeQuery();
 //

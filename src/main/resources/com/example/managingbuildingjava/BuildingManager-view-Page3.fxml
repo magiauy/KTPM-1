@@ -99,8 +99,8 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <DatePicker fx:id="Date__P3__1" layoutX="478.0" layoutY="84.0" prefHeight="28.0" prefWidth="120.0" />
-            <DatePicker fx:id="Date__P3__2" layoutX="634.0" layoutY="84.0" prefHeight="28.0" prefWidth="120.0" />
+            <DatePicker fx:id="Date__P3__1" editable="false" layoutX="478.0" layoutY="84.0" prefHeight="28.0" prefWidth="120.0" />
+            <DatePicker fx:id="Date__P3__2" editable="false" layoutX="634.0" layoutY="84.0" prefHeight="28.0" prefWidth="120.0" />
             <Label alignment="CENTER" layoutX="504.0" layoutY="59.0" prefHeight="19.0" prefWidth="129.0" style="-fx-background-color: rgb(145,205,175, 0.5);" text="Lọc ngày xuất phiếu">
                <font>
                   <Font size="13.0" />

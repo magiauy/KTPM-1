@@ -131,7 +131,7 @@
             </TableView>
             <Pane layoutX="38.0" layoutY="470.0" prefHeight="217.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                  <DatePicker fx:id="selectSersDate" layoutX="182.0" layoutY="90.0" prefHeight="38.0" prefWidth="191.0" />
+                  <DatePicker fx:id="selectSersDate" editable="false" layoutX="182.0" layoutY="90.0" prefHeight="38.0" prefWidth="191.0" />
                   <ComboBox fx:id="comboBox__P1__21" layoutX="21.0" layoutY="90.0" prefHeight="38.0" prefWidth="144.0" promptText="Chọn dịch vụ" style="-fx-background-radius: 10px;" />
                           <Button fx:id="regisMobile1" contentDisplay="GRAPHIC_ONLY" layoutX="147.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#regisMobile" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
                               <graphic>

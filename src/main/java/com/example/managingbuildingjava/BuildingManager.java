@@ -50,10 +50,6 @@ public class BuildingManager extends Application {
             Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
             primaryStage.setTitle("Quản lý tòa nhà!");
             primaryStage.setScene(scene);
-            primaryStage.setOnCloseRequest(event -> {
-                System.out.println("Application is closing...");
-                primaryStage.close();
-            });
             primaryStage.show();
         } catch (IOException e) {
             System.out.println("Error loading BuildingManager view: " + e.getMessage());

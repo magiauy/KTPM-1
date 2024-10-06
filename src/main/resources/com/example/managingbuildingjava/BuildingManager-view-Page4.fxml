@@ -26,8 +26,8 @@
                          <Pane prefHeight="691.0" prefWidth="1089.0" style="-fx-background-color: rgb(240,240,240); -fx-border-width: 0px 0px 2px 0px;" styleClass="TopPane">
                              <children>
                                  <TextField fx:id="search_phieudv" layoutX="281.0" layoutY="16.0" prefHeight="28.0" prefWidth="330.0" promptText="Tìm Theo Mã" style="-fx-background-color: rgb(255, 255, 255);" styleClass="black-text" />
-                                 <DatePicker fx:id="dateStart" layoutX="511.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
-                                 <DatePicker fx:id="dateEnd" layoutX="645.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+                                 <DatePicker fx:id="dateStart" editable="false" layoutX="511.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
+                                 <DatePicker fx:id="dateEnd" editable="false" layoutX="645.0" layoutY="70.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-radius: 10px;" />
                                  <Button fx:id="searchday" layoutX="760.0" layoutY="70.0" mnemonicParsing="false" onAction="#searchDayPPDV" text="Tìm Kiếm" />
                                  <Button fx:id="resetday" layoutX="850.0" layoutY="70.0" mnemonicParsing="false" onAction="#resetDay" text="Đặt Lại" />
                                  <ImageView fitHeight="38.0" fitWidth="42.0" layoutX="234.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
@@ -58,7 +58,7 @@
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
-                                    <DatePicker fx:id="ngayGhiPicker" layoutX="219.0" layoutY="245.0" prefHeight="33.0" prefWidth="169.0" styleClass="black-text" />
+                                    <DatePicker fx:id="ngayGhiPicker" editable="false" layoutX="219.0" layoutY="245.0" prefHeight="33.0" prefWidth="169.0" styleClass="black-text" />
                                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="315.0" prefHeight="32.0" prefWidth="120.0" text="Ghi chú" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
@@ -166,7 +166,7 @@
                                                  <Font name="System Bold" size="13.0" />
                                              </font>
                                          </Label>
-                                    <DatePicker fx:id="ngayGhiPPField" layoutX="215.0" layoutY="239.0" prefHeight="35.0" prefWidth="168.0" styleClass="black-text" />
+                                    <DatePicker fx:id="ngayGhiPPField" editable="false" layoutX="215.0" layoutY="239.0" prefHeight="35.0" prefWidth="168.0" styleClass="black-text" />
                                     
                                      <TextArea fx:id="ghiChuPPField" layoutX="212.0" layoutY="307.0" prefHeight="145.0" prefWidth="174.0" styleClass="black-text" />
                                     <Label alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="108.0" prefHeight="32.0" prefWidth="120.0" text="Mã  phạt" textFill="WHITE">

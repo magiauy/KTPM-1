@@ -60,7 +60,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="datePickerDOB" layoutX="216.0" layoutY="343.0" prefHeight="30.0" prefWidth="165.0" />
+                  <DatePicker fx:id="datePickerDOB" editable="false" layoutX="216.0" layoutY="343.0" prefHeight="30.0" prefWidth="165.0" />
         <ComboBox fx:id="fruitCombo" layoutX="215.0" layoutY="214.0" prefHeight="25.0" prefWidth="165.0" promptText="Chọn giới tính">
   
 </ComboBox>
