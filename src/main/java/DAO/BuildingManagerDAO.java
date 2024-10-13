@@ -21,11 +21,29 @@ public class BuildingManagerDAO implements DAOInterface<BuildingManager> {
         return new BuildingManagerDAO();
     }
 
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(buildingManagerID, 3, LEN(buildingManagerID) - 2) AS INT)), 0) FROM BuildingManager";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "BM" + (lastId + 1);
+        }
+        return "BM1";
+    }
+
     @Override
     public int insert(BuildingManager t) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
+
+            if (t.getBuildingManagerId() == null|| t.getBuildingManagerId().isEmpty()) {
+                String newId = generateNewID(connection);
+                t.setBuildingManagerId(newId);
+            }
+
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO BuildingManager (buildingManagerId, buildingId, lastName, firstName, phoneNumber, dob, gender, citizenIdentityCard, salary) "
                             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");

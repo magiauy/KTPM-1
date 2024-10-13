@@ -2283,6 +2283,7 @@ public class BuildingManagerController implements Initializable {
         }
 
         Service newService = new Service();
+        newService.setServiceID(servicedelete.getServiceID());
         newService.setName(name);
         newService.setPricePerUnit(pricePerUnit);
         newService.setUnit(unit);

@@ -20,11 +20,29 @@ public class FinancialReportDAO implements DAOInterface<FinancialReport> {
         return new FinancialReportDAO();
     }
 
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(financialReportID, 3, LEN(financialReportID) - 2) AS INT)), 0) FROM FinancialReport";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "FR" + (lastId + 1);
+        }
+        return "FR1"; // Nếu bảng rỗng thì bắt đầu từ APT1
+    }
+
     @Override
     public int insert(FinancialReport financialReport) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
+
+            if (financialReport.getFinancialReportID() == null) {
+                String newId = generateNewID(connection);
+                financialReport.setFinancialReportID(newId); // Gán ID mới cho đối tượng Apartment
+            }
+
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO FinancialReport (financialReportID, buildingID, buildingManagerID, date, monthlyRevenue, monthlyOpex, monthlyProfit) VALUES (?, ?, ?, ?, ?, ?, ?)");
 

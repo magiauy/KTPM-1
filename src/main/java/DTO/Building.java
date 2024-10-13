@@ -14,16 +14,16 @@ public class Building {
     private String buildingId;
     private String nameBuilding;
     private String city_Building;
-    private String district_Building;
+//    private String district_Building;
     private String address_Building;
     private int numberOfApartment_Building;
 
-    public Building(String buildingId, String nameBuilding, String city_Buiding, String district_Building,
+    public Building(String buildingId, String nameBuilding, String city_Buiding,
                     String address_Building, int numberOfApartment_Building) {
         this.buildingId = buildingId;
         this.nameBuilding = nameBuilding;
         this.city_Building = city_Buiding;
-        this.district_Building = district_Building;
+//        this.district_Building = district_Building;
         this.address_Building = address_Building;
         this.numberOfApartment_Building = numberOfApartment_Building;
     }
@@ -32,7 +32,7 @@ public class Building {
         this.buildingId = "";
         this.nameBuilding = "";
         this.city_Building = "";
-        this.district_Building = "";
+//        this.district_Building = "";
         this.address_Building = "";
         this.numberOfApartment_Building = 0;
     }
@@ -61,14 +61,6 @@ public class Building {
         this.city_Building = city_Building;
     }
 
-    public String getDistrict_Building() {
-        return district_Building;
-    }
-
-    public void setDistrict_Building(String district_Building) {
-        this.district_Building = district_Building;
-    }
-
     public String getAddress_Building() {
         return address_Building;
     }
@@ -87,7 +79,7 @@ public class Building {
 
     @Override
     public int hashCode() {
-        return Objects.hash(address_Building, buildingId, city_Building, district_Building, nameBuilding,
+        return Objects.hash(address_Building, buildingId, city_Building, nameBuilding,
                 numberOfApartment_Building);
     }
 
@@ -102,7 +94,6 @@ public class Building {
         Building other = (Building) obj;
         return Objects.equals(address_Building, other.address_Building) && Objects.equals(buildingId, other.buildingId)
                 && Objects.equals(city_Building, other.city_Building)
-                && Objects.equals(district_Building, other.district_Building)
                 && Objects.equals(nameBuilding, other.nameBuilding)
                 && numberOfApartment_Building == other.numberOfApartment_Building;
     }
@@ -110,7 +101,7 @@ public class Building {
     @Override
     public String toString() {
         return "Building [buildingId=" + buildingId + ", nameBuilding=" + nameBuilding + ", city_Buiding="
-                + city_Building + ", district_Building=" + district_Building + ", address_Building=" + address_Building
+                + city_Building +  ", address_Building=" + address_Building
                 + ", numberOfApartment_Building=" + numberOfApartment_Building + "]";
     }
 }

@@ -6,9 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="8e742798-47f2-4642-9285-0f9e15a2209a" name="Changes" comment="update pdf final">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/FurnitureBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/FurnitureBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/BuildingBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/BuildingBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BUS/CustomersAccountBUS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BUS/CustomersAccountBUS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/BuildingDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/BuildingDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/BuildingManagerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/BuildingManagerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/FinancialReportDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/FinancialReportDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DAO/TenantDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DAO/TenantDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/Building.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/Building.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DTO/Table_User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DTO/Table_User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BossController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/managingbuildingjava/BuildingManagerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/quanlychothuecanho.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page1.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page2.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page3.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page3.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page4.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/Boss-view-Page4.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/managingbuildingjava/BuildingManager-view-Page2.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +116,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/NGOC/IdeaProjects/BuildingOperationsApplication",
+    "last_opened_file_path": "C:/Users/NGOC/IdeaProjects/KTPM/SwingHotelJava",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -380,7 +393,16 @@
       <workItem from="1728110705390" duration="223000" />
       <workItem from="1728115301593" duration="1804000" />
       <workItem from="1728123070347" duration="29000" />
-      <workItem from="1728186437180" duration="1983000" />
+      <workItem from="1728186437180" duration="2254000" />
+      <workItem from="1728190679904" duration="3659000" />
+      <workItem from="1728459235090" duration="97000" />
+      <workItem from="1728459710732" duration="272000" />
+      <workItem from="1728617884994" duration="2939000" />
+      <workItem from="1728629534368" duration="8275000" />
+      <workItem from="1728705561509" duration="7141000" />
+      <workItem from="1728718382778" duration="1188000" />
+      <workItem from="1728720269421" duration="4712000" />
+      <workItem from="1728745936642" duration="34000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <option name="closed" value="true" />

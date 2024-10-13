@@ -17,21 +17,37 @@ public class BuildingDAO implements DAOInterface<Building> {
         return new BuildingDAO();
     }
 
+    public String generateNewID(Connection conn) throws SQLException {
+        String query = "SELECT ISNULL(MAX(CAST(SUBSTRING(buildingID, 2, LEN(buildingID) - 1) AS INT)), 0) FROM Building";
+
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            int lastId = rs.getInt(1);
+            return "B" + (lastId + 1);
+        }
+        return "B1"; // Nếu bảng rỗng thì bắt đầu từ APT1
+    }
    
     @Override
     public int insert(Building building) {
         int ketQua = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
+
+            if (building.getBuildingId() == null) {
+                String newId = generateNewID(connection);
+                building.setBuildingId(newId);
+            }
+
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO Building (buildingId, name, city, district, address, numberOfApartment) VALUES (?, ?, ?, ?, ?, ?)");
+                    "INSERT INTO Building (buildingId, name, city, address, numberOfApartment) VALUES (?, ?, ?, ?, ?)");
 
             preparedStatement.setString(1, building.getBuildingId());
             preparedStatement.setString(2, building.getNameBuilding());
             preparedStatement.setString(3, building.getCity_Building());
-            preparedStatement.setString(4, building.getDistrict_Building());
-            preparedStatement.setString(5, building.getAddress_Building());
-            preparedStatement.setInt(6, building.getNumberOfApartment_Building());
+            preparedStatement.setString(4, building.getAddress_Building());
+            preparedStatement.setInt(5, building.getNumberOfApartment_Building());
 
             ketQua = preparedStatement.executeUpdate();
 
@@ -52,13 +68,12 @@ public class BuildingDAO implements DAOInterface<Building> {
         try {
             Connection connection = JDBCUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE Building SET name = ?, city = ?, district = ?, address = ?, numberOfApartment = ? WHERE buildingID = ?");
+                    "UPDATE Building SET name = ?, city = ?, address = ?, numberOfApartment = ? WHERE buildingID = ?");
             preparedStatement.setString(1, building.getNameBuilding());
             preparedStatement.setString(2, building.getCity_Building());
-            preparedStatement.setString(3, building.getDistrict_Building());
-            preparedStatement.setString(4, building.getAddress_Building());
-            preparedStatement.setInt(5, building.getNumberOfApartment_Building());
-            preparedStatement.setString(6, building.getBuildingId());
+            preparedStatement.setString(3, building.getAddress_Building());
+            preparedStatement.setInt(4, building.getNumberOfApartment_Building());
+            preparedStatement.setString(5, building.getBuildingId());
 
             ketQua = preparedStatement.executeUpdate();
 
@@ -103,11 +118,10 @@ public class BuildingDAO implements DAOInterface<Building> {
                 String buildingId = resultSet.getString("buildingID");
                 String nameBuilding = resultSet.getString("name");
                 String city_Building = resultSet.getString("city");
-                String district_Building = resultSet.getString("district");
                 String address_Building = resultSet.getString("address");
                 int numberOfApartment_Building = resultSet.getInt("numberOfApartment");
 
-                Building building = new Building(buildingId, nameBuilding, city_Building, district_Building, address_Building, numberOfApartment_Building);
+                Building building = new Building(buildingId, nameBuilding, city_Building, address_Building, numberOfApartment_Building);
                 buildings.add(building);
             }
 
@@ -134,11 +148,10 @@ public class BuildingDAO implements DAOInterface<Building> {
                 String buildingId = resultSet.getString("buildingID");
                 String nameBuilding = resultSet.getString("name");
                 String city_Building = resultSet.getString("city");
-                String district_Building = resultSet.getString("district");
                 String address_Building = resultSet.getString("address");
                 int numberOfApartment_Building = resultSet.getInt("numberOfApartment");
 
-                building = new Building(buildingId, nameBuilding, city_Building, district_Building, address_Building, numberOfApartment_Building);
+                building = new Building(buildingId, nameBuilding, city_Building, address_Building, numberOfApartment_Building);
             }
             resultSet.close();
             preparedStatement.close();
@@ -148,4 +161,42 @@ public class BuildingDAO implements DAOInterface<Building> {
         }
         return building;
     }
+
+    public ArrayList<Building> getBuildingsWithoutManager() {
+        ArrayList<Building> buildingsWithoutManager = new ArrayList<>();
+        try {
+            Connection connection = JDBCUtil.getConnection();
+
+            // Câu truy vấn để lấy các tòa nhà không có quản lý
+            String sql = "SELECT b.* " +
+                    "FROM Building b " +
+                    "LEFT JOIN BuildingManager bm ON b.buildingID = bm.buildingID " +
+                    "WHERE bm.buildingID IS NULL";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Duyệt qua kết quả trả về
+            while (resultSet.next()) {
+                String buildingId = resultSet.getString("buildingID");
+                String nameBuilding = resultSet.getString("name");
+                String city_Building = resultSet.getString("city");
+                String address_Building = resultSet.getString("address");
+                int numberOfApartment_Building = resultSet.getInt("numberOfApartment");
+
+                // Tạo đối tượng Building và thêm vào danh sách
+                Building building = new Building(buildingId, nameBuilding, city_Building, address_Building, numberOfApartment_Building);
+                buildingsWithoutManager.add(building);
+            }
+
+            // Đóng tài nguyên
+            resultSet.close();
+            preparedStatement.close();
+            JDBCUtil.closeConnection(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return buildingsWithoutManager;
+    }
+
 }

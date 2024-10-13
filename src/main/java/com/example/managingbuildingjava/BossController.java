@@ -135,8 +135,6 @@ public class BossController implements Initializable {
 
     @FXML
     private TableColumn<Building, Integer> soLuongCanHoColumn = new TableColumn<>();
-    @FXML
-    private TextField TxtField__P1__1 = new TextField();
 
     @FXML
     private TextField TxtField__P1__search = new TextField();
@@ -153,6 +151,9 @@ public class BossController implements Initializable {
     private TextField TxtField__P1__5 = new TextField();
     @FXML
     private TextField TxtField__P1__6 = new TextField();
+
+    @FXML
+    private Button bnt__P1__add = new Button();
 
     @FXML
     private TableColumn<DTO.BuildingManager, String> buildingManagerIdColumn = new TableColumn<>();
@@ -184,9 +185,6 @@ public class BossController implements Initializable {
     private TableColumn<DTO.BuildingManager, Float> salaryColumn = new TableColumn<>();
 
     @FXML
-    private TextField TxtField__b1 = new TextField();
-
-    @FXML
 
     private TextField TxtField__b2 = new TextField();
     @FXML
@@ -214,8 +212,14 @@ public class BossController implements Initializable {
 
     @FXML
     private ComboBox<String> comboBox__P1__1 = new ComboBox<>();
+
     @FXML
-    private ComboBox<String> comboBox__P1__2 = new ComboBox<>();
+    private ComboBox<String> combobox__P2__1 = new ComboBox<>();
+
+    @FXML
+    private Button bnt__P2__add = new Button();
+
+
     @FXML
     private Label time, numberOfBuildings, monthlyRevenueLabel = new Label();
     @FXML
@@ -247,10 +251,6 @@ public class BossController implements Initializable {
     private TableColumn<FinancialReport, Float> loiNhuanColumn = new TableColumn<>();
 
     @FXML
-    private TextField TxtField__r1 = new TextField();
-    @FXML
-    private TextField TxtField__r2 = new TextField();
-    @FXML
     private TextField TxtField__r3 = new TextField();
     @FXML
     private TextField TxtField__r4 = new TextField();
@@ -265,15 +265,22 @@ public class BossController implements Initializable {
     @FXML
     private DatePicker date2 = new DatePicker();
 
+    @FXML
+    private ComboBox<String> combobox__b = new ComboBox<>();
+
     //page 4
     @FXML
-    private TableColumn<Table_User, String> Colum_P7_3 = new TableColumn<>();
+    private TableColumn<Table_User, String> Column_P7_3 = new TableColumn<>();
+
+    @FXML
+    private TableColumn<Table_User, String> Column_P7_4 = new TableColumn<>();
 
     @FXML
     private TableColumn<Table_User, String> Column_P7_1 = new TableColumn<>();
 
     @FXML
     private TableColumn<Table_User, LocalDate> Column_P7_2 = new TableColumn<>();
+
 
     @FXML
     private TextField TxtField__P7__search = new TextField();
@@ -298,19 +305,35 @@ public class BossController implements Initializable {
         for (LeaseAgreement leaseAgreement : leaseAgreements) {
             Table_User tableUser = new Table_User();
             tableUser.setT(leaseAgreement.getTenantID());
+            tableUser.setActive("Chưa có tài khoản");
+            CustomersAccountBUS customersAccountBUS = new CustomersAccountBUS();
+            ArrayList<CustomersAccount> customersAccounts = customersAccountBUS.getAll();
+            for (CustomersAccount customersAccount : customersAccounts) {
+                if (customersAccount.getId().equals(leaseAgreement.getTenantID())) {
+                    if (leaseAgreement.getLeaseEndDate().isBefore(LocalDate.now())){
+                        boolean deleteSuccess = customersAccountBUS.delete(customersAccount);
+                        if (deleteSuccess){
+                            tableUser.setActive("Vô hiệu");
+                        }
+                    } else {
+                        tableUser.setActive("Đang hoạt động");
+                    }
+                }
+            }
             tableUser.setLa(leaseAgreement.getLeaseAgreementID());
             tableUser.setDe(leaseAgreement.getLeaseEndDate());
+
             tableUserObservableList.add(tableUser);
         }
         List<Tenant> tenants = TenantBUS.getInstance().getTenantsNotInLeaseAgreement();
         for (Tenant tenant : tenants) {
             Table_User tableUser = new Table_User();
             tableUser.setT(tenant.getTenantID());
-            tableUser.setLa("");
+            tableUser.setLa(null);
             tableUser.setDe(null);
+            tableUser.setActive("Chưa có tài khoản");
             tableUserObservableList.add(tableUser);
         }
-
 
         return tableUserObservableList;
     }
@@ -318,7 +341,8 @@ public class BossController implements Initializable {
     private void initTableUser() {
         Column_P7_1.setCellValueFactory(new PropertyValueFactory<>("t"));
         Column_P7_2.setCellValueFactory(new PropertyValueFactory<>("la"));
-        Colum_P7_3.setCellValueFactory(new PropertyValueFactory<>("de"));
+        Column_P7_3.setCellValueFactory(new PropertyValueFactory<>("de"));
+        Column_P7_4.setCellValueFactory(new PropertyValueFactory<>("active"));
         tableUserObservableList = getUserList();
         table__P7__1.setItems(tableUserObservableList);
     }
@@ -335,8 +359,8 @@ public class BossController implements Initializable {
                 alert.setTitle("Thông báo");
                 alert.setHeaderText(null);
                 alert.setContentText("Thêm thành công tài khoản của khách hàng "+selected.getT());
-
                 alert.showAndWait();
+                initTableUser();
             } else {
                 Alert alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Thông báo");
@@ -345,8 +369,6 @@ public class BossController implements Initializable {
                 alert.showAndWait();
             }
         }
-
-
     }
 
     @FXML
@@ -555,12 +577,81 @@ public class BossController implements Initializable {
 
         showcomboboxBuildingManager();
         showcombobox();
-        box_page1();
+//        box_page1();
 //        keyenter();
         keyenter1();
-        box_page0();
+//        box_page0();
         initTableUser();
 
+        BuildingBUS bus = new BuildingBUS();
+
+        //Khởi tạo page 2
+        ArrayList<Building> buildingNotInBuildingManager = bus.getBuildingsWithoutManager();
+        ArrayList<String> buildingIDNotInBuildingManager = new ArrayList<>();
+        for (Building building : buildingNotInBuildingManager) {
+            buildingIDNotInBuildingManager.add(building.getBuildingId());
+        }
+        combobox__P2__1.getItems().addAll(buildingIDNotInBuildingManager);
+
+
+        //
+
+        //Khởi tạo page 3
+
+
+        ArrayList<Building> buildings = bus.getAll();
+        ArrayList<String> buildingID = new ArrayList<>();
+        for (Building building : buildings) {
+            buildingID.add(building.getBuildingId());
+        }
+        combobox__b.getItems().addAll(buildingID);
+        TxtField__r4.setDisable(true);
+        //
+
+    }
+
+    private boolean processing = false; // Cờ để ngăn vòng lặp vô hạn
+
+    @FXML
+    void initCombobox__b(ActionEvent event) {
+        // Bỏ qua nếu hàm được kích hoạt do thay đổi lập trình
+        if (processing) {
+            return;
+        }
+
+        // Kiểm tra nếu giá trị ComboBox là null
+        String buildingid__getCombobox = combobox__b.getSelectionModel().getSelectedItem();
+        if (buildingid__getCombobox == null) {
+            return; // Không xử lý gì thêm nếu không có giá trị được chọn
+        }
+
+        BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
+        ArrayList<BuildingManager> buildingManagers = buildingManagerBUS.getAll();
+        boolean flag = false;
+
+        for (BuildingManager buildingManager : buildingManagers) {
+            if (buildingManager.getBuildingId().equals(buildingid__getCombobox)) {
+                TxtField__r4.setText(buildingManager.getBuildingManagerId());
+                flag = true;
+                break;
+            }
+        }
+
+        if (!flag) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Không tìm thấy quản lý tòa nhà");
+            alert.setHeaderText(null);
+            alert.setContentText("Tòa nhà này chưa có nhân viên.");
+            alert.showAndWait();
+
+            // Sử dụng Platform.runLater để tránh vòng lặp khi set giá trị ComboBox
+            processing = true;
+            Platform.runLater(() -> {
+                combobox__b.setValue(null); // Xóa giá trị ComboBox
+                TxtField__r4.setText("");
+                processing = false;
+            });
+        }
     }
 
 //    public void keyenter() {
@@ -600,67 +691,67 @@ public class BossController implements Initializable {
         });
     }
 
-    public void box_page1() {
-        Platform.runLater(() -> {
-            if (box_dress != null) {
-                ObservableList<String> districts = FXCollections.observableArrayList(
-                        "Tất Cả",
-                        "Quận 1",
-                        "Quận 2",
-                        "Quận 3",
-                        "Quận 4",
-                        "Quận 5",
-                        "Quận 6",
-                        "Quận 7",
-                        "Quận 8",
-                        "Quận 9",
-                        "Quận 10",
-                        "Quận 11",
-                        "Quận 12",
-                        "Quận Bình Tân",
-                        "Quận Bình Thạnh",
-                        "Quận Gò Vấp",
-                        "Quận Phú Nhuận",
-                        "Quận Tân Bình",
-                        "Quận Tân Phú",
-                        "Quận Thủ Đức");
-                box_dress.setItems(districts);
-            } else {
-                System.err.println("box_dressmbo is null. Check FXML and controller connection.");
-            }
-        });
-    }
+//    public void box_page1() {
+//        Platform.runLater(() -> {
+//            if (box_dress != null) {
+//                ObservableList<String> districts = FXCollections.observableArrayList(
+//                        "Tất Cả",
+//                        "Quận 1",
+//                        "Quận 2",
+//                        "Quận 3",
+//                        "Quận 4",
+//                        "Quận 5",
+//                        "Quận 6",
+//                        "Quận 7",
+//                        "Quận 8",
+//                        "Quận 9",
+//                        "Quận 10",
+//                        "Quận 11",
+//                        "Quận 12",
+//                        "Quận Bình Tân",
+//                        "Quận Bình Thạnh",
+//                        "Quận Gò Vấp",
+//                        "Quận Phú Nhuận",
+//                        "Quận Tân Bình",
+//                        "Quận Tân Phú",
+//                        "Quận Thủ Đức");
+//                box_dress.setItems(districts);
+//            } else {
+//                System.err.println("box_dressmbo is null. Check FXML and controller connection.");
+//            }
+//        });
+//    }
 
-    public void box_page0() {
-        Platform.runLater(() -> {
-            if (TxtField__P1__4 != null) {
-                ObservableList<String> districts = FXCollections.observableArrayList(
-                     
-                        "Quận 1",
-                        "Quận 2",
-                        "Quận 3",
-                        "Quận 4",
-                        "Quận 5",
-                        "Quận 6",
-                        "Quận 7",
-                        "Quận 8",
-                        "Quận 9",
-                        "Quận 10",
-                        "Quận 11",
-                        "Quận 12",
-                        "Quận Bình Tân",
-                        "Quận Bình Thạnh",
-                        "Quận Gò Vấp",
-                        "Quận Phú Nhuận",
-                        "Quận Tân Bình",
-                        "Quận Tân Phú",
-                        "Quận Thủ Đức");
-                TxtField__P1__4.setItems(districts);
-            } else {
-                System.err.println("box_dressmbo is null. Check FXML and controller connection.");
-            }
-        });
-    }
+//    public void box_page0() {
+//        Platform.runLater(() -> {
+//            if (TxtField__P1__4 != null) {
+//                ObservableList<String> districts = FXCollections.observableArrayList(
+//
+//                        "Quận 1",
+//                        "Quận 2",
+//                        "Quận 3",
+//                        "Quận 4",
+//                        "Quận 5",
+//                        "Quận 6",
+//                        "Quận 7",
+//                        "Quận 8",
+//                        "Quận 9",
+//                        "Quận 10",
+//                        "Quận 11",
+//                        "Quận 12",
+//                        "Quận Bình Tân",
+//                        "Quận Bình Thạnh",
+//                        "Quận Gò Vấp",
+//                        "Quận Phú Nhuận",
+//                        "Quận Tân Bình",
+//                        "Quận Tân Phú",
+//                        "Quận Thủ Đức");
+//                TxtField__P1__4.setItems(districts);
+//            } else {
+//                System.err.println("box_dressmbo is null. Check FXML and controller connection.");
+//            }
+//        });
+//    }
 
     public void showcombobox() {
         Platform.runLater(() -> {
@@ -699,7 +790,7 @@ public class BossController implements Initializable {
             maToaNhaColumn.setCellValueFactory(new PropertyValueFactory<>("buildingId"));
             tenColumn.setCellValueFactory(new PropertyValueFactory<>("nameBuilding"));
             thanhPhoColumn.setCellValueFactory(new PropertyValueFactory<>("city_Building"));
-            quanColumn.setCellValueFactory(new PropertyValueFactory<>("district_Building"));
+//            quanColumn.setCellValueFactory(new PropertyValueFactory<>("district_Building"));
             diaChiColumn.setCellValueFactory(new PropertyValueFactory<>("address_Building"));
             soLuongCanHoColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfApartment_Building"));
             table__view.setItems(observableBuildingList);
@@ -755,42 +846,97 @@ public class BossController implements Initializable {
 
     }
 
+    private Building previouslySelectedRow = null; // Lưu trữ dòng đã chọn trước đó
+
     public void handleBuilding() {
         table__view.setOnMouseClicked(event -> {
+            // Kiểm tra dòng hiện tại được chọn
+            Building selectedRow = table__view.getSelectionModel().getSelectedItem();
+
             if (event.getClickCount() == 1) {
-                Building selectedRow = table__view.getSelectionModel().getSelectedItem();
-                if (selectedRow != null) {
-                    TxtField__P1__1.setText(selectedRow.getBuildingId());
+                // Nếu chọn lại đúng dòng đã được chọn trước đó, bỏ chọn
+                if (selectedRow != null && selectedRow.equals(previouslySelectedRow)) {
+                    // Bỏ chọn và xóa thông tin trong text field
+                    table__view.getSelectionModel().clearSelection(); // Bỏ chọn
+                    TxtField__P1__2.clear();
+                    TxtField__P1__3.clear();
+                    TxtField__P1__5.clear();
+                    TxtField__P1__6.clear();
+                    selectedBuildingToDelete = null;
+                    previouslySelectedRow = null; // Đặt lại trạng thái chọn
+
+                    // Enable nút bnt__P1__add
+                    bnt__P1__add.setDisable(false);
+                }
+                // Nếu chọn dòng mới, điền thông tin và disable nút
+                else if (selectedRow != null) {
                     TxtField__P1__2.setText(selectedRow.getNameBuilding());
                     TxtField__P1__3.setText(selectedRow.getCity_Building());
-                    // Sử dụng setValue để chọn giá trị trong ComboBox
-                    TxtField__P1__4.setValue(selectedRow.getDistrict_Building()); // districtComboBox là tên của
-                                                                                   // ComboBox của bạn
                     TxtField__P1__5.setText(selectedRow.getAddress_Building());
-                    int numberOfApartments = selectedRow.getNumberOfApartment_Building();
-                    TxtField__P1__6.setText(String.valueOf(numberOfApartments));
+                    TxtField__P1__6.setText(String.valueOf(selectedRow.getNumberOfApartment_Building()));
                     selectedBuildingToDelete = selectedRow;
+                    previouslySelectedRow = selectedRow; // Cập nhật dòng đã chọn
+
+                    // Disable nút bnt__P1__add
+                    bnt__P1__add.setDisable(true);
+                }
+                // Nếu không có dòng nào được chọn
+                else {
+                    TxtField__P1__2.clear();
+                    TxtField__P1__3.clear();
+                    TxtField__P1__5.clear();
+                    TxtField__P1__6.clear();
+                    selectedBuildingToDelete = null;
+                    previouslySelectedRow = null;
+
+                    // Enable nút bnt__P1__add
+                    bnt__P1__add.setDisable(false);
                 }
             }
         });
     }
 
+
+
+    private DTO.BuildingManager previouslySelectedRow1 = null; // Lưu trữ dòng đã chọn trước đó
+
     public void handbuildingmanager() {
         table__view2.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) {
+                // Kiểm tra dòng hiện tại được chọn
                 DTO.BuildingManager selectedRow = table__view2.getSelectionModel().getSelectedItem();
-                if (selectedRow != null) {
 
-                    TxtField__b1.setText(selectedRow.getBuildingManagerId());
-                    TxtField__b2.setText(selectedRow.getBuildingId());
+                // Nếu chọn lại đúng dòng đã được chọn trước đó, bỏ chọn
+                if (selectedRow != null && selectedRow.equals(previouslySelectedRow1)) {
+                    // Bỏ chọn và xóa thông tin trong các text field
+                    table__view2.getSelectionModel().clearSelection(); // Bỏ chọn
+                    combobox__P2__1.setValue(null);
+                    TxtField__b3.clear();
+                    TxtField__b4.clear();
+                    TxtField__b5.clear();
+                    TxtField__b6.clear();
+                    TxtField__b7.clear();
+                    datePickerDOB.setValue(null);
+                    fruitCombo.getSelectionModel().clearSelection();
+                    selectedBuildingToDelete1 = null;
+                    previouslySelectedRow1 = null; // Đặt lại trạng thái chọn
+
+                    // Enable nút bnt__P2__add
+                    bnt__P2__add.setDisable(false);
+                }
+                // Nếu chọn dòng mới, điền thông tin và disable nút
+                else if (selectedRow != null) {
+                    combobox__P2__1.setValue(selectedRow.getBuildingId());
                     TxtField__b3.setText(selectedRow.getFirstName());
                     TxtField__b4.setText(selectedRow.getLastName());
                     TxtField__b5.setText(selectedRow.getPhoneNumber());
                     TxtField__b6.setText(selectedRow.getCitizenIdentityCard());
+
                     double salary = selectedRow.getSalary();
                     DecimalFormat df = new DecimalFormat("#,##0.00"); // Định dạng số với 2 chữ số sau dấu thập phân
                     String formattedSalary = df.format(salary);
                     TxtField__b7.setText(formattedSalary);
+
                     datePickerDOB.setValue(selectedRow.getDob());
                     String genderValue = selectedRow.getGender();
                     if (genderValue != null && !genderValue.isEmpty()) {
@@ -799,11 +945,31 @@ public class BossController implements Initializable {
                         fruitCombo.getSelectionModel().clearSelection();
                     }
                     selectedBuildingToDelete1 = selectedRow;
+                    previouslySelectedRow1 = selectedRow; // Cập nhật dòng đã chọn
 
+                    // Disable nút bnt__P2__add
+                    bnt__P2__add.setDisable(true);
+                }
+                // Nếu không có dòng nào được chọn
+                else {
+                    combobox__P2__1.setValue(null);
+                    TxtField__b3.clear();
+                    TxtField__b4.clear();
+                    TxtField__b5.clear();
+                    TxtField__b6.clear();
+                    TxtField__b7.clear();
+                    datePickerDOB.setValue(null);
+                    fruitCombo.getSelectionModel().clearSelection();
+                    selectedBuildingToDelete1 = null;
+                    previouslySelectedRow1 = null;
+
+                    // Enable nút bnt__P2__add
+                    bnt__P2__add.setDisable(false);
                 }
             }
         });
     }
+
 
     public void handleFianceRerport() {
         table__view3.setOnMouseClicked(event -> {
@@ -811,9 +977,8 @@ public class BossController implements Initializable {
                 FinancialReport selectedRow = table__view3.getSelectionModel().getSelectedItem();
                 if (selectedRow != null) {
 
-                    TxtField__r1.setText(selectedRow.getFinancialReportID());
-                    TxtField__r2.setText(selectedRow.getBuildingID());
                     TxtField__r4.setText(selectedRow.getBuildingManagerID());
+                    combobox__b.setValue(selectedRow.getBuildingID());
 
                     // Xử lý monthlyOpex dạng Float
                     Float opex = selectedRow.getMonthlyOpex();
@@ -864,18 +1029,12 @@ private boolean containsNumber(String s) {
     // =======Building======
     public void handleaddBuilding() {
         try {
-            String buildingId = TxtField__P1__1.getText();
             String nameBuilding = TxtField__P1__2.getText();
             String city_Building = TxtField__P1__3.getText();
-            String district_Building = TxtField__P1__4.getValue();
-            if (district_Building == null || district_Building.isEmpty()) {
-                showAlert("Lỗi", "Vui lòng chọn quận.", AlertType.ERROR);
-                return;
-            }
             String address_Building = TxtField__P1__5.getText();
             int numberOfApartment_Building = Integer.parseInt(TxtField__P1__6.getText());
 
-            if (buildingId.isEmpty() || nameBuilding.isEmpty() || city_Building.isEmpty() || district_Building.isEmpty()
+            if (nameBuilding.isEmpty() || city_Building.isEmpty()
                     || address_Building.isEmpty()) {
                 showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
                 return;
@@ -893,7 +1052,6 @@ private boolean containsNumber(String s) {
             newBuilding.setBuildingId(buildingId);
             newBuilding.setNameBuilding(nameBuilding);
             newBuilding.setCity_Building(city_Building);
-            newBuilding.setDistrict_Building(district_Building);
             newBuilding.setAddress_Building(address_Building);
             newBuilding.setNumberOfApartment_Building(numberOfApartment_Building);
 
@@ -937,7 +1095,6 @@ private boolean containsNumber(String s) {
 //    }
 
     public void resetTextfield() {
-        TxtField__P1__1.setText("");
         TxtField__P1__2.setText("");
         TxtField__P1__3.setText("");
   
@@ -952,7 +1109,6 @@ private boolean containsNumber(String s) {
             showAlert("Lỗi", "Không có tòa nhà nào được chọn để Sửa.", AlertType.ERROR);
             return;
         }
-        String buildingId = TxtField__P1__1.getText().trim();
         String nameBuilding = TxtField__P1__2.getText();
         String city_Building = TxtField__P1__3.getText();
         String district_Building = TxtField__P1__4.getValue();
@@ -976,8 +1132,8 @@ private boolean containsNumber(String s) {
         Building editedBuilding = new Building();
         editedBuilding.setBuildingId(buildingId);
         editedBuilding.setNameBuilding(nameBuilding);
-        editedBuilding.setCity_Building(city_Building);
-        editedBuilding.setDistrict_Building(district_Building);
+//        editedBuilding.setCity_Building(city_Building);
+//        editedBuilding.setDistrict_Building(district_Building);
         editedBuilding.setAddress_Building(address_Building);
         editedBuilding.setNumberOfApartment_Building(numberOfApartment_Building);
 
@@ -994,26 +1150,26 @@ private boolean containsNumber(String s) {
         }
     }
 
-    public void selectDresss() {
-        String dress = box_dress.getValue();
-        if(dress.equals("Tất Cả")){
-            BuildingBUS buildingBUS = new BuildingBUS();
-            ArrayList<Building> searchResult = buildingBUS.getAll();
-            buildingsList.addAll(searchResult);
-            ObservableList<Building> observableBuildingList = FXCollections
-                    .observableArrayList(searchResult);
-            table__view.setItems(observableBuildingList);
-        }else {
-            BuildingBUS buildingBUS = new BuildingBUS();
-            ArrayList<Building> searchResult = buildingBUS.search(dress, "quận");
-            ObservableList<Building> observableBuildingList = FXCollections
-                    .observableArrayList(searchResult);
-            table__view.setItems(observableBuildingList);
-        }
-
-
-       
-    }
+//    public void selectDresss() {
+//        String dress = box_dress.getValue();
+//        if(dress.equals("Tất Cả")){
+//            BuildingBUS buildingBUS = new BuildingBUS();
+//            ArrayList<Building> searchResult = buildingBUS.getAll();
+//            buildingsList.addAll(searchResult);
+//            ObservableList<Building> observableBuildingList = FXCollections
+//                    .observableArrayList(searchResult);
+//            table__view.setItems(observableBuildingList);
+//        }else {
+//            BuildingBUS buildingBUS = new BuildingBUS();
+//            ArrayList<Building> searchResult = buildingBUS.search(dress, "quận");
+//            ObservableList<Building> observableBuildingList = FXCollections
+//                    .observableArrayList(searchResult);
+//            table__view.setItems(observableBuildingList);
+//        }
+//
+//
+//
+//    }
 
     public void handleseacrhName() {
        String name = seacrch_namepage1.getText();
@@ -1035,8 +1191,7 @@ private boolean containsNumber(String s) {
 
     /////// BuildingManeger///====================
     public void handleAddpage2() {
-        String buildingManagerId = TxtField__b1.getText();
-        String buildingId = TxtField__b2.getText();
+        String buildingId = combobox__P2__1.getSelectionModel().getSelectedItem();
         String lastName = TxtField__b3.getText();
         String firstName = TxtField__b4.getText();
         String phoneNumber = TxtField__b5.getText();
@@ -1045,7 +1200,7 @@ private boolean containsNumber(String s) {
         String citizenIdentityCard = TxtField__b6.getText();
         Float salary = Float.parseFloat(TxtField__b7.getText().replaceAll(",", ""));
 
-        if (buildingManagerId.isEmpty() || buildingId.isEmpty() || lastName.isEmpty() || firstName.isEmpty()
+        if (buildingId.isEmpty() || lastName.isEmpty() || firstName.isEmpty()
                 || phoneNumber.isEmpty() || dob == null || gender == null) {
             showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
             return;
@@ -1066,7 +1221,6 @@ private boolean containsNumber(String s) {
         }
 
         DTO.BuildingManager newBuildingManager = new DTO.BuildingManager();
-        newBuildingManager.setBuildingManagerId(buildingManagerId);
         newBuildingManager.setBuildingId(buildingId);
         newBuildingManager.setLastName(lastName);
         newBuildingManager.setFirstName(firstName);
@@ -1082,6 +1236,7 @@ private boolean containsNumber(String s) {
             showAlert("Thành Công", "Đã Thêm Thành Công", AlertType.CONFIRMATION);
             updateBuildingManeger();
             clearInputFields();
+            combobox__P2__1.getItems().remove(buildingId);
 
         } else {
             showAlert("Lỗi", "Mã đã tồn tại trong cơ sở dữ liệu.", AlertType.ERROR);
@@ -1089,9 +1244,9 @@ private boolean containsNumber(String s) {
     }
 
     private void clearInputFields() {
-        TxtField__b1.clear();
         TxtField__b2.clear();
         TxtField__b3.clear();
+        combobox__P2__1.getSelectionModel().clearSelection();
         TxtField__b4.clear();
         TxtField__b5.clear();
         TxtField__b6.clear();
@@ -1145,40 +1300,34 @@ private boolean containsNumber(String s) {
             showAlert("Lỗi", "Không có Quản Lí nào được chọn để sửa.", AlertType.ERROR);
             return;
         }
-        
-        String buildingManagerId = TxtField__b1.getText();
-        String buildingId = TxtField__b2.getText();
+
+//        String buildingId = TxtField__b2.getText();
         String lastName = TxtField__b3.getText();
         String firstName = TxtField__b4.getText();
         String phoneNumber = TxtField__b5.getText();
         LocalDate dob = datePickerDOB.getValue();
         String gender = fruitCombo.getValue();
 
-        if (buildingManagerId.isEmpty() || buildingId.isEmpty()
-                || phoneNumber.isEmpty() || dob == null || gender == null) {
-            showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin.", AlertType.ERROR);
-            return;
-        }
-
-        if (lastName.length() > 40 || firstName.length() > 40) {
+        if (lastName.length() >255 || firstName.length() > 255) {
             showAlert("Lỗi", "Họ và tên không được quá 255 ký tự.", AlertType.ERROR);
+            System.out.println("a");
             return;
         }
 
         if (containsNumber(lastName) ) {
             showAlert("Lỗi", "Tên  không được chứa số.", AlertType.ERROR);
+            System.out.println("b");
             return;
         }
         if (containsNumber(firstName)) {
             showAlert("Lỗi", "Tên  không được chứa số.", AlertType.ERROR);
+            System.out.println("c");
             return;
         }
 
         String citizenIdentityCard = TxtField__b6.getText();
         Float salary = Float.parseFloat(TxtField__b7.getText().replaceAll(",", ""));
         BuildingManager buildingManager = new BuildingManager();
-        buildingManager.setBuildingManagerId(buildingManagerId);
-        buildingManager.setBuildingId(buildingId);
         buildingManager.setLastName(lastName);
         buildingManager.setFirstName(firstName);
         buildingManager.setPhoneNumber(phoneNumber);
@@ -1186,18 +1335,16 @@ private boolean containsNumber(String s) {
         buildingManager.setGender(gender);
         buildingManager.setCitizenIdentityCard(citizenIdentityCard);
         buildingManager.setSalary(salary);
-        System.out.println(salary);
         BuildingManagerBUS buildingManagerBUS = new BuildingManagerBUS();
         boolean check = buildingManagerBUS.update(buildingManager);
         if (check) {
-            if (check) {
-                showAlert("Thành Công", "Cập nhật thành công", AlertType.CONFIRMATION);
-                updateBuildingManeger();
-                clearInputFields();
-            } else {
+            showAlert("Thành Công", "Cập nhật thành công", AlertType.CONFIRMATION);
+            updateBuildingManeger();
+            clearInputFields();
+        } else {
                 showAlert("Thất Bại", "Không thể cập nhật", AlertType.ERROR);
             }
-        }
+
     }
 
     public void SelectGender() {
@@ -1232,8 +1379,7 @@ private boolean containsNumber(String s) {
 
    public void handleAddReport() {
 
-       String financialReportID = TxtField__r1.getText();
-       String buildingID = TxtField__r2.getText();
+       String buildingID = combobox__b.getSelectionModel().getSelectedItem();
        String buildingManagerID = TxtField__r4.getText();
        LocalDate date = Date_page3.getValue();
        FinancialReportBUS reportBUS = new FinancialReportBUS();
@@ -1257,7 +1403,6 @@ private boolean containsNumber(String s) {
 
 
        FinancialReport newFinancialReport = new FinancialReport();
-       newFinancialReport.setFinancialReportID(financialReportID);
        newFinancialReport.setBuildingID(buildingID);
        newFinancialReport.setBuildingManagerID(buildingManagerID);
        newFinancialReport.setDate(date);
@@ -1319,58 +1464,54 @@ private boolean containsNumber(String s) {
     }
 
     public void handEditReport() {
-        if (selecFinancialReport == null) {
-
-            showAlert("Lỗi", "Không có báo cáo nào được chọn để sửa.", AlertType.ERROR);
-            return;
-        }
-
-        String financialReportID = TxtField__r1.getText();
-        String buildingID = TxtField__r2.getText();
-        String buildingManagerID = TxtField__r4.getText();
-        LocalDate date = Date_page3.getValue();
-        FinancialReportBUS reportBUS = new FinancialReportBUS();
-        Month month = date.getMonth();
-        int year = date.getYear();
-        Float revenue = (reportBUS.calculateMonthlyRevenueForBuilding(buildingID, month, year));
-        String revenueStr = String.valueOf(revenue);
-        String revenueWithoutComma = revenueStr.replaceAll(",", "");
-        Float doanhthu = Float.parseFloat(revenueWithoutComma);
-        System.out.println(doanhthu);
-
-        Float monthlyOpex = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
-
-        Float LoiNhuan = reportBUS.LoiNhuan(buildingID, month, year, monthlyOpex);
-        String LoiNhuan1 = String.valueOf(LoiNhuan);
-        String LoiNhuan2 = LoiNhuan1.replaceAll(",", "");
-        Float LoiNhuan3 = Float.parseFloat(LoiNhuan2);
-
-        System.out.println(LoiNhuan3);
-
-        FinancialReport newFinancialReport = new FinancialReport();
-        newFinancialReport.setFinancialReportID(financialReportID);
-        newFinancialReport.setBuildingID(buildingID);
-        newFinancialReport.setBuildingManagerID(buildingManagerID);
-        newFinancialReport.setDate(date);
-        newFinancialReport.setMonthlyRevenue(doanhthu);
-        newFinancialReport.setMonthlyOpex(monthlyOpex);
-        newFinancialReport.setMonthlyProfit(LoiNhuan3);
-
-        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
-        boolean check = financialReportBUS.update(newFinancialReport);
-        if (check) {
-            showAlert("Thành Công", "Đã sửa Thành Công", AlertType.CONFIRMATION);
-            updateFianReport();
-            clearFildReport();
-        } else {
-            showAlert("Thất Bai", "sửa Thất Bại", AlertType.ERROR);
-        }
+//        if (selecFinancialReport == null) {
+//
+//            showAlert("Lỗi", "Không có báo cáo nào được chọn để sửa.", AlertType.ERROR);
+//            return;
+//        }
+//
+//        String buildingManagerID = TxtField__r4.getText();
+//        LocalDate date = Date_page3.getValue();
+//        FinancialReportBUS reportBUS = new FinancialReportBUS();
+//        Month month = date.getMonth();
+//        int year = date.getYear();
+//        Float revenue = (reportBUS.calculateMonthlyRevenueForBuilding(buildingID, month, year));
+//        String revenueStr = String.valueOf(revenue);
+//        String revenueWithoutComma = revenueStr.replaceAll(",", "");
+//        Float doanhthu = Float.parseFloat(revenueWithoutComma);
+//        System.out.println(doanhthu);
+//
+//        Float monthlyOpex = Float.parseFloat(TxtField__r3.getText().replaceAll(",", ""));
+//
+//        Float LoiNhuan = reportBUS.LoiNhuan(buildingID, month, year, monthlyOpex);
+//        String LoiNhuan1 = String.valueOf(LoiNhuan);
+//        String LoiNhuan2 = LoiNhuan1.replaceAll(",", "");
+//        Float LoiNhuan3 = Float.parseFloat(LoiNhuan2);
+//
+//        System.out.println(LoiNhuan3);
+//
+//        FinancialReport newFinancialReport = new FinancialReport();
+//        newFinancialReport.setFinancialReportID(financialReportID);
+//        newFinancialReport.setBuildingID(buildingID);
+//        newFinancialReport.setBuildingManagerID(buildingManagerID);
+//        newFinancialReport.setDate(date);
+//        newFinancialReport.setMonthlyRevenue(doanhthu);
+//        newFinancialReport.setMonthlyOpex(monthlyOpex);
+//        newFinancialReport.setMonthlyProfit(LoiNhuan3);
+//
+//        FinancialReportBUS financialReportBUS = new FinancialReportBUS();
+//        boolean check = financialReportBUS.update(newFinancialReport);
+//        if (check) {
+//            showAlert("Thành Công", "Đã sửa Thành Công", AlertType.CONFIRMATION);
+//            updateFianReport();
+//            clearFildReport();
+//        } else {
+//            showAlert("Thất Bai", "sửa Thất Bại", AlertType.ERROR);
+//        }
 
     }
 
     private void clearFildReport() {
-        TxtField__r1.clear();
-        TxtField__r2.clear();
         TxtField__r3.clear();
         TxtField__r4.clear();
         TxtField__r5.clear();

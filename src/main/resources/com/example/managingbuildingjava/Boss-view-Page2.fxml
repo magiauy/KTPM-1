@@ -19,68 +19,62 @@
                       <ComboBox fx:id="comboBox__P1__1" layoutX="497.0" layoutY="70.0" onAction="#SelectGender" prefHeight="25.0" prefWidth="207.0" promptText="Lọc Theo Giới Tính" style="-fx-background-radius: 10px;" />
             <Pane layoutX="33.0" layoutY="117.0" prefHeight="510.0" prefWidth="420.0" style="-fx-background-color: rgb(255, 255, 255); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0); -fx-background-radius: 20px;">
                <children>
-                          <TextField fx:id="TxtField__b1" layoutX="216.0" layoutY="27.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <TextField fx:id="TxtField__b2" layoutX="216.0" layoutY="86.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <TextField fx:id="TxtField__b3" layoutX="216.0" layoutY="150.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <TextField fx:id="TxtField__b4" layoutX="61.0" layoutY="150.0" prefHeight="32.0" prefWidth="88.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <TextField fx:id="TxtField__b5" layoutX="216.0" layoutY="271.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="403.0" prefHeight="32.0" prefWidth="120.0" text="CCCD" textFill="WHITE">
+                          <TextField fx:id="TxtField__b3" layoutX="216.0" layoutY="101.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                          <TextField fx:id="TxtField__b4" layoutX="61.0" layoutY="101.0" prefHeight="32.0" prefWidth="88.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                          <TextField fx:id="TxtField__b5" layoutX="216.0" layoutY="222.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="80.0" layoutY="335.0" prefHeight="32.0" prefWidth="120.0" text="CCCD" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="89.0" layoutY="271.0" prefHeight="32.0" prefWidth="120.0" text="SDT" textFill="WHITE">
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="89.0" layoutY="222.0" prefHeight="32.0" prefWidth="120.0" text="SDT" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="211.0" prefHeight="32.0" prefWidth="120.0" text="Giới tính" textFill="WHITE">
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="162.0" prefHeight="32.0" prefWidth="120.0" text="Giới tính" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutY="150.0" prefHeight="32.0" prefWidth="88.0" text="Tên" textFill="WHITE">
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutY="101.0" prefHeight="32.0" prefWidth="88.0" text="Tên" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="74.0" layoutY="86.0" prefHeight="32.0" prefWidth="120.0" text="Mã tòa nhà" textFill="WHITE">
+                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="74.0" layoutY="37.0" prefHeight="32.0" prefWidth="120.0" text="Mã tòa nhà" textFill="WHITE">
                               <font>
                                   <Font name="System Bold" size="13.0" />
                               </font>
                   </Label>
-                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="44.0" layoutY="27.0" prefHeight="32.0" prefWidth="143.0" text="Mã phiếu nhân viên" textFill="WHITE">
-                              <font>
-                                  <Font name="System Bold" size="13.0" />
-                              </font>
-                  </Label>
-                  <TextField fx:id="TxtField__b6" layoutX="215.0" layoutY="403.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="74.0" layoutY="342.0" prefHeight="32.0" prefWidth="120.0" text="Ngày sinh" textFill="WHITE">
+                  <TextField fx:id="TxtField__b6" layoutX="214.0" layoutY="335.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="74.0" layoutY="278.0" prefHeight="32.0" prefWidth="120.0" text="Ngày sinh" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="datePickerDOB" layoutX="216.0" layoutY="343.0" prefHeight="30.0" prefWidth="165.0" />
-        <ComboBox fx:id="fruitCombo" layoutX="215.0" layoutY="214.0" prefHeight="25.0" prefWidth="165.0" promptText="Chọn giới tính">
+                  <DatePicker fx:id="datePickerDOB" layoutX="215.0" layoutY="279.0" prefHeight="30.0" prefWidth="165.0" />
+        <ComboBox fx:id="fruitCombo" layoutX="215.0" layoutY="162.0" prefHeight="32.0" prefWidth="165.0" promptText="Chọn giới tính">
   
 </ComboBox>
 
 
 
-                  <TextField fx:id="TxtField__b7" layoutX="215.0" layoutY="451.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="451.0" prefHeight="32.0" prefWidth="120.0" text="Lương" textFill="WHITE">
+                  <TextField fx:id="TxtField__b7" layoutX="214.0" layoutY="391.0" prefHeight="32.0" prefWidth="165.0" style="-fx-background-color: rgb(240,240,240);" styleClass="black-text" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="80.0" layoutY="391.0" prefHeight="32.0" prefWidth="120.0" text="Lương" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="150.0" prefHeight="32.0" prefWidth="88.0" text="Họ" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="101.0" prefHeight="32.0" prefWidth="88.0" text="Họ" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
+                  <ComboBox fx:id="combobox__P2__1" layoutX="215.0" layoutY="37.0" prefHeight="32.0" prefWidth="165.0" />
                </children>
             </Pane>
-                    <Button fx:id="bnt__P1__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleAddpage2" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
+                    <Button fx:id="bnt__P2__add" contentDisplay="GRAPHIC_ONLY" layoutX="52.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleAddpage2" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Thêm " textFill="WHITE">
                         <graphic>
                             <ImageView fitHeight="30" fitWidth="40" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -89,7 +83,7 @@
                             </ImageView>
                         </graphic>
             </Button>
-                    <Button fx:id="bnt__P1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleEditBuildingManeger" prefHeight="32.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Sửa" textFill="WHITE" />
+                    <Button fx:id="bnt__P1__update" contentDisplay="GRAPHIC_ONLY" layoutX="198.0" layoutY="644.0" mnemonicParsing="false" onAction="#handleEditBuildingManeger" prefHeight="38.0" prefWidth="100.0" style="-fx-background-radius: 20px;" text="Sửa" textFill="WHITE" />
                   <TableView fx:id="table__view2" layoutX="497.0" layoutY="117.0" prefHeight="580.0" prefWidth="594.0" style="-fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);">
                     <columns>
                         <TableColumn fx:id="buildingManagerIdColumn" prefWidth="75.0" text="Building Manager ID" />
@@ -111,7 +105,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-                      <ImageView fitHeight="30" fitWidth="40" layoutX="236.0" layoutY="647.0" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fitHeight="30" fitWidth="40" layoutX="233.0" layoutY="648.0" pickOnBounds="true" preserveRatio="true">
                           <image>
                               <Image url="@../../../Picture/update.png" />
                           </image>

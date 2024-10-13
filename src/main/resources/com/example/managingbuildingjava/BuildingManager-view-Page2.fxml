@@ -98,11 +98,12 @@
                                             <columns>
                                                 <TableColumn fx:id="maKhachHangTable_1" prefWidth="126.0" text="Mã khách hàng" />
                                                 <TableColumn fx:id="hoKhachHangTable" minWidth="0.0" prefWidth="0.0" text="Họ" />
+                                    <TableColumn fx:id="hoKhachHangTable" prefWidth="75.0" text="Họ" />
                                     <TableColumn fx:id="tenKhachHangTable" prefWidth="81.0" text="Tên" />
                                     <TableColumn fx:id="soDienThoaiKhachHangTable" prefWidth="86.0" text=" SĐT" />
                                     <TableColumn fx:id="ngaySinhKhachHangTable" prefWidth="148.0" text="Ngày sinh" />
-                                    <TableColumn fx:id="gioiTinhKhachHangTable" prefWidth="122.0" text="Giới tính" />
-                                    <TableColumn fx:id="cCCDTable" prefWidth="127.0" text="CCCD" />
+                                    <TableColumn fx:id="gioiTinhKhachHangTable" prefWidth="72.0" text="Giới tính" />
+                                    <TableColumn fx:id="cCCDTable" prefWidth="95.0" text="CCCD" />
                                             </columns>
                                         </TableView>
                                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="74.0" prefHeight="30.0" prefWidth="268.0" style="-fx-background-color: rgb(145,205,175, 0.5); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);" text="Thông tin khách hàng">
