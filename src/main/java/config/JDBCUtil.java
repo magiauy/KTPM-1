@@ -14,6 +14,7 @@ import java.sql.DatabaseMetaData;
 
 public class JDBCUtil {
     private static String namedb = "quanlychothuecanho";
+//    private static String namedb = "testtable";
     private static String username="root";
 	private static String password="";
 //    public static Connection getConnection() {
@@ -70,7 +71,6 @@ public class JDBCUtil {
     public static Connection getConnection() {
         Connection connection = null;
         try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/"+namedb;
 
             connection = DriverManager.getConnection(url, username, password);

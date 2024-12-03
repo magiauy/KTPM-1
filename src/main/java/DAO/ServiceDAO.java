@@ -28,7 +28,6 @@ public class ServiceDAO implements DAOInterface<Service>{
         int result = 0;
         try {
             Connection connection = JDBCUtil.getConnection();
-
             if (t.getServiceID() == null) {
                 String newId = generateNewID(connection);
                 t.setServiceID(newId);
@@ -50,6 +49,7 @@ public class ServiceDAO implements DAOInterface<Service>{
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return 0;
         }
         return result;
     }

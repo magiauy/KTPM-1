@@ -125,8 +125,8 @@ as listed below:
 4. Using 'useFmtOnly' to retrieve parameter metadata
    Dependent libraries: antlr-runtime (version 4.9.3)
    
-Detailed information on including these dependent libraries in a Standard Java Application 
-or a Maven Application can be found here: https://go.microsoft.com/fwlink/?linkid=867575
+Detailed information on including these dependent libraries in a Standard Java com.example.managingbuildingjava.Spring_Application
+or a Maven com.example.managingbuildingjava.Spring_Application can be found here: https://go.microsoft.com/fwlink/?linkid=867575
 
 -------
 SAMPLES

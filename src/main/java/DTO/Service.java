@@ -1,14 +1,30 @@
 package DTO;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
+import lombok.NonNull;
+
 /**
  *
  * @author NGOC
  */
 public class Service {
+    @NotNull(message = "Service ID is required")
+    @NotEmpty(message = "Service ID is required")
     private String serviceID;
+    @NotNull(message = "Name is required")
+    @NotEmpty(message = "Name is required")
     private String name;
+    @NotNull(message = "Price per unit is required")
+    @Positive(message = "Price per unit must be positive")
     private Double pricePerUnit;
+    @NotNull(message = "Unit is required")
+    @NotEmpty(message = "Unit is required")
     private String unit;
+    @NotNull(message = "Type is required")
+    @NotEmpty(message = "Type is required")
     private String type;
     public Service(String serviceID, String name, Double pricePerUnit, String unit, String type) {
         this.serviceID = serviceID;
