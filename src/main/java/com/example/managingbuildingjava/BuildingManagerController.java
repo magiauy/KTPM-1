@@ -746,6 +746,11 @@ public class BuildingManagerController implements Initializable {
                 apartmentObservableList.remove(selectedApartment);
                 table__P1__1.refresh();
                 refreshFormApartment();
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Thông báo");
+                alert.setHeaderText("Căn hộ "+selectedApartment.getApartmentID() +" đã bị xóa");
+                alert.setContentText("Xóa thành công.");
+                alert.showAndWait();
             } else {
                 System.err.println("Không thể xóa căn hộ từ cơ sở dữ liệu.");
             }
@@ -1231,6 +1236,7 @@ public class BuildingManagerController implements Initializable {
                 cohabitantObservableList.set(selectedIndex, selectedCohabitant);
                 table__P2_1__1.refresh();
                 refreshFormCohabitant();
+                showAlert("Thông báo", "Sửa thành công!", AlertType.INFORMATION);
             } else {
                 System.err.println("Không thể cập nhật thông tin cư dân trong cơ sở dữ liệu.");
             }

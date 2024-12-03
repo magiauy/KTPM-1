@@ -62,7 +62,7 @@
   -fx-text-fill: red;
 }
 
-#Regex__P1__2{
+#Regex__P1__2, #lbvalidate_username, #lbvalidate_pw{
   -fx-text-fill: red;
 }
 

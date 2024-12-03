@@ -26,6 +26,13 @@ public class LoginController {
 
     private Stage bossStage;
 
+    @FXML
+    private Label lbvalidate_pw;
+
+    @FXML
+    private Label lbvalidate_username;
+
+
     public LoginController() {
     }
 
@@ -38,10 +45,15 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        if (username.isEmpty() || password.isEmpty()) {
-            showError("Username and password cannot be empty!");
+        if (username.isEmpty()||password.isEmpty()) {
+            lbvalidate_username.setText("Không được để trống");
+            lbvalidate_pw.setText("Không được để trống");
             return;
+        } else {
+            lbvalidate_username.setText("");
+            lbvalidate_pw.setText("");
         }
+
 
         // Lấy Stage hiện tại từ nút đăng nhập
         Stage stage = (Stage) usernameField.getScene().getWindow();
@@ -89,6 +101,7 @@ public class LoginController {
                         e.printStackTrace();
                     }
                 } else {
+                    lbvalidate_pw.setText("Mật khẩu không đúng");
                     showError("Invalid username or password.");
                 }
             }
