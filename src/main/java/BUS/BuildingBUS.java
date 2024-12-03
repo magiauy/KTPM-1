@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 
 public class BuildingBUS {
     private final BuildingDAO BlDAO = new BuildingDAO();
+
     public ArrayList<Building> listBuildings = new ArrayList<>();
 
     public BuildingBUS() {
@@ -25,6 +26,7 @@ public class BuildingBUS {
     public Building getByIndex(int index) {
         return this.listBuildings.get(index);
     }
+
     public boolean insert(Building building) {
         boolean check = BuildingDAO.getInstance().insert(building) > 0;
         if (check) {
@@ -89,22 +91,12 @@ public class BuildingBUS {
                         }
                     }
                 }
-                case "quận" -> {
-                    for (Building i : this.listBuildings) {
-                       
-                        if ((i.getDistrict_Building()).toLowerCase().contains(text)) {
-                            result.add(i);
-                        }
-                    }
-                }
-
-               
-            
         }
-        System.out.println("Kết quả tìm kiếm: " + result);
         return result;
     }
 
-
+    public ArrayList<Building> getBuildingsWithoutManager() {
+        return BlDAO.getBuildingsWithoutManager();
+    }
 
 }

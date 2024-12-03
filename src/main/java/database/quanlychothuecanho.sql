@@ -163,11 +163,11 @@ CREATE TABLE CustomersAccount (
 
 
 INSERT INTO Building (buildingID, name, city, district, address, numberOfApartment)
-VALUES ('B1', N'Tòa nhà A', N'Hà Nội', N'Cầu Giấy', N'Số 123 Đường ABC', 50),
-       ('B2', N'Tòa nhà B', N'Hồ Chí Minh', N'Quận 1', N'Số 456 Đường XYZ', 40),
-       ('B3', N'Tòa nhà C', N'Đà Nẵng', N'Hải Châu', N'Số 789 Đường LMN', 30),
-       ('B4', N'Tòa nhà D', N'Hải Phòng', N'Đồ Sơn', N'Số 321 Đường PQR', 20),
-       ('B5', N'Tòa nhà E', N'Cần Thơ', N'Ninh Kiều', N'Số 555 Đường STU', 10);
+VALUES ('B1', N'Tòa nhà A', N'Hà Nội', N'Số 123 Đường ABC', 50),
+       ('B2', N'Tòa nhà B', N'Hồ Chí Minh', N'Số 456 Đường XYZ', 40),
+       ('B3', N'Tòa nhà C', N'Đà Nẵng', N'Số 789 Đường LMN', 30),
+       ('B4', N'Tòa nhà D', N'Hải Phòng', N'Số 321 Đường PQR', 20),
+       ('B5', N'Tòa nhà E', N'Cần Thơ', N'Số 555 Đường STU', 10);
 INSERT INTO BuildingManager (buildingManagerID, buildingID, lastName, firstName, phoneNumber, dob, gender, citizenIdentityCard, salary)
 VALUES
     ('BM1', 'B1', N'Nguyễn', N'Văn A', '0123456789', '1980-01-01', N'Nam', '123456789', 15000000.00),

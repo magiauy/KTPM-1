@@ -261,8 +261,7 @@ public class TenantDAO implements DAOInterface<Tenant> {
         ArrayList<Tenant> searchResults = new ArrayList<>();
         try {
             Connection connection = JDBCUtil.getConnection();
-            String sql = "SELECT * FROM MonthlyRentBill A JOIN LeaseAgreement B ON A.apartmentID = B.tenantID " +
-                    "WHERE (A.tenantID LIKE ? OR A.lastName LIKE ? OR A.firstName LIKE ?) AND B.buildingManagerID = ?";
+            String sql = "SELECT * FROM Tenant A JOIN LeaseAgreement B ON A.tenantID = B.tenantID WHERE (A.tenantID LIKE ? OR A.lastName LIKE ? OR A.firstName LIKE ?) AND B.buildingManagerID = ?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, "%" + keyword + "%");

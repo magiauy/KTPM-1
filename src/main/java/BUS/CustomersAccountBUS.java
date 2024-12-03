@@ -2,8 +2,10 @@ package BUS;
 
 import java.util.ArrayList;
 
+import DAO.ApartmentDAO;
 import DAO.CohabitantDAO;
 import DAO.CustomersAccountDAO;
+import DTO.Apartment;
 import DTO.Cohabitant;
 import DTO.CustomersAccount;
 import javafx.application.Platform;
@@ -11,7 +13,6 @@ import javafx.application.Platform;
 public class CustomersAccountBUS {
     private ArrayList<CustomersAccount> listAccount = new ArrayList<>();
     public CustomersAccountBUS() {
-        // Initialize the list in the constructor if needed
         this.listAccount = getAll();
     }
     public ArrayList<CustomersAccount> getAll() {
@@ -31,6 +32,14 @@ public class CustomersAccountBUS {
         boolean check = CustomersAccountDAO.getInstance().insert(customersAccount) != 0;
         if (check) {
             this.listAccount.add(customersAccount);
+        }
+        return check;
+    }
+
+    public boolean delete(CustomersAccount customersAccount){
+        boolean check = CustomersAccountDAO.getInstance().delete(customersAccount.getUsername())!=0;
+        if (check){
+            this.listAccount.remove(customersAccount);
         }
         return check;
     }
