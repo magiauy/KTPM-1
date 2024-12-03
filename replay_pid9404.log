@@ -138,7 +138,7 @@ instanceKlass java/util/Properties$LineReader
 instanceKlass jdk/internal/misc/MethodFinder
 instanceKlass javafx/application/Preloader$PreloaderNotification
 instanceKlass com/sun/javafx/application/ModuleAccess
-instanceKlass javafx/application/Application$Parameters
+instanceKlass javafx/application/com.example.managingbuildingjava.Spring_Application$Parameters
 instanceKlass sun/net/NetProperties$1
 instanceKlass sun/net/NetProperties
 instanceKlass com/sun/javafx/application/PlatformImpl$FinishListener
@@ -151,7 +151,7 @@ instanceKlass  @cpi com/sun/javafx/application/LauncherImpl 881 form vmentry <vm
 instanceKlass com/sun/javafx/application/LauncherImpl
 instanceKlass sun/launcher/LauncherHelper$FXHelper
 instanceKlass sun/net/ext/ExtendedSocketOptions
-instanceKlass javafx/application/Application
+instanceKlass javafx/application/com.example.managingbuildingjava.Spring_Application
 instanceKlass java/net/Inet6Address$Inet6AddressHolder
 instanceKlass sun/nio/ch/Net$1
 instanceKlass java/net/ProtocolFamily

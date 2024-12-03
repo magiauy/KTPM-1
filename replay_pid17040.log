@@ -2444,7 +2444,7 @@ instanceKlass  @bci com/sun/glass/ui/win/WinApplication lambda$runLoop$4 (ILjava
 instanceKlass  @bci com/sun/glass/ui/win/WinApplication runLoop (Ljava/lang/Runnable;)V 58 <appendix> member <vmtarget> ; # com/sun/glass/ui/win/WinApplication$$Lambda+0x000001dac9033cb8
 instanceKlass  @bci com/sun/glass/ui/win/WinApplication getDesiredAwarenesslevel ()I 8 <appendix> argL0 ; # com/sun/glass/ui/win/WinApplication$$Lambda+0x000001dac9033aa0
 instanceKlass  @bci com/sun/glass/ui/win/WinApplication runLoop (Ljava/lang/Runnable;)V 0 <appendix> argL0 ; # com/sun/glass/ui/win/WinApplication$$Lambda+0x000001dac9033888
-instanceKlass  @bci com/sun/glass/ui/Application run (Ljava/lang/Runnable;)V 29 <appendix> member <vmtarget> ; # com/sun/glass/ui/Application$$Lambda+0x000001dac9033668
+instanceKlass  @bci com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application run (Ljava/lang/Runnable;)V 29 <appendix> member <vmtarget> ; # com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application$$Lambda+0x000001dac9033668
 instanceKlass java/util/concurrent/BlockingDeque
 instanceKlass  @bci com/sun/glass/ui/win/WinApplication <init> ()V 4 <appendix> argL0 ; # com/sun/glass/ui/win/WinApplication$$Lambda+0x000001dac9033140
 instanceKlass java/lang/ProcessEnvironment$CheckedEntry
@@ -2486,8 +2486,8 @@ instanceKlass java/util/concurrent/ForkJoinPool$DefaultForkJoinWorkerThreadFacto
 instanceKlass java/util/concurrent/ForkJoinTask
 instanceKlass java/util/concurrent/ForkJoinPool$WorkQueue
 instanceKlass java/util/concurrent/ForkJoinPool$ForkJoinWorkerThreadFactory
-instanceKlass  @bci com/sun/glass/ui/Application <clinit> ()V 4 <appendix> argL0 ; # com/sun/glass/ui/Application$$Lambda+0x000001dac902eed8
-instanceKlass com/sun/glass/ui/Application
+instanceKlass  @bci com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application <clinit> ()V 4 <appendix> argL0 ; # com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application$$Lambda+0x000001dac902eed8
+instanceKlass com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application
 instanceKlass com/sun/glass/ui/View$Capability
 instanceKlass com/sun/glass/ui/Screen
 instanceKlass com/sun/prism/impl/BaseResourceFactory
@@ -2550,7 +2550,7 @@ instanceKlass  @bci com/sun/javafx/tk/quantum/QuantumToolkit <clinit> ()V 67 <ap
 instanceKlass  @bci com/sun/javafx/tk/quantum/QuantumToolkit <clinit> ()V 50 <appendix> argL0 ; # com/sun/javafx/tk/quantum/QuantumToolkit$$Lambda+0x000001dac9021830
 instanceKlass  @bci com/sun/javafx/tk/quantum/QuantumToolkit <clinit> ()V 33 <appendix> argL0 ; # com/sun/javafx/tk/quantum/QuantumToolkit$$Lambda+0x000001dac9021618
 instanceKlass  @bci com/sun/javafx/tk/quantum/QuantumToolkit <clinit> ()V 16 <appendix> argL0 ; # com/sun/javafx/tk/quantum/QuantumToolkit$$Lambda+0x000001dac9021400
-instanceKlass com/sun/glass/ui/Application$EventHandler
+instanceKlass com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application$EventHandler
 instanceKlass com/sun/javafx/scene/text/TextLayoutFactory
 instanceKlass javafx/scene/shape/PathElement
 instanceKlass com/sun/javafx/tk/PlatformImage
@@ -2718,14 +2718,14 @@ instanceKlass sun/net/NetProperties$1
 instanceKlass sun/net/NetProperties
 instanceKlass sun/net/spi/DefaultProxySelector$1
 instanceKlass java/net/Proxy
-instanceKlass javafx/application/Application$Parameters
+instanceKlass javafx/application/com.example.managingbuildingjava.Spring_Application$Parameters
 instanceKlass java/net/ProxySelector
 instanceKlass java/net/SocksSocketImpl$3
 instanceKlass com/sun/javafx/application/LauncherImpl
 instanceKlass  @bci sun/nio/ch/NioSocketImpl closerFor (Ljava/io/FileDescriptor;Z)Ljava/lang/Runnable; 5 <appendix> member <vmtarget> ; # sun/nio/ch/NioSocketImpl$$Lambda+0x000001dac9054fb0
 instanceKlass  @cpi javafx/scene/control/skin/LabeledSkinBase 847 form vmentry <vmtarget> ; # java/lang/invoke/LambdaForm$DMH+0x000001dac9005000
 instanceKlass sun/launcher/LauncherHelper$FXHelper
-instanceKlass javafx/application/Application
+instanceKlass javafx/application/com.example.managingbuildingjava.Spring_Application
 instanceKlass sun/net/ext/ExtendedSocketOptions
 instanceKlass java/net/Inet6Address$Inet6AddressHolder
 instanceKlass sun/nio/ch/Net$1

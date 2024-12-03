@@ -34,7 +34,7 @@ Time: Wed May 15 23:16:18 2024 SE Asia Standard Time elapsed time: 2.864711 seco
 
 ---------------  T H R E A D  ---------------
 
-Current thread (0x00000221931faa30):  JavaThread "JavaFX Application Thread"        [_thread_in_vm, id=16500, stack(0x000000654e500000,0x000000654e600000) (1024K)]
+Current thread (0x00000221931faa30):  JavaThread "JavaFX com.example.managingbuildingjava.Spring_Application Thread"        [_thread_in_vm, id=16500, stack(0x000000654e500000,0x000000654e600000) (1024K)]
 
 Stack: [0x000000654e500000,0x000000654e600000]
 Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
@@ -99,7 +99,7 @@ j  javafx.fxml.FXMLLoader.loadImpl(Ljava/lang/Class;)Ljava/lang/Object;+31 javaf
 j  javafx.fxml.FXMLLoader.load()Ljava/lang/Object;+17 javafx.fxml@20.0.1
 j  com.example.managingbuildingjava.BuildingManager.openBuildingManagerView()V+20 com.example.managingbuildingjava
 j  com.example.managingbuildingjava.BuildingManager.start(Ljavafx/stage/Stage;)V+12 com.example.managingbuildingjava
-j  com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(Ljava/util/concurrent/atomic/AtomicBoolean;Ljavafx/application/Application;)V+20 javafx.graphics@20.0.1
+j  com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(Ljava/util/concurrent/atomic/AtomicBoolean;Ljavafx/application/com.example.managingbuildingjava.Spring_Application;)V+20 javafx.graphics@20.0.1
 j  com.sun.javafx.application.LauncherImpl$$Lambda+0x000002214e08c678.run()V+8 javafx.graphics@20.0.1
 j  com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(Ljava/lang/Runnable;Ljava/util/concurrent/CountDownLatch;)V+1 javafx.graphics@20.0.1
 j  com.sun.javafx.application.PlatformImpl$$Lambda+0x000002214e085a20.run()V+8 javafx.graphics@20.0.1
@@ -1039,7 +1039,7 @@ Java Threads: ( => current thread )
   0x0000022192337c50 JavaThread "Notification Thread"        daemon [_thread_blocked, id=16888, stack(0x000000654df00000,0x000000654e000000) (1024K)]
   0x0000022192551c00 JavaThread "QuantumRenderer-0"          daemon [_thread_blocked, id=13128, stack(0x000000654e300000,0x000000654e400000) (1024K)]
   0x0000022192bfe7b0 JavaThread "InvokeLaterDispatcher"      daemon [_thread_blocked, id=11984, stack(0x000000654e400000,0x000000654e500000) (1024K)]
-=>0x00000221931faa30 JavaThread "JavaFX Application Thread"         [_thread_in_vm, id=16500, stack(0x000000654e500000,0x000000654e600000) (1024K)]
+=>0x00000221931faa30 JavaThread "JavaFX com.example.managingbuildingjava.Spring_Application Thread"         [_thread_in_vm, id=16500, stack(0x000000654e500000,0x000000654e600000) (1024K)]
   0x0000022193481ae0 JavaThread "Thread-1"                   daemon [_thread_in_native, id=5620, stack(0x000000654e900000,0x000000654ea00000) (1024K)]
   0x00000221934e8010 JavaThread "JavaFX-Launcher"                   [_thread_blocked, id=10680, stack(0x000000654ea00000,0x000000654eb00000) (1024K)]
   0x00000221937b8970 JavaThread "Prism Font Disposer"        daemon [_thread_blocked, id=16656, stack(0x000000654ef00000,0x000000654f000000) (1024K)]

@@ -1330,7 +1330,7 @@ instanceKlass  @bci com/sun/glass/ui/win/WinApplication runLoop (Ljava/lang/Runn
 instanceKlass  @bci com/sun/glass/ui/win/WinApplication runLoop (Ljava/lang/Runnable;)V 58 <appendix> member <vmtarget> ; # com/sun/glass/ui/win/WinApplication$$Lambda+0x000001afb8034060
 instanceKlass  @bci com/sun/glass/ui/win/WinApplication getDesiredAwarenesslevel ()I 8 <appendix> argL0 ; # com/sun/glass/ui/win/WinApplication$$Lambda+0x000001afb8033e48
 instanceKlass  @bci com/sun/glass/ui/win/WinApplication runLoop (Ljava/lang/Runnable;)V 0 <appendix> argL0 ; # com/sun/glass/ui/win/WinApplication$$Lambda+0x000001afb8033c30
-instanceKlass  @bci com/sun/glass/ui/Application run (Ljava/lang/Runnable;)V 29 <appendix> member <vmtarget> ; # com/sun/glass/ui/Application$$Lambda+0x000001afb8033a10
+instanceKlass  @bci com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application run (Ljava/lang/Runnable;)V 29 <appendix> member <vmtarget> ; # com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application$$Lambda+0x000001afb8033a10
 instanceKlass java/util/concurrent/BlockingDeque
 instanceKlass  @bci com/sun/glass/ui/win/WinApplication <init> ()V 4 <appendix> argL0 ; # com/sun/glass/ui/win/WinApplication$$Lambda+0x000001afb80334e8
 instanceKlass java/lang/ProcessEnvironment$CheckedEntry
@@ -1372,8 +1372,8 @@ instanceKlass java/util/concurrent/ForkJoinPool$DefaultForkJoinWorkerThreadFacto
 instanceKlass java/util/concurrent/ForkJoinTask
 instanceKlass java/util/concurrent/ForkJoinPool$WorkQueue
 instanceKlass java/util/concurrent/ForkJoinPool$ForkJoinWorkerThreadFactory
-instanceKlass  @bci com/sun/glass/ui/Application <clinit> ()V 4 <appendix> argL0 ; # com/sun/glass/ui/Application$$Lambda+0x000001afb802ba30
-instanceKlass com/sun/glass/ui/Application
+instanceKlass  @bci com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application <clinit> ()V 4 <appendix> argL0 ; # com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application$$Lambda+0x000001afb802ba30
+instanceKlass com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application
 instanceKlass com/sun/glass/ui/View$Capability
 instanceKlass com/sun/glass/ui/Screen
 instanceKlass com/sun/prism/impl/BaseResourceFactory
@@ -1435,7 +1435,7 @@ instanceKlass  @bci com/sun/javafx/tk/quantum/QuantumToolkit <clinit> ()V 67 <ap
 instanceKlass  @bci com/sun/javafx/tk/quantum/QuantumToolkit <clinit> ()V 50 <appendix> argL0 ; # com/sun/javafx/tk/quantum/QuantumToolkit$$Lambda+0x000001afb8022580
 instanceKlass  @bci com/sun/javafx/tk/quantum/QuantumToolkit <clinit> ()V 33 <appendix> argL0 ; # com/sun/javafx/tk/quantum/QuantumToolkit$$Lambda+0x000001afb8022368
 instanceKlass  @bci com/sun/javafx/tk/quantum/QuantumToolkit <clinit> ()V 16 <appendix> argL0 ; # com/sun/javafx/tk/quantum/QuantumToolkit$$Lambda+0x000001afb8022150
-instanceKlass com/sun/glass/ui/Application$EventHandler
+instanceKlass com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application$EventHandler
 instanceKlass com/sun/javafx/runtime/async/AbstractAsyncOperation
 instanceKlass java/util/concurrent/Callable
 instanceKlass com/sun/javafx/runtime/async/AsyncOperation
@@ -1577,7 +1577,7 @@ instanceKlass java/net/SocksSocketImpl$3
 instanceKlass  @bci com/sun/javafx/application/LauncherImpl startToolkit ()V 21 <appendix> member <vmtarget> ; # com/sun/javafx/application/LauncherImpl$$Lambda+0x000001afb8006420
 instanceKlass  @bci sun/nio/ch/NioSocketImpl closerFor (Ljava/io/FileDescriptor;Z)Ljava/lang/Runnable; 5 <appendix> member <vmtarget> ; # sun/nio/ch/NioSocketImpl$$Lambda+0x000001afb805acd0
 # instanceKlass java/lang/invoke/LambdaForm$DMH+0x000001afb800a000
-instanceKlass  @cpi com/sun/glass/ui/Application 525 form vmentry <vmtarget> ; # java/lang/invoke/LambdaForm$DMH+0x000001afb8009c00
+instanceKlass  @cpi com/sun/glass/ui/com.example.managingbuildingjava.Spring_Application 525 form vmentry <vmtarget> ; # java/lang/invoke/LambdaForm$DMH+0x000001afb8009c00
 instanceKlass java/util/concurrent/CountDownLatch
 # instanceKlass java/lang/invoke/LambdaForm$MH+0x000001afb8009800
 # instanceKlass java/lang/invoke/LambdaForm$MH+0x000001afb8009400
@@ -1602,13 +1602,13 @@ instanceKlass com/sun/javafx/application/ModuleAccess
 instanceKlass javafx/application/Preloader$PreloaderNotification
 instanceKlass com/sun/javafx/application/PlatformImpl$FinishListener
 instanceKlass java/net/SocksConsts
-instanceKlass javafx/application/Application$Parameters
+instanceKlass javafx/application/com.example.managingbuildingjava.Spring_Application$Parameters
 instanceKlass com/sun/javafx/application/LauncherImpl
 instanceKlass sun/net/PlatformSocketImpl
 instanceKlass java/net/SocketImpl
 instanceKlass java/net/SocketOptions
 instanceKlass sun/launcher/LauncherHelper$FXHelper
-instanceKlass javafx/application/Application
+instanceKlass javafx/application/com.example.managingbuildingjava.Spring_Application
 instanceKlass java/net/InetSocketAddress$InetSocketAddressHolder
 instanceKlass java/net/InetAddress$PlatformResolver
 instanceKlass java/net/spi/InetAddressResolver
